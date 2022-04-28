@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Text = (props) => {
   const {
+    display,
     children,
     size,
     color,
@@ -23,8 +24,11 @@ const Text = (props) => {
     zindex,
     justifycontent,
     fontFamily,
+    bg,
+    border,
   } = props;
   const styles = {
+    display,
     size,
     color,
     bold,
@@ -43,6 +47,8 @@ const Text = (props) => {
     zindex,
     justifycontent,
     fontFamily,
+    bg,
+    border,
   };
   return (
     <React.Fragment>
@@ -54,6 +60,7 @@ const Text = (props) => {
 };
 
 Text.defaultProps = {
+  display: null,
   size: null,
   bold: false,
   color: "#000000",
@@ -73,10 +80,15 @@ Text.defaultProps = {
   is_flex: false,
   zindex: false,
   fontFamily: null,
+  bg: null,
+  border: null,
 };
 const P = styled.p`
   ${(props) => `font-family : ${props.fontFamily};`};
   /* z-index: 1; */
+  display: ${(props) => props.display};
+  background-color: ${(props) => props.bg};
+  border: ${(props) => props.border};
   z-index: ${(props) => (props.zindex ? `1;` : null)};
   height: ${(props) => props.height};
   word-break: ${(props) => (props.wordbreak ? `break-all` : null)};

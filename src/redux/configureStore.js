@@ -9,7 +9,7 @@ import thunk from "redux-thunk";
 import Comments from "./modules/comments";
 import User from "./modules/user";
 import Mypage from "./modules/mypage";
-import Post from "./modules/post";
+import Feed from "./modules/feed";
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 export const history = createBrowserHistory();
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   user: User,
   comments: Comments,
   mypage: Mypage,
-  post: Post,
+  feed: Feed,
   router: connectRouter(history),
 });
 
