@@ -16,6 +16,7 @@ const Input = (props) => {
     value,
     multiple,
     groupPost,
+    onFocus,
   } = props;
 
   if (multiLine) {
@@ -41,7 +42,7 @@ const Input = (props) => {
           placeholder={placeholder}
           onChange={_onChange}
           defaultValue={defaultValue}
-          value={value}
+          onFocus={onFocus}
         />
       </>
     );
@@ -55,7 +56,6 @@ const Input = (props) => {
         type={type}
         placeholder={placeholder}
         onChange={_onChange}
-        defaultValue={defaultValue}
       />
     </>
   );
@@ -68,11 +68,11 @@ Input.defaultProps = {
   _onChange: () => {},
   type: "text",
   margin: null,
-  defaultValue: null,
+  defaultValue: "",
   border: null,
   width: null,
   height: null,
-  value: null,
+  value: "",
 };
 
 const ElTextarea = styled.textarea`

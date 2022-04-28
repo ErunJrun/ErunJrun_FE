@@ -21,6 +21,13 @@ function KakaoMap() {
   });
   const [moveLine, setMoveLine] = useState();
 
+  console.log(paths);
+  console.log(distances);
+
+  //서버에 보내줄 최종 거리(km)
+  const totalDistance = distances[distances.length - 1] / 100;
+  console.log(totalDistance);
+
   // const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
 
@@ -37,8 +44,6 @@ function KakaoMap() {
     setPlace(inputText);
     setInputText("");
   };
-
-  console.log(place);
 
   // console.log(paths, distances);
 
@@ -111,7 +116,7 @@ function KakaoMap() {
       <Final className="dotOverlay distanceInfo">
         <li>
           <span className="label">총거리</span>{" "}
-          <span className="number">{distance}</span>m
+          <span className="number">{distance / 100}</span>km
         </li>
         <li>
           <span className="label">도보</span>{" "}
@@ -183,6 +188,7 @@ function KakaoMap() {
         <Grid bg="pink" height="auto" padding="5px">
           <Grid display="flex" margin="10px auto">
             <Input
+              type="text"
               _onChange={onChange}
               placeholder="코스 시작점을 검색해주세요"
               value={inputText}

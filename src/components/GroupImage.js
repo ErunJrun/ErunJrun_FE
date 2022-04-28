@@ -8,6 +8,7 @@ const GroupImage = () => {
   // const [imgBase64, setImgBase64] = useState(""); // 파일 base64
   const [showImages, setShowImages] = useState([]);
   console.log(showImages);
+  console.log(imgFile);
 
   // const handleChangeFile = (event) => {
   //   let reader = new FileReader();
@@ -42,7 +43,7 @@ const GroupImage = () => {
 
     if (event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0]); // 1. 파일을 읽어 버퍼에 저장합니다.
-      setImgFile(event.target.files[0]);
+      setImgFile(event.target.files);
     }
 
     setShowImages(imageUrlLists);
