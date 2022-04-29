@@ -4,15 +4,12 @@ import { api } from "../../shared/Api";
 
 //액션
 
-const ADD_POST = "ADD_POST";
-const GET_POST = "GET_POST";
-const DELETE_POST = "DELETE_POST";
-const EDIT_POST = "EDIT_POST";
-const GET_POSTONE = "GET_POSTONE";
-const ADD_LIKE = "ADD_LIKE";
-const CANCLE_LIKE = "CANCLE_LIKE";
-const ADD_BOOKMARK = "ADD_BOOKMARK";
-const DELETE_BOOKMARK = "DELETE_BOOKMARK";
+const ADD_GROUP = "ADD_GROUP";
+const GET_GROUP = "GET_GROUP";
+const DELETE_GROUP = "DELETE_GROUP";
+const EDIT_GROUP = "EDIT_GROUP";
+const GET_GROUP_DETAIL = "GET_GROUP_DETAIL";
+
 const LOADING = "LOADING";
 
 //initialState
@@ -21,28 +18,64 @@ const initialState = {
 };
 
 //액션생성함수
-const addPost = createAction(ADD_POST, (postData) => ({ postData }));
-const getPost = createAction(GET_POST, (postList, paging) => ({
-  postList,
-  paging,
-}));
-const deletePost = createAction(DELETE_POST, (postId) => ({ postId }));
-const editPost = createAction(EDIT_POST, (postId) => ({ postId }));
-const getPostOne = createAction(GET_POSTONE, (post_one) => ({ post_one }));
-const addLike = createAction(ADD_LIKE, (like_data) => ({ like_data }));
-const cancleLike = createAction(CANCLE_LIKE, (like_data) => ({ like_data }));
-const addBookmark = createAction(ADD_BOOKMARK, (postId) => ({ postId }));
-const delelteBookmark = createAction(DELETE_BOOKMARK, (postId) => ({ postId }));
+export const addGroup = (payload) => ({
+  type: ADD_GROUP,
+  payload,
+});
+
+export const getGroup = (payload) => ({
+  type: GET_GROUP,
+  payload,
+});
+
+export const deleteGroup = (payload) => ({
+  type: DELETE_GROUP,
+  payload,
+});
+
+export const editGroup = (payload) => ({
+  type: EDIT_GROUP,
+  payload,
+});
+
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
+
+//미들웨어
+export const addGroupDB = (mapLatLng, thumbnail, contents) => {
+  return function (dispatch, getState, { history }) {
+    console.log(mapLatLng, thumbnail, contents);
+
+    const formData = new FormData();
+    const config = {
+      header: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    formData.append("contents", contents);
+    formData.append("thumbnail", thumbnail);
+    formData.append("mapLatLng", mapLatLng);
+    api
+      .post("/group", formData, config)
+      .then((res) => {
+        history.replace("/groupfeed");
+        console.log(res);
+        return;
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response);
+      });
+  };
+};
 
 //리듀서
 export default handleActions(
   {
-    [ADD_POST]: (state, action) =>
+    [ADD_GROUP]: (state, action) =>
       produce(state, (draft) => {
         draft.list.unshift(action.payload.post);
       }),
-    [GET_POST]: (state, action) =>
+    [GET_GROUP]: (state, action) =>
       produce(state, (draft) => {
         draft.post.push(...action.payload.postList.data);
         draft.is_loading = false;
@@ -50,26 +83,11 @@ export default handleActions(
           draft.paging = action.payload.paging;
         }
       }),
-    [GET_POSTONE]: (state, action) =>
+    [GET_GROUP_DETAIL]: (state, action) =>
       produce(state, (draft) => {
         draft.target = action.payload.post_one;
       }),
-    [ADD_LIKE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.post = action.payload.like_data;
-      }),
-    [CANCLE_LIKE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.post = action.payload.like_data;
-      }),
-    [ADD_BOOKMARK]: (state, action) =>
-      produce(state, (draft) => {
-        draft.post = action.payload.postId;
-      }),
-    [DELETE_BOOKMARK]: (state, action) =>
-      produce(state, (draft) => {
-        draft.post = action.payload.postId;
-      }),
+
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
@@ -78,7 +96,3 @@ export default handleActions(
   },
   initialState
 );
-
-const actionCreators = {};
-
-export { actionCreators };

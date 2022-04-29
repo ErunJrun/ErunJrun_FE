@@ -7,8 +7,9 @@ import {
   MapMarker,
 } from "react-kakao-maps-sdk";
 import { Grid, Input, Text } from "../elements";
+import { history } from "../redux/configureStore";
 
-function KakaoMap() {
+function KakaoMap(props) {
   const { kakao } = window;
 
   const [isdrawing, setIsdrawing] = useState(false);
@@ -23,6 +24,14 @@ function KakaoMap() {
 
   console.log(paths);
   console.log(distances);
+
+  // function sendData() {
+  //   props.setLocation(paths);
+  // }
+
+  useEffect(() => {
+    props.setLocation(paths);
+  }, [paths]);
 
   //서버에 보내줄 최종 거리(km)
   const totalDistance = distances[distances.length - 1] / 100;
@@ -144,47 +153,6 @@ function KakaoMap() {
   return (
     <>
       <Grid margin="30px auto">
-        <Grid margin="30px auto" border="1px solid blue" padding="5px">
-          <Grid>
-            <Text border="1px solid red" bold size="20px">
-              그룹러닝 등록하기
-            </Text>
-          </Grid>
-          <Grid>
-            <Text border="1px solid red" display="inline" bold size="15px">
-              Step 1. 코스입력
-            </Text>
-            <Text
-              border="1px solid red"
-              display="inline"
-              margin="0 10px"
-              size="13px"
-            >
-              지도위에 추천하고 싶은 코스를 표시해주세요.
-            </Text>
-          </Grid>
-
-          <Grid display="flex">
-            <Grid width="500px">
-              <Text border="1px solid red" bold size="15px">
-                위치
-              </Text>
-              <Text border="1px solid red" size="15px">
-                경기도 용인시 수지구 죽전동 112번지
-              </Text>
-            </Grid>
-
-            <Grid width="500px" margin="0 10px">
-              <Text border="1px solid red" bold size="15px">
-                거리
-              </Text>
-              <Text border="1px solid red" size="15px">
-                20km
-              </Text>
-            </Grid>
-          </Grid>
-        </Grid>
-
         <Grid bg="pink" height="auto" padding="5px">
           <Grid display="flex" margin="10px auto">
             <Input

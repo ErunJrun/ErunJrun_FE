@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Text, Input } from "../elements";
 import styled from "styled-components";
 
-const GroupContent = () => {
+const GroupContent = (props) => {
   const [title, setTitle] = useState("");
   const [standbyTime, setStandbyTime] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -12,7 +12,37 @@ const GroupContent = () => {
   const [speed, setSpeed] = useState("");
   const [parking, setParking] = useState("");
   const [baggage, setBaggage] = useState("");
-  const [contente, setContent] = useState("");
+  const [content, setContent] = useState("");
+
+  const contents = [
+    {
+      title: title,
+      standbyTime: standbyTime,
+      startTime: startTime,
+      finishTime: finishTime,
+      maxPeople: maxPeople,
+      date: date,
+      speed: speed,
+      parking: parking,
+      baggage: baggage,
+      content: content,
+    },
+  ];
+
+  useEffect(() => {
+    props.setContents(contents);
+  }, [
+    title,
+    standbyTime,
+    startTime,
+    finishTime,
+    maxPeople,
+    date,
+    speed,
+    parking,
+    baggage,
+    content,
+  ]);
 
   return (
     <>
@@ -43,6 +73,7 @@ const GroupContent = () => {
             그룹러닝이름
           </Text>
           <Input
+            type="text"
             _onChange={(e) => {
               setTitle(e.target.value);
             }}

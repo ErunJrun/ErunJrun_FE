@@ -9,9 +9,6 @@ import Main from "../pages/Main";
 import Login from "../pages/Login";
 import Mypage from "../pages/Mypage";
 import CourseFeed from "../pages/CourseFeed";
-import CourseEdit from "../pages/CourseEdit";
-import CourseDetail from "../pages/CourseDetail";
-import CourseUpload from "../pages/CourseUpload";
 import GroupFeed from "../pages/GroupFeed";
 import GroupUpload from "../pages/GroupUpload";
 

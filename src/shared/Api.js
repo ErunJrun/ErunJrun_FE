@@ -1,13 +1,12 @@
 import axios from "axios";
 import { deleteCookie, getCookie, setCookie } from "./Cookie";
 import { history } from "../redux/configureStore";
-import { logIn, _loginCheckFX } from "../redux/modules/user";
 
 // axios.defaults.withCredentials = true;
 
 export const api = axios.create({
   // 실제 베이스 유알엘
-  baseURL: process.env.BASE_URL,
+  baseURL: process.env.REACT_APP_BASE_URL,
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -56,24 +55,24 @@ api.interceptors.request.use((config) => {
 //   }
 // );
 
-export const apis = {
-  login: (email, password) =>
-    api.post("/api/users/login", { email: email, password: password }),
+// export const apis = {
+//   login: (email, password) =>
+//     api.post("/api/users/login", { email: email, password: password }),
 
-  signup: (email, nickname, password) =>
-    api.post("/api/users/signup", {
-      email: email,
-      nickname: nickname,
-      password: password,
-    }),
+//   signup: (email, nickname, password) =>
+//     api.post("/api/users/signup", {
+//       email: email,
+//       nickname: nickname,
+//       password: password,
+//     }),
 
-  loginCheck: () => api.get("/api/users/auth"),
+//   loginCheck: () => api.get("/api/users/auth"),
 
-  //댓글
-  getComment: (postId) => api.get(`/api/comment/${postId}`, {}),
+//   //댓글
+//   getComment: (postId) => api.get(`/api/comment/${postId}`, {}),
 
-  addComment: (postId, content) =>
-    api.post(`/api/comments/${postId}`, { content: content }),
+//   addComment: (postId, content) =>
+//     api.post(`/api/comments/${postId}`, { content: content }),
 
-  // deleteComment: (commentId) => api.delete(`/api/comment/${commentId}`, {}),
-};
+//   // deleteComment: (commentId) => api.delete(`/api/comment/${commentId}`, {}),
+// };

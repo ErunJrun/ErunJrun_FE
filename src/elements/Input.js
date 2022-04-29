@@ -51,12 +51,7 @@ const Input = (props) => {
   return (
     <>
       {label && <Text margin="0px">{label}</Text>}
-      <ElInput
-        value={value}
-        type={type}
-        placeholder={placeholder}
-        onChange={_onChange}
-      />
+      <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
     </>
   );
 };
