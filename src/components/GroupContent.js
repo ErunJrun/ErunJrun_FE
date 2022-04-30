@@ -46,58 +46,42 @@ const GroupContent = (props) => {
 
   return (
     <>
-      <Grid margin="30px auto" border="1px solid blue" padding="5px">
+      <Grid margin="30px auto" padding="5px">
         <Grid>
-          <Text border="1px solid red" bold size="20px">
+          <Text bold size="20px">
             그룹러닝 등록하기
           </Text>
         </Grid>
         <Grid>
-          <Text border="1px solid red" display="inline" bold size="15px">
+          <Text display="inline" bold size="15px">
             Step 3. 그룹러닝 정보 입력
           </Text>
-          <Text
-            border="1px solid red"
-            display="inline"
-            margin="0 10px"
-            size="13px"
-          >
+          <Text display="inline" margin="0 10px" size="13px">
             그룹 러닝에 관한 상세 정보들을 입력해주세요.
           </Text>
         </Grid>
       </Grid>
 
       <Grid display="flex" flexDirection="column">
-        <Grid>
-          <Text border="1px solid red" bold size="15px">
-            그룹러닝이름
-          </Text>
-          <Input
-            type="text"
-            _onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            placeholder="예: 봄바람 불 때 한강 달리기!"
-          ></Input>
-        </Grid>
-
-        <Grid display="flex" flexDirection="row">
-          <Grid>
-            <Text border="1px solid red" bold size="15px">
-              스탠바이시간
+        <Grid display="flex">
+          <Grid maxWidth="1024px" width="100%" margin="0 10px 0  0">
+            <Text bold size="15px">
+              그룹러닝이름
             </Text>
             <Input
+              type="text"
               _onChange={(e) => {
-                setStandbyTime(e.target.value);
+                setTitle(e.target.value);
               }}
-              type="time"
-              defaultValue={new Date().toISOString().slice(11, 16)}
+              placeholder="예: 봄바람 불 때 한강 달리기!"
               groupPost
             ></Input>
           </Grid>
+        </Grid>
 
-          <Grid>
-            <Text border="1px solid red" bold size="15px">
+        <Grid display="flex">
+          <Grid maxWidth="160px" width="100%" margin="0 60px 0  0">
+            <Text bold size="15px">
               출발시간
             </Text>
             <Input
@@ -105,13 +89,13 @@ const GroupContent = (props) => {
                 setStartTime(e.target.value);
               }}
               type="time"
-              defaultValue={new Date().toISOString().slice(11, 16)}
+              // defaultValue={new Date().toISOString().slice(11, 16)}
               groupPost
             ></Input>
           </Grid>
 
-          <Grid>
-            <Text border="1px solid red" bold size="15px">
+          <Grid maxWidth="160px" width="100%">
+            <Text bold size="15px">
               종료시간(예상)
             </Text>
             <Input
@@ -119,57 +103,74 @@ const GroupContent = (props) => {
                 setFinishTime(e.target.value);
               }}
               type="time"
-              defaultValue={new Date().toISOString().slice(11, 16)}
+              // defaultValue={new Date().toISOString().slice(11, 16)}
               groupPost
             ></Input>
           </Grid>
         </Grid>
-        <Grid>
-          <Text border="1px solid red" bold size="15px">
+
+        <Grid maxWidth="160px" width="100%">
+          <Text bold size="15px">
             모집인원
           </Text>
           <GroupSelect
-            defaultValue={"2명"}
             onChange={(e) => {
               setMaxPeople(e.target.value);
             }}
           >
-            <option value="2명">2명</option>
-            <option value="3명">3명</option>
-            <option value="4명">4명</option>
-            <option value="5명">5명</option>
-            <option value="6명">6명</option>
-            <option value="7명">7명</option>
-            <option value="8명">8명</option>
-            <option value="9명">9명</option>
-            <option value="10명">10명</option>
+            <option value="null">인원 선택</option>
+            <option value="2">2명</option>
+            <option value="3">3명</option>
+            <option value="4">4명</option>
+            <option value="5">5명</option>
+            <option value="6">6명</option>
+            <option value="7">7명</option>
+            <option value="8">8명</option>
+            <option value="9">9명</option>
+            <option value="10">10명</option>
           </GroupSelect>
         </Grid>
 
-        <Grid>
-          <Text border="1px solid red" bold size="15px">
-            러닝 날짜
-          </Text>
-          <Input
-            _onChange={(e) => {
-              setDate(e.target.value);
-            }}
-            type="date"
-            defaultValue={new Date().toISOString().slice(0, 10)}
-            groupPost
-          ></Input>
+        <Grid display="flex">
+          <Grid maxWidth="160px" width="100%" margin="0 60px 0 0">
+            <Text bold size="15px">
+              러닝 날짜
+            </Text>
+            <Input
+              _onChange={(e) => {
+                setDate(e.target.value);
+              }}
+              type="date"
+              // defaultValue={new Date().toISOString().slice(0, 10)}
+              groupPost
+            ></Input>
+          </Grid>
+
+          <Grid maxWidth="160px" width="100%">
+            <Text bold size="15px">
+              스탠바이시간
+            </Text>
+            <Input
+              _onChange={(e) => {
+                setStandbyTime(e.target.value);
+              }}
+              type="time"
+              // defaultValue={new Date().toISOString().slice(11, 16)}
+              groupPost
+            ></Input>
+          </Grid>
         </Grid>
 
-        <Grid>
-          <Text border="1px solid red" bold size="15px">
+        <Grid maxWidth="160px" width="100%">
+          <Text bold size="15px">
             페이스
           </Text>
           <GroupSelect
-            defaultValue={`4'00" km/h`}
             onChange={(e) => {
               setSpeed(e.target.value);
             }}
           >
+            <option>페이스 선택</option>
             <option>4'00" km/h</option>
             <option>4'30" km/h</option>
             <option>5'00" km/h</option>
@@ -179,11 +180,12 @@ const GroupContent = (props) => {
           </GroupSelect>
         </Grid>
 
-        <Grid>
-          <Text border="1px solid red" bold size="15px">
+        <Grid maxWidth="1024px" width="100%">
+          <Text bold size="15px">
             주차방법(선택)
           </Text>
           <Input
+            groupPost
             _onChange={(e) => {
               setParking(e.target.value);
             }}
@@ -191,11 +193,12 @@ const GroupContent = (props) => {
           ></Input>
         </Grid>
 
-        <Grid>
-          <Text border="1px solid red" bold size="15px">
+        <Grid maxWidth="1024px" width="100%">
+          <Text bold size="15px">
             짐보관방법(선택)
           </Text>
           <Input
+            groupPost
             _onChange={(e) => {
               setBaggage(e.target.value);
             }}
@@ -203,8 +206,8 @@ const GroupContent = (props) => {
           ></Input>
         </Grid>
 
-        <Grid>
-          <Text border="1px solid red" bold size="15px">
+        <Grid maxWidth="1024px" width="100%">
+          <Text bold size="15px">
             그럽러닝에 대한 상세설명
           </Text>
           <Input
@@ -228,7 +231,7 @@ const GroupSelect = styled.select`
   border: 1px solid #4e4e4e;
   box-sizing: border-box;
   border-radius: 5px;
-  width: 160px;
+  width: 100%;
   height: 40px;
   text-align: center;
   outline: none;

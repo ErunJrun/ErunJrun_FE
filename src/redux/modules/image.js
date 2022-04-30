@@ -8,6 +8,7 @@ const DELETE_PRE = "DELETE_PRE";
 const EDIT_PRE = "EDIT_PRE";
 const INIT_PRE = "INIT_PRE";
 const EDIT_URL = "EDIT_URL";
+const RESET_FILE = "RESET_FILE";
 
 // 액션 크리에이터
 
@@ -17,6 +18,8 @@ const editPre = createAction(EDIT_PRE, (editImage) => ({ editImage }));
 
 const initPre = createAction(INIT_PRE, () => ({}));
 const editUrl = createAction(EDIT_URL, (Url) => ({ Url }));
+
+const resetFile = createAction(RESET_FILE, () => {});
 
 const initialState = {
   preView: [],
@@ -73,6 +76,11 @@ export default handleActions(
       produce(state, (draft) => {
         draft.editUrl = [...draft.editUrl, action.payload.Url];
       }),
+
+    [RESET_FILE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.files = [];
+      }),
   },
   initialState
 );
@@ -83,6 +91,7 @@ const imgActions = {
   editPre,
   initPre,
   editUrl,
+  resetFile,
 };
 
 export { imgActions };

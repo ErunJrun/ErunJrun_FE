@@ -1,6 +1,7 @@
 import { handleActions, createAction } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/Api";
+import axios from "axios";
 
 //액션
 
@@ -41,21 +42,39 @@ export const editGroup = (payload) => ({
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 
 //미들웨어
-export const addGroupDB = (mapLatLng, thumbnail, contents) => {
+export const addGroupDB = (
+  mapLatLng,
+  thumbnail,
+  contents,
+  address,
+  distance
+) => {
   return function (dispatch, getState, { history }) {
-    console.log(mapLatLng, thumbnail, contents);
-
+    console.log(mapLatLng, thumbnail, contents, address, distance);
     const formData = new FormData();
-    const config = {
-      header: {
-        "content-type": "multipart/form-data",
-      },
-    };
-    formData.append("contents", contents);
-    formData.append("thumbnail", thumbnail);
-    formData.append("mapLatLng", mapLatLng);
-    api
-      .post("/group", formData, config)
+    thumbnail?.map((e, idx) => {
+      return formData.append("thumbnail", e);
+    });
+    formData.append("title", contents[0].title);
+    formData.append("maxPeople", contents[0].maxPeople);
+    formData.append("date", contents[0].date);
+    formData.append("standbyTime", contents[0].standbyTime);
+    formData.append("startTime", contents[0].startTime);
+    formData.append("finishTime", contents[0].finishTime);
+    formData.append("parking", contents[0].parking);
+    formData.append("speed", contents[0].speed);
+    formData.append("baggage", contents[0].baggage);
+    formData.append("content", contents[0].content);
+    formData.append("location", address);
+    formData.append("distance", distance);
+    formData.append("mapLatLng", JSON.stringify(mapLatLng));
+
+    axios
+      .post("http://rengabro.shop/group", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         history.replace("/groupfeed");
         console.log(res);

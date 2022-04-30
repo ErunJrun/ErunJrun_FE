@@ -4,24 +4,24 @@ import { history } from "../redux/configureStore";
 
 // axios.defaults.withCredentials = true;
 
-export const api = axios.create({
-  // 실제 베이스 유알엘
-  baseURL: process.env.REACT_APP_BASE_URL,
-  headers: {
-    "content-type": "application/json;charset=UTF-8",
-    accept: "application/json",
-  },
-});
+// export const api = axios.create({
+//   // 실제 베이스 유알엘
+//   baseURL: process.env.REACT_APP_BASE_URL,
+//   headers: {
+//     "content-type": "application/json;charset=UTF-8",
+//     accept: "application/json",
+//   },
+// });
 
-api.interceptors.request.use((config) => {
-  const atoken = getCookie("ACCESS_TOKEN");
-  const rtoken = getCookie("REFRESH_TOKEN");
+// api.interceptors.request.use((config) => {
+//   const atoken = getCookie("ACCESS_TOKEN");
+//   const rtoken = getCookie("REFRESH_TOKEN");
 
-  config.headers.common["Authorization"] = `Bearer ${atoken}`;
-  config.headers.common["reAuthorization"] = `Bearer ${rtoken}`;
+//   config.headers.common["Authorization"] = `Bearer ${atoken}`;
+//   config.headers.common["reAuthorization"] = `Bearer ${rtoken}`;
 
-  return config;
-});
+//   return config;
+// });
 
 // api.interceptors.response.use(
 //   (response) => {

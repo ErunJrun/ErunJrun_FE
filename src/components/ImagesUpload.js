@@ -26,7 +26,7 @@ const ImagesUpload = (props) => {
   //   dispatch(imgActions.setPre(editPree));
   // }, [eddit]);
 
-  //이미지 미리보기
+  //이미지 저장 및 미리보기
   const handleChangeFile = (event) => {
     const imageLists = event.target.files;
     const maxImageCnt = 3;
@@ -36,7 +36,7 @@ const ImagesUpload = (props) => {
       window.alert("첨부 파일은 최대 3개까지 가능합니다.");
     }
 
-    if (totalImage.length >= 3) {
+    if (totalImage.length + imageLists.length > 3) {
       window.alert("첨부 파일은 최대 3개까지 가능합니다.");
     } else {
       let imgList = [];
@@ -48,18 +48,18 @@ const ImagesUpload = (props) => {
         }
       }
 
+      for (let i = 0; i < Math.min(imageLists.length, maxImageCnt); i++) {
+        const currentImageUrl = URL.createObjectURL(imageLists[i]);
+        imageUrlLists.push(currentImageUrl);
+      }
+
+      if (imageUrlLists.length > 3) {
+        imageUrlLists = imageUrlLists.slice(0, 3);
+      }
+      setShowImages(imageUrlLists);
+
       dispatch(imgActions.setPre(imgList));
     }
-
-    for (let i = 0; i < Math.min(imageLists.length, maxImageCnt); i++) {
-      const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      imageUrlLists.push(currentImageUrl);
-    }
-
-    if (imageUrlLists.length > 3) {
-      imageUrlLists = imageUrlLists.slice(0, 3);
-    }
-    setShowImages(imageUrlLists);
   };
 
   //첨부파일 검증

@@ -31,6 +31,7 @@ function KakaoMap(props) {
 
   useEffect(() => {
     props.setLocation(paths);
+    props.setDistance(totalDistance);
   }, [paths]);
 
   //서버에 보내줄 최종 거리(km)
@@ -153,7 +154,7 @@ function KakaoMap(props) {
   return (
     <>
       <Grid margin="30px auto">
-        <Grid bg="pink" height="auto" padding="5px">
+        <Grid height="auto" padding="5px">
           <Grid display="flex" margin="10px auto">
             <Input
               type="text"

@@ -108,6 +108,7 @@ const GroupInput = styled.input`
   height: 40px;
   text-align: center;
   outline: none;
+  width: 100%;
 `;
 
 export default Input;

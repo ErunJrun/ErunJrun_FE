@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Text } from "../elements";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import GroupFilter from "../components/GroupFilter";
 
 const GroupFeed = () => {
+  const [value, onChange] = useState(new Date());
   return (
     <>
       <Grid>
@@ -20,6 +23,10 @@ const GroupFeed = () => {
           함께하고 싶은 러너의 그룹 러닝에 신청해보세요!
         </Text>
       </Grid>
+
+      {/* <Calendar onChange={onChange} value={value} /> */}
+
+      <GroupFilter></GroupFilter>
 
       <StepBtn
         onClick={() => {
