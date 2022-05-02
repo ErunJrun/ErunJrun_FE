@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Text } from "../elements";
+import { Grid, IconButton, Text } from "../elements";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import Calendar from "react-calendar";
@@ -9,6 +9,12 @@ import GroupCard from "../components/GroupCard";
 
 const GroupFeed = () => {
   const [value, onChange] = useState(new Date());
+  const [filter, setFilter] = useState(false);
+
+  const filterToggle = () => {
+    setFilter(!filter);
+  };
+
   return (
     <>
       <Grid
@@ -41,7 +47,21 @@ const GroupFeed = () => {
         </Text>
       </Grid>
 
-      <GroupFilter></GroupFilter>
+      <Grid
+        maxWidth="1360px"
+        width="100%"
+        margin="10px auto"
+        display="flex"
+        justifyContent="right"
+        alignItems="center"
+      >
+        <IconButton filter size="25" cursor="pointer" _onClick={filterToggle} />
+        <Text margin="0 0 0 10px" bold _onClick={filterToggle} cursor="pointer">
+          검색필터
+        </Text>
+      </Grid>
+      {filter ? <GroupFilter></GroupFilter> : null}
+
       <GroupCard></GroupCard>
 
       <StepBtn

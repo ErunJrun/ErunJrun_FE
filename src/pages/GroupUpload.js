@@ -4,6 +4,7 @@ import KakaoMap from "../components/KakaoMap";
 import GroupContent from "../components/GroupContent";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { addGroupDB } from "../redux/modules/feed";
 import { history } from "../redux/configureStore";
 import { Grid, Text } from "../elements";
@@ -237,6 +238,7 @@ const GroupUpload = () => {
         </StepWrap>
         <GroupContent setContents={setContents}></GroupContent>
         <StepBtn onClick={goBack2}>이전단계</StepBtn>
+
         <StepBtn
           onClick={() => {
             addGroupPost();

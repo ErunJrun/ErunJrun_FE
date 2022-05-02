@@ -4,14 +4,14 @@ import { history } from "../redux/configureStore";
 
 // axios.defaults.withCredentials = true;
 
-// export const api = axios.create({
-//   // 실제 베이스 유알엘
-//   baseURL: process.env.REACT_APP_BASE_URL,
-//   headers: {
-//     "content-type": "application/json;charset=UTF-8",
-//     accept: "application/json",
-//   },
-// });
+export const api = axios.create({
+  // 실제 베이스 유알엘
+  baseURL: process.env.REACT_APP_BASE_URL,
+  headers: {
+    "content-type": "application/json;charset=UTF-8",
+    accept: "application/json",
+  },
+});
 
 // api.interceptors.request.use((config) => {
 //   const atoken = getCookie("ACCESS_TOKEN");

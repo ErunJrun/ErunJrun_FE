@@ -1,9 +1,24 @@
-import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Text, Grid } from "../elements";
+import { IconButton } from "../elements";
+import { getGroupDB } from "../redux/modules/feed";
+import { filterActions } from "../redux/modules/filter";
 
 const GroupFilter = () => {
+  const dispatch = useDispatch();
+  const filterArea = useSelector((state) => state.filter.area);
+  console.log(filterArea);
+
+  const choiceFilter = (e) => {
+    dispatch(filterActions.setFilterArea(e));
+  };
+
+  const getFilter = () => {
+    dispatch(getGroupDB());
+  };
+
   const [area, setArea] = useState([
     "전국",
     "서울특별시",
@@ -55,9 +70,18 @@ const GroupFilter = () => {
           <AreaContents>
             {area.map((e, idx) => {
               return (
-                <Text margin="19px 0 14px 41px" bold>
-                  {e}
-                </Text>
+                <Fragment key={idx}>
+                  <Text
+                    _onClick={() => {
+                      choiceFilter(e);
+                    }}
+                    margin="19px 0 14px 41px"
+                    bold
+                    cursor="pointer"
+                  >
+                    {e}
+                  </Text>
+                </Fragment>
               );
             })}
           </AreaContents>
@@ -72,9 +96,11 @@ const GroupFilter = () => {
           <TimeContents>
             {time.map((e, idx) => {
               return (
-                <Text margin="19px 0 14px 41px" bold>
-                  {e}
-                </Text>
+                <Fragment key={idx}>
+                  <Text margin="19px 0 14px 41px" bold>
+                    {e}
+                  </Text>
+                </Fragment>
               );
             })}
           </TimeContents>
@@ -89,9 +115,11 @@ const GroupFilter = () => {
           <DistanceContents>
             {distance.map((e, idx) => {
               return (
-                <Text margin="12px 0 12px 41px" bold>
-                  {e}
-                </Text>
+                <Fragment key={idx}>
+                  <Text margin="12px 0 12px 41px" bold>
+                    {e}
+                  </Text>
+                </Fragment>
               );
             })}
           </DistanceContents>
@@ -109,7 +137,13 @@ const GroupFilter = () => {
         padding="24px"
         borderRadius="0px 0px 3px 3px"
       >
-        <SearchBtn>검색하기</SearchBtn>
+        <SearchBtn
+          onClick={() => {
+            getFilter();
+          }}
+        >
+          검색하기
+        </SearchBtn>
       </Grid>
       <Hr></Hr>
     </>
@@ -212,6 +246,7 @@ const SearchBtn = styled.button`
   font-size: 18px;
   line-height: 25px;
   border: none;
+  cursor: pointer;
 `;
 
 const Hr = styled.hr`

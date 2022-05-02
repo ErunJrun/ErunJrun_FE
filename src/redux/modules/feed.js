@@ -42,6 +42,18 @@ export const editGroup = (payload) => ({
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 
 //미들웨어
+export const getGroupDB = (category) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.get(`/group/${category}`);
+      console.log(data.data);
+      dispatch(getGroup(data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const addGroupDB = (
   mapLatLng,
   thumbnail,
@@ -76,9 +88,10 @@ export const addGroupDB = (
         },
       })
       .then((res) => {
-        history.replace("/groupfeed");
+        history.push("/groupfeed");
         console.log(res);
-        return;
+
+        dispatch(getGroupDB());
       })
       .catch((err) => {
         console.log(err);
@@ -92,15 +105,12 @@ export default handleActions(
   {
     [ADD_GROUP]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.unshift(action.payload.post);
+        draft.list.unshift(action.payload);
       }),
     [GET_GROUP]: (state, action) =>
       produce(state, (draft) => {
-        draft.post.push(...action.payload.postList.data);
-        draft.is_loading = false;
-        if (action.payload.paging) {
-          draft.paging = action.payload.paging;
-        }
+        console.log(state, action.payload);
+        draft.list = action.payload;
       }),
     [GET_GROUP_DETAIL]: (state, action) =>
       produce(state, (draft) => {

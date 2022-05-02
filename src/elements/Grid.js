@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Grid = (props) => {
   const {
+    flexWrap,
     zIndex,
     _onMouseOver,
     _onMouseOut,
@@ -40,6 +41,7 @@ const Grid = (props) => {
   } = props;
 
   const styles = {
+    flexWrap: flexWrap,
     zIndex: zIndex,
     overflow: overflow,
     display: display,
@@ -114,6 +116,7 @@ Grid.defaultProps = {
   display: null,
   flexDirection: null,
   justifyContent: null,
+  flexWrap: null,
 };
 
 const GridBox = styled.div`
@@ -123,6 +126,7 @@ const GridBox = styled.div`
   display: ${(props) => props.display};
   justify-content: ${(props) => props.justifyContent};
   flex-direction: ${(props) => props.flexDirection};
+  flex-wrap: ${(props) => props.flexWrap};
   align-items: ${(props) => props.alignItems};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
