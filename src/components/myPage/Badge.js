@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
 
-const Schedule = () => {
+const Badge = () => {
     return (
         <Box>
-            Schedule
+            Badge
         </Box>
     );
 };
@@ -12,9 +12,9 @@ const Schedule = () => {
 const Box = styled.div`
   border: 1px solid black;
   border-radius: 3px;
-  width: 40%;
-  height: 400px;
-  margin-left: 30px;
+  width: 82%;
+  height: 200px;
+  margin-top: 30px;
 `;
 
-export default Schedule;
+export default Badge;

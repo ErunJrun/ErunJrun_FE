@@ -10,9 +10,9 @@ const Header = () => {
 
   return (
     <HeaderBox>
-      <div onClick={() => {history.push("/main");}}>이RUN저RUN</div>
-      <Btn onClick={() => {history.push("/main");}}>Home</Btn>
-      <Btn onClick={() => {history.push("/main");}}>그룹러닝</Btn>
+      <div onClick={() => {history.push("/");}}>이RUN저RUN</div>
+      <Btn onClick={() => {history.push("/");}}>Home</Btn>
+      <Btn onClick={() => {history.push("/groupfeed");}}>그룹러닝</Btn>
       <Btn onClick={() => {history.push("/coursefeed");}}>코스추천</Btn>
       <IoMdNotifications size="20px" />
       <Modal/>
