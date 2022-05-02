@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ImagesUpload from "../components/ImagesUpload";
-import KakaoMap from "../components/KakaoMap";
-import GroupContent from "../components/GroupContent";
+import ImagesUpload from "../components/groupUpload/ImagesUpload";
+import KakaoMap from "../components/groupUpload/KakaoMap";
+import GroupUpContent from "../components/groupUpload/GroupUpContent";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -236,7 +236,7 @@ const GroupUpload = () => {
             </Stepper>
           </Box>
         </StepWrap>
-        <GroupContent setContents={setContents}></GroupContent>
+        <GroupUpContent setContents={setContents}></GroupUpContent>
         <StepBtn onClick={goBack2}>이전단계</StepBtn>
 
         <StepBtn

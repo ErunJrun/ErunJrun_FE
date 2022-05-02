@@ -18,7 +18,10 @@
     "history": "4.10.1",
     "immer": "^9.0.12",
     "react": "^17.0.2",
+<<<<<<< HEAD
     "react-bootstrap": "^2.3.1",
+=======
+>>>>>>> f11a2f633c45386b886a0dfd44b5558fdb51b8f3
     "react-calendar": "^3.7.0",
     "react-dom": "^17.0.2",
     "react-geocode": "^0.2.3",

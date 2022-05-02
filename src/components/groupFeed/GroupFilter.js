@@ -1,22 +1,37 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Text, Grid } from "../elements";
-import { IconButton } from "../elements";
-import { getGroupDB } from "../redux/modules/feed";
-import { filterActions } from "../redux/modules/filter";
+import { Text, Grid } from "../../elements";
+import { IconButton } from "../../elements";
+import { getGroupDB } from "../../redux/modules/feed";
+import { filterActions } from "../../redux/modules/filter";
 
-const GroupFilter = () => {
+const GroupFilter = (props) => {
   const dispatch = useDispatch();
   const filterArea = useSelector((state) => state.filter.area);
-  console.log(filterArea);
+  const filterTime = useSelector((state) => state.filter.time);
+  const filterDistance = useSelector((state) => state.filter.distance);
+  console.log(filterArea, filterTime, filterDistance);
 
-  const choiceFilter = (e) => {
-    dispatch(filterActions.setFilterArea(e));
+  const category = [filterArea, filterTime, filterDistance];
+
+  const choiceArea = (idx) => {
+    dispatch(filterActions.setFilterArea(idx));
+  };
+
+  const choiceTime = (idx) => {
+    dispatch(filterActions.setFilterTime(idx));
+  };
+
+  const choiceDistance = (idx) => {
+    dispatch(filterActions.setFilterDistance(idx));
   };
 
   const getFilter = () => {
-    dispatch(getGroupDB());
+    props.setFilter(false);
+    props.setReset(true);
+    dispatch(getGroupDB(category));
+    // dispatch(filterActions.resetFilter());
   };
 
   const [area, setArea] = useState([
@@ -25,11 +40,10 @@ const GroupFilter = () => {
     "경기도",
     "인천광역시",
     "강원도",
-    "경기도",
-    "충청남도 / 충청북도 / 세종특별자치시 / 대전광역시",
+    "충청도 / 세종특별자치시 / 대전광역시",
     "경상북도 / 대구광역시",
     "경상남도 / 부산광역시 / 울산광역시",
-    "전라남도 / 전라북도 / 광주광역시",
+    "전라도 / 광주광역시",
     "제주특별자치시",
   ]);
 
@@ -64,7 +78,7 @@ const GroupFilter = () => {
         <Grid>
           <AreaTitle>
             <Text size="18px" bold>
-              러닝지역
+              러닝 지역
             </Text>
           </AreaTitle>
           <AreaContents>
@@ -73,7 +87,8 @@ const GroupFilter = () => {
                 <Fragment key={idx}>
                   <Text
                     _onClick={() => {
-                      choiceFilter(e);
+                      choiceArea(idx);
+                      console.log(e);
                     }}
                     margin="19px 0 14px 41px"
                     bold
@@ -90,14 +105,22 @@ const GroupFilter = () => {
         <Grid>
           <TimeTitle>
             <Text size="18px" bold>
-              러닝시간대
+              러닝 시간대
             </Text>
           </TimeTitle>
           <TimeContents>
             {time.map((e, idx) => {
               return (
                 <Fragment key={idx}>
-                  <Text margin="19px 0 14px 41px" bold>
+                  <Text
+                    _onClick={() => {
+                      choiceTime(idx);
+                      console.log(e);
+                    }}
+                    margin="19px 0 14px 41px"
+                    bold
+                    cursor="pointer"
+                  >
                     {e}
                   </Text>
                 </Fragment>
@@ -109,14 +132,22 @@ const GroupFilter = () => {
         <Grid>
           <DistanceTitle>
             <Text size="18px" bold>
-              러닝지역
+              러닝 거리
             </Text>
           </DistanceTitle>
           <DistanceContents>
             {distance.map((e, idx) => {
               return (
                 <Fragment key={idx}>
-                  <Text margin="12px 0 12px 41px" bold>
+                  <Text
+                    _onClick={() => {
+                      choiceDistance(idx);
+                      console.log(e);
+                    }}
+                    margin="12px 0 12px 41px"
+                    bold
+                    cursor="pointer"
+                  >
                     {e}
                   </Text>
                 </Fragment>
@@ -144,7 +175,18 @@ const GroupFilter = () => {
         >
           검색하기
         </SearchBtn>
+
+        <IconButton
+          cancle
+          size="20"
+          color="black"
+          _onClick={() => {
+            props.setFilter(false);
+            dispatch(filterActions.resetFilter());
+          }}
+        ></IconButton>
       </Grid>
+
       <Hr></Hr>
     </>
   );
@@ -239,6 +281,7 @@ const DistanceContents = styled.div`
 
 const SearchBtn = styled.button`
   background: #000000;
+  margin-right: 30px;
   border-radius: 3px;
   width: 157px;
   height: 50px;
@@ -247,6 +290,11 @@ const SearchBtn = styled.button`
   line-height: 25px;
   border: none;
   cursor: pointer;
+  :hover {
+    background-color: #4b77a7;
+    font-weight: 900;
+    box-shadow: 1px 1px 5px black;
+  }
 `;
 
 const Hr = styled.hr`

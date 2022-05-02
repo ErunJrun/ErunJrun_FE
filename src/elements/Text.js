@@ -26,6 +26,7 @@ const Text = (props) => {
     fontFamily,
     bg,
     border,
+    borderRadius,
   } = props;
   const styles = {
     display,
@@ -49,6 +50,7 @@ const Text = (props) => {
     fontFamily,
     bg,
     border,
+    borderRadius,
   };
   return (
     <React.Fragment>
@@ -82,11 +84,13 @@ Text.defaultProps = {
   fontFamily: null,
   bg: null,
   border: null,
+  borderRadius: null,
 };
 const P = styled.p`
   ${(props) => `font-family : ${props.fontFamily};`};
   /* z-index: 1; */
   display: ${(props) => props.display};
+  border-radius: ${(props) => props.borderRadius};
   background-color: ${(props) => props.bg};
   border: ${(props) => props.border};
   z-index: ${(props) => (props.zindex ? `1;` : null)};

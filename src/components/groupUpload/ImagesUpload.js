@@ -1,9 +1,9 @@
 import React, { useEffect, Fragment, useState } from "react";
 import styled from "styled-components";
-import { Image, Grid, Text } from "../elements";
-import ImageUpload from "../assets/ImageUpload.png";
+import { Image, Grid, Text } from "../../elements";
+import ImageUpload from "../../assets/ImageUpload.png";
 import { useDispatch, useSelector } from "react-redux";
-import { imgActions } from "../redux/modules/image";
+import { imgActions } from "../../redux/modules/image";
 
 const ImagesUpload = (props) => {
   const dispatch = useDispatch();

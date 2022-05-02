@@ -6,8 +6,8 @@ import {
   CustomOverlayMap,
   MapMarker,
 } from "react-kakao-maps-sdk";
-import { Grid, Input, Text } from "../elements";
-import { history } from "../redux/configureStore";
+import { Grid, Input, Text } from "../../elements";
+import { history } from "../../redux/configureStore";
 
 function KakaoMap(props) {
   const { kakao } = window;
