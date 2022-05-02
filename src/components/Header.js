@@ -15,8 +15,7 @@ const Header = () => {
       <Btn onClick={() => {history.push("/coursefeed");}}>코스추천</Btn>
       <IoMdNotifications size="20px" />
       <Modal/>
-    </HeaderBox>
-    
+    </HeaderBox>    
   );
 };
 
@@ -36,4 +35,7 @@ const Btn = styled.button`
   text-decoration: none;
   margin-left: 30px; 
 `;
+
 export default Header;
+
+

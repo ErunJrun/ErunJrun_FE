@@ -18,6 +18,5 @@ const Main = () => {
 
 const Box = styled.div`
   display: flex;
-  
 `;
 export default Main;

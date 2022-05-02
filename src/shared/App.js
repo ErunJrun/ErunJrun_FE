@@ -21,7 +21,7 @@ function App() {
         <Route path="/" exact component={Intro} />
         <Route path="/main" exact component={Main} />
         <Route path="/login" exact component={Login} />
-        <Route path="/myforest" exact component={Mypage} />
+        <Route path="/mypage" exact component={Mypage} />
         <Route path="/coursefeed" exact component={CourseFeed} />
       </ConnectedRouter>
     </React.Fragment>
