@@ -1,7 +1,7 @@
 import React from "react";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
-import { FaUser } from "react-icons/fa";
+import Modal from "./main/Modal";
 import { IoMdNotifications } from "react-icons/io";
 
 
@@ -14,18 +14,14 @@ const Header = () => {
       <Btn onClick={() => {history.push("/main");}}>그룹러닝</Btn>
       <Btn onClick={() => {history.push("/coursefeed");}}>코스추천</Btn>
       <IoMdNotifications size="20px" />
-      <div onClick={() => {history.push("mypage");}}>
-        <FaUser/>
-      </div>
-      
-    </HeaderBox>
-    
+      <Modal/>
+    </HeaderBox>    
   );
 };
 
 const HeaderBox = styled.div`
   display: flex;
-  padding: 5%;
+  padding: 6%;
 `;
 
 const Btn = styled.button`
@@ -39,4 +35,7 @@ const Btn = styled.button`
   text-decoration: none;
   margin-left: 30px; 
 `;
+
 export default Header;
+
+
