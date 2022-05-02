@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
-import { Text, Grid, Image } from "../elements";
+import { Text, Grid, Image } from "../../elements";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { getGroupDB } from "../redux/modules/feed";
-import { history } from "../redux/configureStore";
+import { getGroupDB } from "../../redux/modules/feed";
+import { history } from "../../redux/configureStore";
 
 const GroupCard = () => {
   const dispatch = useDispatch();
@@ -17,28 +17,9 @@ const GroupCard = () => {
   return (
     <>
       <Grid
-        display="flex"
-        justifyContent="left"
-        alignItems="center"
-        margin="28px auto 38px auto"
-        maxWidth="1360px"
-        width="100%"
-      >
-        <Text margin="0 15px 0 0" size="24px" bold>
-          ㅇㅇㅇ 님을 위한 추천 그룹 러닝입니다!
-        </Text>
-        <Text margin="0 8px 0 0" size="18px" bold>
-          #서울특별시
-        </Text>
-        <Text size="18px" bold>
-          #5km 이상 10km 미만
-        </Text>
-      </Grid>
-      <Grid
         margin="38px auto"
         display="flex"
         flexWrap="wrap"
-        // justifyContent="center"
         alignItems="center"
         maxWidth="1395px"
         width="100%"
@@ -76,8 +57,7 @@ const GroupCard = () => {
                     {feedList?.title}
                   </Text>
                   <Text size="16px" margin="4px 0 0 0">
-                    {feedList?.date} {feedList?.standbyTime} (소요 시간 : 2h
-                    30min)
+                    {feedList?.date} (소요 시간 : {feedList?.totalTime})
                   </Text>
                   <Text size="16px" margin="4px 0 0 0">
                     신청인원 {feedList?.applyPeople} / {feedList?.maxPeople}

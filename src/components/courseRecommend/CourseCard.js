@@ -1,7 +1,7 @@
 import React from "react";
 
-const CourseRecommend = () => {
+const CourseCard = () => {
   return <div>CourseRecommend</div>;
 };
 
-export default CourseRecommend;
+export default CourseCard;

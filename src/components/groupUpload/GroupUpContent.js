@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Text, Input } from "../elements";
+import { Grid, Text, Input } from "../../elements";
 import styled from "styled-components";
 
 const GroupContent = (props) => {
