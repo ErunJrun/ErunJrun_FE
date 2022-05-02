@@ -8,12 +8,6 @@ import { IoMdNotifications } from "react-icons/io";
 const Header = () => {
   return (
     <HeaderBox>
-<<<<<<< HEAD
-      <div onClick={() => {history.push("/");}}>이RUN저RUN</div>
-      <Btn onClick={() => {history.push("/");}}>Home</Btn>
-      <Btn onClick={() => {history.push("/groupfeed");}}>그룹러닝</Btn>
-      <Btn onClick={() => {history.push("/coursefeed");}}>코스추천</Btn>
-=======
       <div
         onClick={() => {
           history.push("/");
@@ -42,7 +36,6 @@ const Header = () => {
       >
         코스추천
       </Btn>
->>>>>>> f11a2f633c45386b886a0dfd44b5558fdb51b8f3
       <IoMdNotifications size="20px" />
       <Modal />
     </HeaderBox>
