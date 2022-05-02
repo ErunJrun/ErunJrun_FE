@@ -5,16 +5,31 @@ import styled from "styled-components";
 const MGroupRunning = () => {
     return (
         <div>
-            <h2>모집중인 그룹 러닝</h2>
-            <Btn onClick={() => {history.push("/main");}}>
-                더보기
-            </Btn>
+            <Box>
+                <h2>그룹 러닝</h2>
+                <Btn onClick={() => {history.push("/main");}}>
+                    더보기
+                </Btn>
+            </Box>
+
+            <Box>
+                <h2>코스추천</h2>
+                <Btn onClick={() => {history.push("/coursefeed");}}>
+                    더보기
+                </Btn>
+            </Box>
         </div>
     );
 };
 
+const Box = styled.div`
+  padding: 5%;
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Btn = styled.button`
-  //border: none;
+  border: none;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.9rem;
   color:#000000;
