@@ -24,6 +24,7 @@ const Image = (props) => {
     className,
     radius,
     preview,
+    borderRadius,
   } = props;
 
   const styles = {
@@ -48,6 +49,7 @@ const Image = (props) => {
     _onClick,
     radius,
     preview,
+    borderRadius,
   };
 
   // 로고 이미지 쓸때
@@ -250,6 +252,7 @@ const MyImageRT = styled.div`
 const ImgBtn = styled.div`
   position: relative;
   overflow: hidden;
+  border-radius: ${(props) => props.borderRadius};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};

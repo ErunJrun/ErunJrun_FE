@@ -1,4 +1,5 @@
 import React from "react";
+
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import Modal from "./main/Modal";
@@ -16,6 +17,7 @@ const Header = () => {
       <IoMdNotifications size="20px" />
       <Modal/>
     </HeaderBox>    
+
   );
 };
 
