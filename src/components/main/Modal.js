@@ -24,7 +24,7 @@ const Modal = () => {
                 <div className="madal">
                     <div onClick={toggleModal} className="overlay"></div>
                     <div className="modal-content">
-                        <p onClick={() => {history.push("/myforest");}}>
+                        <p onClick={() => {history.push("/mypage");}}>
                             마이 페이지</p>
                         <p onClick={() => {}}>
                             계정 설정</p>
