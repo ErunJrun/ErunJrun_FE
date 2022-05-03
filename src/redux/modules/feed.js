@@ -106,8 +106,8 @@ export const addGroupDB = (
     formData.append("distance", distance);
     formData.append("mapLatLng", JSON.stringify(mapLatLng));
 
-    axios
-      .post("http://rengabro.shop/group", formData, {
+    api
+      .post("/group", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

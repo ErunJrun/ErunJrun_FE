@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { naverLoginDB } from "../redux/modules/user";
+import { naverLoginDB } from "../../redux/modules/user";
 
 const NaverLogin = () => {
   const dispatch = useDispatch();

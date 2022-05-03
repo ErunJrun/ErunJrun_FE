@@ -8,7 +8,7 @@ const getCookie = (name) => {
 };
 
 // 쿠키 저장
-const setCookie = (name, value, exp = 5) => {
+const setCookie = (name, value, exp = 1) => {
   let date = new Date();
   // 만료 날짜 만들기
   date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);

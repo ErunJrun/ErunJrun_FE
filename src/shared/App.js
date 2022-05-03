@@ -12,8 +12,8 @@ import CourseFeed from "../pages/CourseFeed";
 import GroupFeed from "../pages/GroupFeed";
 import GroupUpload from "../pages/GroupUpload";
 import GroupDetail from "../pages/GroupDetail";
-import KakaoLogin from "../components/KakaoLogin";
-import NaverLogin from "../components/NaverLogin";
+import KakaoLogin from "../components/login/KakaoLogin";
+import NaverLogin from "../components/login/NaverLogin";
 
 function App() {
   return (

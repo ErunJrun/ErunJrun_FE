@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { kakaoLogin } from "../redux/modules/user";
+import { kakaoLogin } from "../../redux/modules/user";
 
 const KakaoLogin = () => {
   const dispatch = useDispatch();
