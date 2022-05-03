@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Badge from "../components/myPage/Badge";
 import { history } from "../redux/configureStore";
 
-const Mypage = () => {
+const Recommend = () => {
   return (
     <Box1>
       <Box2>
@@ -27,7 +27,7 @@ const Mypage = () => {
                 <Btn onClick={() => {history.push("/mypage/bookmark");}}>북마크 추천 코스</Btn>
               </CategoryBox>
           </Category>
-          참려한 그룹러닝
+          내가만든 추천코스
           <button>더보기</button>
         </Box>
         <Badge/>
@@ -78,4 +78,4 @@ const Btn = styled.button`
   }
 `;
 
-export default Mypage;
+export default Recommend;

@@ -1,8 +1,9 @@
 import React from 'react';
-import Attend from './Attend';
-import Make from './Make';
-import Recommend from './Recommend';
-import Bookmark from './Bookmark';
+import { history } from '../../redux/configureStore';
+import Attend from '../../pages/Attend';
+import Make from '../../pages/Make';
+import Recommend from '../../pages/Recommend';
+import Bookmark from '../../pages/Bookmark';
 import styled from "styled-components";
 
 const RunningBox = () => {
@@ -10,18 +11,22 @@ const RunningBox = () => {
         <Box>
             <Category>
                 <CategoryBox>
-                    <Attend/>
+                  <Btn onClick={() => {history.push("/mypage");}}> 참여한 그룹 러닝</Btn>
                 </CategoryBox>
                 <CategoryBox>
-                    <Recommend/>
+                  <Btn  onClick={() => {history.push("/mypage/recommend");}}>내가 만든 추천 코스</Btn>
                 </CategoryBox>  
                 <CategoryBox>
-                    <Make/> 
+                  <Btn  onClick={() => {history.push("/mypage/make");}}>내가 만든 그룹 러닝</Btn>
                 </CategoryBox>  
                 <CategoryBox>
-                    <Bookmark/>
+                  <Btn onClick={() => {history.push("/mypage/bookmark");}}>북마크 추천 코스</Btn>
                 </CategoryBox>
             </Category>
+            <Attend/>
+            <Recommend/>
+            <Make/>
+            <Bookmark/>
         </Box>
     );
 };
@@ -45,4 +50,17 @@ const CategoryBox = styled.div`
   margin-right: 20px;
 `;
 
+const Btn = styled.button`
+  width: 150px;
+  height: 40px;
+  border: transparent;
+  background-color: transparent;
+  :hover{
+     width: 150px;
+     height: 40px;
+     border-radius: 5px;
+     background-color: black;
+     color: white;
+  }
+`;
 export default RunningBox;
