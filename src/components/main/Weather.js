@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import styled from "styled-components";
+import { ConstructionOutlined } from '@mui/icons-material';
 
 const Weather = () => {
   const [latitude, setLatitude] = useState(0);
@@ -13,6 +14,9 @@ const Weather = () => {
   const [tempMax, setTempMax] = useState(0);
   const [tempMin, setTempMin] = useState(0);
   const [humidity, setHumidity] = useState(0);
+
+  const apiKey = process.env.REACT_APP_API_KEY;
+  console.log(apiKey);
 
   const savePositionToState = (position) => {
     setLatitude(position.coords.latitude);
@@ -27,7 +31,7 @@ const Weather = () => {
         savePositionToState
         );
       const res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=2f894af6872d7ac3beffd36c159b3b4b&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
       );
       setTemperature(res.data.main.temp);
       setCityName(res.data.name);

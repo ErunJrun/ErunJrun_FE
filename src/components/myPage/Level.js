@@ -2,8 +2,8 @@ import React from 'react';
 
 const Level = () => {
     return (
-        <div>
-            Level
+        <div> 
+            굿 러너 레벨
         </div>
     );
 };

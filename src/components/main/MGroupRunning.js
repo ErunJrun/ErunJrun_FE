@@ -7,14 +7,18 @@ const MGroupRunning = () => {
         <div>
             <Box>
                 <h2>그룹 러닝</h2>
-                <Btn onClick={() => {history.push("/main");}}>
+                <Btn onClick={() => {
+                      history.push("/groupfeed");
+                    }}>
                     더보기
                 </Btn>
             </Box>
 
             <Box>
                 <h2>코스추천</h2>
-                <Btn onClick={() => {history.push("/coursefeed");}}>
+                <Btn onClick={() => {
+                      history.push("/coursefeed")
+                    ;}}>
                     더보기
                 </Btn>
             </Box>
