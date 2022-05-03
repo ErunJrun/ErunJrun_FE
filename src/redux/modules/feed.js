@@ -45,45 +45,34 @@ const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 export const getGroupDB = (category) => {
   return async function (dispatch, getState, { history }) {
     try {
-      if (category === "all") {
-        const { data } = await api.get(`/group/${category}`);
-        dispatch(getGroup(data.data));
-      } else {
-        console.log(category);
-        let region = "";
-        category[0].map((value) => {
-          region += value + "%";
-        });
-        region = region.substring(-1);
+      console.log(category);
+      // let date = new Date().toISOString().substring(0, 10);
+      let date = "";
+      let region = "";
+      category[0].map((value) => {
+        region += value + "%";
+      });
+      region = region.substring(-1);
 
-        let time = "";
-        category[1].map((value) => {
-          time += value + "%";
-        });
-        time = time.substring(-1);
+      let time = "";
+      category[1].map((value) => {
+        time += value + "%";
+      });
+      time = time.substring(-1);
 
-        let distance = "";
-        category[2].map((value) => {
-          distance += value + "%";
-        });
-        distance = distance.substring(-1);
+      let distance = "";
+      category[2].map((value) => {
+        distance += value + "%";
+      });
+      distance = distance.substring(-1);
 
-        let date = new Date();
-        // if(category.date === undefined) {
-        //   return date
-        // } else {
+      let finish = category[3];
 
-        //   return date = category.date
-        // }
-
-        let finish = "";
-
-        const { data } = await api.get(
-          `/group/all?date=${date}&region=${region}&time=${time}&distance=${distance}&finish=${finish}`
-        );
-        console.log(data.data);
-        dispatch(getGroup(data.data));
-      }
+      const { data } = await api.get(
+        `/group/all?date=${date}&region=${region}&time=${time}&distance=${distance}&finish=${finish}`
+      );
+      console.log(data.data);
+      dispatch(getGroup(data.data));
     } catch (error) {
       console.log(error);
     }

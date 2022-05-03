@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Grid, IconButton, Text, Input } from "../elements";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 import GroupFilter from "../components/groupFeed/GroupFilter";
 import GroupCard from "../components/groupFeed/GroupCard";
 import CalendarFilter from "../components/groupFeed/CalendarFilter";
@@ -13,8 +11,13 @@ import { getGroupDB } from "../redux/modules/feed";
 
 const GroupFeed = () => {
   const dispatch = useDispatch();
-  const [filter, setFilter] = useState(false);
+  const filterArea = useSelector((state) => state.filter.area);
+  const filterTime = useSelector((state) => state.filter.time);
+  const filterDistance = useSelector((state) => state.filter.distance);
   const [finish, setFinish] = useState(0);
+  console.log(filterArea, filterTime, filterDistance, finish);
+
+  const [filter, setFilter] = useState(false);
   const [reset, setReset] = useState(false);
   const [area, setArea] = useState([
     "전국",
@@ -51,14 +54,16 @@ const GroupFeed = () => {
   console.log(filterList);
 
   const finishCheck = () => {
-    if (finish === 0) {
+    if (finish == 0) {
       setFinish(1);
+      dispatch(getGroupDB(category));
     } else {
       setFinish(0);
+      dispatch(getGroupDB(category));
     }
   };
 
-  console.log(finish);
+  const category = [filterArea, filterTime, filterDistance, finish];
 
   const filterToggle = () => {
     setFilter(!filter);
@@ -80,19 +85,7 @@ const GroupFeed = () => {
         <Text size="16px">함께하고 싶은 러너의 그룹 러닝에 신청해보세요!</Text>
       </Grid>
 
-      {/* <Calendar onChange={onChange} value={value} /> */}
-      <Grid
-        bg="gray"
-        maxWidth="1360px"
-        width="100%"
-        margin="0 auto"
-        height="96px"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <CalendarFilter></CalendarFilter>
-      </Grid>
+      <CalendarFilter></CalendarFilter>
 
       <Grid
         maxWidth="1360px"
@@ -108,7 +101,11 @@ const GroupFeed = () => {
         </Text>
       </Grid>
       {filter ? (
-        <GroupFilter setReset={setReset} setFilter={setFilter}></GroupFilter>
+        <GroupFilter
+          finish={finish}
+          setReset={setReset}
+          setFilter={setFilter}
+        ></GroupFilter>
       ) : null}
 
       <Grid
@@ -206,13 +203,18 @@ const GroupFeed = () => {
         justifyContent="right"
         alignItems="center"
       >
-        <input onClick={finishCheck} type="checkbox"></input>
+        <input
+          onClick={() => {
+            finishCheck();
+          }}
+          type="checkbox"
+        ></input>
         <Text bold margin="0 0 0 10px">
           마감공고 포함하기
         </Text>
       </Grid>
 
-      <GroupCard></GroupCard>
+      <GroupCard finish={finish}></GroupCard>
 
       <StepBtn
         onClick={() => {

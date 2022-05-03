@@ -13,7 +13,7 @@ const GroupFilter = (props) => {
   const filterDistance = useSelector((state) => state.filter.distance);
   console.log(filterArea, filterTime, filterDistance);
 
-  const category = [filterArea, filterTime, filterDistance];
+  const category = [filterArea, filterTime, filterDistance, props.finish];
 
   const choiceArea = (idx) => {
     dispatch(filterActions.setFilterArea(idx));
