@@ -27,6 +27,8 @@ const Text = (props) => {
     bg,
     border,
     borderRadius,
+    text_decoration,
+    marginTop,
   } = props;
   const styles = {
     display,
@@ -51,6 +53,8 @@ const Text = (props) => {
     bg,
     border,
     borderRadius,
+    text_decoration,
+    marginTop,
   };
   return (
     <React.Fragment>
@@ -85,6 +89,8 @@ Text.defaultProps = {
   bg: null,
   border: null,
   borderRadius: null,
+  text_decoration: null,
+  marginTop: null,
 };
 const P = styled.p`
   ${(props) => `font-family : ${props.fontFamily};`};
@@ -97,6 +103,7 @@ const P = styled.p`
   height: ${(props) => props.height};
   word-break: ${(props) => (props.wordbreak ? `break-all` : null)};
   ${(props) => (props.bold ? `font-weight: 600;` : `font-weight: 350;`)};
+  ${(props) => (props.text_decoration ? `text-decoration: underline;` : null)};
   ${(props) => `color : ${props.color};`};
   ${(props) => `font-size: ${props.size};`};
   ${(props) => `margin : ${props.margin};`};
@@ -108,6 +115,7 @@ const P = styled.p`
   ${(props) => `left : ${props.left};`};
   ${(props) => (props.textalign ? `text-align: center;` : null)};
   ${(props) => (props.justifycontent ? `justify-content: center;` : null)};
+  ${(props) => (props.marginTop ? `margin-top: 30px;` : null)};
   cursor: ${(props) => props.cursor};
   white-space: pre-wrap;
   min-width: ${(props) => props.minWidth}; // 최소 width 값 지정

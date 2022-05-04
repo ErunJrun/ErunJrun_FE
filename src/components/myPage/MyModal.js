@@ -20,7 +20,7 @@ const MyModal = () => {
             </button>
 
             {modal && (
-                <div className="madal">
+                <div>
                     <div onClick={toggleModal} className="overlay"></div>
                     <div className="modal-content">
                         <p> 굿러너 레벨 정의 설명</p>

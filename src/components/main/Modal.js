@@ -21,12 +21,12 @@ const Modal = () => {
       </button>
 
       {modal && (
-        <div className="madal">
+        <div>
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
             <p
               onClick={() => {
-                history.push("/mypage");
+                history.push("/mypage")
               }}
             >
               마이 페이지

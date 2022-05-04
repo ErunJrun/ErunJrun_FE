@@ -16,7 +16,7 @@ const Schedule = () => {
                     <div>고양시</div>
                     <div>10km</div>
                 </div>
-                <FiChevronRight/>
+                <FiChevronRight size="40"/>
             </GroupBox>
             <hr/>
             <Text>D-3 봄에 뛰기 좋은 코스  |  고양시  |  10km</Text>
