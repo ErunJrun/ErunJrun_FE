@@ -25,10 +25,6 @@ function KakaoMap(props) {
   console.log(paths);
   console.log(distances);
 
-  // function sendData() {
-  //   props.setLocation(paths);
-  // }
-
   useEffect(() => {
     props.setLocation(paths);
     props.setDistance(totalDistance);

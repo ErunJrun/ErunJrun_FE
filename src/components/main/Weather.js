@@ -1,35 +1,32 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { ConstructionOutlined } from '@mui/icons-material';
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const Weather = () => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
-  const [weather, setWeather] = useState('');
+  const [weather, setWeather] = useState("");
   const [temperature, setTemperature] = useState(0);
-  const [cityName, setCityName] = useState('');
-  const [icon, setIcon] = useState('');
+  const [cityName, setCityName] = useState("");
+  const [icon, setIcon] = useState("");
   const [feelsLike, setFeelsLike] = useState(0);
   const [tempMax, setTempMax] = useState(0);
   const [tempMin, setTempMin] = useState(0);
   const [humidity, setHumidity] = useState(0);
 
   const apiKey = process.env.REACT_APP_API_KEY;
-  console.log(apiKey);
 
   const savePositionToState = (position) => {
     setLatitude(position.coords.latitude);
     setLongitude(position.coords.longitude);
-  }
+  };
 
-  const iconURL = "http://openweathermap.org/img/w/" +icon + ".png";
+  const iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
 
-  const fetchWeather= async () => {
+  const fetchWeather = async () => {
     try {
-       window.navigator.geolocation.getCurrentPosition(
-        savePositionToState
-        );
+      window.navigator.geolocation.getCurrentPosition(savePositionToState);
       const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
       );
@@ -49,12 +46,12 @@ const Weather = () => {
 
   useEffect(() => {
     fetchWeather();
-  }, [latitude, longitude])
+  }, [latitude, longitude]);
 
   return (
     <Box>
       <div>{cityName}</div>
-      <img src = {iconURL}/>
+      <img src={iconURL} />
       <div>{temperature}°C</div>
       <div>{weather}</div>
       <div>체감: {feelsLike}°C</div>
@@ -70,6 +67,5 @@ const Box = styled.div`
   border: 1px solid #000000;
   margin-left: 30px;
 `;
-
 
 export default Weather;

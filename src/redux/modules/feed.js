@@ -16,6 +16,7 @@ const LOADING = "LOADING";
 //initialState
 const initialState = {
   list: [],
+  detail: [],
 };
 
 //액션생성함수
@@ -26,6 +27,11 @@ export const addGroup = (payload) => ({
 
 export const getGroup = (payload) => ({
   type: GET_GROUP,
+  payload,
+});
+
+export const getGroupDetail = (payload) => ({
+  type: GET_GROUP_DETAIL,
   payload,
 });
 
@@ -46,33 +52,54 @@ export const getGroupDB = (category) => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log(category);
-      // let date = new Date().toISOString().substring(0, 10);
-      let date = "";
-      let region = "";
-      category[0].map((value) => {
-        region += value + "%";
-      });
-      region = region.substring(-1);
+
+      let region = category[0];
 
       let time = "";
-      category[1].map((value) => {
+      category[1]?.map((value) => {
         time += value + "%";
       });
       time = time.substring(-1);
 
       let distance = "";
-      category[2].map((value) => {
+      category[2]?.map((value) => {
         distance += value + "%";
       });
       distance = distance.substring(-1);
 
-      let finish = category[3];
+      let startDate = "";
+      category[3] ? (startDate = category[3]) : (startDate = "");
+
+      let endDate = "";
+      category[4] ? (endDate = category[4]) : (endDate = "");
+
+      let theme = "";
+      category[5]?.map((value) => {
+        category += value + "%";
+      });
+      category = distance.substring(-1);
+
+      let finish = 0;
+      category[6] ? (finish = category[6]) : (finish = "0");
 
       const { data } = await api.get(
-        `/group/all?date=${date}&region=${region}&time=${time}&distance=${distance}&finish=${finish}`
+        `/group/all?date=${startDate}%%${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&theme=${theme}`
       );
       console.log(data.data);
       dispatch(getGroup(data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getGroupDetailDB = (groupId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      // console.log(groupId);
+      const { data } = await api.get(`/group/detail/${groupId}`);
+      console.log(data.data);
+      dispatch(getGroupDetail(data.data));
     } catch (error) {
       console.log(error);
     }
@@ -134,17 +161,18 @@ export default handleActions(
       }),
     [GET_GROUP]: (state, action) =>
       produce(state, (draft) => {
-        console.log(state, action.payload);
+        // console.log(state, action.payload);
         draft.list = action.payload;
       }),
     [GET_GROUP_DETAIL]: (state, action) =>
       produce(state, (draft) => {
-        draft.target = action.payload.post_one;
+        // console.log(action.payload);
+        draft.detail = action.payload;
       }),
 
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         draft.is_loading = action.payload.is_loading;
       }),
   },

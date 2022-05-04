@@ -88,14 +88,11 @@ Text.defaultProps = {
 };
 const P = styled.p`
   ${(props) => `font-family : ${props.fontFamily};`};
-  /* z-index: 1; */
   display: ${(props) => props.display};
   border-radius: ${(props) => props.borderRadius};
   background-color: ${(props) => props.bg};
   border: ${(props) => props.border};
   z-index: ${(props) => (props.zindex ? `1;` : null)};
-  height: ${(props) => props.height};
-  word-break: ${(props) => (props.wordbreak ? `break-all` : null)};
   ${(props) => (props.bold ? `font-weight: 600;` : `font-weight: 350;`)};
   ${(props) => `color : ${props.color};`};
   ${(props) => `font-size: ${props.size};`};

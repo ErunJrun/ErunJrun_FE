@@ -35,7 +35,7 @@ export default handleActions(
 
     [SET_FILTER_TIME]: (state, action) =>
       produce(state, (draft) => {
-        console.log(state, action.payload.list);
+        console.log(action.payload.list);
         draft.time = [...state.time, action.payload.list];
       }),
 
