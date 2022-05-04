@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
@@ -16,8 +16,21 @@ import NaverLogin from "../components/login/NaverLogin";
 import Recommend from "../pages/Recommend";
 import Make from "../pages/Make";
 import Bookmark from "../pages/Bookmark";
+import { useDispatch } from "react-redux";
+import { loginCheckDB } from "../redux/modules/user";
+import { getCookie } from "./Cookie";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const token = getCookie("accessToken");
+
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(loginCheckDB());
+  //   }
+  // }, []);
+
   return (
     <React.Fragment>
       <Header></Header>

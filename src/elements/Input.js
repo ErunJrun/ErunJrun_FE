@@ -17,6 +17,9 @@ const Input = (props) => {
     multiple,
     groupPost,
     onFocus,
+    step,
+    min,
+    max,
   } = props;
 
   if (multiLine) {
@@ -38,11 +41,15 @@ const Input = (props) => {
       <>
         {label && <Text margin="0px">{label}</Text>}
         <GroupInput
+          required
           type={type}
           placeholder={placeholder}
           onChange={_onChange}
           defaultValue={defaultValue}
           onFocus={onFocus}
+          step={step}
+          min={min}
+          max={max}
         />
       </>
     );

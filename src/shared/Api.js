@@ -18,6 +18,8 @@ api.interceptors.request.use((config) => {
   const token = getCookie("accessToken");
   const refreshToken = getCookie("refreshToken");
 
+  // console.log("액세스", token, "리프레쉬", refreshToken);
+
   config.headers.common["Authorization"] = `Bearer ${token}`;
   config.headers.common["reAuthorization"] = `Bearer ${refreshToken}`;
 
@@ -33,6 +35,8 @@ api.interceptors.response.use(
 
     const originalRequest = config;
     const dispatch = useDispatch();
+
+    console.log("토큰 인터셉터", error);
 
     if (response?.status === 401) {
       if (response?.data.token) {

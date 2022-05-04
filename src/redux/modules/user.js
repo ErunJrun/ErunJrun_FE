@@ -1,5 +1,3 @@
-// import { apis, api } from "../../shared/Api";
-
 import axios from "axios";
 import { api } from "../../shared/Api";
 
@@ -81,8 +79,8 @@ export const naverLoginDB = (code, state) => {
         // const nickname = res.data.nickname;
         // const profileImageUrl = res.data.profileImageUrl;
 
-        setCookie("accessToken", res.data.token, 0.5);
-        setCookie("refreshToken", res.data.refreshToken, 1);
+        setCookie("accessToken", res.data.token, 2);
+        setCookie("refreshToken", res.data.refreshToken, 2);
 
         // localStorage.setItem("userId", userId);
         // localStorage.setItem("nickname", nickname);
@@ -105,14 +103,14 @@ export const naverLoginDB = (code, state) => {
 
 export const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
+    console.log("로그인 체크 DB");
     api
-      .get("")
+      .get("/user/auth")
       .then((res) => {
         console.log(res);
 
         dispatch(
           logIn({
-            email: res.data.email,
             nickname: res.data.nickname,
             userId: res.data.userId,
             profileImageUrl: res.data.profileImageUrl,
@@ -135,7 +133,7 @@ export const logoutDB = () => {
     localStorage.removeItem("profileImageUrl");
 
     dispatch(logOut());
-    history.push("/");
+    history.push("/login");
   };
 };
 
