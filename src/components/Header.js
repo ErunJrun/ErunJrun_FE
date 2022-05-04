@@ -1,11 +1,51 @@
 import React from "react";
-
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import Modal from "./main/Modal";
 import { IoMdNotifications } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+
+  const is_login = useSelector((state) => state.user.is_login)
+
+  if (is_login) {
+    return (
+      <HeaderBox>
+        <div
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          이RUN저RUN
+        </div>
+        <Btn
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          Home
+        </Btn>
+        <Btn
+          onClick={() => {
+            history.push("/groupfeed");
+          }}
+        >
+          그룹러닝
+        </Btn>
+        <Btn
+          onClick={() => {
+            history.push("/coursefeed");
+          }}
+        >
+          코스추천
+        </Btn>
+        <IoMdNotifications size="20px" />
+        <Modal />
+      </HeaderBox>
+    );
+  }
+
   return (
     <HeaderBox>
       <div
@@ -36,8 +76,13 @@ const Header = () => {
       >
         코스추천
       </Btn>
-      <IoMdNotifications size="20px" />
-      <Modal />
+      <Btn
+        onClick={() => {
+          history.push("/login");
+        }}
+      >
+        로그인
+      </Btn>
     </HeaderBox>
   );
 };

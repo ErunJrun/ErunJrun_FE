@@ -4,6 +4,7 @@ import Schedule from "../components/myPage/Schedule";
 import styled from "styled-components";
 import Badge from "../components/myPage/Badge";
 import { history } from "../redux/configureStore";
+import MGroupCard from "../components/myPage/MGroupCard";
 
 const Mypage = () => {
   return (
@@ -28,6 +29,7 @@ const Mypage = () => {
               </CategoryBox>
           </Category>
           참려한 그룹러닝
+          <MGroupCard/>
           <button>더보기</button>
         </Box>
         <Badge/>
@@ -49,7 +51,7 @@ const Box = styled.div`
   border: 1px solid black;
   border-radius: 3px;
   width: 82%;
-  height: 400px;
+  height: 800px;
   margin-top: 30px;
 `;
 

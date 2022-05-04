@@ -16,7 +16,6 @@ const Weather = () => {
   const [humidity, setHumidity] = useState(0);
 
   const apiKey = process.env.REACT_APP_API_KEY;
-  console.log(apiKey);
 
   const savePositionToState = (position) => {
     setLatitude(position.coords.latitude);

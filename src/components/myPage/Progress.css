@@ -1,0 +1,39 @@
+.progress1 {
+    background-color: #d8d8d8;
+    border-radius: 20px;
+    width: 300px;
+    height: 25px;
+}
+
+.progress {
+    background-color: transparent;
+    width: 300px;
+    height: 3px;
+    margin-bottom: 30px;
+}
+
+.progress-done {
+    background: linear-gradient(to left, #f57a55, #FF9472);
+    color: #fff;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0;
+    height: 100%;
+    opacity: 0;
+    transition: 1s ease;
+}
+
+.running {
+    background: linear-gradient(to left, transparent, transparent);
+    color: rgb(26, 27, 27);
+    border-radius: 20px;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    width: 0;
+    height: 100%;
+    opacity: 0;
+    transition: 1s ease;
+}

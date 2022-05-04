@@ -1,13 +1,12 @@
 import React from 'react';
 import Level from './Level';
-import MyModal from './MyModal';
 import styled from "styled-components";
 
 const Profile = () => {
     return (
         <Box>
             <div>
-              <MyImage src="http://kaihuastudio.com/common/img/default_profile.png"/>
+              <MyImage src="https://ifh.cc/g/qT8V9W.jpg"/>
               <p>김다운</p>
               <p>블루</p>
               <p>경기도 | 10km</p>
@@ -15,7 +14,6 @@ const Profile = () => {
             </div>
             <hr/>
             <Level/>
-            <MyModal/>
         </Box>
     );
 };
