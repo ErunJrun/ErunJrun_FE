@@ -8,16 +8,10 @@ import Evaluation from "./Evaluation";
 
 const MGroupCard = (props) => {
   const dispatch = useDispatch();
-  const feedList = useSelector((state) => state.feed.list);
-  const filterArea = useSelector((state) => state.filter.area);
-  const filterTime = useSelector((state) => state.filter.time);
-  const filterDistance = useSelector((state) => state.filter.distance);
 
-  const category = [filterArea, filterTime, filterDistance, props.finish];
-
-  React.useEffect(() => {
-    dispatch(getGroupDB(category));
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(getGroupDB(category));
+  // }, []);
 
   return (
     <>
@@ -67,7 +61,7 @@ const MGroupCard = (props) => {
           );
         })}
       </Grid> */}
-      <Evaluation/>
+      <Evaluation />
     </>
   );
 };
@@ -77,7 +71,5 @@ const Hr = styled.div`
   width: 430px;
   margin: 16px auto;
 `;
-
-
 
 export default MGroupCard;
