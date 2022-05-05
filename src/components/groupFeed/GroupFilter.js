@@ -3,9 +3,7 @@ import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Text, Grid } from "../../elements";
-import { IconButton } from "../../elements";
 import { getGroupDB } from "../../redux/modules/feed";
-import { filterActions } from "../../redux/modules/filter";
 import CalendarFilter from "./CalendarFilter";
 import DistanceFilter from "./DistanceFilter";
 import TimeFilter from "./TimeFilter";
@@ -30,21 +28,21 @@ const GroupFilter = (props) => {
     props.finish,
   ];
 
-  console.log(
-    "region=>>",
-    region,
-    "startDate=>>",
-    startDate,
-    "endDate=>>",
-    endDate,
-    "filterTime=>>",
-    filterTime,
-    "filterDistance=>>",
-    filterDistance,
-    "filterTheme=>>",
-    filterTheme,
-    props.finish
-  );
+  // console.log(
+  //   "region=>>",
+  //   region,
+  //   "startDate=>>",
+  //   startDate,
+  //   "endDate=>>",
+  //   endDate,
+  //   "filterTime=>>",
+  //   filterTime,
+  //   "filterDistance=>>",
+  //   filterDistance,
+  //   "filterTheme=>>",
+  //   filterTheme,
+  //   props.finish
+  // );
 
   const getFilter = () => {
     dispatch(getGroupDB(category));

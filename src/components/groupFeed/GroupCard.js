@@ -8,15 +8,11 @@ import { history } from "../../redux/configureStore";
 const GroupCard = (props) => {
   const dispatch = useDispatch();
   const feedList = useSelector((state) => state.feed.list);
-  const filterArea = useSelector((state) => state.filter.area);
-  const filterTime = useSelector((state) => state.filter.time);
-  const filterDistance = useSelector((state) => state.filter.distance);
+  // const category = [filterArea, filterTime, filterDistance, props.finish];
 
-  const category = [filterArea, filterTime, filterDistance, props.finish];
-
-  React.useEffect(() => {
-    dispatch(getGroupDB(category));
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(getGroupDB(category));
+  // }, []);
 
   return (
     <>

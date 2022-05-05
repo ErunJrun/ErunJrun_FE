@@ -57,13 +57,13 @@ export const getGroupDB = (category) => {
 
       let time = "";
       category[1]?.map((value) => {
-        time += value + "%";
+        time += value + "/";
       });
       time = time.substring(-1);
 
       let distance = "";
       category[2]?.map((value) => {
-        distance += value + "%";
+        distance += value + "/";
       });
       distance = distance.substring(-1);
 
@@ -75,15 +75,14 @@ export const getGroupDB = (category) => {
 
       let theme = "";
       category[5]?.map((value) => {
-        category += value + "%";
+        category[5] += value + "/";
       });
-      category = distance.substring(-1);
+      category[5] = distance.substring(-1);
 
-      let finish = 0;
-      category[6] ? (finish = category[6]) : (finish = "0");
+      let finish = category[6];
 
       const { data } = await api.get(
-        `/group/all?date=${startDate}%%${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&theme=${theme}`
+        `/group/all?date=${startDate}/${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}`
       );
       console.log(data.data);
       dispatch(getGroup(data.data));

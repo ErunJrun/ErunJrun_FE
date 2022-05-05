@@ -1,9 +1,10 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Grid, Text } from "../elements";
 import KakaoLogin from "../assets/KakaoLogin.png";
 import NaverLogin from "../assets/NaverLogin.png";
+import { history } from "../redux/configureStore";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,14 @@ const Login = () => {
   const naverCallbackUrl = process.env.REACT_APP_NAVER_CALLBACK_URL;
   const kakaoClientId = process.env.REACT_APP_KAKAO_LOGIN_ID;
   const kakaoCallbackUrl = process.env.REACT_APP_KAKAO_CALLBACK_URL;
+
+  const isLogin = useSelector((state) => state.user.isLogin);
+
+  useEffect(() => {
+    if (isLogin) {
+      return history.push("/");
+    }
+  }, []);
 
   return (
     <React.Fragment>

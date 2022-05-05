@@ -36,28 +36,25 @@ const initialState = {
 // 미들웨어
 export const kakaoLogin = (authorization_code) => {
   return (dispatch, getState, { history }) => {
-    console.log(authorization_code);
     api
       .get(`user/kakao/callback?code=${authorization_code}`)
       .then((res) => {
-        console.log(res);
-
-        // const userId = res.data.userId;
-        // const nickname = res.data.nickname;
-        // const profileImageUrl = res.data.profileImageUrl;
+        const userId = res.data.userId;
+        const nickname = res.data.nickname;
+        const profileUrl = res.data.profileUrl;
 
         setCookie("accessToken", res.data.token, 0.5);
         setCookie("refreshToken", res.data.refreshToken, 1);
 
-        // localStorage.setItem("userId", userId);
-        // localStorage.setItem("nickname", nickname);
-        // localStorage.setItem("profileImageUrl", profileImageUrl);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("nickname", nickname);
+        localStorage.setItem("profileUrl", profileUrl);
 
         dispatch(
           logIn({
-            nickname: res.data.nickname,
-            userId: res.data.userId,
-            profileImageUrl: res.data.profileImageUrl,
+            nickname: nickname,
+            userId: userId,
+            profileUrl: profileUrl,
           })
         );
         history.replace("/");
@@ -74,23 +71,22 @@ export const naverLoginDB = (code, state) => {
     api
       .get(`user/naver/callback?code=${code}&state=${state}`)
       .then((res) => {
-        console.log(res);
-        // const userId = res.data.userId;
-        // const nickname = res.data.nickname;
-        // const profileImageUrl = res.data.profileImageUrl;
+        const userId = res.data.userId;
+        const nickname = res.data.nickname;
+        const profileUrl = res.data.profileUrl;
 
         setCookie("accessToken", res.data.token, 2);
         setCookie("refreshToken", res.data.refreshToken, 2);
 
-        // localStorage.setItem("userId", userId);
-        // localStorage.setItem("nickname", nickname);
-        // localStorage.setItem("profileImageUrl", profileImageUrl);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("nickname", nickname);
+        localStorage.setItem("profileUrl", profileUrl);
 
         dispatch(
           logIn({
-            nickname: res.data.nickname,
-            userId: res.data.userId,
-            profileImageUrl: res.data.profileImageUrl,
+            nickname: nickname,
+            userId: userId,
+            profileUrl: profileUrl,
           })
         );
         history.replace("/");
@@ -108,14 +104,17 @@ export const loginCheckDB = () => {
       .get("/user/auth")
       .then((res) => {
         console.log(res);
-
-        dispatch(
-          logIn({
-            nickname: res.data.nickname,
-            userId: res.data.userId,
-            profileImageUrl: res.data.profileImageUrl,
-          })
-        );
+        if (res.data) {
+          dispatch(
+            logIn({
+              nickname: res.data.nickname,
+              userId: res.data.userId,
+              profileUrl: res.data.profileUrl,
+            })
+          );
+        } else {
+          dispatch(logoutDB());
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -130,9 +129,10 @@ export const logoutDB = () => {
     deleteCookie("refreshToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("nickname");
-    localStorage.removeItem("profileImageUrl");
+    localStorage.removeItem("profileUrl");
 
     dispatch(logOut());
+    window.alert("로그아웃 시간이 만료되었습니다.");
     history.push("/login");
   };
 };
@@ -143,16 +143,16 @@ export default handleActions(
       produce(state, (draft) => {
         draft.user.nickname = action.payload.nickname;
         draft.user.userId = action.payload.userId;
-        draft.user.profileImageUrl = action.payload.profileImageUrl;
-        draft.is_login = true;
+        draft.user.profileUrl = action.payload.profileImageUrl;
+        draft.isLogin = true;
       }),
 
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         draft.user.nickname = null;
         draft.user.userId = null;
-        draft.user.profileImageUrl = null;
-        draft.is_login = false;
+        draft.user.profileUrl = null;
+        draft.isLogin = false;
       }),
   },
   initialState

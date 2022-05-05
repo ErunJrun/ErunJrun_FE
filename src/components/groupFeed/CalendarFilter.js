@@ -12,7 +12,7 @@ const CalendarFilter = (props) => {
   ]);
   const [startDate, endDate] = dateRange;
 
-  console.log(startDate, endDate);
+  // console.log(startDate, endDate);
   const _startDate = formatDate(startDate);
   const _endDate = formatDate(endDate);
 

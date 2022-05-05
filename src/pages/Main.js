@@ -7,9 +7,9 @@ import MGroupRunning from "../components/main/MGroupRunning";
 const Main = () => {
   return (
     <div>
-        <Banner/>
-        <Weather/>
-      <MGroupRunning/>
+      <Banner />
+      <Weather />
+      <MGroupRunning />
     </div>
   );
 };

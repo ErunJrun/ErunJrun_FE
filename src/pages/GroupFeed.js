@@ -6,7 +6,7 @@ import GroupFilter from "../components/groupFeed/GroupFilter";
 import GroupCard from "../components/groupFeed/GroupCard";
 import CalendarFilter from "../components/groupFeed/CalendarFilter";
 import { useDispatch, useSelector } from "react-redux";
-import { filterActions } from "../redux/modules/filter";
+
 import { getGroupDB } from "../redux/modules/feed";
 
 const GroupFeed = () => {
@@ -17,7 +17,7 @@ const GroupFeed = () => {
   const [region, setRegion] = useState("");
   const [filterTime, setFilterTime] = useState([]);
   const [filterDistance, setFilterDistance] = useState([]);
-  const [filterTheme, setFilterTheme] = useState();
+  const [filterTheme, setFilterTheme] = useState([]);
 
   const category = [
     region,
@@ -30,7 +30,7 @@ const GroupFeed = () => {
   ];
 
   const finishCheck = () => {
-    if (finish === 0) {
+    if (finish == 0) {
       setFinish(1);
     } else {
       setFinish(0);
@@ -39,7 +39,7 @@ const GroupFeed = () => {
 
   useEffect(() => {
     dispatch(getGroupDB(category));
-  }, []);
+  }, [finish]);
 
   // const filterToggle = () => {
   //   setFilter(!filter);
@@ -100,13 +100,14 @@ const GroupFeed = () => {
         justifyContent="right"
         alignItems="center"
       >
-        <input
-          onClick={() => {
+        <Text
+          cursor="pointer"
+          _onClick={() => {
             finishCheck();
           }}
-          type="checkbox"
-        ></input>
-        <Text bold margin="0 0 0 10px">
+          bold
+          margin="0 0 0 10px"
+        >
           마감공고 포함하기
         </Text>
       </Grid>
