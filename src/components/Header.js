@@ -6,8 +6,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-
-  const is_login = useSelector((state) => state.user.is_login)
+  const is_login = useSelector((state) => state.user.isLogin);
 
   if (is_login) {
     return (

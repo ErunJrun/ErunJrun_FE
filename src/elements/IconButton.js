@@ -16,6 +16,7 @@ import { CgSmile } from "react-icons/cg";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { HiPencilAlt } from "react-icons/hi";
 import { FcFilledFilter } from "react-icons/fc";
+import { BiDotsVerticalRounded } from "react-icons/bi";
 
 const IconButton = (props) => {
   const {
@@ -49,6 +50,7 @@ const IconButton = (props) => {
     smile,
     zIndex,
     filter,
+    moreDot,
   } = props;
 
   const styles = {
@@ -62,6 +64,19 @@ const IconButton = (props) => {
   };
 
   //아이콘 작동
+  if (moreDot) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <BiDotsVerticalRounded
+            size={size}
+            onClick={_onClick}
+          ></BiDotsVerticalRounded>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
   if (filter) {
     return (
       <React.Fragment>

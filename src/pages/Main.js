@@ -8,10 +8,10 @@ const Main = () => {
   return (
     <div>
       <Box>
-        <Banner/>
-        <Weather/>
+        <Banner />
+        {/* <Weather/> */}
       </Box>
-      <MGroupRunning/>
+      <MGroupRunning />
     </div>
   );
 };

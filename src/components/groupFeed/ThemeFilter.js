@@ -21,7 +21,7 @@ const ThemeFilter = (props) => {
 
   const choiceTheme = (e, idx) => {
     if (e.target.checked) {
-      setCheckedInputs([...checkedInputs, idx]);
+      setCheckedInputs([...checkedInputs, e]);
     } else {
       // 체크 해제
       setCheckedInputs(checkedInputs.filter((el) => el !== idx));

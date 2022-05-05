@@ -25,11 +25,11 @@ function App() {
 
   const token = getCookie("accessToken");
 
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(loginCheckDB());
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (token) {
+      dispatch(loginCheckDB());
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -41,8 +41,8 @@ function App() {
         <Route path="/coursefeed" exact component={CourseFeed} />
         <Route path="/groupfeed" exact component={GroupFeed} />
         <Route path="/groupupload" exact component={GroupUpload} />
-        <Route path="/kakao" component={KakaoLogin}></Route>
-        <Route path="/naver" component={NaverLogin}></Route>
+        <Route path="/kakao" exact component={KakaoLogin}></Route>
+        <Route path="/naver" exact component={NaverLogin}></Route>
         <Route path="/groupdetail/:groupId" exact component={GroupDetail} />
         <Route path="/mypage/recommend" exact component={Recommend} />
         <Route path="/mypage/make" exact component={Make} />

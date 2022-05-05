@@ -1,8 +1,6 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { Grid, Text } from "../../elements";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { filterActions } from "../../redux/modules/filter";
 
 const TimeFilter = (props) => {
   const [checkedInputs, setCheckedInputs] = useState([]);

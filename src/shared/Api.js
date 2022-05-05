@@ -1,8 +1,6 @@
 import axios from "axios";
 import { deleteCookie, getCookie, setCookie } from "./Cookie";
 import { history } from "../redux/configureStore";
-import { useDispatch } from "react-redux";
-import { logoutDB } from "../redux/modules/user";
 
 // axios.defaults.withCredentials = true;
 
@@ -31,24 +29,32 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const { config, response } = error;
-
+    const {
+      config,
+      response: { status },
+      response,
+    } = error;
     const originalRequest = config;
-    const dispatch = useDispatch();
 
-    console.log("토큰 인터셉터", error);
+    if (response.data.token) {
+      // access token이 재발급 된 상태,
+      console.log(response);
+      setCookie("accessToken", response.data.token, 0.5);
+      axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
+      originalRequest.headers.Authorization = `Bearer ${response.data.token}`;
 
-    if (response?.status === 401) {
-      if (response?.data.token) {
-        console.log(response);
-        setCookie("accessToken", response.data.token);
-        originalRequest.headers.Authorization = `Bearer ${response.data.token}`;
+      return axios(originalRequest);
+    } else {
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("nickname");
+      localStorage.removeItem("profileUrl");
 
-        return axios(originalRequest);
-      } else {
-        return dispatch(logoutDB());
-      }
+      console.log("리프레쉬토큰 만료");
+      history.push("/login");
     }
+
     return Promise.reject(error);
   }
 );
