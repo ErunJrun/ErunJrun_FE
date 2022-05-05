@@ -21,7 +21,7 @@ const MGroupCard = (props) => {
 
   return (
     <>
-      <Grid
+      {/* <Grid
         margin="38px auto"
         display="flex"
         flexWrap="wrap"
@@ -66,7 +66,8 @@ const MGroupCard = (props) => {
             </Fragment>
           );
         })}
-      </Grid>
+      </Grid> */}
+      <Evaluation/>
     </>
   );
 };

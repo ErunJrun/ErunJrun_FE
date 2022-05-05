@@ -4,6 +4,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Main from "../pages/Main";
 import Login from "../pages/Login";
 import Mypage from "../pages/Mypage";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/mypage/make" exact component={Make} />
         <Route path="/mypage/bookmark" exact component={Bookmark} />
       </ConnectedRouter>
+      <Footer></Footer>
     </React.Fragment>
   );
 }

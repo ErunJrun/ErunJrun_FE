@@ -3,6 +3,8 @@ import axios from "axios";
 import styled from "styled-components";
 import { ConstructionOutlined } from "@mui/icons-material";
 
+import "./Weather.css"
+
 const Weather = () => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
@@ -66,6 +68,8 @@ const Box = styled.div`
   padding: 5%;
   border: 1px solid #000000;
   margin-left: 30px;
+  width: 20vw;
+  height: 13vh;
 `;
 
 export default Weather;

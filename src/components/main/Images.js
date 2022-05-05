@@ -1,7 +1,7 @@
 const Images = [
     {
         id: 1,
-        src: "https://2rdnmg1qbg403gumla1v9i2h-wpengine.netdna-ssl.com/wp-content/uploads/sites/3/2021/08/Running101-640717019-770x533-1-650x428.jpg",
+        src: "https://ifh.cc/g/6rZ899.png",
         alt: "running1"
     },
     {

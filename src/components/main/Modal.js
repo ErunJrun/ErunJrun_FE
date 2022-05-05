@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { history } from "../../redux/configureStore";
-import "../../shared/Modal.css";
-import { FaUser } from "react-icons/fa";
+import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { logoutDB } from "../../redux/modules/user";
+
+import "../../shared/Modal.css";
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -16,9 +17,9 @@ const Modal = () => {
 
   return (
     <div>
-      <button className="btn-modal" onClick={toggleModal}>
-        <FaUser />
-      </button>
+      <Div className="btn-modal" onClick={toggleModal}>
+        <MyImage src="https://ifh.cc/g/qT8V9W.jpg"/>
+      </Div>
 
       {modal && (
         <div>
@@ -49,5 +50,16 @@ const Modal = () => {
     </div>
   );
 };
+
+const Div = styled.div`
+   background-color: #030c37;
+`;
+
+const MyImage = styled.img`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%
+  
+`;
 
 export default Modal;

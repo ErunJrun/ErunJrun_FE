@@ -37,7 +37,7 @@ const Btn = styled.button`
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.9rem;
   color:#000000;
-  background-color: #ffffff;
+  background-color: transparent;
   font-weight: 1000;
   text-align: center;
   text-decoration: none;

@@ -50,13 +50,13 @@ body {
 .text {
     position: absolute;
     color: #fff;
-    font-size: 35px;
+    font-size: 25px;
     font-weight: 600;
 }
 
   button.btn {
     position: absolute;
-    top: 350px;
+    top: 200px;
     left : 80px; 
     width: 150px;
     height: 40px;
