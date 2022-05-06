@@ -29,6 +29,7 @@ const Text = (props) => {
     borderRadius,
     text_decoration,
     marginTop,
+    marginLeft,
   } = props;
   const styles = {
     display,
@@ -55,6 +56,7 @@ const Text = (props) => {
     borderRadius,
     text_decoration,
     marginTop,
+    marginLeft,
   };
   return (
     <React.Fragment>
@@ -91,6 +93,7 @@ Text.defaultProps = {
   borderRadius: null,
   text_decoration: null,
   marginTop: null,
+  marginLeft: null,
 };
 const P = styled.p`
   ${(props) => `font-family : ${props.fontFamily};`};
@@ -113,6 +116,7 @@ const P = styled.p`
   ${(props) => (props.textalign ? `text-align: center;` : null)};
   ${(props) => (props.justifycontent ? `justify-content: center;` : null)};
   ${(props) => (props.marginTop ? `margin-top: 30px;` : null)};
+  ${(props) => (props.marginLeft ? `margin-left: 20px;` : null)};
   cursor: ${(props) => props.cursor};
   white-space: pre-wrap;
   min-width: ${(props) => props.minWidth}; // 최소 width 값 지정

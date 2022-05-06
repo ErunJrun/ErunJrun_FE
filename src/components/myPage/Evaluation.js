@@ -39,17 +39,17 @@ const Evaluation = () => {
                             2022.04.27 토 10:00 에 벚꽃과 야경 러닝 명소를 함께함
                         </Text>
                         <Btn>
-                            <>
+                            <Icon>
                                 <HiOutlineEmojiHappy size="30" color="#9613f3"/>
-                            </>
+                            </Icon>
                             <Text bold>
                                 좋았어요
                             </Text>       
                         </Btn>
                         <Btn>
-                            <>
+                            <Icon>
                               <HiOutlineEmojiSad size="30" color="#9613f3"/>  
-                            </>
+                            </Icon>
                             <Text bold>
                                 아쉬웠어요
                             </Text>      
@@ -75,6 +75,10 @@ const MyImage = styled.img`
   width: 80px;
   margin: 10px 40px 10px 40px;
   border-radius: 50%
+`;
+
+const Icon = styled.div`
+  margin-top: 10px;
 `;
 
 const Btn = styled.button`

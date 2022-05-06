@@ -95,7 +95,7 @@ const Header = () => {
 
 const HeaderBox = styled.div`
   display: flex;
-  height:111px;
+  height:90px;
   background-color: #030c37;
   align-items: center; 
 `;

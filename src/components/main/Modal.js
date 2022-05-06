@@ -8,17 +8,19 @@ import { logoutDB } from "../../redux/modules/user";
 import "../../shared/Modal.css";
 
 const Modal = () => {
+  const profile = localStorage.getItem("profileUrl");
+
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
   };
-
+  
   return (
     <div>
       <Div className="btn-modal" onClick={toggleModal}>
-        <MyImage src="https://ifh.cc/g/qT8V9W.jpg"/>
+        <MyImage src={profile}/>
       </Div>
 
       {modal && (

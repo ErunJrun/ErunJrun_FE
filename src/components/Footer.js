@@ -39,11 +39,14 @@ const Footer = () => {
   );
 };
 
+
 const HeaderBox = styled.div`
   display: flex;
-  height:214px;
+  height:217px;
   background-color: #030c37;
   align-items: center; 
+  margin-top: auto;
+
 `;
 
 const Box = styled.div`

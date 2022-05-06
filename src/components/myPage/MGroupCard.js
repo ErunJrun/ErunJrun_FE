@@ -9,58 +9,9 @@ import Evaluation from "./Evaluation";
 const MGroupCard = (props) => {
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   dispatch(getGroupDB(category));
-  // }, []);
-
   return (
     <>
-      {/* <Grid
-        margin="38px auto"
-        display="flex"
-        flexWrap="wrap"
-        alignItems="center"
-        maxWidth="1395px"
-        width="100%"
-      >
-        {feedList.map((feedList, idx) => {
-          return (
-            <Fragment key={idx}>
-              <Grid
-                _onClick={() => {
-                  history.push(`/groupdetail/${feedList.groupId}`);
-                }}
-                margin="66px 17.5px"
-                maxWidth="430px"
-                width="100%"
-                display="flex"
-                flexDirection="column"
-              >
-                <Image
-                  shape="imgBtn"
-                  height="359px"
-                  src={feedList?.thumbnailUrl}
-                  borderRadius="6px"
-                ></Image>
-
-                <Grid width="430px">
-                  <Text size="20px" bold margin="4px 0 0 0">
-                    {feedList?.title}
-                  </Text>
-                  <Text size="16px" margin="4px 0 0 0">
-                    {feedList?.date} (소요 시간 : {feedList?.totalTime})
-                  </Text>
-                  <Text size="16px" margin="4px 0 0 0">
-                    신청인원 {feedList?.applyPeople} / {feedList?.maxPeople}
-                  </Text>
-                  
-                </Grid>
-              </Grid>
-              <Evaluation/>
-            </Fragment>
-          );
-        })}
-      </Grid> */}
+     <button onClick={() => {history.push("/check");}}>출석 체크하기</button>
       <Evaluation />
     </>
   );

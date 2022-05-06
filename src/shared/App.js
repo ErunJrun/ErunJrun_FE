@@ -17,9 +17,12 @@ import NaverLogin from "../components/login/NaverLogin";
 import Recommend from "../pages/Recommend";
 import Make from "../pages/Make";
 import Bookmark from "../pages/Bookmark";
+import Check from "../pages/Check";
 import { useDispatch } from "react-redux";
 import { loginCheckDB } from "../redux/modules/user";
 import { getCookie } from "./Cookie";
+
+import styled from "styled-components";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +38,7 @@ function App() {
   return (
     <React.Fragment>
       <Header></Header>
+      <Wrapper>
       <ConnectedRouter history={history}>
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
@@ -48,9 +52,18 @@ function App() {
         <Route path="/mypage/recommend" exact component={Recommend} />
         <Route path="/mypage/make" exact component={Make} />
         <Route path="/mypage/bookmark" exact component={Bookmark} />
+        <Route path="/check" exact component={Check} />
       </ConnectedRouter>
+      </Wrapper>
       <Footer></Footer>
     </React.Fragment>
   );
 }
+
+//Footer 고정
+const Wrapper = styled.div`
+  height: auto;
+  min-height: 90vh;
+`;
+
 export default App;
