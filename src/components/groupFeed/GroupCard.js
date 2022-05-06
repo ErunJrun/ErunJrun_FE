@@ -7,12 +7,8 @@ import { history } from "../../redux/configureStore";
 
 const GroupCard = (props) => {
   const dispatch = useDispatch();
-  const feedList = useSelector((state) => state.feed.list);
-  // const category = [filterArea, filterTime, filterDistance, props.finish];
-
-  // React.useEffect(() => {
-  //   dispatch(getGroupDB(category));
-  // }, []);
+  const feedList = useSelector((state) => state.post.list);
+  console.log(feedList);
 
   return (
     <>
@@ -24,7 +20,7 @@ const GroupCard = (props) => {
         maxWidth="1395px"
         width="100%"
       >
-        {feedList.map((feedList, idx) => {
+        {feedList?.map((feedList, idx) => {
           return (
             <Fragment key={idx}>
               <Grid
