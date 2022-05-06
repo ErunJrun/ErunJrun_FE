@@ -29,11 +29,7 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const {
-      config,
-      response: { status },
-      response,
-    } = error;
+    const { config, response } = error;
     const originalRequest = config;
 
     if (response.data.token) {
@@ -45,12 +41,13 @@ api.interceptors.response.use(
 
       return axios(originalRequest);
     } else {
+      console.log(response);
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
       localStorage.removeItem("userId");
       localStorage.removeItem("nickname");
       localStorage.removeItem("profileUrl");
-
+      window.alert("로그인 시간이 만료되었습니다.");
       console.log("리프레쉬토큰 만료");
       history.push("/login");
     }

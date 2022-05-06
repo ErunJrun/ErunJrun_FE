@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 
 const ImageSlide = () => {
   const detailGroup = useSelector((state) => state.feed.detail);
-  console.log(detailGroup);
 
   return (
     <Swiper
