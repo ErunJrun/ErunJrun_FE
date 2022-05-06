@@ -3,35 +3,18 @@ import ImagesUpload from "../components/groupUpload/ImagesUpload";
 import KakaoMap from "../components/groupUpload/KakaoMap";
 import GroupUpContent from "../components/groupUpload/GroupUpContent";
 import styled from "styled-components";
+import UploadStep from "../components/groupUpload/UploadStep";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addGroupDB } from "../redux/modules/feed";
 import { history } from "../redux/configureStore";
 import { Grid, Text } from "../elements";
 import { imgActions } from "../redux/modules/image";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
-import "./GruopUpload.css";
 
-const steps = [
-  {
-    label: "Step 1. 코스 입력",
-  },
-  {
-    label: "Step 2. 이미지 업로드",
-  },
-  {
-    label: "Step 3. 그룹러닝 정보 입력",
-  },
-];
+import "./GruopUpload.css";
 
 const GroupUpload = () => {
   const dispatch = useDispatch();
-
-  const [activeStep, setActiveStep] = React.useState(0);
 
   const [isLoaded1, setIsLoad1] = useState(false);
   const [isLoaded2, setIsLoad2] = useState(false);
@@ -69,44 +52,68 @@ const GroupUpload = () => {
     } else {
       setIsLoad1(true);
       setIsLoad2(true);
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      // setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
 
   const goBack1 = () => {
     setIsLoad1(false);
     setIsLoad2(false);
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  // if (contents[0].title === "") {
+  //   window.alert("제목을 입력해주세요");
+  // }
+  // if (contents[0].standbyTime === "") {
+  //   window.alert("스탠바이 시간을 입력해주세요");
+  // }
+  // if (contents[0].finishTime === "") {
+  //   window.alert("종료 시간을 입력해주세요");
+  // }
+  // if (contents[0].maxPeople === "") {
+  //   window.alert("모집인원을 입력해주세요");
+  // }
+  // if (contents[0].date === "") {
+  //   window.alert("러닝 날짜를 입력해주세요");
+  // }
+  // if (contents[0].speed === "") {
+  //   window.alert("페이스를 선택해주세요");
+  // }
+  // if (contents[0].content === "") {
+  //   window.alert("상세설명을 입력해주세요");
+  // }
+  // if (contents[0].theme === "") {
+  //   window.alert("러닝타입을 선택해주세요");}
+
   const goNext3 = () => {
-    if (thumbnail.length == 0) {
-      window.alert("최소 1장의 이미지를 추가해 주세요");
+    if (
+      contents[0].title === "" ||
+      contents[0].standbyTime === "" ||
+      contents[0].finishTime === "" ||
+      contents[0].maxPeople === "" ||
+      contents[0].date === "" ||
+      contents[0].speed === "" ||
+      contents[0].theme === "" ||
+      contents[0].content === ""
+    ) {
+      window.alert("빈칸을 채워주세요");
     } else {
       setIsLoad2(false);
       setIsLoad3(true);
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      // setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
 
   const goBack2 = () => {
     setIsLoad2(true);
     setIsLoad3(false);
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const addGroupPost = () => {
-    if (
-      contents.title === "" ||
-      contents.standbyTime === "" ||
-      contents.finishTime === "" ||
-      contents.startTime === "" ||
-      contents.maxPeople === "" ||
-      contents.date === "" ||
-      contents.speed === "" ||
-      contents.content === ""
-    ) {
-      window.alert("모든 값을 입력해주세요");
+    if (thumbnail.length == 0) {
+      window.alert("최소 1장의 이미지를 추가해 주세요");
     } else {
       dispatch(addGroupDB(location, thumbnail, contents, address, distance));
       dispatch(imgActions.resetFile());
@@ -117,21 +124,8 @@ const GroupUpload = () => {
   if (!isLoaded1) {
     return (
       <>
-        <Grid margin="30px auto" padding="5px">
-          <StepWrap>
-            <Box sx={{ maxWidth: 400 }}>
-              <Stepper activeStep={activeStep} orientation="vertical">
-                {steps.map((step, index) => (
-                  <Step key={step.label}>
-                    <StepLabel>{step.label}</StepLabel>
-                    <StepContent>
-                      <Box sx={{ mb: 5 }}></Box>
-                    </StepContent>
-                  </Step>
-                ))}
-              </Stepper>
-            </Box>
-          </StepWrap>
+        <UploadStep />
+        <Grid margin="80px 0 0 280px" maxWidth="1032px" width="100%">
           <Grid>
             <Text bold size="20px">
               그룹러닝 등록하기
@@ -142,8 +136,22 @@ const GroupUpload = () => {
               Step 1. 코스입력
             </Text>
             <Text display="inline" margin="0 10px" size="13px">
-              지도위에 추천하고 싶은 코스를 표시해주세요.
+              지도위에 그룹러닝할 코스를 표시해주세요.
             </Text>
+          </Grid>
+
+          <Grid>
+            <Text bold size="15px" bg="#EAEAEA" padding="10px" color="black">
+              ⚠ 코스는 업로드 이후 수정이 불가능합니다. 다음 단계로 넘어가기
+              전에 해당 위치가 맞는지 확인해 주세요!
+            </Text>
+          </Grid>
+
+          <Grid>
+            <KakaoMap
+              setDistance={setDistance}
+              setLocation={setLocation}
+            ></KakaoMap>
           </Grid>
 
           <Grid display="flex">
@@ -161,12 +169,9 @@ const GroupUpload = () => {
               <Text size="15px">{distance ? distance : "0"}km</Text>
             </Grid>
           </Grid>
+
+          <StepBtn onClick={goNext2}>다음단계</StepBtn>
         </Grid>
-        <KakaoMap
-          setDistance={setDistance}
-          setLocation={setLocation}
-        ></KakaoMap>
-        <StepBtn onClick={goNext2}>다음단계</StepBtn>
       </>
     );
   }
@@ -174,21 +179,17 @@ const GroupUpload = () => {
   if (isLoaded2) {
     return (
       <>
+        <GroupUpContent setContents={setContents}></GroupUpContent>
+        <StepBtn onClick={goBack1}>이전단계</StepBtn>
+        <StepBtn onClick={goNext3}>다음단계</StepBtn>
+      </>
+    );
+  }
+
+  if (isLoaded3) {
+    return (
+      <>
         <Grid margin="30px auto" padding="5px">
-          <StepWrap>
-            <Box sx={{ maxWidth: 400 }}>
-              <Stepper activeStep={activeStep} orientation="vertical">
-                {steps.map((step, index) => (
-                  <Step key={step.label}>
-                    <StepLabel>{step.label}</StepLabel>
-                    <StepContent>
-                      <Box sx={{ mb: 5 }}></Box>
-                    </StepContent>
-                  </Step>
-                ))}
-              </Stepper>
-            </Box>
-          </StepWrap>
           <Grid>
             <Text bold size="20px">
               그룹러닝 등록하기
@@ -213,32 +214,7 @@ const GroupUpload = () => {
           </Grid>
         </Grid>
         <ImagesUpload setImage={setImage}></ImagesUpload>
-        <StepBtn onClick={goBack1}>이전단계</StepBtn>
-        <StepBtn onClick={goNext3}>다음단계</StepBtn>
-      </>
-    );
-  }
-
-  if (isLoaded3) {
-    return (
-      <>
-        <StepWrap>
-          <Box sx={{ maxWidth: 400 }}>
-            <Stepper activeStep={activeStep} orientation="vertical">
-              {steps.map((step, index) => (
-                <Step key={step.label}>
-                  <StepLabel>{step.label}</StepLabel>
-                  <StepContent>
-                    <Box sx={{ mb: 5 }}></Box>
-                  </StepContent>
-                </Step>
-              ))}
-            </Stepper>
-          </Box>
-        </StepWrap>
-        <GroupUpContent setContents={setContents}></GroupUpContent>
         <StepBtn onClick={goBack2}>이전단계</StepBtn>
-
         <StepBtn
           onClick={() => {
             addGroupPost();
@@ -250,22 +226,6 @@ const GroupUpload = () => {
     );
   }
 };
-
-const StepWrap = styled.div`
-  position: fixed;
-  width: 250px;
-  height: 250px;
-  right: 200px;
-  top: 294px;
-  box-shadow: 0px 2px 18px -5px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 3;
-  background-color: #ffffff;
-`;
 
 const StepBtn = styled.button`
   width: 184px;

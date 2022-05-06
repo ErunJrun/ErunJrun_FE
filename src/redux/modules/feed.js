@@ -16,7 +16,12 @@ const LOADING = "LOADING";
 //initialState
 const initialState = {
   list: [],
-  detail: [],
+  detail: {
+    mapLatLng: [
+      { lat: 37.498004414546934, lng: 127.02770621963765 },
+      { lat: 37.6, lng: 127.4 },
+    ],
+  },
 };
 
 //액션생성함수
@@ -53,7 +58,8 @@ export const getGroupDB = (category) => {
     try {
       console.log(category);
 
-      let region = category[0];
+      let region = "";
+      category[0] ? (region = category[0]) : (region = "");
 
       let time = "";
       category[1]?.map((value) => {
@@ -68,7 +74,7 @@ export const getGroupDB = (category) => {
       distance = distance.substring(-1);
 
       let startDate = "";
-      category[3] ? (startDate = category[3]) : (startDate = "");
+      category[3] ? (startDate = category[3] + "/") : (startDate = "");
 
       let endDate = "";
       category[4] ? (endDate = category[4]) : (endDate = "");
@@ -82,7 +88,7 @@ export const getGroupDB = (category) => {
       let finish = category[6];
 
       const { data } = await api.get(
-        `/group/all?date=${startDate}/${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}`
+        `/group/all?date=${startDate}${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}`
       );
       console.log(data.data);
       dispatch(getGroup(data.data));
@@ -101,6 +107,7 @@ export const getGroupDetailDB = (groupId) => {
       dispatch(getGroupDetail(data.data));
     } catch (error) {
       console.log(error);
+      window.alert("해당 게시물이 존재하지 않습니다");
     }
   };
 };
@@ -128,6 +135,7 @@ export const addGroupDB = (
     formData.append("speed", contents[0].speed);
     formData.append("baggage", contents[0].baggage);
     formData.append("content", contents[0].content);
+    formData.append("thema", contents[0].theme);
     formData.append("location", address);
     formData.append("distance", distance);
     formData.append("mapLatLng", JSON.stringify(mapLatLng));
@@ -139,14 +147,32 @@ export const addGroupDB = (
         },
       })
       .then((res) => {
-        history.push("/groupfeed");
         console.log(res);
 
-        dispatch(getGroupDB());
+        // dispatch(getGroupDB());
+        window.alert("게시물 등록 완료");
+        history.replace("/groupfeed");
       })
       .catch((err) => {
         console.log(err);
         console.log(err.response);
+      });
+  };
+};
+
+export const deleteGroupDB = (groupId) => {
+  return function (dispatch, getState, { history }) {
+    console.log(groupId);
+    api
+      .delete(`/group/${groupId}`)
+      .then((res) => {
+        console.log(res);
+        window.alert("삭제 완료");
+
+        history.push("/groupfeed");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 };

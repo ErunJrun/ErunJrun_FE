@@ -45,7 +45,6 @@ const DistanceFilter = (props) => {
             <Label
               onChange={(e) => {
                 choiceDistance(e, idx);
-                console.log(e);
               }}
               checked={checkedInputs.includes(idx)}
             >

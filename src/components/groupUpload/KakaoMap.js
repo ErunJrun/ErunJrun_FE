@@ -22,17 +22,14 @@ function KakaoMap(props) {
   });
   const [moveLine, setMoveLine] = useState();
 
-  console.log(paths);
-  console.log(distances);
-
   useEffect(() => {
     props.setLocation(paths);
     props.setDistance(totalDistance);
   }, [paths]);
 
   //서버에 보내줄 최종 거리(km)
-  const totalDistance = distances[distances.length - 1] / 100;
-  console.log(totalDistance);
+
+  const totalDistance = (distances[distances.length - 1] / 1000).toFixed(1);
 
   // const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
@@ -115,33 +112,25 @@ function KakaoMap(props) {
   }, [place]);
 
   const DistanceInfo = ({ distance }) => {
-    const walkkTime = (distance / 67) | 0;
-    const bycicleTime = (distance / 227) | 0;
+    const runningTime = (distance / 100) | 0;
 
     return (
       <Final className="dotOverlay distanceInfo">
         <li>
           <span className="label">총거리</span>{" "}
-          <span className="number">{distance / 100}</span>km
+          <span className="number">{(distance / 1000).toFixed(1)}</span>km
         </li>
         <li>
-          <span className="label">도보</span>{" "}
-          {walkkTime > 60 && (
-            <>
-              <span className="number">{Math.floor(walkkTime / 60)}</span> 시간{" "}
-            </>
-          )}
-          <span className="number">{walkkTime % 60}</span> 분
+          <span className="label">페이스 : 6'00'km/h</span>{" "}
         </li>
         <li>
-          <span className="label">자전거</span>{" "}
-          {bycicleTime > 60 && (
+          <span>러닝시간 : </span>
+          {runningTime > 60 && (
             <>
-              <span className="number">{Math.floor(bycicleTime / 60)}</span>{" "}
-              시간{" "}
+              <span className="number">{Math.floor(runningTime / 60)}</span>시간
             </>
           )}
-          <span className="number">{bycicleTime % 60}</span> 분
+          <span className="number">{runningTime % 60}</span>분
         </li>
       </Final>
     );
@@ -173,8 +162,8 @@ function KakaoMap(props) {
               }}
               style={{
                 // 지도의 크기
-                width: "800px",
-                height: "450px",
+                width: "100%",
+                height: "533px",
               }}
               level={3} // 지도의 확대 레벨
               onClick={handleClick}
@@ -235,9 +224,13 @@ function KakaoMap(props) {
                   <div className="dotOverlay distanceInfo">
                     총거리{" "}
                     <span className="number">
-                      {Math.round(clickLine.getLength() + moveLine.getLength())}
+                      {(
+                        (clickLine.getLength() + moveLine.getLength()) /
+                        1000
+                      ).toFixed(1)}
+                      {/* {Math.round(clickLine.getLength() + moveLine.getLength())} */}
                     </span>
-                    m
+                    km
                   </div>
                 </CustomOverlayMap>
               )}
@@ -254,13 +247,6 @@ function KakaoMap(props) {
               ))} */}
             </Map>
           </Grid>
-        </Grid>
-
-        <Grid>
-          <Text bold size="15px" bg="#EAEAEA" padding="10px" color="black">
-            ⚠ 코스는 업로드 이후 수정이 불가능합니다. 다음 단계로 넘어가기 전에
-            해당 위치가 맞는지 확인해 주세요!
-          </Text>
         </Grid>
       </Grid>
     </>

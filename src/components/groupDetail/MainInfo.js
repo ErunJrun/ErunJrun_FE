@@ -1,10 +1,22 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid, Image, Text, IconButton } from "../../elements";
 import styled from "styled-components";
+import Permit from "../../shared/Permit";
+import { deleteGroupDB } from "../../redux/modules/feed";
 
-const MainInfo = () => {
+const MainInfo = (props) => {
+  const dispatch = useDispatch();
   const detailGroup = useSelector((state) => state.feed.detail);
+  const [editMenu, setEditMenu] = React.useState(false);
+
+  const handleEditMenu = () => {
+    return setEditMenu(!editMenu);
+  };
+
+  const closeEditMenu = () => {
+    return setEditMenu(false);
+  };
 
   return (
     <>
@@ -27,8 +39,31 @@ const MainInfo = () => {
             ></Image>
             <Text bold>{detailGroup?.nickname}</Text>
           </Grid>
-          <IconButton moreDot color="gray"></IconButton>
+          <Permit>
+            <Grid display="flex" justifyContent="right">
+              <IconButton
+                _onClick={handleEditMenu}
+                moreDot
+                color="gray"
+              ></IconButton>
+              {editMenu ? (
+                <DropContent>
+                  <Text _onClick={closeEditMenu}>수정하기</Text>
+                  <hr />
+                  <Text
+                    _onClick={() => {
+                      dispatch(deleteGroupDB(props?.groupId));
+                      closeEditMenu();
+                    }}
+                  >
+                    삭제하기
+                  </Text>
+                </DropContent>
+              ) : null}
+            </Grid>
+          </Permit>
         </Grid>
+
         <Grid>
           <Text bold size="25px">
             {detailGroup?.title}
@@ -41,8 +76,7 @@ const MainInfo = () => {
           <Text bold>
             러닝일시{"  "}
             <span>
-              {"  "} {detailGroup?.date}
-              {"  "} {detailGroup?.standbyTime}
+              {"  "} {detailGroup?.datetime}
             </span>
           </Text>
           <Text bold>
@@ -60,7 +94,7 @@ const MainInfo = () => {
           <Text bold>
             러닝인원{"  "}
             <span>
-              {"  "} apply인원이 빠져있음 / {detailGroup?.maxPeople}
+              {"  "} {detailGroup?.Appliers?.length} / {detailGroup?.maxPeople}
             </span>
           </Text>
           <Text bold>
@@ -74,7 +108,7 @@ const MainInfo = () => {
         <Hr></Hr>
 
         <Text textalign="center" margin="10px auto" bold>
-          모집 마감까지 약 0시간
+          모집 마감까지 약 {detailGroup?.applyEndTime}시간
         </Text>
         <ApplyBtn>신청하기</ApplyBtn>
         <Grid width="100%" display="flex" justifyContent="space-between">
@@ -114,6 +148,17 @@ const ChatBtn = styled.button`
   width: 172px;
   height: 40px;
   border: solid 1px #c4c4c4;
+`;
+
+const DropContent = styled.div`
+  position: absolute;
+  top: 165px;
+  background-color: white;
+  min-width: 100px;
+  z-index: 1;
+  text-align: center;
+  border-radius: 0px 0px 5px 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
 export default MainInfo;

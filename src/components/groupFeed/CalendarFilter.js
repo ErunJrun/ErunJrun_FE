@@ -6,10 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 
 const CalendarFilter = (props) => {
-  const [dateRange, setDateRange] = useState([
-    new Date(2018, 0),
-    new Date(2030, 0),
-  ]);
+  const [dateRange, setDateRange] = useState(["", ""]);
   const [startDate, endDate] = dateRange;
 
   // console.log(startDate, endDate);

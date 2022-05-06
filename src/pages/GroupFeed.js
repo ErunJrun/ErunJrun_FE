@@ -12,12 +12,14 @@ import { getGroupDB } from "../redux/modules/feed";
 const GroupFeed = () => {
   const dispatch = useDispatch();
   const [finish, setFinish] = useState("0");
-  const [startDate, setStartDate] = useState("2018-01-01");
-  const [endDate, setEndDate] = useState("2030-01-01");
-  const [region, setRegion] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [region, setRegion] = useState([]);
   const [filterTime, setFilterTime] = useState([]);
   const [filterDistance, setFilterDistance] = useState([]);
   const [filterTheme, setFilterTheme] = useState([]);
+
+  console.log(filterTheme);
 
   const category = [
     region,
@@ -36,6 +38,10 @@ const GroupFeed = () => {
       setFinish(0);
     }
   };
+
+  useEffect(() => {
+    dispatch(getGroupDB(category));
+  }, []);
 
   useEffect(() => {
     dispatch(getGroupDB(category));

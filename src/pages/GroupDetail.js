@@ -9,13 +9,14 @@ import { Grid, Text } from "../elements";
 import ServeInfo from "../components/groupDetail/ServeInfo";
 import MapInfo from "../components/groupDetail/MapInfo";
 import CrewLeaderInfo from "../components/groupDetail/CrewLeaderInfo";
+import Appliers from "../components/groupDetail/Appliers";
+import CommentList from "../components/comments/CommentList";
 
 const GroupDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
   const detailGroup = useSelector((state) => state.feed.detail);
-  console.log(detailGroup);
 
   useEffect(() => {
     dispatch(getGroupDetailDB(groupId));
@@ -25,7 +26,7 @@ const GroupDetail = () => {
     <>
       <Grid width="1360px" display="flex" justifyContent="center" margin="0">
         <ImageSlide />
-        <MainInfo />
+        <MainInfo groupId={groupId} />
       </Grid>
 
       <Text margin="20px 0 0 0" bold>
@@ -49,8 +50,9 @@ const GroupDetail = () => {
         <Text margin="0 0 100px 0">{detailGroup?.content}</Text>
       </Grid>
 
-      <Text bold>크루장 프로필</Text>
       <CrewLeaderInfo />
+      <Appliers />
+      <CommentList />
     </>
   );
 };

@@ -13,7 +13,7 @@ const GroupFilter = (props) => {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [region, setRegion] = useState("");
+  const [region, setRegion] = useState([]);
   const [filterTime, setFilterTime] = useState([]);
   const [filterDistance, setFilterDistance] = useState([]);
   const [filterTheme, setFilterTheme] = useState([]);

@@ -9,6 +9,8 @@ const ThemeFilter = (props) => {
     props?.setFilterTheme(checkedInputs);
   }, [checkedInputs]);
 
+  console.log(checkedInputs);
+
   const [theme, setTheme] = useState([
     "전체",
     "도시",
@@ -21,10 +23,10 @@ const ThemeFilter = (props) => {
 
   const choiceTheme = (e, idx) => {
     if (e.target.checked) {
-      setCheckedInputs([...checkedInputs, e]);
+      setCheckedInputs([...checkedInputs, theme[idx]]);
     } else {
       // 체크 해제
-      setCheckedInputs(checkedInputs.filter((el) => el !== idx));
+      setCheckedInputs(checkedInputs.filter((el) => el !== theme[idx]));
     }
   };
 
@@ -46,7 +48,6 @@ const ThemeFilter = (props) => {
             <Label
               onChange={(e) => {
                 choiceTheme(e, idx);
-                console.log(e);
               }}
               checked={checkedInputs.includes(idx)}
             >

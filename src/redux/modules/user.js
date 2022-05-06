@@ -113,12 +113,16 @@ export const loginCheckDB = () => {
             })
           );
         } else {
-          dispatch(logoutDB());
+          deleteCookie("accessToken");
+          deleteCookie("refreshToken");
+          localStorage.removeItem("userId");
+          localStorage.removeItem("nickname");
+          localStorage.removeItem("profileUrl");
+          dispatch(logOut());
         }
       })
       .catch((error) => {
         console.log(error);
-        dispatch(logoutDB());
       });
   };
 };
@@ -132,7 +136,7 @@ export const logoutDB = () => {
     localStorage.removeItem("profileUrl");
 
     dispatch(logOut());
-    window.alert("로그아웃 시간이 만료되었습니다.");
+    window.alert("다음에 또 방문해 주세요");
     history.push("/login");
   };
 };
@@ -143,7 +147,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.user.nickname = action.payload.nickname;
         draft.user.userId = action.payload.userId;
-        draft.user.profileUrl = action.payload.profileImageUrl;
+        draft.user.profileUrl = action.payload.profileUrl;
         draft.isLogin = true;
       }),
 
