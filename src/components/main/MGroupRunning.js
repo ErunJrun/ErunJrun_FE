@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { history } from "../../redux/configureStore";
 import styled from "styled-components";
 import GroupCard from "../groupFeed/GroupCard";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPostDB } from "../../redux/modules/post";
 import { Text, Grid } from "../../elements";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 
 const MGroupRunning = () => {
   const dispatch = useDispatch();
+  const postList = useSelector((state) => state.post.list);
 
   useEffect(() => {
     dispatch(getPostDB());
@@ -36,7 +37,17 @@ const MGroupRunning = () => {
           </Btn>
         </Box>
 
-        <GroupCard />
+        <Grid
+          margin="38px auto"
+          display="flex"
+          alignItems="center"
+          maxWidth="1395px"
+          width="100%"
+        >
+          {postList?.map((item, idx) => {
+            return <GroupCard key={idx} {...item} />;
+          })}
+        </Grid>
       </CardBox>
 
       <CardBox>

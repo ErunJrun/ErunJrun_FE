@@ -28,22 +28,6 @@ const GroupFilter = (props) => {
     props.finish,
   ];
 
-  // console.log(
-  //   "region=>>",
-  //   region,
-  //   "startDate=>>",
-  //   startDate,
-  //   "endDate=>>",
-  //   endDate,
-  //   "filterTime=>>",
-  //   filterTime,
-  //   "filterDistance=>>",
-  //   filterDistance,
-  //   "filterTheme=>>",
-  //   filterTheme,
-  //   props.finish
-  // );
-
   const getFilter = () => {
     dispatch(getGroupDB(category));
     // dispatch(filterActions.resetFilter());

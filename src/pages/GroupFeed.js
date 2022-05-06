@@ -11,6 +11,7 @@ import { getGroupDB } from "../redux/modules/feed";
 
 const GroupFeed = () => {
   const dispatch = useDispatch();
+  const feedList = useSelector((state) => state.feed.list);
   const [finish, setFinish] = useState("0");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -19,7 +20,7 @@ const GroupFeed = () => {
   const [filterDistance, setFilterDistance] = useState([]);
   const [filterTheme, setFilterTheme] = useState([]);
 
-  console.log(filterTheme);
+  console.log(feedList);
 
   const category = [
     region,
@@ -43,9 +44,9 @@ const GroupFeed = () => {
     dispatch(getGroupDB(category));
   }, []);
 
-  useEffect(() => {
-    dispatch(getGroupDB(category));
-  }, [finish]);
+  // useEffect(() => {
+  //   dispatch(getGroupDB(category));
+  // }, [finish]);
 
   // const filterToggle = () => {
   //   setFilter(!filter);
@@ -66,7 +67,6 @@ const GroupFeed = () => {
         </Text>
         <Text size="16px">함께하고 싶은 러너의 그룹 러닝에 신청해보세요!</Text>
       </Grid>
-
       <Grid
         maxWidth="1360px"
         width="100%"
@@ -75,9 +75,7 @@ const GroupFeed = () => {
         justifyContent="right"
         alignItems="center"
       ></Grid>
-
-      <GroupFilter finish={finish}></GroupFilter>
-
+      <GroupFilter finish={finish}></GroupFilter>;
       <Grid
         display="flex"
         justifyContent="left"
@@ -97,7 +95,6 @@ const GroupFeed = () => {
         </Text>
       </Grid>
       <Hr></Hr>
-
       <Grid
         maxWidth="1360px"
         width="100%"
@@ -117,9 +114,17 @@ const GroupFeed = () => {
           마감공고 포함하기
         </Text>
       </Grid>
-
-      <GroupCard></GroupCard>
-
+      <Grid
+        margin="38px auto"
+        display="flex"
+        alignItems="center"
+        maxWidth="1395px"
+        width="100%"
+      >
+        {feedList?.map((item, idx) => {
+          return <GroupCard key={idx} {...item}></GroupCard>;
+        })}
+      </Grid>
       <StepBtn
         onClick={() => {
           history.push("/groupupload");

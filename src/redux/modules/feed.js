@@ -83,7 +83,7 @@ export const getGroupDB = (category) => {
       category[5]?.map((value) => {
         category[5] += value + "/";
       });
-      category[5] = distance.substring(-1);
+      category[5] = theme.substring(-1);
 
       let finish = category[6];
 
