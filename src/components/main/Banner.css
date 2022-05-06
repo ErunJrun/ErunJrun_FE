@@ -1,14 +1,14 @@
 
 body {
     display: block;
-    margin: 0px auto;
+    margin: 0px auto 0px auto;
 }
 
 .swiper {
     width: 100vw;
     height: 356px;
     display: block;
-    margin-left: 190px;
+    margin-left: 200px;
 }
 
 .swiper-slide {
@@ -42,16 +42,16 @@ body {
     color: #fff;
     text-align: left;
     line-height: 0.4;
-    top: 60px;
-    left : 40%; 
+    top: 80px;
+    left : 38%; 
 }
 
-.grid{
+/* .grid{
     display: flex;
     position: absolute;
     top: 170px;
-    left : 39.5%; 
-}
+    left : 37.5%; 
+} */
 .category {
     color: #68f99e;
     border: 2px solid #68f99e;
@@ -67,8 +67,8 @@ body {
 
 button.btn {
     position: absolute;
-    top: 250px;
-    left : 40%; 
+    top: 210px;
+    left : 38%; 
     width: 150px;
     height: 40px;
     background-color: #000;
@@ -76,3 +76,4 @@ button.btn {
     border: none;
     border-radius: 5px;
 }  
+

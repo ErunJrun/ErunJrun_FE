@@ -1,0 +1,40 @@
+.weather-box {
+    display: flex;
+    margin-bottom: -5px;
+    margin-left: 40px;
+}
+
+.city {
+    color: aliceblue;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.weather-icon{
+    width: 70px;
+    height: 70px;
+}
+
+.temperature{
+    color: rgb(240, 248, 255);
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.feels {
+    color: aliceblue;
+    font-size: 19px;
+    font-weight: 300;
+}
+
+.temp {
+    color: aliceblue;
+    display: flex;
+    margin: 30px;
+    width: 220px;
+    justify-content: space-between;
+    line-height: 1.5;
+    font-size: 15px;
+    font-weight: 600;
+}
