@@ -4,9 +4,13 @@ import { Grid, Image, Text, IconButton } from "../../elements";
 import styled from "styled-components";
 import Permit from "../../shared/Permit";
 import { deleteGroupDB } from "../../redux/modules/feed";
+import { history } from "../../redux/configureStore";
+import { useParams } from "react-router-dom";
 
 const MainInfo = (props) => {
   const dispatch = useDispatch();
+  const params = useParams();
+  const groupId = params.groupId;
   const detailGroup = useSelector((state) => state.feed.detail);
   const [editMenu, setEditMenu] = React.useState(false);
 
@@ -16,6 +20,11 @@ const MainInfo = (props) => {
 
   const closeEditMenu = () => {
     return setEditMenu(false);
+  };
+
+  const editGroup = () => {
+    closeEditMenu();
+    history.push(`/groupEdit/${groupId}`);
   };
 
   return (
@@ -48,7 +57,13 @@ const MainInfo = (props) => {
               ></IconButton>
               {editMenu ? (
                 <DropContent>
-                  <Text _onClick={closeEditMenu}>수정하기</Text>
+                  <Text
+                    _onClick={() => {
+                      editGroup();
+                    }}
+                  >
+                    수정하기
+                  </Text>
                   <hr />
                   <Text
                     _onClick={() => {

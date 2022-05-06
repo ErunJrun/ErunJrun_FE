@@ -112,13 +112,9 @@ const GroupUpload = () => {
   };
 
   const addGroupPost = () => {
-    if (thumbnail.length == 0) {
-      window.alert("최소 1장의 이미지를 추가해 주세요");
-    } else {
-      dispatch(addGroupDB(location, thumbnail, contents, address, distance));
-      dispatch(imgActions.resetFile());
-      history.replace("/groupfeed");
-    }
+    dispatch(addGroupDB(location, thumbnail, contents, address, distance));
+    dispatch(imgActions.resetFile());
+    history.replace("/groupfeed");
   };
 
   if (!isLoaded1) {

@@ -11,6 +11,7 @@ const LOG_OUT = "LOG_OUT";
 const GET_RECOMMEND = "GET_RECOMMEND";
 const FOLLOWING_USER = "FOLLOWING_USER";
 const SEARCH_USER = "SEARCH_USER";
+const LOG_IN_INFO = "LOG_IN_INFO";
 
 // Action creators
 export const logIn = (payload) => ({
@@ -23,13 +24,18 @@ export const logOut = (payload) => ({
   payload,
 });
 
+export const logInInfo = (payload) => ({
+  type: LOG_IN_INFO,
+  payload,
+});
+
 // 초기값
 const initialState = {
   isLogin: false,
   user: {
     nickname: null,
     userId: null,
-    profileImageUrl: null,
+    profileUrl: null,
   },
 };
 
@@ -39,6 +45,7 @@ export const kakaoLogin = (authorization_code) => {
     api
       .get(`user/kakao/callback?code=${authorization_code}`)
       .then((res) => {
+        console.log(res.data);
         const userId = res.data.userId;
         const nickname = res.data.nickname;
         const profileUrl = res.data.profileUrl;
@@ -57,7 +64,11 @@ export const kakaoLogin = (authorization_code) => {
             profileUrl: profileUrl,
           })
         );
-        history.replace("/");
+        if (!res.data.firstLogin) {
+          history.replace("/");
+        } else {
+          history.replace("/loginInfo");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -71,6 +82,7 @@ export const naverLoginDB = (code, state) => {
     api
       .get(`user/naver/callback?code=${code}&state=${state}`)
       .then((res) => {
+        console.log(res.data);
         const userId = res.data.userId;
         const nickname = res.data.nickname;
         const profileUrl = res.data.profileUrl;
@@ -89,11 +101,32 @@ export const naverLoginDB = (code, state) => {
             profileUrl: profileUrl,
           })
         );
-        history.replace("/");
+        if (!res.data.firstLogin) {
+          history.replace("/");
+        } else {
+          history.replace("/loginInfo");
+        }
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+};
+
+export const loginInfoDB = (likeLocation, likeDistance, userLevel) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.patch(`/auth/userLike`, {
+        likeLocation: likeLocation,
+        likeDistance: likeDistance,
+        userLevel: userLevel,
+      });
+      console.log(data);
+      window.alert("이RUN 저RUN에서 즐거운 시간 되세요!");
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -103,7 +136,7 @@ export const loginCheckDB = () => {
     api
       .get("/user/auth")
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         if (res.data) {
           dispatch(
             logIn({
@@ -128,16 +161,22 @@ export const loginCheckDB = () => {
 };
 
 export const logoutDB = () => {
-  return function (dispatch, getState, { history }) {
-    deleteCookie("accessToken");
-    deleteCookie("refreshToken");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("nickname");
-    localStorage.removeItem("profileUrl");
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.delete(`/user/logout`);
+      console.log(data);
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("nickname");
+      localStorage.removeItem("profileUrl");
 
-    dispatch(logOut());
-    window.alert("다음에 또 방문해 주세요");
-    history.push("/login");
+      dispatch(logOut());
+      window.alert("다음에 또 방문해 주세요");
+      history.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 

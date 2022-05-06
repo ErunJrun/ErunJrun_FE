@@ -18,6 +18,8 @@ import Recommend from "../pages/Recommend";
 import Make from "../pages/Make";
 import Bookmark from "../pages/Bookmark";
 import Check from "../pages/Check";
+import LoginInfo from "../pages/LoginInfo";
+import GroupEdit from "../pages/GroupEdit";
 import { useDispatch } from "react-redux";
 import { loginCheckDB } from "../redux/modules/user";
 import { getCookie } from "./Cookie";
@@ -39,21 +41,23 @@ function App() {
     <React.Fragment>
       <Header></Header>
       <Wrapper>
-      <ConnectedRouter history={history}>
-        <Route path="/" exact component={Main} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/mypage" exact component={Mypage} />
-        <Route path="/coursefeed" exact component={CourseFeed} />
-        <Route path="/groupfeed" exact component={GroupFeed} />
-        <Route path="/groupupload" exact component={GroupUpload} />
-        <Route path="/kakao" exact component={KakaoLogin}></Route>
-        <Route path="/naver" exact component={NaverLogin}></Route>
-        <Route path="/groupdetail/:groupId" exact component={GroupDetail} />
-        <Route path="/mypage/recommend" exact component={Recommend} />
-        <Route path="/mypage/make" exact component={Make} />
-        <Route path="/mypage/bookmark" exact component={Bookmark} />
-        <Route path="/check" exact component={Check} />
-      </ConnectedRouter>
+        <ConnectedRouter history={history}>
+          <Route path="/" exact component={Main} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/mypage" exact component={Mypage} />
+          <Route path="/coursefeed" exact component={CourseFeed} />
+          <Route path="/groupfeed" exact component={GroupFeed} />
+          <Route path="/groupupload" exact component={GroupUpload} />
+          <Route path="/kakao" exact component={KakaoLogin}></Route>
+          <Route path="/naver" exact component={NaverLogin}></Route>
+          <Route path="/groupdetail/:groupId" exact component={GroupDetail} />
+          <Route path="/mypage/recommend" exact component={Recommend} />
+          <Route path="/mypage/make" exact component={Make} />
+          <Route path="/mypage/bookmark" exact component={Bookmark} />
+          <Route path="/check" exact component={Check} />
+          <Route path="/loginInfo" exact component={LoginInfo} />
+          <Route path="/groupEdit/:groupId" exact component={GroupEdit} />
+        </ConnectedRouter>
       </Wrapper>
       <Footer></Footer>
     </React.Fragment>
