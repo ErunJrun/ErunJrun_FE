@@ -120,13 +120,13 @@ Grid.defaultProps = {
 };
 
 const GridBox = styled.div`
+  flex-wrap: wrap;
   ${(props) => (props.className ? `className: ${props.className};` : "")}
   ${(props) => (props.wrap ? `flex-wrap: ${props.wrap};` : "")}
   z-index: ${(props) => props.zIndex};
   display: ${(props) => props.display};
   justify-content: ${(props) => props.justifyContent};
   flex-direction: ${(props) => props.flexDirection};
-  flex-wrap: ${(props) => props.flexWrap};
   align-items: ${(props) => props.alignItems};
   width: ${(props) => props.width};
   height: ${(props) => props.height};

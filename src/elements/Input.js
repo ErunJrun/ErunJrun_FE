@@ -30,7 +30,7 @@ const Input = (props) => {
           rows={10}
           placeholder={placeholder}
           onChange={_onChange}
-          defaultValue={defaultValue}
+          value={value}
         />
       </>
     );
@@ -45,7 +45,7 @@ const Input = (props) => {
           type={type}
           placeholder={placeholder}
           onChange={_onChange}
-          defaultValue={defaultValue}
+          value={value}
           onFocus={onFocus}
           step={step}
           min={min}
@@ -74,7 +74,7 @@ Input.defaultProps = {
   border: null,
   width: null,
   height: null,
-  value: "",
+  value: undefined,
 };
 
 const ElTextarea = styled.textarea`

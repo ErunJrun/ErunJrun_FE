@@ -10,6 +10,7 @@ const GET_GROUP = "GET_GROUP";
 const DELETE_GROUP = "DELETE_GROUP";
 const EDIT_GROUP = "EDIT_GROUP";
 const GET_GROUP_DETAIL = "GET_GROUP_DETAIL";
+const EDIT_GROUP_CONTENT = "EDIT_GROUP_CONTENT";
 
 const LOADING = "LOADING";
 
@@ -47,6 +48,11 @@ export const deleteGroup = (payload) => ({
 
 export const editGroup = (payload) => ({
   type: EDIT_GROUP,
+  payload,
+});
+
+export const editGroupContent = (payload) => ({
+  type: EDIT_GROUP_CONTENT,
   payload,
 });
 
@@ -177,6 +183,51 @@ export const deleteGroupDB = (groupId) => {
   };
 };
 
+export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(
+        groupId,
+        contents,
+        "url=>=>",
+        thumbnailUrl,
+        "새사진파일 =>=>",
+        thumbnail
+      );
+      const formData = new FormData();
+
+      thumbnail?.map((e, idx) => {
+        return formData.append("thumbnail", e);
+      });
+
+      thumbnailUrl?.map((e, idx) => {
+        return formData.append("thumbnailUrl", e);
+      });
+
+      formData.append("title", contents.title);
+      formData.append("maxPeople", contents.maxPeople);
+      formData.append("date", contents.date);
+      formData.append("standbyTime", contents.standbyTime);
+      formData.append("startTime", contents.startTime);
+      formData.append("finishTime", contents.finishTime);
+      formData.append("parking", contents.parking);
+      formData.append("speed", contents.speed);
+      formData.append("baggage", contents.baggage);
+      formData.append("content", contents.content);
+      formData.append("thema", contents.theme);
+
+      const { data } = await api.patch(`/group/${groupId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 //리듀서
 export default handleActions(
   {
@@ -193,6 +244,28 @@ export default handleActions(
       produce(state, (draft) => {
         // console.log(action.payload);
         draft.detail = action.payload;
+      }),
+
+    // [EDIT_GROUP]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     console.log(action.payload);
+    //     draft.detail = action.payload;
+    //   }),
+
+    [EDIT_GROUP_CONTENT]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.detail.baggage = action.payload[0]?.baggage;
+        draft.detail.content = action.payload[0]?.content;
+        draft.detail.date = action.payload[0]?.date;
+        draft.detail.finishTime = action.payload[0]?.finishTime;
+        draft.detail.maxPeople = action.payload[0]?.maxPeople;
+        draft.detail.parking = action.payload[0]?.parking;
+        draft.detail.speed = action.payload[0]?.speed;
+        draft.detail.standbyTime = action.payload[0]?.standbyTime;
+        draft.detail.startTime = action.payload[0]?.startTime;
+        draft.detail.thema = action.payload[0]?.theme;
+        draft.detail.title = action.payload[0]?.title;
       }),
 
     [LOADING]: (state, action) =>

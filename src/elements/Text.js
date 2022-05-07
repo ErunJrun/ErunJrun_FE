@@ -96,13 +96,13 @@ Text.defaultProps = {
   marginLeft: null,
 };
 const P = styled.p`
-  ${(props) => `font-family : ${props.fontFamily};`};
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
   display: ${(props) => props.display};
   border-radius: ${(props) => props.borderRadius};
   background-color: ${(props) => props.bg};
   border: ${(props) => props.border};
   z-index: ${(props) => (props.zindex ? `1;` : null)};
-  ${(props) => (props.bold ? `font-weight: 600;` : `font-weight: 350;`)};
+  ${(props) => (props.bold ? `font-weight: 700;` : `font-weight: 400;`)};
   ${(props) => (props.text_decoration ? `text-decoration: underline;` : null)};
   ${(props) => `color : ${props.color};`};
   ${(props) => `font-size: ${props.size};`};

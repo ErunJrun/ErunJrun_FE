@@ -85,7 +85,7 @@ export const _editCommentFX = (commentId, content) => {
         content: content,
       });
       console.log(data);
-      // dispatch(editComm());
+      dispatch(editComm(data.data));
       window.alert("댓글 수정 완료");
     } catch (error) {
       console.log(error);

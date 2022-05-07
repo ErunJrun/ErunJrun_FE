@@ -1,17 +1,14 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { Grid, Text, Input } from "../../elements";
+import { useSelect } from "@mui/base";
+import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { Grid, Text, Input } from "../../elements";
+import { editGroupContent } from "../../redux/modules/feed";
 
-const GroupContent = (props) => {
-  const [title, setTitle] = useState("");
-  const [standbyTime, setStandbyTime] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [finishTime, setFinishTime] = useState("");
-  const [maxPeople, setMaxPeople] = useState("");
-  const [date, setDate] = useState("");
-  const [parking, setParking] = useState("");
-  const [baggage, setBaggage] = useState("");
-  const [content, setContent] = useState("");
+const EditContent = (props) => {
+  const dispatch = useDispatch();
+  console.log(props);
+
   const [runTypeList, setRunTypeList] = useState([
     "도시",
     "공원",
@@ -29,16 +26,19 @@ const GroupContent = (props) => {
     `6'30" km/h`,
   ]);
 
-  const [checkedType, setCheckedType] = useState("");
-  const [checkedSpeed, setCheckedSpeed] = useState("");
+  const [title, setTitle] = useState(props.title);
+  const [standbyTime, setStandbyTime] = useState(props.standbyTime);
+  const [startTime, setStartTime] = useState(props.startTime);
+  const [finishTime, setFinishTime] = useState(props.finishTime);
+  const [maxPeople, setMaxPeople] = useState(props.maxPeople);
+  const [date, setDate] = useState(props.date);
+  const [parking, setParking] = useState(props.parking);
+  const [baggage, setBaggage] = useState(props.baggage);
+  const [content, setContent] = useState(props.content);
+  const [checkedType, setCheckedType] = useState(props.thema);
+  const [checkedSpeed, setCheckedSpeed] = useState(props.speed);
 
-  const choiceRunType = (e) => {
-    setCheckedType(e);
-  };
-
-  const choiceSpeed = (e) => {
-    setCheckedSpeed(e);
-  };
+  console.log(standbyTime, startTime, checkedType);
 
   const contents = [
     {
@@ -56,21 +56,35 @@ const GroupContent = (props) => {
     },
   ];
 
+  const choiceRunType = (e) => {
+    setCheckedType(e);
+  };
+
+  const choiceSpeed = (e) => {
+    setCheckedSpeed(e);
+  };
+
   useEffect(() => {
-    props.setContents(contents);
-  }, [
-    title,
-    standbyTime,
-    startTime,
-    finishTime,
-    maxPeople,
-    date,
-    checkedSpeed,
-    parking,
-    baggage,
-    content,
-    checkedType,
-  ]);
+    console.log("실행");
+    setTitle(props.title);
+    setStandbyTime(props.standbyTime);
+    setStartTime(props.startTime);
+    setFinishTime(props.finishTime);
+    setMaxPeople(props.maxPeople);
+    setDate(props.date);
+    setParking(props.parking);
+    setBaggage(props.baggage);
+    setContent(props.content);
+    setCheckedType(props.thema);
+    setCheckedSpeed(props.speed);
+  }, [props]);
+
+  const goNext2 = () => {
+    props.setIsLoad1(true);
+    props.setIsLoad2(true);
+    dispatch(editGroupContent(contents));
+    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
 
   return (
     <>
@@ -78,15 +92,15 @@ const GroupContent = (props) => {
         <Grid margin="30px auto" padding="5px">
           <Grid>
             <Text bold size="20px">
-              그룹러닝 등록하기
+              그룹러닝 수정하기
             </Text>
           </Grid>
           <Grid>
             <Text display="inline" bold size="15px">
-              Step 3. 그룹러닝 정보 입력
+              Step 1. 그룹러닝 정보 수정
             </Text>
             <Text display="inline" margin="0 10px" size="13px">
-              그룹 러닝에 관한 상세 정보들을 입력해주세요.
+              그룹 러닝에 관한 상세 정보들을 수정해주세요.
             </Text>
           </Grid>
         </Grid>
@@ -102,8 +116,8 @@ const GroupContent = (props) => {
                 _onChange={(e) => {
                   setTitle(e.target.value);
                 }}
-                placeholder="예: 봄바람 불 때 한강 달리기!"
                 groupPost
+                value={title || ""}
               ></Input>
             </Grid>
           </Grid>
@@ -119,7 +133,7 @@ const GroupContent = (props) => {
                     setDate(e.target.value);
                   }}
                   type="date"
-                  // defaultValue={new Date().toISOString().slice(0, 10)}
+                  value={date || ""}
                   groupPost
                 ></Input>
               </Grid>
@@ -133,7 +147,7 @@ const GroupContent = (props) => {
                     setStandbyTime(e.target.value);
                   }}
                   type="time"
-                  // defaultValue={new Date().toISOString().slice(11, 16)}
+                  value={standbyTime || ""}
                   groupPost
                 ></Input>
               </Grid>
@@ -154,7 +168,7 @@ const GroupContent = (props) => {
                   setStartTime(e.target.value);
                 }}
                 type="time"
-                // defaultValue={new Date().toISOString().slice(11, 16)}
+                value={startTime || ""}
                 groupPost
               ></Input>
             </Grid>
@@ -168,7 +182,7 @@ const GroupContent = (props) => {
                   setFinishTime(e.target.value);
                 }}
                 type="time"
-                // defaultValue={new Date().toISOString().slice(11, 16)}
+                value={finishTime || ""}
                 groupPost
               ></Input>
             </Grid>
@@ -182,6 +196,7 @@ const GroupContent = (props) => {
               onChange={(e) => {
                 setMaxPeople(e.target.value);
               }}
+              value={maxPeople || ""}
             >
               <option value="null">인원 선택</option>
               <option value="2">2명</option>
@@ -204,14 +219,16 @@ const GroupContent = (props) => {
               {runTypeList.map((e, idx) => {
                 return (
                   <Fragment key={idx}>
-                    <Label checked={checkedType}>
+                    <Label>
                       <input
-                        onClick={() => {
+                        onChange={() => {
+                          console.log(e);
                           choiceRunType(e);
                         }}
                         type="radio"
                         name="runType"
                         value={e}
+                        checked={checkedType === e ? e : ""}
                       ></input>
                       <Text bold>{e}</Text>
                     </Label>
@@ -224,30 +241,29 @@ const GroupContent = (props) => {
             </Text>
           </Grid>
 
-          <Grid maxWidth="160px" width="100%">
-            <Grid>
-              <Text bold size="15px">
-                페이스
-              </Text>
-              <Grid display="flex">
-                {runSpeedList.map((e, idx) => {
-                  return (
-                    <Fragment key={idx}>
-                      <Label checked={checkedSpeed}>
-                        <input
-                          onClick={() => {
-                            choiceSpeed(e);
-                          }}
-                          type="radio"
-                          name="speed"
-                          value={e}
-                        ></input>
-                        <Text bold>{e}</Text>
-                      </Label>
-                    </Fragment>
-                  );
-                })}
-              </Grid>
+          <Grid>
+            <Text bold size="15px">
+              페이스
+            </Text>
+            <Grid display="flex">
+              {runSpeedList.map((e, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <Label>
+                      <input
+                        onChange={() => {
+                          choiceSpeed(e);
+                        }}
+                        type="radio"
+                        name="speed"
+                        value={e}
+                        checked={checkedSpeed === e ? e : ""}
+                      ></input>
+                      <Text bold>{e}</Text>
+                    </Label>
+                  </Fragment>
+                );
+              })}
             </Grid>
           </Grid>
 
@@ -261,6 +277,7 @@ const GroupContent = (props) => {
                 setParking(e.target.value);
               }}
               placeholder="예: 자라 IFC몰 주차장"
+              value={parking || ""}
             ></Input>
           </Grid>
 
@@ -273,7 +290,7 @@ const GroupContent = (props) => {
               _onChange={(e) => {
                 setBaggage(e.target.value);
               }}
-              placeholder="예: 지하철 짐 보관함"
+              value={baggage || ""}
             ></Input>
           </Grid>
 
@@ -286,10 +303,11 @@ const GroupContent = (props) => {
                 setContent(e.target.value);
               }}
               multiLine
-              placeholder="예 : 호수공원 러닝 참 좋아하는데요~ 함께 뛰면 두배로 즐거울 것 같아 그룹 러닝을 모집합니다!"
+              value={content || ""}
             ></Input>
           </Grid>
         </Grid>
+        <StepBtn onClick={goNext2}>다음단계</StepBtn>
       </Grid>
     </>
   );
@@ -335,4 +353,17 @@ const Label = styled.label`
   }
 `;
 
-export default GroupContent;
+const StepBtn = styled.button`
+  width: 184px;
+  height: 40px;
+  background: #cecece;
+  border: 1px solid #4e4e4e;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  align-items: center;
+  color: #000000;
+  margin: 10px;
+`;
+export default EditContent;
