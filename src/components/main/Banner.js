@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-//import "../../shared/styles.css";
+import "../../shared/styles.css";
 import "./Banner.css"
 
 const Banner = () => {
@@ -52,7 +52,7 @@ const Banner = () => {
               }}>
                 추천 코스 보러가기
             </button>
-              <Weather/>
+            <Weather/>
         </SwiperSlide>
           ))}
     </Swiper>
