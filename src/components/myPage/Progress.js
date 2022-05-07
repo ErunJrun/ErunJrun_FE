@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FaChild } from "react-icons/fa";
+import { Text } from "../../elements"
 import { FaCaretUp } from "react-icons/fa";
-import { FaRegFlag } from "react-icons/fa";
 import "./Progress.css"
 
 const Progress = (props) => {
@@ -27,19 +26,29 @@ const Progress = (props) => {
     },[])
 
     return (
-        <div>
-            
+        <div className="box">  
             <div className="progress">
               <div className="running" style={run}>
-                   {props.done}km
-                   <FaChild size="30" color='orange'/>
-                   <FaRegFlag size="25"/>
+                  <div className="running-box">
+                       {props.done}km
+                  </div>      
+                   
               </div>
             </div>
             <div className="progress1">
                <div className="progress-done" style={style}></div>
             </div>
-            <FaCaretUp/>첫 시작점 50km 100km
+            <div className="km">
+                <Text bold size="16px">
+                    0 km
+                </Text>
+                <Text bold size="16px">
+                    <FaCaretUp/>첫 시작점 50 km
+                </Text>
+                <Text bold size="16px">
+                    100 km
+                </Text>
+            </div>
         </div>
     );
 };

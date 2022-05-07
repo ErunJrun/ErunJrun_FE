@@ -9,10 +9,10 @@ import MGroupCard from "../components/myPage/MGroupCard";
 const Mypage = () => {
   return (
     <Box1>
-      <Box2>
+  
         <Profile/>
         <Schedule/>
-      </Box2>  
+   
         <Box>
           <Category>
               <CategoryBox>
@@ -37,9 +37,9 @@ const Mypage = () => {
   );
 };
 
-const Box2 = styled.div`
-  display: flex;
-`;
+// const Box2 = styled.div`
+//   display: flex;
+// `;
 
 const Box1 = styled.div`
   justify-content: center;

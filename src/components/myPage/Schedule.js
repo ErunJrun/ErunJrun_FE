@@ -28,11 +28,12 @@ const Schedule = () => {
 };
 
 const Box = styled.div`
-  border: 1px solid black;
-  border-radius: 3px;
-  width: 40%;
-  height: 400px;
-  margin-left: 30px;
+  width: 1200px;
+  height: 258px;
+  margin: 24px auto 64px auto;
+  padding: 24px 38px 32px 32px;
+  border-radius: 6px;
+  background-color: #f5f5f5;
 `;
 
 const MyImage = styled.img`

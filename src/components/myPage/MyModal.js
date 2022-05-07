@@ -16,7 +16,7 @@ const MyModal = () => {
             <button
             className="btn-modal"
             onClick = {toggleModal}>
-                <FiHelpCircle/> 
+                <FiHelpCircle size="20"/> 
             </button>
 
             {modal && (
