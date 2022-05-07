@@ -28,15 +28,18 @@ const Modal = () => {
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
             <p
+              style = { {cursor:"pointer"} }
               onClick={() => {
                 history.push("/mypage")
               }}
             >
               마이 페이지
             </p>
-            <p onClick={() => {}}>계정 설정</p>
+            <p style = { {cursor:"pointer"} }
+              onClick={() => {}}>계정 설정</p>
             <hr />
             <p
+              style = { {cursor:"pointer"} }
               onClick={() => {
                 dispatch(logoutDB());
               }}
