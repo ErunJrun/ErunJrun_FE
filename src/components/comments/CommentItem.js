@@ -19,6 +19,7 @@ const CommentItem = (props) => {
   const editComm = (commentId) => {
     console.log("댓글 수정");
     dispatch(_editCommentFX(commentId, newComm));
+    editToggle(props?.commentId);
   };
 
   return (
@@ -54,7 +55,6 @@ const CommentItem = (props) => {
                     cursor="pointer"
                     _onClick={() => {
                       editComm(props?.commentId);
-                      editToggle(props?.commentId);
                     }}
                     margin="0 5px"
                     size="12px"
