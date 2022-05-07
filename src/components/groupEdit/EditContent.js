@@ -64,22 +64,6 @@ const EditContent = (props) => {
     setCheckedSpeed(e);
   };
 
-  // useEffect(() => {
-  //   props.setContents(contents);
-  // }, [
-  //   title,
-  //   standbyTime,
-  //   startTime,
-  //   finishTime,
-  //   maxPeople,
-  //   date,
-  //   checkedSpeed,
-  //   parking,
-  //   baggage,
-  //   content,
-  //   checkedType,
-  // ]);
-
   useEffect(() => {
     console.log("실행");
     setTitle(props.title);

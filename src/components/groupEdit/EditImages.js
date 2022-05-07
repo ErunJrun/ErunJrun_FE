@@ -11,19 +11,29 @@ const EditImages = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
+
+  //기존 사진 url
+  const detailImageUrl = [
+    props.thumbnailUrl1,
+    props.thumbnailUrl2,
+    props.thumbnailUrl3,
+  ];
+
   const [showImages, setShowImages] = useState([]);
   const totalImage = useSelector((state) => state.image.files);
   const editContents = useSelector((state) => state.feed.detail);
   console.log(totalImage);
+  // console.log(showImages);
 
   const goBack1 = () => {
     props.setIsLoad1(false);
     props.setIsLoad2(true);
+    dispatch(imgActions.resetFile());
     // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const editGroupPost = () => {
-    dispatch(editGroupDB(groupId, editContents, totalImage));
+    dispatch(editGroupDB(groupId, editContents, editUrl, newFiles));
     dispatch(imgActions.resetFile());
     // history.replace("/groupfeed");
   };
@@ -66,19 +76,40 @@ const EditImages = (props) => {
 
   //이미지 삭제
   const handleDeleteImage = (x, idx) => {
-    // 서버에서 준 URL 버킷 이름을 기준으로 찾아
-    if (x.indexOf("hyemco-butket") !== -1) {
-      dispatch(imgActions.editUrl(x));
-      // URL을 따로 저장
-      dispatch(imgActions.deletePre(idx));
-      // 리덕스 files에 있는 URL 삭제 (배열을 맞추기 위함)
-    } else {
-      // 리덕스에 files 삭제
-      dispatch(imgActions.deletePre(idx));
-    }
+    // 리덕스에 files 삭제
+    dispatch(imgActions.deletePre(idx));
     // 프리뷰 삭제
     setShowImages(showImages.filter((p, index) => index !== idx));
   };
+
+  //새로 올린 파일과 기존 사진 url을 분리
+  let newFiles = [];
+  let editUrl = [];
+  totalImage.map((e, idx) => {
+    if (e?.name) {
+      newFiles.push(e);
+      console.log("새로운사진", newFiles);
+    }
+    if (!e?.name) {
+      editUrl.push(e);
+      console.log("기존사진URL", editUrl);
+    }
+  });
+
+  useEffect(() => {
+    let editPreview = [];
+    // 서버에서 받은 URL을 PreView에 넣어줌
+    detailImageUrl.map((e, idx) => {
+      if (e !== null) {
+        console.log(e);
+        return editPreview.push(detailImageUrl[idx]);
+      }
+    });
+    setShowImages(editPreview);
+    console.log(editPreview);
+    // 리덕스에 files 인덱스를 맞추기 위해 URL도 같이 넣어줌
+    dispatch(imgActions.setPre(editPreview));
+  }, [props]);
 
   return (
     <>

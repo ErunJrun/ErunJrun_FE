@@ -35,7 +35,7 @@ function App() {
     if (token) {
       dispatch(loginCheckDB());
     }
-  }, []);
+  }, [token]);
 
   return (
     <React.Fragment>

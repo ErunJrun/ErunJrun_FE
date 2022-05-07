@@ -183,20 +183,48 @@ export const deleteGroupDB = (groupId) => {
   };
 };
 
-export const editGroupDB = (groupId, contents, thumbnail) => {
-  return function (dispatch, getState, { history }) {
-    console.log(groupId, contents, thumbnail);
-    api
-      .patch(`/group/${groupId}`)
-      .then((res) => {
-        console.log(res);
-        window.alert("수정 완료");
+export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(
+        groupId,
+        contents,
+        "url=>=>",
+        thumbnailUrl,
+        "새사진파일 =>=>",
+        thumbnail
+      );
+      const formData = new FormData();
 
-        // history.push("/groupfeed");
-      })
-      .catch((error) => {
-        console.log(error);
+      thumbnail?.map((e, idx) => {
+        return formData.append("thumbnail", e);
       });
+
+      thumbnailUrl?.map((e, idx) => {
+        return formData.append("thumbnailUrl", e);
+      });
+
+      formData.append("title", contents.title);
+      formData.append("maxPeople", contents.maxPeople);
+      formData.append("date", contents.date);
+      formData.append("standbyTime", contents.standbyTime);
+      formData.append("startTime", contents.startTime);
+      formData.append("finishTime", contents.finishTime);
+      formData.append("parking", contents.parking);
+      formData.append("speed", contents.speed);
+      formData.append("baggage", contents.baggage);
+      formData.append("content", contents.content);
+      formData.append("thema", contents.theme);
+
+      const { data } = await api.patch(`/group/${groupId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
