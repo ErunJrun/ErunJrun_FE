@@ -34,6 +34,7 @@ const Mypage = () => {
         </Box>
         <Badge/>
     </Box1>
+    
   );
 };
 

@@ -55,7 +55,7 @@ const Profile = () => {
 
 const Box = styled.div`
   width: 1200px;
-  height: 365px;
+  height: 310px;
   margin: 64px auto 24px auto;
   padding: 24px 38px 32px 32px;
   border-radius: 6px;
