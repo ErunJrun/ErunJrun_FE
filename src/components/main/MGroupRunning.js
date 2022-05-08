@@ -38,7 +38,7 @@ const MGroupRunning = () => {
         </Box>
 
         <Grid
-          padding="0% 13% 0% 13%" 
+          padding="0%" 
           margin="auto"
           display="flex"
           justifyContent="center"

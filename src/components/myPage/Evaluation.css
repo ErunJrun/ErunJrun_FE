@@ -29,7 +29,7 @@ body.active-modal {
     background: rgba(49,49,49,0.8);
 }
 ._modal-content {
-    transform: translate(0%, -50%);
+    transform: translate(-20%, -200%);
     line-height: 1.4;
     background: #ffffff;
     padding: 14px 28px;

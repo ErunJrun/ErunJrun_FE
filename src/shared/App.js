@@ -15,8 +15,7 @@ import GroupDetail from "../pages/GroupDetail";
 import KakaoLogin from "../components/login/KakaoLogin";
 import NaverLogin from "../components/login/NaverLogin";
 import Recommend from "../pages/Recommend";
-import Make from "../pages/Make";
-import Bookmark from "../pages/Bookmark";
+import Badge from "../pages/Badge";
 import Check from "../pages/Check";
 import LoginInfo from "../pages/LoginInfo";
 import GroupEdit from "../pages/GroupEdit";
@@ -52,8 +51,7 @@ function App() {
           <Route path="/naver" exact component={NaverLogin}></Route>
           <Route path="/groupdetail/:groupId" exact component={GroupDetail} />
           <Route path="/mypage/recommend" exact component={Recommend} />
-          <Route path="/mypage/make" exact component={Make} />
-          <Route path="/mypage/bookmark" exact component={Bookmark} />
+          <Route path="/mypage/badge" exact component={Badge} />
           <Route path="/check" exact component={Check} />
           <Route path="/loginInfo" exact component={LoginInfo} />
           <Route path="/groupEdit/:groupId" exact component={GroupEdit} />

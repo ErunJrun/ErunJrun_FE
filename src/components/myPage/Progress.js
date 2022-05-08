@@ -22,7 +22,7 @@ const Progress = (props) => {
                 width: `${props.done}%`
             }
             setRun(newRun);
-        }, 1000)
+        }, 400)
     },[])
 
     return (

@@ -42,7 +42,7 @@ const MyModal = () => {
                             • 신청한 그룹 러닝에 참석했을때, 
                              <span style={{color: "blue"}}> 1km</span> <br/>
                             • 그룹 러닝의 크루장이 되고 크루원들로부터 <br/>
-                              좋은 평가를 받았을때, 
+                            &nbsp;&nbsp;좋은 평가를 받았을때, 
                               <span style={{color: "blue"}}> 최대 5km</span>
                         </Text>
 
@@ -54,7 +54,7 @@ const MyModal = () => {
                             • 신청한 그룹 러닝에 불참했을때, 
                             <span style={{color: "red"}}> 1km</span> <br/>
                             • 그룹 러닝의 크루장이 되고 크루원들로부터 <br/>
-                             좋지 않은 평가를 받았을때,
+                            &nbsp;&nbsp;좋지 않은 평가를 받았을때,
                              <span style={{color: "red"}}> 최대 5km</span>
                         </Text>
                         <button

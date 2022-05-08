@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { history } from "../redux/configureStore";
 import { Text, Grid } from "../elements"
 
-const Recommend = () => {
+const Badge = () => {
   return (
     <Box1>
         <Profile/>
@@ -23,6 +23,7 @@ const Recommend = () => {
             _onClick={() => {history.push("/mypage/recommend");}} 
             margin="-15px 0 0 50px"
             size="17px"
+            color="#AAA"
             bold>
               코스 추천
             </Text>
@@ -30,12 +31,11 @@ const Recommend = () => {
             _onClick={() => {history.push("/mypage/badge");}}
             margin="-15px 0 0 50px"
             size="17px"
-            color="#AAA"
             bold>
               뱃지
             </Text>
         </Grid>  
-        코스추천
+        뱃지
     </Box1>
     
   );
@@ -47,4 +47,4 @@ const Box1 = styled.div`
   margin: auto;
 `;
 
-export default Recommend;
+export default Badge;
