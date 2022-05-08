@@ -11,42 +11,32 @@ const Profile = () => {
     return (
         <Box>
             <MiddleBox>
+
               <ImgBox>
                 <MyImage src={profile}/>
-                <Text bold size="19px">
-                  {userName}
-                </Text>
+                <Text bold size="20px"> {userName} </Text>
               </ImgBox>
+
               <Introduce>
                  자기소개
                 <Triangle/>
               </Introduce>
+
               <Information>
-                <SmallBox>
-                  <Text bold size="16px">
-                    러닝레벨 
-                  </Text>
-                  <Text  bold size="17px" color="#4A4A4A">
-                    블루
-                  </Text>
-                </SmallBox>
-                <SmallBox>
-                  <Text bold size="16px">
-                    선호거리
-                  </Text>
-                  <Text bold size="17px" color="#4A4A4A">
-                    10km
-                  </Text>
-                </SmallBox>
-                <SmallBox>
-                  <Text bold size="16px">
-                    선호지역
-                  </Text>
-                  <Text size="17px" color="#4A4A4A">
-                    경기도
-                  </Text>
-                </SmallBox>
+                  <SmallBox>
+                    <Text bold size="16px"> 러닝레벨 </Text>
+                    <Text  bold size="17px" color="#4A4A4A"> 블루 </Text>
+                  </SmallBox>
+                  <SmallBox>
+                    <Text bold size="16px"> 선호거리 </Text>
+                    <Text bold size="17px" color="#4A4A4A"> 10km 이상 15km 미만</Text>
+                  </SmallBox>
+                  <SmallBox>
+                    <Text bold size="16px"> 선호지역 </Text>
+                    <Text size="17px" color="#4A4A4A">충청도/세종특별자치시/대전광역시</Text>
+                  </SmallBox>
               </Information>
+
             </MiddleBox>
             <Level/>
         </Box>
@@ -80,6 +70,7 @@ const ImgBox = styled.div`
   height: 141px;
   text-align:center;
   line-height: 0.5;
+  margin-top: 8px;
 `;
 
 const MyImage = styled.img`
@@ -92,13 +83,15 @@ const Introduce = styled.div`
   white-space: nowrap;
   transform: translate(12%);
   width: 480px;
-  height: 112px;
+  height: 90px;
   border-radius: 6px;
   background-color: #e1e1e1;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16.5px;
+  font-weight: 550;
   color: #000;
   text-align: center;
+  padding-top: 25px;
+  margin-top: 8px;
 `;
 
 const Triangle= styled.div`
@@ -107,13 +100,13 @@ const Triangle= styled.div`
   border-style: solid;
   border-width: 1rem;
   border-color:transparent #e1e1e1 transparent transparent;
-  transform: translate(-95%, 50%);
+  transform: translate(-95%, 0%);
 `
 
 const Information= styled.div`
-width: 400px;
+width: 450px;
 height: 90px;
-margin-left: 100px;
 line-height: 0.2;
+margin: 7px 0 0 110px;
 `
 export default Profile;

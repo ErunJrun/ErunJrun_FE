@@ -1,5 +1,5 @@
 .box {
-    margin: 50px 104px 0px 196px;
+    margin: 45px 104px 0px 196px;
 }
 
 .km {
@@ -54,6 +54,6 @@
   font-weight: bold;
   margin-bottom: 10px;
   position: absolute;
-  transform: translate(20%, -140%);
+  transform: translate(9%, -140%);
   
 }

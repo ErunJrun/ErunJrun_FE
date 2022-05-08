@@ -39,13 +39,13 @@ const Progress = (props) => {
                <div className="progress-done" style={style}></div>
             </div>
             <div className="km">
-                <Text bold size="16px">
+                <Text size="16px">
                     0 km
                 </Text>
-                <Text bold size="16px">
+                <Text size="16px">
                     <FaCaretUp/>첫 시작점 50 km
                 </Text>
-                <Text bold size="16px">
+                <Text size="16px">
                     100 km
                 </Text>
             </div>

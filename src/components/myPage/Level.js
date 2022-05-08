@@ -22,7 +22,7 @@ const Level = () => {
 const Box = styled.div`
  display: flex;
  align-items: center;
- margin: -20px 0px 0px 150px;
+ margin: -20px 0px -10px 150px;
 `;
 
 export default Level;
