@@ -2,6 +2,7 @@ import React from "react";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import Modal from "./main/Modal";
+import { IconButton } from "../elements";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
 
@@ -43,7 +44,11 @@ const Header = () => {
         </Box1>
 
         <Box2>
-          <IoMdNotificationsOutline size="35px" color="#BFCED1"/>
+          <IconButton
+          alarm
+          color="#BFCED1"
+          size="35px"
+          ></IconButton>
           <Modal />
         </Box2>
       </HeaderBox>

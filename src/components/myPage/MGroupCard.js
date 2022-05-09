@@ -9,6 +9,8 @@ import Evaluation from "./Evaluation";
 const MGroupCard = (props) => {
   const dispatch = useDispatch();
 
+  // 서버연결하면 전체수정!
+
   return (
     <>
     <Grid

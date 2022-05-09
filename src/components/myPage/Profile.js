@@ -1,7 +1,7 @@
 import React from 'react';
 import Level from './Level';
 import styled from "styled-components";
-import { Text } from "../../elements"
+import { Text, Grid } from "../../elements"
 
 const Profile = () => {
 

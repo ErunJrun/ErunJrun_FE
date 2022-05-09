@@ -17,6 +17,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { HiPencilAlt } from "react-icons/hi";
 import { FcFilledFilter } from "react-icons/fc";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 const IconButton = (props) => {
   const {
@@ -51,6 +52,7 @@ const IconButton = (props) => {
     zIndex,
     filter,
     moreDot,
+    alarm,
   } = props;
 
   const styles = {
@@ -64,6 +66,19 @@ const IconButton = (props) => {
   };
 
   //아이콘 작동
+  if (alarm) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <IoMdNotificationsOutline
+            size={size}
+            onClick={_onClick}
+          ></IoMdNotificationsOutline>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
   if (moreDot) {
     return (
       <React.Fragment>
