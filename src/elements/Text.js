@@ -30,6 +30,7 @@ const Text = (props) => {
     text_decoration,
     marginTop,
     marginLeft,
+    letterSpacing,
   } = props;
   const styles = {
     display,
@@ -57,6 +58,7 @@ const Text = (props) => {
     text_decoration,
     marginTop,
     marginLeft,
+    letterSpacing,
   };
   return (
     <React.Fragment>
@@ -71,8 +73,7 @@ Text.defaultProps = {
   display: null,
   size: null,
   bold: false,
-  color: "#000000",
-  margin: null,
+  color: "#323132",
   width: null,
   height: null,
   wordbreak: false,
@@ -94,15 +95,17 @@ Text.defaultProps = {
   text_decoration: null,
   marginTop: null,
   marginLeft: null,
+  letterSpacing: null,
 };
 const P = styled.p`
+  letter-spacing: -0.8px;
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   display: ${(props) => props.display};
   border-radius: ${(props) => props.borderRadius};
   background-color: ${(props) => props.bg};
   border: ${(props) => props.border};
   z-index: ${(props) => (props.zindex ? `1;` : null)};
-  ${(props) => (props.bold ? `font-weight: 700;` : `font-weight: 400;`)};
+  ${(props) => (props.bold ? `font-weight: 800;` : `font-weight: 600;`)};
   ${(props) => (props.text_decoration ? `text-decoration: underline;` : null)};
   ${(props) => `color : ${props.color};`};
   ${(props) => `font-size: ${props.size};`};
@@ -114,6 +117,7 @@ const P = styled.p`
   ${(props) => `top : ${props.top};`};
   ${(props) => `left : ${props.left};`};
   ${(props) => (props.textalign ? `text-align: center;` : null)};
+  vertical-align: middle;
   ${(props) => (props.justifycontent ? `justify-content: center;` : null)};
   ${(props) => (props.marginTop ? `margin-top: 30px;` : null)};
   ${(props) => (props.marginLeft ? `margin-left: 20px;` : null)};

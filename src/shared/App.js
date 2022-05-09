@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
+//페이지 변경시 마다 맨 위부터 보이게
+import ScrollToTop from "./ScrollToTop";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -23,7 +25,7 @@ import GroupEdit from "../pages/GroupEdit";
 import { useDispatch } from "react-redux";
 import { loginCheckDB } from "../redux/modules/user";
 import { getCookie } from "./Cookie";
-
+import "./GlobalStyles";
 import styled from "styled-components";
 
 function App() {
@@ -42,6 +44,7 @@ function App() {
       <Header></Header>
       <Wrapper>
         <ConnectedRouter history={history}>
+          <ScrollToTop />
           <Route path="/" exact component={Main} />
           <Route path="/login" exact component={Login} />
           <Route path="/mypage" exact component={Mypage} />

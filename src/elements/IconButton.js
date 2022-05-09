@@ -17,6 +17,10 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { HiPencilAlt } from "react-icons/hi";
 import { FcFilledFilter } from "react-icons/fc";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import { MdOutlineKeyboardArrowUp } from "react-icons/md";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { MdOutlineCancel } from "react-icons/md";
+import { FcCalendar } from "react-icons/fc";
 
 const IconButton = (props) => {
   const {
@@ -51,6 +55,10 @@ const IconButton = (props) => {
     zIndex,
     filter,
     moreDot,
+    upArrow,
+    downArrow,
+    cancelRound,
+    calendar,
   } = props;
 
   const styles = {
@@ -64,6 +72,52 @@ const IconButton = (props) => {
   };
 
   //아이콘 작동
+  if (calendar) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <FcCalendar size={size} onClick={_onClick}></FcCalendar>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
+  if (cancelRound) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <MdOutlineCancel size={size} onClick={_onClick}></MdOutlineCancel>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
+  if (upArrow) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <MdOutlineKeyboardArrowUp
+            size={size}
+            onClick={_onClick}
+          ></MdOutlineKeyboardArrowUp>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
+  if (downArrow) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <MdOutlineKeyboardArrowDown
+            size={size}
+            onClick={_onClick}
+          ></MdOutlineKeyboardArrowDown>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
   if (moreDot) {
     return (
       <React.Fragment>

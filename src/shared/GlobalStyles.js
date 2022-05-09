@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle`
 		font-size:62.5%;
 	}
 	body{
-		position: relative;
+		/* position: relative; */
 		margin: 0;
 		padding: 0;
 		font-family: "Spoqa Han Sans Neo", "sans-serif";

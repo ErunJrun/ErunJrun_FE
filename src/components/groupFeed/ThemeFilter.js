@@ -31,14 +31,8 @@ const ThemeFilter = (props) => {
   };
 
   return (
-    <Grid
-      display="flex"
-      alignItems="center"
-      justifyContent="left"
-      width="100%"
-      margin="10px auto"
-    >
-      <Text size="18px" bold margin="12px 16px 9px 0">
+    <Grid display="flex" alignItems="center" width="100%" margin="0 auto">
+      <Text size="16px" bold margin="0 16px 0 0">
         러닝 테마
       </Text>
 
@@ -52,7 +46,7 @@ const ThemeFilter = (props) => {
               checked={checkedInputs.includes(idx)}
             >
               <input type="checkbox" name={e} value={idx} />
-              <Text bold>{e}</Text>
+              <Text>{e}</Text>
             </Label>
           </Fragment>
         );
@@ -66,20 +60,25 @@ const Label = styled.label`
     display: none;
   }
   input + p {
-    padding: 5px 20px;
+    width: auto;
+    padding: 8px 19px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    border: solid 1px #000;
+    border-radius: 60px;
+    border: solid 1px #f0f0f0;
+    background-color: #f0f0f0;
     cursor: pointer;
-  }
-  input:checked + p {
-    background-color: #68f99e;
+    box-sizing: border-box;
     color: #000;
   }
-  margin: 0px 12px;
+  input:checked + p {
+    border: solid 1px #030c37;
+    background-color: #030c37;
+    color: #68f99e;
+    font-weight: 500;
+  }
+  margin: 0 12px 0 0;
 `;
-
 export default ThemeFilter;
