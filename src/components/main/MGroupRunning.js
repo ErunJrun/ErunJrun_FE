@@ -77,7 +77,7 @@ const MGroupRunning = () => {
 };
 
 const CardBox = styled.div`
-  padding: 0% 13% 0% 13%;
+  padding: 0% 16% 0% 16%;
   margin-top: 20px;
 `;
 

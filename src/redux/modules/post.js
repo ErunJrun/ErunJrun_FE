@@ -23,7 +23,6 @@ export const getPostDB = (category) => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await api.get(`/group/main`);
-      console.log(data.data);
       dispatch(getPost(data.data));
     } catch (error) {
       console.log(error);
