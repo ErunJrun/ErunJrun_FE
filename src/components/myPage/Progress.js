@@ -22,7 +22,7 @@ const Progress = (props) => {
                 width: `${props.done}%`
             }
             setRun(newRun);
-        }, 1000)
+        }, 400)
     },[])
 
     return (
@@ -30,22 +30,22 @@ const Progress = (props) => {
             <div className="progress">
               <div className="running" style={run}>
                   <div className="running-box">
-                       {props.done}km
+                       {props.done}km                     
                   </div>      
-                   
+                  <img src="https://ifh.cc/g/jY802x.png"/>
               </div>
             </div>
             <div className="progress1">
                <div className="progress-done" style={style}></div>
             </div>
             <div className="km">
-                <Text bold size="16px">
+                <Text size="16px">
                     0 km
                 </Text>
-                <Text bold size="16px">
+                <Text size="16px">
                     <FaCaretUp/>첫 시작점 50 km
                 </Text>
-                <Text bold size="16px">
+                <Text size="16px">
                     100 km
                 </Text>
             </div>

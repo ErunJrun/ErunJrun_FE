@@ -17,11 +17,11 @@ const Evaluation = () => {
 
     return (
         <div>
-            <button
+            <ApplyBtnTrue
             className="_btn-modal"
             onClick = {toggleModal}>
                 크루장 평가하기
-            </button>
+            </ApplyBtnTrue>
 
             {modal && (
                 <div>
@@ -91,5 +91,14 @@ const Btn = styled.button`
     justify-content: center; 
     flex-direction: column;
 `
+const ApplyBtnTrue = styled.button`
+  width: 430px;
+  background:  #030c37;
+  border-radius: 3px;
+  height: 35px;
+  color: white;
+  border: none;
+  margin: -30px 0 30px 0px
+`;
 
 export default Evaluation;

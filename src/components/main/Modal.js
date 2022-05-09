@@ -5,7 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { logoutDB } from "../../redux/modules/user";
 
-import "../../shared/Modal.css";
+import "./Modal.css";
 
 const Modal = () => {
   const profile = localStorage.getItem("profileUrl");

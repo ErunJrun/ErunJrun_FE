@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import "../../shared/styles.css";
 import "./Banner.css"
 
 const Banner = () => {

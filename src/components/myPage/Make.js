@@ -1,9 +1,9 @@
 import React from "react";
-import Profile from "../components/myPage/Profile";
-import Schedule from "../components/myPage/Schedule";
+import Profile from "./Profile";
+import Schedule from "./Schedule";
 import styled from "styled-components";
-import Badge from "../components/myPage/Badge";
-import { history } from "../redux/configureStore";
+
+import { history } from "../../redux/configureStore";
 
 const Make = () => {
   return (
@@ -30,7 +30,7 @@ const Make = () => {
           내가 만든 그룹 러닝
           <button>더보기</button>
         </Box>
-        <Badge/>
+        
     </Box1>
   );
 };

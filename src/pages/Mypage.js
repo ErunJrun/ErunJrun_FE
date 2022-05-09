@@ -2,82 +2,44 @@ import React from "react";
 import Profile from "../components/myPage/Profile";
 import Schedule from "../components/myPage/Schedule";
 import styled from "styled-components";
-import Badge from "../components/myPage/Badge";
 import { history } from "../redux/configureStore";
 import MGroupCard from "../components/myPage/MGroupCard";
+import { Text, Grid } from "../elements"
 
 const Mypage = () => {
   return (
-    <Box1>
-  
+    <Grid  width="1200px" margin="auto">
         <Profile/>
         <Schedule/>
-   
-        <Box>
-          <Category>
-              <CategoryBox>
-                <Btn onClick={() => {history.push("/mypage");}}> 참여한 그룹 러닝</Btn>
-              </CategoryBox>
-              <CategoryBox>
-                <Btn  onClick={() => {history.push("/mypage/recommend");}}>내가 만든 추천 코스</Btn>
-              </CategoryBox>  
-              <CategoryBox>
-                <Btn  onClick={() => {history.push("/mypage/make");}}>내가 만든 그룹 러닝</Btn>
-              </CategoryBox>  
-              <CategoryBox>
-                <Btn onClick={() => {history.push("/mypage/bookmark");}}>북마크 추천 코스</Btn>
-              </CategoryBox>
-          </Category>
-          참려한 그룹러닝
+        <Grid display="flex">
+            <Text
+            _onClick={() => {history.push("/mypage");}}
+            margin="-15px 0 0 30px"
+            size="17px"
+            bold>
+              그룹 러닝
+            </Text>
+            <Text
+            _onClick={() => {history.push("/mypage/recommend");}} 
+            margin="-15px 0 0 50px"
+            size="17px"
+            color="#AAA"
+            bold>
+              코스 추천
+            </Text>
+            <Text
+            _onClick={() => {history.push("/mypage/badge");}}
+            margin="-15px 0 0 50px"
+            size="17px"
+            color="#AAA"
+            bold>
+              뱃지
+            </Text>
+        </Grid>  
           <MGroupCard/>
-          <button>더보기</button>
-        </Box>
-        <Badge/>
-    </Box1>
+    </Grid>  
+    
   );
 };
-
-// const Box2 = styled.div`
-//   display: flex;
-// `;
-
-const Box1 = styled.div`
-  justify-content: center;
-  align-item: center;
-  margin: auto;
-`;
-
-const Box = styled.div`
-  border: 1px solid black;
-  border-radius: 3px;
-  width: 82%;
-  height: 800px;
-  margin-top: 30px;
-`;
-
-const Category = styled.div`
-  display: felx;
-  justify-content: flex-start;
-  padding: 2.5%;
-  margin-right: 10px;
-`;
-
-const CategoryBox = styled.div`
-  margin-right: 20px;
-`;
-
-const Btn = styled.button`
-  width: 150px;
-  height: 40px;
-  border: transparent;
-  background-color: transparent;
-  :hover{
-     width: 150px;
-     height: 40px;
-     border-radius: 5px;
-     background-color: black;
-     color: white;
-  }
-`;
 
 export default Mypage;

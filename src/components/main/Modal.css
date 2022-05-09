@@ -27,7 +27,7 @@ body.active-modal {
     position: absolute;
     top: 10%;
     left: 78%;
-    transform: translate(-30%, 10%);
+    transform: translate(-20%, -60%);
     line-height: 1.4;
     background: #ffffff;
     padding: 14px 28px;
@@ -37,6 +37,7 @@ body.active-modal {
     z-index: 2;
     font-size: 15px;
     font-weight: 500;
+    box-shadow : 1px 1px 5px rgb(214, 214, 214);
 }
 
 .close-modal {
