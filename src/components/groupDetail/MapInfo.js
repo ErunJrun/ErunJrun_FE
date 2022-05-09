@@ -17,33 +17,31 @@ function MapInfo(props) {
 
   return (
     <>
-      <Grid margin="30px auto">
-        <Grid height="auto" padding="5px">
-          <Grid>
-            <Map // 지도를 표시할 Container
-              id={`map`}
-              center={{
-                // 지도의 중심좌표
-                lat: 37.498004414546934,
-                lng: 127.02770621963765,
-              }}
-              style={{
-                // 지도의 크기
-                width: "800px",
-                height: "450px",
-              }}
-              level={5} // 지도의 확대 레벨
-              onCreate={setMap}
-            >
-              <Polyline
-                path={detailGroup?.mapLatLng}
-                strokeWeight={6} // 선의 두께입니다
-                strokeColor={"#68F99E"} // 선의 색깔입니다
-                strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-                strokeStyle={"solid"} // 선의 스타일입니다
-              />
-            </Map>
-          </Grid>
+      <Grid margin="0 0 96px 0">
+        <Grid>
+          <Map // 지도를 표시할 Container
+            id={`map`}
+            center={{
+              // 지도의 중심좌표
+              lat: detailGroup?.mapLatLng[0]?.lat,
+              lng: detailGroup?.mapLatLng[0]?.lng,
+            }}
+            style={{
+              // 지도의 크기
+              width: "758px",
+              height: "406px",
+            }}
+            level={5} // 지도의 확대 레벨
+            onCreate={setMap}
+          >
+            <Polyline
+              path={detailGroup?.mapLatLng}
+              strokeWeight={6} // 선의 두께입니다
+              strokeColor={"#68F99E"} // 선의 색깔입니다
+              strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+              strokeStyle={"solid"} // 선의 스타일입니다
+            />
+          </Map>
         </Grid>
       </Grid>
     </>

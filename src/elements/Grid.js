@@ -139,6 +139,7 @@ const GridBox = styled.div`
   height: ${(props) => props.height};
   top: ${(props) => props.top};
   left: ${(props) => props.left};
+  bottom: ${(props) => props.bottom};
   box-sizing: border-box;
   cursor: ${(props) => props.cursor};
   border-top: ${(props) => props.borderTop};

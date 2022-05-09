@@ -22,6 +22,7 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
 import { FcCalendar } from "react-icons/fc";
+import { MdCancel } from "react-icons/md";
 
 const IconButton = (props) => {
   const {
@@ -61,6 +62,7 @@ const IconButton = (props) => {
     downArrow,
     cancelRound,
     calendar,
+    cancelRoundBlack,
   } = props;
 
   const styles = {
@@ -74,6 +76,16 @@ const IconButton = (props) => {
   };
 
   //아이콘 작동
+  if (cancelRoundBlack) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <MdCancel size={size} onClick={_onClick}></MdCancel>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
   if (alarm) {
     return (
       <React.Fragment>

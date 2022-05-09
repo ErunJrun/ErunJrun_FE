@@ -25,6 +25,7 @@ const Image = (props) => {
     radius,
     preview,
     borderRadius,
+    border,
   } = props;
 
   const styles = {
@@ -50,6 +51,7 @@ const Image = (props) => {
     radius,
     preview,
     borderRadius,
+    border,
   };
 
   // 로고 이미지 쓸때
@@ -133,6 +135,7 @@ Image.defaultProps = {
   maxHeight: null,
   image_auto: false,
   float: null,
+  border: null,
 };
 
 const AspectOutter = styled.div`
@@ -208,6 +211,7 @@ const ImageCircle = styled.div`
   width: var(--size);
   height: var(--size);
   border-radius: 100%;
+  border: ${(props) => props.border};
   background-image: url("${(props) => props.src}");
   background-size: cover;
   margin: ${(props) => props.margin};

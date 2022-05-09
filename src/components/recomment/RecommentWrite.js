@@ -3,17 +3,21 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Grid } from "../../elements";
 import { _addCommentFX } from "../../redux/modules/comments";
-import defaultProfile from "../../assets/defaultProfile.png";
+import defaultProfile2 from "../../assets/defaultProfile2.png";
+import { _addReCommentFX } from "../../redux/modules/recomments";
 
-const CommentWrite = (props) => {
+const RecommentWrite = (props) => {
   const dispatch = useDispatch();
-  const [comm, setComm] = useState("");
+  const [recomm, setReComm] = useState("");
 
-  const writeComm = (e) => {
-    setComm(e.target.value);
-    console.log(comm);
-    dispatch(_addCommentFX("group", props.groupId, comm));
-    setComm("");
+  console.log(props);
+
+  const writeReComm = (e) => {
+    setReComm(e.target.value);
+    console.log(recomm);
+    dispatch(_addReCommentFX(props.commentId, recomm));
+    props.setReComm(false);
+    setReComm("");
   };
 
   return (
@@ -26,19 +30,19 @@ const CommentWrite = (props) => {
           borderRadius="3px 3px 0px 0px"
         >
           <Grid display="flex" alignItems="center">
-            <CommImg src={defaultProfile} />
+            <CommImg src={defaultProfile2} />
             <CommTextarea
               type="text"
-              placeholder="궁금하신 점을 댓글로 남겨보세요!"
-              value={comm}
+              placeholder="답글을 남겨보세요!"
+              value={recomm}
               onChange={(e) => {
-                setComm(e.target.value);
+                setReComm(e.target.value);
               }}
             ></CommTextarea>
           </Grid>
         </Grid>
 
-        <CommBtn onClick={writeComm}>등록하기</CommBtn>
+        <CommBtn onClick={writeReComm}>등록하기</CommBtn>
       </Grid>
     </>
   );
@@ -59,8 +63,8 @@ const CommTextarea = styled.textarea`
   border: none;
   outline: none;
   resize: none;
-  font-size: 16px;
   box-sizing: border-box;
+  font-size: 16px;
   line-height: normal;
   overflow: hidden;
   vertical-align: middle;
@@ -79,7 +83,7 @@ const CommTextarea = styled.textarea`
 const CommBtn = styled.button`
   position: relative;
   bottom: 45px;
-  left: 650px;
+  left: 600px;
   max-width: 92px;
   width: 100%;
   height: 32px;
@@ -92,4 +96,4 @@ const CommBtn = styled.button`
   border-radius: 3px;
 `;
 
-export default CommentWrite;
+export default RecommentWrite;

@@ -19,17 +19,27 @@ const CommentList = () => {
 
   return (
     <>
-      <Grid display="flex" flexDirection="column" height="auto" margin="10px">
-        <Text bold>문의하기</Text>
+      <Grid display="flex" flexDirection="column" margin="0 0 320px 0">
+        <Text margin="0 0 24px 0" size="18px" bold>
+          Q&A
+        </Text>
+
+        <CommentWrite groupId={groupId}></CommentWrite>
+        <Grid
+          padding="24px"
+          display="flex"
+          border="1px solid #D3D3D3"
+          borderRadius="0 0 3px 3px"
+        >
+          <Text size="12px">댓글 {commentList?.length}개</Text>
+          {commentList?.map((comment, idx) => {
+            if (comment == null) {
+              return;
+            }
+            return <CommentItem key={idx} {...comment} />;
+          })}
+        </Grid>
       </Grid>
-      <CommentWrite groupId={groupId}></CommentWrite>
-      <Text bold>댓글 {commentList?.length}개</Text>
-      {commentList?.map((comment, idx) => {
-        if (comment == null) {
-          return;
-        }
-        return <CommentItem key={idx} {...comment} />;
-      })}
     </>
   );
 };

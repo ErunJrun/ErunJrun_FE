@@ -6,6 +6,8 @@ import Permit from "../../shared/Permit";
 import { deleteGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
 import { useParams } from "react-router-dom";
+import groupChat from "../../assets/groupChat.png";
+import shareIcon from "../../assets/shareIcon.png";
 
 const MainInfo = (props) => {
   const dispatch = useDispatch();
@@ -13,6 +15,8 @@ const MainInfo = (props) => {
   const groupId = params.groupId;
   const detailGroup = useSelector((state) => state.feed.detail);
   const [editMenu, setEditMenu] = React.useState(false);
+
+  const nickname = localStorage.getItem("nickname");
 
   const handleEditMenu = () => {
     return setEditMenu(!editMenu);
@@ -30,105 +34,127 @@ const MainInfo = (props) => {
   return (
     <>
       <Grid
-        maxWidth="416px"
+        maxWidth="402px"
         width="100%"
-        minHeight="510px"
-        border="1px solid  #bababa"
+        border="1px solid #EFEFEF"
         borderRadius="10px"
         margin="0"
-        padding="15px 31px 24px 31px"
+        padding="24px 32px"
+        position="fixed"
+        left="1158px"
+        bottom="280px"
+        bg="white"
+        height="488px"
       >
-        <Grid is_flex>
-          <Grid display="flex" alignItems="center">
-            <Image
-              imageType="circle"
-              size="40"
-              src={detailGroup?.profileUrl}
-              margin="0 18px 0 0"
-            ></Image>
-            <Text bold>{detailGroup?.nickname}</Text>
-          </Grid>
+        <Grid height="auto" display="flex" justifyContent="space-between">
+          <Text width="auto" margin="0" size="18px" bold>
+            {detailGroup?.title}
+          </Text>
+
           <Permit>
-            <Grid display="flex" justifyContent="right">
-              <IconButton
-                _onClick={handleEditMenu}
-                moreDot
-                color="gray"
-              ></IconButton>
-              {editMenu ? (
-                <DropContent>
-                  <Text
-                    _onClick={() => {
-                      editGroup();
-                    }}
-                  >
-                    수정하기
-                  </Text>
-                  <hr />
-                  <Text
-                    _onClick={() => {
-                      dispatch(deleteGroupDB(props?.groupId));
-                      closeEditMenu();
-                    }}
-                  >
-                    삭제하기
-                  </Text>
-                </DropContent>
-              ) : null}
-            </Grid>
+            {nickname === detailGroup?.nickname ? (
+              <Grid width="auto" margin="0" display="flex">
+                <IconButton
+                  _onClick={handleEditMenu}
+                  moreDot
+                  color="gray"
+                ></IconButton>
+                {editMenu ? (
+                  <DropContent>
+                    <Text
+                      _onClick={() => {
+                        editGroup();
+                      }}
+                    >
+                      수정하기
+                    </Text>
+                    <hr />
+                    <Text
+                      _onClick={() => {
+                        dispatch(deleteGroupDB(props?.groupId));
+                        closeEditMenu();
+                      }}
+                    >
+                      삭제하기
+                    </Text>
+                  </DropContent>
+                ) : null}
+              </Grid>
+            ) : null}
           </Permit>
         </Grid>
 
-        <Grid>
-          <Text bold size="25px">
-            {detailGroup?.title}
-          </Text>
-        </Grid>
-
-        <Hr></Hr>
-
-        <Grid>
-          <Text bold>
-            러닝일시{"  "}
-            <span>
-              {"  "} {detailGroup?.datetime}
-            </span>
-          </Text>
-          <Text bold>
-            러닝장소{"  "}
-            <span>
-              {"  "} {detailGroup?.location}
-            </span>
-          </Text>
-          <Text bold>
-            러닝타입{"  "}
-            <span>
-              {"  "} {detailGroup?.thema}
-            </span>
-          </Text>
-          <Text bold>
-            러닝인원{"  "}
-            <span>
-              {"  "} {detailGroup?.Appliers?.length} / {detailGroup?.maxPeople}
-            </span>
-          </Text>
-          <Text bold>
-            러닝거리{"  "}
-            <span>
-              {"  "} {detailGroup?.distance} km
-            </span>
-          </Text>
-        </Grid>
-
-        <Hr></Hr>
-
-        <Text textalign="center" margin="10px auto" bold>
-          모집 마감까지 약 {detailGroup?.applyEndTime}시간
+        <Text size="16px" color="#FF2D55" margin="10px auto" bold>
+          (약 {detailGroup?.applyEndTime} 후 마감)
         </Text>
+
+        <Hr></Hr>
+
+        <Grid height="auto">
+          <Grid display="flex">
+            <Text width="auto" margin="0 16px 16px 0">
+              일시
+            </Text>
+            <Text width="auto" margin="0" bold>
+              {detailGroup?.datetime}
+            </Text>
+          </Grid>
+
+          <Grid display="flex">
+            <Text width="auto" margin="0 16px 16px 0">
+              장소
+            </Text>
+            <Text width="auto" margin="0" bold>
+              {detailGroup?.location}
+            </Text>
+          </Grid>
+
+          <Grid display="flex">
+            <Text width="auto" margin="0 16px 16px 0">
+              타입
+            </Text>
+            <Text width="auto" margin="0" bold>
+              {detailGroup?.thema}
+            </Text>
+          </Grid>
+
+          <Grid display="flex">
+            <Text width="auto" margin="0 16px 16px 0">
+              인원
+            </Text>
+            <Text width="auto" margin="0" bold>
+              {detailGroup?.Appliers?.length} / {detailGroup?.maxPeople}
+            </Text>
+          </Grid>
+
+          <Grid display="flex">
+            <Text width="auto" margin="0 16px 16px 0">
+              거리
+            </Text>
+            <Text width="auto" margin="0" bold>
+              {detailGroup?.distance} km
+            </Text>
+          </Grid>
+        </Grid>
+
+        <Hr></Hr>
+
         <ApplyBtn>신청하기</ApplyBtn>
-        <Grid width="100%" display="flex" justifyContent="space-between">
-          <ChatBtn>러닝그룹 채팅방</ChatBtn>
-          <ChatBtn>공유하기</ChatBtn>
+        <Grid
+          display="flex"
+          justifyContent="space-between"
+          margin="16px 0 0 0"
+          height="auto"
+        >
+          <ChatBtn>
+            <ChatImg src={groupChat} />
+            <Text margin="0">그룹 채팅방</Text>
+          </ChatBtn>
+
+          <ShareBtn>
+            <ChatImg src={shareIcon} />
+            <Text>공유하기</Text>
+          </ShareBtn>
         </Grid>
       </Grid>
     </>
@@ -136,21 +162,21 @@ const MainInfo = (props) => {
 };
 
 const Hr = styled.div`
-  border: 1px solid #e5e5e5;
+  border: 1px solid #cbcbcb;
   width: 100%;
-  margin: 16px auto;
+  margin: 24px auto;
 `;
 
 const ApplyBtn = styled.button`
-  background: #c4c4c4;
-  margin: 10px auto;
-  border-radius: 3px;
-  max-width: 352px;
+  max-width: 338px;
   width: 100%;
-  height: 56px;
-  color: black;
-  font-size: 16px;
+  height: 45px;
+  font-size: 18px;
   font-weight: 700;
+  color: #68f99e;
+  background-color: #030c37;
+  padding: 11px;
+  border-radius: 3px;
   border: none;
   cursor: pointer;
   :hover {
@@ -159,10 +185,46 @@ const ApplyBtn = styled.button`
   }
 `;
 
-const ChatBtn = styled.button`
-  width: 172px;
-  height: 40px;
-  border: solid 1px #c4c4c4;
+const ChatBtn = styled.div`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  width: 159px;
+  height: 38px;
+  background-color: #efefef;
+  border-radius: 3px;
+  box-sizing: border-box;
+  margin: 0;
+  :hover {
+    font-weight: 900;
+    box-shadow: 0px 0px 5px gray;
+  }
+`;
+
+const ShareBtn = styled.div`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  width: 159px;
+  height: 38px;
+  background-color: #efefef;
+  border-radius: 3px;
+  box-sizing: border-box;
+  margin: 0;
+  :hover {
+    font-weight: 900;
+    box-shadow: 0px 0px 5px gray;
+  }
+`;
+
+const ChatImg = styled.img`
+  width: 21px;
+  height: 19.2px;
+  margin-right: 8px;
 `;
 
 const DropContent = styled.div`

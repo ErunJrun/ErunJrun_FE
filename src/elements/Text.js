@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Text = (props) => {
   const {
+    id,
     display,
     children,
     size,
@@ -31,6 +32,7 @@ const Text = (props) => {
     marginTop,
     marginLeft,
     letterSpacing,
+    hover,
   } = props;
   const styles = {
     display,
@@ -59,10 +61,12 @@ const Text = (props) => {
     marginTop,
     marginLeft,
     letterSpacing,
+    id,
+    hover,
   };
   return (
     <React.Fragment>
-      <P {...styles} onClick={_onClick}>
+      <P id={id} {...styles} onClick={_onClick}>
         {children}
       </P>
     </React.Fragment>
@@ -96,8 +100,12 @@ Text.defaultProps = {
   marginTop: null,
   marginLeft: null,
   letterSpacing: null,
+  hover: null,
 };
 const P = styled.p`
+  :hover {
+    ${(props) => props.hover};
+  }
   letter-spacing: -0.8px;
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   display: ${(props) => props.display};
@@ -105,7 +113,7 @@ const P = styled.p`
   background-color: ${(props) => props.bg};
   border: ${(props) => props.border};
   z-index: ${(props) => (props.zindex ? `1;` : null)};
-  ${(props) => (props.bold ? `font-weight: 800;` : `font-weight: 600;`)};
+  ${(props) => (props.bold ? `font-weight: 800;` : `font-weight: 500;`)};
   ${(props) => (props.text_decoration ? `text-decoration: underline;` : null)};
   ${(props) => `color : ${props.color};`};
   ${(props) => `font-size: ${props.size};`};

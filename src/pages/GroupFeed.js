@@ -24,8 +24,7 @@ const GroupFeed = () => {
   const [searchState, setSearchState] = useState(false);
 
   const nickname = localStorage.getItem("nickname");
-
-  console.log(finish);
+  console.log(filterTheme);
 
   const category = [
     region,
@@ -37,6 +36,18 @@ const GroupFeed = () => {
     finish,
   ];
 
+  // const category = [
+  //   {
+  //     region: region,
+  //     filterTime: filterTime,
+  //     filterDistance: filterDistance,
+  //     startDate: startDate,
+  //     endDate: endDate,
+  //     filterTheme: filterTheme,
+  //     finish: finish,
+  //   },
+  // ];
+
   const finishCheck = () => {
     if (finish == 0) {
       setFinish(1);
@@ -45,9 +56,13 @@ const GroupFeed = () => {
     }
   };
 
+  // useEffect(() => {
+  //   dispatch(getGroupDB(category));
+  // }, []);
+
   useEffect(() => {
     dispatch(getGroupDB(category));
-  }, []);
+  }, [finish]);
 
   return (
     <>
@@ -110,13 +125,18 @@ const GroupFeed = () => {
           alignItems="center"
         >
           <input
-            style={{ width: "18px", height: "18px", margin: "0 8px 0 0" }}
+            style={{
+              width: "18px",
+              height: "18px",
+              margin: "0 8px 0 0",
+              cursor: "pointer",
+            }}
             type="checkbox"
             onClick={() => {
               finishCheck();
             }}
           ></input>
-          <Text cursor="pointer" bold margin="0">
+          <Text bold margin="0">
             마감공고 포함하기
           </Text>
         </Grid>

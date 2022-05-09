@@ -11,6 +11,9 @@ import MapInfo from "../components/groupDetail/MapInfo";
 import CrewLeaderInfo from "../components/groupDetail/CrewLeaderInfo";
 import Appliers from "../components/groupDetail/Appliers";
 import CommentList from "../components/comments/CommentList";
+import ImageCollage from "../components/groupDetail/ImageCollage";
+import InfoCategory from "../components/groupDetail/InfoCategory";
+import mapIcon from "../assets/mapIcon.png";
 
 const GroupDetail = () => {
   const dispatch = useDispatch();
@@ -24,37 +27,54 @@ const GroupDetail = () => {
 
   return (
     <>
-      <Grid width="1360px" display="flex" justifyContent="center" margin="0">
-        <ImageSlide />
-        <MainInfo groupId={groupId} />
-      </Grid>
-
-      <Text margin="20px 0 0 0" bold>
-        그룹러닝 상세
-      </Text>
-
       <Grid
+        maxWidth="758px"
+        width="100%"
         display="flex"
-        width="1360px"
-        justifyContent="left"
-        flexDirection="row"
+        justifyContent="center"
+        margin="80px auto 65px 360px"
+        position="relative"
       >
+        <ImageCollage detailGroup={detailGroup} />
+
+        <InfoCategory />
         <ServeInfo />
+
+        <Grid
+          display="flex"
+          id="코스정보"
+          alignItems="center"
+          margin="0 0 15px 0"
+        >
+          <MapIconImg src={mapIcon} />
+          <Text bold size="18px">
+            지도로 보는 코스 정보
+          </Text>
+          <MapInfo id="코스정보" />
+        </Grid>
+
+        <Grid id="소개" margin="0 0 96px 0">
+          <Text bold size="18px" margin="0 0 22px 0">
+            크루장의 소개글
+          </Text>
+          <Text size="16px">{detailGroup?.content}</Text>
+        </Grid>
+
+        <Appliers />
+        <CommentList />
       </Grid>
-
-      <Text bold>코스지도</Text>
-      <MapInfo />
-
-      <Text bold>그룹러닝 안내</Text>
-      <Grid margin="0 0 100px 0">
-        <Text margin="0 0 100px 0">{detailGroup?.content}</Text>
+      <Grid>
+        <MainInfo groupId={groupId} />
+        <CrewLeaderInfo />
       </Grid>
-
-      <CrewLeaderInfo />
-      <Appliers />
-      <CommentList />
     </>
   );
 };
+
+const MapIconImg = styled.img`
+  width: 14px;
+  height: 20px;
+  margin: 0 10px 0 0;
+`;
 
 export default GroupDetail;
