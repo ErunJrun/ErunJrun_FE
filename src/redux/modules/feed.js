@@ -155,13 +155,12 @@ export const addGroupDB = (
       .then((res) => {
         console.log(res);
 
-        // dispatch(getGroupDB());
+        dispatch(getGroupDB());
         window.alert("게시물 등록 완료");
         history.replace("/groupfeed");
       })
       .catch((err) => {
         console.log(err);
-        console.log(err.response);
       });
   };
 };

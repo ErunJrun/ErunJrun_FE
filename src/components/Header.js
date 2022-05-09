@@ -11,14 +11,14 @@ const Header = () => {
 
   if (is_login) {
     return (
-      <HeaderBox>
+      <HeaderBox id="1">
         <Box1>
           <Logo
             onClick={() => {
               history.push("/");
             }}
           >
-          <img src="https://ifh.cc/g/fkqsm3.png"/>
+            <img src="https://ifh.cc/g/fkqsm3.png" />
           </Logo>
           <Btn
             onClick={() => {
@@ -44,11 +44,7 @@ const Header = () => {
         </Box1>
 
         <Box2>
-          <IconButton
-          alarm
-          color="#BFCED1"
-          size="35px"
-          ></IconButton>
+          <IconButton alarm color="#BFCED1" size="35px"></IconButton>
           <Modal />
         </Box2>
       </HeaderBox>
@@ -56,13 +52,13 @@ const Header = () => {
   }
 
   return (
-    <HeaderBox>
+    <HeaderBox id="1">
       <Logo
         onClick={() => {
           history.push("/");
         }}
       >
-        <img src="https://ifh.cc/g/fkqsm3.png"/>
+        <img src="https://ifh.cc/g/fkqsm3.png" />
       </Logo>
       <Btn
         onClick={() => {
@@ -100,9 +96,9 @@ const Header = () => {
 
 const HeaderBox = styled.div`
   display: flex;
-  height:90px;
+  height: 90px;
   background-color: #030c37;
-  align-items: center; 
+  align-items: center;
 `;
 
 const Logo = styled.div`
@@ -111,18 +107,18 @@ const Logo = styled.div`
 
 const Box1 = styled.div`
   display: flex;
-  align-items: center; 
-  margin-left: 9%
+  align-items: center;
+  margin-left: 9%;
 `;
 
 const Box2 = styled.div`
   display: flex;
-  align-items: center; 
-  margin-left: 45%
+  align-items: center;
+  margin-left: 45%;
 `;
 
 const Btn = styled.button`
-width:100px;
+  width: 100px;
   border: none;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.95rem;

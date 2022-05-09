@@ -18,6 +18,10 @@ import { HiPencilAlt } from "react-icons/hi";
 import { FcFilledFilter } from "react-icons/fc";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineKeyboardArrowUp } from "react-icons/md";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { MdOutlineCancel } from "react-icons/md";
+import { FcCalendar } from "react-icons/fc";
 
 const IconButton = (props) => {
   const {
@@ -53,6 +57,10 @@ const IconButton = (props) => {
     filter,
     moreDot,
     alarm,
+    upArrow,
+    downArrow,
+    cancelRound,
+    calendar,
   } = props;
 
   const styles = {
@@ -74,6 +82,52 @@ const IconButton = (props) => {
             size={size}
             onClick={_onClick}
           ></IoMdNotificationsOutline>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
+  if (calendar) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <FcCalendar size={size} onClick={_onClick}></FcCalendar>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
+  if (cancelRound) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <MdOutlineCancel size={size} onClick={_onClick}></MdOutlineCancel>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
+  if (upArrow) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <MdOutlineKeyboardArrowUp
+            size={size}
+            onClick={_onClick}
+          ></MdOutlineKeyboardArrowUp>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
+  if (downArrow) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <MdOutlineKeyboardArrowDown
+            size={size}
+            onClick={_onClick}
+          ></MdOutlineKeyboardArrowDown>
         </Icon>
       </React.Fragment>
     );

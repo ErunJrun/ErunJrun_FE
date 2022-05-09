@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Grid = (props) => {
   const {
+    id,
     flexWrap,
     zIndex,
     _onMouseOver,
@@ -38,6 +39,7 @@ const Grid = (props) => {
     borderTop,
     wrap,
     className,
+    alignContent,
   } = props;
 
   const styles = {
@@ -72,6 +74,8 @@ const Grid = (props) => {
     radius: radius,
     wrap: wrap,
     className: className,
+    alignContent,
+    id,
   };
 
   return (
@@ -81,6 +85,7 @@ const Grid = (props) => {
         onClick={_onClick}
         onMouseOver={_onMouseOver}
         onMouseOut={_onMouseOut}
+        id={id}
       >
         {children}
       </GridBox>
@@ -117,10 +122,12 @@ Grid.defaultProps = {
   flexDirection: null,
   justifyContent: null,
   flexWrap: null,
+  alignContent: null,
 };
 
 const GridBox = styled.div`
   flex-wrap: wrap;
+  align-content: ${(props) => props.alignContent};
   ${(props) => (props.className ? `className: ${props.className};` : "")}
   ${(props) => (props.wrap ? `flex-wrap: ${props.wrap};` : "")}
   z-index: ${(props) => props.zIndex};

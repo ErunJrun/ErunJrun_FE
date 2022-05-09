@@ -9,6 +9,8 @@ const CalendarFilter = (props) => {
   const [dateRange, setDateRange] = useState(["", ""]);
   const [startDate, endDate] = dateRange;
 
+  console.log(startDate, endDate);
+
   // console.log(startDate, endDate);
   const _startDate = formatDate(startDate);
   const _endDate = formatDate(endDate);
@@ -29,15 +31,15 @@ const CalendarFilter = (props) => {
     props.setEndDate(_endDate);
   }, [dateRange]);
 
-  // const choiceDate = () => {
-  //   props.setStartDate(_startDate);
-  //   props.setEndDate(_endDate);
-  // };
+  useEffect(() => {
+    setDateRange(["", ""]);
+  }, [props.reset]);
 
   return (
     <>
       <DatePicker
         locale={ko}
+        placeholderText="날짜 범위를 선택해주세요"
         dateFormat="yyyy-MM-dd"
         selectsRange={true}
         startDate={startDate}
@@ -52,15 +54,16 @@ const CalendarFilter = (props) => {
 };
 
 const DateInput = styled.input`
-  width: 255px;
+  width: 317px;
   height: 46px;
-  padding: 11px 22px 10px 24px;
+  padding: 13px 16px;
   border: solid 1px #000;
-  font-size: 18px;
-  font-weight: 500;
-  color: #000;
-  box-sizing: border-box;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #818181;
   margin: 0;
+  box-sizing: border-box;
 `;
 
 export default CalendarFilter;
