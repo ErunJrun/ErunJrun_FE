@@ -1,39 +1,42 @@
 import React from 'react';
 import Level from './Level';
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Text, Grid } from "../../elements"
 
 const Profile = () => {
 
-  const userName = localStorage.getItem("nickname");
-  const profile = localStorage.getItem("profileUrl");
+
+  const profile_list = useSelector((state) => state.mypage.list);
+
+  if (profile_list.length === 0) { return <></>; }
 
     return (
         <Box>
             <MiddleBox>
 
               <ImgBox>
-                <MyImage src={profile}/>
-                <Text bold size="20px"> {userName} </Text>
+                <MyImage src={profile_list.userInfo.profileUrl}/>
+                <Text bold size="20px"> {profile_list.userInfo.nickname} </Text>
               </ImgBox>
 
               <Introduce>
-                 자기소개
+                 {profile_list.userInfo.bio}
                 <Triangle/>
               </Introduce>
 
               <Information>
                   <SmallBox>
                     <Text bold size="16px"> 러닝레벨 </Text>
-                    <Text  bold size="17px" color="#4A4A4A"> 블루 </Text>
+                    <Text  bold size="16px" color="#4A4A4A"> {profile_list.userInfo.userLevel} </Text>
                   </SmallBox>
                   <SmallBox>
                     <Text bold size="16px"> 선호거리 </Text>
-                    <Text bold size="17px" color="#4A4A4A"> 10km 이상 15km 미만</Text>
+                    <Text bold size="16px" color="#4A4A4A"> {profile_list.userInfo.likeDistance}</Text>
                   </SmallBox>
                   <SmallBox>
                     <Text bold size="16px"> 선호지역 </Text>
-                    <Text size="17px" color="#4A4A4A">충청도/세종특별자치시/대전광역시</Text>
+                    <Text size="16px" color="#4A4A4A"> {profile_list.userInfo.likeLocation}</Text>
                   </SmallBox>
               </Information>
 
@@ -100,7 +103,7 @@ const Triangle= styled.div`
   border-style: solid;
   border-width: 1rem;
   border-color:transparent #e1e1e1 transparent transparent;
-  transform: translate(-95%, 0%);
+  transform: translate(-95%, 50%);
 `
 
 const Information= styled.div`

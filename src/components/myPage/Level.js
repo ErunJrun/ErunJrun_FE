@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileDB } from "../../redux/modules/mypage"
 import MyModal from './MyModal';
 import Progress from './Progress';
 import styled from "styled-components";
 import { Text } from "../../elements"
 
 const Level = () => {
+
+    const profile_list = useSelector((state) => state.mypage.list);
 
     return (
         <div> 
@@ -13,8 +17,8 @@ const Level = () => {
                 굿러너 레벨          
                </Text> 
                <MyModal/> 
-            </Box>          
-            <Progress done="70"/>         
+            </Box>        
+            <Progress done={profile_list?.userInfo?.mannerPoint}/>        
         </div>
     );
 };
