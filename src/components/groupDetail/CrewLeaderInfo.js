@@ -1,31 +1,70 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Grid, Image, Text } from "../../elements";
+import styled from "styled-components";
 
 const CrewLeaderInfo = () => {
   const detailGroup = useSelector((state) => state.feed.detail);
+
   return (
     <>
-      <Grid display="flex" flexDirection="column" height="auto" margin="10px">
-        <Text bold>크루장 프로필</Text>
-        <Grid display="flex" alignItems="center">
-          <Image
-            imageType="circle"
-            size="72"
-            src={detailGroup?.profileUrl}
-            margin="0 18px 0 0"
-          ></Image>
-          <Grid display="flex" flexDirection="column">
-            <Grid display="flex" height="atuo">
-              <Text margin="5px" bold>
-                {detailGroup?.nickname}
+      <Grid
+        maxWidth="402px"
+        width="100%"
+        border="1px solid #EFEFEF"
+        borderRadius="10px"
+        margin="0"
+        padding="24px"
+        position="fixed"
+        left="1158px"
+        bottom="100px"
+        bg="white"
+        height="140px"
+        display="flex"
+        alignItems="center"
+      >
+        <Image
+          display="inline-block"
+          imageType="circle"
+          size="92"
+          width="92px"
+          height="92px"
+          src={detailGroup?.profileUrl}
+          margin="0 12px 0 0"
+          border="1px solid #68F99E"
+        ></Image>
+
+        <Grid
+          margin="0"
+          width="auto"
+          height="auto"
+          display="flex"
+          flexDirection="column"
+        >
+          <Grid
+            width="auto"
+            display="flex"
+            height="auto"
+            margin="0 0 12px 0"
+            alignItems="center"
+          >
+            <Text margin="0 5px 0 0" size="20px" bold>
+              {detailGroup?.nickname}
+            </Text>
+            <Text margin="0 5px 0 0">크루장</Text>
+            <LevelBox>
+              <Text color="white" size="12px" margin="0" bold>
+                레드 RUNNER
               </Text>
-              <Text margin="5px">레드</Text>
-              <Text margin="5px">굿러너 레벨 58km</Text>
-            </Grid>
-            <Text margin="5px">
-              주로 한강 그룹 러닝을 즐겨합니다! 한강 러닝 좋아하시는 분들 같이
-              뛰어요!
+            </LevelBox>
+          </Grid>
+
+          <Grid width="auto" height="auto" display="flex" margin="0">
+            <Text size="12px" margin="0 5px 0 0">
+              굿러너 레벨
+            </Text>
+            <Text size="12px" margin="0" bold>
+              72km
             </Text>
           </Grid>
         </Grid>
@@ -33,5 +72,17 @@ const CrewLeaderInfo = () => {
     </>
   );
 };
+
+const LevelBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px 5px;
+  width: 93px;
+  height: 18px;
+  background-color: #fc4b4b;
+  box-sizing: border-box;
+  border-radius: 2px;
+`;
 
 export default CrewLeaderInfo;

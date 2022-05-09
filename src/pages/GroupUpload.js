@@ -114,7 +114,6 @@ const GroupUpload = () => {
   const addGroupPost = () => {
     dispatch(addGroupDB(location, thumbnail, contents, address, distance));
     dispatch(imgActions.resetFile());
-    history.replace("/groupfeed");
   };
 
   if (!isLoaded1) {

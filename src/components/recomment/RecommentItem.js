@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Grid, Text, Image, IconButton } from "../../elements";
@@ -9,37 +9,37 @@ import {
 } from "../../redux/modules/comments";
 import Permit from "../../shared/Permit";
 import styled from "styled-components";
-import RecommentWrite from "../recomment/RecommentWrite";
-import RecommentItem from "../recomment/RecommentItem";
-import { _getReCommentFX } from "../../redux/modules/recomments";
+import {
+  _editReCommentFX,
+  _getReCommentFX,
+} from "../../redux/modules/recomments";
 
-const CommentItem = (props) => {
+const RecommentItem = (props) => {
   const dispatch = useDispatch();
   const [newComm, setNewComm] = useState("");
-  const [reComm, setReComm] = useState(false);
 
   const nickname = localStorage.getItem("nickname");
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  const recommentList = useSelector((state) => state.recomments.list);
+  // const commentList = useSelector((state) => state.comments.list);
+  // const recommentList = useSelector((state) => state.recomments.list);
 
-  console.log(recommentList);
   console.log(props);
 
-  const editToggle = (commentId) => {
-    dispatch(_isEdit(commentId));
+  const editToggle = (recommentId) => {
+    dispatch(_isEdit(recommentId));
   };
 
-  const editComm = (commentId) => {
-    console.log("댓글 수정");
-    dispatch(_editCommentFX(commentId, newComm));
-    editToggle(commentId);
+  const editReComm = (recommentId) => {
+    console.log("대댓글 수정");
+    dispatch(_editReCommentFX(recommentId, newComm));
+    editToggle(props?.recommentId);
   };
 
   return (
     <>
       <Grid display="flex" flexDirection="column" margin="0 0 15px 0">
-        <Grid display="flex" maxWidth="758px" width="100%">
+        <Grid display="flex" maxWidth="700px" width="100%">
           <Grid
             display="flex"
             alignItems="center"
@@ -81,7 +81,7 @@ const CommentItem = (props) => {
               <Text
                 cursor="pointer"
                 _onClick={() => {
-                  editComm(props?.commentId);
+                  editReComm(props?.recommentId);
                 }}
                 margin="0 16px 0 0"
                 size="12px"
@@ -108,20 +108,7 @@ const CommentItem = (props) => {
             <Text color="#818181" margin="0 16px 0 0" size="12px">
               {props?.createdAt}
             </Text>
-            <Permit>
-              <Text
-                hover="color:#68F99E; font-weight:900;"
-                color="#818181"
-                margin="0 16px 0 0"
-                size="12px"
-                cursor="pointer"
-                _onClick={() => {
-                  setReComm(!reComm);
-                }}
-              >
-                답글달기
-              </Text>
-            </Permit>
+
             <Permit>
               {props?.user?.nickname === nickname ? (
                 <>
@@ -129,7 +116,7 @@ const CommentItem = (props) => {
                     hover="color:#68F99E; font-weight:900;"
                     cursor="pointer"
                     _onClick={() => {
-                      editToggle(props?.commentId);
+                      editToggle(props?.recommentId);
                     }}
                     margin="0 16px 0 0"
                     size="12px"
@@ -155,24 +142,6 @@ const CommentItem = (props) => {
           </Grid>
         )}
       </Grid>
-      <Grid margin="0 0 12px 76px">
-        {props?.Recomments?.map((recomment, idx) => {
-          if (recomment === null) {
-            return;
-          }
-          return (
-            <RecommentItem
-              key={idx}
-              commentId={props?.commentId}
-              {...recomment}
-            />
-          );
-        })}
-      </Grid>
-
-      {reComm ? (
-        <RecommentWrite setReComm={setReComm} commentId={props?.commentId} />
-      ) : null}
     </>
   );
 };
@@ -189,4 +158,4 @@ const EditInput = styled.textarea`
   }
 `;
 
-export default CommentItem;
+export default RecommentItem;

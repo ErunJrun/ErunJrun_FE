@@ -125,7 +125,7 @@ export const addGroupDB = (
   address,
   distance
 ) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     console.log(mapLatLng, thumbnail, contents, address, distance);
     const formData = new FormData();
     thumbnail?.map((e, idx) => {
@@ -145,23 +145,19 @@ export const addGroupDB = (
     formData.append("location", address);
     formData.append("distance", distance);
     formData.append("mapLatLng", JSON.stringify(mapLatLng));
-
-    api
-      .post("/group", formData, {
+    try {
+      const { data } = await api.post("/group", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      })
-      .then((res) => {
-        console.log(res);
-
-        dispatch(getGroupDB());
-        window.alert("게시물 등록 완료");
-        history.replace("/groupfeed");
-      })
-      .catch((err) => {
-        console.log(err);
       });
+      console.log(data);
+      window.alert("게시물 등록 완료");
+      console.log("1");
+      history.replace("/groupfeed");
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -176,6 +172,7 @@ export const deleteGroupDB = (groupId) => {
 
         history.push("/groupfeed");
       })
+
       .catch((error) => {
         console.log(error);
       });
@@ -213,7 +210,7 @@ export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
       formData.append("speed", contents.speed);
       formData.append("baggage", contents.baggage);
       formData.append("content", contents.content);
-      formData.append("thema", contents.theme);
+      formData.append("thema", contents.thema);
 
       const { data } = await api.patch(`/group/${groupId}`, formData, {
         headers: {
@@ -221,6 +218,7 @@ export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
         },
       });
       console.log(data.data);
+      history.push("/groupfeed");
     } catch (error) {
       console.log(error);
     }
