@@ -18,8 +18,8 @@ const Mypage = () => {
   const [myGroup, setMyGroup] = useState(false);
 
     useEffect(() => {
-    dispatch(getProfileDB(userId));
-  }, []);
+      dispatch(getProfileDB(userId));
+    }, []);
   
   return (
     <Grid  width="1200px" margin="auto">

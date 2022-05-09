@@ -36,7 +36,9 @@ const Modal = () => {
               마이 페이지
             </p>
             <p style = { {cursor:"pointer"} }
-              onClick={() => {}}>계정 설정</p>
+              onClick={() => {
+                history.push("/edit")
+              }}>계정 설정</p>
             <hr />
             <p
               style = { {cursor:"pointer"} }

@@ -55,6 +55,8 @@ export const getRunningDB = (userId) => {
   };
 };
 
+//const { data } = await api.get(`/group/mypage?userId=${userId}`);
+
 //reducer
 
 export default handleActions(
