@@ -84,6 +84,7 @@ const CardBox = styled.div`
 const Box = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 3% 5% 0% 5%;
 `;
 
 const Btn = styled.button`
