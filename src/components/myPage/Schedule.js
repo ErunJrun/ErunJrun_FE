@@ -61,12 +61,10 @@ const Schedule = () => {
             {profile_list.waiting?.map((waiting, index) =>
             index > 0 && 4 > index &&(
               
-              <div key={waiting.groupId}
-              onClick={() => {
-                history.push(`/groupdetail/${profile_list.waiting?.groupId}`);
-              }}
-              >
-                  <Grid 
+              <div key={waiting.groupId}>
+                  <Grid onClick={() => {
+                    history.push(`/groupdetail/${profile_list.waiting?.groupId}`);
+                  }}
                     display="flex" 
                     justifyContent="space-between"  
                     width="550px" 
@@ -75,7 +73,7 @@ const Schedule = () => {
                   >
                     <Text 
                       bold size="16px"
-                      margin="45px 0 0 0" 
+                      margin="18px 0 0 0" 
                       color="#68f99e"
                       width="70px"
                       height="24px"

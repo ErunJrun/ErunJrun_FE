@@ -33,7 +33,7 @@ body.active-modal {
     line-height: 1.4;
     background: #ffffff;
     padding: 14px 28px;
-    border-radius: 3px;
+    border-radius: 10px;
     width: 500px;
     height: 530px;
     /* align-items: center;

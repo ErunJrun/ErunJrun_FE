@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getEvaluationDB } from "../../redux/modules/mypage"
 import styled from "styled-components";
-import { Text } from "../../elements"
+import { Text, Grid } from "../../elements"
 import { AiOutlineClose } from "react-icons/ai";
-import { HiOutlineEmojiHappy } from "react-icons/hi";
-import { HiOutlineEmojiSad } from "react-icons/hi";
 
 import "./Evaluation.css";
 
-const Evaluation = () => {
-
+const Evaluation = (props) => {
+    console.log(props);
+    const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
+
+     const userId = localStorage.getItem("userId");
+     const groupId = props.running.groupId;
+     const hostId = props.running.userId;
+
+     const group = useSelector((state) => state.mypage.host);
+
+     useEffect(() => {
+        dispatch(getEvaluationDB(groupId, hostId, userId));
+      }, []);
+
+    console.log(group);
+    // if (group.length === 0) { return <></>; }
 
     const toggleModal = () => {
         setModal(!modal)
@@ -17,38 +31,34 @@ const Evaluation = () => {
 
     return (
         <div>
-            <p style={{margin:"0 0 3px 0"}}
-            onClick = {toggleModal}>
+            <Grid style={{margin:"0 0 3px 0", border:"none"}}
+                onClick = {toggleModal}>
                 크루장 평가하기
-            </p>
+            </Grid>
 
             {modal && (
                 <div>
                     <div onClick={toggleModal} className="_overlay"></div>
                     <div className="_modal-content">
                         <Text bold size="18px" marginTop>크루장 평가</Text>
-                        <MyImage src="https://ifh.cc/g/qT8V9W.jpg"/>
+                        <MyImage src={group?.user?.profileUrl}/>
                         <Text bold size="14px">
-                            김다운
+                            {group?.user?.nickname}
                         </Text>
                         <Text bold size="20px" marginTop>
-                            김다운님의 그룹러닝은 어땠나요?
+                            {group?.user?.nickname}님의 그룹러닝은 어땠나요?
                         </Text>
                         <Text size="13px" color="#858585">
-                            2022.04.27 토 10:00 에 벚꽃과 야경 러닝 명소를 함께함
+                        {group?.user?.date} 토 {group?.user?.standbyTime} 에 {group?.user?.title}를 함께함
                         </Text>
                         <Btn>
-                            <Icon>
-                                <HiOutlineEmojiHappy size="30" color="#9613f3"/>
-                            </Icon>
+                            <img style={{margin:"15px 0 0 0"}} src='https://ifh.cc/g/3Mn8Ja.png'/>
                             <Text bold>
                                 좋았어요
                             </Text>       
                         </Btn>
                         <Btn>
-                            <Icon>
-                              <HiOutlineEmojiSad size="30" color="#9613f3"/>  
-                            </Icon>
+                            <img style={{margin:"15px 0 0 0"}} src='https://ifh.cc/g/rqhHfO.png'/>
                             <Text bold>
                                 아쉬웠어요
                             </Text>      

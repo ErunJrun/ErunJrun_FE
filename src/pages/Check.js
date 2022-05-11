@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text } from "../elements"
+import { Text,Grid } from "../elements"
 import styled from "styled-components";
 
 const Check = () => {
@@ -25,10 +25,14 @@ const Check = () => {
 
     return (
         <Box>
-            <div>
+            <Grid width="540px" height="129px">
+                <MyImage src="https://ifh.cc/g/qT8V9W.jpg"/>
                 <img src="https://ifh.cc/g/fkqsm3.png"/>
-                이RUN저RUN
-            </div>
+            </Grid>
+            
+                
+               
+            
             <div>
                 2022.04.27. 10:00 토 벚꽃과 야경 러닝 명소  3/10
             </div>
