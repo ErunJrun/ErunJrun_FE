@@ -4,15 +4,13 @@ import { useParams } from "react-router-dom";
 import { Grid, Text, Image, IconButton } from "../../elements";
 import {
   _deleteCommentFX,
+  _deleteReCommentFX,
   _editCommentFX,
-  _isEdit,
+  _isReEdit,
+  _editReCommentFX,
 } from "../../redux/modules/comments";
 import Permit from "../../shared/Permit";
 import styled from "styled-components";
-import {
-  _editReCommentFX,
-  _getReCommentFX,
-} from "../../redux/modules/recomments";
 
 const RecommentItem = (props) => {
   const dispatch = useDispatch();
@@ -26,14 +24,14 @@ const RecommentItem = (props) => {
 
   console.log(props);
 
-  const editToggle = (recommentId) => {
-    dispatch(_isEdit(recommentId));
+  const editToggle = () => {
+    dispatch(_isReEdit(props?.recommentId, props?.commentId));
   };
 
   const editReComm = (recommentId) => {
     console.log("대댓글 수정");
     dispatch(_editReCommentFX(recommentId, newComm));
-    editToggle(props?.recommentId);
+    editToggle();
   };
 
   return (
@@ -54,7 +52,7 @@ const RecommentItem = (props) => {
             ></Image>
 
             <Grid display="flex" flexDirection="column" width="auto">
-              {props.is_edit ? (
+              {props.isEdit ? (
                 <>
                   <EditInput
                     onChange={(e) => setNewComm(e.target.value)}
@@ -75,7 +73,7 @@ const RecommentItem = (props) => {
           </Grid>
         </Grid>
 
-        {props.is_edit ? (
+        {props.isEdit ? (
           <>
             <Grid margin="0 0 0 48px" display="flex" alignItems="center">
               <Text
@@ -97,7 +95,7 @@ const RecommentItem = (props) => {
                 height="18px"
                 cancelRoundBlack
                 _onClick={() => {
-                  editToggle(props?.commentId);
+                  editToggle(props?.recommentId);
                 }}
                 margin="0 16px 0 0"
               ></IconButton>
@@ -128,7 +126,9 @@ const RecommentItem = (props) => {
                     hover="color:#68F99E; font-weight:900;"
                     cursor="pointer"
                     _onClick={() => {
-                      dispatch(_deleteCommentFX(props?.commentId));
+                      dispatch(
+                        _deleteReCommentFX(props?.recommentId, props?.commentId)
+                      );
                     }}
                     margin="0 16px 0 0"
                     size="12px"

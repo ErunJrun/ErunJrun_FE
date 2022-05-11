@@ -22,14 +22,19 @@ function KakaoMap(props) {
   });
   const [moveLine, setMoveLine] = useState();
 
+  console.log(distances);
+
   useEffect(() => {
     props.setLocation(paths);
-    props.setDistance(totalDistance);
   }, [paths]);
+
+  useEffect(() => {
+    props.setDistance(totalDistance);
+  }, [distances]);
 
   //서버에 보내줄 최종 거리(km)
 
-  const totalDistance = (distances[distances.length - 1] / 1000).toFixed(1);
+  const totalDistance = (distances[distances.length - 1] / 1000).toFixed(2);
 
   // const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
@@ -118,7 +123,7 @@ function KakaoMap(props) {
       <Final className="dotOverlay distanceInfo">
         <li>
           <span className="label">총거리</span>{" "}
-          <span className="number">{(distance / 1000).toFixed(1)}</span>km
+          <span className="number">{totalDistance}</span>km
         </li>
         <li>
           <span className="label">페이스 : 6'00'km/h</span>{" "}
@@ -139,102 +144,92 @@ function KakaoMap(props) {
   return (
     <>
       <Grid margin="30px auto">
-        <Grid height="auto" padding="5px">
-          <Grid display="flex" margin="10px auto">
-            <Input
-              type="text"
-              _onChange={onChange}
-              placeholder="코스 시작점을 검색해주세요"
-              value={inputText}
-            />
-            <SearchLoctionBtn onClick={handleSubmit}>
-              장소 검색
-            </SearchLoctionBtn>
-          </Grid>
+        <Grid display="flex" margin="0 0 16px 0">
+          <LocationInput
+            type="text"
+            onChange={onChange}
+            placeholder="장소를 검색하여 코스를 지정하세요."
+            value={inputText}
+            onKeyPress={handleSubmit}
+          />
+          <SearchLocationBtn onClick={handleSubmit}>검색하기</SearchLocationBtn>
+        </Grid>
 
-          <Grid>
-            <Map // 지도를 표시할 Container
-              id={`map`}
-              center={{
-                // 지도의 중심좌표
-                lat: 37.498004414546934,
-                lng: 127.02770621963765,
-              }}
-              style={{
-                // 지도의 크기
-                width: "100%",
-                height: "533px",
-              }}
-              level={3} // 지도의 확대 레벨
-              onClick={handleClick}
-              onRightClick={handleRightClick}
-              onMouseMove={handleMouseMove}
-              onCreate={setMap}
-            >
-              <Polyline
-                path={paths}
-                strokeWeight={8} // 선의 두께입니다
-                strokeColor={"#db4040"} // 선의 색깔입니다
-                strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-                strokeStyle={"solid"} // 선의 스타일입니다
-                onCreate={setClickLine}
-              />
-              {paths.map((path) => (
+        <Grid>
+          <Map // 지도를 표시할 Container
+            id={`map`}
+            center={{
+              // 지도의 중심좌표
+              lat: 37.498004414546934,
+              lng: 127.02770621963765,
+            }}
+            style={{
+              // 지도의 크기
+              width: "100%",
+              height: "464px",
+            }}
+            level={3} // 지도의 확대 레벨
+            onClick={handleClick}
+            onRightClick={handleRightClick}
+            onMouseMove={handleMouseMove}
+            onCreate={setMap}
+          >
+            <Polyline
+              path={paths}
+              strokeWeight={8} // 선의 두께입니다
+              strokeColor={"#686EF9"} // 선의 색깔입니다
+              strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+              strokeStyle={"solid"} // 선의 스타일입니다
+              onCreate={setClickLine}
+            />
+            {paths.map((path) => (
+              <CustomOverlayMap
+                key={`dot-${path.lat},${path.lng}`}
+                position={path}
+                zIndex={1}
+              >
+                <span className="dot"></span>
+              </CustomOverlayMap>
+            ))}
+            {paths.length > 1 &&
+              distances.slice(1, distances.length).map((distance, index) => (
                 <CustomOverlayMap
-                  key={`dot-${path.lat},${path.lng}`}
-                  position={path}
-                  zIndex={1}
-                >
-                  <span className="dot"></span>
-                </CustomOverlayMap>
-              ))}
-              {paths.length > 1 &&
-                distances.slice(1, distances.length).map((distance, index) => (
-                  <CustomOverlayMap
-                    key={`distance-${paths[index + 1].lat},${
-                      paths[index + 1].lng
-                    }`}
-                    position={paths[index + 1]}
-                    yAnchor={1}
-                    zIndex={2}
-                  >
-                    {!isdrawing && distances.length === index + 2 ? (
-                      <DistanceInfo distance={distance} />
-                    ) : (
-                      <div className="dotOverlay">
-                        <span className="number"></span>
-                      </div>
-                    )}
-                  </CustomOverlayMap>
-                ))}
-              <Polyline
-                path={isdrawing ? [paths[paths.length - 1], mousePosition] : []}
-                strokeWeight={6} // 선의 두께입니다
-                strokeColor={"#db4040"} // 선의 색깔입니다
-                strokeOpacity={0.5} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-                strokeStyle={"solid"} // 선의 스타일입니다
-                onCreate={setMoveLine}
-              />
-              {isdrawing && (
-                <CustomOverlayMap
-                  position={mousePosition}
+                  key={`distance-${paths[index + 1].lat},${
+                    paths[index + 1].lng
+                  }`}
+                  position={paths[index + 1]}
                   yAnchor={1}
                   zIndex={2}
                 >
-                  <div className="dotOverlay distanceInfo">
-                    총거리{" "}
-                    <span className="number">
-                      {(
-                        (clickLine.getLength() + moveLine.getLength()) /
-                        1000
-                      ).toFixed(1)}
-                      {/* {Math.round(clickLine.getLength() + moveLine.getLength())} */}
-                    </span>
-                    km
-                  </div>
+                  {!isdrawing && distances.length === index + 2 ? (
+                    <DistanceInfo distance={distance} />
+                  ) : (
+                    <div className="dotOverlay">
+                      <span className="number"></span>
+                    </div>
+                  )}
                 </CustomOverlayMap>
-              )}
-              {/* {markers.map((marker) => (
+              ))}
+            <Polyline
+              path={isdrawing ? [paths[paths.length - 1], mousePosition] : []}
+              strokeWeight={6} // 선의 두께입니다
+              strokeColor={"#db4040"} // 선의 색깔입니다
+              strokeOpacity={0.5} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+              strokeStyle={"solid"} // 선의 스타일입니다
+              onCreate={setMoveLine}
+            />
+            {isdrawing && (
+              <CustomOverlayMap position={mousePosition} yAnchor={1} zIndex={2}>
+                <div className="dotOverlay distanceInfo">
+                  총거리
+                  <span className="number">
+                    {totalDistance === "NaN" ? null : totalDistance}
+                  </span>
+                  km
+                </div>
+              </CustomOverlayMap>
+            )}
+            {/* {markers.map((marker) => (
                 <MapMarker
                   key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
                   position={marker.position}
@@ -245,13 +240,51 @@ function KakaoMap(props) {
                   )}
                 </MapMarker>
               ))} */}
-            </Map>
-          </Grid>
+          </Map>
         </Grid>
       </Grid>
     </>
   );
 }
+
+const LocationInput = styled.input`
+  max-width: 694px;
+  width: 100%;
+  height: 52px;
+  box-sizing: border-box;
+  border: 1px solid #cbcbcb;
+  border-radius: 3px;
+  padding: 10px 0px 10px 32px;
+  margin: 0 32px 0 0;
+  :focus {
+    border: 1px solid #030c37;
+    outline: none;
+  }
+  ::placeholder {
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 16px;
+    font-weight: 500;
+  }
+`;
+
+const SearchLocationBtn = styled.button`
+  padding: 10px;
+  max-width: 139px;
+  width: 100%;
+  height: 52px;
+  background: #030c37;
+  border: 1px solid #030c37;
+  border-radius: 3px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin: 0;
+  cursor: pointer;
+  :hover {
+    box-shadow: 0 0 3px #030c37;
+  }
+`;
 
 const Final = styled.div`
   border: 1px solid black;
@@ -262,36 +295,6 @@ const Final = styled.div`
     list-style: none;
   }
   border-radius: 5px;
-`;
-
-const SearchLoctionBtn = styled.button`
-  width: 184px;
-  height: 40px;
-  background: #cecece;
-  border: 1px solid #4e4e4e;
-  border-radius: 5px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-  align-items: center;
-  color: #000000;
-  display: flex;
-  justify-content: center;
-  margin: 0 20px;
-`;
-
-const StepBtn = styled.button`
-  width: 184px;
-  height: 40px;
-  background: #cecece;
-  border: 1px solid #4e4e4e;
-  border-radius: 5px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-  align-items: center;
-  color: #000000;
-  margin: 10px 10px;
 `;
 
 export default KakaoMap;

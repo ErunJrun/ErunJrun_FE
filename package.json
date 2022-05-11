@@ -8,6 +8,7 @@
     "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.7.0",
+    "@mui/lab": "^5.0.0-alpha.80",
     "@mui/styled-engine": "latest",
     "@mui/styled-engine-sc": "^5.7.0",
     "@testing-library/jest-dom": "^5.14.1",

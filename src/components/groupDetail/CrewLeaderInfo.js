@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Grid, Image, Text } from "../../elements";
 import styled from "styled-components";
 
-const CrewLeaderInfo = () => {
+const CrewLeaderInfo = (props) => {
   const detailGroup = useSelector((state) => state.feed.detail);
 
   return (
@@ -52,9 +52,9 @@ const CrewLeaderInfo = () => {
               {detailGroup?.nickname}
             </Text>
             <Text margin="0 5px 0 0">크루장</Text>
-            <LevelBox>
+            <LevelBox userLevel={detailGroup?.userLevel}>
               <Text color="white" size="12px" margin="0" bold>
-                레드 RUNNER
+                {detailGroup?.userLevel} RUNNER
               </Text>
             </LevelBox>
           </Grid>
@@ -80,7 +80,13 @@ const LevelBox = styled.div`
   padding: 1px 5px;
   width: 93px;
   height: 18px;
-  background-color: #fc4b4b;
+  ${(props) => (props.userLevel === "블루" ? `background-color:#686EF9 ;` : "")}
+  ${(props) => (props.userLevel === "레드" ? `background-color: #fc4b4b;` : "")}
+  ${(props) =>
+    props.userLevel === "오렌지" ? `background-color:#F76300;` : ""}
+  ${(props) => (props.userLevel === "골드" ? `background-color: #AC943C;` : "")}
+  
+
   box-sizing: border-box;
   border-radius: 2px;
 `;

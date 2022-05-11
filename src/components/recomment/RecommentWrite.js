@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Grid } from "../../elements";
-import { _addCommentFX } from "../../redux/modules/comments";
+import { _addCommentFX, _addReCommentFX } from "../../redux/modules/comments";
 import defaultProfile2 from "../../assets/defaultProfile2.png";
-import { _addReCommentFX } from "../../redux/modules/recomments";
 
 const RecommentWrite = (props) => {
   const dispatch = useDispatch();

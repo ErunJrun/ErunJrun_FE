@@ -11,6 +11,12 @@ const CommentList = () => {
   const dispatch = useDispatch();
   const commentList = useSelector((state) => state.comments.list);
 
+  // const recommentList = commentList?.Recomments?.map((e, idx) => {
+  //   console.log(e);
+  // });
+
+  console.log(commentList);
+
   const groupId = params.groupId;
 
   React.useEffect(() => {

@@ -12,6 +12,7 @@ const ImageSlide = () => {
 
   return (
     <Swiper
+      id="GroupDetailSlide"
       className="GroupDetailSlide"
       modules={[Navigation, Pagination]}
       spaceBetween={50}

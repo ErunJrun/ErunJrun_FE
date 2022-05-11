@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Grid = (props) => {
   const {
+    hover,
     id,
     flexWrap,
     zIndex,
@@ -43,6 +44,7 @@ const Grid = (props) => {
   } = props;
 
   const styles = {
+    hover: hover,
     flexWrap: flexWrap,
     zIndex: zIndex,
     overflow: overflow,
@@ -123,9 +125,16 @@ Grid.defaultProps = {
   justifyContent: null,
   flexWrap: null,
   alignContent: null,
+  hover: null,
 };
 
 const GridBox = styled.div`
+  :hover {
+    ${(props) => props.hover};
+  }
+  :focus {
+    ${(props) => props.hover};
+  }
   flex-wrap: wrap;
   align-content: ${(props) => props.alignContent};
   ${(props) => (props.className ? `className: ${props.className};` : "")}

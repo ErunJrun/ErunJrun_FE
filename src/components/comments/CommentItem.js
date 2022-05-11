@@ -11,7 +11,6 @@ import Permit from "../../shared/Permit";
 import styled from "styled-components";
 import RecommentWrite from "../recomment/RecommentWrite";
 import RecommentItem from "../recomment/RecommentItem";
-import { _getReCommentFX } from "../../redux/modules/recomments";
 
 const CommentItem = (props) => {
   const dispatch = useDispatch();
@@ -21,9 +20,6 @@ const CommentItem = (props) => {
   const nickname = localStorage.getItem("nickname");
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  const recommentList = useSelector((state) => state.recomments.list);
-
-  console.log(recommentList);
   console.log(props);
 
   const editToggle = (commentId) => {

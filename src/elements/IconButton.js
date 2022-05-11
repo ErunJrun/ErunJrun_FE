@@ -23,9 +23,11 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
 import { FcCalendar } from "react-icons/fc";
 import { MdCancel } from "react-icons/md";
+import { RiErrorWarningFill } from "react-icons/ri";
 
 const IconButton = (props) => {
   const {
+    waring,
     _onClick,
     pencil,
     Table,
@@ -76,6 +78,19 @@ const IconButton = (props) => {
   };
 
   //아이콘 작동
+  if (waring) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <RiErrorWarningFill
+            size={size}
+            onClick={_onClick}
+          ></RiErrorWarningFill>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
   if (cancelRoundBlack) {
     return (
       <React.Fragment>
