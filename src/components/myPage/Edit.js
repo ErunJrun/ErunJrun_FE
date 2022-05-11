@@ -9,8 +9,7 @@ const Edit = (props) => {
   const dispatch = useDispatch(); 
   const fileInput = useRef();
   const userId = localStorage.getItem("userId");
-  console.log(props);
-
+  
   const [nickname, setNickname] = useState(props.profile.nickname);
   const [image, setImage] = useState(props.profile.image);
   const [imgBase, setImgBase] = useState("");
@@ -22,7 +21,7 @@ const Edit = (props) => {
   const [agreeSMS, setAgreeSMS] = useState(false);
 //   const [agreeSMS, setAgreeSMS] = useState(Boolean(props.profile.agreeSMS));
   const [numberCK, setNumderCK] = useState("");
-console.log(agreeSMS);
+
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
     "경기도",

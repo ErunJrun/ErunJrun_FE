@@ -6,7 +6,7 @@ import Evaluation from './Evaluation';
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 
-const Group = (props) => {
+const Group = () => {
   
     const dispatch = useDispatch();
     const userId = localStorage.getItem("userId");
@@ -65,11 +65,11 @@ const Group = (props) => {
                 >
                 </Grid>
               </Grid>
-
-              <ApplyBtnTrue>
-                <Evaluation/>
-              </ApplyBtnTrue>
-  
+            
+                <ApplyBtnTrue>
+                  <Evaluation running={data}/>
+                </ApplyBtnTrue>
+             
               {data.evaluation ? (
                 <ApplyBtnFalse>체크완료</ApplyBtnFalse>
               ) : (

@@ -66,9 +66,9 @@ const MyGroup = (props) => {
                 </Grid>
               </Grid>
   
-              {data.evaluation ? (
+              {data.evaluation ? 
                 <ApplyBtnFalse>체크완료</ApplyBtnFalse>
-              ) : (
+               : (
                 <ApplyBtnTrue
                 onClick={() => {history.push("/check");}}>출석체크하기</ApplyBtnTrue>
               )}

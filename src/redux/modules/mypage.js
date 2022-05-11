@@ -11,6 +11,8 @@ const GET_INFORMATION = "GET_INFORMATION";
 const EDIT_PROFILE = "EDIT_PROFILE";
 const NUMBER_CHECK = "NUMBER_CHECK";
 const GETNUMBER_CHECK = "GETNUMBER_CHECK";
+const GET_EVALUATION = "GET_EVALUATION";
+//const PATCH_EVALUATION = "GET_EVALUATION";
 
 
 // //action creators
@@ -48,6 +50,16 @@ export const editProfile = (payload) => ({
   type: GETNUMBER_CHECK,
   payload,
 });
+
+export const getEvaluation = (payload) => ({
+  type: GET_EVALUATION,
+  payload,
+});
+
+// export const patchEvaluation = (payload) => ({
+//   type: PATCH_EVALUATION,
+//   payload,
+// });
   
 //initialState
 const initialState = {
@@ -56,6 +68,7 @@ const initialState = {
   mygroup:[],
   phoneNumber: [],
   info: [],
+  host:[],
 };
 
 
@@ -97,7 +110,7 @@ export const getRunningDB = (userId) => {
     try {
         //console.log(userId);
         const { data } = await api.get(`/group/mypage?userId=${userId}`);
-        console.log(data);
+        //console.log(data);
         dispatch(getMyRunning(data));
     } catch (error) {
         console.log(error);
@@ -105,8 +118,6 @@ export const getRunningDB = (userId) => {
     }
   };
 };
-
-//const { data } = await api.get(`/group/mypage?userId=${userId}`);
 
 //회원정보 수정페이지 기본값
 export const getInformationDB = () => {
@@ -186,6 +197,24 @@ export const getNumberCheckMiddleware = (phone, numberCK) => {
   };
 };
 
+//호스트평가정보 
+export const getEvaluationDB = (groupId, hostId, userId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(groupId,hostId,userId);
+      let data
+      if (hostId != userId) {
+        data = await api.get(`/group/evaluation/${groupId}`);
+      }
+      // const { data } = await api.get(`/group/evaluation/${groupId}`);
+      console.log(data);
+      dispatch(getEvaluation(data));
+    } catch (error) {
+      console.log(error);
+      //window.alert(error);
+    }
+  };
+};
 
 //reducer
 
@@ -193,19 +222,16 @@ export default handleActions(
   {
     [GET_PROFILE]: (state, action) =>
     produce(state, (draft) => {
-      console.log(action.payload);
       draft.list = action.payload;
     }),
    
     [GET_RUNNING]: (state, action) =>
     produce(state, (draft) => {
-      console.log(action.payload);
       draft.group = action.payload;
     }),
 
     [GET_MYRUNNING]: (state, action) =>
     produce(state, (draft) => {
-      console.log(action.payload);
       draft.mygroup = action.payload;
     }),
 
@@ -238,6 +264,12 @@ export default handleActions(
       produce(state, (draft) => {
         console.log(action.payload);
         draft.phoneNumber = action.payload;
+      }),
+
+      [GET_EVALUATION]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.host = action.payload;
       }),
   },
   initialState

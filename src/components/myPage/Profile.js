@@ -45,7 +45,7 @@ const Profile = () => {
                   </SmallBox>
                   <SmallBox>
                     <Text bold size="16px"> 선호거리 </Text>
-                    <Text size="17px" color="#000"> {profile_list.userInfo.likeDistance === "1" ? "10km" : null}</Text>
+                    <Text size="17px" color="#000"> {profile_list.userInfo.likeDistance}</Text>
                   </SmallBox>
                   <SmallBox>
                     <Text bold size="16px"> 선호지역 </Text>
