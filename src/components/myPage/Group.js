@@ -66,9 +66,11 @@ const Group = () => {
                 </Grid>
               </Grid>
             
-                <ApplyBtnTrue>
+                {/* <ApplyBtnTrue> */}
+                <div>
                   <Evaluation running={data}/>
-                </ApplyBtnTrue>
+                </div>
+                {/* </ApplyBtnTrue> */}
              
               {data.evaluation ? (
                 <ApplyBtnFalse>체크완료</ApplyBtnFalse>
