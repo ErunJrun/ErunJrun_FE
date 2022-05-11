@@ -8,8 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addGroupDB } from "../redux/modules/feed";
 import { history } from "../redux/configureStore";
-import { Grid, Text } from "../elements";
+import { Grid, IconButton, Text } from "../elements";
 import { imgActions } from "../redux/modules/image";
+import step1 from "../assets/step1.png";
 
 import "./GruopUpload.css";
 
@@ -119,49 +120,71 @@ const GroupUpload = () => {
   if (!isLoaded1) {
     return (
       <>
-        <UploadStep />
-        <Grid margin="80px 0 0 280px" maxWidth="1032px" width="100%">
-          <Grid>
-            <Text bold size="20px">
-              그룹러닝 등록하기
-            </Text>
-          </Grid>
-          <Grid>
-            <Text display="inline" bold size="15px">
-              Step 1. 코스입력
-            </Text>
-            <Text display="inline" margin="0 10px" size="13px">
-              지도위에 그룹러닝할 코스를 표시해주세요.
-            </Text>
-          </Grid>
+        {/* <UploadStep /> */}
 
-          <Grid>
-            <Text bold size="15px" bg="#EAEAEA" padding="10px" color="black">
-              ⚠ 코스는 업로드 이후 수정이 불가능합니다. 다음 단계로 넘어가기
-              전에 해당 위치가 맞는지 확인해 주세요!
-            </Text>
-          </Grid>
-
-          <Grid>
-            <KakaoMap
-              setDistance={setDistance}
-              setLocation={setLocation}
-            ></KakaoMap>
-          </Grid>
-
-          <Grid display="flex">
-            <Grid width="500px">
-              <Text bold size="15px">
-                위치
+        <Grid margin="80px 695px 0 auto" maxWidth="865px" width="100%">
+          <Step1Img src={step1}></Step1Img>
+          <Grid display="flex" margin="0 0 18px 0" alignItems="center">
+            <Grid display="flex" width="auto">
+              <Text margin="0" height="auto" display="inline" bold size="20px">
+                러닝 코스
               </Text>
-              <Text size="15px">{address ? address : " "}</Text>
+              <RedPoint></RedPoint>
             </Grid>
 
-            <Grid width="500px" margin="0 10px">
-              <Text bold size="15px">
-                총 거리
+            <Text display="inline" margin="0 10px" size="16px">
+              왼쪽 클릭을 통해 경로를 설정한 후, 오른쪽 클릭으로 경로를 마무리
+              해주세요.
+            </Text>
+          </Grid>
+          <Hr />
+
+          <KakaoMap
+            setDistance={setDistance}
+            setLocation={setLocation}
+          ></KakaoMap>
+
+          <Grid display="flex">
+            <Grid display="flex" alignItems="center">
+              <Text width="auto" bold size="15px" margin="0 65.7px 0 0">
+                코스 위치 정보
               </Text>
-              <Text size="15px">{distance ? distance : "0"}km</Text>
+              <Grid display="flex" maxWidth="716px">
+                <Grid display="flex">
+                  <LocationInfo>
+                    {address ? (
+                      <Text size="16px">{address}</Text>
+                    ) : (
+                      <Text size="16px" color="#818181">
+                        지정하신 시작 위치가 자동으로 입력됩니다.
+                      </Text>
+                    )}
+                  </LocationInfo>
+                  <DistanceInfo>
+                    {distance !== "NaN" ? (
+                      <Text size="16px">{distance} km</Text>
+                    ) : (
+                      <Text size="16px" color="#818181">
+                        코스 거리 km
+                      </Text>
+                    )}
+                  </DistanceInfo>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid display="flex" alignItems="center" margin="14px 0 0 0">
+              <IconButton
+                waring
+                color="#FF2D55"
+                size="19.21"
+                height="19.2px"
+                width="16px"
+                margin="0 8px 0 148px"
+              />
+              <Text width="auto" color="#FF2D55" bold margin="0">
+                러닝 코스는 업로드 이후 수정이 불가능합니다. 해당 위치가 맞는지
+                다시 한 번 확인해 주세요!
+              </Text>
             </Grid>
           </Grid>
 
@@ -175,8 +198,16 @@ const GroupUpload = () => {
     return (
       <>
         <GroupUpContent setContents={setContents}></GroupUpContent>
-        <StepBtn onClick={goBack1}>이전단계</StepBtn>
-        <StepBtn onClick={goNext3}>다음단계</StepBtn>
+        <Grid
+          maxWidth="865px"
+          width="100%"
+          display="flex"
+          justifyContent="space-between"
+          margin="80px 0 397px 280px"
+        >
+          <StepBtn2 onClick={goBack1}>이전단계</StepBtn2>
+          <StepBtn2 onClick={goNext3}>다음단계</StepBtn2>
+        </Grid>
       </>
     );
   }
@@ -222,18 +253,94 @@ const GroupUpload = () => {
   }
 };
 
-const StepBtn = styled.button`
-  width: 184px;
-  height: 40px;
-  background: #cecece;
-  border: 1px solid #4e4e4e;
-  border-radius: 5px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
+const Step1Img = styled.img`
+  position: fixed;
+  max-width: 295px;
+  width: 100%;
+  right: 360px;
+  top: 170px;
+`;
+
+const LocationInfo = styled.div`
+  max-width: 546px;
+  width: 100%;
+  height: 75px;
+  box-sizing: border-box;
+  border: 1px solid #cbcbcb;
+  border-radius: 3px 0 0 3px;
+  display: flex;
   align-items: center;
-  color: #000000;
-  margin: 10px;
+  padding: 24px 32px;
+  margin: 0;
+`;
+
+const DistanceInfo = styled.div`
+  max-width: 168px;
+  width: 100%;
+  height: 75px;
+  box-sizing: border-box;
+  border: 1px solid #cbcbcb;
+  border-left: none;
+  border-radius: 0px 3px 3px 0px;
+  display: flex;
+  align-items: center;
+  padding: 24px 32px;
+  justify-content: center;
+  margin: 0;
+`;
+
+const StepBtn = styled.button`
+  max-width: 173px;
+  width: 100%;
+  height: 45px;
+  background: #030c37;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 10px 40px;
+  color: white;
+  display: flex;
+  align-items: center;
+  margin: 160px 0 200px auto;
+  border: none;
+  cursor: pointer;
+  :hover {
+    box-shadow: 0 0 3px #030c37;
+  }
+`;
+
+const StepBtn2 = styled.button`
+  max-width: 173px;
+  width: 100%;
+  height: 45px;
+  background: #030c37;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 10px 40px;
+  color: white;
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  :hover {
+    box-shadow: 0 0 3px #030c37;
+  }
+`;
+
+const Hr = styled.hr`
+  width: 865px;
+  height: 0px;
+  margin: 0 0 48px 0;
+  border: 1px solid #000000;
+  transform: rotate(180deg);
+`;
+
+const RedPoint = styled.div`
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  background: #ff2d55;
 `;
 
 export default GroupUpload;

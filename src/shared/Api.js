@@ -40,17 +40,23 @@ api.interceptors.response.use(
       originalRequest.headers.Authorization = `Bearer ${response.data.token}`;
 
       return axios(originalRequest);
-    } else {
-      console.log(response);
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("nickname");
-      localStorage.removeItem("profileUrl");
-      window.alert("로그인 시간이 만료되었습니다.");
-      console.log("리프레쉬토큰 만료");
-      history.push("/login");
     }
+
+    if (response.data.success === false) {
+      window.alert(response.data.message);
+    }
+
+    // else {
+    //   console.log(response);
+    //   deleteCookie("accessToken");
+    //   deleteCookie("refreshToken");
+    //   localStorage.removeItem("userId");
+    //   localStorage.removeItem("nickname");
+    //   localStorage.removeItem("profileUrl");
+    //   window.alert("로그인 시간이 만료되었습니다.");
+    //   console.log("리프레쉬토큰 만료");
+    //   history.push("/login");
+    // }
 
     return Promise.reject(error);
   }

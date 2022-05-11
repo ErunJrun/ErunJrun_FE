@@ -22,29 +22,33 @@ const Appliers = () => {
           크루원 정보
         </Text>
 
-        {detailGroup?.Appliers?.map((e, idx) => {
-          return (
-            <Fragment key={idx}>
-              <Grid
-                width="100%"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                alignContent="flex-start"
-              >
-                <Image
-                  imageType="circle"
-                  size="64"
-                  src={e ? e.profileUrl : { defaultProfile }}
-                ></Image>
+        <Grid display="flex">
+          {detailGroup?.Appliers?.map((e, idx) => {
+            return (
+              <Fragment key={idx}>
+                <Grid
+                  width="auto"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  alignContent="flex-start"
+                  margin="0 13px 0 0"
+                >
+                  <Image
+                    imageType="circle"
+                    size="64"
+                    src={e ? e.profileUrl : { defaultProfile }}
+                    border="1px solid gray"
+                  ></Image>
 
-                <Text size="14px" width="40px" margin="8px 0 0 0" textalign>
-                  {e?.nickname}
-                </Text>
-              </Grid>
-            </Fragment>
-          );
-        })}
+                  <Text size="14px" width="40px" margin="8px 0 0 0" textalign>
+                    {e?.nickname}
+                  </Text>
+                </Grid>
+              </Fragment>
+            );
+          })}
+        </Grid>
       </Grid>
     </>
   );

@@ -9,11 +9,12 @@ import pageUp from "../assets/pageUp.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-scroll";
 
-import { getGroupDB } from "../redux/modules/feed";
+import { getGroupDB, resetGroup } from "../redux/modules/feed";
 
 const GroupFeed = () => {
   const dispatch = useDispatch();
   const feedList = useSelector((state) => state.feed.list);
+  const preferData = useSelector((state) => state.feed.preferData);
   const [finish, setFinish] = useState("0");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -26,15 +27,25 @@ const GroupFeed = () => {
   const nickname = localStorage.getItem("nickname");
   console.log(filterTheme);
 
-  const category = [
-    region,
-    filterTime,
-    filterDistance,
-    startDate,
-    endDate,
-    filterTheme,
-    finish,
-  ];
+  const category = {
+    region: region,
+    filterTime: filterTime,
+    filterDistance: filterDistance,
+    startDate: startDate,
+    endDate: endDate,
+    filterTheme: filterTheme,
+    finish: finish,
+  };
+
+  // const category = [
+  //   region,
+  //   filterTime,
+  //   filterDistance,
+  //   startDate,
+  //   endDate,
+  //   filterTheme,
+  //   finish,
+  // ];
 
   // const category = [
   //   {
@@ -61,7 +72,12 @@ const GroupFeed = () => {
   // }, []);
 
   useEffect(() => {
+    console.log("클린업 이전");
     dispatch(getGroupDB(category));
+    return () => {
+      console.log("클린업");
+      dispatch(resetGroup());
+    };
   }, [finish]);
 
   return (
@@ -100,18 +116,31 @@ const GroupFeed = () => {
           {searchState || !nickname ? (
             <>
               <Text size="20px" bold>
-                총 {feedList.length}건의 결과
+                총{" "}
+                <span style={{ color: "#686EF9" }}>
+                  {feedList.length ? feedList.length : "0"}
+                </span>
+                건의 결과
               </Text>
             </>
           ) : (
             <>
               <Text margin="0 15px 0 0" size="20px" bold>
-                {nickname} 님을 위한 추천 그룹 러닝입니다!
+                <span style={{ color: "#686EF9" }}>
+                  {nickname ? nickname : null}
+                </span>{" "}
+                님을 위한 추천 그룹 러닝입니다!
               </Text>
-              <Text margin="0 8px 0 0" size="16px">
-                #서울특별시
+              <Text color="#686EF9" margin="0 8px 0 0" size="16px">
+                {preferData?.likeLocation
+                  ? "#" + preferData?.likeLocation
+                  : null}
               </Text>
-              <Text size="16px">#5km 이상 10km 미만</Text>
+              <Text size="16px" color="#686EF9">
+                {preferData?.likeDistance
+                  ? "#" + preferData?.likeDistance
+                  : null}
+              </Text>
             </>
           )}
         </Grid>

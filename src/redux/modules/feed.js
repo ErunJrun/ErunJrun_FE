@@ -5,18 +5,22 @@ import axios from "axios";
 
 //액션
 
+const RESET_GROUP = "RESET_GROUP";
 const ADD_GROUP = "ADD_GROUP";
 const GET_GROUP = "GET_GROUP";
 const DELETE_GROUP = "DELETE_GROUP";
 const EDIT_GROUP = "EDIT_GROUP";
 const GET_GROUP_DETAIL = "GET_GROUP_DETAIL";
 const EDIT_GROUP_CONTENT = "EDIT_GROUP_CONTENT";
+const APPLY_GROUP = "APPLY_GROUP";
+const APPLY_DETAIL = "APPLY_DETAIL";
 
 const LOADING = "LOADING";
 
 //initialState
 const initialState = {
   list: [],
+  preferData: [],
   detail: {
     mapLatLng: [
       { lat: 37.498004414546934, lng: 127.02770621963765 },
@@ -26,6 +30,10 @@ const initialState = {
 };
 
 //액션생성함수
+export const resetGroup = () => ({
+  type: RESET_GROUP,
+});
+
 export const addGroup = (payload) => ({
   type: ADD_GROUP,
   payload,
@@ -56,6 +64,16 @@ export const editGroupContent = (payload) => ({
   payload,
 });
 
+export const applyGroup = (payload) => ({
+  type: APPLY_GROUP,
+  payload,
+});
+
+export const applyDetail = (payload) => ({
+  type: APPLY_DETAIL,
+  payload,
+});
+
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 
 //미들웨어
@@ -65,39 +83,45 @@ export const getGroupDB = (category) => {
       console.log(category);
 
       let region = "";
-      category[0] ? (region = category[0]) : (region = "");
+      category.region ? (region = category.region) : (region = "");
 
       let time = "";
-      category[1]?.map((value) => {
+      category?.filterTime?.map((value) => {
         time += value + "/";
       });
       time = time.substring(-1);
 
       let distance = "";
-      category[2]?.map((value) => {
+      category?.filterDistance?.map((value) => {
         distance += value + "/";
       });
       distance = distance.substring(-1);
 
       let startDate = "";
-      category[3] ? (startDate = category[3] + "/") : (startDate = "");
+      if (category.startDate === "NaN-NaN-NaN" || category.startDate === "") {
+        startDate = "";
+      } else {
+        startDate = category.startDate + "/";
+      }
 
       let endDate = "";
-      category[4] ? (endDate = category[4]) : (endDate = "");
+      category.endDate !== "NaN-NaN-NaN"
+        ? (endDate = category.endDate)
+        : (endDate = "");
 
       let theme = "";
-      category[5]?.map((value) => {
-        category[5] += value + "/";
+      category?.filterTheme?.map((value) => {
+        theme += value + "/";
       });
-      category[5] = theme.substring(-1);
+      theme = theme.substring(-1);
 
-      let finish = category[6];
+      let finish = category?.finish;
 
       const { data } = await api.get(
         `/group/all?date=${startDate}${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}`
       );
-      console.log(data.data);
-      dispatch(getGroup(data.data));
+      console.log(data);
+      dispatch(getGroup(data));
     } catch (error) {
       console.log(error);
     }
@@ -225,9 +249,54 @@ export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
   };
 };
 
+export const applyGroupDB = (groupId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(groupId);
+      const { data } = await api.post(`/group/${groupId}/apply`);
+      console.log(data.data);
+
+      const applyData = {
+        groupId: groupId,
+        applyState: data.data.applyState,
+        applyPeople: data.data.applyPeople,
+      };
+
+      dispatch(applyGroup(applyData));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const applyDetailDB = (groupId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(groupId);
+      const { data } = await api.post(`/group/${groupId}/apply`);
+      console.log(data.data);
+
+      const applyData = {
+        groupId: groupId,
+        applyState: data.data.applyState,
+        applyPeople: data.data.applyPeople,
+      };
+
+      dispatch(applyDetail(applyData));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 //리듀서
 export default handleActions(
   {
+    [RESET_GROUP]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list = [];
+      }),
+
     [ADD_GROUP]: (state, action) =>
       produce(state, (draft) => {
         draft.list.unshift(action.payload);
@@ -235,7 +304,8 @@ export default handleActions(
     [GET_GROUP]: (state, action) =>
       produce(state, (draft) => {
         // console.log(state, action.payload);
-        draft.list = action.payload;
+        draft.list = action.payload.data;
+        draft.preferData = action.payload.preferData;
       }),
     [GET_GROUP_DETAIL]: (state, action) =>
       produce(state, (draft) => {
@@ -263,6 +333,24 @@ export default handleActions(
         draft.detail.startTime = action.payload[0]?.startTime;
         draft.detail.thema = action.payload[0]?.theme;
         draft.detail.title = action.payload[0]?.title;
+      }),
+
+    [APPLY_GROUP]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(state);
+        draft.list.map((e, i) => {
+          if (action.payload.groupId === e.groupId) {
+            e.applyState = action.payload.applyState;
+            e.applyPeople = action.payload.applyPeople;
+          }
+        });
+      }),
+
+    [APPLY_DETAIL]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(state);
+        draft.detail.applyState = action.payload.applyState;
+        draft.detail.applyPeople = action.payload.applyPeople;
       }),
 
     [LOADING]: (state, action) =>

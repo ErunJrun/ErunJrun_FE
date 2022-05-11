@@ -13,7 +13,16 @@ const ServeInfo = () => {
         <Grid display="flex" margin="0 0 16px 0">
           <Grid width="auto" display="flex" margin="0 64px 0 0">
             <Text margin="0 16px 0 0" size="16px" color="#818181">
-              출발시간
+              스탠바이
+            </Text>
+            <Text bold margin="0" size="16px">
+              {detailGroup?.standbyTime}
+            </Text>
+          </Grid>
+
+          <Grid width="auto" display="flex" margin="0 64px 0 0">
+            <Text margin="0 16px 0 0" size="16px" color="#818181">
+              출발 시간
             </Text>
             <Text bold color="" margin="0" size="16px">
               {startTime}
@@ -22,19 +31,10 @@ const ServeInfo = () => {
 
           <Grid width="auto" display="flex" margin="0 64px 0 0">
             <Text margin="0 16px 0 0" size="16px" color="#818181">
-              종료시간
+              도착 시간
             </Text>
             <Text bold margin="0" size="16px">
               {detailGroup?.finishTime}
-            </Text>
-          </Grid>
-
-          <Grid width="auto" display="flex" margin="0 64px 0 0">
-            <Text margin="0 16px 0 0" size="16px" color="#818181">
-              러닝속도
-            </Text>
-            <Text bold margin="0" size="16px">
-              {detailGroup?.speed}
             </Text>
           </Grid>
         </Grid>
@@ -50,7 +50,7 @@ const ServeInfo = () => {
 
         <Grid display="flex">
           <Text margin="0 16px 0 0" size="16px" color="#818181">
-            짐 보관{"  "}
+            짐 보관{"    "}
           </Text>
           <Text bold margin="0" size="16px">
             {detailGroup?.baggage}

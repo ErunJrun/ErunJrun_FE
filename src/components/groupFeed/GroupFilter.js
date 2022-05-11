@@ -59,15 +59,25 @@ const GroupFilter = (props) => {
     "20:00 ~ 24:00",
   ]);
 
-  const category = [
-    region,
-    filterTime,
-    filterDistance,
-    startDate,
-    endDate,
-    filterTheme,
-    props.finish,
-  ];
+  // const category = [
+  //   region,
+  //   filterTime,
+  //   filterDistance,
+  //   startDate,
+  //   endDate,
+  //   filterTheme,
+  //   props.finish,
+  // ];
+
+  const category = {
+    region: region,
+    filterTime: filterTime,
+    filterDistance: filterDistance,
+    startDate: startDate,
+    endDate: endDate,
+    filterTheme: filterTheme,
+    finish: props.finish,
+  };
 
   const resetFilter = () => {
     setStartDate("");

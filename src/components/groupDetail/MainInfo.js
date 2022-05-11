@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid, Image, Text, IconButton } from "../../elements";
 import styled from "styled-components";
 import Permit from "../../shared/Permit";
-import { deleteGroupDB } from "../../redux/modules/feed";
+import { applyDetailDB, deleteGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
 import { useParams } from "react-router-dom";
 import groupChat from "../../assets/groupChat.png";
@@ -16,7 +16,19 @@ const MainInfo = (props) => {
   const detailGroup = useSelector((state) => state.feed.detail);
   const [editMenu, setEditMenu] = React.useState(false);
 
+  console.log(props);
+  console.log(detailGroup);
+
   const nickname = localStorage.getItem("nickname");
+  const isLogin = useSelector((state) => state.user.isLogin);
+
+  const goApply = () => {
+    if (isLogin) {
+      dispatch(applyDetailDB(props.groupId));
+    } else {
+      window.alert("로그인 후 이용해 주세요");
+    }
+  };
 
   const handleEditMenu = () => {
     return setEditMenu(!editMenu);
@@ -44,7 +56,7 @@ const MainInfo = (props) => {
         left="1158px"
         bottom="280px"
         bg="white"
-        height="488px"
+        height="524px"
       >
         <Grid height="auto" display="flex" justifyContent="space-between">
           <Text width="auto" margin="0" size="18px" bold>
@@ -122,8 +134,12 @@ const MainInfo = (props) => {
             <Text width="auto" margin="0 16px 16px 0">
               인원
             </Text>
-            <Text width="auto" margin="0" bold>
-              {detailGroup?.Appliers?.length} / {detailGroup?.maxPeople}
+            <Text width="auto" margin="0 5px 0 0" bold>
+              최대 {detailGroup?.maxPeople}명
+            </Text>
+            <Text width="auto" margin="0" bold color="#FF2D55">
+              (잔여 {detailGroup?.maxPeople - detailGroup?.Appliers?.length}
+              자리)
             </Text>
           </Grid>
 
@@ -135,11 +151,39 @@ const MainInfo = (props) => {
               {detailGroup?.distance} km
             </Text>
           </Grid>
+
+          <Grid display="flex">
+            <Text width="auto" margin="0 16px 0 0">
+              속도
+            </Text>
+            <Text width="auto" margin="0" bold>
+              {detailGroup?.speed}
+            </Text>
+          </Grid>
         </Grid>
 
         <Hr></Hr>
 
-        <ApplyBtn>신청하기</ApplyBtn>
+        {detailGroup?.applyState ? (
+          <ApplyBtn
+            onClick={() => {
+              window.alert("신청이 완료되었습니다.");
+              goApply();
+            }}
+          >
+            신청하기
+          </ApplyBtn>
+        ) : (
+          <ApplyBtnFalse
+            onClick={() => {
+              window.alert("신청이 취소되었습니다.");
+              goApply();
+            }}
+          >
+            신청취소
+          </ApplyBtnFalse>
+        )}
+
         <Grid
           display="flex"
           justifyContent="space-between"
@@ -148,7 +192,9 @@ const MainInfo = (props) => {
         >
           <ChatBtn>
             <ChatImg src={groupChat} />
-            <Text margin="0">그룹 채팅방</Text>
+            <Text cursor="pointer" margin="0">
+              그룹 채팅방
+            </Text>
           </ChatBtn>
 
           <ShareBtn>
@@ -177,6 +223,24 @@ const ApplyBtn = styled.button`
   background-color: #030c37;
   padding: 11px;
   border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  :hover {
+    font-weight: 900;
+    box-shadow: 1px 1px 5px black;
+  }
+`;
+
+const ApplyBtnFalse = styled.button`
+  max-width: 338px;
+  width: 100%;
+  height: 45px;
+  font-size: 18px;
+  font-weight: 700;
+  background: gray;
+  border-radius: 3px;
+  padding: 11px;
+  color: white;
   border: none;
   cursor: pointer;
   :hover {
@@ -229,13 +293,13 @@ const ChatImg = styled.img`
 
 const DropContent = styled.div`
   position: absolute;
-  top: 165px;
+  top: 52px;
+  right: 40px;
   background-color: white;
-  min-width: 100px;
-  z-index: 1;
+  min-width: 115px;
   text-align: center;
-  border-radius: 0px 0px 5px 5px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 8px rgba(149, 149, 149, 0.35);
 `;
 
 export default MainInfo;

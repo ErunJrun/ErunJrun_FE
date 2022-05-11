@@ -31,13 +31,13 @@ function MapInfo(props) {
               width: "758px",
               height: "406px",
             }}
-            level={5} // 지도의 확대 레벨
+            level={4} // 지도의 확대 레벨
             onCreate={setMap}
           >
             <Polyline
               path={detailGroup?.mapLatLng}
-              strokeWeight={6} // 선의 두께입니다
-              strokeColor={"#68F99E"} // 선의 색깔입니다
+              strokeWeight={5} // 선의 두께입니다
+              strokeColor={"#686EF9"} // 선의 색깔입니다
               strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
               strokeStyle={"solid"} // 선의 스타일입니다
             />
