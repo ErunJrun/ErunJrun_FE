@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import Modal from "./main/Modal";
-import { IconButton } from "../elements";
+import { Grid, IconButton } from "../elements";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Alarm from "./alarm/Alarm";
+import { _getAlarmDB, _readAlarmDB } from "../redux/modules/user";
+
+import Badge from "@mui/material/Badge";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.isLogin);
+  const alarmList = useSelector((state) => state.user.alarm);
+
+  const [alarmOpen, setAlarmOpen] = useState(false);
+  console.log(alarmOpen);
+
+  const readAlarm = () => {
+    setAlarmOpen(!alarmOpen);
+    dispatch(_readAlarmDB());
+  };
+
+  useEffect(() => {
+    dispatch(_getAlarmDB());
+  }, []);
 
   if (is_login) {
     return (
@@ -44,7 +62,22 @@ const Header = () => {
         </Box1>
 
         <Box2>
-          <IconButton alarm color="#BFCED1" size="35px"></IconButton>
+          <Grid>
+            <Badge
+              badgeContent={alarmList?.unreadCount ? alarmList?.unreadCount : 0}
+              color="primary"
+            >
+              <IconButton
+                _onClick={() => {
+                  readAlarm();
+                }}
+                alarm
+                color="#BFCED1"
+                size="35px"
+              ></IconButton>
+            </Badge>
+            {alarmOpen ? <Alarm></Alarm> : null}
+          </Grid>
           <Modal />
         </Box2>
       </HeaderBox>
