@@ -6,6 +6,8 @@ import axios from "axios";
 // actions
 const GET_PROFILE = "GET_PROFILE";
 const GET_RUNNING = "GET_RUNNING";
+const GET_MYRUNNING = "GET_MYRUNNING";
+const GET_INFORMATION = "GET_INFORMATION";
 const EDIT_PROFILE = "EDIT_PROFILE";
 const NUMBER_CHECK = "NUMBER_CHECK";
 const GETNUMBER_CHECK = "GETNUMBER_CHECK";
@@ -19,6 +21,16 @@ export const getProfile = (payload) => ({
 
 export const getRunning = (payload) => ({
   type: GET_RUNNING,
+  payload,
+});
+
+export const getMyRunning = (payload) => ({
+  type: GET_MYRUNNING,
+  payload,
+});
+
+export const getInformation = (payload) => ({
+  type: GET_INFORMATION,
   payload,
 });
 
@@ -40,7 +52,10 @@ export const editProfile = (payload) => ({
 //initialState
 const initialState = {
   list: [],
+  group:[],
+  mygroup:[],
   phoneNumber: [],
+  info: [],
 };
 
 
@@ -61,14 +76,29 @@ export const getProfileDB = (userId) => {
     };
   };
 
-//참여예정 그룹러닝
-export const getRunningDB = (userId) => {
+//참여완료 그룹러닝
+export const getMyRunningDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
         //console.log(userId);
         const { data } = await api.get(`/group/complete?userId=${userId}`);
-        //console.log(data.data);
-        dispatch(getRunning(data.data));
+        console.log(data);
+        dispatch(getRunning(data));
+    } catch (error) {
+        console.log(error);
+        window.alert(error);
+    }
+  };
+};
+
+//내가만든 그룹러닝
+export const getRunningDB = (userId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+        //console.log(userId);
+        const { data } = await api.get(`/group/mypage?userId=${userId}`);
+        console.log(data);
+        dispatch(getMyRunning(data));
     } catch (error) {
         console.log(error);
         window.alert(error);
@@ -77,6 +107,19 @@ export const getRunningDB = (userId) => {
 };
 
 //const { data } = await api.get(`/group/mypage?userId=${userId}`);
+
+//회원정보 수정페이지 기본값
+export const getInformationDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+        const { data } = await api.get(`/auth/updateUser`);
+        dispatch(getInformation(data.data));
+    } catch (error) {
+        console.log(error);
+        window.alert(error);
+    }
+  };
+};
 
 //회원정보 수정
 export const editProfileDB = (userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS) => {
@@ -157,7 +200,19 @@ export default handleActions(
     [GET_RUNNING]: (state, action) =>
     produce(state, (draft) => {
       console.log(action.payload);
-      draft.list = action.payload;
+      draft.group = action.payload;
+    }),
+
+    [GET_MYRUNNING]: (state, action) =>
+    produce(state, (draft) => {
+      console.log(action.payload);
+      draft.mygroup = action.payload;
+    }),
+
+    [GET_INFORMATION]: (state, action) =>
+    produce(state, (draft) => {
+      console.log(action.payload);
+      draft.info = action.payload;
     }),
 
     [EDIT_PROFILE]: (state, action) =>

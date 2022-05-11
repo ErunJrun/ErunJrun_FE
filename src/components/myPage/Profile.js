@@ -11,6 +11,10 @@ const Profile = () => {
 
   if (profile_list.length === 0) { return <></>; }
 
+  // if(profile_list.userInfo.likeDistance === "1") {
+  //   return  profile_list.userInfo.likeDistance = "5km 미만"
+  // }
+
     return (
         <Box>
             <MiddleBox>
@@ -28,15 +32,24 @@ const Profile = () => {
               <Information>
                   <SmallBox>
                     <Text bold size="16px"> 러닝레벨 </Text>
-                    <Text  bold size="16px" color="#4A4A4A"> {profile_list.userInfo.userLevel} </Text>
+                    <Text 
+                      size="14px"
+                      margin="8px 0 0 0" 
+                      padding="10px 10px 0 7px"
+                      color="#fff"
+                      height="13px"
+                      borderRadius="3px"
+                      bg="#ff3d3d"
+                      textalign="center"
+                    > {profile_list.userInfo.userLevel} RUNNER</Text>
                   </SmallBox>
                   <SmallBox>
                     <Text bold size="16px"> 선호거리 </Text>
-                    <Text bold size="16px" color="#4A4A4A"> {profile_list.userInfo.likeDistance}</Text>
+                    <Text size="17px" color="#000"> {profile_list.userInfo.likeDistance === "1" ? "10km" : null}</Text>
                   </SmallBox>
                   <SmallBox>
                     <Text bold size="16px"> 선호지역 </Text>
-                    <Text size="16px" color="#4A4A4A"> {profile_list.userInfo.likeLocation}</Text>
+                    <Text size="17px" color="#000"> {profile_list.userInfo.likeLocation}</Text>
                   </SmallBox>
               </Information>
 

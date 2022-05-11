@@ -3,11 +3,11 @@ body.active-modal {
 }
 
 .btn-modal_ {
-    padding: 10px 20px;
     display: block;
     font-size: 18px;
     border: none;
     background-color: white;
+    margin-top: 5px;
 }
 
 .modal_, .overlay_ {
@@ -27,17 +27,18 @@ body.active-modal {
     position: absolute;
     top: 10%;
     left: 78%;
-    transform: translate(-210%, 32%);
+    transform: translate(-180%, 55%);
     line-height: 1.4;
-    background: #fffdf7;
-    padding: 14px 28px;
-    border-radius: 3px;
-    border: 1px solid #eee;
-    width: 380px;
-    height: 430px;
+    background:#313131;
+    padding: 14px 20px;
+    border-radius: 10px;
+    /* border: 1px solid #eee; */
+    width: 395px;
+    height: 388px;
     z-index: 2;
     line-height: 2;
-    box-shadow : 2px 2px 20px rgb(231, 231, 231);
+    /* box-shadow : 2px 2px 20px rgb(231, 231, 231); */
+    justify-content: center;
 
 }
 

@@ -3,38 +3,53 @@ import { useSelector } from "react-redux";
 import { Text, Grid }from '../../elements';
 import styled from "styled-components";
 import { FiChevronRight } from "react-icons/fi";
+import { history } from '../../redux/configureStore';
 
 const Schedule = () => {
 
     const profile_list = useSelector((state) => state.mypage.list);
-    
+
     if (profile_list.length === 0) { return <></>; }
     
     return (
-        <Box>
-          <Text bold size="16px" margin="0px 0px 32px 0px">
+      <>
+     {profile_list.waiting.length === 0 ?  null :
+      <Box>
+          <Text bold size="18px" margin="0px 0px 32px 0px">
             참여예정 그룹 러닝
           </Text>
 
-          <Text bold size="14px"  color="#696dcd" margin="-53px 0px 0px 1100px">
+          <Text bold size="14px"  color="#000" margin="-53px 0px 0px 1100px">
             전체보기
           </Text>
       
-            <Grid display="flex">
-                <MyImage src={profile_list.waiting[0].thumbnailUrl}/>
+            <Grid display="flex"
+              _onClick={() => {
+                history.push(`/groupdetail/${profile_list.waiting[0]?.groupId}`);
+              }}>
+                <MyImage src={profile_list.waiting[0]?.thumbnailUrl}/>
                 <div>
-                    <Text bold size="19px" margin="45px 0 0 0" color="#0a29c4">
-                      D-{profile_list.waiting[0].dDay}
+                    <Text 
+                      bold size="16px"
+                      margin="45px 0 0 0" 
+                      color="#68f99e"
+                      width="70px"
+                      height="24px"
+                      borderRadius="60px"
+                      bg="#030c37"
+                      textalign="center"
+                    >
+                      D-{profile_list.waiting[0]?.dDay}
                     </Text>
-                    <Text bold size="16px" margin="8px 0 0 0">{profile_list.waiting[0].title}</Text>
-                    <Text  size="14px" color="#272d31"  margin="8px 0 0 0">
-                        {profile_list.waiting[0].date} &nbsp;
-                        ( 소요시간 : {profile_list.waiting[0].totalTime} )
+                    <Text bold size="16px" margin="8px 0 0 0">{profile_list.waiting[0]?.title}</Text>
+                    <Text  size="14px" color="#000"  margin="8px 0 0 0">
+                        {profile_list.waiting[0]?.date} &nbsp;
+                        ( 소요시간 : {profile_list.waiting[0]?.totalTime} )
                     </Text>
                     <Grid display="flex">
-                      <TextBox>{profile_list.waiting[0].location}</TextBox>
-                      <TextBox>{profile_list.waiting[0].distance}</TextBox>
-                      <TextBox>{profile_list.waiting[0].thema}</TextBox>
+                      <TextBox>{profile_list.waiting[0]?.location}</TextBox>
+                      <TextBox>{profile_list.waiting[0]?.distance}</TextBox>
+                      <TextBox>{profile_list.waiting[0]?.thema}</TextBox>
                     </Grid>
                 </div>
                 <Grid  margin="-120px 0 0 570px">
@@ -43,10 +58,14 @@ const Schedule = () => {
             </Grid>  
 
             <Grid margin="-180px 0 0 0px">
-            {profile_list.waiting.map((waiting, index) =>
+            {profile_list.waiting?.map((waiting, index) =>
             index > 0 && 4 > index &&(
               
-              <div key={waiting.groupId}>
+              <div key={waiting.groupId}
+              onClick={() => {
+                history.push(`/groupdetail/${profile_list.waiting?.groupId}`);
+              }}
+              >
                   <Grid 
                     display="flex" 
                     justifyContent="space-between"  
@@ -54,20 +73,30 @@ const Schedule = () => {
                     height="180px" 
                     margin="-130px 0 0 650px"
                   >
-                    <Text bold size="18px" color="#0a29c4">D-{waiting.dDay}</Text>
+                    <Text 
+                      bold size="16px"
+                      margin="45px 0 0 0" 
+                      color="#68f99e"
+                      width="70px"
+                      height="24px"
+                      borderRadius="60px"
+                      bg="#030c37"
+                      textalign="center"
+                    >D-{waiting.dDay}</Text>
                         <Text bold size="18px">&nbsp;{waiting.title}</Text>
                         <div style={{margin:"0 0 0 140px", display:"flex"}}>
                             <TextBox>{waiting.location}</TextBox>
                             <TextBox>{waiting.distance}</TextBox>
                             <TextBox>{waiting.thema}</TextBox> 
                         </div>
-                        <Hr/>
                   </Grid>
               </div>  
               )
             )}
             </Grid>
         </Box>
+      }
+        </>
     );
 };
 
