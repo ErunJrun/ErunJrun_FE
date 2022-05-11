@@ -8,12 +8,22 @@ import { handleActions } from "redux-actions";
 // Action
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
-const GET_RECOMMEND = "GET_RECOMMEND";
-const FOLLOWING_USER = "FOLLOWING_USER";
-const SEARCH_USER = "SEARCH_USER";
+
 const LOG_IN_INFO = "LOG_IN_INFO";
+const GET_ALARM = "GET_ALARM";
+const READ_ALARM = "READ_ALARM";
 
 // Action creators
+export const getAlarm = (payload) => ({
+  type: GET_ALARM,
+  payload,
+});
+
+export const readAlarm = (payload) => ({
+  type: READ_ALARM,
+  payload,
+});
+
 export const logIn = (payload) => ({
   type: LOG_IN,
   payload,
@@ -37,6 +47,7 @@ const initialState = {
     userId: null,
     profileUrl: null,
   },
+  alarm: [],
 };
 
 // 미들웨어
@@ -180,6 +191,30 @@ export const logoutDB = () => {
   };
 };
 
+export const _getAlarmDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const data = await api.get(`/alarm`);
+      console.log(data);
+      dispatch(getAlarm(data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const _readAlarmDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const data = await api.patch(`/alarm`);
+      console.log(data);
+      // dispatch(readAlarm(data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export default handleActions(
   {
     [LOG_IN]: (state, action) =>
@@ -196,6 +231,12 @@ export default handleActions(
         draft.user.userId = null;
         draft.user.profileUrl = null;
         draft.isLogin = false;
+      }),
+
+    [GET_ALARM]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.alarm = action.payload;
       }),
   },
   initialState

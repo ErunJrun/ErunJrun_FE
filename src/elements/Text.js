@@ -122,7 +122,7 @@ const P = styled.p`
   :hover {
     ${(props) => props.hover};
   }
-  letter-spacing: -0.8px;
+  letter-spacing: -0.3px;
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   display: ${(props) => props.display};
   border-radius: ${(props) => props.borderRadius};
