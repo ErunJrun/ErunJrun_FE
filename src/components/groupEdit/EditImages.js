@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment, useState } from "react";
 import styled from "styled-components";
 import { Image, Grid, Text } from "../../elements";
-import ImageUpload from "../../assets/ImageUpload.png";
+import ImageUpload from "../../assets/imageUpload.png";
 import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
 import { editGroupDB } from "../../redux/modules/feed";

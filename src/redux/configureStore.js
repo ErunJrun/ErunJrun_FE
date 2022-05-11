@@ -12,6 +12,7 @@ import Mypage from "./modules/mypage";
 import Feed from "./modules/feed";
 import Image from "./modules/image";
 import Post from "./modules/post";
+import Recomments from "./modules/recomments";
 
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
@@ -20,7 +21,7 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
   user: User,
   comments: Comments,
-
+  recomments: Recomments,
   mypage: Mypage,
   feed: Feed,
   image: Image,

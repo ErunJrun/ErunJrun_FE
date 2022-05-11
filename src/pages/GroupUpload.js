@@ -11,6 +11,7 @@ import { history } from "../redux/configureStore";
 import { Grid, IconButton, Text } from "../elements";
 import { imgActions } from "../redux/modules/image";
 import step1 from "../assets/step1.png";
+import step3 from "../assets/step3.png";
 
 import "./GruopUpload.css";
 
@@ -215,39 +216,39 @@ const GroupUpload = () => {
   if (isLoaded3) {
     return (
       <>
-        <Grid margin="30px auto" padding="5px">
-          <Grid>
-            <Text bold size="20px">
-              그룹러닝 등록하기
-            </Text>
-          </Grid>
-          <Grid>
-            <Text display="inline" bold size="15px">
-              Step 2. 이미지 업로드
-            </Text>
-            <Text display="inline" margin="0 10px" size="13px">
-              그룹 러닝 썸네일에 들어갈 대표 이미지와 관련 상세 이미지를
-              업로드해주세요.
-            </Text>
-          </Grid>
-
-          <Grid display="flex">
-            <Grid width="500px">
-              <Text bold size="15px">
-                {`업로드 된 이미지 ${thumbnail.length}/3`}
+        <Grid margin="80px 695px 0 auto" maxWidth="865px" width="100%">
+          <Step1Img src={step3}></Step1Img>
+          <Grid display="flex" margin="0 0 18px 0" alignItems="center">
+            <Grid display="flex" width="auto">
+              <Text margin="0" height="auto" display="inline" bold size="20px">
+                러닝 코스
               </Text>
+              <RedPoint></RedPoint>
             </Grid>
           </Grid>
+          <Hr />
+
+          <Grid display="flex" maring="0">
+            <Text bold>{`업로드 된 이미지 (${thumbnail.length}/3`})</Text>
+          </Grid>
+          <ImagesUpload setImage={setImage}></ImagesUpload>
+
+          <Grid
+            display="flex"
+            justifyContent="space-between"
+            margin="160px 0 397px 0"
+          >
+            <StepBtn2 onClick={goBack2}>이전단계</StepBtn2>
+            <StepBtn2
+              onClick={() => {
+                addGroupPost();
+              }}
+              style={{ color: "#68F99E" }}
+            >
+              작성완료
+            </StepBtn2>
+          </Grid>
         </Grid>
-        <ImagesUpload setImage={setImage}></ImagesUpload>
-        <StepBtn onClick={goBack2}>이전단계</StepBtn>
-        <StepBtn
-          onClick={() => {
-            addGroupPost();
-          }}
-        >
-          작성완료
-        </StepBtn>
       </>
     );
   }

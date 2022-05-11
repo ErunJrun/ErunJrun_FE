@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Grid, Text, Image, IconButton } from "../../elements";
-import {
-  _deleteCommentFX,
-  _deleteReCommentFX,
-  _editCommentFX,
-  _isReEdit,
-  _editReCommentFX,
-} from "../../redux/modules/comments";
 import Permit from "../../shared/Permit";
 import styled from "styled-components";
+import {
+  _deleteReCommentFX,
+  _editReCommentFX,
+  _getReCommentFX,
+  _isReEdit,
+} from "../../redux/modules/recomments";
 
 const RecommentItem = (props) => {
   const dispatch = useDispatch();
@@ -20,15 +19,20 @@ const RecommentItem = (props) => {
   const isLogin = useSelector((state) => state.user.isLogin);
 
   // const commentList = useSelector((state) => state.comments.list);
-  // const recommentList = useSelector((state) => state.recomments.list);
+  const recommentList = useSelector((state) => state.recomments.list);
 
   console.log(props);
+  console.log(recommentList);
+
+  // React.useEffect(() => {
+  //   dispatch(_getReCommentFX(props.commentId));
+  // }, []);
 
   const editToggle = () => {
-    dispatch(_isReEdit(props?.recommentId, props?.commentId));
+    dispatch(_isReEdit(recommentList.recommentId));
   };
 
-  const editReComm = (recommentId) => {
+  const editReCommment = (recommentId) => {
     console.log("대댓글 수정");
     dispatch(_editReCommentFX(recommentId, newComm));
     editToggle();
@@ -47,12 +51,12 @@ const RecommentItem = (props) => {
             <Image
               imageType="circle"
               size="40"
-              src={props.user.profileUrl}
+              src={props?.user?.profileUrl}
               margin="0 8px 0 0"
             ></Image>
 
             <Grid display="flex" flexDirection="column" width="auto">
-              {props.isEdit ? (
+              {props?.isEdit ? (
                 <>
                   <EditInput
                     onChange={(e) => setNewComm(e.target.value)}
@@ -71,76 +75,74 @@ const RecommentItem = (props) => {
               )}
             </Grid>
           </Grid>
-        </Grid>
 
-        {props.isEdit ? (
-          <>
-            <Grid margin="0 0 0 48px" display="flex" alignItems="center">
-              <Text
-                cursor="pointer"
-                _onClick={() => {
-                  editReComm(props?.recommentId);
-                }}
-                margin="0 16px 0 0"
-                size="12px"
-                bold
-              >
-                수정완료
+          {props?.isEdit ? (
+            <>
+              <Grid margin="0 0 0 48px" display="flex" alignItems="center">
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    editReCommment(props.recommentId);
+                  }}
+                  margin="0 16px 0 0"
+                  size="12px"
+                  bold
+                >
+                  수정완료
+                </Text>
+                <IconButton
+                  cursor="pointer"
+                  color="gray"
+                  size="15"
+                  width="15px"
+                  height="18px"
+                  cancelRoundBlack
+                  _onClick={() => {
+                    editToggle(props.recommentId);
+                  }}
+                  margin="0 16px 0 0"
+                ></IconButton>
+              </Grid>
+            </>
+          ) : (
+            <Grid display="flex" margin="0 0 0 48px">
+              <Text color="#818181" margin="0 16px 0 0" size="12px">
+                {props?.createdAt}
               </Text>
-              <IconButton
-                cursor="pointer"
-                color="gray"
-                size="15"
-                width="15px"
-                height="18px"
-                cancelRoundBlack
-                _onClick={() => {
-                  editToggle(props?.recommentId);
-                }}
-                margin="0 16px 0 0"
-              ></IconButton>
-            </Grid>
-          </>
-        ) : (
-          <Grid display="flex" margin="0 0 0 48px">
-            <Text color="#818181" margin="0 16px 0 0" size="12px">
-              {props?.createdAt}
-            </Text>
 
-            <Permit>
-              {props?.user?.nickname === nickname ? (
-                <>
-                  <Text
-                    hover="color:#68F99E; font-weight:900;"
-                    cursor="pointer"
-                    _onClick={() => {
-                      editToggle(props?.recommentId);
-                    }}
-                    margin="0 16px 0 0"
-                    size="12px"
-                    color="#818181"
-                  >
-                    수정하기
-                  </Text>
-                  <Text
-                    hover="color:#68F99E; font-weight:900;"
-                    cursor="pointer"
-                    _onClick={() => {
-                      dispatch(
-                        _deleteReCommentFX(props?.recommentId, props?.commentId)
-                      );
-                    }}
-                    margin="0 16px 0 0"
-                    size="12px"
-                    color="#818181"
-                  >
-                    삭제하기
-                  </Text>
-                </>
-              ) : null}
-            </Permit>
-          </Grid>
-        )}
+              <Permit>
+                {props?.user?.nickname === nickname ? (
+                  <>
+                    <Text
+                      hover="color:#68F99E; font-weight:900;"
+                      cursor="pointer"
+                      _onClick={() => {
+                        editToggle(props.recommentId);
+                      }}
+                      margin="0 16px 0 0"
+                      size="12px"
+                      color="#818181"
+                    >
+                      수정하기
+                    </Text>
+                    <Text
+                      hover="color:#68F99E; font-weight:900;"
+                      cursor="pointer"
+                      _onClick={() => {
+                        dispatch(_deleteReCommentFX(props.recommentId));
+                      }}
+                      margin="0 16px 0 0"
+                      size="12px"
+                      color="#818181"
+                    >
+                      삭제하기
+                    </Text>
+                  </>
+                ) : null}
+              </Permit>
+            </Grid>
+          )}
+        </Grid>
       </Grid>
     </>
   );

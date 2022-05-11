@@ -1,6 +1,7 @@
 import { api } from "../../shared/Api";
 import { produce } from "immer";
 import { handleActions } from "redux-actions";
+import { _getReCommentFX } from "./recomments";
 
 // Action
 const ADD_COMM = "ADD_COMM";
@@ -8,11 +9,7 @@ const GET_COMM = "GET_COMM";
 const EDIT_COMM = "EDIT_COMM";
 const DELETE_COMM = "DELETE_COMM";
 const IS_EDIT = "IS_EDIT";
-
-const ADD_RE_COMM = "ADD_RE_COMM";
-const EDIT_RE_COMM = "EDIT_RE_COMM";
-const DELETE_RE_COMM = "DELETE_RE_COMM";
-const IS_RE_EDIT = "IS_RE_EDIT";
+const IS_RECOMM_BOX = "IS_RECOMM_BOX";
 
 // Action creators
 export const getComm = (payload) => ({
@@ -40,23 +37,8 @@ export const isEdit = (payload) => ({
   payload,
 });
 
-export const addReComm = (payload) => ({
-  type: ADD_RE_COMM,
-  payload,
-});
-
-export const editReComm = (payload) => ({
-  type: EDIT_RE_COMM,
-  payload,
-});
-
-export const deleteReComm = (payload) => ({
-  type: DELETE_RE_COMM,
-  payload,
-});
-
-export const isReEdit = (payload) => ({
-  type: IS_RE_EDIT,
+export const isRecommBox = (payload) => ({
+  type: IS_RECOMM_BOX,
   payload,
 });
 
@@ -76,7 +58,7 @@ export const _getCommentFX = (category, categoryId) => {
       let comment_list = [];
 
       data.data.map((data) => {
-        comment_list.push({ is_edit: false, ...data });
+        comment_list.push({ isRecomm: false, is_edit: false, ...data });
       });
 
       console.log(comment_list);
@@ -100,7 +82,7 @@ export const _addCommentFX = (category, categoryId, content) => {
       let comment_list = [];
 
       data.data.map((data) => {
-        comment_list.push({ is_edit: false, ...data });
+        comment_list.push({ isRecomm: false, is_edit: false, ...data });
       });
 
       dispatch(addComm(comment_list));
@@ -156,98 +138,35 @@ export const _isEdit = (commentId) => {
   };
 };
 
-//대댓글 미들웨어
-export const _addReCommentFX = (commentId, content) => {
-  return async function (dispatch, { history }) {
-    try {
-      console.log(commentId, content);
-      const { data } = await api.post(`/recomment/${commentId}`, {
-        content: content,
-      });
-      console.log(data);
-      dispatch(addComm(data.data));
-      window.alert("대댓글 등록 완료");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const _deleteReCommentFX = (recommentId, commentId) => {
-  return async function (dispatch, getState, { history }) {
-    try {
-      console.log(recommentId, commentId);
-      const { data } = await api.delete(`/recomment/${recommentId}`);
-      console.log(data);
-      const delDate = {
-        recommentId: recommentId,
-        commentId: commentId,
-      };
-
-      const _comment_list = getState().comments.list;
-      console.log(_comment_list);
-
-      // let _recomment_list = _comment_list.filter((e, idx) => {
-      //   if(e.commentId !== commentId) {
-      //     if(e)
-      //   }
-      // });
-
-      // console.log(_recomment_list);
-
-      // const recomment_index = _recomment_list[0]?.filter((b) => {
-      //   return b.recommentId === recommentId;
-      // });
-
-      // window.alert("대댓글 삭제 완료");
-      // dispatch(deleteReComm(recomment_index));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const _isReEdit = (recommentId, commentId) => {
+export const _isRecommBox = (commentId) => {
   return async function (dispatch, getState) {
-    console.log(recommentId, commentId);
+    console.log(commentId);
 
     const _comment_list = getState().comments.list;
     console.log(_comment_list);
 
-    let _recomment_list = [];
-    _comment_list.map((e, idx) => {
-      _recomment_list.push(e.Recomments);
+    const __comment_list = _comment_list.map((e, i) => {
+      if (e.isRecomm === true) {
+        return { ...e, isRecomm: false };
+      } else {
+        return { ...e, isRecomm: false };
+      }
     });
 
-    console.log(_recomment_list);
+    console.log(__comment_list);
 
-    const recomment_index = _recomment_list?.findIndex((b) => {
-      return b.recommentId === recommentId;
+    const comment_index = _comment_list.findIndex((b) => {
+      return b.commentId === commentId;
     });
-    console.log(recomment_index);
 
-    const editStateData = {
-      recommentId: recommentId,
-      commentId: commentId,
-      reIndex: recomment_index,
-    };
-    dispatch(isReEdit(editStateData));
-  };
-};
-
-export const _editReCommentFX = (recommentId, content) => {
-  return async function (dispatch, { history }) {
-    try {
-      console.log(recommentId, content);
-      const { data } = await api.patch(`/recomment/${recommentId}`, {
-        content: content,
-      });
-      console.log(data);
-      dispatch(editReComm(data.data));
-      window.alert("대댓글 수정 완료");
-    } catch (error) {
-      console.log(error);
-    }
+    const recommBoxList = [
+      {
+        comment_list: __comment_list,
+        comment_index: comment_index,
+      },
+    ];
+    dispatch(isRecommBox(recommBoxList));
+    dispatch(_getReCommentFX(commentId));
   };
 };
 
@@ -297,44 +216,23 @@ export default handleActions(
         draft.list = isEditList;
       }),
 
-    [DELETE_RE_COMM]: (state, action) =>
+    [IS_RECOMM_BOX]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
 
-        const new_list = state.list.filter((list) => {});
-        console.log(new_list);
-        console.log(state.list);
-        draft.list[0].Recomments = new_list;
-      }),
-
-    [EDIT_RE_COMM]: (state, action) =>
-      produce(state, (draft) => {
-        console.log(action.payload);
-        draft.list = action.payload;
-      }),
-
-    [IS_RE_EDIT]: (state, action) =>
-      produce(state, (draft) => {
-        console.log(action.payload);
-        console.log(state.list);
-        const isEditList = state.list.map((e, i) => {
-          if (action.payload.commentId === e.commentId) {
-            console.log(1, e);
-            e.Recomments.map((p, idx) => {
-              if (action.payload.recommentId === p.recommentId) {
-                if (p.isEdit === false) {
-                  return { ...p, isEdit: true };
-                } else {
-                  return { ...p, isEdit: false };
-                }
-              }
-            });
+        const isRecommList = action.payload[0].comment_list.map((e, i) => {
+          if (action.payload[0].comment_index === i) {
+            if (e.isRecomm === false) {
+              return { ...e, isRecomm: true };
+            } else {
+              return { ...e, isRecomm: false };
+            }
           } else {
             return e;
           }
         });
-        console.log(isEditList);
-        draft.list[action.payload.reIndex].Recomments = isEditList;
+
+        draft.list = isRecommList;
       }),
   },
   initialState

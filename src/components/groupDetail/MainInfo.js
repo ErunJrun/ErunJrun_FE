@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Permit from "../../shared/Permit";
 import { applyDetailDB, deleteGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import groupChat from "../../assets/groupChat.png";
 import shareIcon from "../../assets/shareIcon.png";
 
@@ -164,7 +164,7 @@ const MainInfo = (props) => {
 
         <Hr></Hr>
 
-        {detailGroup?.applyState ? (
+        {!detailGroup?.applyState ? (
           <ApplyBtn
             onClick={() => {
               window.alert("신청이 완료되었습니다.");
@@ -176,32 +176,62 @@ const MainInfo = (props) => {
         ) : (
           <ApplyBtnFalse
             onClick={() => {
-              window.alert("신청이 취소되었습니다.");
               goApply();
             }}
           >
             신청취소
           </ApplyBtnFalse>
         )}
+        {detailGroup?.applyState ? (
+          <Grid
+            display="flex"
+            justifyContent="space-between"
+            margin="16px 0 0 0"
+            height="auto"
+          >
+            <a
+              style={{ textDecoration: "none" }}
+              href={detailGroup.chattingRoom}
+            >
+              <ChatBtn style={{ background: "#FAE301" }}>
+                <ChatImg src={groupChat} />
+                <Text cursor="pointer" margin="0">
+                  그룹 채팅방
+                </Text>
+              </ChatBtn>
+            </a>
 
-        <Grid
-          display="flex"
-          justifyContent="space-between"
-          margin="16px 0 0 0"
-          height="auto"
-        >
-          <ChatBtn>
-            <ChatImg src={groupChat} />
-            <Text cursor="pointer" margin="0">
-              그룹 채팅방
-            </Text>
-          </ChatBtn>
+            <ShareBtn>
+              <ChatImg src={shareIcon} />
+              <Text>공유하기</Text>
+            </ShareBtn>
+          </Grid>
+        ) : (
+          <Grid
+            display="flex"
+            justifyContent="space-between"
+            margin="16px 0 0 0"
+            height="auto"
+          >
+            <ChatBtn>
+              <ChatImg src={groupChat} />
+              <Text
+                _onClick={() => {
+                  window.alert("신청 후 이용해 주세요");
+                }}
+                cursor="pointer"
+                margin="0"
+              >
+                그룹 채팅방
+              </Text>
+            </ChatBtn>
 
-          <ShareBtn>
-            <ChatImg src={shareIcon} />
-            <Text>공유하기</Text>
-          </ShareBtn>
-        </Grid>
+            <ShareBtn>
+              <ChatImg src={shareIcon} />
+              <Text>공유하기</Text>
+            </ShareBtn>
+          </Grid>
+        )}
       </Grid>
     </>
   );

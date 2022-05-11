@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 const Text = (props) => {
   const {
+    onMouseOver,
+    onMouseOut,
     id,
     display,
     children,
@@ -33,8 +35,11 @@ const Text = (props) => {
     marginLeft,
     letterSpacing,
     hover,
+    alignItems,
   } = props;
   const styles = {
+    onMouseOver,
+    onMouseOut,
     display,
     size,
     color,
@@ -63,10 +68,17 @@ const Text = (props) => {
     letterSpacing,
     id,
     hover,
+    alignItems,
   };
   return (
     <React.Fragment>
-      <P id={id} {...styles} onClick={_onClick}>
+      <P
+        id={id}
+        {...styles}
+        onMouseOver={onMouseOver}
+        onMouseOut={onMouseOut}
+        onClick={_onClick}
+      >
         {children}
       </P>
     </React.Fragment>
@@ -88,6 +100,8 @@ Text.defaultProps = {
   textalign: false,
   justifycontent: false,
   _onClick: () => {},
+  onMouseOver: () => {},
+  onMouseOut: () => {},
   cursor: "default",
   minWidth: null,
   is_flex: false,
@@ -101,8 +115,10 @@ Text.defaultProps = {
   marginLeft: null,
   letterSpacing: null,
   hover: null,
+  alignItems: null,
 };
 const P = styled.p`
+  align-items: ${(props) => props.alignItems};
   :hover {
     ${(props) => props.hover};
   }
