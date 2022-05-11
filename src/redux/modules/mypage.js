@@ -12,7 +12,7 @@ const EDIT_PROFILE = "EDIT_PROFILE";
 const NUMBER_CHECK = "NUMBER_CHECK";
 const GETNUMBER_CHECK = "GETNUMBER_CHECK";
 const GET_EVALUATION = "GET_EVALUATION";
-//const PATCH_EVALUATION = "GET_EVALUATION";
+// const PATCH_EVALUATION = "PATCH_EVALUATION";
 
 
 // //action creators
@@ -60,6 +60,7 @@ export const getEvaluation = (payload) => ({
 //   type: PATCH_EVALUATION,
 //   payload,
 // });
+
   
 //initialState
 const initialState = {
@@ -69,6 +70,7 @@ const initialState = {
   phoneNumber: [],
   info: [],
   host:[],
+  // evaluation:[],
 };
 
 
@@ -90,12 +92,12 @@ export const getProfileDB = (userId) => {
   };
 
 //참여완료 그룹러닝
-export const getMyRunningDB = (userId) => {
+export const getRunningDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
         //console.log(userId);
         const { data } = await api.get(`/group/complete?userId=${userId}`);
-        console.log(data);
+        //console.log(data);
         dispatch(getRunning(data));
     } catch (error) {
         console.log(error);
@@ -105,7 +107,7 @@ export const getMyRunningDB = (userId) => {
 };
 
 //내가만든 그룹러닝
-export const getRunningDB = (userId) => {
+export const getMyRunningDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
         //console.log(userId);
@@ -126,7 +128,7 @@ export const getInformationDB = () => {
         const { data } = await api.get(`/auth/updateUser`);
         dispatch(getInformation(data.data));
     } catch (error) {
-        console.log(error);
+       // console.log(error);
         window.alert(error);
     }
   };
@@ -154,7 +156,7 @@ export const editProfileDB = (userId, nickname, image, bio, likeLocation, likeDi
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data);
+     // console.log(data);
       history.push("/mypage");
     } catch (error) {
       console.log(error);
@@ -197,24 +199,47 @@ export const getNumberCheckMiddleware = (phone, numberCK) => {
   };
 };
 
-//호스트평가정보 
+//호스트 정보 
 export const getEvaluationDB = (groupId, hostId, userId) => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log(groupId,hostId,userId);
       let data
-      if (hostId != userId) {
+      if (hostId !== userId) {
         data = await api.get(`/group/evaluation/${groupId}`);
+        console.log(data);
+        dispatch(getEvaluation(data));
       }
-      // const { data } = await api.get(`/group/evaluation/${groupId}`);
-      console.log(data);
-      dispatch(getEvaluation(data));
+      
     } catch (error) {
       console.log(error);
       //window.alert(error);
     }
   };
 };
+
+//호스트 평가 
+// export const evaluationDB = (groupId, userId, point) => {
+//   return async function (dispatch, getState, { history }) {
+//     try {
+//       console.log(groupId, userId);
+//       const formData = new FormData();
+      
+//       formData.append("userId", userId);
+//       formData.append("point", point);
+  
+//       const { data } = await api.patch(`/group/evaluation/${groupId}`, formData, {
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//         },
+//       });
+//       console.log(data);
+//       history.push("/mypage");
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
 
 //reducer
 
@@ -271,6 +296,12 @@ export default handleActions(
         console.log(action.payload);
         draft.host = action.payload;
       }),
+
+      // [PATCH_EVALUATION]: (state, action) =>
+      // produce(state, (draft) => {
+      //   console.log(action.payload);
+      //   draft.evaluation = action.payload;
+      // }),
   },
   initialState
 );
