@@ -3,6 +3,7 @@
 // import { useParams } from "react-router-dom";
 // import { Grid, Text } from "../../elements";
 // import { _getCommentFX } from "../../redux/modules/comments";
+// import { _getReCommentFX } from "../../redux/modules/recomments";
 // import CommentItem from "./CommentItem";
 // import CommentWrite from "./CommentWrite";
 
@@ -14,7 +15,7 @@
 //   const groupId = params.groupId;
 
 //   React.useEffect(() => {
-//     dispatch(_getCommentFX("group", groupId));
+//     dispatch(_getReCommentFX(commentId));
 //   }, []);
 
 //   return (

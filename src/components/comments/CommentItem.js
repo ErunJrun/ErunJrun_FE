@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Grid, Text, Image, IconButton } from "../../elements";
 import {
   _deleteCommentFX,
   _editCommentFX,
+  _getCommentFX,
   _isEdit,
+  _isRecommBox,
 } from "../../redux/modules/comments";
 import Permit from "../../shared/Permit";
 import styled from "styled-components";
-import RecommentWrite from "../recomment/RecommentWrite";
 import RecommentItem from "../recomment/RecommentItem";
+import RecommentWrite from "../recomment/RecommentWrite";
+import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
 
 const CommentItem = (props) => {
   const dispatch = useDispatch();
@@ -20,10 +23,17 @@ const CommentItem = (props) => {
   const nickname = localStorage.getItem("nickname");
   const isLogin = useSelector((state) => state.user.isLogin);
 
+  const recommentList = useSelector((state) => state.recomments.list);
+
+  console.log(recommentList);
   console.log(props);
 
   const editToggle = (commentId) => {
     dispatch(_isEdit(commentId));
+  };
+
+  const recommToggle = (commentId) => {
+    dispatch(_isRecommBox(commentId));
   };
 
   const editComm = (commentId) => {
@@ -31,6 +41,10 @@ const CommentItem = (props) => {
     dispatch(_editCommentFX(commentId, newComm));
     editToggle(commentId);
   };
+
+  // React.useEffect(() => {
+  //   dispatch(_getReCommentFX(props.commentId));
+  // }, []);
 
   return (
     <>
@@ -45,12 +59,12 @@ const CommentItem = (props) => {
             <Image
               imageType="circle"
               size="40"
-              src={props.user.profileUrl}
+              src={props?.user?.profileUrl}
               margin="0 8px 0 0"
             ></Image>
 
             <Grid display="flex" flexDirection="column" width="auto">
-              {props.is_edit ? (
+              {props?.is_edit ? (
                 <>
                   <EditInput
                     onChange={(e) => setNewComm(e.target.value)}
@@ -71,7 +85,7 @@ const CommentItem = (props) => {
           </Grid>
         </Grid>
 
-        {props.is_edit ? (
+        {props?.is_edit ? (
           <>
             <Grid margin="0 0 0 48px" display="flex" alignItems="center">
               <Text
@@ -103,6 +117,18 @@ const CommentItem = (props) => {
           <Grid display="flex" margin="0 0 0 48px">
             <Text color="#818181" margin="0 16px 0 0" size="12px">
               {props?.createdAt}
+            </Text>
+            <Text
+              hover="color:#68F99E; font-weight:900;"
+              color="#818181"
+              margin="0 16px 0 0"
+              size="12px"
+              cursor="pointer"
+              _onClick={() => {
+                recommToggle(props?.commentId);
+              }}
+            >
+              답글보기
             </Text>
             <Permit>
               <Text
@@ -151,20 +177,20 @@ const CommentItem = (props) => {
           </Grid>
         )}
       </Grid>
-      <Grid margin="0 0 12px 76px">
-        {props?.Recomments?.map((recomment, idx) => {
-          if (recomment === null) {
-            return;
-          }
-          return (
-            <RecommentItem
-              key={idx}
-              commentId={props?.commentId}
-              {...recomment}
-            />
-          );
-        })}
-      </Grid>
+      {props.isRecomm
+        ? recommentList?.map((e, idx) => {
+            if (e === null) {
+              return;
+            }
+            return (
+              <Fragment key={idx}>
+                <Grid margin="0 0 12px 76px">
+                  <RecommentItem commentId={props?.commentId} {...e} />
+                </Grid>
+              </Fragment>
+            );
+          })
+        : null}
 
       {reComm ? (
         <RecommentWrite setReComm={setReComm} commentId={props?.commentId} />

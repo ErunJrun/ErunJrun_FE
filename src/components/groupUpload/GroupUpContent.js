@@ -8,6 +8,7 @@ const GroupContent = (props) => {
   const [textLength600, setTextLength600] = useState(0);
   const [textLengthPark, setTextLengthPark] = useState(0);
   const [textLengthBag, setTextLengthBag] = useState(0);
+  const [textLengthChat, setTextLengthChat] = useState(0);
   const [title, setTitle] = useState("");
   const [standbyTime, setStandbyTime] = useState(
     new Date().toISOString().slice(11, 16)
@@ -23,6 +24,7 @@ const GroupContent = (props) => {
   const [parking, setParking] = useState("");
   const [baggage, setBaggage] = useState("");
   const [content, setContent] = useState("");
+  const [chattingRoom, setChattingRoom] = useState("");
   const [runTypeList, setRunTypeList] = useState([
     "도시",
     "공원",
@@ -84,6 +86,16 @@ const GroupContent = (props) => {
     setTextLengthBag(wordLength);
   };
 
+  const checkMaxLengthChat = (e) => {
+    let wordLength = e.target.value.length;
+
+    if (wordLength >= 40) {
+      window.alert("40자 이상 작성할 수 없습니다.");
+      return;
+    }
+    setTextLengthChat(wordLength);
+  };
+
   const choiceRunType = (e) => {
     setCheckedType(e);
   };
@@ -105,6 +117,7 @@ const GroupContent = (props) => {
       baggage: baggage,
       content: content,
       theme: checkedType,
+      chattingRoom: chattingRoom,
     },
   ];
 
@@ -122,6 +135,7 @@ const GroupContent = (props) => {
     baggage,
     content,
     checkedType,
+    chattingRoom,
   ]);
 
   return (
@@ -365,13 +379,13 @@ const GroupContent = (props) => {
               <GroupInput
                 type="url"
                 onChange={(e) => {
-                  setTitle(e.target.value);
-                  checkMaxLength(e);
+                  setChattingRoom(e.target.value);
+                  checkMaxLengthChat(e);
                 }}
                 placeholder="크루원들과 소통할 오픈채팅방 링크를 추가해주세요."
               ></GroupInput>
               <Text margin="0" size="14px">
-                {textLength}/28
+                {textLengthChat}/40
               </Text>
             </Grid>
           </Grid>

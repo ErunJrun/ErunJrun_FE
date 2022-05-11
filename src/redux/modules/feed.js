@@ -166,6 +166,7 @@ export const addGroupDB = (
     formData.append("baggage", contents[0].baggage);
     formData.append("content", contents[0].content);
     formData.append("thema", contents[0].theme);
+    formData.append("chattingRoom", contents[0].chattingRoom);
     formData.append("location", address);
     formData.append("distance", distance);
     formData.append("mapLatLng", JSON.stringify(mapLatLng));

@@ -1,12 +1,13 @@
 import React, { useEffect, Fragment, useState } from "react";
 import styled from "styled-components";
 import { Image, Grid, Text } from "../../elements";
-import ImageUpload from "../../assets/ImageUpload.png";
+import ImageIcon from "../../assets/ImageIcon.png";
 import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
 
 const ImagesUpload = (props) => {
   const dispatch = useDispatch();
+  const [hide, setHide] = useState(false);
   const [showImages, setShowImages] = useState([]);
   const totalImage = useSelector((state) => state.image.files);
   console.log(totalImage);
@@ -85,37 +86,35 @@ const ImagesUpload = (props) => {
   //이미지 삭제
   const handleDeleteImage = (x, idx) => {
     // 서버에서 준 URL 버킷 이름을 기준으로 찾아
-    if (x.indexOf("hyemco-butket") !== -1) {
-      dispatch(imgActions.editUrl(x));
-      // URL을 따로 저장
-      dispatch(imgActions.deletePre(idx));
-      // 리덕스 files에 있는 URL 삭제 (배열을 맞추기 위함)
-    } else {
-      // 리덕스에 files 삭제
-      dispatch(imgActions.deletePre(idx));
-    }
+
+    // 리덕스에 files 삭제
+    dispatch(imgActions.deletePre(idx));
+
     // 프리뷰 삭제
     setShowImages(showImages.filter((p, index) => index !== idx));
   };
 
   return (
     <>
-      <Grid
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        width="auto"
-        margin="30px 0"
-      >
-        <Grid width="300px" margin="0px 10px">
+      <Grid display="flex">
+        <Grid>
           <label htmlFor="profile_image">
-            <Image
-              shape="imgBtn"
-              height="300px"
-              width="300px"
-              src={ImageUpload}
-            />
-
+            <Grid
+              width="280px"
+              height="210px"
+              border="1px solid #7B7B7B"
+              borderRadius="3px"
+              bg="#F0F0F0"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+              cursor="pointer"
+              margin="0 0 32px 0"
+            >
+              <UploadIcon src={ImageIcon} />
+              <Text>눌러서 이미지 업로드하기</Text>
+            </Grid>
             <ImageInput
               type="file"
               multiple="multiple"
@@ -125,27 +124,61 @@ const ImagesUpload = (props) => {
             ></ImageInput>
           </label>
         </Grid>
-        <Grid display="flex" margin="0px 10px">
+        <MidHr />
+
+        <Grid display="flex" margin="0 0 32px 0">
           {showImages.map((image, idx) => (
             <Fragment key={idx}>
-              <Image shape="imgBtn" height="300px" width="300px" src={image} />
-              <div onClick={() => handleDeleteImage(image, idx)}>x버튼</div>
+              <Grid display="relative" width="auto">
+                <Text
+                  zindex
+                  position="absolute"
+                  width="120px"
+                  height="40px"
+                  bg="rgba(255, 255, 255, 0.3)"
+                  border="1px solid #FFFFFF"
+                  borderRadius="3px"
+                  _onClick={() => handleDeleteImage(image, idx)}
+                  margin="85px 80px"
+                  display="flex"
+                  justifycontent="center"
+                  color="white"
+                  alignItems="center"
+                  cursor="pointer"
+                >
+                  삭제하기
+                </Text>
+                <ImagePreview src={image} />
+              </Grid>
             </Fragment>
           ))}
         </Grid>
       </Grid>
-      <Grid>
-        <Text bold size="15px" bg="#EAEAEA" padding="10px" color="black">
-          <li>
-            업로드 가능한 이미지 최대 용량은 30MB 입니다. 1000px*1000px 사이즈의
+
+      <MidHr />
+      <Grid
+        bg="#F0F0F0"
+        padding="16px 24px"
+        height="136px"
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+      >
+        <Text margin="0" bold size="14px">
+          <li style={{ marginBottom: "10px" }}>
+            업로드 가능한 이미지 최대 용량은 30MB 입니다.
+          </li>
+          <li style={{ marginBottom: "10px" }}>
+            504px*378px 사이즈의 이미지 크기를 권장합니다.
+          </li>
+          <li style={{ marginBottom: "10px" }}>
+            가로길이 504px, 세로길이 378px 아하 크기의 이미지 경우 화질이 깨질
+            수도 있습니다.
           </li>
           <li>
-            이미지 크기를 권장합니다. 가로길이 100px, 세로길이 100px 아하 크기의
+            지나치게 선정적이나 폭력적인 이미지를 업로드할 경우 제재가 있을 수도
+            있습니다.
           </li>
-          <li>
-            이미지 경우 화질이 깨질 수도 있습니다. 지나치게 선정적이나 폭력적인
-          </li>
-          <li>이미지를 업로드할 경우 제제가 있을 수도 있습니다.</li>
         </Text>
       </Grid>
     </>
@@ -154,6 +187,26 @@ const ImagesUpload = (props) => {
 
 const ImageInput = styled.input`
   display: none;
+`;
+
+const UploadIcon = styled.img`
+  width: 90px;
+  height: 90px;
+`;
+
+const ImagePreview = styled.img`
+  height: 210px;
+  width: 280px;
+  position: relative;
+  margin: 0 4px;
+`;
+const MidHr = styled.hr`
+  width: 100%;
+  height: 0px;
+  background: #cbcbcb;
+  border: 1px solid #cbcbcb;
+  transform: rotate(180deg);
+  margin-bottom: 32px;
 `;
 
 export default ImagesUpload;
