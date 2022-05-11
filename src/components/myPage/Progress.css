@@ -23,7 +23,7 @@
 }
 
 .progress-done {
-    background: linear-gradient(to left, #3888ff, #458fff);
+    background: linear-gradient(to left, #d66060, #d66060);
     color: #fff;
     border-radius: 20px;
     display: flex;
@@ -48,7 +48,7 @@
 .running-box {
   padding: 10px 12px 10px 12px;
   border-radius: 6px;
-  background-color: #3772cc;
+  background-color: #030c37;
   color: #68f99e;
   font-size: 14px;
   font-weight: bold;
@@ -57,3 +57,9 @@
   transform: translate(9%, -140%);
   
 }
+
+/* .bar {
+  width: 900px;
+  height: 9px; 
+  background-color: #e1e1e1;
+} */

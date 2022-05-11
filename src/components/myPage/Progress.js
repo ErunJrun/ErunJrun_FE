@@ -26,13 +26,15 @@ const Progress = (props) => {
     },[])
 
     return (
+        <>
         <div className="box">  
             <div className="progress">
+            {/* <img src='https://ifh.cc/g/GQ2P5c.png' /> */}
               <div className="running" style={run}>
                   <div className="running-box">
-                       {props.done}km                     
+                       {props.done} km                     
                   </div>      
-                  <img src="https://ifh.cc/g/jY802x.png"/>
+                  <img src="https://ifh.cc/g/jY802x.png" />
               </div>
             </div>
             <div className="progress1">
@@ -50,6 +52,9 @@ const Progress = (props) => {
                 </Text>
             </div>
         </div>
+        {/* <div className="bar"/> */}
+        {/* <div className="bar"/> */}
+        </>
     );
 };
 

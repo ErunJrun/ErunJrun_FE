@@ -17,11 +17,10 @@ const Evaluation = () => {
 
     return (
         <div>
-            <ApplyBtnTrue
-            className="_btn-modal"
+            <p style={{margin:"0 0 3px 0"}}
             onClick = {toggleModal}>
                 크루장 평가하기
-            </ApplyBtnTrue>
+            </p>
 
             {modal && (
                 <div>

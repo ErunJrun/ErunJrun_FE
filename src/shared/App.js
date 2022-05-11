@@ -20,6 +20,7 @@ import Recommend from "../pages/Recommend";
 import Badge from "../pages/Badge";
 import Check from "../pages/Check";
 import LoginInfo from "../pages/LoginInfo";
+import MypageEdit from "../pages/MypageEdit";
 import GroupEdit from "../pages/GroupEdit";
 import { useDispatch } from "react-redux";
 import { loginCheckDB } from "../redux/modules/user";
@@ -58,6 +59,7 @@ function App() {
           <Route path="/check" exact component={Check} />
           <Route path="/loginInfo" exact component={LoginInfo} />
           <Route path="/groupEdit/:groupId" exact component={GroupEdit} />
+          <Route path="/edit" exact component={MypageEdit} />
         </ConnectedRouter>
       </Wrapper>
       <Footer></Footer>
