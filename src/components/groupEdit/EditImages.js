@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
 import { editGroupDB } from "../../redux/modules/feed";
 import { useParams } from "react-router-dom";
+import ImageIcon from "../../assets/ImageIcon.png";
+import editStep2 from "../../assets/editStep2.png";
 
 const EditImages = (props) => {
   const dispatch = useDispatch();
@@ -113,88 +115,123 @@ const EditImages = (props) => {
 
   return (
     <>
-      <Grid margin="30px auto" padding="5px">
-        <Grid>
-          <Text bold size="20px">
-            그룹러닝 등록하기
-          </Text>
-        </Grid>
-        <Grid>
-          <Text display="inline" bold size="15px">
-            Step 2. 이미지 업로드
-          </Text>
-          <Text display="inline" margin="0 10px" size="13px">
-            그룹 러닝 썸네일에 들어갈 대표 이미지와 관련 상세 이미지를
-            업로드해주세요.
-          </Text>
-        </Grid>
-
-        <Grid display="flex">
-          <Grid width="500px">
-            <Text bold size="15px">
-              {`업로드 된 이미지 ${totalImage.length}/3`}
+      <Grid margin="80px 695px 0 auto" maxWidth="865px" width="100%">
+        <Step1Img src={editStep2}></Step1Img>
+        <Grid display="flex" margin="0 0 18px 0" alignItems="center">
+          <Grid display="flex" width="auto">
+            <Text margin="0" height="auto" display="inline" bold size="20px">
+              러닝 코스
             </Text>
+            <RedPoint></RedPoint>
           </Grid>
         </Grid>
-      </Grid>
+        <Hr />
 
-      <Grid
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        width="auto"
-        margin="30px 0"
-      >
-        <Grid width="300px" margin="0px 10px">
-          <label htmlFor="profile_image">
-            <Image
-              shape="imgBtn"
-              height="300px"
-              width="300px"
-              src={ImageUpload}
-            />
-
-            <ImageInput
-              type="file"
-              multiple="multiple"
-              id="profile_image"
-              onChange={handleChangeFile}
-              accept=".jpg, .jpeg, .png"
-            ></ImageInput>
-          </label>
+        <Grid display="flex" maring="0">
+          <Text bold>{`업로드 된 이미지 (${totalImage.length}/3`})</Text>
         </Grid>
-        <Grid display="flex" margin="0px 10px">
-          {showImages.map((image, idx) => (
-            <Fragment key={idx}>
-              <Image shape="imgBtn" height="300px" width="300px" src={image} />
-              <div onClick={() => handleDeleteImage(image, idx)}>x버튼</div>
-            </Fragment>
-          ))}
+        <Grid display="flex">
+          <Grid>
+            <label htmlFor="profile_image">
+              <Grid
+                width="280px"
+                height="210px"
+                border="1px solid #7B7B7B"
+                borderRadius="3px"
+                bg="#F0F0F0"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                flexDirection="column"
+                cursor="pointer"
+                margin="0 0 32px 0"
+              >
+                <UploadIcon src={ImageIcon} />
+                <Text>눌러서 이미지 업로드하기</Text>
+              </Grid>
+              <ImageInput
+                type="file"
+                multiple="multiple"
+                id="profile_image"
+                onChange={handleChangeFile}
+                accept=".jpg, .jpeg, .png"
+              ></ImageInput>
+            </label>
+          </Grid>
+          <MidHr />
+
+          <Grid display="flex" margin="0 0 32px 0">
+            {showImages.map((image, idx) => (
+              <Fragment key={idx}>
+                <Grid display="relative" width="auto">
+                  <Text
+                    zindex
+                    position="absolute"
+                    width="120px"
+                    height="40px"
+                    bg="rgba(255, 255, 255, 0.3)"
+                    border="1px solid #FFFFFF"
+                    borderRadius="3px"
+                    _onClick={() => handleDeleteImage(image, idx)}
+                    margin="85px 80px"
+                    display="flex"
+                    justifycontent="center"
+                    color="white"
+                    alignItems="center"
+                    cursor="pointer"
+                  >
+                    삭제하기
+                  </Text>
+                  <ImagePreview src={image} />
+                </Grid>
+              </Fragment>
+            ))}
+          </Grid>
+        </Grid>
+
+        <MidHr />
+        <Grid
+          bg="#F0F0F0"
+          padding="16px 24px"
+          height="136px"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <Text margin="0" bold size="14px">
+            <li style={{ marginBottom: "10px" }}>
+              업로드 가능한 이미지 최대 용량은 30MB 입니다.
+            </li>
+            <li style={{ marginBottom: "10px" }}>
+              504px*378px 사이즈의 이미지 크기를 권장합니다.
+            </li>
+            <li style={{ marginBottom: "10px" }}>
+              가로길이 504px, 세로길이 378px 아하 크기의 이미지 경우 화질이 깨질
+              수도 있습니다.
+            </li>
+            <li>
+              지나치게 선정적이나 폭력적인 이미지를 업로드할 경우 제재가 있을
+              수도 있습니다.
+            </li>
+          </Text>
+        </Grid>
+
+        <Grid
+          display="flex"
+          justifyContent="space-between"
+          margin="160px 0 397px 0"
+        >
+          <StepBtn2 onClick={goBack1}>이전단계</StepBtn2>
+          <StepBtn2
+            onClick={() => {
+              editGroupPost();
+            }}
+            style={{ color: "#68F99E" }}
+          >
+            작성완료
+          </StepBtn2>
         </Grid>
       </Grid>
-      <Grid>
-        <Text bold size="15px" bg="#EAEAEA" padding="10px" color="black">
-          <li>
-            업로드 가능한 이미지 최대 용량은 30MB 입니다. 1000px*1000px 사이즈의
-          </li>
-          <li>
-            이미지 크기를 권장합니다. 가로길이 100px, 세로길이 100px 아하 크기의
-          </li>
-          <li>
-            이미지 경우 화질이 깨질 수도 있습니다. 지나치게 선정적이나 폭력적인
-          </li>
-          <li>이미지를 업로드할 경우 제제가 있을 수도 있습니다.</li>
-        </Text>
-      </Grid>
-
-      <StepBtn onClick={goBack1}>이전단계</StepBtn>
-      <StepBtn
-        onClick={() => {
-          editGroupPost();
-        }}
-      >
-        작성완료
-      </StepBtn>
     </>
   );
 };
@@ -203,18 +240,65 @@ const ImageInput = styled.input`
   display: none;
 `;
 
-const StepBtn = styled.button`
-  width: 184px;
-  height: 40px;
-  background: #cecece;
-  border: 1px solid #4e4e4e;
-  border-radius: 5px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-  align-items: center;
-  color: #000000;
-  margin: 10px;
+const UploadIcon = styled.img`
+  width: 90px;
+  height: 90px;
 `;
 
+const ImagePreview = styled.img`
+  height: 210px;
+  width: 280px;
+  position: relative;
+  margin: 0 4px;
+`;
+const MidHr = styled.hr`
+  width: 100%;
+  height: 0px;
+  background: #cbcbcb;
+  border: 1px solid #cbcbcb;
+  transform: rotate(180deg);
+  margin-bottom: 32px;
+`;
+
+const Step1Img = styled.img`
+  position: fixed;
+  max-width: 295px;
+  width: 100%;
+  right: 360px;
+  top: 170px;
+`;
+
+const Hr = styled.hr`
+  width: 865px;
+  height: 0px;
+  margin: 0 0 48px 0;
+  border: 1px solid #000000;
+  transform: rotate(180deg);
+`;
+
+const RedPoint = styled.div`
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  background: #ff2d55;
+`;
+
+const StepBtn2 = styled.button`
+  max-width: 173px;
+  width: 100%;
+  height: 45px;
+  background: #030c37;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 10px 40px;
+  color: white;
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  :hover {
+    box-shadow: 0 0 3px #030c37;
+  }
+`;
 export default EditImages;

@@ -10,15 +10,9 @@ const GroupContent = (props) => {
   const [textLengthBag, setTextLengthBag] = useState(0);
   const [textLengthChat, setTextLengthChat] = useState(0);
   const [title, setTitle] = useState("");
-  const [standbyTime, setStandbyTime] = useState(
-    new Date().toISOString().slice(11, 16)
-  );
-  const [startTime, setStartTime] = useState(
-    new Date().toISOString().slice(11, 16)
-  );
-  const [finishTime, setFinishTime] = useState(
-    new Date().toISOString().slice(11, 16)
-  );
+  const [standbyTime, setStandbyTime] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [finishTime, setFinishTime] = useState("");
   const [maxPeople, setMaxPeople] = useState("");
   const [date, setDate] = useState(new Date().toISOString().substring(0, 10));
   const [parking, setParking] = useState("");
@@ -161,7 +155,7 @@ const GroupContent = (props) => {
               display="flex"
               alignItems="center"
               padding="10px 20px"
-              maxWidth="724px"
+              maxWidth="714px"
               height="75px"
               border="1px solid #CBCBCB"
               borderRadius="3px"
@@ -186,42 +180,48 @@ const GroupContent = (props) => {
               러닝 일시
             </Text>
             <Grid
+              maxWidth="714px"
               display="flex"
-              alignItems="center"
-              padding="10px 20px"
-              maxWidth="357px"
-              height="75px"
-              border="1px solid #CBCBCB"
-              borderRadius="3px"
-              hover="border:1px solid #030C37;"
-              margin="0 11px 0 0"
+              justifyContent="space-between"
             >
-              <GroupInput
-                type="date"
-                onChange={(e) => {
-                  setDate(e.target.value);
-                }}
-                value={date}
-              ></GroupInput>
-            </Grid>
+              <Grid
+                display="flex"
+                alignItems="center"
+                padding="10px 20px"
+                maxWidth="347px"
+                height="75px"
+                border="1px solid #CBCBCB"
+                borderRadius="3px"
+                hover="border:1px solid #030C37;"
+                margin="0"
+              >
+                <GroupInput
+                  type="date"
+                  onChange={(e) => {
+                    setDate(e.target.value);
+                  }}
+                  value={date}
+                ></GroupInput>
+              </Grid>
 
-            <Grid
-              display="flex"
-              alignItems="center"
-              padding="10px 20px"
-              maxWidth="357px"
-              height="75px"
-              border="1px solid #CBCBCB"
-              borderRadius="3px"
-              hover="border:1px solid #030C37;"
-            >
-              <GroupInput
-                type="time"
-                onChange={(e) => {
-                  setStandbyTime(e.target.value);
-                }}
-                value={standbyTime}
-              ></GroupInput>
+              <Grid
+                display="flex"
+                alignItems="center"
+                padding="10px 20px"
+                maxWidth="347px"
+                height="75px"
+                border="1px solid #CBCBCB"
+                borderRadius="3px"
+                hover="border:1px solid #030C37;"
+              >
+                <GroupInput
+                  type="time"
+                  onChange={(e) => {
+                    setStandbyTime(e.target.value);
+                  }}
+                  value={standbyTime}
+                ></GroupInput>
+              </Grid>
             </Grid>
 
             <Grid display="flex" alignItems="center" margin="12px 0 0 0">
@@ -247,7 +247,7 @@ const GroupContent = (props) => {
               display="flex"
               alignItems="center"
               padding="10px 20px"
-              maxWidth="357px"
+              maxWidth="347px"
               height="75px"
               border="1px solid #CBCBCB"
               borderRadius="3px"
@@ -272,7 +272,7 @@ const GroupContent = (props) => {
               display="flex"
               alignItems="center"
               padding="10px 20px"
-              maxWidth="357px"
+              maxWidth="347px"
               height="75px"
               border="1px solid #CBCBCB"
               borderRadius="3px"
@@ -297,7 +297,7 @@ const GroupContent = (props) => {
               display="flex"
               alignItems="center"
               padding="10px 20px"
-              maxWidth="724px"
+              maxWidth="714px"
               height="75px"
               border="1px solid #CBCBCB"
               borderRadius="3px"
@@ -333,7 +333,7 @@ const GroupContent = (props) => {
               alignItems="center"
               justifyContent="center"
               padding="10px 20px"
-              maxWidth="724px"
+              maxWidth="714px"
               height="462px"
               border="1px solid #CBCBCB"
               borderRadius="3px"
@@ -370,7 +370,7 @@ const GroupContent = (props) => {
               display="flex"
               alignItems="center"
               padding="10px 20px"
-              maxWidth="726px"
+              maxWidth="714px"
               height="75px"
               border="1px solid #CBCBCB"
               borderRadius="3px"
@@ -477,7 +477,7 @@ const GroupContent = (props) => {
               display="flex"
               alignItems="center"
               padding="10px 20px"
-              maxWidth="724px"
+              maxWidth="714px"
               height="75px"
               border="1px solid #CBCBCB"
               borderRadius="3px"
@@ -505,7 +505,7 @@ const GroupContent = (props) => {
               display="flex"
               alignItems="center"
               padding="10px 20px"
-              maxWidth="724px"
+              maxWidth="714px"
               height="75px"
               border="1px solid #CBCBCB"
               borderRadius="3px"

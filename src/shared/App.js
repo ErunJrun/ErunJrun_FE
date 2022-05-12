@@ -21,6 +21,7 @@ import Check from "../pages/Check";
 import LoginInfo from "../pages/LoginInfo";
 import MypageEdit from "../pages/MypageEdit";
 import GroupEdit from "../pages/GroupEdit";
+import ErrorPage from "./ErrorPage";
 import { useDispatch } from "react-redux";
 import { loginCheckDB } from "../redux/modules/user";
 import { getCookie } from "./Cookie";
@@ -58,6 +59,7 @@ function App() {
           <Route path="/loginInfo" exact component={LoginInfo} />
           <Route path="/groupEdit/:groupId" exact component={GroupEdit} />
           <Route path="/edit" exact component={MypageEdit} />
+          <Route path="/error" exact component={ErrorPage} />
         </ConnectedRouter>
       </Wrapper>
       <Footer></Footer>
