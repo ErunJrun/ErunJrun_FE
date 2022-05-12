@@ -4,7 +4,7 @@ import { Navigation, Pagination } from "swiper";
 import Images from "./Images";
 import { history } from "../../redux/configureStore";
 import styled from "styled-components";
-import { Text } from "../../elements";
+import { Grid, Text } from "../../elements";
 import Weather from "./Weather";
 import { useSelector } from "react-redux";
 
@@ -30,29 +30,35 @@ const Banner = () => {
         >
           {Images.map((item) => (
             <SwiperSlide key={item.id}>
-              <img src={item.src} alt={item.alt} />
-              <div className="text">
-                <Text bold size="35px" color="white">
-                  {userName} 님,
-                </Text>
-                <Text bold size="22px" color="#ECF1F1">
-                  {userName} 님에게 어울리는 코스를 알려드려요!
-                </Text>
-              </div>
-              {/* <div className='grid'>
+              <Grid
+                display="flex"
+                maxWidth="1240px"
+                justifyContent="space-between"
+              >
+                <img src={item.src} alt={item.alt} />
+                <div className="text">
+                  <Text bold size="35px" color="white">
+                    {userName} 님,
+                  </Text>
+                  <Text bold size="22px" color="#ECF1F1">
+                    {userName} 님에게 어울리는 코스를 알려드려요!
+                  </Text>
+                </div>
+                {/* <div className='grid'>
               <div className="category"># 고양시</div>
               <div className="category"># 10km</div>
             </div> */}
-              <button
-                className="btn"
-                type="button"
-                onClick={() => {
-                  history.push("/coursefeed");
-                }}
-              >
-                추천 코스 보러가기
-              </button>
-              <Weather />
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={() => {
+                    history.push("/coursefeed");
+                  }}
+                >
+                  추천 코스 보러가기
+                </button>
+                <Weather />
+              </Grid>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -71,7 +77,7 @@ const Banner = () => {
       >
         {Images.map((item) => (
           <SwiperSlide key={item.id}>
-            <img src={item.src} alt={item.alt} />
+            <BannerImg src={item.src} alt={item.alt} />
             <div className="text">
               <Text bold size="35px" color="white">
                 runner 님,
@@ -100,7 +106,14 @@ const Banner = () => {
 const Box = styled.div`
   width: 100%;
   height: 356px;
-  margin-left: -200px;
+  background-color: #5d79ff;
+  overflow: hidden;
+`;
+
+const BannerImg = styled.img`
+  max-width: 1240px;
+  width: 100%;
+  height: auto;
 `;
 
 export default Banner;

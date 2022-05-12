@@ -94,8 +94,8 @@ const Alarm = () => {
 const Wrap = styled.div`
   z-index: 3;
   position: absolute;
-  left: 63%;
-  top: 80px;
+  left: 57%;
+  top: 68px;
   margin: 0;
   padding: 24px 10px;
   max-width: 400px;

@@ -4,12 +4,13 @@ import errorPage from "../assets/errorPage.png";
 import { Text } from "../elements";
 import { history } from "../redux/configureStore";
 
-const ErrorPage = () => {
+const Ready = () => {
   return (
     <Wrap>
       <ErrImg src={errorPage}></ErrImg>
       <Text size="30px" bold margin="0">
-        요청하신 페이지를 찾을 수 없습니다.
+        <span style={{ color: "#68F99E" }}>이RUN 저RUN</span> 페이지
+        준비중입니다.
       </Text>
       <Btn
         onClick={() => {
@@ -56,4 +57,4 @@ const Btn = styled.button`
   }
 `;
 
-export default ErrorPage;
+export default Ready;

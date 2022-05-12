@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPostDB } from "../../redux/modules/post";
 import { Text, Grid } from "../../elements";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import courseFeedBanner from "../../assets/courseFeedBanner.png";
 
 const MGroupRunning = () => {
   const dispatch = useDispatch();
@@ -17,28 +18,39 @@ const MGroupRunning = () => {
 
   return (
     <>
-      <CardBox>
-        <Box>
-          <Grid display="flex" alignItems="center">
-            <Text bold size="25px">
+      <Grid
+        maxWidth="1240px"
+        display="flex"
+        justifyContent="column"
+        margin="100px auto 320px auto"
+      >
+        <Grid
+          display="flex"
+          justifyContent="space-between"
+          alignItems="flex-end"
+          margin="0 0 40px 0"
+        >
+          <Grid display="flex" alignItems="flex-end" width="auto">
+            <Text bold size="26px" margin="0 16px 0 0">
               그룹러닝
             </Text>
-            <Text bold size="15px" marginLeft>
+            <Text lineHeight="30px" size="16px" margin="0">
               함께 뛰면 즐거움이 두배!
             </Text>
           </Grid>
+
           <Btn
             onClick={() => {
-              history.push("/groupfeed");
+              history.push("/coursefeed");
             }}
           >
             더보기
             <HiOutlineArrowNarrowRight />
           </Btn>
-        </Box>
+        </Grid>
 
         <Grid
-          padding="0%" 
+          padding="0%"
           margin="auto"
           display="flex"
           justifyContent="center"
@@ -50,18 +62,29 @@ const MGroupRunning = () => {
             return <GroupCard key={idx} {...item} />;
           })}
         </Grid>
-      </CardBox>
+      </Grid>
 
-      <CardBox>
-        <Box>
-          <Grid display="flex" alignItems="center">
-            <Text bold size="25px">
+      <Grid
+        maxWidth="1240px"
+        display="flex"
+        justifyContent="column"
+        margin="80px auto 320px auto"
+      >
+        <Grid
+          display="flex"
+          justifyContent="space-between"
+          alignItems="flex-end"
+          margin="0 0 40px 0"
+        >
+          <Grid display="flex" alignItems="flex-end" width="auto">
+            <Text bold size="26px" margin="0 16px 0 0">
               코스추천
             </Text>
-            <Text bold size="15px" marginLeft>
+            <Text lineHeight="30px" size="16px" margin="0">
               나만의 코스를 추천해주세요!
             </Text>
           </Grid>
+
           <Btn
             onClick={() => {
               history.push("/coursefeed");
@@ -70,27 +93,18 @@ const MGroupRunning = () => {
             더보기
             <HiOutlineArrowNarrowRight />
           </Btn>
-        </Box>
-      </CardBox>
+        </Grid>
+
+        <CourseBanner src={courseFeedBanner}></CourseBanner>
+      </Grid>
     </>
   );
 };
 
-const CardBox = styled.div`
-  padding: 0% 16% 0% 16%;
-  margin-top: 20px;
-`;
-
-const Box = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 100px 50px 0 50px;
-`;
-
 const Btn = styled.button`
   border: none;
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 0.9rem;
+  font-size: 18px;
   color: #000000;
   background-color: transparent;
   font-weight: 1000;
@@ -98,6 +112,12 @@ const Btn = styled.button`
   text-decoration: none;
   margin-left: 30px;
   width: 100px;
+  cursor: pointer;
+`;
+
+const CourseBanner = styled.img`
+  max-width: 1240px;
+  width: 100%;
 `;
 
 export default MGroupRunning;

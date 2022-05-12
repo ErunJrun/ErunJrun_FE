@@ -136,6 +136,7 @@ Image.defaultProps = {
   image_auto: false,
   float: null,
   border: null,
+  padding: null,
 };
 
 const AspectOutter = styled.div`
@@ -217,6 +218,7 @@ const ImageCircle = styled.div`
   margin: ${(props) => props.margin};
   cursor: ${(props) => props.cursor};
   display: ${(props) => props.display};
+  padding: ${(props) => props.padding};
 `;
 
 // 마이페이지 프로필 커스텀

@@ -1,7 +1,7 @@
 import React from "react";
 import Ready from "../shared/Ready";
 
-const CourseFeed = () => {
+const Contact = () => {
   return (
     <>
       <Ready />
@@ -9,4 +9,4 @@ const CourseFeed = () => {
   );
 };
 
-export default CourseFeed;
+export default Contact;
