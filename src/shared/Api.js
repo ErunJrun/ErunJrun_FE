@@ -1,6 +1,5 @@
 import axios from "axios";
 import { deleteCookie, getCookie, setCookie } from "./Cookie";
-
 import { history } from "../redux/configureStore";
 
 // axios.defaults.withCredentials = true;
