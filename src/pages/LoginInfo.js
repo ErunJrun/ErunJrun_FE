@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { loginInfoDB } from "../redux/modules/user";
 import loginInfoImage from "../assets/loginInfoImage.png";
 import { history } from "../redux/configureStore";
-import ErrorPage from "../shared/ErrorPage";
 
 const LoginInfo = () => {
   const dispatch = useDispatch();
@@ -214,14 +213,6 @@ const LoginInfo = () => {
             <StartBtn onClick={addLoginInfo}>러닝시작하기</StartBtn>
           </Grid>
         </Grid>
-      </>
-    );
-  }
-
-  if (!nickname) {
-    return (
-      <>
-        <ErrorPage></ErrorPage>
       </>
     );
   }

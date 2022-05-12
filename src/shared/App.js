@@ -21,7 +21,12 @@ import Check from "../pages/Check";
 import LoginInfo from "../pages/LoginInfo";
 import MypageEdit from "../pages/MypageEdit";
 import GroupEdit from "../pages/GroupEdit";
-import ErrorPage from "./ErrorPage";
+import ServiceInfo from "../pages/ServiceInfo";
+import Contact from "../pages/Contact";
+import ServiceTerms from "../pages/ServiceTerms";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import CourseFeed from "../pages/CourseFeed";
+
 import { useDispatch } from "react-redux";
 import { loginCheckDB } from "../redux/modules/user";
 import { getCookie } from "./Cookie";
@@ -59,7 +64,11 @@ function App() {
           <Route path="/loginInfo" exact component={LoginInfo} />
           <Route path="/groupEdit/:groupId" exact component={GroupEdit} />
           <Route path="/edit" exact component={MypageEdit} />
-          <Route path="/error" exact component={ErrorPage} />
+          <Route path="/contact" exact component={CourseFeed} />
+          <Route path="/coursefeed" exact component={Contact} />
+          <Route path="/serviceInfo" exact component={ServiceInfo} />
+          <Route path="/serviceTerms" exact component={ServiceTerms} />
+          <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
         </ConnectedRouter>
       </Wrapper>
       <Footer></Footer>

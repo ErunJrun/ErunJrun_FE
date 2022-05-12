@@ -36,6 +36,7 @@ const Text = (props) => {
     letterSpacing,
     hover,
     alignItems,
+    lineHeight,
   } = props;
   const styles = {
     onMouseOver,
@@ -69,6 +70,7 @@ const Text = (props) => {
     id,
     hover,
     alignItems,
+    lineHeight,
   };
   return (
     <React.Fragment>
@@ -116,8 +118,10 @@ Text.defaultProps = {
   letterSpacing: null,
   hover: null,
   alignItems: null,
+  lineHeight: null,
 };
 const P = styled.p`
+  line-height: ${(props) => props.lineHeight};
   align-items: ${(props) => props.alignItems};
   :hover {
     ${(props) => props.hover};

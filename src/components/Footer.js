@@ -1,59 +1,79 @@
 import React from "react";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
+import { Grid } from "../elements";
 
 const Footer = () => {
-
   return (
     <HeaderBox>
-        <Box
-          onClick={() => {
-            history.push("/");
-          }}
+      <Grid maxWidth="1240px">
+        <Grid
+          display="flex"
+          maxWidth="685px"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          <img src="https://ifh.cc/g/fkqsm3.png"/>
-        </Box>
-        <Btn
-          onClick={() => {
-            history.push("/");
-          }}
-        >
-          서비스 소개
-        </Btn>
-        <Btn
-          onClick={() => {}}
-        >
-          개인정보처리방침
-        </Btn>
-        <Btn
-          onClick={() => {}}
-        >
-          이용약관
-        </Btn>
-        <Btn
-          onClick={() => {}}
-        >
-          찾아오시는 길
-        </Btn>
+          <Logo
+            onClick={() => {
+              history.push("/");
+            }}
+          >
+            <img src="https://ifh.cc/g/fkqsm3.png" />
+          </Logo>
+          <Btn
+            onClick={() => {
+              history.push("/serviceInfo");
+            }}
+          >
+            서비스 소개
+          </Btn>
+          <Btn
+            onClick={() => {
+              history.push("/privacyPolicy");
+            }}
+          >
+            개인정보처리방침
+          </Btn>
+          <Btn
+            onClick={() => {
+              history.push("/serviceTerms");
+            }}
+          >
+            이용약관
+          </Btn>
+          <Btn
+            onClick={() => {
+              history.push("/contact");
+            }}
+          >
+            Contact
+          </Btn>
+        </Grid>
+      </Grid>
     </HeaderBox>
   );
 };
 
-
 const HeaderBox = styled.div`
   display: flex;
-  height:217px;
+  height: 216px;
   background-color: #030c37;
-  align-items: center; 
+  align-items: center;
   margin-top: auto;
-
+  justify-content: center;
 `;
 
-const Box = styled.div`
-  margin-left: 9%;
+const Logo = styled.div`
+  max-width: 128px;
+  width: 100%;
+  max-height: 71.1px;
+  height: 100%;
+  margin-right: 20px;
+  cursor: pointer;
 `;
 
 const Btn = styled.button`
+  cursor: pointer;
   border: none;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.8rem;

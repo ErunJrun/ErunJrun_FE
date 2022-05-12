@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Alarm from "./alarm/Alarm";
 import { _getAlarmDB, _readAlarmDB } from "../redux/modules/user";
 
-import Badge from "@mui/material/Badge";
-
 const Header = () => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.isLogin);
@@ -30,7 +28,79 @@ const Header = () => {
   if (is_login) {
     return (
       <HeaderBox id="1">
-        <Box1>
+        <Grid maxWidth="1240px" display="flex" justifyContent="space-between">
+          <Grid
+            display="flex"
+            alignItems="center"
+            maxWidth="473px"
+            justifyContent="space-between"
+          >
+            <Logo
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              <img src="https://ifh.cc/g/fkqsm3.png" />
+            </Logo>
+            <Btn
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              Home
+            </Btn>
+            <Btn
+              onClick={() => {
+                history.push("/groupfeed");
+              }}
+            >
+              그룹러닝
+            </Btn>
+            <Btn
+              onClick={() => {
+                history.push("/coursefeed");
+              }}
+            >
+              코스추천
+            </Btn>
+          </Grid>
+          <Grid display="flex" width="auto" alignItems="center">
+            <Grid height="auto" display="flex" width="auto">
+              <IconButton
+                _onClick={() => {
+                  readAlarm();
+                }}
+                alarm
+                color="#BFCED1"
+                size="35px"
+                height="62px"
+                padding="28px 0 0 0"
+                margin="0"
+              ></IconButton>
+              {alarmList?.unreadCount !== 0 ? (
+                <Badge>
+                  {alarmList?.unreadCount ? alarmList?.unreadCount : null}
+                </Badge>
+              ) : null}
+
+              {alarmOpen ? <Alarm></Alarm> : null}
+            </Grid>
+            <Modal />
+          </Grid>
+        </Grid>
+      </HeaderBox>
+    );
+  }
+
+  return (
+    <HeaderBox id="1">
+      <Grid maxWidth="1240px" display="flex" justifyContent="space-between">
+        <Grid
+          display="flex"
+          alignItems="center"
+          maxWidth="473px"
+          justifyContent="space-between"
+        >
           <Logo
             onClick={() => {
               history.push("/");
@@ -59,62 +129,8 @@ const Header = () => {
           >
             코스추천
           </Btn>
-        </Box1>
+        </Grid>
 
-        <Box2>
-          <Grid>
-            <Badge
-              badgeContent={alarmList?.unreadCount ? alarmList?.unreadCount : 0}
-              color="primary"
-            >
-              <IconButton
-                _onClick={() => {
-                  readAlarm();
-                }}
-                alarm
-                color="#BFCED1"
-                size="35px"
-              ></IconButton>
-            </Badge>
-            {alarmOpen ? <Alarm></Alarm> : null}
-          </Grid>
-          <Modal />
-        </Box2>
-      </HeaderBox>
-    );
-  }
-
-  return (
-    <HeaderBox id="1">
-      <Logo
-        onClick={() => {
-          history.push("/");
-        }}
-      >
-        <img src="https://ifh.cc/g/fkqsm3.png" />
-      </Logo>
-      <Btn
-        onClick={() => {
-          history.push("/");
-        }}
-      >
-        Home
-      </Btn>
-      <Btn
-        onClick={() => {
-          history.push("/groupfeed");
-        }}
-      >
-        그룹러닝
-      </Btn>
-      <Btn
-        onClick={() => {
-          history.push("/coursefeed");
-        }}
-      >
-        코스추천
-      </Btn>
-      <Box2>
         <Btn
           onClick={() => {
             history.push("/login");
@@ -122,7 +138,7 @@ const Header = () => {
         >
           로그인
         </Btn>
-      </Box2>
+      </Grid>
     </HeaderBox>
   );
 };
@@ -132,35 +148,49 @@ const HeaderBox = styled.div`
   height: 90px;
   background-color: #030c37;
   align-items: center;
+  width: 100%;
+  justify-content: center;
+`;
+
+const Badge = styled.div`
+  position: absolute;
+  right: 21.5%;
+  top: 28px;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  border: none;
+  color: black;
+  background-color: #68f99e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1px;
+  box-sizing: border-box;
 `;
 
 const Logo = styled.div`
-  margin-left: 9%;
-`;
-
-const Box1 = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 9%;
-`;
-
-const Box2 = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 45%;
+  max-width: 128px;
+  width: 100%;
+  max-height: 71.1px;
+  height: 100%;
+  margin-right: 20px;
+  cursor: pointer;
 `;
 
 const Btn = styled.button`
-  width: 100px;
+  cursor: pointer;
+  width: auto;
   border: none;
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 0.95rem;
+  font-size: 16px;
   color: #ffffff;
   background-color: transparent;
-  font-weight: 1000;
+  font-weight: 700;
   text-align: center;
   text-decoration: none;
-  margin-left: 30px;
   :hover {
     color: #68f99e;
   }
