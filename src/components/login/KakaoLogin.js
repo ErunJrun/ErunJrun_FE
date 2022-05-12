@@ -6,7 +6,10 @@ const KakaoLogin = () => {
   const dispatch = useDispatch();
 
   // 인가코드
-  let code = new URL(window.location.href).searchParams.get("code");
+  let params = new URLSearchParams(document.location.search);
+  let code = params.get("code");
+
+  // let code = new URL(window.location.href).searchParams.get("code");
   console.log(code);
 
   React.useEffect(async () => {
