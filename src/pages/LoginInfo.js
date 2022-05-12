@@ -1,8 +1,11 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Text, Grid } from "../elements";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { loginInfoDB } from "../redux/modules/user";
+import loginInfoImage from "../assets/loginInfoImage.png";
+import { history } from "../redux/configureStore";
+import ErrorPage from "../shared/ErrorPage";
 
 const LoginInfo = () => {
   const dispatch = useDispatch();
@@ -11,6 +14,15 @@ const LoginInfo = () => {
   const [checkedExp, setCheckedExp] = useState("");
 
   console.log(checkedRegion, checkedDistance, checkedExp);
+
+  const nickname = localStorage.getItem("nickname");
+
+  useEffect(() => {
+    if (!nickname) {
+      window.alert("비정상적인 접근입니다.");
+      history.push("/login");
+    }
+  }, []);
 
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
@@ -25,27 +37,29 @@ const LoginInfo = () => {
   ]);
 
   const [runDistance, setRunDistance] = useState([
-    "5km미만",
-    "5km 이상 10km 미만",
-    "10km 이상 15km 미만",
-    "15km 이상",
     "잘 모르겠어요",
+    `    5km 이상 
+  10km 미만`,
+    `   10km 이상
+   15km 미만`,
+    "15km 이상",
+    "5km미만",
   ]);
 
   const [runExp, setRunExp] = useState([
-    "처음이예요",
+    "런린이",
+    "퍼플",
     "블루",
     "레드",
-    "오렌지",
-    "골드",
+    "블랙",
   ]);
 
   const [runExpComment, setRunExpComment] = useState([
-    "러닝은 태어나서 처음!",
-    "1달에 5회 미만으로 뛰어요!",
-    "1달에 10회 미만으로 뛰어요!",
-    "1달에 15회 미만으로 뛰어요!",
-    "1달에 15회 이상으로 뛰어요!",
+    "처음이에요",
+    "5회 미만",
+    `5회 이상 10회 미만`,
+    `10회 이상 15회 미만`,
+    `15회 이상`,
   ]);
 
   const choiceRegion = (idx) => {
@@ -64,135 +78,186 @@ const LoginInfo = () => {
     dispatch(loginInfoDB(checkedRegion, checkedDistance, checkedExp));
   };
 
-  return (
-    <>
-      <Grid maxWidth="1000px" margin="68px auto">
-        <Grid>
-          <Text bold size="36px">
-            방남지님의 러닝 스타일을 알려주세요
-          </Text>
-          <Text size="24px">원하는 크루를 찾기 쉽도록 도와드릴게요!</Text>
-        </Grid>
-
-        <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
-          <Text margin="0" bold size="28px">
-            선호지역
-          </Text>
-          <Text margin="0" size="24px">
-            주로 활동하시는 지역을 선택해주세요.
-          </Text>
-          <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
-            {runRegion.map((e, idx) => {
-              return (
-                <Fragment key={idx}>
-                  <Label checked={checkedRegion}>
-                    <input
-                      onClick={() => {
-                        choiceRegion(idx);
-                      }}
-                      type="radio"
-                      name="runRegion"
-                      value={e}
-                    ></input>
-                    <Text bold>{e}</Text>
-                  </Label>
-                </Fragment>
-              );
-            })}
-          </Grid>
-        </Grid>
-
-        <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
-          <Text margin="0" bold size="28px">
-            선호 거리
-          </Text>
-
-          <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
-            {runDistance.map((e, idx) => {
-              return (
-                <Fragment key={idx}>
-                  <LabelDistance checked={checkedDistance}>
-                    <input
-                      onClick={() => {
-                        choiceDistance(idx);
-                      }}
-                      type="radio"
-                      name="runDistance"
-                      value={e}
-                    ></input>
-                    <Text bold>{e}</Text>
-                  </LabelDistance>
-                </Fragment>
-              );
-            })}
-          </Grid>
-        </Grid>
-
-        <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
-          <Text margin="0" bold size="28px">
-            러닝 경험
-          </Text>
-          <Text margin="0" size="20px">
-            1달 기준의 러닝 횟수를 선택해주세요.
-          </Text>
-
-          <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
-            {runExp.map((e, idx) => {
-              return (
-                <Fragment key={idx}>
-                  <LabelExp checked={checkedExp}>
-                    <input
-                      onClick={() => {
-                        choiceExp(e);
-                      }}
-                      type="radio"
-                      name="runExp"
-                      value={e}
-                    ></input>
-                    <Text bold>{e}</Text>
-                  </LabelExp>
-                </Fragment>
-              );
-            })}
-          </Grid>
-          <Grid display="flex" justifyContent="center">
-            <Text size="24px" bold>
-              {runExpComment[0]}
+  if (nickname) {
+    return (
+      <>
+        <Grid maxWidth="800px" width="100%" margin="72px auto ">
+          <LoginCharacter src={loginInfoImage}></LoginCharacter>
+          <Grid margin="0 0 51px 0">
+            <Text margin="45px 0 0 0" bold size="30px">
+              <span style={{ color: "#68F99E" }}>{nickname}</span>님의 러닝
+              스타일을 알려주세요
+            </Text>
+            <Text margin="8px 0 0 0" size="20px">
+              러닝 스타일에 딱 맞는 그룹 러닝을 추천해드립니다.
             </Text>
           </Grid>
-        </Grid>
 
-        <Grid margin="116px 0" display="flex" justifyContent="center">
-          <StartBtn onClick={addLoginInfo}>러닝시작하기</StartBtn>
+          <Grid margin="0 0 84px 0" display="flex" flexDirection="column">
+            <Text margin="0 0 16px 0" bold size="18px">
+              선호하는 러닝 지역
+            </Text>
+            <Hr />
+
+            <Grid margin="0" display="flex" justifyContent="space-between">
+              {runRegion.map((e, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <Label checked={checkedRegion}>
+                      <input
+                        onClick={() => {
+                          choiceRegion(idx + 1);
+                        }}
+                        type="radio"
+                        name="runRegion"
+                        value={e}
+                      ></input>
+                      <Text size="14px" bold>
+                        {e}
+                      </Text>
+                    </Label>
+                  </Fragment>
+                );
+              })}
+            </Grid>
+          </Grid>
+
+          <Grid margin="0 0 84px 0" display="flex">
+            <Text
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              margin="0 0 16px 0"
+              bold
+              size="18px"
+            >
+              선호하는 러닝 거리
+            </Text>
+            <Hr />
+
+            <Grid
+              margin="20px 0 0 0"
+              display="flex"
+              justifyContent="space-between"
+            >
+              {runDistance.map((e, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <LabelDistance checked={checkedDistance}>
+                      <input
+                        onClick={() => {
+                          choiceDistance(idx);
+                        }}
+                        type="radio"
+                        name="runDistance"
+                        value={e}
+                      ></input>
+                      <Text size="14px" bold>
+                        {e}
+                      </Text>
+                    </LabelDistance>
+                  </Fragment>
+                );
+              })}
+            </Grid>
+          </Grid>
+
+          <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
+            <Text
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              margin="0 0 16px 0"
+              bold
+              size="18px"
+            >
+              1달 기준 러닝 횟수
+            </Text>
+            <Hr />
+
+            <Grid
+              margin="20px 0 20px 0"
+              display="flex"
+              justifyContent="space-between"
+            >
+              {runExpComment.map((e, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <LabelExp checked={checkedExp}>
+                      <input
+                        onClick={() => {
+                          choiceExp(idx);
+                        }}
+                        type="radio"
+                        name="runExp"
+                        value={idx}
+                      ></input>
+                      <Text size="14px" bold>
+                        {e}
+                      </Text>
+                    </LabelExp>
+                  </Fragment>
+                );
+              })}
+            </Grid>
+            <Grid display="flex" justifyContent="center">
+              {checkedExp >= 0 ? (
+                <Text size="16px" bold>
+                  당신의 러닝 레벨은{" "}
+                  <Span runExp={checkedExp}>{runExp[checkedExp]}</Span> 입니다.
+                </Text>
+              ) : null}
+            </Grid>
+          </Grid>
+
+          <Grid margin="116px 0" display="flex" justifyContent="center">
+            <StartBtn onClick={addLoginInfo}>러닝시작하기</StartBtn>
+          </Grid>
         </Grid>
-      </Grid>
-    </>
-  );
+      </>
+    );
+  }
+
+  if (!nickname) {
+    return (
+      <>
+        <ErrorPage></ErrorPage>
+      </>
+    );
+  }
 };
+
+const LoginCharacter = styled.img`
+  width: 280px;
+  height: 139px;
+`;
+
+const Hr = styled.hr`
+  width: 800px;
+  height: 0px;
+  border: 1px solid #000000;
+  margin: 0;
+`;
 
 const LabelExp = styled.label`
   input {
     display: none;
   }
   input + p {
-    margin: 10px;
-    width: 180px;
-    height: 50px;
-    flex-grow: 0;
+    width: 147px;
+    height: 64px;
+    box-sizing: border-box;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 11px auto;
-    border-radius: 3px;
-    border: solid 1px #000;
+    padding: 10px auto;
+    border-radius: 100px;
     cursor: pointer;
-    box-sizing: border-box;
+    background-color: #f0f0f0;
   }
   input:checked + p {
     background-color: #68f99e;
-    color: #000;
+    color: #030c37;
   }
 `;
 
@@ -201,24 +266,20 @@ const LabelDistance = styled.label`
     display: none;
   }
   input + p {
-    margin: 10px;
-    width: 180px;
-    height: 74px;
-    flex-grow: 0;
+    width: 147px;
+    height: 64px;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 11px auto;
-    border-radius: 3px;
-    border: solid 1px #000;
+    padding: 10px 20px;
+    border-radius: 100px;
     cursor: pointer;
     box-sizing: border-box;
+    background-color: #f0f0f0;
   }
   input:checked + p {
     background-color: #68f99e;
-    color: #000;
+    color: #030c37;
   }
 `;
 
@@ -227,35 +288,47 @@ const Label = styled.label`
     display: none;
   }
   input + p {
-    margin: 10px 5px;
-    width: 316px;
-    height: 74px;
-    flex-grow: 0;
+    width: 256px;
+    height: 56px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 24px auto;
-    border-radius: 3px;
-    border: solid 1px #000;
+    padding: 10px auto;
+    border-radius: 100px;
     cursor: pointer;
     box-sizing: border-box;
+    background-color: #f0f0f0;
   }
   input:checked + p {
     background-color: #68f99e;
-    color: #000;
+    color: #030c37;
   }
 `;
 
+const Span = styled.span`
+  ${(props) => (props.runExp === 0 ? `color:#FF823B ;` : "")}
+  ${(props) => (props.runExp === 1 ? `color:#BD6AFF ;` : "")}
+  ${(props) => (props.runExp === 2 ? `color: #4248C4;` : "")}
+  ${(props) => (props.runExp === 3 ? `color:#EE4343;` : "")}
+  ${(props) => (props.runExp === 4 ? `color: #303030;` : "")}
+`;
+
 const StartBtn = styled.button`
+  margin: 0 0 320px 0;
   box-sizing: border-box;
-  width: 350.91px;
-  height: 66px;
-  background: #000000;
-  border: 1px solid #000000;
-  border-radius: 4px;
-  color: white;
+  width: 200px;
+  height: 56px;
+  background: #030c37;
+  border-radius: 6px;
+  color: #68f99e;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  :hover {
+    box-shadow: 0 0 4px #030c37;
+    font-size: 19px;
+  }
 `;
 
 export default LoginInfo;

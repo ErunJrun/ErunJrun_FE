@@ -5,6 +5,7 @@ import { Grid, Text } from "../elements";
 import KakaoLogin from "../assets/KakaoLogin.png";
 import NaverLogin from "../assets/NaverLogin.png";
 import { history } from "../redux/configureStore";
+import LoginLogo from "../assets/LoginLogo.png";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -31,52 +32,50 @@ const Login = () => {
         margin="10px auto"
         padding="16px"
       >
-        <Grid
-          maxWidth="470px"
-          width="100%"
-          display="flex"
-          flexDirection="column"
-          margin="0 0 163px 0"
-        >
-          <Text margin="0" size="48px">
-            함께 달리고 싶을 땐
-          </Text>
-          <Text margin="0" bold size="48px">
-            이RUN저RUN
-          </Text>
-        </Grid>
+        <LogoImg src={LoginLogo}></LogoImg>
 
-        <Grid
-          maxWidth="470px"
-          width="100%"
-          display="flex"
-          flexDirection="column"
-        >
-          <KakaoBtn
-            onClick={() => {
-              window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=${kakaoCallbackUrl}&response_type=code`;
-            }}
-            src={KakaoLogin}
-          ></KakaoBtn>
+        <KakaoBtn
+          onClick={() => {
+            window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=${kakaoCallbackUrl}&response_type=code`;
+          }}
+          src={KakaoLogin}
+        ></KakaoBtn>
 
-          <NaverBtn
-            onClick={() => {
-              window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClinetId}&redirect_uri=${naverCallbackUrl}&state=erunjrun`;
-            }}
-            src={NaverLogin}
-          ></NaverBtn>
-        </Grid>
+        <NaverBtn
+          onClick={() => {
+            window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClinetId}&redirect_uri=${naverCallbackUrl}&state=erunjrun`;
+          }}
+          src={NaverLogin}
+        ></NaverBtn>
       </Grid>
     </React.Fragment>
   );
 };
 
+const LogoImg = styled.img`
+  width: 292px;
+  height: 146px;
+  margin: 135px auto 64px auto;
+`;
+
 const KakaoBtn = styled.img`
-  margin-bottom: 20px;
+  width: 360px;
+  height: 54px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  :hover {
+    box-shadow: 0 0 3px #142785;
+  }
 `;
 
 const NaverBtn = styled.img`
-  margin-bottom: 20px;
+  width: 360px;
+  height: 54px;
+  margin-bottom: 297px;
+  cursor: pointer;
+  :hover {
+    box-shadow: 0 0 3px #142785;
+  }
 `;
 
 export default Login;

@@ -80,10 +80,12 @@ const LevelBox = styled.div`
   padding: 1px 5px;
   width: 93px;
   height: 18px;
-  ${(props) => (props.userLevel === "블루" ? `background-color:#686EF9 ;` : "")}
-  ${(props) => (props.userLevel === "레드" ? `background-color: #fc4b4b;` : "")}
   ${(props) =>
-    props.userLevel === "오렌지" ? `background-color:#F76300;` : ""}
+    props.userLevel === "처음이에요" ? `background-color:#FF823B ;` : ""}
+  ${(props) => (props.userLevel === "퍼플" ? `background-color:#BD6AFF ;` : "")}
+  ${(props) => (props.userLevel === "블루" ? `background-color: #4248C4;` : "")}
+  ${(props) =>
+    props.userLevel === "오렌지" ? `background-color:#EE4343;` : ""}
   ${(props) => (props.userLevel === "골드" ? `background-color: #AC943C;` : "")}
   
 
