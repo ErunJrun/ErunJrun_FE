@@ -76,7 +76,9 @@ const Group = () => {
                 <ApplyBtnFalse>체크완료</ApplyBtnFalse>
               ) : (
                 <ApplyBtnTrue
-                onClick={() => {history.push("/check");}}>출석체크하기</ApplyBtnTrue>
+                onClick={() => {
+                  history.push("/check");
+                }}>출석체크하기</ApplyBtnTrue>
               )}
             </Grid> 
 
