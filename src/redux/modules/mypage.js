@@ -12,7 +12,7 @@ const EDIT_PROFILE = "EDIT_PROFILE";
 const NUMBER_CHECK = "NUMBER_CHECK";
 const GETNUMBER_CHECK = "GETNUMBER_CHECK";
 const GET_EVALUATION = "GET_EVALUATION";
-// const PATCH_EVALUATION = "PATCH_EVALUATION";
+const PATCH_EVALUATION = "PATCH_EVALUATION";
 
 
 // //action creators
@@ -70,7 +70,7 @@ const initialState = {
   phoneNumber: [],
   info: [],
   host:[],
-  // evaluation:[],
+  evaluation:[],
 };
 
 
@@ -218,28 +218,30 @@ export const getEvaluationDB = (groupId, hostId, userId) => {
   };
 };
 
-//호스트 평가 
-// export const evaluationDB = (groupId, userId, point) => {
-//   return async function (dispatch, getState, { history }) {
-//     try {
-//       console.log(groupId, userId);
-//       const formData = new FormData();
+// 호스트 평가 
+export const evaluationDB = (groupId,hostId, point) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(groupId, hostId, point);
+      const formData = new FormData();
       
-//       formData.append("userId", userId);
-//       formData.append("point", point);
+      formData.append("hostId", hostId);
+      formData.append("point", point);
   
-//       const { data } = await api.patch(`/group/evaluation/${groupId}`, formData, {
-//         headers: {
-//           "Content-Type": "multipart/form-data",
-//         },
-//       });
-//       console.log(data);
-//       history.push("/mypage");
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
+      const { data } = await api.patch(`/group/evaluation/${groupId}`, {hostId: hostId,
+        point: point}, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(data);
+      history.push("/mypage");
+      window.alert("호스트평가가 완료되었습니다!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 //reducer
 
@@ -297,11 +299,12 @@ export default handleActions(
         draft.host = action.payload;
       }),
 
-      // [PATCH_EVALUATION]: (state, action) =>
-      // produce(state, (draft) => {
-      //   console.log(action.payload);
-      //   draft.evaluation = action.payload;
-      // }),
+      [PATCH_EVALUATION]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.evaluation = action.hostId;
+        draft.evaluation = action.point;
+      }),
   },
   initialState
 );

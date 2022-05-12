@@ -1,7 +1,8 @@
 import React, { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getEvaluationDB } from "../../redux/modules/mypage";
+import { getEvaluationDB, evaluationDB } from "../../redux/modules/mypage";
 import styled from "styled-components";
+import { history } from '../../redux/configureStore';
 import { Text, Grid } from "../../elements"
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -11,9 +12,6 @@ const Evaluation = (props) => {
     //console.log(props);
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
-    const [point, setPoint] = useState(0);
-
-    console.log(point);
 
      const userId = localStorage.getItem("userId");
      const groupId = props.running.groupId;
@@ -23,11 +21,12 @@ const Evaluation = (props) => {
     const group = useSelector((state) => state.mypage.host);
 
     //console.log(group);
-
+      
     const toggleModal = () => {
         setModal(!modal)
     };
-    
+
+           
     return (
         <div>
             <button style={{margin:"0 0 3px 0", border:"none"}}
@@ -54,14 +53,23 @@ const Evaluation = (props) => {
                         {group?.data?.hostUser?.date} 토 &nbsp; {group?.data?.hostUser?.standbyTime} 에 &nbsp; {group?.data?.hostUser?.title}를  &nbsp;함께함
                         </Text>
 
-                        <Btn onClick={() => { setPoint(point + 1); }}>
+                        
+                        <Btn onClick={() => { 
+                            
+                            toggleModal();
+                            dispatch(evaluationDB(groupId, hostId, 1));
+                        }}>
                             <img style={{margin:"15px 0 0 0"}} src='https://ifh.cc/g/3Mn8Ja.png'/>
                             <Text bold>
                                 좋았어요
-                            </Text>       
+                             </Text>       
                         </Btn>
 
-                        <Btn onClick={() => { setPoint(point - 1); }}>
+                        <Btn onClick={() => { 
+                       
+                            toggleModal();
+                            dispatch(evaluationDB(groupId, hostId, -1));
+                        }}>
                             <img style={{margin:"15px 0 0 0"}} src='https://ifh.cc/g/rqhHfO.png'/>
                             <Text bold>
                                 아쉬웠어요

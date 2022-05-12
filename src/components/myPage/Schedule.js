@@ -67,7 +67,7 @@ const Schedule = () => {
                   }}
                     display="flex" 
                     justifyContent="space-between"  
-                    width="550px" 
+                    width="600px" 
                     height="180px" 
                     margin="-130px 0 0 650px"
                   >
@@ -82,7 +82,7 @@ const Schedule = () => {
                       textalign="center"
                     >D-{waiting.dDay}</Text>
                         <Text bold size="18px">&nbsp;{waiting.title}</Text>
-                        <div style={{margin:"0 0 0 140px", display:"flex"}}>
+                        <div style={{margin:"0 30px 0 0", display:"flex"}}>
                             <TextBox>{waiting.location}</TextBox>
                             <TextBox>{waiting.distance}</TextBox>
                             <TextBox>{waiting.thema}</TextBox> 
