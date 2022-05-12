@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Text,Grid } from "../elements"
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 const Check = () => {
-
+    
     const [bgColor, setBgColor] = useState("white")
     const [color, setColor] = useState("#05ae24");
     const [check, setCheck] = useState("출석확인");
     const [ckColor, setCkColor] = useState("white");
 
+    const check_list = useSelector((state) => state.mypage.attend);
+    console.log(check_list);
+     //if (check_list.length === 0) { return <></>; }
 
     const bgChange = () => {
         bgColor === "#ebfbd7" ? setBgColor("white") : setBgColor("#ebfbd7");
@@ -30,12 +34,10 @@ const Check = () => {
                 <img src="https://ifh.cc/g/fkqsm3.png"/>
             </Grid>
             
-                
-               
-            
             <div>
                 2022.04.27. 10:00 토 벚꽃과 야경 러닝 명소  3/10
             </div>
+  
             <Leader>
                 <MyImage src="https://ifh.cc/g/qT8V9W.jpg"/>
                 <Text bold size="16px">
@@ -45,11 +47,11 @@ const Check = () => {
                     크루장
                 </Text>
             </Leader>
-            <hr/>
-            <UserBox bgColor={bgColor} onClick={bgChange}>             
-                <MyImage src="https://ifh.cc/g/40ohfh.jpg"/>
+           {/* {check_list?.applyUser?.user.map((user, index) => (
+               <UserBox key={index} bgColor={bgColor} onClick={bgChange} >             
+                <MyImage src={user.profileUrl}/>
                 <Text bold size="16px">
-                    누룽지
+                    {user.nickname}
                 </Text>
                 <Button color={color} ckColor={ckColor} onClick={() => {
                   change();
@@ -58,19 +60,9 @@ const Check = () => {
                    {check}
                 </Button>
             </UserBox>
-            <UserBox bgColor={bgColor} onClick={bgChange}>             
-                <MyImage src="https://ifh.cc/g/40ohfh.jpg"/>
-                <Text bold size="16px">
-                    누룽지
-                </Text>
-                <Button color={color} ckColor={ckColor} onClick={() => {
-                  change();
-                  ckChange();
-                }}>
-                   {check}
-                </Button>
-            </UserBox>
-           
+           ))} */}
+            
+            
         </Box>
         
     );

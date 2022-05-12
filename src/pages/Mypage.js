@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileDB } from "../redux/modules/mypage"
+import { getProfileDB, getMyRunningDB } from "../redux/modules/mypage"
 import Profile from "../components/myPage/Profile";
 import Schedule from "../components/myPage/Schedule";
 import styled from "styled-components";
@@ -60,6 +60,7 @@ const Mypage = () => {
         <Btn onClick={()=>{ 
             setMyGroup(true)
             setComplete(false)
+            dispatch(getMyRunningDB(userId));
             }}>
             내가만든 그룹러닝
         </Btn> 

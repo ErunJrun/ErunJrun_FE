@@ -13,6 +13,7 @@ const NUMBER_CHECK = "NUMBER_CHECK";
 const GETNUMBER_CHECK = "GETNUMBER_CHECK";
 const GET_EVALUATION = "GET_EVALUATION";
 const PATCH_EVALUATION = "PATCH_EVALUATION";
+const GET_ATTEND = "GET_ATTEND";
 
 
 // //action creators
@@ -56,10 +57,15 @@ export const getEvaluation = (payload) => ({
   payload,
 });
 
-// export const patchEvaluation = (payload) => ({
-//   type: PATCH_EVALUATION,
-//   payload,
-// });
+export const patchEvaluation = (payload) => ({
+  type: PATCH_EVALUATION,
+  payload,
+});
+
+export const getAttend = (payload) => ({
+  type: GET_ATTEND,
+  payload,
+});
 
   
 //initialState
@@ -71,6 +77,7 @@ const initialState = {
   info: [],
   host:[],
   evaluation:[],
+  attend:[],
 };
 
 
@@ -243,6 +250,29 @@ export const evaluationDB = (groupId,hostId, point) => {
   };
 };
 
+//출석체크 리스트
+export const getAttendDB = (groupId, userId, hostId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(groupId,userId,hostId);
+      // let data
+      // if (hostId === userId) {
+      //   data = await api.get(`/group/attendance/${groupId}`);
+      //   console.log(data);
+      //   dispatch(getAttend(data));
+      // }
+
+      const { data } = await api.get(`/group/attendance/${groupId}`);
+        console.log(data);
+        dispatch(getAttend(data));
+      
+    } catch (error) {
+      console.log(error);
+      //window.alert(error);
+    }
+  };
+};
+
 //reducer
 
 export default handleActions(
@@ -304,6 +334,12 @@ export default handleActions(
         console.log(action.payload);
         draft.evaluation = action.hostId;
         draft.evaluation = action.point;
+      }),
+
+      [GET_ATTEND]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.attend = action.payload;
       }),
   },
   initialState

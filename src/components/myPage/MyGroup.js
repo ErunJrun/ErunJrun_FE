@@ -1,22 +1,16 @@
-import React, { useEffect } from 'react';
-import { getMyRunningDB } from "../../redux/modules/mypage"
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid, Image, IconButton } from "../../elements";
-import Evaluation from './Evaluation';
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
+import { getAttendDB } from '../../redux/modules/mypage';
 
-const MyGroup = (props) => {
-  
+const MyGroup = () => {
     const dispatch = useDispatch();
-    const userId = localStorage.getItem("userId");
+    const hostId = localStorage.getItem("userId");
 
     const my = useSelector((state) => state.mypage.mygroup);
     console.log(my);
-
-    useEffect(() => {
-        dispatch(getMyRunningDB(userId));
-    }, []);
 
     if (my.length === 0) { return <></>; }
 
@@ -27,7 +21,7 @@ const MyGroup = (props) => {
               <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
               <Grid
                 _onClick={() => {
-                  history.push(`/groupdetail/${data.groupId}`);
+                  history.push(`/groupdetail/$groupId`);
                 }}
                 width="100%"
                 display="flex"
@@ -70,7 +64,10 @@ const MyGroup = (props) => {
                 <ApplyBtnFalse>체크완료</ApplyBtnFalse>
                : (
                 <ApplyBtnTrue
-                onClick={() => {history.push("/check");}}>출석체크하기</ApplyBtnTrue>
+                onClick={() => {
+                  history.push("/check");
+                  dispatch(getAttendDB( data.groupId, data.userId, hostId));
+                }}>출석체크하기</ApplyBtnTrue>
               )}
             </Grid> 
 
