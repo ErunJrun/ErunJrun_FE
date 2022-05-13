@@ -14,8 +14,6 @@ const LoginInfo = () => {
   const [checkedDistance, setCheckedDistance] = useState("");
   const [checkedExp, setCheckedExp] = useState("");
 
-  console.log(checkedRegion, checkedDistance, checkedExp);
-
   const nickname = localStorage.getItem("nickname");
 
   // useEffect(() => {
@@ -82,6 +80,8 @@ const LoginInfo = () => {
       dispatch(loginInfoDB(checkedRegion, checkedDistance, runExp[checkedExp]));
     }
   };
+
+  console.log(checkedRegion, checkedDistance, checkedExp, runExp[checkedExp]);
 
   if (nickname) {
     return (
