@@ -28,8 +28,10 @@ const Header = () => {
   const token = getCookie("accessToken");
 
   useEffect(() => {
-    dispatch(_getAlarmDB());
-  }, [token]);
+    if (token) {
+      dispatch(_getAlarmDB());
+    }
+  }, []);
 
   if (is_login) {
     return (
