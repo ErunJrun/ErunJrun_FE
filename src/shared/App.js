@@ -60,7 +60,7 @@ function App() {
           <Route path="/groupdetail/:groupId" exact component={GroupDetail} />
           <Route path="/mypage/recommend" exact component={Recommend} />
           <Route path="/mypage/badge" exact component={Badge} />
-          <Route path="/check" exact component={Check} />
+          <Route path="/check/:groupId" exact component={Check} />
           <Route path="/loginInfo" exact component={LoginInfo} />
           <Route path="/groupEdit/:groupId" exact component={GroupEdit} />
           <Route path="/edit" exact component={MypageEdit} />

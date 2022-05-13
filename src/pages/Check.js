@@ -4,9 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import { patchAttendDB } from "../redux/modules/mypage";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 const Check = () => {
   const dispatch = useDispatch();
+  const params = useParams();
+  const groupId = params.groupId;
+
+  console.log(groupId);
 
   const [userId, setUserId] = useState([]);
 
@@ -14,8 +19,6 @@ const Check = () => {
 
   const check_list = useSelector((state) => state.mypage.attend);
   console.log(check_list);
-
-  const groupId = check_list?.applyUser[0]?.groupId;
 
   const choiceTime = (e, index) => {
     if (e.target.checked) {

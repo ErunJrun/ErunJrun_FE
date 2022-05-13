@@ -1,81 +1,81 @@
-import React from 'react';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid, Image, IconButton } from "../../elements";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
-import { getAttendDB } from '../../redux/modules/mypage';
+import { getAttendDB } from "../../redux/modules/mypage";
 
 const MyGroup = () => {
-    const dispatch = useDispatch();
-    const hostId = localStorage.getItem("userId");
+  const dispatch = useDispatch();
+  const hostId = localStorage.getItem("userId");
 
-    const my = useSelector((state) => state.mypage.mygroup);
-    console.log(my);
+  const my = useSelector((state) => state.mypage.mygroup);
+  console.log(my);
 
-    if (my.length === 0) { return <></>; }
+  if (my.length === 0) {
+    return <></>;
+  }
 
-    return (
-        <Grid  display="flex">
-          {my.data?.map((data, index) =>
-         
-            (
-              <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
-              <Grid
-                _onClick={() => {
-                  history.push(`/groupdetail/$groupId`);
-                }}
-                width="100%"
-                display="flex"
-                flexDirection="column"
-                cursor="pointer"
-              >
-                <Image
-                  shape="imgBtn"
-                  width="384px"
-                  height="288px"
-                  src={data.thumbnailUrl}
-                  borderRadius="3px"
-                ></Image>
-  
-                <Grid>
-                  <Text cursor="pointer" size="18px" bold margin="0">
-                    {data.title}
-                  </Text>
-                  <Text cursor="pointer" size="16px" margin="10px 0 0 0">
-                    {data.date} (소요 시간 : {data.totalTime})
-                  </Text>
-                </Grid>
-  
-                <Grid cursor="pointer" display="flex">
-                  <Tag>{data.location}</Tag>
-                  <Tag>{data.distance}km</Tag>
-                  <Tag>{data.thema}</Tag>
-                </Grid>
-                <Hr></Hr>
-                <Grid
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  margin="0 0 10px 0"
-                >
-                </Grid>
-              </Grid>
-  
-              {data.evaluation ? 
-                <ApplyBtnFalse>체크완료</ApplyBtnFalse>
-               : (
-                <ApplyBtnTrue
-                onClick={() => {
-                  history.push("/check");
-                  dispatch(getAttendDB( data.groupId, data.userId, hostId));
-                }}>출석체크하기</ApplyBtnTrue>
-              )}
-            </Grid> 
+  return (
+    <Grid display="flex">
+      {my.data?.map((data, index) => (
+        <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
+          <Grid
+            _onClick={() => {
+              history.push(`/groupdetail/$groupId`);
+            }}
+            width="100%"
+            display="flex"
+            flexDirection="column"
+            cursor="pointer"
+          >
+            <Image
+              shape="imgBtn"
+              width="384px"
+              height="288px"
+              src={data.thumbnailUrl}
+              borderRadius="3px"
+            ></Image>
 
-              )
-            )}
+            <Grid>
+              <Text cursor="pointer" size="18px" bold margin="0">
+                {data.title}
+              </Text>
+              <Text cursor="pointer" size="16px" margin="10px 0 0 0">
+                {data.date} (소요 시간 : {data.totalTime})
+              </Text>
+            </Grid>
+
+            <Grid cursor="pointer" display="flex">
+              <Tag>{data.location}</Tag>
+              <Tag>{data.distance}km</Tag>
+              <Tag>{data.thema}</Tag>
+            </Grid>
+            <Hr></Hr>
+            <Grid
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              margin="0 0 10px 0"
+            ></Grid>
+          </Grid>
+
+          {data.evaluation ? (
+            <ApplyBtnFalse>체크완료</ApplyBtnFalse>
+          ) : (
+            <ApplyBtnTrue
+              onClick={() => {
+                history.push(`/check/${data.groupId}`);
+                dispatch(getAttendDB(data.groupId, data.userId, hostId));
+              }}
+            >
+              출석체크하기
+            </ApplyBtnTrue>
+          )}
         </Grid>
-    );
+      ))}
+    </Grid>
+  );
 };
 
 const ApplyEnd = styled.div`

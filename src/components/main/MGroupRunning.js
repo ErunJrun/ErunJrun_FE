@@ -49,12 +49,7 @@ const MGroupRunning = () => {
           </Btn>
         </Grid>
 
-        <Grid
-          padding="0%"
-          margin="auto"
-          display="flex"
-          justifyContent="space-between"
-        >
+        <Grid padding="0%" margin="auto" display="flex">
           {postList?.map((item, idx) => {
             return <GroupCard key={idx} {...item} />;
           })}
