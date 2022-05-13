@@ -74,7 +74,11 @@ const LoginInfo = () => {
   };
 
   const addLoginInfo = () => {
-    if (!checkedRegion || !checkedDistance || !checkedExp) {
+    if (
+      checkedRegion === null ||
+      checkedDistance === null ||
+      checkedExp === null
+    ) {
       return window.alert("미선택 된 항목이 있습니다.");
     } else {
       dispatch(loginInfoDB(checkedRegion, checkedDistance, runExp[checkedExp]));
