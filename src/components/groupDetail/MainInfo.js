@@ -6,8 +6,9 @@ import Permit from "../../shared/Permit";
 import { applyDetailDB, deleteGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
 import { Link, useParams } from "react-router-dom";
-import groupChat from "../../assets/groupChat.png";
-import shareIcon from "../../assets/shareIcon.png";
+import groupChat from "../../assets/groupDetail/chat.png";
+import shareIcon from "../../assets/groupDetail/share.png";
+import shoesMint from "../../assets/groupDetail/shoesMint.png";
 
 const MainInfo = (props) => {
   const dispatch = useDispatch();
@@ -49,24 +50,23 @@ const MainInfo = (props) => {
         maxWidth="402px"
         width="100%"
         border="1px solid #EFEFEF"
-        borderRadius="10px"
+        borderRadius="3px"
         margin="0"
-        padding="24px 32px"
-        position="fixed"
-        left="1158px"
-        bottom="280px"
-        bg="white"
-        height="524px"
+        padding="18px 32px"
+        bg="#FFFFFF"
+        height="auto"
+        boxShadow="0px 0px 6px rgba(141, 141, 141, 0.25)"
       >
         <Grid height="auto" display="flex" justifyContent="space-between">
-          <Text width="auto" margin="0" size="18px" bold>
+          <Text margin="0 0 12px 0" size="18px" bold>
             {detailGroup?.title}
           </Text>
 
           <Permit>
             {nickname === detailGroup?.nickname ? (
-              <Grid width="auto" margin="0" display="flex">
+              <Grid margin="0" display="flex" width="auto">
                 <IconButton
+                  cursor="pointer"
                   _onClick={handleEditMenu}
                   moreDot
                   color="gray"
@@ -74,14 +74,16 @@ const MainInfo = (props) => {
                 {editMenu ? (
                   <DropContent>
                     <Text
+                      margin="0"
                       _onClick={() => {
                         editGroup();
                       }}
                     >
                       수정하기
                     </Text>
-                    <hr />
+                    <Line />
                     <Text
+                      margin="0"
                       _onClick={() => {
                         dispatch(deleteGroupDB(props?.groupId));
                         closeEditMenu();
@@ -95,10 +97,18 @@ const MainInfo = (props) => {
             ) : null}
           </Permit>
         </Grid>
-
-        <Text size="16px" color="#FF2D55" margin="10px auto" bold>
-          (약 {detailGroup?.applyEndTime} 후 마감)
-        </Text>
+        <Grid display="flex" alignItems="center">
+          <ShoesImg src={shoesMint} />
+          <Text
+            display="inline"
+            size="16px"
+            color="#FF2D55"
+            margin="0 0 0 4px"
+            bold
+          >
+            약 {detailGroup?.applyEndTime} 후 마감
+          </Text>
+        </Grid>
 
         <Hr></Hr>
 
@@ -270,6 +280,11 @@ const Hr = styled.div`
   margin: 24px auto;
 `;
 
+const ShoesImg = styled.img`
+  width: 22px;
+  height: auto;
+`;
+
 const ApplyBtn = styled.button`
   max-width: 338px;
   width: 100%;
@@ -361,15 +376,29 @@ const ChatImg = styled.img`
   margin-right: 8px;
 `;
 
+const Line = styled.hr`
+  width: 106px;
+  margin: 16px 0;
+  border: 1px solid #dddddd;
+`;
+
 const DropContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  top: 52px;
-  right: 40px;
-  background-color: white;
-  min-width: 115px;
+  box-sizing: border-box;
+  top: 40px;
+  left: 250px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  width: 107px;
+  height: 104px;
   text-align: center;
   border-radius: 10px;
   box-shadow: 0px 0px 8px rgba(149, 149, 149, 0.35);
+  padding: 10px;
 `;
 
 export default MainInfo;

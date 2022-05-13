@@ -3,6 +3,15 @@ import { useSelector } from "react-redux";
 import { Grid, Image, Text } from "../../elements";
 import styled from "styled-components";
 
+import LevelBox from "./LevelBox";
+
+import chatIcon from "../../assets/groupDetail/chat.png";
+import crewLeaderFlag from "../../assets/groupDetail/crewLeaderFlag.png";
+import crewLeaderName from "../../assets/groupDetail/crewLeaderName.png";
+import mapIcon from "../../assets/groupDetail/map.png";
+import shareIcon from "../../assets/groupDetail/share.png";
+import shoesMintIcon from "../../assets/groupDetail/shoesMint.png";
+
 const CrewLeaderInfo = (props) => {
   const detailGroup = useSelector((state) => state.feed.detail);
 
@@ -12,58 +21,47 @@ const CrewLeaderInfo = (props) => {
         maxWidth="402px"
         width="100%"
         border="1px solid #EFEFEF"
-        borderRadius="10px"
-        margin="0"
-        padding="24px"
-        position="fixed"
-        left="1158px"
-        bottom="100px"
+        borderRadius="3px"
+        margin="16px 0 0 0"
+        padding="16px 32px"
         bg="white"
         height="140px"
         display="flex"
         alignItems="center"
+        boxShadow="0px 0px 6px rgba(141, 141, 141, 0.25)"
+        position="relative"
       >
-        <Image
-          display="inline-block"
-          imageType="circle"
-          size="92"
-          width="92px"
-          height="92px"
-          src={detailGroup?.profileUrl}
-          margin="0 12px 0 0"
-          border="1px solid #68F99E"
-        ></Image>
+        <CrewLeaderName src={crewLeaderName} />
+        <Grid justifyContent="center" display="flex" width="auto">
+          <CrewLeaderProfile src={detailGroup?.profileUrl}></CrewLeaderProfile>
+          <LevelWrap>
+            <LevelBox userLevel={detailGroup?.userLevel}></LevelBox>
+          </LevelWrap>
+        </Grid>
 
         <Grid
-          margin="0"
+          margin="0 0 0 20px"
           width="auto"
           height="auto"
           display="flex"
           flexDirection="column"
         >
+          <Text margin="0 5px 10px 0" size="16px" bold>
+            {detailGroup?.nickname}
+          </Text>
+
           <Grid
             width="auto"
-            display="flex"
             height="auto"
-            margin="0 0 12px 0"
+            display="flex"
+            margin="0"
             alignItems="center"
           >
-            <Text margin="0 5px 0 0" size="20px" bold>
-              {detailGroup?.nickname}
-            </Text>
-            <Text margin="0 5px 0 0">크루장</Text>
-            <LevelBox userLevel={detailGroup?.userLevel}>
-              <Text color="white" size="12px" margin="0" bold>
-                {detailGroup?.userLevel} RUNNER
-              </Text>
-            </LevelBox>
-          </Grid>
-
-          <Grid width="auto" height="auto" display="flex" margin="0">
-            <Text size="12px" margin="0 5px 0 0">
+            <CrewFlag src={crewLeaderFlag} />
+            <Text size="14px" margin="0 5px 0 0">
               굿러너 레벨
             </Text>
-            <Text size="12px" margin="0" bold>
+            <Text size="14px" margin="0" bold>
               72km
             </Text>
           </Grid>
@@ -73,24 +71,29 @@ const CrewLeaderInfo = (props) => {
   );
 };
 
-const LevelBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1px 5px;
-  width: 93px;
-  height: 18px;
-  ${(props) =>
-    props.userLevel === "처음이에요" ? `background-color:#FF823B ;` : ""}
-  ${(props) => (props.userLevel === "퍼플" ? `background-color:#BD6AFF ;` : "")}
-  ${(props) => (props.userLevel === "블루" ? `background-color: #4248C4;` : "")}
-  ${(props) =>
-    props.userLevel === "오렌지" ? `background-color:#EE4343;` : ""}
-  ${(props) => (props.userLevel === "골드" ? `background-color: #AC943C;` : "")}
-  
-
-  box-sizing: border-box;
-  border-radius: 2px;
+const LevelWrap = styled.div`
+  position: absolute;
+  bottom: 10px;
 `;
 
+const CrewLeaderName = styled.img`
+  width: 43px;
+  height: auto;
+  position: absolute;
+  right: 16px;
+  top: 0;
+`;
+
+const CrewLeaderProfile = styled.img`
+  border-radius: 100%;
+  width: 101px;
+  height: 101px;
+  border: 2px solid #dddddd;
+`;
+
+const CrewFlag = styled.img`
+  width: 16px;
+  height: auto;
+  margin-right: 6px;
+`;
 export default CrewLeaderInfo;

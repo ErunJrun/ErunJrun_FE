@@ -3,17 +3,15 @@ import ImagesUpload from "../components/groupUpload/ImagesUpload";
 import KakaoMap from "../components/groupUpload/KakaoMap";
 import GroupUpContent from "../components/groupUpload/GroupUpContent";
 import styled from "styled-components";
-import UploadStep from "../components/groupUpload/UploadStep";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { addGroupDB } from "../redux/modules/feed";
 import { history } from "../redux/configureStore";
 import { Grid, IconButton, Text } from "../elements";
 import { imgActions } from "../redux/modules/image";
-import step1 from "../assets/step1.png";
-import step3 from "../assets/step3.png";
-import groupRightBtn from "../assets/groupRightBtn.png";
-import groupLeftBtn from "../assets/groupLeftBtn.png";
+import step1 from "../assets/groupUpload/step1.png";
+import step3 from "../assets/groupUpload/step3.png";
+import groupRightBtn from "../assets/groupUpload/groupRightBtn.png";
+import groupLeftBtn from "../assets/groupUpload/groupLeftBtn.png";
 
 const GroupUpload = () => {
   const dispatch = useDispatch();
@@ -237,12 +235,9 @@ const GroupUpload = () => {
         <Grid margin="80px 695px 0 auto" maxWidth="865px" width="100%">
           <Step1Img src={step3}></Step1Img>
           <Grid display="flex" margin="0 0 18px 0" alignItems="center">
-            <Grid display="flex" width="auto">
-              <Text margin="0" height="auto" display="inline" bold size="20px">
-                러닝 코스
-              </Text>
-              <RedPoint></RedPoint>
-            </Grid>
+            <Text margin="0" height="auto" display="inline" bold size="20px">
+              추가 이미지
+            </Text>
           </Grid>
           <Hr />
 

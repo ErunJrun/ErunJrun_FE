@@ -12,7 +12,7 @@ import CrewLeaderInfo from "../components/groupDetail/CrewLeaderInfo";
 import Appliers from "../components/groupDetail/Appliers";
 import CommentList from "../components/comments/CommentList";
 import InfoCategory from "../components/groupDetail/InfoCategory";
-import mapIcon from "../assets/mapIcon.png";
+import mapIcon from "../assets/groupDetail/map.png";
 
 const GroupDetail = () => {
   const dispatch = useDispatch();
@@ -22,25 +22,23 @@ const GroupDetail = () => {
 
   useEffect(() => {
     dispatch(getGroupDetailDB(groupId));
-  }, []);
+  }, [groupId]);
 
   return (
     <>
       <Grid
         maxWidth="758px"
+        height="auto"
         width="100%"
         display="flex"
         justifyContent="center"
         margin="80px auto 65px 360px"
         position="relative"
       >
-        {/* <ImageCollage detailGroup={detailGroup} /> */}
         <ImageSlide />
-
         <InfoCategory />
         <div id="코스정보"></div>
         <ServeInfo />
-
         <Grid display="flex" alignItems="center" margin="0 0 15px 0">
           <MapIconImg src={mapIcon} />
           <Text bold size="18px">
@@ -49,7 +47,6 @@ const GroupDetail = () => {
           <MapInfo />
           <div id="소개"></div>
         </Grid>
-
         <Grid margin="0 0 96px 0">
           <Text bold size="18px" margin="0 0 22px 0">
             크루장의 소개글
@@ -57,13 +54,14 @@ const GroupDetail = () => {
           <Text size="16px">{detailGroup?.content}</Text>
           <div id="크루원"></div>
         </Grid>
-        <div id="Q&A"></div>
         <Appliers />
+
         <CommentList />
-      </Grid>
-      <Grid>
-        <MainInfo groupId={groupId} />
-        <CrewLeaderInfo {...detailGroup} />
+        <div id="Q&A"></div>
+        <Grid position="fixed" left="1158px" top="170px">
+          <MainInfo groupId={groupId} />
+          <CrewLeaderInfo {...detailGroup} />
+        </Grid>
       </Grid>
     </>
   );

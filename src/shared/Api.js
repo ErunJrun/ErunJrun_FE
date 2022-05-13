@@ -36,7 +36,7 @@ api.interceptors.response.use(
     if (response.data.token) {
       // access token이 재발급 된 상태,
       console.log(response);
-      setCookie("accessToken", response.data.token, 0.5);
+      setCookie("accessToken", response.data.token, 1);
       axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
       originalRequest.headers.Authorization = `Bearer ${response.data.token}`;
 

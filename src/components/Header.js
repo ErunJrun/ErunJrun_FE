@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Alarm from "./alarm/Alarm";
 import { _getAlarmDB, _readAlarmDB } from "../redux/modules/user";
 import { getCookie } from "../shared/Cookie";
-import alarmIcon from "../assets/alarmIcon.png";
+import alarmIcon from "../assets/header/alarmIcon.png";
+import headerLogo from "../assets/header/headerLogo.png";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,13 @@ const Header = () => {
   if (is_login) {
     return (
       <HeaderBox id="1">
-        <Grid maxWidth="1200px" display="flex" justifyContent="space-between">
+        <Grid
+          height="auto"
+          margin="0"
+          maxWidth="1200px"
+          display="flex"
+          justifyContent="space-between"
+        >
           <Grid
             display="flex"
             alignItems="center"
@@ -55,7 +62,7 @@ const Header = () => {
                 setAlarmOpen(false);
               }}
             >
-              <img src="https://ifh.cc/g/fkqsm3.png" />
+              <HeaderCi src={headerLogo} />
             </Logo>
             <Btn
               onClick={() => {
@@ -119,7 +126,7 @@ const Header = () => {
               history.push("/");
             }}
           >
-            <img src="https://ifh.cc/g/fkqsm3.png" />
+            <HeaderCi src={headerLogo} />
           </Logo>
           <Btn
             onClick={() => {
@@ -165,6 +172,11 @@ const HeaderBox = styled.div`
   justify-content: center;
 `;
 
+const HeaderCi = styled.img`
+  width: 140px;
+  height: auto;
+`;
+
 const AlarmIcon = styled.img`
   width: 28px;
   height: auto;
@@ -173,8 +185,8 @@ const AlarmIcon = styled.img`
 
 const Badge = styled.div`
   position: absolute;
-  right: 22.5%;
-  top: 23px;
+  right: 22.4%;
+  top: 18px;
   border-radius: 100%;
   width: 20px;
   height: 20px;
@@ -202,11 +214,12 @@ const Logo = styled.div`
 const Btn = styled.button`
   cursor: pointer;
   width: auto;
+  height: auto;
   border: none;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #ffffff;
   background-color: transparent;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-weight: 700;
   text-align: center;
   text-decoration: none;

@@ -1,13 +1,13 @@
 import React, { useEffect, Fragment, useState } from "react";
 import styled from "styled-components";
 import { Image, Grid, Text } from "../../elements";
-import ImageUpload from "../../assets/ImageUpload.png";
 import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
 import { editGroupDB } from "../../redux/modules/feed";
 import { useParams } from "react-router-dom";
-import ImageIcon from "../../assets/ImageIcon.png";
-import editStep2 from "../../assets/editStep2.png";
+import ImageIcon from "../../assets/groupUpload/imageCamera.png";
+import editStep2 from "../../assets/groupUpload/editStep2.png";
+import groupLeftBtn from "../../assets/groupUpload/groupLeftBtn.png";
 
 const EditImages = (props) => {
   const dispatch = useDispatch();
@@ -118,12 +118,9 @@ const EditImages = (props) => {
       <Grid margin="80px 695px 0 auto" maxWidth="865px" width="100%">
         <Step1Img src={editStep2}></Step1Img>
         <Grid display="flex" margin="0 0 18px 0" alignItems="center">
-          <Grid display="flex" width="auto">
-            <Text margin="0" height="auto" display="inline" bold size="20px">
-              러닝 코스
-            </Text>
-            <RedPoint></RedPoint>
-          </Grid>
+          <Text margin="0" height="auto" display="inline" bold size="20px">
+            추가 이미지
+          </Text>
         </Grid>
         <Hr />
 
@@ -131,23 +128,24 @@ const EditImages = (props) => {
           <Text bold>{`업로드 된 이미지 (${totalImage.length}/3`})</Text>
         </Grid>
         <Grid display="flex">
-          <Grid>
+          <Grid width="auto">
             <label htmlFor="profile_image">
               <Grid
                 width="280px"
-                height="210px"
+                height="169px"
                 border="1px solid #7B7B7B"
                 borderRadius="3px"
-                bg="#F0F0F0"
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
                 flexDirection="column"
                 cursor="pointer"
-                margin="0 0 32px 0"
+                margin="0"
               >
                 <UploadIcon src={ImageIcon} />
-                <Text>눌러서 이미지 업로드하기</Text>
+                <Text color="#7B7B7B" size="14px">
+                  눌러서 이미지 업로드하기
+                </Text>
               </Grid>
               <ImageInput
                 type="file"
@@ -158,34 +156,66 @@ const EditImages = (props) => {
               ></ImageInput>
             </label>
           </Grid>
-          <MidHr />
 
           <Grid display="flex" margin="0 0 32px 0">
-            {showImages.map((image, idx) => (
-              <Fragment key={idx}>
-                <Grid display="relative" width="auto">
-                  <Text
-                    zindex
-                    position="absolute"
-                    width="120px"
-                    height="40px"
-                    bg="rgba(255, 255, 255, 0.3)"
-                    border="1px solid #FFFFFF"
-                    borderRadius="3px"
-                    _onClick={() => handleDeleteImage(image, idx)}
-                    margin="85px 80px"
-                    display="flex"
-                    justifycontent="center"
-                    color="white"
-                    alignItems="center"
-                    cursor="pointer"
-                  >
-                    삭제하기
-                  </Text>
-                  <ImagePreview src={image} />
-                </Grid>
-              </Fragment>
-            ))}
+            {showImages.map((image, idx) => {
+              if (idx === 0) {
+                return (
+                  <Fragment key={idx}>
+                    <Grid position="relative" width="auto">
+                      <Thumbnail>대표</Thumbnail>
+                      <Text
+                        zindex
+                        position="absolute"
+                        width="100px"
+                        height="30px"
+                        bg="rgba(255, 255, 255, 0.3)"
+                        border="1px solid #FFFFFF"
+                        borderRadius="3px"
+                        _onClick={() => handleDeleteImage(image, idx)}
+                        margin="92px 79px"
+                        display="flex"
+                        justifycontent="center"
+                        color="white"
+                        alignItems="center"
+                        cursor="pointer"
+                        size="14px"
+                      >
+                        삭제하기
+                      </Text>
+                      <ImagePreview onMouseOver={() => {}} src={image} />
+                    </Grid>
+                  </Fragment>
+                );
+              } else {
+                return (
+                  <Fragment key={idx}>
+                    <Grid display="relative" width="auto">
+                      <Text
+                        zindex
+                        position="absolute"
+                        width="100px"
+                        height="30px"
+                        bg="rgba(255, 255, 255, 0.3)"
+                        border="1px solid #FFFFFF"
+                        borderRadius="3px"
+                        _onClick={() => handleDeleteImage(image, idx)}
+                        margin="92px 79px"
+                        display="flex"
+                        justifycontent="center"
+                        color="white"
+                        alignItems="center"
+                        cursor="pointer"
+                        size="14px"
+                      >
+                        삭제하기
+                      </Text>
+                      <ImagePreview onMouseOver={() => {}} src={image} />
+                    </Grid>
+                  </Fragment>
+                );
+              }
+            })}
           </Grid>
         </Grid>
 
@@ -198,7 +228,7 @@ const EditImages = (props) => {
           flexDirection="column"
           justifyContent="center"
         >
-          <Text margin="0" bold size="14px">
+          <Text margin="0" size="14px">
             <li style={{ marginBottom: "10px" }}>
               업로드 가능한 이미지 최대 용량은 30MB 입니다.
             </li>
@@ -221,7 +251,13 @@ const EditImages = (props) => {
           justifyContent="space-between"
           margin="160px 0 397px 0"
         >
-          <StepBtn2 onClick={goBack1}>이전단계</StepBtn2>
+          <StepBtn2 onClick={goBack1}>
+            <img
+              style={{ width: "8px", height: "auto", marginRight: "16px" }}
+              src={groupLeftBtn}
+            ></img>
+            이전단계
+          </StepBtn2>
           <StepBtn2
             onClick={() => {
               editGroupPost();
@@ -236,21 +272,41 @@ const EditImages = (props) => {
   );
 };
 
+const Thumbnail = styled.div`
+  position: absolute;
+  box-sizing: border-box;
+  top: 40px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 47px;
+  height: 19px;
+  z-index: 4;
+  background: rgba(3, 12, 55, 0.5);
+  border-radius: 1px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+`;
+
 const ImageInput = styled.input`
   display: none;
 `;
 
 const UploadIcon = styled.img`
-  width: 90px;
-  height: 90px;
+  width: 61px;
+  height: auto;
 `;
 
 const ImagePreview = styled.img`
-  height: 210px;
+  height: 169px;
   width: 280px;
   position: relative;
-  margin: 0 4px;
+  margin: 32px 8px 0 0;
+  object-fit: cover;
 `;
+
 const MidHr = styled.hr`
   width: 100%;
   height: 0px;
@@ -276,13 +332,6 @@ const Hr = styled.hr`
   transform: rotate(180deg);
 `;
 
-const RedPoint = styled.div`
-  width: 6px;
-  height: 6px;
-  border-radius: 100%;
-  background: #ff2d55;
-`;
-
 const StepBtn2 = styled.button`
   max-width: 173px;
   width: 100%;
@@ -291,10 +340,11 @@ const StepBtn2 = styled.button`
   border-radius: 3px;
   font-weight: 700;
   font-size: 18px;
-  padding: 10px 40px;
+  padding: 10px;
   color: white;
   display: flex;
   align-items: center;
+  justify-content: center;
   border: none;
   cursor: pointer;
   :hover {

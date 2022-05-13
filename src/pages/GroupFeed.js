@@ -4,8 +4,9 @@ import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import GroupFilter from "../components/groupFeed/GroupFilter";
 import GroupCard from "../components/groupFeed/GroupCard";
-import upload from "../assets/upload.png";
-import pageUp from "../assets/pageUp.png";
+import upload from "../assets/groupFeed/groupUploadBtn1.png";
+import uploadHover from "../assets/groupFeed/groupUploadBtn2.png";
+import pageUp from "../assets/groupFeed/pageUpBtn.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-scroll";
 
@@ -26,7 +27,11 @@ const GroupFeed = () => {
   const [filterTime, setFilterTime] = useState([]);
   const [filterDistance, setFilterDistance] = useState([]);
   const [filterTheme, setFilterTheme] = useState([]);
+
   const [searchState, setSearchState] = useState(false);
+  const [uploadBtn, setUploadBtn] = useState(false);
+
+  console.log(uploadBtn);
 
   const category = {
     region: region,
@@ -164,20 +169,37 @@ const GroupFeed = () => {
         </Grid>
         <Grid
           display="flex"
-          maxWidth="1282px"
+          width="auto"
           height="auto"
           flexDirection="column"
           alignContent="flex-end"
-          justifyContent="center"
+          justifyContent="right"
           position="fixed"
-          top="816px"
+          top="726px"
+          left="83%"
+          _onMouseOver={() => {
+            setUploadBtn(true);
+          }}
+          _onMouseOut={() => {
+            setUploadBtn(false);
+          }}
         >
-          <UploadBtn
-            onClick={() => {
-              history.push("/groupupload");
-            }}
-            src={upload}
-          />
+          {uploadBtn === true ? (
+            <UploadBtn
+              onClick={() => {
+                history.push("/groupupload");
+              }}
+              src={uploadHover}
+            />
+          ) : (
+            <UploadBtn
+              onClick={() => {
+                history.push("/groupupload");
+              }}
+              src={upload}
+            />
+          )}
+
           <Link to="1" spy={true} smooth={true}>
             <PageUpBtn src={pageUp} />
           </Link>
@@ -188,20 +210,19 @@ const GroupFeed = () => {
 };
 
 const UploadBtn = styled.img`
-  max-width: 50px;
+  max-width: 66px;
   width: 100%;
-  max-height: 50px;
-  height: 100%;
+  height: auto;
   cursor: pointer;
-  margin: 0 0 20px 0;
+  margin: 0;
 `;
 
 const PageUpBtn = styled.img`
-  max-width: 50px;
+  max-width: 66px;
   width: 100%;
-  max-height: 50px;
-  height: 100%;
+  height: auto;
   cursor: pointer;
+  margin: 0;
 `;
 
 const Hr = styled.div`

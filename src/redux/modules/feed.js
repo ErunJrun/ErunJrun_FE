@@ -143,7 +143,7 @@ export const getMainDB = () => {
 export const getGroupDetailDB = (groupId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      // console.log(groupId);
+      console.log(groupId);
       const { data } = await api.get(`/group/detail/${groupId}`);
       console.log(data.data);
       dispatch(getGroupDetail(data.data));
@@ -294,7 +294,7 @@ export const applyDetailDB = (groupId) => {
         applyState: data.data.applyState,
         applyPeople: data.data.applyPeople,
       };
-
+      dispatch(getGroupDetailDB(groupId));
       dispatch(applyDetail(applyData));
     } catch (error) {
       console.log(error);

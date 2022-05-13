@@ -67,6 +67,7 @@ const IconButton = (props) => {
     cancelRound,
     calendar,
     cancelRoundBlack,
+    position,
   } = props;
 
   const styles = {
@@ -77,6 +78,7 @@ const IconButton = (props) => {
     cursor: cursor,
     color: color,
     zIndex: zIndex,
+    position: position,
   };
 
   //아이콘 작동
@@ -422,16 +424,19 @@ IconButton.defaultProps = {
   width: "100%",
   color: "white",
   zIndex: null,
+  position: null,
+  cursor: null,
 };
 
 const Icon = styled.div`
-  cursor: auto;
+  cursor: ${(props) => props.cursor};
   margin: ${(props) => props.margin};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   padding: ${(props) => props.padding};
   ${(props) => (props.color ? `color:${props.color};` : "")}
   z-index: ${(props) => props.zIndex};
+  position: ${(props) => props.relative};
 `;
 
 export default IconButton;
