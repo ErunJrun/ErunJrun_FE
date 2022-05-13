@@ -79,7 +79,7 @@ const LoginInfo = () => {
     if (!checkedRegion || !checkedDistance || !checkedExp) {
       return window.alert("미선택 된 항목이 있습니다.");
     } else {
-      dispatch(loginInfoDB(checkedRegion, checkedDistance, checkedExp));
+      dispatch(loginInfoDB(checkedRegion, checkedDistance, runExp[checkedExp]));
     }
   };
 
