@@ -46,6 +46,7 @@ const AlarmStart = (props) => {
                 </Text>
               ) : (
                 <Text cursor="pointer" hover="font-weight:900;" margin="0">
+                  30분 뒤{" "}
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
                   러닝이 시작합니다.
                 </Text>
