@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect }from 'react';
 import Level from './Level';
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -8,22 +8,20 @@ const Profile = () => {
 
 
   const profile_list = useSelector((state) => state.mypage.list);
-console.log(profile_list.userInfo.userLevel);
-  if (profile_list.length === 0) { return <></>; }
 
-
-  //if(profile_list.userInfo.userLevel)
+  //if (profile_list.length === 0) { return <></>; }
+  
     return (
         <Box>
             <MiddleBox>
 
               <ImgBox>
-                <MyImage src={profile_list.userInfo.profileUrl}/>
-                <Text bold size="20px"> {profile_list.userInfo.nickname} </Text>
+                <MyImage src={profile_list?.userInfo?.profileUrl}/>
+                <Text bold size="20px"> {profile_list?.userInfo?.nickname} </Text>
               </ImgBox>
 
               <Introduce>
-                 {profile_list.userInfo.bio}
+                 {profile_list?.userInfo?.bio}
                 <Triangle/>
               </Introduce>
 
@@ -39,15 +37,15 @@ console.log(profile_list.userInfo.userLevel);
                       borderRadius="3px"
                       bg="#ff3d3d"
                       textalign="center"
-                    > {profile_list.userInfo.userLevel} RUNNER</Text>
+                    > {profile_list?.userInfo?.userLevel} RUNNER</Text>
                   </SmallBox>
                   <SmallBox>
                     <Text bold size="16px"> 선호거리 </Text>
-                    <Text size="17px" color="#000"> {profile_list.userInfo.likeDistance}</Text>
+                    <Text size="17px" color="#000"> {profile_list?.userInfo?.likeDistance}</Text>
                   </SmallBox>
                   <SmallBox>
                     <Text bold size="16px"> 선호지역 </Text>
-                    <Text size="17px" color="#000"> {profile_list.userInfo.likeLocation}</Text>
+                    <Text size="17px" color="#000"> {profile_list?.userInfo?.likeLocation}</Text>
                   </SmallBox>
               </Information>
 
