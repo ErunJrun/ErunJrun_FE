@@ -14,6 +14,7 @@ const GETNUMBER_CHECK = "GETNUMBER_CHECK";
 const GET_EVALUATION = "GET_EVALUATION";
 const PATCH_EVALUATION = "PATCH_EVALUATION";
 const GET_ATTEND = "GET_ATTEND";
+const PATCH_ATTEND = "PATCH_ATTEND";
 
 
 // //action creators
@@ -67,6 +68,12 @@ export const getAttend = (payload) => ({
   payload,
 });
 
+export const patchAttend = (payload) => ({
+  type: PATCH_ATTEND,
+  payload,
+});
+
+
   
 //initialState
 const initialState = {
@@ -78,6 +85,7 @@ const initialState = {
   host:[],
   evaluation:[],
   attend:[],
+  att:[],
 };
 
 
@@ -273,6 +281,29 @@ export const getAttendDB = (groupId, userId, hostId) => {
   };
 };
 
+// 출석체크 
+ export const patchAttendDB = (groupId, userId) => {
+   return async function (dispatch, getState, { history }) {
+     try {
+       console.log(groupId, userId);
+       const formData = new FormData();
+      
+      formData.append("attendence", [userId]);
+  
+       const { data } = await api.patch(`/group/attendance/${groupId}`, {attendence:  [userId]}, {
+         headers: {
+           "Content-Type": "multipart/form-data",
+         },
+       });
+      console.log(data); 
+       history.push("/mypage");
+       window.alert("출석체크가 완료되었습니다!");
+     } catch (error) {
+       console.log(error);
+     }
+   };
+ };
+
 //reducer
 
 export default handleActions(
@@ -340,6 +371,12 @@ export default handleActions(
       produce(state, (draft) => {
         console.log(action.payload);
         draft.attend = action.payload;
+      }),
+
+      [PATCH_ATTEND]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.att = action.hostId;
       }),
   },
   initialState

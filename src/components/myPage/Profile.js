@@ -8,13 +8,11 @@ const Profile = () => {
 
 
   const profile_list = useSelector((state) => state.mypage.list);
-
+console.log(profile_list.userInfo.userLevel);
   if (profile_list.length === 0) { return <></>; }
 
-  // if(profile_list.userInfo.likeDistance === "1") {
-  //   return  profile_list.userInfo.likeDistance = "5km 미만"
-  // }
 
+  //if(profile_list.userInfo.userLevel)
     return (
         <Box>
             <MiddleBox>

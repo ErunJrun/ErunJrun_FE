@@ -8,6 +8,7 @@ import { history } from "../redux/configureStore";
 import Group from "../components/myPage/Group";
 import MyGroup from "../components/myPage/MyGroup";
 import { Text, Grid } from "../elements"
+import Tabs from "../components/myPage/Tabs";
 
 const Mypage = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Mypage = () => {
     <Grid  width="1200px" margin="auto">
         <Profile userId={userId}/>
         <Schedule userId={userId}/>
-        <Grid display="flex">
+        {/* <Grid display="flex">
             <Text
               _onClick={() => {history.push("/mypage");}}
               margin="-15px 0 0 30px"
@@ -49,9 +50,10 @@ const Mypage = () => {
               뱃지
             </Text>
             <Hr/>
-        </Grid> 
+        </Grid>  */}
+        <Tabs/>
 
-        <Btn onClick={()=>{ 
+        {/* <Btn onClick={()=>{ 
             setComplete(true)
             setMyGroup(false)
             }}>
@@ -67,7 +69,7 @@ const Mypage = () => {
 
         { complete === true ? <Group/> : null }
 
-        { myGroup === true ? <MyGroup/> : null }
+        { myGroup === true ? <MyGroup/> : null } */}
 
     </Grid>  
     
