@@ -9,6 +9,7 @@ import { Text } from "../../elements"
 const Level = () => {
 
     const profile_list = useSelector((state) => state.mypage.list);
+    console.log(profile_list);
 
     return (
         <div> 

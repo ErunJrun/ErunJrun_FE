@@ -3,6 +3,7 @@ import Banner from "../components/main/Banner";
 import MGroupRunning from "../components/main/MGroupRunning";
 
 const Main = () => {
+
   return (
     <div>
       <Banner />

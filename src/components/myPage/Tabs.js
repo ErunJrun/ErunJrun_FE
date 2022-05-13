@@ -9,7 +9,7 @@ import Group from "../myPage/Group";
 import MyGroup from "../myPage/MyGroup";
 import Ready from "../../shared/Ready"
 
-import { getProfileDB, getMyRunningDB } from "../../redux/modules/mypage"
+import { getRunningDB, getMyRunningDB } from "../../redux/modules/mypage"
 import { useDispatch, useSelector } from "react-redux";
 
 const TabPanel = (props) => {
@@ -77,15 +77,16 @@ export default function BasicTabs() {
       <Btn onClick={()=>{ 
             setComplete(true)
             setMyGroup(false)
+            //dispatch(getRunningDB(userId));
             }}>
-            참여완료 그룹러닝
+            참여완료 그룹 러닝
         </Btn>
         <Btn onClick={()=>{ 
             setMyGroup(true)
             setComplete(false)
             dispatch(getMyRunningDB(userId));
             }}>
-            내가만든 그룹러닝
+            진행완료 그룹 러닝
         </Btn> 
 
         { complete === true ? <Group/> : null }
@@ -112,6 +113,9 @@ const Btn = styled.button`
   background-color: #95fbc7;
   color: #030c37;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   text-align: center;
+  :hover {
+    font-weight: 900;
+  }
 `;

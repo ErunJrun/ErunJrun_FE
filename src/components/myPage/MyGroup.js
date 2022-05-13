@@ -17,6 +17,7 @@ const MyGroup = () => {
     return (
         <Grid  display="flex">
           {my.data?.map((data, index) =>
+         
             (
               <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
               <Grid

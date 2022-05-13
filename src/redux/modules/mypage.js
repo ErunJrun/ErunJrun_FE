@@ -171,7 +171,7 @@ export const editProfileDB = (userId, nickname, image, bio, likeLocation, likeDi
           "Content-Type": "multipart/form-data",
         },
       });
-     // console.log(data);
+      console.log(data);
       history.push("/mypage");
     } catch (error) {
       console.log(error);
@@ -188,6 +188,7 @@ export const numberCheckMiddleware = (phone) => {
             tel: phone 
         });
         console.log(data);
+        window.alert("인증번호가 발송 되었습니다");
         
     } catch (error) {
         console.log(error);
@@ -206,10 +207,11 @@ export const getNumberCheckMiddleware = (phone, numberCK) => {
             code: numberCK 
         });
         console.log(data);
+        window.alert("인증되었습니다");
       
     } catch (error) {
         console.log(error);
-        window.alert(error);
+        window.alert("인증에 실패하였습니다");
     }
   };
 };
@@ -288,14 +290,14 @@ export const getAttendDB = (groupId, userId, hostId) => {
        console.log(groupId, userId);
        const formData = new FormData();
       
-      formData.append("attendence", [userId]);
+      formData.append("attendance", userId);
   
-       const { data } = await api.patch(`/group/attendance/${groupId}`, {attendence:  [userId]}, {
+       const { data } = await api.patch(`/group/attendance/${groupId}`, {attendance:userId}, {
          headers: {
            "Content-Type": "multipart/form-data",
          },
        });
-      console.log(data); 
+      console.log(data);                                      
        history.push("/mypage");
        window.alert("출석체크가 완료되었습니다!");
      } catch (error) {
@@ -376,7 +378,7 @@ export default handleActions(
       [PATCH_ATTEND]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
-        draft.att = action.hostId;
+        draft.att = action.attendance;
       }),
   },
   initialState

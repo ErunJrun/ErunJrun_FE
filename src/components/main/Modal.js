@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import { history } from "../../redux/configureStore";
+//import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { logoutDB } from "../../redux/modules/user";
+import { getProfileDB, getMyRunningDB } from "../../redux/modules/mypage";
 
 import "./Modal.css";
 import { Image } from "../../elements";
 
 const Modal = (props) => {
   const profile = localStorage.getItem("profileUrl");
+  const userId = localStorage.getItem("userId");
+  //console.log(userId);
 
   const dispatch = useDispatch();
   const [modal, setModal] = useState(props.modalOpen);
-  console.log(modal);
-  console.log(props.modalOpen);
+  //console.log(modal);
+  //console.log(props.modalOpen);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -42,6 +46,8 @@ const Modal = (props) => {
               style={{ cursor: "pointer" }}
               onClick={() => {
                 history.push("/mypage");
+                // history.push(`/mypage/${userId}`);
+              
               }}
             >
               마이 페이지

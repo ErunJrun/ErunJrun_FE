@@ -8,8 +8,10 @@ const Profile = () => {
 
 
   const profile_list = useSelector((state) => state.mypage.list);
-
+ // console.log(profile_list.userInfo.userLevel);
   //if (profile_list.length === 0) { return <></>; }
+
+
   
     return (
         <Box>
@@ -35,7 +37,7 @@ const Profile = () => {
                       color="#fff"
                       height="13px"
                       borderRadius="3px"
-                      bg="#ff3d3d"
+                      bg="#030c37"
                       textalign="center"
                     > {profile_list?.userInfo?.userLevel} RUNNER</Text>
                   </SmallBox>
