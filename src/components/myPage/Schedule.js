@@ -8,7 +8,7 @@ import { history } from '../../redux/configureStore';
 const Schedule = () => {
 
     const profile_list = useSelector((state) => state.mypage.list);
-
+console.log(profile_list);
     if (profile_list.length === 0) { return <></>; }
     
     return (
@@ -62,8 +62,8 @@ const Schedule = () => {
             index > 0 && 4 > index &&(
               
               <div key={waiting.groupId}>
-                  <Grid onClick={() => {
-                    history.push(`/groupdetail/${profile_list.waiting?.groupId}`);
+                  <Grid _onClick={() => {
+                    history.push(`/groupdetail/${waiting.groupId}`);
                   }}
                     display="flex" 
                     justifyContent="space-between"  

@@ -1,113 +1,194 @@
 import React, { useState } from 'react';
 import { Text,Grid } from "../elements"
 import { useDispatch, useSelector } from "react-redux";
+import { history } from '../redux/configureStore';
+import { patchAttendDB } from '../redux/modules/mypage';
 import styled from "styled-components";
 
 const Check = () => {
-    
-    const [bgColor, setBgColor] = useState("white")
-    const [color, setColor] = useState("#05ae24");
-    const [check, setCheck] = useState("출석확인");
-    const [ckColor, setCkColor] = useState("white");
+    const dispatch = useDispatch();
+
+    const [userId, setUserId] = useState([]);
+
+    console.log(userId);
 
     const check_list = useSelector((state) => state.mypage.attend);
     console.log(check_list);
-     //if (check_list.length === 0) { return <></>; }
 
-    const bgChange = () => {
-        bgColor === "#ebfbd7" ? setBgColor("white") : setBgColor("#ebfbd7");
-    };
-   
-    const change = () => {
-        color === "white" ? setColor("#05ae24") : setColor("white");
-    };
-
-    const ckChange = () => {
-        check === "출석확인" ? setCheck("출석취소") : setCheck("출석확인");
-        ckColor === "white" ? setCkColor("black") : setCkColor("white");
-    };
+    const choiceTime = (e, index) => {
+        if (e.target.checked) {
+            setUserId([...userId, index]);
+        } else {
+          // 체크 해제
+          setUserId(userId.filter((el) => el !== index));
+        }
+      };
+     
+      const groupId = check_list.applyUser[0].groupId;
 
     return (
         <Box>
-            <Grid width="540px" height="129px">
-                <MyImage src="https://ifh.cc/g/qT8V9W.jpg"/>
+            <Grid height="142px" bg="#030c37">
+                <Img src={check_list?.groupInfo?.user?.profileUrl}/>
                 <img src="https://ifh.cc/g/fkqsm3.png"/>
             </Grid>
             
-            <div>
-                2022.04.27. 10:00 토 벚꽃과 야경 러닝 명소  3/10
-            </div>
+            <InfoBox>
+                <Grid display="flex">  
+                    <Text bold size="16px" margin="22px 15px 0 32px">
+                        {check_list?.groupInfo?.date} 
+                    </Text>
+                    <Text size="16px"  margin="22px 0 0 0">
+                        {check_list?.groupInfo?.title}
+                    </Text>
+                </Grid>
+                <Text bold size="16px" margin="0 50px 0 0">
+                    {check_list?.groupInfo?.attendanceCount}
+                </Text>      
+            </InfoBox>
   
-            <Leader>
-                <MyImage src="https://ifh.cc/g/qT8V9W.jpg"/>
-                <Text bold size="16px">
-                    김다운
-                </Text>
-                <Text bold size="16px" color="#32aa3a">
+            <Leader>  
+                 <Grid display="flex"> 
+                    <MyImage src={check_list?.groupInfo?.user?.profileUrl}/>
+                    <Text bold size="16px" margin="30px 0 0 25px">
+                        {check_list?.groupInfo?.user?.nickname}
+                    </Text>
+                </Grid>
+                <Text 
+                width="104px" 
+                height="44px" 
+                bold size="16px" 
+                color="#030c37"
+                margin="20px -10px 0 0">
                     크루장
                 </Text>
             </Leader>
-           {/* {check_list?.applyUser?.user.map((user, index) => (
-               <UserBox key={index} bgColor={bgColor} onClick={bgChange} >             
-                <MyImage src={user.profileUrl}/>
-                <Text bold size="16px">
-                    {user.nickname}
-                </Text>
-                <Button color={color} ckColor={ckColor} onClick={() => {
-                  change();
-                  ckChange();
-                }}>
-                   {check}
-                </Button>
+            
+           {check_list?.applyUser?.map((applyUser, index) => (
+               <UserBox key={index}>  
+               <Grid display="flex" margin="32px 0 0 0">          
+                    <Image src={applyUser.user.profileUrl}/>
+                    <Text bold size="16px" margin="21px 0 0 25px">
+                        {applyUser.user.nickname}
+                    </Text>
+                </Grid> 
+                <Label 
+                //  onClick={() => {ckChange();}}
+                onChange={(e) => {
+                    choiceTime(e, index);
+                }}
+                    checked={userId.includes(index)}
+                  >
+                      <input  type="checkbox" name={applyUser.userId} value={applyUser.userId} />
+                    <Text size="16px">출석</Text> 
+                </Label>              
             </UserBox>
-           ))} */}
+           ))}
             
-            
+            <Btn onClick={()=>{ 
+            history.push("/mypage");
+            dispatch(patchAttendDB(groupId, userId));
+            }}>
+            출석체크 완료</Btn>
         </Box>
         
     );
 };
 
 const Box = styled.div`
-  height: 1000px;
   width: 540px;
   border: 1px solid #ccc;
   margin: 100px auto 30px auto;
 `;
 
+const InfoBox = styled.div`
+  height: 65px; 
+  background-color: #f3f3f3; 
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const Leader = styled.div`
-  width: 500px;
-  height: 98px;
-  margin: 16px 0;
-  padding: 0px 21px 0px 19px;
+  width: 510px;
+  height: 84px;
+  padding: 15px;
   display: flex;
-  background-color: #ebfbd7;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const MyImage = styled.img`
   height: 64px;
   width: 64px;
+  border: 2px solid #68f99e;
+  border-radius: 50%;
+  margin-top: 7px;
+`;
+
+const Image = styled.img`
+  height: 64px;
+  width: 64px;
+  border-radius: 50%
+`;
+
+const Img = styled.img`
+  height: 50px;
+  width: 50px;
   border-radius: 50%
 `;
 
 const UserBox = styled.div`
-  width: 500px;
+  width: 510px;
   height: 98px;
-  margin: 16px 0;
-  padding: 0px 21px 0px 19px;
+  padding: 15px;
   display: flex;
-  background-color: ${props => props.bgColor};
+  justify-content: space-between;
+  align-items: center;
+;
 `;
 
-const Button = styled.button`
-  width: 104px;
-  height: 44px;
-  margin: 26px 21px 26px 53px;
-  padding: 11px 23px 11px 22px;
-  border-radius: 10px;
+
+const Btn = styled.button`
+  width: 186px;
+  height: 56px;
+  margin: 50px 0 100px 180px; 
+  border-radius: 3px;
   border: none;
-  background-color: ${props => props.color};
-  color: ${props => props.ckColor};
+  background-color: #68f99e;
+  color: #030c37;
+  font-size: 16px;
+  font-weight: 550;
+`;
+
+const Label = styled.label`
+  input {
+    display: none;
+  }
+  input + p {
+    width: 95px;
+    height: 36px;
+    padding: 8px 19px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: solid 1px #f0f0f0;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    box-sizing: border-box;
+    color: #000;
+    content: "dff";
+    
+  }
+  input:checked + p {
+    border: solid 1px #030c37;
+    background-color: #030c37;
+    color: #68f99e;
+    font-weight: 500;
+  }
+  margin: 0 8px 0 0;
 `;
 
 export default Check;

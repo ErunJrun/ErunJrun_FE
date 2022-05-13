@@ -7,9 +7,18 @@ import Box from '@mui/material/Box';
 import styled from "styled-components";
 import Group from "../myPage/Group";
 import MyGroup from "../myPage/MyGroup";
+import Ready from "../../shared/Ready"
+
+import { getProfileDB, getMyRunningDB } from "../../redux/modules/mypage"
+import { useDispatch, useSelector } from "react-redux";
 
 const TabPanel = (props) => {
   const { children, value, index } = props;
+
+  
+  // useEffect(() => {
+  //   dispatch(getProfileDB(userId));
+  // }, []);
 
   return (
     <div
@@ -42,6 +51,10 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
+  const dispatch = useDispatch();
+
+  const userId = localStorage.getItem("userId");
+
   const [value, setValue] = React.useState(0);
 
   const [complete, setComplete] = useState(true);
@@ -70,6 +83,7 @@ export default function BasicTabs() {
         <Btn onClick={()=>{ 
             setMyGroup(true)
             setComplete(false)
+            dispatch(getMyRunningDB(userId));
             }}>
             내가만든 그룹러닝
         </Btn> 
@@ -79,10 +93,10 @@ export default function BasicTabs() {
         { myGroup === true ? <MyGroup/> : null }
       </TabPanel>
       <TabPanel value={value} index={1}>
-        개발중입니다!
+          <Ready />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        개발중입니다!
+          <Ready />
       </TabPanel>
     </Box>
   );
