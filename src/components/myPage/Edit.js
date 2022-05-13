@@ -35,19 +35,21 @@ const Edit = (props) => {
   ]);
 
   const [runDistance, setRunDistance] = useState([
-    "5km미만",
-    "5km 이상 10km 미만",
-    "10km 이상 15km 미만",
-    "15km 이상",
     "잘 모르겠어요",
+    `    5km 이상 
+    10km 미만`,
+    `   10km 이상
+    15km 미만`,
+    "15km 이상",
+    "5km미만",
   ]);
 
   const [runExp, setRunExp] = useState([
-    "처음이예요",
+    "런린이",
+    "퍼플",
     "블루",
     "레드",
-    "오렌지",
-    "골드",
+    "블랙",
   ]);
 
   const changeName = (e) => {
