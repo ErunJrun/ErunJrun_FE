@@ -126,7 +126,7 @@ const GroupFeed = () => {
               </Text>
               <Text color="#686EF9" margin="0 8px 0 0" size="16px">
                 {preferData?.likeLocation
-                  ? "#" + regionTag[preferData?.likeLocation]
+                  ? "#" + preferData?.likeLocation
                   : null}
               </Text>
               <Text size="16px" color="#686EF9">
