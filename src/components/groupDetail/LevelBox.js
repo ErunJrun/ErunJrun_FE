@@ -22,7 +22,7 @@ const LevelBox = (props) => {
 
   if (props?.userLevel === "블루") return <LevelImg src={levelBlue} />;
 
-  if (!props?.userLevel) return <></>;
+  if (props === undefined) return <></>;
 };
 
 const LevelImg = styled.img`
