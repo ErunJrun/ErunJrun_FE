@@ -1,9 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Grid, Text, Input, IconButton } from "../../elements";
 import styled from "styled-components";
-import step2 from "../../assets/step2.png";
+import step2 from "../../assets/groupUpload/step2.png";
 import dayjs from "dayjs";
-import "dayjs/locale/ko";
 
 const GroupContent = (props) => {
   const [textLength, setTextLength] = useState(0);

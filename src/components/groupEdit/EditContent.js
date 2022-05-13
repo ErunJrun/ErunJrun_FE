@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Grid, Text, IconButton } from "../../elements";
 import { editGroupContent } from "../../redux/modules/feed";
-import editStep1 from "../../assets/editStep1.png";
+import editStep1 from "../../assets/groupUpload/editStep1.png";
+import groupRightBtn from "../../assets/groupUpload/groupRightBtn.png";
 
 const EditContent = (props) => {
   const dispatch = useDispatch();
@@ -555,7 +556,13 @@ const EditContent = (props) => {
         justifyContent="right"
         margin="80px 0 397px 280px"
       >
-        <StepBtn2 onClick={goNext2}>다음단계</StepBtn2>
+        <StepBtn onClick={goNext2}>
+          다음단계
+          <img
+            style={{ width: "8px", height: "auto", marginLeft: "16px" }}
+            src={groupRightBtn}
+          ></img>
+        </StepBtn>
       </Grid>
     </>
   );
@@ -674,7 +681,7 @@ const Label = styled.label`
   }
 `;
 
-const StepBtn2 = styled.button`
+const StepBtn = styled.button`
   max-width: 173px;
   width: 100%;
   height: 45px;
@@ -682,10 +689,12 @@ const StepBtn2 = styled.button`
   border-radius: 3px;
   font-weight: 700;
   font-size: 18px;
-  padding: 10px 40px;
+  padding: 10px;
   color: white;
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin: 160px 0 200px auto;
   border: none;
   cursor: pointer;
   :hover {

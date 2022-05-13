@@ -3,8 +3,10 @@ import { Text, Grid } from "../elements";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { loginInfoDB } from "../redux/modules/user";
-import loginInfoImage from "../assets/loginInfoImage.png";
-import { history } from "../redux/configureStore";
+import LevelBox from "../components/groupDetail/LevelBox";
+import LevelShoes from "../components/LevelShoes";
+
+import runStyleCharacter from "../assets/loginInfo/runStyleCharacter.png";
 
 const LoginInfo = () => {
   const dispatch = useDispatch();
@@ -16,12 +18,12 @@ const LoginInfo = () => {
 
   const nickname = localStorage.getItem("nickname");
 
-  useEffect(() => {
-    if (!nickname) {
-      window.alert("비정상적인 접근입니다.");
-      history.push("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!nickname) {
+  //     window.alert("비정상적인 접근입니다.");
+  //     history.push("/login");
+  //   }
+  // }, []);
 
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
@@ -46,7 +48,7 @@ const LoginInfo = () => {
   ]);
 
   const [runExp, setRunExp] = useState([
-    "런린이",
+    "오렌지",
     "퍼플",
     "블루",
     "레드",
@@ -81,11 +83,11 @@ const LoginInfo = () => {
     }
   };
 
-  if (!nickname) {
+  if (nickname) {
     return (
       <>
         <Grid maxWidth="800px" width="100%" margin="72px auto ">
-          <LoginCharacter src={loginInfoImage}></LoginCharacter>
+          <LoginCharacter src={runStyleCharacter}></LoginCharacter>
           <Grid margin="0 0 51px 0">
             <Text margin="45px 0 0 0" bold size="30px">
               <span style={{ color: "#68F99E" }}>{nickname}</span>님의 러닝
@@ -203,12 +205,23 @@ const LoginInfo = () => {
                 );
               })}
             </Grid>
-            <Grid display="flex" justifyContent="center">
+            <Grid display="flex" justifyContent="center" alignItems="center">
               {checkedExp >= 0 ? (
-                <Text size="16px" bold>
-                  당신의 러닝 레벨은{" "}
-                  <Span runExp={checkedExp}>{runExp[checkedExp]}</Span> 입니다.
-                </Text>
+                <>
+                  <LevelShoes userLevel={runExp[checkedExp]} />
+                  <Text
+                    display="flex"
+                    alignItems="center"
+                    size="16px"
+                    bold
+                    margin="0 0 0 8px"
+                  >
+                    당신의 러닝 레벨은{"  "}
+                    <LevelBox userLevel={runExp[checkedExp]} />
+                    {"  "}
+                    {"  "}입니다.
+                  </Text>
+                </>
               ) : null}
             </Grid>
           </Grid>

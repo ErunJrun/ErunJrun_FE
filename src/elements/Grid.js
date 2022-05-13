@@ -41,6 +41,7 @@ const Grid = (props) => {
     wrap,
     className,
     alignContent,
+    boxShadow,
   } = props;
 
   const styles = {
@@ -79,6 +80,7 @@ const Grid = (props) => {
     className: className,
     alignContent,
     id,
+    boxShadow: boxShadow,
   };
 
   return (
@@ -127,6 +129,7 @@ Grid.defaultProps = {
   flexWrap: null,
   alignContent: null,
   hover: null,
+  boxShadow: null,
 };
 
 const GridBox = styled.div`
@@ -151,6 +154,7 @@ const GridBox = styled.div`
   left: ${(props) => props.left};
   bottom: ${(props) => props.bottom};
   box-sizing: border-box;
+  box-shadow: ${(props) => props.boxShadow};
   cursor: ${(props) => props.cursor};
   border-top: ${(props) => props.borderTop};
   border-right: ${(props) => props.borderRight};

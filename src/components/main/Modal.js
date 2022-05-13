@@ -8,7 +8,7 @@ import { logoutDB } from "../../redux/modules/user";
 import { getProfileDB, getMyRunningDB } from "../../redux/modules/mypage";
 
 import "./Modal.css";
-import { Image } from "../../elements";
+import { Grid, Image, Text } from "../../elements";
 
 const Modal = (props) => {
   const profile = localStorage.getItem("profileUrl");
@@ -42,36 +42,46 @@ const Modal = (props) => {
         <div>
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
-            <p
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                history.push("/mypage");
-                // history.push(`/mypage/${userId}`);
-              
-              }}
-            >
-              마이 페이지
-            </p>
-            <p
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                history.push("/edit");
-              }}
-            >
-              계정 설정
-            </p>
-            <hr />
-            <p
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                dispatch(logoutDB());
-              }}
-            >
-              로그아웃
-            </p>
-            <button className="close-modal" onClick={toggleModal}>
-              <AiOutlineClose />
-            </button>
+            <Grid display="flex">
+              <Text
+                margin="0 0 32px 0"
+                cursor="pointer"
+                _onClick={() => {
+                  history.push("/mypage");
+                  setModal(false);
+                }}
+                size="18px"
+              >
+                마이 페이지
+              </Text>
+              <Text
+                margin="0"
+                cursor="pointer"
+                size="18px"
+                _onClick={() => {
+                  history.push("/edit");
+                  setModal(false);
+                }}
+              >
+                계정 설정
+              </Text>
+            </Grid>
+            <Hr />
+            <Grid display="flex">
+              <Text
+                color="#FF2D55"
+                margin="0"
+                cursor="pointer"
+                size="18px"
+                style={{ margin: "0", cursor: "pointer" }}
+                _onClick={() => {
+                  dispatch(logoutDB());
+                  setModal(false);
+                }}
+              >
+                로그아웃
+              </Text>
+            </Grid>
           </div>
         </div>
       )}
@@ -81,6 +91,13 @@ const Modal = (props) => {
 
 const Div = styled.div`
   background-color: #030c37;
+`;
+
+const Hr = styled.hr`
+  width: 150px;
+  height: 0px;
+  border: 1px solid rgba(149, 149, 149, 0.25);
+  margin: 16px 0;
 `;
 
 export default Modal;

@@ -1,8 +1,10 @@
 import React, { Fragment } from "react";
 import { Grid, Text } from "../../elements";
 import styled from "styled-components";
+import { history } from "../../redux/configureStore";
 
 const AlarmComment = (props) => {
+  console.log(props);
   return (
     <Fragment>
       <Grid
@@ -27,15 +29,22 @@ const AlarmComment = (props) => {
               {props?.createdAt}
             </Text>
           </Grid>
-          <Grid height="auto" display="flex">
+          <Grid
+            cursor="pointer"
+            _onClick={() => {
+              history.push(`/groupdetail/${props?.groupId}`);
+            }}
+            height="auto"
+            display="flex"
+          >
             {props.category === "comment" ? (
-              <Text cursor="pointer" margin="0">
+              <Text hover="font-weight:900;" cursor="pointer" margin="0">
                 <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
                 {"   "}
                 게시물에 댓글이 달렸습니다.
               </Text>
             ) : (
-              <Text cursor="pointer" margin="0">
+              <Text hover="font-weight:900;" cursor="pointer" margin="0">
                 <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span> 의
                 {"   "}
                 <span style={{ color: "#68F99E" }}>

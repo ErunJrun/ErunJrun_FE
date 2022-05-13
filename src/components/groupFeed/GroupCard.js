@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { applyGroupDB, getGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
+import shoesYellow from "../../assets/groupFeed/shoesYellow.png";
 import Permit from "../../shared/Permit";
 
 const GroupCard = (props) => {
@@ -56,18 +57,14 @@ const GroupCard = (props) => {
                 margin="0"
                 width="auto"
               >
-                <IconButton
-                  size="20"
-                  width="20px"
-                  height="20px"
-                  calendar
-                  margin="0 5px 0 0"
-                />
+                <ShoesImg src={shoesYellow} />
                 <Text size="14px" margin="0 5px 0 0">
                   모집기한
                 </Text>
               </Grid>
-              <Text size="14px">약 {props?.applyEndTime} 후 마감</Text>
+              <Text bold size="14px">
+                약 {props?.applyEndTime} 후 마감
+              </Text>
             </ApplyEnd>
           )}
 
@@ -121,7 +118,7 @@ const GroupCard = (props) => {
             종료
           </ApplyBtnFalse>
         ) : props.applyState ? (
-          <ApplyBtnFalse onClick={goApply}>신청취소</ApplyBtnFalse>
+          <ApplyBtnFalse onClick={goApply}>취소하기</ApplyBtnFalse>
         ) : (
           <ApplyBtnTrue onClick={goApply}>신청하기</ApplyBtnTrue>
         )}
@@ -212,6 +209,12 @@ const ApplyBtnFalse = styled.button`
     box-shadow: 0 0 3px black;
     font-weight: 900;
   }
+`;
+
+const ShoesImg = styled.img`
+  width: 22px;
+  height: auto;
+  margin-right: 8px;
 `;
 
 export default GroupCard;

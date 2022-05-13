@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment, useState } from "react";
 import styled from "styled-components";
 import { Image, Grid, Text } from "../../elements";
-import ImageIcon from "../../assets/ImageIcon.png";
+import ImageIcon from "../../assets/groupUpload/imageCamera.png";
 import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
 
@@ -11,21 +11,6 @@ const ImagesUpload = (props) => {
   const [showImages, setShowImages] = useState([]);
   const totalImage = useSelector((state) => state.image.files);
   console.log(totalImage);
-
-  // useEffect(() => {
-  //   props.setImage(imgFile);
-  // }, [imgFile]);
-
-  // useEffect(() => {
-  //   let editPree = [];
-  //   // 서버에서 받은 URL을 PreView에 넣어줌
-  //   for (let i = 0; i < eddit.length; i++) {
-  //     editPree.push(eddit[i]);
-  //   }
-  //   setShowImages(editPree);
-  //   // 리덕스에 files 인덱스를 맞추기 위해 URL도 같이 넣우줌
-  //   dispatch(imgActions.setPre(editPree));
-  // }, [eddit]);
 
   //이미지 저장 및 미리보기
   const handleChangeFile = (event) => {
@@ -104,16 +89,17 @@ const ImagesUpload = (props) => {
               height="169px"
               border="1px solid #7B7B7B"
               borderRadius="3px"
-              bg="#F0F0F0"
               display="flex"
               justifyContent="center"
               alignItems="center"
               flexDirection="column"
               cursor="pointer"
-              margin="0 0 32px 0"
+              margin="0"
             >
               <UploadIcon src={ImageIcon} />
-              <Text>눌러서 이미지 업로드하기</Text>
+              <Text color="#7B7B7B" size="14px">
+                눌러서 이미지 업로드하기
+              </Text>
             </Grid>
             <ImageInput
               type="file"
@@ -126,31 +112,64 @@ const ImagesUpload = (props) => {
         </Grid>
 
         <Grid display="flex" margin="0 0 32px 0">
-          {showImages.map((image, idx) => (
-            <Fragment key={idx}>
-              <Grid display="relative" width="auto">
-                <Text
-                  zindex
-                  position="absolute"
-                  width="120px"
-                  height="40px"
-                  bg="rgba(255, 255, 255, 0.3)"
-                  border="1px solid #FFFFFF"
-                  borderRadius="3px"
-                  _onClick={() => handleDeleteImage(image, idx)}
-                  margin="62px 85px"
-                  display="flex"
-                  justifycontent="center"
-                  color="white"
-                  alignItems="center"
-                  cursor="pointer"
-                >
-                  삭제하기
-                </Text>
-                <ImagePreview onMouseOver={() => {}} src={image} />
-              </Grid>
-            </Fragment>
-          ))}
+          {showImages.map((image, idx) => {
+            if (idx === 0) {
+              return (
+                <Fragment key={idx}>
+                  <Grid position="relative" width="auto">
+                    <Thumbnail>대표</Thumbnail>
+                    <Text
+                      zindex
+                      position="absolute"
+                      width="100px"
+                      height="30px"
+                      bg="rgba(255, 255, 255, 0.3)"
+                      border="1px solid #FFFFFF"
+                      borderRadius="3px"
+                      _onClick={() => handleDeleteImage(image, idx)}
+                      margin="92px 79px"
+                      display="flex"
+                      justifycontent="center"
+                      color="white"
+                      alignItems="center"
+                      cursor="pointer"
+                      size="14px"
+                    >
+                      삭제하기
+                    </Text>
+                    <ImagePreview onMouseOver={() => {}} src={image} />
+                  </Grid>
+                </Fragment>
+              );
+            } else {
+              return (
+                <Fragment key={idx}>
+                  <Grid display="relative" width="auto">
+                    <Text
+                      zindex
+                      position="absolute"
+                      width="100px"
+                      height="30px"
+                      bg="rgba(255, 255, 255, 0.3)"
+                      border="1px solid #FFFFFF"
+                      borderRadius="3px"
+                      _onClick={() => handleDeleteImage(image, idx)}
+                      margin="92px 79px"
+                      display="flex"
+                      justifycontent="center"
+                      color="white"
+                      alignItems="center"
+                      cursor="pointer"
+                      size="14px"
+                    >
+                      삭제하기
+                    </Text>
+                    <ImagePreview onMouseOver={() => {}} src={image} />
+                  </Grid>
+                </Fragment>
+              );
+            }
+          })}
         </Grid>
       </Grid>
 
@@ -163,7 +182,7 @@ const ImagesUpload = (props) => {
         flexDirection="column"
         justifyContent="center"
       >
-        <Text margin="0" bold size="14px">
+        <Text margin="0" size="14px">
           <li style={{ marginBottom: "10px" }}>
             업로드 가능한 이미지 최대 용량은 30MB 입니다.
           </li>
@@ -184,20 +203,38 @@ const ImagesUpload = (props) => {
   );
 };
 
+const Thumbnail = styled.div`
+  position: absolute;
+  box-sizing: border-box;
+  top: 40px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 47px;
+  height: 19px;
+  z-index: 4;
+  background: rgba(3, 12, 55, 0.5);
+  border-radius: 1px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+`;
+
 const ImageInput = styled.input`
   display: none;
 `;
 
 const UploadIcon = styled.img`
-  width: 90px;
-  height: 90px;
+  width: 61px;
+  height: auto;
 `;
 
 const ImagePreview = styled.img`
   height: 169px;
   width: 280px;
   position: relative;
-  margin: 0 4px;
+  margin: 32px 8px 0 0;
   object-fit: cover;
 `;
 const MidHr = styled.hr`

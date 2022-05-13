@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Grid, Text } from "../../elements";
 import styled from "styled-components";
+import { history } from "../../redux/configureStore";
 
 const AlarmStart = (props) => {
   if (props.category === "start") {
@@ -29,15 +30,21 @@ const AlarmStart = (props) => {
                 {props?.createdAt}
               </Text>
             </Grid>
-            <Grid height="auto" display="flex">
+            <Grid
+              _onClick={() => {
+                history.push(`/groupdetail/${props?.groupId}`);
+              }}
+              height="auto"
+              display="flex"
+            >
               {props.role === "host" ? (
-                <Text margin="0">
+                <Text cursor="pointer" hover="font-weight:900;" margin="0">
                   30분 뒤{" "}
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
                   그룹러닝이 시작합니다. 출석체크를 해주세요.
                 </Text>
               ) : (
-                <Text margin="0">
+                <Text cursor="pointer" hover="font-weight:900;" margin="0">
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
                   러닝이 시작합니다.
                 </Text>
@@ -74,14 +81,20 @@ const AlarmStart = (props) => {
                 {props?.createdAt}
               </Text>
             </Grid>
-            <Grid height="auto" display="flex">
+            <Grid
+              _onClick={() => {
+                history.push(`/groupdetail/${props?.groupId}`);
+              }}
+              height="auto"
+              display="flex"
+            >
               {props.role === "host" ? (
-                <Text margin="0">
+                <Text cursor="pointer" hover="font-weight:900;" margin="0">
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
                   은 어떠셨나요? 당신은 멋진 크루장입니다!
                 </Text>
               ) : (
-                <Text margin="0">
+                <Text cursor="pointer" hover="font-weight:900;" margin="0">
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
                   은 어떠셨나요? 크루장평가를 해주세요
                 </Text>
@@ -119,8 +132,14 @@ const AlarmStart = (props) => {
                 {props?.createdAt}
               </Text>
             </Grid>
-            <Grid height="auto" display="flex">
-              <Text margin="0">
+            <Grid
+              _onClick={() => {
+                history.push(`/groupdetail/${props?.groupId}`);
+              }}
+              height="auto"
+              display="flex"
+            >
+              <Text cursor="pointer" hover="font-weight:900;" margin="0">
                 오늘은 이RUN 저RUN{" "}
                 <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
                 그룹 러닝이 있습니다.
