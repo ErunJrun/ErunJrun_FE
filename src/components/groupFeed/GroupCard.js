@@ -21,7 +21,7 @@ const GroupCard = (props) => {
 
   return (
     <>
-      <Grid maxWidth="384px" width="100%" margin="0 8px 80px 8px">
+      <Grid maxWidth="384px" width="100%" margin="0 0 80px 0">
         <Grid
           _onClick={() => {
             history.push(`/groupdetail/${props.groupId}`);
@@ -112,7 +112,14 @@ const GroupCard = (props) => {
           )}
         </Grid>
         {props.applyEndTime === "0 일" ? (
-          <ApplyBtnFalse style={{ background: "black" }}>종료</ApplyBtnFalse>
+          <ApplyBtnFalse
+            style={{ background: "black", color: "white" }}
+            onClick={() => {
+              window.alert("기한이 종료되었습니다.");
+            }}
+          >
+            종료
+          </ApplyBtnFalse>
         ) : props.applyState ? (
           <ApplyBtnFalse onClick={goApply}>신청취소</ApplyBtnFalse>
         ) : (
@@ -150,11 +157,15 @@ const ApplyFinish = styled.div`
 `;
 
 const Tag = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 500;
+  font-size: 14px;
   height: 24px;
   background-color: #ddd;
   margin: 20px 12px 0 0;
-  padding: 3px 11px;
+  padding: 1px 10px;
   border-radius: 2px;
   :hover {
     background-color: #68f99e;
@@ -171,9 +182,10 @@ const Hr = styled.div`
 const ApplyBtnTrue = styled.button`
   max-width: 382px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
   width: 100%;
   background: #030c37;
+  border: 1px solid #030c37;
   border-radius: 3px;
   height: 38px;
   color: white;
@@ -188,14 +200,18 @@ const ApplyBtnTrue = styled.button`
 const ApplyBtnFalse = styled.button`
   max-width: 382px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
   width: 100%;
-  background: gray;
+  background-color: white;
   border-radius: 3px;
   height: 38px;
-  color: white;
-  border: none;
   cursor: pointer;
+  color: #030c37;
+  border: 1px solid #030c37;
+  :hover {
+    box-shadow: 0 0 3px black;
+    font-weight: 900;
+  }
 `;
 
 export default GroupCard;

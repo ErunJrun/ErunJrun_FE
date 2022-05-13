@@ -15,9 +15,9 @@ import "./Banner.css";
 
 const Banner = () => {
   const is_login = useSelector((state) => state.user.isLogin);
+  const userName = localStorage.getItem("nickname");
 
   if (is_login) {
-    const userName = localStorage.getItem("nickname");
     return (
       <Box>
         <Swiper
@@ -30,11 +30,7 @@ const Banner = () => {
         >
           {Images.map((item) => (
             <SwiperSlide key={item.id}>
-              <Grid
-                display="flex"
-                maxWidth="1240px"
-                justifyContent="space-between"
-              >
+              <Grid display="flex" justifyContent="space-between">
                 <img src={item.src} alt={item.alt} />
                 <div className="text">
                   <Text bold size="35px" color="white">
@@ -106,12 +102,12 @@ const Banner = () => {
 const Box = styled.div`
   width: 100%;
   height: 356px;
-  background-color: #5d79ff;
+  /* background-color: #5d79ff; */
   overflow: hidden;
 `;
 
 const BannerImg = styled.img`
-  max-width: 1240px;
+  max-width: 1920px;
   width: 100%;
   height: auto;
 `;

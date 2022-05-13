@@ -1,5 +1,14 @@
 #GroupDetailSlide {
   width: 758px;
-  height: 400px;
+  height: 426px;
   margin: 0;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: rgb(255, 255, 255, 0.5);
+}
+
+.swiper-pagination-bullet {
+  background-color: rgb(255, 255, 255, 0.8);
 }

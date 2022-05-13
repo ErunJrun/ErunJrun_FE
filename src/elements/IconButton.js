@@ -24,9 +24,11 @@ import { MdOutlineCancel } from "react-icons/md";
 import { FcCalendar } from "react-icons/fc";
 import { MdCancel } from "react-icons/md";
 import { RiErrorWarningFill } from "react-icons/ri";
+import { VscDebugRestart } from "react-icons/vsc";
 
 const IconButton = (props) => {
   const {
+    reset,
     waring,
     _onClick,
     pencil,
@@ -78,6 +80,16 @@ const IconButton = (props) => {
   };
 
   //아이콘 작동
+  if (reset) {
+    return (
+      <React.Fragment>
+        <Icon {...styles}>
+          <VscDebugRestart size={size} onClick={_onClick}></VscDebugRestart>
+        </Icon>
+      </React.Fragment>
+    );
+  }
+
   if (waring) {
     return (
       <React.Fragment>
@@ -408,14 +420,13 @@ IconButton.defaultProps = {
   leftArrowIcon: false,
   moreView: false,
   width: "100%",
-  cursor: "pointer",
   color: "white",
   zIndex: null,
 };
 
 const Icon = styled.div`
+  cursor: auto;
   margin: ${(props) => props.margin};
-  cursor: ${(props) => props.cursor};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   padding: ${(props) => props.padding};

@@ -53,13 +53,12 @@ const AlarmStart = (props) => {
     return (
       <Fragment>
         <Grid
-          cursor="pointer"
           margin="0 0 32px 0"
           height="auto"
           display="flex"
           alignItems="flex-start"
         >
-          {!props?.check === true ? <NewDot /> : <NoneDot />}
+          {!props?.check ? <NewDot /> : <NoneDot />}
 
           <Grid margin="0" display="flex" maxWidth="316px">
             <Grid
@@ -94,7 +93,7 @@ const AlarmStart = (props) => {
     );
   }
 
-  if (props.category === "dDay") {
+  if (props.category === "Dday") {
     return (
       <Fragment>
         <Grid

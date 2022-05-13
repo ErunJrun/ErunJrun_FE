@@ -11,6 +11,7 @@ import ThemeFilter from "./ThemeFilter";
 
 const GroupFilter = (props) => {
   const dispatch = useDispatch();
+
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [region, setRegion] = useState([]);
@@ -20,9 +21,6 @@ const GroupFilter = (props) => {
 
   const [isAddFilter, setIsAddFilter] = useState(false);
   const [resetState, setResetState] = useState(false);
-
-  console.log(filterTime, filterDistance, filterTheme);
-  console.log(startDate, endDate, region);
 
   const switchAddFilter = () => {
     setIsAddFilter(!isAddFilter);
@@ -59,16 +57,6 @@ const GroupFilter = (props) => {
     "20:00 ~ 24:00",
   ]);
 
-  // const category = [
-  //   region,
-  //   filterTime,
-  //   filterDistance,
-  //   startDate,
-  //   endDate,
-  //   filterTheme,
-  //   props.finish,
-  // ];
-
   const category = {
     region: region,
     filterTime: filterTime,
@@ -95,7 +83,6 @@ const GroupFilter = (props) => {
   const getFilter = () => {
     dispatch(getGroupDB(category));
     props.setSearchState(true);
-    // dispatch(filterActions.resetFilter());
   };
 
   return (
@@ -169,29 +156,29 @@ const GroupFilter = (props) => {
 
             <Grid display="flex" alignItems="center" justifyContent="center">
               <Text
-                margin="0"
                 _onClick={switchAddFilter}
+                margin="0"
                 cursor="pointer"
                 size="16px"
                 bold
               >
                 추가 검색조건 닫기
               </Text>
-              <IconButton upArrow color="black" />
+              <IconButton _onClick={switchAddFilter} upArrow color="black" />
             </Grid>
           </>
         ) : (
           <Grid display="flex" alignItems="center" justifyContent="center">
             <Text
-              margin="0"
               _onClick={switchAddFilter}
+              margin="0"
               cursor="pointer"
               size="16px"
               bold
             >
               추가 검색조건 펼치기
             </Text>
-            <IconButton downArrow color="black" />
+            <IconButton _onClick={switchAddFilter} downArrow color="black" />
           </Grid>
         )}
       </Grid>
@@ -206,7 +193,7 @@ const GroupFilter = (props) => {
           display="flex"
           justifyContent="left"
           flexDirection="column"
-          maxWidth="900px"
+          maxWidth="850px"
           width="100%"
         >
           <Grid display="flex" justifyContent="left" width="auto">
@@ -286,12 +273,26 @@ const GroupFilter = (props) => {
           </Grid>
         </Grid>
 
-        <Grid display="flex" width="auto">
+        <Grid
+          display="flex"
+          width="auto"
+          justifyContent="flex-end"
+          alignItems="center"
+        >
+          <IconButton
+            _onClick={resetFilter}
+            cursor="pointer"
+            height="19px"
+            reset
+            color="#818181"
+            size="20"
+          />
           <Text
             _onClick={resetFilter}
             cursor="pointer"
             color="#818181"
             size="14px"
+            margin="0 0 0 8px"
           >
             선택초기화
           </Text>
@@ -301,16 +302,6 @@ const GroupFilter = (props) => {
     </>
   );
 };
-
-const Label = styled.label`
-  border: none;
-  border-radius: 60px;
-  background-color: #030c37;
-  margin: 0 15px 0 0;
-  color: #68f99e;
-  padding: 5px 15px;
-  width: auto;
-`;
 
 const RegionSelect = styled.select`
   width: 317px;
@@ -322,6 +313,9 @@ const RegionSelect = styled.select`
   font-weight: 400;
   color: #818181;
   box-sizing: border-box;
+  :focus {
+    border: 1px solid #68f99e;
+  }
 `;
 
 const Hr = styled.hr`
@@ -331,13 +325,14 @@ const Hr = styled.hr`
 `;
 
 const SearchBtn = styled.button`
-  background: #000000;
+  background: #030c37;
   margin: 0 0 0 16px;
   border-radius: 3px;
-  width: 157px;
-  height: 50px;
+  width: 158px;
+  height: 44px;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 700;
   line-height: 25px;
   border: none;
   cursor: pointer;

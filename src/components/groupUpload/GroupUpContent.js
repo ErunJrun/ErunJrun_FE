@@ -2,6 +2,8 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Grid, Text, Input, IconButton } from "../../elements";
 import styled from "styled-components";
 import step2 from "../../assets/step2.png";
+import dayjs from "dayjs";
+import "dayjs/locale/ko";
 
 const GroupContent = (props) => {
   const [textLength, setTextLength] = useState(0);
@@ -14,7 +16,7 @@ const GroupContent = (props) => {
   const [startTime, setStartTime] = useState("");
   const [finishTime, setFinishTime] = useState("");
   const [maxPeople, setMaxPeople] = useState("");
-  const [date, setDate] = useState(new Date().toISOString().substring(0, 10));
+  const [date, setDate] = useState("");
   const [parking, setParking] = useState("");
   const [baggage, setBaggage] = useState("");
   const [content, setContent] = useState("");
@@ -38,6 +40,20 @@ const GroupContent = (props) => {
 
   const [checkedType, setCheckedType] = useState("");
   const [checkedSpeed, setCheckedSpeed] = useState("");
+
+  const datePick = (e) => {
+    console.log(dayjs(e.target.value).format("YYYYMMDD"));
+    console.log(dayjs(new Date()).format("YYYYMMDD"));
+    if (
+      dayjs(e.target.value).format("YYYYMMDD") <=
+      dayjs(new Date()).format("YYYYMMDD")
+    ) {
+      window.alert("오늘 날짜 이후부터 선택이 가능합니다.");
+      setDate("");
+    }
+  };
+
+  // console.log(date);
 
   //글자 수 제한
   const checkMaxLength = (e) => {
@@ -134,7 +150,7 @@ const GroupContent = (props) => {
 
   return (
     <>
-      <Grid margin="80px 0 0 280px" maxWidth="865px">
+      <Grid margin="80px auto 0 18.7%" maxWidth="865px">
         <Step2Img src={step2}></Step2Img>
         <Grid display="flex" margin="0 0 18px 0" alignItems="center">
           <Grid display="flex" width="auto">
@@ -148,7 +164,7 @@ const GroupContent = (props) => {
 
         <Grid display="flex" flexDirection="column">
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold size="15px" margin="0 73px 0 0">
+            <Text display="inline" bold margin="0 73px 0 0">
               그룹 러닝명
             </Text>
             <Grid
@@ -176,7 +192,7 @@ const GroupContent = (props) => {
           </Grid>
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold size="15px" margin="0 85px 0 0">
+            <Text display="inline" bold margin="0 85px 0 0">
               러닝 일시
             </Text>
             <Grid
@@ -199,6 +215,7 @@ const GroupContent = (props) => {
                   type="date"
                   onChange={(e) => {
                     setDate(e.target.value);
+                    datePick(e);
                   }}
                   value={date}
                 ></GroupInput>
@@ -224,14 +241,14 @@ const GroupContent = (props) => {
               </Grid>
             </Grid>
 
-            <Grid display="flex" alignItems="center" margin="12px 0 0 0">
+            <Grid display="flex" alignItems="center" margin="12px 0 0 15%">
               <IconButton
                 waring
                 color="#FF2D55"
                 size="19.21"
                 height="19.2px"
                 width="16px"
-                margin="0 8px 0 138px"
+                margin="0 8px 0 14px"
               />
               <Text width="auto" color="#FF2D55" bold margin="0">
                 스탠바이로 지정한 시간의 4시간 전, 그룹러닝 모집이 마감됩니다.
@@ -240,7 +257,7 @@ const GroupContent = (props) => {
           </Grid>
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold size="15px" margin="0 85px 0 0">
+            <Text display="inline" bold margin="0 85px 0 0">
               출발 시간
             </Text>
             <Grid
@@ -265,7 +282,7 @@ const GroupContent = (props) => {
           </Grid>
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold size="15px" margin="0 85px 0 0">
+            <Text display="inline" bold margin="0 85px 0 0">
               도착 시간
             </Text>
             <Grid
@@ -290,7 +307,7 @@ const GroupContent = (props) => {
           </Grid>
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold size="15px" margin="0 85px 0 0">
+            <Text display="inline" bold margin="0 85px 0 0">
               모집 인원
             </Text>
             <Grid
@@ -325,7 +342,7 @@ const GroupContent = (props) => {
           </Grid>
 
           <Grid display="flex" margin="0 0 32px 0">
-            <Text display="inline" bold size="15px" margin="30px 85px 0 0">
+            <Text display="inline" bold margin="30px 85px 0 0">
               상세 소개
             </Text>
             <Grid
@@ -363,7 +380,7 @@ const GroupContent = (props) => {
           </Grid>
 
           <Grid display="flex" alignItems="center" margin="0 0 64px 0">
-            <Text display="inline" bold size="15px" margin="0 45px 0 0">
+            <Text display="inline" bold margin="0 45px 0 0">
               그룹채팅방 링크
             </Text>
             <Grid
@@ -470,7 +487,7 @@ const GroupContent = (props) => {
           <Hr />
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold size="15px" margin="0 86px 0 0">
+            <Text display="inline" bold margin="0 86px 0 0">
               주차 방법
             </Text>
             <Grid
@@ -498,7 +515,7 @@ const GroupContent = (props) => {
           </Grid>
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold size="15px" margin="0 73px 0 0">
+            <Text display="inline" bold margin="0 73px 0 0">
               짐보관 방법
             </Text>
             <Grid
@@ -534,7 +551,7 @@ const Step2Img = styled.img`
   position: fixed;
   max-width: 295px;
   width: 100%;
-  right: 360px;
+  right: 19%;
   top: 170px;
 `;
 const Hr = styled.hr`
@@ -553,7 +570,7 @@ const RedPoint = styled.div`
 `;
 
 const GroupInput = styled.input`
-  font-size: 18px;
+  font-size: 16px;
   box-sizing: border-box;
   margin: 0 20px 0 0;
   display: flex;
@@ -574,6 +591,9 @@ const GroupInput = styled.input`
 `;
 
 const GroupTextArea = styled.textarea`
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-weight: 400;
+  font-size: 16px;
   padding: 10px;
   box-sizing: border-box;
   display: flex;
@@ -588,7 +608,7 @@ const GroupTextArea = styled.textarea`
   }
   ::placeholder {
     font-family: "Spoqa Han Sans Neo", "sans-serif";
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: #818181;
   }

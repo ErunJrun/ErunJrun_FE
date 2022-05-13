@@ -12,8 +12,8 @@ import { Grid, IconButton, Text } from "../elements";
 import { imgActions } from "../redux/modules/image";
 import step1 from "../assets/step1.png";
 import step3 from "../assets/step3.png";
-
-import "./GruopUpload.css";
+import groupRightBtn from "../assets/groupRightBtn.png";
+import groupLeftBtn from "../assets/groupLeftBtn.png";
 
 const GroupUpload = () => {
   const dispatch = useDispatch();
@@ -180,7 +180,7 @@ const GroupUpload = () => {
                 size="19.21"
                 height="19.2px"
                 width="16px"
-                margin="0 8px 0 148px"
+                margin="0 8px 0 0"
               />
               <Text width="auto" color="#FF2D55" bold margin="0">
                 러닝 코스는 업로드 이후 수정이 불가능합니다. 해당 위치가 맞는지
@@ -189,7 +189,13 @@ const GroupUpload = () => {
             </Grid>
           </Grid>
 
-          <StepBtn onClick={goNext2}>다음단계</StepBtn>
+          <StepBtn onClick={goNext2}>
+            다음단계
+            <img
+              style={{ width: "8px", height: "auto", marginLeft: "16px" }}
+              src={groupRightBtn}
+            ></img>
+          </StepBtn>
         </Grid>
       </>
     );
@@ -204,10 +210,22 @@ const GroupUpload = () => {
           width="100%"
           display="flex"
           justifyContent="space-between"
-          margin="80px 0 397px 280px"
+          margin="80px 0 397px 18.7%"
         >
-          <StepBtn2 onClick={goBack1}>이전단계</StepBtn2>
-          <StepBtn2 onClick={goNext3}>다음단계</StepBtn2>
+          <StepBtn2 onClick={goBack1}>
+            <img
+              style={{ width: "8px", height: "auto", marginRight: "16px" }}
+              src={groupLeftBtn}
+            ></img>
+            이전단계
+          </StepBtn2>
+          <StepBtn2 onClick={goNext3}>
+            다음단계
+            <img
+              style={{ width: "8px", height: "auto", marginLeft: "16px" }}
+              src={groupRightBtn}
+            ></img>
+          </StepBtn2>
         </Grid>
       </>
     );
@@ -238,7 +256,13 @@ const GroupUpload = () => {
             justifyContent="space-between"
             margin="160px 0 397px 0"
           >
-            <StepBtn2 onClick={goBack2}>이전단계</StepBtn2>
+            <StepBtn2 onClick={goBack2}>
+              <img
+                style={{ width: "8px", height: "auto", marginRight: "16px" }}
+                src={groupLeftBtn}
+              ></img>
+              이전단계
+            </StepBtn2>
             <StepBtn2
               onClick={() => {
                 addGroupPost();
@@ -298,10 +322,11 @@ const StepBtn = styled.button`
   border-radius: 3px;
   font-weight: 700;
   font-size: 18px;
-  padding: 10px 40px;
+  padding: 10px;
   color: white;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 160px 0 200px auto;
   border: none;
   cursor: pointer;
@@ -318,10 +343,11 @@ const StepBtn2 = styled.button`
   border-radius: 3px;
   font-weight: 700;
   font-size: 18px;
-  padding: 10px 40px;
+  padding: 10px;
   color: white;
   display: flex;
   align-items: center;
+  justify-content: center;
   border: none;
   cursor: pointer;
   :hover {

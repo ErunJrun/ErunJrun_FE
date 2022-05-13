@@ -8,14 +8,17 @@ import { logoutDB } from "../../redux/modules/user";
 import "./Modal.css";
 import { Image } from "../../elements";
 
-const Modal = () => {
+const Modal = (props) => {
   const profile = localStorage.getItem("profileUrl");
 
   const dispatch = useDispatch();
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(props.modalOpen);
+  console.log(modal);
+  console.log(props.modalOpen);
 
   const toggleModal = () => {
     setModal(!modal);
+    props.setAlarmOpen(false);
   };
 
   return (

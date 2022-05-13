@@ -3,26 +3,26 @@ import { history } from "../../redux/configureStore";
 import styled from "styled-components";
 import GroupCard from "../groupFeed/GroupCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostDB } from "../../redux/modules/post";
 import { Text, Grid } from "../../elements";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import courseFeedBanner from "../../assets/courseFeedBanner.png";
+import { getMainDB } from "../../redux/modules/feed";
 
 const MGroupRunning = () => {
   const dispatch = useDispatch();
-  const postList = useSelector((state) => state.post.list);
+  const postList = useSelector((state) => state.feed.list);
 
   useEffect(() => {
-    dispatch(getPostDB());
+    dispatch(getMainDB());
   }, []);
 
   return (
     <>
       <Grid
-        maxWidth="1240px"
+        maxWidth="1200px"
         display="flex"
         justifyContent="column"
-        margin="100px auto 320px auto"
+        margin="100px auto 160px auto"
       >
         <Grid
           display="flex"
@@ -53,10 +53,7 @@ const MGroupRunning = () => {
           padding="0%"
           margin="auto"
           display="flex"
-          justifyContent="center"
-          alignItems="center"
-          maxWidth="1395px"
-          width="100%"
+          justifyContent="space-between"
         >
           {postList?.map((item, idx) => {
             return <GroupCard key={idx} {...item} />;
@@ -65,10 +62,10 @@ const MGroupRunning = () => {
       </Grid>
 
       <Grid
-        maxWidth="1240px"
+        maxWidth="1200px"
         display="flex"
         justifyContent="column"
-        margin="80px auto 320px auto"
+        margin="0 auto 320px auto"
       >
         <Grid
           display="flex"
@@ -116,7 +113,6 @@ const Btn = styled.button`
 `;
 
 const CourseBanner = styled.img`
-  max-width: 1240px;
   width: 100%;
 `;
 

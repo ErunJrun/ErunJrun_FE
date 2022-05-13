@@ -164,7 +164,16 @@ const MainInfo = (props) => {
 
         <Hr></Hr>
 
-        {!detailGroup?.applyState ? (
+        {detailGroup?.applyEndTime === "0 일" ? (
+          <ApplyBtnFalse
+            onClick={() => {
+              window.alert("기한이 종료되었습니다.");
+            }}
+            style={{ background: "black", color: "white" }}
+          >
+            기한 종료
+          </ApplyBtnFalse>
+        ) : !detailGroup?.applyState ? (
           <ApplyBtn
             onClick={() => {
               window.alert("신청이 완료되었습니다.");
@@ -182,7 +191,25 @@ const MainInfo = (props) => {
             신청취소
           </ApplyBtnFalse>
         )}
-        {detailGroup?.applyState ? (
+
+        {detailGroup?.applyEndTime === "0 일" ? (
+          <Grid
+            display="flex"
+            justifyContent="space-between"
+            margin="16px 0 0 0"
+            height="auto"
+          >
+            <EndBtn>
+              <ChatImg src={groupChat} />
+              <Text margin="0">그룹 채팅방</Text>
+            </EndBtn>
+
+            <EndBtn>
+              <ChatImg src={shareIcon} />
+              <Text>공유하기</Text>
+            </EndBtn>
+          </Grid>
+        ) : detailGroup?.applyState ? (
           <Grid
             display="flex"
             justifyContent="space-between"
@@ -267,11 +294,11 @@ const ApplyBtnFalse = styled.button`
   height: 45px;
   font-size: 18px;
   font-weight: 700;
-  background: gray;
+  background-color: white;
   border-radius: 3px;
   padding: 11px;
-  color: white;
-  border: none;
+  color: #030c37;
+  border: 1px solid #030c37;
   cursor: pointer;
   :hover {
     font-weight: 900;
@@ -293,7 +320,7 @@ const ChatBtn = styled.div`
   margin: 0;
   :hover {
     font-weight: 900;
-    box-shadow: 0px 0px 5px gray;
+    box-shadow: 1px 1px 5px black;
   }
 `;
 
@@ -311,8 +338,21 @@ const ShareBtn = styled.div`
   margin: 0;
   :hover {
     font-weight: 900;
-    box-shadow: 0px 0px 5px gray;
+    box-shadow: 1px 1px 5px black;
   }
+`;
+
+const EndBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  width: 159px;
+  height: 38px;
+  background-color: gray;
+  border-radius: 3px;
+  box-sizing: border-box;
+  margin: 0;
 `;
 
 const ChatImg = styled.img`

@@ -6,7 +6,7 @@ import { Grid } from "../elements";
 const Footer = () => {
   return (
     <HeaderBox>
-      <Grid maxWidth="1240px">
+      <Grid maxWidth="1200px">
         <Grid
           display="flex"
           maxWidth="685px"

@@ -64,6 +64,10 @@ const DateInput = styled.input`
   color: #818181;
   margin: 0;
   box-sizing: border-box;
+  outline: none;
+  :focus {
+    border: 1px solid #68f99e;
+  }
 `;
 
 export default CalendarFilter;

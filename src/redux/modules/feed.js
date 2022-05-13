@@ -128,6 +128,18 @@ export const getGroupDB = (category) => {
   };
 };
 
+export const getMainDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.get(`/group/main`);
+      console.log(data);
+      dispatch(getGroup(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const getGroupDetailDB = (groupId) => {
   return async function (dispatch, getState, { history }) {
     try {

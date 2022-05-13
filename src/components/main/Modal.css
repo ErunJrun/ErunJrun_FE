@@ -8,6 +8,11 @@ body.active-modal {
   font-size: 18px;
   border: none;
   background-color: white;
+  cursor: pointer;
+}
+
+.btn-modal :hover {
+  border: 1px solid #68f99e;
 }
 
 .modal .overlay {

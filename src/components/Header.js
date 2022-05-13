@@ -7,6 +7,8 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import Alarm from "./alarm/Alarm";
 import { _getAlarmDB, _readAlarmDB } from "../redux/modules/user";
+import { getCookie } from "../shared/Cookie";
+import alarmIcon from "../assets/alarmIcon.png";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -14,21 +16,25 @@ const Header = () => {
   const alarmList = useSelector((state) => state.user.alarm);
 
   const [alarmOpen, setAlarmOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   console.log(alarmOpen);
 
   const readAlarm = () => {
     setAlarmOpen(!alarmOpen);
+    setModalOpen(false);
     dispatch(_readAlarmDB());
   };
 
+  const token = getCookie("accessToken");
+
   useEffect(() => {
     dispatch(_getAlarmDB());
-  }, []);
+  }, [token]);
 
   if (is_login) {
     return (
       <HeaderBox id="1">
-        <Grid maxWidth="1240px" display="flex" justifyContent="space-between">
+        <Grid maxWidth="1200px" display="flex" justifyContent="space-between">
           <Grid
             display="flex"
             alignItems="center"
@@ -38,6 +44,7 @@ const Header = () => {
             <Logo
               onClick={() => {
                 history.push("/");
+                setAlarmOpen(false);
               }}
             >
               <img src="https://ifh.cc/g/fkqsm3.png" />
@@ -45,6 +52,7 @@ const Header = () => {
             <Btn
               onClick={() => {
                 history.push("/");
+                setAlarmOpen(false);
               }}
             >
               Home
@@ -52,6 +60,7 @@ const Header = () => {
             <Btn
               onClick={() => {
                 history.push("/groupfeed");
+                setAlarmOpen(false);
               }}
             >
               그룹러닝
@@ -59,6 +68,7 @@ const Header = () => {
             <Btn
               onClick={() => {
                 history.push("/coursefeed");
+                setAlarmOpen(false);
               }}
             >
               코스추천
@@ -66,17 +76,12 @@ const Header = () => {
           </Grid>
           <Grid display="flex" width="auto" alignItems="center">
             <Grid height="auto" display="flex" width="auto">
-              <IconButton
-                _onClick={() => {
+              <AlarmIcon
+                src={alarmIcon}
+                onClick={() => {
                   readAlarm();
                 }}
-                alarm
-                color="#BFCED1"
-                size="35px"
-                height="62px"
-                padding="28px 0 0 0"
-                margin="0"
-              ></IconButton>
+              ></AlarmIcon>
               {alarmList?.unreadCount !== 0 ? (
                 <Badge>
                   {alarmList?.unreadCount ? alarmList?.unreadCount : null}
@@ -85,7 +90,7 @@ const Header = () => {
 
               {alarmOpen ? <Alarm></Alarm> : null}
             </Grid>
-            <Modal />
+            <Modal modalOpen={modalOpen} setAlarmOpen={setAlarmOpen} />
           </Grid>
         </Grid>
       </HeaderBox>
@@ -94,7 +99,7 @@ const Header = () => {
 
   return (
     <HeaderBox id="1">
-      <Grid maxWidth="1240px" display="flex" justifyContent="space-between">
+      <Grid maxWidth="1200px" display="flex" justifyContent="space-between">
         <Grid
           display="flex"
           alignItems="center"
@@ -150,6 +155,12 @@ const HeaderBox = styled.div`
   align-items: center;
   width: 100%;
   justify-content: center;
+`;
+
+const AlarmIcon = styled.img`
+  width: 28px;
+  height: auto;
+  cursor: pointer;
 `;
 
 const Badge = styled.div`

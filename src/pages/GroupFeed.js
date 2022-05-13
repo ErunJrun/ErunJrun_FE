@@ -13,8 +13,12 @@ import { getGroupDB, resetGroup } from "../redux/modules/feed";
 
 const GroupFeed = () => {
   const dispatch = useDispatch();
+
+  const nickname = localStorage.getItem("nickname");
+
   const feedList = useSelector((state) => state.feed.list);
   const preferData = useSelector((state) => state.feed.preferData);
+
   const [finish, setFinish] = useState("0");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -23,9 +27,6 @@ const GroupFeed = () => {
   const [filterDistance, setFilterDistance] = useState([]);
   const [filterTheme, setFilterTheme] = useState([]);
   const [searchState, setSearchState] = useState(false);
-
-  const nickname = localStorage.getItem("nickname");
-  console.log(filterTheme);
 
   const category = {
     region: region,
@@ -37,28 +38,6 @@ const GroupFeed = () => {
     finish: finish,
   };
 
-  // const category = [
-  //   region,
-  //   filterTime,
-  //   filterDistance,
-  //   startDate,
-  //   endDate,
-  //   filterTheme,
-  //   finish,
-  // ];
-
-  // const category = [
-  //   {
-  //     region: region,
-  //     filterTime: filterTime,
-  //     filterDistance: filterDistance,
-  //     startDate: startDate,
-  //     endDate: endDate,
-  //     filterTheme: filterTheme,
-  //     finish: finish,
-  //   },
-  // ];
-
   const finishCheck = () => {
     if (finish == 0) {
       setFinish(1);
@@ -67,15 +46,24 @@ const GroupFeed = () => {
     }
   };
 
-  // useEffect(() => {
-  //   dispatch(getGroupDB(category));
-  // }, []);
+  const [regionTag, setRegionTag] = useState([
+    "전국",
+    "서울특별시",
+    "경기도",
+    "인천광역시",
+    "강원도",
+    "충청도 / 세종특별자치시 / 대전광역시",
+    "경상북도 / 대구광역시",
+    "경상남도 / 부산광역시 / 울산광역시",
+    "전라도 / 광주광역시",
+    "제주특별자치시",
+  ]);
 
   useEffect(() => {
-    console.log("클린업 이전");
+    console.log("GET 그룹 게시물");
     dispatch(getGroupDB(category));
     return () => {
-      console.log("클린업");
+      console.log("그룹 게시물 클린업");
       dispatch(resetGroup());
     };
   }, [finish]);
@@ -133,7 +121,7 @@ const GroupFeed = () => {
               </Text>
               <Text color="#686EF9" margin="0 8px 0 0" size="16px">
                 {preferData?.likeLocation
-                  ? "#" + preferData?.likeLocation
+                  ? "#" + regionTag[preferData?.likeLocation]
                   : null}
               </Text>
               <Text size="16px" color="#686EF9">
@@ -169,7 +157,7 @@ const GroupFeed = () => {
             마감공고 포함하기
           </Text>
         </Grid>
-        <Grid display="flex" alignItems="center" width="100%">
+        <Grid display="flex" width="100%" justifyContent="space-between">
           {feedList?.map((item, idx) => {
             return <GroupCard key={idx} {...item}></GroupCard>;
           })}

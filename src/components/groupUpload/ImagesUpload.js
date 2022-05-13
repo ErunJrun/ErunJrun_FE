@@ -101,7 +101,7 @@ const ImagesUpload = (props) => {
           <label htmlFor="profile_image">
             <Grid
               width="280px"
-              height="210px"
+              height="169px"
               border="1px solid #7B7B7B"
               borderRadius="3px"
               bg="#F0F0F0"
@@ -124,7 +124,6 @@ const ImagesUpload = (props) => {
             ></ImageInput>
           </label>
         </Grid>
-        <MidHr />
 
         <Grid display="flex" margin="0 0 32px 0">
           {showImages.map((image, idx) => (
@@ -139,7 +138,7 @@ const ImagesUpload = (props) => {
                   border="1px solid #FFFFFF"
                   borderRadius="3px"
                   _onClick={() => handleDeleteImage(image, idx)}
-                  margin="85px 80px"
+                  margin="62px 85px"
                   display="flex"
                   justifycontent="center"
                   color="white"
@@ -148,7 +147,7 @@ const ImagesUpload = (props) => {
                 >
                   삭제하기
                 </Text>
-                <ImagePreview src={image} />
+                <ImagePreview onMouseOver={() => {}} src={image} />
               </Grid>
             </Fragment>
           ))}
@@ -195,10 +194,11 @@ const UploadIcon = styled.img`
 `;
 
 const ImagePreview = styled.img`
-  height: 210px;
+  height: 169px;
   width: 280px;
   position: relative;
   margin: 0 4px;
+  object-fit: cover;
 `;
 const MidHr = styled.hr`
   width: 100%;

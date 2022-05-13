@@ -44,6 +44,7 @@ const Grid = (props) => {
   } = props;
 
   const styles = {
+    _onMouseOver: () => {},
     hover: hover,
     flexWrap: flexWrap,
     zIndex: zIndex,

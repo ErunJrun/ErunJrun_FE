@@ -74,10 +74,14 @@ const LoginInfo = () => {
   };
 
   const addLoginInfo = () => {
-    dispatch(loginInfoDB(checkedRegion, checkedDistance, checkedExp));
+    if (!checkedRegion || !checkedDistance || !checkedExp) {
+      return window.alert("미선택 된 항목이 있습니다.");
+    } else {
+      dispatch(loginInfoDB(checkedRegion, checkedDistance, checkedExp));
+    }
   };
 
-  if (nickname) {
+  if (!nickname) {
     return (
       <>
         <Grid maxWidth="800px" width="100%" margin="72px auto ">

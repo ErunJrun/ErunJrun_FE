@@ -40,7 +40,7 @@ const Alarm = () => {
                 );
               }
 
-              if (alarm.category === "dDay") {
+              if (alarm.category === "Dday") {
                 return <AlarmStart key={idx} category={"dDay"} {...alarm} />;
               }
 

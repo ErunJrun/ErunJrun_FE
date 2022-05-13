@@ -11,9 +11,9 @@ const AlarmUpdate = (props) => {
         display="flex"
         alignItems="flex-start"
       >
-        {!props?.check === true ? <NewDot /> : <NoneDot />}
+        {!props?.check ? <NewDot /> : <NoneDot />}
 
-        <Grid margin="0" display="flex" mxWidth="316px">
+        <Grid margin="0" display="flex" maxWidth="316px">
           <Grid
             display="flex"
             alignItems="center"
