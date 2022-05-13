@@ -40,17 +40,17 @@ const GroupContent = (props) => {
   const [checkedType, setCheckedType] = useState("");
   const [checkedSpeed, setCheckedSpeed] = useState("");
 
-  const datePick = (e) => {
-    console.log(dayjs(e.target.value).format("YYYYMMDD"));
-    console.log(dayjs(new Date()).format("YYYYMMDD"));
-    if (
-      dayjs(e.target.value).format("YYYYMMDD") <=
-      dayjs(new Date()).format("YYYYMMDD")
-    ) {
-      window.alert("오늘 날짜 이후부터 선택이 가능합니다.");
-      setDate("");
-    }
-  };
+  // const datePick = (e) => {
+  //   console.log(dayjs(e.target.value).format("YYYYMMDD"));
+  //   console.log(dayjs(new Date()).format("YYYYMMDD"));
+  //   if (
+  //     dayjs(e.target.value).format("YYYYMMDD") <=
+  //     dayjs(new Date()).format("YYYYMMDD")
+  //   ) {
+  //     window.alert("오늘 날짜 이후부터 선택이 가능합니다.");
+  //     setDate("");
+  //   }
+  // };
 
   // console.log(date);
 
@@ -214,7 +214,6 @@ const GroupContent = (props) => {
                   type="date"
                   onChange={(e) => {
                     setDate(e.target.value);
-                    datePick(e);
                   }}
                   value={date}
                 ></GroupInput>
