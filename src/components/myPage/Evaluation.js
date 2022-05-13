@@ -29,13 +29,13 @@ const Evaluation = (props) => {
            
     return (
         <div>
-            <button style={{margin:"0 0 3px 0", border:"none"}}
+            <Button style={{margin:"0 0 3px 0", border:"none"}}
                 onClick={() => {
                     toggleModal()
                     dispatch(getEvaluationDB(groupId, hostId, userId));
                 }}>
                 크루장 평가하기
-            </button>
+            </Button>
 
             {modal && (
                 <div>
@@ -113,6 +113,22 @@ const Btn = styled.button`
     align-items: center;
     justify-content: center; 
     flex-direction: column;
+`
+const Button = styled.button`
+max-width: 382px;
+font-size: 16px;
+font-weight: 500;
+width: 100%;
+background: #030c37;
+border-radius: 3px;
+height: 38px;
+color: white;
+border: none;
+cursor: pointer;
+:hover {
+  box-shadow: 0 0 3px black;
+  font-weight: 900;
+}
 `
 const ApplyBtnTrue = styled.button`
   width: 430px;

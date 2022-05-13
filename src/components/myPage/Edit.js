@@ -6,6 +6,7 @@ import { Text, Grid } from "../../elements";
 import styled from "styled-components";
 
 const Edit = (props) => {
+  console.log(props);
   const dispatch = useDispatch(); 
   const fileInput = useRef();
   const userId = localStorage.getItem("userId");
@@ -18,10 +19,10 @@ const Edit = (props) => {
   const [likeDistance, setLikeDistance] = useState(props.profile.likeDistance);
   const [userLevel, setUserLevel] = useState(props.profile.userLevel);
   const [phone, setPhone] = useState(props.profile.phone);
-  const [agreeSMS, setAgreeSMS] = useState(false);
-//   const [agreeSMS, setAgreeSMS] = useState(Boolean(props.profile.agreeSMS));
-  const [numberCK, setNumderCK] = useState("");
 
+  const [agreeSMS, setAgreeSMS] = useState(props.profile.agreeSMS);
+  const [numberCK, setNumderCK] = useState("");
+console.log(agreeSMS);
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
     "경기도",
@@ -98,19 +99,21 @@ const Edit = (props) => {
   };
 
   const edit = () => {
+    console.log("아아");
     dispatch(editProfileDB(userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS));
+    
+  
   };
 
 
   return (
     <>
-      <Grid maxWidth="1000px" margin="68px auto">
+      <Grid maxWidth="800px" margin="68px auto" justify="center">
         <Grid>
-          <Text bold size="30px">
+          <Text bold size="20px">
             회원정보 수정
           </Text>
           
-          <Text bold size="20px">프로필 수정</Text>
           <Text bold size="16px">프로필 사진</Text>
           <MyImage src={
             imgBase
@@ -128,33 +131,36 @@ const Edit = (props) => {
         </Grid>
 
         <Text bold size="16px">닉네임</Text>
-        <input value={nickname} onChange={changeName} type="text" 
-        placeholder="닉네임을 입력해주세요!" />
+            <Input value={nickname} onChange={changeName} type="text" 
+            placeholder="닉네임을 입력해주세요!" />
         <Text bold size="16px">자기소개</Text>
-        <input value={bio} onChange={changeContent} type="text" 
-        placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"  />
+            <Input value={bio} onChange={changeContent} type="text" 
+            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"  />
+
+            <Hr></Hr>
 
         <Text bold size="16px">핸드폰 번호</Text>
-            <div>
-                <input value={phone} onChange={ Number } type="text" 
+            <Grid display="felx">
+                <Inp value={phone} onChange={ Number } type="text" 
                 placeholder="010-1234-5678"  maxLength={20} />
-                <button
+                <Button
                 onClick={()=>{
                   dispatch(numberCheckMiddleware(phone));
                 }}
-                >인증요청</button>
-            </div>
-                <input value={agreeSMS} onChange={agree} type='checkbox'/>개인정보사용 동의 및 알림수신에 동의합니다.
-            <div>
-                <input value={numberCK} onChange={ NumderCK } type="text" 
+                >인증요청</Button>
+            </Grid>
+                
+            <Grid display="felx">
+                <Inp value={numberCK} onChange={ NumderCK } type="text" 
                 placeholder="인증번호를 입력해주세요!"  maxLength={20} />
-                <button
+                <Button
                   onClick={()=>{
                     dispatch(getNumberCheckMiddleware(phone,numberCK));
                   }}
-                >인증</button>
-            </div>
-        
+                >인증</Button>
+            </Grid>
+
+            <input checked={agreeSMS} value={agreeSMS} onChange={agree} type='checkbox'/>개인정보사용 동의 및 알림수신에 동의합니다.
         <hr/>
 
         <Text bold size="20px">나의 러닝스타일</Text>
@@ -236,19 +242,21 @@ const Edit = (props) => {
           </Grid>
         </Grid>
         <hr/>
-        <Text margin="0" bold size="18px">회원 탈퇴</Text>
-        <Box>회원을 탈퇴할 시, 현재 '굿러너 레벨'과 작성했던 게시물, 북마크한 코스 추천 게시물들이 초기화됩니다.<br/>
+        {/* <Text bold size="16px" color="#7b7b7b">회원 탈퇴</Text> */}
+        {/* <Box>회원을 탈퇴할 시, 현재 '굿러너 레벨'과 작성했던 게시물, 북마크한 코스 추천 게시물들이 초기화됩니다.<br/>
              정말로 탈퇴하시겠습니까?
              <button>탈퇴하기</button>
-        </Box>
-        <button
-         onClick={() => {
-          history.push("/mypage")
-        }}>수정취소</button>
-        <button
-         onClick={() => {
-          edit();
-        }}>저장하기</button>
+        </Box> */}
+        <Grid margin="70px 0 0 450px">
+            <Button
+            onClick={() => {
+              history.push("/mypage")
+            }}>수정취소</Button>
+            <Button
+            onClick={() => {
+              edit();
+            }}>저장하기</Button>
+        </Grid>
       </Grid>
     </>
   );
@@ -267,6 +275,55 @@ const MyImage = styled.img`
   height: 100px;
   width: 100px;
   border-radius: 50%
+`;
+
+const Button = styled.button`
+  width: 156px;
+  height: 55px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: solid 1px #030c37;
+  background-color: #030c37;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  margin-left: 16px;
+  :hover {font-size: 17px;}
+`;
+
+const Input= styled.input`
+  width: 767px;
+  height: 55px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 3px;
+  border: solid 1px #cbcbcb;
+  padding-left: 32px;
+  font-size: 16px;
+  font-weight: 500;
+`;
+
+const Inp= styled.input`
+  width: 302px;
+  height: 55px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 3px;
+  border: solid 1px #cbcbcb;
+  padding-left: 32px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+`;
+
+const Hr = styled.div`
+  width: 800px;
+  height: 1px;
+  background-color: #cbcbcb;
 `;
 
 const LabelExp = styled.label`

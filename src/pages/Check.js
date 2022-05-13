@@ -15,6 +15,8 @@ const Check = () => {
     const check_list = useSelector((state) => state.mypage.attend);
     console.log(check_list);
 
+    const groupId = check_list?.applyUser[0]?.groupId;
+    
     const choiceTime = (e, index) => {
         if (e.target.checked) {
             setUserId([...userId, index]);
@@ -24,7 +26,7 @@ const Check = () => {
         }
       };
      
-      const groupId = check_list.applyUser[0].groupId;
+      
 
     return (
         <Box>

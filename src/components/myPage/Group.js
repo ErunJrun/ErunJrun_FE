@@ -23,6 +23,7 @@ const Group = () => {
     return (
         <Grid  display="flex">
           {running?.data?.map((data, index) =>
+           userId !== data.userId &&
             (
               <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
               <Grid
@@ -72,14 +73,14 @@ const Group = () => {
                 </div>
                 {/* </ApplyBtnTrue> */}
              
-              {data.evaluation ? (
+              {/* {data.evaluation ? (
                 <ApplyBtnFalse>체크완료</ApplyBtnFalse>
               ) : (
                 <ApplyBtnTrue
                 onClick={() => {
                   history.push("/check");
                 }}>출석체크하기</ApplyBtnTrue>
-              )}
+              )} */}
             </Grid> 
 
               )

@@ -4,7 +4,7 @@ import { FaCaretUp } from "react-icons/fa";
 import "./Progress.css"
 
 const Progress = (props) => {
-
+console.log(props);
     const [style, setStyle] = useState({})
     const [run, setRun] = useState({})
 
@@ -23,7 +23,7 @@ const Progress = (props) => {
             }
             setRun(newRun);
         }, 400)
-    },[])
+    },[props])
 
     return (
         <>
