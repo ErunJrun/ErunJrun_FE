@@ -22,7 +22,7 @@ const GroupCard = (props) => {
 
   return (
     <>
-      <Grid maxWidth="384px" width="100%" margin="0 0 80px 0">
+      <Grid maxWidth="384px" width="100%" margin="0 8px 80px 8px">
         <Grid
           _onClick={() => {
             history.push(`/groupdetail/${props.groupId}`);

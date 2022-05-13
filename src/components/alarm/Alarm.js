@@ -6,7 +6,7 @@ import AlarmStart from "./AlarmStart";
 import AlarmComment from "./AlarmComment";
 import AlarmUpdate from "./AlarmUpdate";
 
-const Alarm = () => {
+const Alarm = (props) => {
   const alarmList = useSelector((state) => state.user.alarm);
 
   console.log(alarmList);
@@ -21,6 +21,7 @@ const Alarm = () => {
               if (alarm.category === "start" && alarm.role === "host") {
                 return (
                   <AlarmStart
+                    setAlarmOpen={props.setAlarmOpen}
                     key={idx}
                     category={"start"}
                     role={"host"}
@@ -32,6 +33,7 @@ const Alarm = () => {
               if (alarm.category === "start" && alarm.role === "attendance") {
                 return (
                   <AlarmStart
+                    setAlarmOpen={props.setAlarmOpen}
                     key={idx}
                     category={"start"}
                     role={"attendance"}
@@ -41,12 +43,20 @@ const Alarm = () => {
               }
 
               if (alarm.category === "Dday") {
-                return <AlarmStart key={idx} category={"dDay"} {...alarm} />;
+                return (
+                  <AlarmStart
+                    setAlarmOpen={props.setAlarmOpen}
+                    key={idx}
+                    category={"dDay"}
+                    {...alarm}
+                  />
+                );
               }
 
               if (alarm.category === "end" && alarm.role === "host") {
                 return (
                   <AlarmStart
+                    setAlarmOpen={props.setAlarmOpen}
                     key={idx}
                     category={"end"}
                     role={"host"}
@@ -58,6 +68,7 @@ const Alarm = () => {
               if (alarm.category === "end" && alarm.role === "attendance") {
                 return (
                   <AlarmStart
+                    setAlarmOpen={props.setAlarmOpen}
                     key={idx}
                     category={"end"}
                     role={"attendance"}
@@ -68,22 +79,46 @@ const Alarm = () => {
 
               if (alarm.category === "comment") {
                 return (
-                  <AlarmComment key={idx} category={"comment"} {...alarm} />
+                  <AlarmComment
+                    setAlarmOpen={props.setAlarmOpen}
+                    key={idx}
+                    category={"comment"}
+                    {...alarm}
+                  />
                 );
               }
 
               if (alarm.category === "recomment") {
                 return (
-                  <AlarmComment key={idx} category={"recomment"} {...alarm} />
+                  <AlarmComment
+                    setAlarmOpen={props.setAlarmOpen}
+                    key={idx}
+                    category={"recomment"}
+                    {...alarm}
+                  />
                 );
               }
 
               if (alarm.category === "update") {
-                return <AlarmUpdate key={idx} category={"update"} {...alarm} />;
+                return (
+                  <AlarmUpdate
+                    setAlarmOpen={props.setAlarmOpen}
+                    key={idx}
+                    category={"update"}
+                    {...alarm}
+                  />
+                );
               }
 
               if (alarm.category === "delete") {
-                return <AlarmUpdate key={idx} category={"delete"} {...alarm} />;
+                return (
+                  <AlarmUpdate
+                    setAlarmOpen={props.setAlarmOpen}
+                    key={idx}
+                    category={"delete"}
+                    {...alarm}
+                  />
+                );
               }
             })}
       </Wrap>

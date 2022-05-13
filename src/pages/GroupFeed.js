@@ -162,7 +162,7 @@ const GroupFeed = () => {
             마감공고 포함하기
           </Text>
         </Grid>
-        <Grid display="flex" width="100%" justifyContent="space-between">
+        <Grid display="flex" width="100%">
           {feedList?.map((item, idx) => {
             return <GroupCard key={idx} {...item}></GroupCard>;
           })}

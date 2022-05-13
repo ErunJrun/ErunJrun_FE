@@ -103,7 +103,7 @@ const Header = () => {
                 </Badge>
               )}
 
-              {alarmOpen ? <Alarm></Alarm> : null}
+              {alarmOpen ? <Alarm setAlarmOpen={setAlarmOpen}></Alarm> : null}
             </Grid>
             <Modal modalOpen={modalOpen} setAlarmOpen={setAlarmOpen} />
           </Grid>

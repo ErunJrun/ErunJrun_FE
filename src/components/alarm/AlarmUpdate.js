@@ -32,7 +32,7 @@ const AlarmUpdate = (props) => {
             {props.category === "update" ? (
               <Text
                 _onClick={() => {
-                  history.push(`/groupdetail/${props?.groupId}`);
+                  props.setAlarmOpen(false);
                 }}
                 hover="font-weight:900;"
                 cursor="pointer"
@@ -42,7 +42,14 @@ const AlarmUpdate = (props) => {
                 게시물이 수정되었습니다.
               </Text>
             ) : (
-              <Text hover="font-weight:900;" cursor="pointer" margin="0">
+              <Text
+                _onClick={() => {
+                  props.setAlarmOpen(false);
+                }}
+                hover="font-weight:900;"
+                cursor="pointer"
+                margin="0"
+              >
                 <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
                 게시물이 삭제되었습니다.
               </Text>

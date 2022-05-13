@@ -33,6 +33,7 @@ const AlarmStart = (props) => {
             <Grid
               _onClick={() => {
                 history.push(`/groupdetail/${props?.groupId}`);
+                props.setAlarmOpen(false);
               }}
               height="auto"
               display="flex"

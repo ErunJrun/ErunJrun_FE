@@ -33,6 +33,7 @@ const AlarmComment = (props) => {
             cursor="pointer"
             _onClick={() => {
               history.push(`/groupdetail/${props?.groupId}`);
+              props.setAlarmOpen(false);
             }}
             height="auto"
             display="flex"
