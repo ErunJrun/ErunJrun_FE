@@ -32,7 +32,7 @@ const Profile = () => {
               {" "}
               러닝레벨{" "}
             </Text>
-            <LevelBox userLevel={profile_list?.userInfo.userLevel} />
+            <LevelBox userLevel={profile_list?.userInfo?.userLevel} />
           </SmallBox>
           <SmallBox>
             <Text bold size="16px">
