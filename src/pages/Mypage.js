@@ -8,6 +8,7 @@ import { history } from "../redux/configureStore";
 import Group from "../components/myPage/Group";
 import MyGroup from "../components/myPage/MyGroup";
 import { Text, Grid } from "../elements";
+
 import Tabs from "../components/myPage/Tabs";
 
 const Mypage = () => {
