@@ -16,7 +16,6 @@ const PATCH_EVALUATION = "PATCH_EVALUATION";
 const GET_ATTEND = "GET_ATTEND";
 const PATCH_ATTEND = "PATCH_ATTEND";
 
-
 // //action creators
 export const getProfile = (payload) => ({
   type: GET_PROFILE,
@@ -39,16 +38,16 @@ export const getInformation = (payload) => ({
 });
 
 export const editProfile = (payload) => ({
-   type: EDIT_PROFILE,
-   payload,
- });
+  type: EDIT_PROFILE,
+  payload,
+});
 
- export const numberCheck = (payload) => ({
+export const numberCheck = (payload) => ({
   type: NUMBER_CHECK,
   payload,
 });
 
- export const getNumberCheck = (payload) => ({
+export const getNumberCheck = (payload) => ({
   type: GETNUMBER_CHECK,
   payload,
 });
@@ -73,50 +72,47 @@ export const patchAttend = (payload) => ({
   payload,
 });
 
-
-  
 //initialState
 const initialState = {
   list: [],
-  group:[],
-  mygroup:[],
+  group: [],
+  mygroup: [],
   phoneNumber: [],
   info: [],
-  host:[],
-  evaluation:[],
-  attend:[],
-  att:[],
+  host: [],
+  evaluation: [],
+  attend: [],
+  att: [],
 };
-
 
 // middleware actions
 
 //프로필 가져오기
 export const getProfileDB = (userId) => {
-    return async function (dispatch, getState, { history }) {
-      try {
-        //console.log(userId);
-        const { data } = await api.get(`/auth/info/${userId}`);
-        //console.log(data.data);
-        dispatch(getProfile(data.data));
-      } catch (error) {
-        console.log(error);
-        window.alert(error);
-      }
-    };
+  return async function (dispatch, getState, { history }) {
+    try {
+      //console.log(userId);
+      const { data } = await api.get(`/auth/info/${userId}`);
+      //console.log(data.data);
+      dispatch(getProfile(data.data));
+    } catch (error) {
+      console.log(error);
+      window.alert(error);
+    }
   };
+};
 
 //참여완료 그룹러닝
 export const getRunningDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
-        //console.log(userId);
-        const { data } = await api.get(`/group/complete?userId=${userId}`);
-        //console.log(data);
-        dispatch(getRunning(data));
+      console.log(userId);
+      const { data } = await api.get(`/group/complete?userId=${userId}`);
+      console.log(data);
+      dispatch(getRunning(data));
     } catch (error) {
-        console.log(error);
-        window.alert(error);
+      console.log(error);
+      window.alert(error);
     }
   };
 };
@@ -125,13 +121,13 @@ export const getRunningDB = (userId) => {
 export const getMyRunningDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
-        //console.log(userId);
-        const { data } = await api.get(`/group/mypage?userId=${userId}`);
-        //console.log(data);
-        dispatch(getMyRunning(data));
+      console.log(userId);
+      const { data } = await api.get(`/group/mypage?userId=${userId}`);
+      console.log(data);
+      dispatch(getMyRunning(data));
     } catch (error) {
-        console.log(error);
-        window.alert(error);
+      console.log(error);
+      window.alert(error);
     }
   };
 };
@@ -140,24 +136,42 @@ export const getMyRunningDB = (userId) => {
 export const getInformationDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
-        const { data } = await api.get(`/auth/updateUser`);
-        dispatch(getInformation(data.data));
+      const { data } = await api.get(`/auth/updateUser`);
+      dispatch(getInformation(data.data));
     } catch (error) {
-       // console.log(error);
-        window.alert(error);
+      // console.log(error);
+      window.alert(error);
     }
   };
 };
 
 //회원정보 수정
-export const editProfileDB = (userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS) => {
+export const editProfileDB = (
+  userId,
+  nickname,
+  image,
+  bio,
+  likeLocation,
+  likeDistance,
+  userLevel,
+  phone,
+  agreeSMS
+) => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log(
-        userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS
+        userId,
+        nickname,
+        image,
+        bio,
+        likeLocation,
+        likeDistance,
+        userLevel,
+        phone,
+        agreeSMS
       );
       const formData = new FormData();
-      
+
       formData.append("nickname", nickname);
       formData.append("image", image);
       formData.append("bio", bio);
@@ -184,15 +198,14 @@ export const numberCheckMiddleware = (phone) => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log(phone);
-        const { data } = await api.post(`/user/message`, {  
-            tel: phone 
-        });
-        console.log(data);
-        window.alert("인증번호가 발송 되었습니다");
-        
+      const { data } = await api.post(`/user/message`, {
+        tel: phone,
+      });
+      console.log(data);
+      window.alert("인증번호가 발송 되었습니다");
     } catch (error) {
-        console.log(error);
-        window.alert(error);
+      console.log(error);
+      window.alert(error);
     }
   };
 };
@@ -202,32 +215,30 @@ export const getNumberCheckMiddleware = (phone, numberCK) => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log(phone, numberCK);
-        const { data } = await api.post(`/user/verify`, {  
-            tel: phone,
-            code: numberCK 
-        });
-        console.log(data);
-        window.alert("인증되었습니다");
-      
+      const { data } = await api.post(`/user/verify`, {
+        tel: phone,
+        code: numberCK,
+      });
+      console.log(data);
+      window.alert("인증되었습니다");
     } catch (error) {
-        console.log(error);
-        window.alert("인증에 실패하였습니다");
+      console.log(error);
+      window.alert("인증에 실패하였습니다");
     }
   };
 };
 
-//호스트 정보 
+//호스트 정보
 export const getEvaluationDB = (groupId, hostId, userId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId,hostId,userId);
-      let data
+      console.log(groupId, hostId, userId);
+      let data;
       if (hostId !== userId) {
         data = await api.get(`/group/evaluation/${groupId}`);
         console.log(data);
         dispatch(getEvaluation(data));
       }
-      
     } catch (error) {
       console.log(error);
       //window.alert(error);
@@ -235,22 +246,25 @@ export const getEvaluationDB = (groupId, hostId, userId) => {
   };
 };
 
-// 호스트 평가 
-export const evaluationDB = (groupId,hostId, point) => {
+// 호스트 평가
+export const evaluationDB = (groupId, hostId, point) => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log(groupId, hostId, point);
       const formData = new FormData();
-      
+
       formData.append("hostId", hostId);
       formData.append("point", point);
-  
-      const { data } = await api.patch(`/group/evaluation/${groupId}`, {hostId: hostId,
-        point: point}, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+
+      const { data } = await api.patch(
+        `/group/evaluation/${groupId}`,
+        { hostId: hostId, point: point },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log(data);
       history.push("/mypage");
       window.alert("호스트평가가 완료되었습니다!");
@@ -264,7 +278,7 @@ export const evaluationDB = (groupId,hostId, point) => {
 export const getAttendDB = (groupId, userId, hostId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId,userId,hostId);
+      console.log(groupId, userId, hostId);
       // let data
       // if (hostId === userId) {
       //   data = await api.get(`/group/attendance/${groupId}`);
@@ -273,9 +287,8 @@ export const getAttendDB = (groupId, userId, hostId) => {
       // }
 
       const { data } = await api.get(`/group/attendance/${groupId}`);
-        console.log(data);
-        dispatch(getAttend(data));
-      
+      console.log(data);
+      dispatch(getAttend(data));
     } catch (error) {
       console.log(error);
       //window.alert(error);
@@ -283,53 +296,57 @@ export const getAttendDB = (groupId, userId, hostId) => {
   };
 };
 
-// 출석체크 
- export const patchAttendDB = (groupId, userId) => {
-   return async function (dispatch, getState, { history }) {
-     try {
-       console.log(groupId, userId);
-       const formData = new FormData();
-      
+// 출석체크
+export const patchAttendDB = (groupId, userId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(groupId, userId);
+      const formData = new FormData();
+
       formData.append("attendance", userId);
-  
-       const { data } = await api.patch(`/group/attendance/${groupId}`, {attendance:userId}, {
-         headers: {
-           "Content-Type": "multipart/form-data",
-         },
-       });
-      console.log(data);                                      
-       history.push("/mypage");
-       window.alert("출석체크가 완료되었습니다!");
-     } catch (error) {
-       console.log(error);
-     }
-   };
- };
+
+      const { data } = await api.patch(
+        `/group/attendance/${groupId}`,
+        { attendance: userId },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(data);
+      history.push("/mypage");
+      window.alert("출석체크가 완료되었습니다!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 //reducer
 
 export default handleActions(
   {
     [GET_PROFILE]: (state, action) =>
-    produce(state, (draft) => {
-      draft.list = action.payload;
-    }),
-   
+      produce(state, (draft) => {
+        draft.list = action.payload;
+      }),
+
     [GET_RUNNING]: (state, action) =>
-    produce(state, (draft) => {
-      draft.group = action.payload;
-    }),
+      produce(state, (draft) => {
+        draft.group = action.payload;
+      }),
 
     [GET_MYRUNNING]: (state, action) =>
-    produce(state, (draft) => {
-      draft.mygroup = action.payload;
-    }),
+      produce(state, (draft) => {
+        draft.mygroup = action.payload;
+      }),
 
     [GET_INFORMATION]: (state, action) =>
-    produce(state, (draft) => {
-      console.log(action.payload);
-      draft.info = action.payload;
-    }),
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.info = action.payload;
+      }),
 
     [EDIT_PROFILE]: (state, action) =>
       produce(state, (draft) => {
@@ -342,40 +359,40 @@ export default handleActions(
         draft.list = action.payload.userLevel;
         draft.list = action.payload.phone;
         draft.list = action.payload.agreeSMS;
-      }),  
+      }),
 
-      [NUMBER_CHECK]: (state, action) =>
+    [NUMBER_CHECK]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
         draft.phoneNumber = action.payload;
       }),
 
-      [GETNUMBER_CHECK]: (state, action) =>
+    [GETNUMBER_CHECK]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
         draft.phoneNumber = action.payload;
       }),
 
-      [GET_EVALUATION]: (state, action) =>
+    [GET_EVALUATION]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
         draft.host = action.payload;
       }),
 
-      [PATCH_EVALUATION]: (state, action) =>
+    [PATCH_EVALUATION]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
         draft.evaluation = action.hostId;
         draft.evaluation = action.point;
       }),
 
-      [GET_ATTEND]: (state, action) =>
+    [GET_ATTEND]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
         draft.attend = action.payload;
       }),
 
-      [PATCH_ATTEND]: (state, action) =>
+    [PATCH_ATTEND]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
         draft.att = action.attendance;

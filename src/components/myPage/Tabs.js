@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import styled from "styled-components";
 import Group from "../myPage/Group";
 import MyGroup from "../myPage/MyGroup";
-import Ready from "../../shared/Ready"
+import Ready from "../../shared/Ready";
 
-import { getRunningDB, getMyRunningDB } from "../../redux/modules/mypage"
+import { getRunningDB, getMyRunningDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
 
 const TabPanel = (props) => {
   const { children, value, index } = props;
 
-  
   // useEffect(() => {
   //   dispatch(getProfileDB(userId));
   // }, []);
@@ -26,16 +25,11 @@ const TabPanel = (props) => {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-     
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
-}
+};
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -46,7 +40,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -65,39 +59,47 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ width: '106%' }}>
-      <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+    <Box sx={{ width: "106%" }}>
+      <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
           <Tab label="그룹러닝" {...a11yProps(0)} />
           <Tab label="코스추천" {...a11yProps(1)} />
           <Tab label="뱃지" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-      <Btn onClick={()=>{ 
-            setComplete(true)
-            setMyGroup(false)
-            //dispatch(getRunningDB(userId));
-            }}>
-            참여완료 그룹 러닝
+        <Btn
+          onClick={() => {
+            setComplete(true);
+            setMyGroup(false);
+            dispatch(getRunningDB(userId));
+          }}
+        >
+          참여완료 그룹 러닝
         </Btn>
-        <Btn onClick={()=>{ 
-            setMyGroup(true)
-            setComplete(false)
+        <Btn
+          onClick={() => {
+            setMyGroup(true);
+            setComplete(false);
             dispatch(getMyRunningDB(userId));
-            }}>
-            진행완료 그룹 러닝
-        </Btn> 
+          }}
+        >
+          진행완료 그룹 러닝
+        </Btn>
 
-        { complete === true ? <Group/> : null }
+        {complete === true ? <Group /> : null}
 
-        { myGroup === true ? <MyGroup/> : null }
+        {myGroup === true ? <MyGroup /> : null}
       </TabPanel>
       <TabPanel value={value} index={1}>
-          <Ready />
+        <Ready />
       </TabPanel>
       <TabPanel value={value} index={2}>
-          <Ready />
+        <Ready />
       </TabPanel>
     </Box>
   );

@@ -1,79 +1,77 @@
-import React, { useEffect } from 'react';
-import { getRunningDB } from "../../redux/modules/mypage"
+import React, { useEffect } from "react";
+import { getRunningDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid, Image, IconButton } from "../../elements";
-import Evaluation from './Evaluation';
+import Evaluation from "./Evaluation";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 
 const Group = () => {
-  
-    const dispatch = useDispatch();
-    const userId = localStorage.getItem("userId");
+  const dispatch = useDispatch();
+  const userId = localStorage.getItem("userId");
 
-    const running = useSelector((state) => state.mypage.group);
-    console.log(running);
+  const running = useSelector((state) => state.mypage.group);
+  console.log(running);
 
-    useEffect(() => {
-        dispatch(getRunningDB(userId));
-    }, []);
+  useEffect(() => {
+    dispatch(getRunningDB(userId));
+  }, []);
 
-    if (running.length === 0) { return <></>; }
+  if (running.length === 0) {
+    return <></>;
+  }
 
-    return (
-        <Grid  display="flex">
-          {running?.data?.map((data, index) =>
-           userId !== data.userId &&
-            (
-              <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
-              <Grid
-                _onClick={() => {
-                  history.push(`/groupdetail/${data.groupId}`);
-                }}
-                width="100%"
-                display="flex"
-                flexDirection="column"
-                cursor="pointer"
-              >
-                <Image
-                  shape="imgBtn"
-                  width="384px"
-                  height="288px"
-                  src={data.thumbnailUrl}
-                  borderRadius="3px"
-                ></Image>
-  
-                <Grid>
-                  <Text cursor="pointer" size="18px" bold margin="0">
-                    {data.title}
-                  </Text>
-                  <Text cursor="pointer" size="16px" margin="10px 0 0 0">
-                    {data.date} (소요 시간 : {data.totalTime})
-                  </Text>
-                </Grid>
-  
-                <Grid cursor="pointer" display="flex">
-                  <Tag>{data.location}</Tag>
-                  <Tag>{data.distance}km</Tag>
-                  <Tag>{data.thema}</Tag>
-                </Grid>
-                <Hr></Hr>
-                <Grid
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  margin="0 0 10px 0"
-                >
-                </Grid>
-              </Grid>
-            
-                {/* <ApplyBtnTrue> */}
-                <div>
-                  <Evaluation running={data}/>
-                </div>
-                {/* </ApplyBtnTrue> */}
-             
-              {/* {data.evaluation ? (
+  return (
+    <Grid display="flex">
+      {running?.data?.map((data, index) => (
+        <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
+          <Grid
+            _onClick={() => {
+              history.push(`/groupdetail/${data.groupId}`);
+            }}
+            width="100%"
+            display="flex"
+            flexDirection="column"
+            cursor="pointer"
+          >
+            <Image
+              shape="imgBtn"
+              width="384px"
+              height="288px"
+              src={data.thumbnailUrl}
+              borderRadius="3px"
+            ></Image>
+
+            <Grid>
+              <Text cursor="pointer" size="18px" bold margin="0">
+                {data.title}
+              </Text>
+              <Text cursor="pointer" size="16px" margin="10px 0 0 0">
+                {data.date} (소요 시간 : {data.totalTime})
+              </Text>
+            </Grid>
+
+            <Grid cursor="pointer" display="flex">
+              <Tag>{data.location}</Tag>
+              <Tag>{data.distance}km</Tag>
+              <Tag>{data.thema}</Tag>
+            </Grid>
+            <Hr></Hr>
+            <Grid
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              margin="0 0 10px 0"
+            ></Grid>
+          </Grid>
+
+          {/* <ApplyBtnTrue> */}
+          <div>
+            <Evaluation running={data} />
+          </div>
+          {/* </ApplyBtnTrue> */}
+
+          {/* {data.evaluation ? (
                 <ApplyBtnFalse>체크완료</ApplyBtnFalse>
               ) : (
                 <ApplyBtnTrue
@@ -81,12 +79,10 @@ const Group = () => {
                   history.push("/check");
                 }}>출석체크하기</ApplyBtnTrue>
               )} */}
-            </Grid> 
-
-              )
-            )}
         </Grid>
-    );
+      ))}
+    </Grid>
+  );
 };
 
 const ApplyEnd = styled.div`
