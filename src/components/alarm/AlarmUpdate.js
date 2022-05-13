@@ -21,7 +21,7 @@ const AlarmUpdate = (props) => {
             margin="0 0 10px 0"
           >
             <Text margin="0 8px 0 0" size="14px" display="inline">
-              댓글등록
+              게시글
             </Text>
             <Text margin="0" size="12px" color="#828282" display="inline">
               {props?.createdAt}

@@ -17,7 +17,7 @@ const Header = () => {
 
   const [alarmOpen, setAlarmOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  console.log(alarmOpen);
+  console.log(alarmList);
 
   const readAlarm = () => {
     setAlarmOpen(!alarmOpen);
@@ -32,6 +32,12 @@ const Header = () => {
       dispatch(_getAlarmDB());
     }
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(_getAlarmDB());
+    }
+  }, [token]);
 
   if (is_login) {
     return (
@@ -84,11 +90,11 @@ const Header = () => {
                   readAlarm();
                 }}
               ></AlarmIcon>
-              {alarmList?.unreadCount !== 0 ? (
+              {alarmList?.unreadCount === 0 || alarmList === [] ? null : (
                 <Badge>
                   {alarmList?.unreadCount ? alarmList?.unreadCount : null}
                 </Badge>
-              ) : null}
+              )}
 
               {alarmOpen ? <Alarm></Alarm> : null}
             </Grid>
@@ -167,8 +173,8 @@ const AlarmIcon = styled.img`
 
 const Badge = styled.div`
   position: absolute;
-  right: 21.5%;
-  top: 28px;
+  right: 22.5%;
+  top: 23px;
   border-radius: 100%;
   width: 20px;
   height: 20px;
