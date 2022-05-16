@@ -218,10 +218,10 @@ const Hr = styled.div`
 `;
 
 const Wrap = styled.div`
-  z-index: 3;
+  z-index: 0;
   position: absolute;
   left:30%;
-  top: 300px;
+  top: 210px;
   margin: 0;
   padding: 24px 10px;
   max-width: 664px;
@@ -264,5 +264,9 @@ const Overlay = styled.div`
   bottom: 0;
   position: fixed;
   background: rgba(49,49,49,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 `;
 export default Schedule;

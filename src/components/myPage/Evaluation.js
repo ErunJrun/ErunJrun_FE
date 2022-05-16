@@ -39,8 +39,8 @@ const Evaluation = (props) => {
 
             {modal && (
                 <div>
-                    <div onClick={toggleModal} className="_overlay"></div>
-                    <div className="_modal-content">
+                    <Overlaye onClick={toggleModal} >
+                    <Wrap>
                         <Text bold size="18px" marginTop>크루장 평가</Text>
                         <MyImage src={group?.data?.hostUser?.user?.profileUrl}/>
                         <Text bold size="14px">
@@ -50,7 +50,7 @@ const Evaluation = (props) => {
                             {group?.data?.hostUser?.user?.nickname}님의 그룹러닝은 어땠나요?
                         </Text>
                         <Text size="13px" color="#858585">
-                        {group?.data?.hostUser?.date} 토 &nbsp; {group?.data?.hostUser?.standbyTime} 에 &nbsp; {group?.data?.hostUser?.title}를  &nbsp;함께함
+                        {group?.data?.hostUser?.date}  &nbsp; {group?.data?.hostUser?.standbyTime} 에 &nbsp; {group?.data?.hostUser?.title}를  &nbsp;함께함
                         </Text>
 
                         
@@ -85,7 +85,7 @@ const Evaluation = (props) => {
                         onClick = {toggleModal}>
                             <AiOutlineClose/>
                         </button>
-                    </div>
+                    </Wrap></Overlaye>
                 </div>
             )}
             
@@ -139,5 +139,35 @@ const ApplyBtnTrue = styled.button`
   border: none;
   margin: -30px 0 30px 0px
 `;
+
+const Overlaye = styled.div`
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background: rgba(49,49,49,0.8);
+    z-index: 2;
+`;
+
+const Wrap = styled.div`
+  z-index: 0;
+  position: absolute;
+  left:30%;
+  top: 210px;
+  margin: 0;
+  padding: 14px 28px;
+  max-width: 664px;
+  width: 500px;
+  height: 530px;
+  background: #ffffff;
+  box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+  line-height: 1.4;
+`;
+
 
 export default Evaluation;
