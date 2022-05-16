@@ -22,7 +22,7 @@ const MyGroup = () => {
         <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
           <Grid
             _onClick={() => {
-              history.push(`/groupdetail/$groupId`);
+              history.push(`/groupdetail/${data.groupId}`);
             }}
             width="100%"
             display="flex"

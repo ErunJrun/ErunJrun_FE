@@ -13,14 +13,12 @@ import Tabs from "../components/myPage/Tabs";
 
 const Mypage = () => {
   const dispatch = useDispatch();
-  // const params = useParams();
-  // console.log(params);
-  // const userId = params.userId;
-  // console.log(userId);
-  const userId = localStorage.getItem("userId");
-
-  const [complete, setComplete] = useState(true);
-  const [myGroup, setMyGroup] = useState(false);
+  const params = useParams();
+  console.log(params);
+  const userId = params.userId;
+  console.log(userId);
+  //const userId = localStorage.getItem("userId");
+ // const userId = props.match.params.StoreId
 
    useEffect(() => {
      dispatch(getProfileDB(userId));
@@ -33,23 +31,6 @@ const Mypage = () => {
       
       <Tabs />
 
-      {/* <Btn onClick={()=>{ 
-            setComplete(true)
-            setMyGroup(false)
-            }}>
-            참여완료 그룹러닝
-        </Btn>
-        <Btn onClick={()=>{ 
-            setMyGroup(true)
-            setComplete(false)
-            dispatch(getMyRunningDB(userId));
-            }}>
-            내가만든 그룹러닝
-        </Btn> 
-
-      {complete === true ? <Group /> : null}
-
-        { myGroup === true ? <MyGroup/> : null } */}
     </Grid>
   );
 };

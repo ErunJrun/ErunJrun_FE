@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { history } from "../../redux/configureStore";
-//import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -12,8 +12,13 @@ import { Grid, Image, Text } from "../../elements";
 
 const Modal = (props) => {
   const profile = localStorage.getItem("profileUrl");
+
+  // const params = useParams();
+  // console.log(params);
+  // const userId = params.userId;
+  // console.log(userId);
   const userId = localStorage.getItem("userId");
-  //console.log(userId);
+  console.log(userId);
 
   const dispatch = useDispatch();
   const [modal, setModal] = useState(props.modalOpen);
@@ -47,7 +52,8 @@ const Modal = (props) => {
                 margin="0 0 32px 0"
                 cursor="pointer"
                 _onClick={() => {
-                  history.push("/mypage");
+                  //history.push("/mypage");
+                  history.push(`/mypage/${userId}`);
                   setModal(false);
                 }}
                 size="18px"
