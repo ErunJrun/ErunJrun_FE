@@ -14,6 +14,7 @@ import step3 from "../assets/groupUpload/step3.png";
 import groupRightBtn from "../assets/groupUpload/groupRightBtn.png";
 import groupLeftBtn from "../assets/groupUpload/groupLeftBtn.png";
 import { Link } from "react-scroll";
+import { resetMap } from "../redux/modules/uploadInfo";
 
 const GroupUpload = () => {
   const dispatch = useDispatch();
@@ -101,6 +102,10 @@ const GroupUpload = () => {
     dispatch(addGroupDB(location, thumbnail, contents, address, distance));
     dispatch(imgActions.resetFile());
   };
+
+  useEffect(() => {
+    dispatch(resetMap());
+  }, []);
 
   if (!isLoaded1) {
     return (
