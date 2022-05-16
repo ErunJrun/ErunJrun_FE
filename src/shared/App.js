@@ -52,6 +52,7 @@ function App() {
           <ScrollToTop />
           <Route path="/" exact component={Main} />
           <Route path="/login" exact component={Login} />
+          {/* <Route path="/mypage/:userId" exact component={Mypage} /> */}
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/groupfeed" exact component={GroupFeed} />
           <Route path="/groupupload" exact component={GroupUpload} />

@@ -19,9 +19,6 @@ const Mypage = () => {
   // console.log(userId);
   const userId = localStorage.getItem("userId");
 
-  const [complete, setComplete] = useState(true);
-  const [myGroup, setMyGroup] = useState(false);
-
    useEffect(() => {
      dispatch(getProfileDB(userId));
    }, []);
@@ -33,23 +30,6 @@ const Mypage = () => {
       
       <Tabs />
 
-      {/* <Btn onClick={()=>{ 
-            setComplete(true)
-            setMyGroup(false)
-            }}>
-            참여완료 그룹러닝
-        </Btn>
-        <Btn onClick={()=>{ 
-            setMyGroup(true)
-            setComplete(false)
-            dispatch(getMyRunningDB(userId));
-            }}>
-            내가만든 그룹러닝
-        </Btn> 
-
-      {complete === true ? <Group /> : null}
-
-        { myGroup === true ? <MyGroup/> : null } */}
     </Grid>
   );
 };
