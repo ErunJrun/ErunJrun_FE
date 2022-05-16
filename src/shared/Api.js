@@ -2,6 +2,8 @@ import axios from "axios";
 import { deleteCookie, getCookie, setCookie } from "./Cookie";
 
 import { history } from "../redux/configureStore";
+import { useDispatch } from "react-redux";
+import { logoutDB } from "../redux/modules/user";
 
 // axios.defaults.withCredentials = true;
 
@@ -32,11 +34,12 @@ api.interceptors.response.use(
   async (error) => {
     const { config, response } = error;
     const originalRequest = config;
+    const dispatch = useDispatch();
 
     if (response.data.token) {
       // access token이 재발급 된 상태,
       console.log(response);
-      setCookie("accessToken", response.data.token, 3);
+      setCookie("accessToken", response.data.token, 1);
       axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
       originalRequest.headers.Authorization = `Bearer ${response.data.token}`;
 
@@ -44,7 +47,8 @@ api.interceptors.response.use(
     }
 
     if (response.data.success === false) {
-      window.alert(response.data.message);
+      console.log(response.data.message);
+      dispatch(logoutDB());
     }
 
     // else {

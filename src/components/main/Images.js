@@ -1,14 +1,16 @@
-const Images = [
-    {
-        id: 1,
-        src: "https://ifh.cc/g/B3RjGF.png",
-        alt: "running1"
-    },
-    {
-        id: 2,
-        src: "https://ifh.cc/g/6rZ899.png",
-        alt: "running3"
-    },
+import blueBanner from "../../assets/main/blueBanner.png";
+import yellowBanner from "../../assets/main/yellowBanner.png";
 
-  ];
-  export default Images;
+const Images = [
+  {
+    id: 1,
+    src: blueBanner,
+    alt: "running1",
+  },
+  {
+    id: 2,
+    src: yellowBanner,
+    alt: "running3",
+  },
+];
+export default Images;

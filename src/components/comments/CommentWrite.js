@@ -10,6 +10,9 @@ const CommentWrite = (props) => {
   const [comm, setComm] = useState("");
 
   const writeComm = (e) => {
+    if (comm === "") {
+      window.alert("내용을 입력해주세요");
+    }
     setComm(e.target.value);
     console.log(comm);
     dispatch(_addCommentFX("group", props.groupId, comm));

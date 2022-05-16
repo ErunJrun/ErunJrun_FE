@@ -13,6 +13,7 @@ import Feed from "./modules/feed";
 import Image from "./modules/image";
 import Post from "./modules/post";
 import Recomments from "./modules/recomments";
+import UploadInfo from "./modules/uploadInfo";
 
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   recomments: Recomments,
   mypage: Mypage,
   feed: Feed,
+  uploadInfo: UploadInfo,
   image: Image,
   post: Post,
   router: connectRouter(history),

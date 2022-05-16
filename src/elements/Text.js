@@ -37,6 +37,7 @@ const Text = (props) => {
     hover,
     alignItems,
     lineHeight,
+    regular,
   } = props;
   const styles = {
     onMouseOver,
@@ -71,6 +72,7 @@ const Text = (props) => {
     hover,
     alignItems,
     lineHeight,
+    regular,
   };
   return (
     <React.Fragment>
@@ -133,7 +135,13 @@ const P = styled.p`
   background-color: ${(props) => props.bg};
   border: ${(props) => props.border};
   z-index: ${(props) => (props.zindex ? `1;` : null)};
-  ${(props) => (props.bold ? `font-weight: 800;` : `font-weight: 500;`)};
+  ${(props) =>
+    props.bold
+      ? `font-weight: 700;`
+      : props.regular
+      ? `font-weight: 400;`
+      : `font-weight: 500;`};
+
   ${(props) => (props.text_decoration ? `text-decoration: underline;` : null)};
   ${(props) => `color : ${props.color};`};
   ${(props) => `font-size: ${props.size};`};

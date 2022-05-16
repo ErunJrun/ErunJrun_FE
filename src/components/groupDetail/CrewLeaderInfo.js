@@ -62,7 +62,7 @@ const CrewLeaderInfo = (props) => {
               굿러너 레벨
             </Text>
             <Text size="14px" margin="0" bold>
-              72km
+              {detailGroup?.mannerPoint}km
             </Text>
           </Grid>
         </Grid>

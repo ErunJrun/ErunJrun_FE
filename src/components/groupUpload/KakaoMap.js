@@ -8,29 +8,30 @@ import {
 } from "react-kakao-maps-sdk";
 import { Grid, Input, Text } from "../../elements";
 import { history } from "../../redux/configureStore";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addDistance,
+  addPaths,
+  resetMap,
+} from "../../redux/modules/uploadInfo";
 
-function KakaoMap(props) {
+function KakaoMap() {
   const { kakao } = window;
+
+  const dispatch = useDispatch();
+
+  const mapInfoList = useSelector((state) => state.uploadInfo);
+  console.log(mapInfoList);
 
   const [isdrawing, setIsdrawing] = useState(false);
   const [clickLine, setClickLine] = useState();
-  const [paths, setPaths] = useState([]);
+  const [paths, setPaths] = useState(mapInfoList?.paths);
   const [distances, setDistances] = useState([]);
   const [mousePosition, setMousePosition] = useState({
     lat: 0,
     lng: 0,
   });
   const [moveLine, setMoveLine] = useState();
-
-  console.log(distances);
-
-  useEffect(() => {
-    props.setLocation(paths);
-  }, [paths]);
-
-  useEffect(() => {
-    props.setDistance(totalDistance);
-  }, [distances]);
 
   //서버에 보내줄 최종 거리(km)
 
@@ -48,9 +49,7 @@ function KakaoMap(props) {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
     setPlace(inputText);
-    setInputText("");
   };
 
   // console.log(paths, distances);
@@ -59,6 +58,7 @@ function KakaoMap(props) {
     if (!isdrawing) {
       setDistances([]);
       setPaths([]);
+      dispatch(resetMap());
     }
     setPaths((prev) => [
       ...prev,
@@ -83,6 +83,8 @@ function KakaoMap(props) {
 
   const handleRightClick = (_map, _mouseEvent) => {
     setIsdrawing(false);
+    dispatch(addPaths(paths));
+    dispatch(addDistance(totalDistance));
   };
 
   //장소 검색
@@ -112,6 +114,8 @@ function KakaoMap(props) {
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
+      } else {
+        window.alert("검색된 장소가 없습니다");
       }
     });
   }, [place]);
@@ -165,7 +169,7 @@ function KakaoMap(props) {
             }}
             style={{
               // 지도의 크기
-              width: "100%",
+              width: "865px",
               height: "464px",
             }}
             level={3} // 지도의 확대 레벨

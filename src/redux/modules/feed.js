@@ -14,7 +14,6 @@ const GET_GROUP_DETAIL = "GET_GROUP_DETAIL";
 const EDIT_GROUP_CONTENT = "EDIT_GROUP_CONTENT";
 const APPLY_GROUP = "APPLY_GROUP";
 const APPLY_DETAIL = "APPLY_DETAIL";
-
 const LOADING = "LOADING";
 
 //initialState
@@ -27,6 +26,7 @@ const initialState = {
       { lat: 37.6, lng: 127.4 },
     ],
   },
+  isLoading: false,
 };
 
 //액션생성함수
@@ -74,7 +74,10 @@ export const applyDetail = (payload) => ({
   payload,
 });
 
-const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
+export const loading = (payload) => ({
+  type: LOADING,
+  payload,
+});
 
 //미들웨어
 export const getGroupDB = (category) => {
@@ -167,18 +170,18 @@ export const addGroupDB = (
     thumbnail?.map((e, idx) => {
       return formData.append("thumbnail", e);
     });
-    formData.append("title", contents[0].title);
-    formData.append("maxPeople", contents[0].maxPeople);
-    formData.append("date", contents[0].date);
-    formData.append("standbyTime", contents[0].standbyTime);
-    formData.append("startTime", contents[0].startTime);
-    formData.append("finishTime", contents[0].finishTime);
-    formData.append("parking", contents[0].parking);
-    formData.append("speed", contents[0].speed);
-    formData.append("baggage", contents[0].baggage);
-    formData.append("content", contents[0].content);
-    formData.append("thema", contents[0].theme);
-    formData.append("chattingRoom", contents[0].chattingRoom);
+    formData.append("title", contents.title);
+    formData.append("maxPeople", contents.maxPeople);
+    formData.append("date", contents.date);
+    formData.append("standbyTime", contents.standbyTime);
+    formData.append("startTime", contents.startTime);
+    formData.append("finishTime", contents.finishTime);
+    formData.append("parking", contents.parking);
+    formData.append("speed", contents.speed);
+    formData.append("baggage", contents.baggage);
+    formData.append("content", contents.content);
+    formData.append("thema", contents.theme);
+    formData.append("chattingRoom", contents.chattingRoom);
     formData.append("location", address);
     formData.append("distance", distance);
     formData.append("mapLatLng", JSON.stringify(mapLatLng));
@@ -326,12 +329,6 @@ export default handleActions(
         draft.detail = action.payload;
       }),
 
-    // [EDIT_GROUP]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     console.log(action.payload);
-    //     draft.detail = action.payload;
-    //   }),
-
     [EDIT_GROUP_CONTENT]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
@@ -368,8 +365,8 @@ export default handleActions(
 
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload);
-        draft.is_loading = action.payload.is_loading;
+        console.log(action.payload);
+        draft.isLoading = action.payload.isLoading;
       }),
   },
   initialState

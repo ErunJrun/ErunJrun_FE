@@ -1,25 +1,31 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Grid, Text, Input, IconButton } from "../../elements";
 import styled from "styled-components";
-import step2 from "../../assets/groupUpload/step2.png";
 import dayjs from "dayjs";
+import { useDispatch, useSelector } from "react-redux";
+import { addContents } from "../../redux/modules/uploadInfo";
 
 const GroupContent = (props) => {
+  const dispatch = useDispatch();
+  const contentsList = useSelector((state) => state.uploadInfo.contents);
+  console.log(contentsList);
+
   const [textLength, setTextLength] = useState(0);
   const [textLength600, setTextLength600] = useState(0);
   const [textLengthPark, setTextLengthPark] = useState(0);
   const [textLengthBag, setTextLengthBag] = useState(0);
   const [textLengthChat, setTextLengthChat] = useState(0);
-  const [title, setTitle] = useState("");
-  const [standbyTime, setStandbyTime] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [finishTime, setFinishTime] = useState("");
-  const [maxPeople, setMaxPeople] = useState("");
-  const [date, setDate] = useState("");
-  const [parking, setParking] = useState("");
-  const [baggage, setBaggage] = useState("");
-  const [content, setContent] = useState("");
-  const [chattingRoom, setChattingRoom] = useState("");
+
+  const [title, setTitle] = useState(contentsList.title);
+  const [standbyTime, setStandbyTime] = useState(contentsList.standbyTime);
+  const [startTime, setStartTime] = useState(contentsList.startTime);
+  const [finishTime, setFinishTime] = useState(contentsList.finishTime);
+  const [maxPeople, setMaxPeople] = useState(contentsList.maxPeople);
+  const [date, setDate] = useState(contentsList.date);
+  const [parking, setParking] = useState(contentsList.parking);
+  const [baggage, setBaggage] = useState(contentsList.baggage);
+  const [content, setContent] = useState(contentsList.content);
+  const [chattingRoom, setChattingRoom] = useState(contentsList.chattingRoom);
   const [runTypeList, setRunTypeList] = useState([
     "도시",
     "공원",
@@ -37,22 +43,22 @@ const GroupContent = (props) => {
     `6'30" km/h`,
   ]);
 
-  const [checkedType, setCheckedType] = useState("");
-  const [checkedSpeed, setCheckedSpeed] = useState("");
+  const [checkedType, setCheckedType] = useState(contentsList.theme);
+  const [checkedSpeed, setCheckedSpeed] = useState(contentsList.speed);
 
-  // const datePick = (e) => {
-  //   console.log(dayjs(e.target.value).format("YYYYMMDD"));
-  //   console.log(dayjs(new Date()).format("YYYYMMDD"));
-  //   if (
-  //     dayjs(e.target.value).format("YYYYMMDD") <=
-  //     dayjs(new Date()).format("YYYYMMDD")
-  //   ) {
-  //     window.alert("오늘 날짜 이후부터 선택이 가능합니다.");
-  //     setDate("");
-  //   }
-  // };
+  console.log(maxPeople);
 
-  // console.log(date);
+  const datePick = (e) => {
+    console.log(dayjs(e.target.value).format("YYYYMMDD"));
+    console.log(dayjs(new Date()).format("YYYYMMDD"));
+    if (
+      dayjs(e.target.value).format("YYYYMMDD") <=
+      dayjs(new Date()).format("YYYYMMDD")
+    ) {
+      window.alert("오늘 날짜 이후부터 선택이 가능합니다.");
+      setDate("");
+    }
+  };
 
   //글자 수 제한
   const checkMaxLength = (e) => {
@@ -113,25 +119,24 @@ const GroupContent = (props) => {
     setCheckedSpeed(e);
   };
 
-  const contents = [
-    {
-      title: title,
-      standbyTime: standbyTime,
-      startTime: startTime,
-      finishTime: finishTime,
-      maxPeople: maxPeople,
-      date: date,
-      speed: checkedSpeed,
-      parking: parking,
-      baggage: baggage,
-      content: content,
-      theme: checkedType,
-      chattingRoom: chattingRoom,
-    },
-  ];
+  const contents = {
+    title: title,
+    standbyTime: standbyTime,
+    startTime: startTime,
+    finishTime: finishTime,
+    maxPeople: maxPeople,
+    date: date,
+    speed: checkedSpeed,
+    parking: parking,
+    baggage: baggage,
+    content: content,
+    theme: checkedType,
+    chattingRoom: chattingRoom,
+  };
 
   useEffect(() => {
-    props.setContents(contents);
+    // props.setContents(contents);
+    dispatch(addContents(contents));
   }, [
     title,
     standbyTime,
@@ -149,8 +154,7 @@ const GroupContent = (props) => {
 
   return (
     <>
-      <Grid margin="80px auto 0 18.7%" maxWidth="865px">
-        <Step2Img src={step2}></Step2Img>
+      <Grid margin="0 auto" width="865px">
         <Grid display="flex" margin="0 0 18px 0" alignItems="center">
           <Grid display="flex" width="auto">
             <Text margin="0" height="auto" display="inline" bold size="20px">
@@ -182,6 +186,7 @@ const GroupContent = (props) => {
                   setTitle(e.target.value);
                   checkMaxLength(e);
                 }}
+                value={title}
                 placeholder="그룹 러닝명을 입력해주세요."
               ></GroupInput>
               <Text margin="0" size="14px">
@@ -214,6 +219,7 @@ const GroupContent = (props) => {
                   type="date"
                   onChange={(e) => {
                     setDate(e.target.value);
+                    datePick(e);
                   }}
                   value={date}
                 ></GroupInput>
@@ -322,6 +328,7 @@ const GroupContent = (props) => {
                 onChange={(e) => {
                   setMaxPeople(e.target.value);
                 }}
+                value={maxPeople}
               >
                 <option style={{ color: "#818181" }} value="null">
                   모집 인원을 입력해주세요.(최대 10명)
@@ -361,6 +368,7 @@ const GroupContent = (props) => {
                   setContent(e.target.value);
                   checkMaxLength600(e);
                 }}
+                value={content}
                 placeholder=" 600자 이내로 그룹 러닝에 대한 소개를 작성해주세요.
                 ex) 호수공원 러닝 참 좋아하는데요~ 함께 뛰면 두배로 즐거울 것 같아 그룹 러닝을 모집합니다!"
               ></GroupTextArea>
@@ -397,6 +405,7 @@ const GroupContent = (props) => {
                   setChattingRoom(e.target.value);
                   checkMaxLengthChat(e);
                 }}
+                value={chattingRoom}
                 placeholder="크루원들과 소통할 오픈채팅방 링크를 추가해주세요."
               ></GroupInput>
               <Text margin="0" size="14px">
@@ -422,14 +431,15 @@ const GroupContent = (props) => {
             {runTypeList.map((e, idx) => {
               return (
                 <Fragment key={idx}>
-                  <Label checked={checkedType}>
+                  <Label>
                     <input
-                      onClick={() => {
+                      onChange={() => {
                         choiceRunType(e);
                       }}
                       type="radio"
                       name="runType"
                       value={e}
+                      checked={checkedType === e ? e : ""}
                     ></input>
                     <Text bold>{e}</Text>
                   </Label>
@@ -458,14 +468,15 @@ const GroupContent = (props) => {
               {runSpeedList.map((e, idx) => {
                 return (
                   <Fragment key={idx}>
-                    <Label checked={checkedSpeed}>
+                    <Label>
                       <input
-                        onClick={() => {
+                        onChange={() => {
                           choiceSpeed(e);
                         }}
                         type="radio"
                         name="speed"
                         value={e}
+                        checked={checkedSpeed === e ? e : ""}
                       ></input>
                       <Text bold>{e}</Text>
                     </Label>
@@ -504,6 +515,7 @@ const GroupContent = (props) => {
                   setParking(e.target.value);
                   checkMaxLengthPark(e);
                 }}
+                value={parking}
                 placeholder="주변 주차 정보가 있다면 추가해주세요."
               ></GroupInput>
               <Text margin="0" size="14px">
@@ -532,6 +544,7 @@ const GroupContent = (props) => {
                   setBaggage(e.target.value);
                   checkMaxLengthBag(e);
                 }}
+                value={baggage}
                 placeholder="예 : 개별 보관"
               ></GroupInput>
               <Text margin="0" size="14px">
@@ -545,13 +558,6 @@ const GroupContent = (props) => {
   );
 };
 
-const Step2Img = styled.img`
-  position: fixed;
-  max-width: 295px;
-  width: 100%;
-  right: 19%;
-  top: 170px;
-`;
 const Hr = styled.hr`
   width: 865px;
   height: 0px;

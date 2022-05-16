@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-scroll";
 
 import { getGroupDB, resetGroup } from "../redux/modules/feed";
+import Permit from "../shared/Permit";
 
 const GroupFeed = () => {
   const dispatch = useDispatch();
@@ -77,130 +78,127 @@ const GroupFeed = () => {
     <>
       <Grid
         position="relative"
-        maxWidth="1200px"
-        width="100%"
-        margin="0 auto 320px auto"
+        width="1282px"
+        margin="0 auto 320px 360px"
+        justifyContent="space-between"
+        display="flex"
       >
-        <Grid
-          width="100%"
-          display="flex"
-          justifyContent="left"
-          margin="64px auto 32px auto"
-          alignItems="center"
-        >
-          <Text margin="0 10px 0 0" bold size="20px">
-            그룹러닝
-          </Text>
-          <Text size="14px">함께 뛰면 즐거움이 두배!</Text>
-        </Grid>
-        <GroupFilter
-          category={category}
-          setSearchState={setSearchState}
-          finish={finish}
-        ></GroupFilter>
-        <Grid
-          display="flex"
-          justifyContent="left"
-          alignItems="baseline"
-          margin="64px 0 0 0"
-          maxWidth="1360px"
-          width="100%"
-        >
-          {searchState || !nickname ? (
-            <>
-              <Text size="20px" bold>
-                총{" "}
-                <span style={{ color: "#686EF9" }}>
-                  {feedList.length ? feedList.length : "0"}
-                </span>
-                건의 결과
-              </Text>
-            </>
-          ) : (
-            <>
-              <Text margin="0 15px 0 0" size="20px" bold>
-                <span style={{ color: "#686EF9" }}>
-                  {nickname ? nickname : null}
-                </span>{" "}
-                님을 위한 추천 그룹 러닝입니다!
-              </Text>
-              <Text color="#686EF9" margin="0 8px 0 0" size="16px">
-                {preferData?.likeLocation
-                  ? "#" + preferData?.likeLocation
-                  : null}
-              </Text>
-              <Text size="16px" color="#686EF9">
-                {preferData?.likeDistance
-                  ? "#" + preferData?.likeDistance
-                  : null}
-              </Text>
-            </>
-          )}
-        </Grid>
-        <Hr></Hr>
-        <Grid
-          maxWidth="1360px"
-          width="100%"
-          margin="10px auto 40px auto"
-          display="flex"
-          justifyContent="right"
-          alignItems="center"
-        >
-          <input
-            style={{
-              width: "18px",
-              height: "18px",
-              margin: "0 8px 0 0",
-              cursor: "pointer",
-            }}
-            type="checkbox"
-            onClick={() => {
-              finishCheck();
-            }}
-          ></input>
-          <Text bold margin="0">
-            마감공고 포함하기
-          </Text>
-        </Grid>
-        <Grid display="flex" width="100%">
-          {feedList?.map((item, idx) => {
-            return <GroupCard key={idx} {...item}></GroupCard>;
-          })}
-        </Grid>
-        <Grid
-          display="flex"
-          width="auto"
-          height="auto"
-          flexDirection="column"
-          alignContent="flex-end"
-          justifyContent="right"
-          position="fixed"
-          top="726px"
-          left="83%"
-          _onMouseOver={() => {
-            setUploadBtn(true);
-          }}
-          _onMouseOut={() => {
-            setUploadBtn(false);
-          }}
-        >
-          {uploadBtn === true ? (
-            <UploadBtn
-              onClick={() => {
-                history.push("/groupupload");
+        <Grid width="1200px">
+          <Grid
+            display="flex"
+            justifyContent="left"
+            margin="64px auto 32px auto"
+            alignItems="center"
+          >
+            <Text margin="0 10px 0 0" bold size="20px">
+              그룹러닝
+            </Text>
+            <Text size="14px">함께 뛰면 즐거움이 두배!</Text>
+          </Grid>
+          <GroupFilter
+            category={category}
+            setSearchState={setSearchState}
+            finish={finish}
+          ></GroupFilter>
+          <Grid
+            display="flex"
+            justifyContent="left"
+            alignItems="baseline"
+            margin="64px 0 0 0"
+          >
+            {searchState || !nickname ? (
+              <>
+                <Text size="20px" bold>
+                  총{" "}
+                  <span style={{ color: "#686EF9" }}>
+                    {feedList.length ? feedList.length : "0"}
+                  </span>
+                  건의 결과
+                </Text>
+              </>
+            ) : (
+              <>
+                <Text margin="0 15px 0 0" size="20px" bold>
+                  <span style={{ color: "#686EF9" }}>
+                    {nickname ? nickname : null}
+                  </span>{" "}
+                  님을 위한 추천 그룹 러닝입니다!
+                </Text>
+                <Text color="#686EF9" margin="0 8px 0 0" size="16px">
+                  {preferData?.likeLocation
+                    ? "#" + preferData?.likeLocation
+                    : null}
+                </Text>
+                <Text size="16px" color="#686EF9">
+                  {preferData?.likeDistance
+                    ? "#" + preferData?.likeDistance
+                    : null}
+                </Text>
+              </>
+            )}
+          </Grid>
+          <Hr></Hr>
+          <Grid
+            margin="10px auto 40px auto"
+            display="flex"
+            justifyContent="right"
+            alignItems="center"
+          >
+            <input
+              style={{
+                width: "18px",
+                height: "18px",
+                margin: "0 8px 0 0",
+                cursor: "pointer",
               }}
-              src={uploadHover}
-            />
-          ) : (
-            <UploadBtn
+              type="checkbox"
               onClick={() => {
-                history.push("/groupupload");
+                finishCheck();
               }}
-              src={upload}
-            />
-          )}
+            ></input>
+            <Text bold margin="0">
+              마감공고 포함하기
+            </Text>
+          </Grid>
+          <Grid display="flex">
+            {feedList?.map((item, idx) => {
+              return <GroupCard key={idx} {...item}></GroupCard>;
+            })}
+          </Grid>
+        </Grid>
 
-          <Link to="1" spy={true} smooth={true}>
+        <Grid
+          display="flex"
+          flexDirection="column"
+          position="sticky"
+          top="726px"
+          margin="0"
+          width="auto"
+        >
+          <Permit>
+            {uploadBtn === true ? (
+              <UploadBtn
+                onClick={() => {
+                  history.push("/groupupload");
+                }}
+                src={uploadHover}
+              />
+            ) : (
+              <UploadBtn
+                onClick={() => {
+                  history.push("/groupupload");
+                }}
+                src={upload}
+              />
+            )}
+          </Permit>
+
+          <Link
+            style={{ position: "relative" }}
+            to="1"
+            spy={true}
+            smooth={true}
+          >
             <PageUpBtn src={pageUp} />
           </Link>
         </Grid>
@@ -210,17 +208,15 @@ const GroupFeed = () => {
 };
 
 const UploadBtn = styled.img`
-  max-width: 66px;
-  width: 100%;
-  height: auto;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
   margin: 0;
 `;
 
 const PageUpBtn = styled.img`
-  max-width: 66px;
-  width: 100%;
-  height: auto;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
   margin: 0;
 `;

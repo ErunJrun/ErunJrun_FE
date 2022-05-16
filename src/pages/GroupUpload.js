@@ -9,9 +9,11 @@ import { history } from "../redux/configureStore";
 import { Grid, IconButton, Text } from "../elements";
 import { imgActions } from "../redux/modules/image";
 import step1 from "../assets/groupUpload/step1.png";
+import step2 from "../assets/groupUpload/step2.png";
 import step3 from "../assets/groupUpload/step3.png";
 import groupRightBtn from "../assets/groupUpload/groupRightBtn.png";
 import groupLeftBtn from "../assets/groupUpload/groupLeftBtn.png";
+import { Link } from "react-scroll";
 
 const GroupUpload = () => {
   const dispatch = useDispatch();
@@ -20,13 +22,12 @@ const GroupUpload = () => {
   const [isLoaded2, setIsLoad2] = useState(false);
   const [isLoaded3, setIsLoad3] = useState(false);
 
-  const [location, setLocation] = useState([]);
-  const [distance, setDistance] = useState([]);
-  const [image, setImage] = useState([]);
-  const [contents, setContents] = useState([]);
-  const [address, setAddress] = useState("");
-
+  const location = useSelector((state) => state.uploadInfo.paths);
+  const distance = useSelector((state) => state.uploadInfo.distance);
+  const contents = useSelector((state) => state.uploadInfo.contents);
   const thumbnail = useSelector((state) => state.image.files);
+
+  const [address, setAddress] = useState("");
 
   console.log(location, distance, thumbnail, contents);
 
@@ -52,57 +53,42 @@ const GroupUpload = () => {
     } else {
       setIsLoad1(true);
       setIsLoad2(true);
-      // setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
 
   const goBack1 = () => {
     setIsLoad1(false);
     setIsLoad2(false);
-    // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  // if (contents[0].title === "") {
-  //   window.alert("제목을 입력해주세요");
-  // }
-  // if (contents[0].standbyTime === "") {
-  //   window.alert("스탠바이 시간을 입력해주세요");
-  // }
-  // if (contents[0].finishTime === "") {
-  //   window.alert("종료 시간을 입력해주세요");
-  // }
-  // if (contents[0].maxPeople === "") {
-  //   window.alert("모집인원을 입력해주세요");
-  // }
-  // if (contents[0].date === "") {
-  //   window.alert("러닝 날짜를 입력해주세요");
-  // }
-  // if (contents[0].speed === "") {
-  //   window.alert("페이스를 선택해주세요");
-  // }
-  // if (contents[0].content === "") {
-  //   window.alert("상세설명을 입력해주세요");
-  // }
-  // if (contents[0].theme === "") {
-  //   window.alert("러닝타입을 선택해주세요");}
-
   const goNext3 = () => {
-    if (
-      contents[0].title === "" ||
-      contents[0].standbyTime === "" ||
-      contents[0].finishTime === "" ||
-      contents[0].maxPeople === "" ||
-      contents[0].date === "" ||
-      contents[0].speed === "" ||
-      contents[0].theme === "" ||
-      contents[0].content === ""
-    ) {
-      window.alert("빈칸을 채워주세요");
-    } else {
-      setIsLoad2(false);
-      setIsLoad3(true);
-      // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (contents.title === "") {
+      return window.alert("제목을 입력해주세요");
     }
+    if (contents.standbyTime === "") {
+      return window.alert("러닝 일시를 입력해주세요");
+    }
+    if (contents.finishTime === "") {
+      return window.alert("종료 시간을 입력해주세요");
+    }
+    if (contents.maxPeople === "") {
+      return window.alert("모집인원을 입력해주세요");
+    }
+    if (contents.date === "") {
+      return window.alert("러닝 날짜를 입력해주세요");
+    }
+    if (contents.speed === "") {
+      return window.alert("페이스를 선택해주세요");
+    }
+    if (contents.content === "") {
+      return window.alert("상세설명을 입력해주세요");
+    }
+    if (contents.theme === "") {
+      return window.alert("러닝타입을 선택해주세요");
+    }
+    setIsLoad2(false);
+    setIsLoad3(true);
+    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const goBack2 = () => {
@@ -119,37 +105,48 @@ const GroupUpload = () => {
   if (!isLoaded1) {
     return (
       <>
-        {/* <UploadStep /> */}
+        <div id="step1"></div>
+        <Grid
+          position="relative"
+          margin="0 auto"
+          width="1200px"
+          display="flex"
+          justifyContent="space-between"
+        >
+          <Grid margin="80px auto 0 auto" width="865px">
+            <Grid display="flex" margin="0 0 18px 0" alignItems="center">
+              <Grid display="flex" width="auto">
+                <Text
+                  margin="0"
+                  height="auto"
+                  display="inline"
+                  bold
+                  size="20px"
+                >
+                  러닝 코스
+                </Text>
+                <RedPoint></RedPoint>
+              </Grid>
 
-        <Grid margin="80px 695px 0 auto" maxWidth="865px" width="100%">
-          <Step1Img src={step1}></Step1Img>
-          <Grid display="flex" margin="0 0 18px 0" alignItems="center">
-            <Grid display="flex" width="auto">
-              <Text margin="0" height="auto" display="inline" bold size="20px">
-                러닝 코스
+              <Text display="inline" margin="0 10px" size="16px">
+                왼쪽 클릭을 통해 경로를 설정한 후, 오른쪽 클릭으로 경로를 마무리
+                해주세요.
               </Text>
-              <RedPoint></RedPoint>
             </Grid>
+            <Hr />
 
-            <Text display="inline" margin="0 10px" size="16px">
-              왼쪽 클릭을 통해 경로를 설정한 후, 오른쪽 클릭으로 경로를 마무리
-              해주세요.
-            </Text>
-          </Grid>
-          <Hr />
+            <KakaoMap></KakaoMap>
 
-          <KakaoMap
-            setDistance={setDistance}
-            setLocation={setLocation}
-          ></KakaoMap>
-
-          <Grid display="flex">
-            <Grid display="flex" alignItems="center">
-              <Text width="auto" bold size="15px" margin="0 65.7px 0 0">
-                코스 위치 정보
-              </Text>
-              <Grid display="flex" maxWidth="716px">
-                <Grid display="flex">
+            <Grid display="flex">
+              <Grid
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text bold size="15px" margin="0 55px 0 0">
+                  코스 위치 정보
+                </Text>
+                <Grid display="flex" width="714px">
                   <LocationInfo>
                     {address ? (
                       <Text size="16px">{address}</Text>
@@ -170,30 +167,33 @@ const GroupUpload = () => {
                   </DistanceInfo>
                 </Grid>
               </Grid>
+              <Grid display="flex" alignItems="center" margin="14px 0 0 148px">
+                <IconButton
+                  waring
+                  color="#FF2D55"
+                  size="19.21"
+                  height="19.2px"
+                  width="16px"
+                  margin="0 8px 0 0"
+                />
+                <Text width="auto" color="#FF2D55" bold margin="0">
+                  러닝 코스는 업로드 이후 수정이 불가능합니다. 해당 위치가
+                  맞는지 다시 한 번 확인해 주세요!
+                </Text>
+              </Grid>
             </Grid>
-            <Grid display="flex" alignItems="center" margin="14px 0 0 0">
-              <IconButton
-                waring
-                color="#FF2D55"
-                size="19.21"
-                height="19.2px"
-                width="16px"
-                margin="0 8px 0 0"
-              />
-              <Text width="auto" color="#FF2D55" bold margin="0">
-                러닝 코스는 업로드 이후 수정이 불가능합니다. 해당 위치가 맞는지
-                다시 한 번 확인해 주세요!
-              </Text>
-            </Grid>
-          </Grid>
 
-          <StepBtn onClick={goNext2}>
-            다음단계
-            <img
-              style={{ width: "8px", height: "auto", marginLeft: "16px" }}
-              src={groupRightBtn}
-            ></img>
-          </StepBtn>
+            <Link to="step1" spy={true}>
+              <StepBtn onClick={goNext2}>
+                다음단계
+                <img
+                  style={{ width: "8px", height: "auto", marginLeft: "16px" }}
+                  src={groupRightBtn}
+                ></img>
+              </StepBtn>
+            </Link>
+          </Grid>
+          <StepImg src={step1}></StepImg>
         </Grid>
       </>
     );
@@ -202,28 +202,43 @@ const GroupUpload = () => {
   if (isLoaded2) {
     return (
       <>
-        <GroupUpContent setContents={setContents}></GroupUpContent>
+        <div id="step2"></div>
         <Grid
-          maxWidth="865px"
-          width="100%"
+          position="relative"
+          margin="0 auto"
+          width="1200px"
           display="flex"
           justifyContent="space-between"
-          margin="80px 0 397px 18.7%"
         >
-          <StepBtn2 onClick={goBack1}>
-            <img
-              style={{ width: "8px", height: "auto", marginRight: "16px" }}
-              src={groupLeftBtn}
-            ></img>
-            이전단계
-          </StepBtn2>
-          <StepBtn2 onClick={goNext3}>
-            다음단계
-            <img
-              style={{ width: "8px", height: "auto", marginLeft: "16px" }}
-              src={groupRightBtn}
-            ></img>
-          </StepBtn2>
+          <Grid margin="80px auto 320px auto" width="865px">
+            <GroupUpContent></GroupUpContent>
+
+            <Grid display="flex" margin="0" justifyContent="space-between">
+              <Link to="step2" spy={true}>
+                <StepBtn2 onClick={goBack1}>
+                  <img
+                    style={{
+                      width: "8px",
+                      height: "auto",
+                      marginRight: "16px",
+                    }}
+                    src={groupLeftBtn}
+                  ></img>
+                  이전단계
+                </StepBtn2>
+              </Link>
+              <Link to="step2" spy={true}>
+                <StepBtn2 onClick={goNext3}>
+                  다음단계
+                  <img
+                    style={{ width: "8px", height: "auto", marginLeft: "16px" }}
+                    src={groupRightBtn}
+                  ></img>
+                </StepBtn2>
+              </Link>
+            </Grid>
+          </Grid>
+          <StepImg src={step2}></StepImg>
         </Grid>
       </>
     );
@@ -232,58 +247,72 @@ const GroupUpload = () => {
   if (isLoaded3) {
     return (
       <>
-        <Grid margin="80px 695px 0 auto" maxWidth="865px" width="100%">
-          <Step1Img src={step3}></Step1Img>
-          <Grid display="flex" margin="0 0 18px 0" alignItems="center">
-            <Text margin="0" height="auto" display="inline" bold size="20px">
-              추가 이미지
-            </Text>
-          </Grid>
-          <Hr />
+        <div id="step3"></div>
+        <Grid
+          position="relative"
+          margin="0 auto "
+          width="1200px"
+          display="flex"
+          justifyContent="space-between"
+        >
+          <Grid margin="80px auto 0 auto" width="865px">
+            <Grid display="flex" margin="0 0 18px 0" alignItems="center">
+              <Text margin="0" height="auto" display="inline" bold size="20px">
+                추가 이미지
+              </Text>
+            </Grid>
+            <Hr />
 
-          <Grid display="flex" maring="0">
-            <Text bold>{`업로드 된 이미지 (${thumbnail.length}/3`})</Text>
-          </Grid>
-          <ImagesUpload setImage={setImage}></ImagesUpload>
+            <Grid display="flex" maring="0">
+              <Text bold>{`업로드 된 이미지 (${thumbnail.length}/3`})</Text>
+            </Grid>
+            <ImagesUpload></ImagesUpload>
 
-          <Grid
-            display="flex"
-            justifyContent="space-between"
-            margin="160px 0 397px 0"
-          >
-            <StepBtn2 onClick={goBack2}>
-              <img
-                style={{ width: "8px", height: "auto", marginRight: "16px" }}
-                src={groupLeftBtn}
-              ></img>
-              이전단계
-            </StepBtn2>
-            <StepBtn2
-              onClick={() => {
-                addGroupPost();
-              }}
-              style={{ color: "#68F99E" }}
+            <Grid
+              display="flex"
+              justifyContent="space-between"
+              margin="160px 0 397px 0"
             >
-              작성완료
-            </StepBtn2>
+              <Link to="step3" spy={true}>
+                <StepBtn2 onClick={goBack2}>
+                  <img
+                    style={{
+                      width: "8px",
+                      height: "auto",
+                      marginRight: "16px",
+                    }}
+                    src={groupLeftBtn}
+                  ></img>
+                  이전단계
+                </StepBtn2>
+              </Link>
+              <StepBtn2
+                onClick={() => {
+                  addGroupPost();
+                }}
+                style={{ color: "#68F99E" }}
+              >
+                작성완료
+              </StepBtn2>
+            </Grid>
           </Grid>
+          <StepImg src={step3}></StepImg>
         </Grid>
       </>
     );
   }
 };
 
-const Step1Img = styled.img`
-  position: fixed;
-  max-width: 295px;
-  width: 100%;
-  right: 360px;
+const StepImg = styled.img`
+  position: sticky;
+  width: 295px;
+  height: 236px;
+  margin: 0;
   top: 170px;
 `;
 
 const LocationInfo = styled.div`
-  max-width: 546px;
-  width: 100%;
+  width: 546px;
   height: 75px;
   box-sizing: border-box;
   border: 1px solid #cbcbcb;
@@ -295,8 +324,8 @@ const LocationInfo = styled.div`
 `;
 
 const DistanceInfo = styled.div`
-  max-width: 168px;
-  width: 100%;
+  width: 168px;
+
   height: 75px;
   box-sizing: border-box;
   border: 1px solid #cbcbcb;
@@ -310,8 +339,7 @@ const DistanceInfo = styled.div`
 `;
 
 const StepBtn = styled.button`
-  max-width: 173px;
-  width: 100%;
+  width: 173px;
   height: 45px;
   background: #030c37;
   border-radius: 3px;
@@ -331,8 +359,7 @@ const StepBtn = styled.button`
 `;
 
 const StepBtn2 = styled.button`
-  max-width: 173px;
-  width: 100%;
+  width: 173px;
   height: 45px;
   background: #030c37;
   border-radius: 3px;

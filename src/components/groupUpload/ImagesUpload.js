@@ -5,18 +5,17 @@ import ImageIcon from "../../assets/groupUpload/imageCamera.png";
 import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
 
-const ImagesUpload = (props) => {
+const ImagesUpload = () => {
   const dispatch = useDispatch();
-  const [hide, setHide] = useState(false);
-  const [showImages, setShowImages] = useState([]);
   const totalImage = useSelector((state) => state.image.files);
-  console.log(totalImage);
+  const showImages = useSelector((state) => state.image.show);
+  console.log(totalImage, showImages);
 
   //이미지 저장 및 미리보기
   const handleChangeFile = (event) => {
     const imageLists = event.target.files;
     const maxImageCnt = 3;
-    let imageUrlLists = [...showImages];
+    let imageUrlLists = [];
 
     if (imageLists.length > maxImageCnt) {
       window.alert("첨부 파일은 최대 3개까지 가능합니다.");
@@ -39,34 +38,10 @@ const ImagesUpload = (props) => {
         imageUrlLists.push(currentImageUrl);
       }
 
-      if (imageUrlLists.length > 3) {
-        imageUrlLists = imageUrlLists.slice(0, 3);
-      }
-      setShowImages(imageUrlLists);
-
+      dispatch(imgActions.setShow(imageUrlLists));
       dispatch(imgActions.setPre(imgList));
     }
   };
-
-  //첨부파일 검증
-  //   const validation = (obj) => {
-  //     const fileTypes = ['image/svg', 'image/gif', 'image/jpg','image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tif'];
-  //     if (obj.name.length > 100) {
-  //         alert("파일명이 100자 이상인 파일은 제외되었습니다.");
-  //         return false;
-  //     } else if (obj.size > (100 * 1024 * 1024)) {
-  //         alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
-  //         return false;
-  //     } else if (obj.name.lastIndexOf('.') == -1) {
-  //         alert("확장자가 없는 파일은 제외되었습니다.");
-  //         return false;
-  //     } else if (!fileTypes.includes(obj.type)) {
-  //         alert("첨부가 불가능한 파일은 제외되었습니다.");
-  //         return false;
-  //     } else {
-  //         return true;
-  //     }
-  // }
 
   //이미지 삭제
   const handleDeleteImage = (x, idx) => {
@@ -76,12 +51,13 @@ const ImagesUpload = (props) => {
     dispatch(imgActions.deletePre(idx));
 
     // 프리뷰 삭제
-    setShowImages(showImages.filter((p, index) => index !== idx));
+    dispatch(imgActions.deleteShow(idx));
+    // setShowImages(showImages.filter((p, index) => index !== idx));
   };
 
   return (
     <>
-      <Grid display="flex">
+      <Grid display="flex" width="865px">
         <Grid>
           <label htmlFor="profile_image">
             <Grid

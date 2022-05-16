@@ -28,7 +28,7 @@ import PrivacyPolicy from "../pages/PrivacyPolicy";
 import CourseFeed from "../pages/CourseFeed";
 
 import { useDispatch } from "react-redux";
-import { loginCheckDB } from "../redux/modules/user";
+import { loginCheckDB, logoutDB } from "../redux/modules/user";
 import { getCookie } from "./Cookie";
 import "./GlobalStyles";
 import styled from "styled-components";
@@ -41,6 +41,8 @@ function App() {
   useEffect(() => {
     if (token) {
       dispatch(loginCheckDB());
+    } else {
+      dispatch(logoutDB);
     }
   }, [token]);
 

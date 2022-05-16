@@ -61,7 +61,7 @@ export const kakaoLogin = (authorization_code) => {
         const nickname = res.data.nickname;
         const profileUrl = res.data.profileUrl;
 
-        setCookie("accessToken", res.data.token, 3);
+        setCookie("accessToken", res.data.token, 1);
         setCookie("refreshToken", res.data.refreshToken, 168);
 
         localStorage.setItem("userId", userId);
@@ -98,7 +98,7 @@ export const naverLoginDB = (code, state) => {
         const nickname = res.data.nickname;
         const profileUrl = res.data.profileUrl;
 
-        setCookie("accessToken", res.data.token, 3);
+        setCookie("accessToken", res.data.token, 1);
         setCookie("refreshToken", res.data.refreshToken, 168);
 
         localStorage.setItem("userId", userId);
