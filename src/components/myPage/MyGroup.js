@@ -17,6 +17,12 @@ const MyGroup = () => {
   }
 
   return (
+    <>
+    {my.data.length === 0 ? 
+    <Box>
+      진행한 그룹러닝이 없습니다
+    </Box>
+    :
     <Grid display="flex">
       {my.data?.map((data, index) => (
         <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
@@ -75,6 +81,8 @@ const MyGroup = () => {
         </Grid>
       ))}
     </Grid>
+    } 
+    </>
   );
 };
 
@@ -138,6 +146,18 @@ const ApplyBtnFalse = styled.button`
   height: 38px;
   color: white;
   border: none;
+`;
+
+const Box = styled.div`
+  font-weight: 900;
+  font-size: 26px;
+  color: #333;
+  height: 100px;
+  width: 1220px;
+  background-color: #fff;
+  padding: 250px 11px;
+  text-align: center;
+  border:none;
 `;
 
 export default MyGroup;

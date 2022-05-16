@@ -13,17 +13,11 @@ import { Grid, Image, Text } from "../../elements";
 const Modal = (props) => {
   const profile = localStorage.getItem("profileUrl");
 
-  // const params = useParams();
-  // console.log(params);
-  // const userId = params.userId;
-  // console.log(userId);
   const userId = localStorage.getItem("userId");
   console.log(userId);
 
   const dispatch = useDispatch();
   const [modal, setModal] = useState(props.modalOpen);
-  //console.log(modal);
-  //console.log(props.modalOpen);
 
   const toggleModal = () => {
     setModal(!modal);

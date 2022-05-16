@@ -22,7 +22,13 @@ const Group = () => {
   }
 
   return (
-    <Grid display="flex">
+    <>
+    {running.data.length === 0 ? 
+      <Box>
+        참여한 그룹러닝이 없습니다
+      </Box>
+      : 
+      <Grid display="flex">
       {running?.data?.map((data, index) => 
         userId !== data.userId &&
       (
@@ -84,6 +90,8 @@ const Group = () => {
         </Grid>
       ))}
     </Grid>
+    }
+    </>
   );
 };
 
@@ -147,6 +155,18 @@ const ApplyBtnFalse = styled.button`
   height: 38px;
   color: white;
   border: none;
+`;
+
+const Box = styled.div`
+  font-weight: 900;
+  font-size: 26px;
+  color: #333;
+  height: 100px;
+  width: 1220px;
+  background-color: #fff;
+  padding: 250px 11px;
+  text-align: center;
+  border:none;
 `;
 
 export default Group;
