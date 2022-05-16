@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/Api";
@@ -265,9 +266,9 @@ export const evaluationDB = (groupId, hostId, point) => {
           },
         }
       );
-      console.log(data);
-      history.push("/mypage");
+      console.log(data); 
       window.alert("호스트평가가 완료되었습니다!");
+      history.push(`/mypage/${userId}`);
     } catch (error) {
       console.log(error);
     }
@@ -279,13 +280,6 @@ export const getAttendDB = (groupId, userId, hostId) => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log(groupId, userId, hostId);
-      // let data
-      // if (hostId === userId) {
-      //   data = await api.get(`/group/attendance/${groupId}`);
-      //   console.log(data);
-      //   dispatch(getAttend(data));
-      // }
-
       const { data } = await api.get(`/group/attendance/${groupId}`);
       console.log(data);
       dispatch(getAttend(data));

@@ -66,18 +66,18 @@ const MyGroup = () => {
             ></Grid>
           </Grid>
 
-          {data.evaluation ? (
-            <ApplyBtnFalse>체크완료</ApplyBtnFalse>
-          ) : (
-            <ApplyBtnTrue
+          {data.attendance ? 
+            (<ApplyBtnFalse>체크완료</ApplyBtnFalse>)
+           : 
+            (<ApplyBtnTrue
               onClick={() => {
                 history.push(`/check/${data.groupId}`);
                 dispatch(getAttendDB(data.groupId, data.userId, hostId));
               }}
             >
               출석체크하기
-            </ApplyBtnTrue>
-          )}
+            </ApplyBtnTrue>)
+          }
         </Grid>
       ))}
     </Grid>

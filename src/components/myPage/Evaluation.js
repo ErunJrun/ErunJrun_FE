@@ -55,7 +55,6 @@ const Evaluation = (props) => {
 
                         
                         <Btn onClick={() => { 
-                            
                             toggleModal();
                             dispatch(evaluationDB(groupId, hostId, 1));
                         }}>
@@ -66,7 +65,6 @@ const Evaluation = (props) => {
                         </Btn>
 
                         <Btn onClick={() => { 
-                       
                             toggleModal();
                             dispatch(evaluationDB(groupId, hostId, -1));
                         }}>

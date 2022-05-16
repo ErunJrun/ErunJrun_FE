@@ -73,20 +73,16 @@ const Group = () => {
             ></Grid>
           </Grid>
 
-          {/* <ApplyBtnTrue> */}
-          <div>
-            <Evaluation running={data} />
-          </div>
-          {/* </ApplyBtnTrue> */}
-
-          {/* {data.evaluation ? (
-                <ApplyBtnFalse>체크완료</ApplyBtnFalse>
-              ) : (
-                <ApplyBtnTrue
-                onClick={() => {
-                  history.push("/check");
-                }}>출석체크하기</ApplyBtnTrue>
-              )} */}
+          {data.evaluation ? 
+            (<ApplyBtnFalse>평가완료</ApplyBtnFalse>)
+           : 
+            (
+              <div>
+                <Evaluation running={data} />
+              </div>
+            )
+          }
+          
         </Grid>
       ))}
     </Grid>
