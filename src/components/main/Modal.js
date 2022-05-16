@@ -52,8 +52,8 @@ const Modal = (props) => {
                 margin="0 0 32px 0"
                 cursor="pointer"
                 _onClick={() => {
-                  history.push("/mypage");
-                  // history.push(`/mypage/${userId}`);
+                  //history.push("/mypage");
+                  history.push(`/mypage/${userId}`);
                   setModal(false);
                 }}
                 size="18px"

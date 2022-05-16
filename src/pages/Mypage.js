@@ -13,11 +13,12 @@ import Tabs from "../components/myPage/Tabs";
 
 const Mypage = () => {
   const dispatch = useDispatch();
-  // const params = useParams();
-  // console.log(params);
-  // const userId = params.userId;
-  // console.log(userId);
-  const userId = localStorage.getItem("userId");
+  const params = useParams();
+  console.log(params);
+  const userId = params.userId;
+  console.log(userId);
+  //const userId = localStorage.getItem("userId");
+ // const userId = props.match.params.StoreId
 
    useEffect(() => {
      dispatch(getProfileDB(userId));

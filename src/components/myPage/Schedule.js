@@ -88,9 +88,15 @@ const Schedule = () => {
                       height="24px"
                       borderRadius="60px"
                       bg="#030c37"
-                      textalign="center"
+                      textalign="center"    
                     >D-{waiting.dDay}</Text>
-                        <Text bold size="18px">&nbsp;{waiting.title}</Text>
+                        <Text 
+                        width="180px"
+                        height="24px"
+                        bold 
+                        size="18px" 
+                        textalign="left"
+                        >{waiting.title}</Text>
                         <div style={{margin:"0 30px 0 0", display:"flex"}}>
                             <TextBox>{waiting.location}</TextBox>
                             <TextBox>{waiting.distance}</TextBox>
@@ -227,7 +233,7 @@ const Wrap = styled.div`
   max-width: 664px;
   //box-sizing: border-box;
   width: 100%;
-  height: 472px;
+  height: 722px;
   background: #ffffff;
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
