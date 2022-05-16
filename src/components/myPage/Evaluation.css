@@ -1,5 +1,6 @@
 body.active-modal {
     overflow-y: hidden;
+   
 }
 
 ._btn-modal {
@@ -27,6 +28,7 @@ body.active-modal {
     bottom: 0;
     position: fixed;
     background: rgba(49,49,49,0.8);
+ 
 }
 ._modal-content {
     transform: translate(-20%, -200%);
@@ -39,6 +41,7 @@ body.active-modal {
     /* align-items: center;
     justify-content: center; */
     text-align: center;
+    z-index: 0;
 }
 
 ._close-modal {
