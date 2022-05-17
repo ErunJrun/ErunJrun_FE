@@ -7,6 +7,7 @@ import LevelBox from "../components/groupDetail/LevelBox";
 import LevelShoes from "../components/LevelShoes";
 
 import runStyleCharacter from "../assets/loginInfo/runStyleCharacter.png";
+import { history } from "../redux/configureStore";
 
 const LoginInfo = () => {
   const dispatch = useDispatch();
@@ -16,12 +17,12 @@ const LoginInfo = () => {
 
   const nickname = localStorage.getItem("nickname");
 
-  // useEffect(() => {
-  //   if (!nickname) {
-  //     window.alert("비정상적인 접근입니다.");
-  //     history.push("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!nickname) {
+      window.alert("비정상적인 접근입니다.");
+      history.push("/login");
+    }
+  }, []);
 
   const [runRegion, setRunRegion] = useState([
     "서울특별시",

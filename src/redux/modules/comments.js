@@ -145,30 +145,46 @@ export const _isRecommBox = (commentId) => {
     const _comment_list = getState().comments.list;
     console.log(_comment_list);
 
-    const __comment_list = _comment_list.map((e, i) => {
-      if (e.isRecomm === true) {
-        return { ...e, isRecomm: false };
-      } else {
-        return { ...e, isRecomm: false };
-      }
-    });
-
-    console.log(__comment_list);
-
     const comment_index = _comment_list.findIndex((b) => {
       return b.commentId === commentId;
     });
 
-    const recommBoxList = [
-      {
-        comment_list: __comment_list,
-        comment_index: comment_index,
-      },
-    ];
-    dispatch(isRecommBox(recommBoxList));
+    dispatch(isRecommBox(comment_index));
     dispatch(_getReCommentFX(commentId));
   };
 };
+
+// export const _isRecommBox = (commentId) => {
+//   return async function (dispatch, getState) {
+//     console.log(commentId);
+
+//     const _comment_list = getState().comments.list;
+//     console.log(_comment_list);
+
+//     const __comment_list = _comment_list.map((e, i) => {
+//       if (e.isRecomm === true) {
+//         return { ...e, isRecomm: false };
+//       } else {
+//         return { ...e, isRecomm: false };
+//       }
+//     });
+
+//     console.log(__comment_list);
+
+//     const comment_index = _comment_list.findIndex((b) => {
+//       return b.commentId === commentId;
+//     });
+
+//     const recommBoxList = [
+//       {
+//         comment_list: __comment_list,
+//         comment_index: comment_index,
+//       },
+//     ];
+//     dispatch(isRecommBox(recommBoxList));
+//     dispatch(_getReCommentFX(commentId));
+//   };
+// };
 
 // Reducer
 export default handleActions(
@@ -218,10 +234,8 @@ export default handleActions(
 
     [IS_RECOMM_BOX]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
-
-        const isRecommList = action.payload[0].comment_list.map((e, i) => {
-          if (action.payload[0].comment_index === i) {
+        const isRecommList = state.list.map((e, i) => {
+          if (action.payload === i) {
             if (e.isRecomm === false) {
               return { ...e, isRecomm: true };
             } else {
@@ -234,6 +248,25 @@ export default handleActions(
 
         draft.list = isRecommList;
       }),
+
+    // [IS_RECOMM_BOX]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     console.log(action.payload);
+
+    //     const isRecommList = action.payload[0].comment_list.map((e, i) => {
+    //       if (action.payload[0].comment_index === i) {
+    //         if (e.isRecomm === false) {
+    //           return { ...e, isRecomm: true };
+    //         } else {
+    //           return { ...e, isRecomm: false };
+    //         }
+    //       } else {
+    //         return e;
+    //       }
+    //     });
+
+    //     draft.list = isRecommList;
+    //   }),
   },
   initialState
 );

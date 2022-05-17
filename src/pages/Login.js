@@ -6,6 +6,7 @@ import KakaoLogin from "../assets/KakaoLogin.png";
 import NaverLogin from "../assets/NaverLogin.png";
 import { history } from "../redux/configureStore";
 import LoginLogo from "../assets/LoginLogo.png";
+import { getCookie } from "../shared/Cookie";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -15,11 +16,12 @@ const Login = () => {
   const kakaoCallbackUrl = process.env.REACT_APP_KAKAO_CALLBACK_URL;
 
   const isLogin = useSelector((state) => state.user.isLogin);
+  const token = getCookie("accessToken");
+
+  console.log(isLogin);
 
   useEffect(() => {
-    if (isLogin) {
-      return history.push("/");
-    }
+    if (isLogin || token) history.push("/");
   }, []);
 
   return (

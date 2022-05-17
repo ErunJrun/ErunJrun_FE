@@ -20,6 +20,7 @@ const ImageSlide = () => {
       navigation={{ clickable: true }}
       pagination={{ clickable: true }}
     >
+      ``
       {detailGroup?.thumbnailUrl1 ? (
         <SwiperSlide>
           <img src={detailGroup?.thumbnailUrl1}></img>

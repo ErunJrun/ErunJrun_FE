@@ -47,6 +47,7 @@ api.interceptors.response.use(
     }
 
     if (response.data.success === false) {
+      window.alert(response.data.message);
       console.log(response.data.message);
       dispatch(logoutDB());
     }

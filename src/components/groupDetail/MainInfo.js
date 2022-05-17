@@ -9,6 +9,7 @@ import { Link, useParams } from "react-router-dom";
 import groupChat from "../../assets/groupDetail/chat.png";
 import shareIcon from "../../assets/groupDetail/share.png";
 import shoesMint from "../../assets/groupDetail/shoesMint.png";
+import KakaoShareButton from "../KakaoShareButton";
 
 const MainInfo = (props) => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const MainInfo = (props) => {
 
   const nickname = localStorage.getItem("nickname");
   const isLogin = useSelector((state) => state.user.isLogin);
+
+  console.log(isLogin);
 
   const goApply = () => {
     if (isLogin) {
@@ -47,8 +50,7 @@ const MainInfo = (props) => {
   return (
     <>
       <Grid
-        maxWidth="402px"
-        width="100%"
+        width="402px"
         border="1px solid #EFEFEF"
         borderRadius="3px"
         margin="0"
@@ -186,7 +188,6 @@ const MainInfo = (props) => {
         ) : !detailGroup?.applyState ? (
           <ApplyBtn
             onClick={() => {
-              window.alert("신청이 완료되었습니다.");
               goApply();
             }}
           >
@@ -214,10 +215,7 @@ const MainInfo = (props) => {
               <Text margin="0">그룹 채팅방</Text>
             </EndBtn>
 
-            <EndBtn>
-              <ChatImg src={shareIcon} />
-              <Text>공유하기</Text>
-            </EndBtn>
+            <KakaoShareButton detailGroup={detailGroup} />
           </Grid>
         ) : detailGroup?.applyState ? (
           <Grid
@@ -238,10 +236,7 @@ const MainInfo = (props) => {
               </ChatBtn>
             </a>
 
-            <ShareBtn>
-              <ChatImg src={shareIcon} />
-              <Text>공유하기</Text>
-            </ShareBtn>
+            <KakaoShareButton detailGroup={detailGroup} />
           </Grid>
         ) : (
           <Grid
@@ -263,10 +258,7 @@ const MainInfo = (props) => {
               </Text>
             </ChatBtn>
 
-            <ShareBtn>
-              <ChatImg src={shareIcon} />
-              <Text>공유하기</Text>
-            </ShareBtn>
+            <KakaoShareButton detailGroup={detailGroup} />
           </Grid>
         )}
       </Grid>
@@ -322,24 +314,6 @@ const ApplyBtnFalse = styled.button`
 `;
 
 const ChatBtn = styled.div`
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 9px;
-  width: 159px;
-  height: 38px;
-  background-color: #efefef;
-  border-radius: 3px;
-  box-sizing: border-box;
-  margin: 0;
-  :hover {
-    font-weight: 900;
-    box-shadow: 1px 1px 5px black;
-  }
-`;
-
-const ShareBtn = styled.div`
   cursor: pointer;
   display: flex;
   justify-content: center;

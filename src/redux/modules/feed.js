@@ -297,10 +297,11 @@ export const applyDetailDB = (groupId) => {
         applyState: data.data.applyState,
         applyPeople: data.data.applyPeople,
       };
+      window.alert("신청이 완료되었습니다.");
       dispatch(getGroupDetailDB(groupId));
       dispatch(applyDetail(applyData));
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   };
 };

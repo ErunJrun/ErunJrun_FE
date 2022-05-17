@@ -14,7 +14,7 @@ const AlarmUpdate = (props) => {
       >
         {!props?.check ? <NewDot /> : <NoneDot />}
 
-        <Grid margin="0" display="flex" maxWidth="316px">
+        <Grid margin="0" display="flex" width="315px">
           <Grid
             display="flex"
             alignItems="center"
@@ -31,6 +31,7 @@ const AlarmUpdate = (props) => {
           <Grid height="auto" display="flex">
             {props.category === "update" ? (
               <Text
+                textLeft
                 _onClick={() => {
                   props.setAlarmOpen(false);
                 }}
@@ -43,6 +44,7 @@ const AlarmUpdate = (props) => {
               </Text>
             ) : (
               <Text
+                textLeft
                 _onClick={() => {
                   props.setAlarmOpen(false);
                 }}

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import EditContent from "../components/groupEdit/EditContent";
 import EditImages from "../components/groupEdit/EditImages";
 import { Text } from "../elements";
+import { history } from "../redux/configureStore";
 import { getGroupDetailDB } from "../redux/modules/feed";
 
 const GroupEdit = () => {
@@ -12,6 +13,7 @@ const GroupEdit = () => {
   const params = useParams();
   const groupId = params.groupId;
   const detailGroup = useSelector((state) => state.feed.detail);
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   console.log(detailGroup);
 
@@ -20,6 +22,13 @@ const GroupEdit = () => {
 
   useEffect(() => {
     dispatch(getGroupDetailDB(groupId));
+  }, []);
+
+  useEffect(() => {
+    if (!isLogin) {
+      window.alert("비정상적인 접근입니다.");
+      history.push("/");
+    }
   }, []);
 
   if (!isLoaded1) {
