@@ -1,9 +1,12 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editProfileDB, numberCheckMiddleware, getNumberCheckMiddleware } from "../../redux/modules/mypage"
+import { editProfileDB, numberCheckMiddleware, getNumberCheckMiddleware, deleteUserDB } from "../../redux/modules/mypage"
 import { history } from "../../redux/configureStore";
 import { Text, Grid } from "../../elements";
 import styled from "styled-components";
+import LevelBox from "../groupDetail/LevelBox";
+import LevelShoes from "../LevelShoes";
+
 
 const Edit = (props) => {
   console.log(props);
@@ -12,8 +15,8 @@ const Edit = (props) => {
   const userId = localStorage.getItem("userId");
   
   const [nickname, setNickname] = useState(props.profile.nickname);
-  const [image, setImage] = useState(props.profile.image);
-  const [imgBase, setImgBase] = useState("");
+  const [image, setImage] = useState(props.profile.profileUrl);
+  const [imgBase, setImgBase] = useState(props.profile.profileUrl);
   const [bio, setBio] = useState(props.profile.bio);
   const [likeLocation, setLikeLocation] = useState(props.profile.likeLocation);
   const [likeDistance, setLikeDistance] = useState(props.profile.likeDistance);
@@ -26,8 +29,8 @@ console.log(agreeSMS);
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
     "경기도",
-    "강원도",
     "인천광역시",
+    "강원도",
     "충청도 / 세종특별자치시 / 대전광역시",
     "경상북도 / 대구광역시",
     "경상남도 / 부산광역시 / 울산광역시",
@@ -36,17 +39,17 @@ console.log(agreeSMS);
   ]);
 
   const [runDistance, setRunDistance] = useState([
-    "잘 모르겠어요",
+    "5km미만",
     `    5km 이상 
     10km 미만`,
     `   10km 이상
     15km 미만`,
     "15km 이상",
-    "5km미만",
+    "잘 모르겠어요",
   ]);
 
   const [runExp, setRunExp] = useState([
-    "런린이",
+    "오렌지",
     "퍼플",
     "블루",
     "레드",
@@ -99,12 +102,9 @@ console.log(agreeSMS);
   };
 
   const edit = () => {
-    console.log("아아");
+    console.log("나와라");
     dispatch(editProfileDB(userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS));
-    
-  
   };
-
 
   return (
     <>
@@ -118,7 +118,8 @@ console.log(agreeSMS);
           <MyImage src={
             imgBase
             ? imgBase
-            : "https://ifh.cc/g/1cYtTJ.png"
+            : 
+            "https://ifh.cc/g/1cYtTJ.png"
           }/>
           <input
               cursor="pointer"
@@ -143,42 +144,56 @@ console.log(agreeSMS);
             <Grid display="felx">
                 <Inp value={phone} onChange={ Number } type="text" 
                 placeholder="010-1234-5678"  maxLength={20} />
-                <Button
-                onClick={()=>{
-                  dispatch(numberCheckMiddleware(phone));
-                }}
-                >인증요청</Button>
+
+                { phone === null ?  
+                 <Button
+                    onClick={()=>{
+                    dispatch(numberCheckMiddleware(phone));
+                  }}
+                >
+                  인증요청
+                  </Button>
+                : 
+                  null
+                }
+               
             </Grid>
                 
-            <Grid display="felx">
-                <Inp value={numberCK} onChange={ NumderCK } type="text" 
-                placeholder="인증번호를 입력해주세요!"  maxLength={20} />
-                <Button
-                  onClick={()=>{
-                    dispatch(getNumberCheckMiddleware(phone,numberCK));
-                  }}
-                >인증</Button>
-            </Grid>
+            { phone === null ? 
+              <Grid display="felx">
+                  <Inp value={numberCK} onChange={ NumderCK } type="text" 
+                  placeholder="인증번호를 입력해주세요!"  maxLength={20} />
+                  <Button
+                    onClick={()=>{
+                      dispatch(getNumberCheckMiddleware(phone,numberCK));
+                    }}
+                  >인증</Button>
+              </Grid>
+            : 
+              null
+            }
+            
 
-            <input checked={agreeSMS} value={agreeSMS} onChange={agree} type='checkbox'/>개인정보사용 동의 및 알림수신에 동의합니다.
+            <input checked={agreeSMS} value={agreeSMS} onChange={agree} type='checkbox'/>
+              개인정보사용 동의 및 알림수신에 동의합니다.
         <hr/>
 
         <Text bold size="20px">나의 러닝스타일</Text>
-        <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
-          <Text margin="0" bold size="18px">
-            선호지역
-          </Text>
-          <Text margin="0" size="16px">
-            주로 활동하시는 지역을 선택해주세요.
-          </Text>
+        <Grid margin="0 0 84px 0" display="flex" flexDirection="column">
+            <Text margin="0 0 16px 0" bold size="18px">
+              Step 1. 선호하는 러닝 지역을 선택해주세요!
+            </Text>
+            <Hr />
+
           <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
             {runRegion.map((e, idx) => {
               return (
                 <Fragment key={idx}>
                   <Label checked={likeLocation}>
-                    <input onClick={() => {choiceRegion(idx); }}
+                    <input onClick={() => {choiceRegion(idx+1); }}
                       type="radio"
                       name="runRegion"
+                      //checked={likeLocation}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>
@@ -191,7 +206,7 @@ console.log(agreeSMS);
 
         <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
           <Text margin="0" bold size="18px">
-            선호 거리
+            Step 1. 선호하는 러닝 거리를 선택해주세요!
           </Text>
 
           <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
@@ -200,9 +215,10 @@ console.log(agreeSMS);
                 <Fragment key={idx}>
                   <LabelDistance checked={likeDistance}>
                     <input
-                      onClick={() => {choiceDistance(idx); }}
+                      onClick={() => {choiceDistance(idx + 1); }}
                       type="radio"
                       name="runDistance"
+                      //checked={likeDistance}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>
@@ -214,11 +230,8 @@ console.log(agreeSMS);
         </Grid>
 
         <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
-          <Text margin="0" bold size="18px">
-            러닝 경험
-          </Text>
-          <Text margin="0" size="16px">
-            1달 기준의 러닝 횟수를 선택해주세요.
+           <Text margin="0" bold size="18px">
+          Step 3. (1달 기준) 러닝 횟수를 선택해주세요!
           </Text>
 
           <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
@@ -232,6 +245,7 @@ console.log(agreeSMS);
                       }}
                       type="radio"
                       name="runExp"
+                      //checked={userLevel}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>
@@ -242,15 +256,22 @@ console.log(agreeSMS);
           </Grid>
         </Grid>
         <hr/>
-        {/* <Text bold size="16px" color="#7b7b7b">회원 탈퇴</Text> */}
-        {/* <Box>회원을 탈퇴할 시, 현재 '굿러너 레벨'과 작성했던 게시물, 북마크한 코스 추천 게시물들이 초기화됩니다.<br/>
-             정말로 탈퇴하시겠습니까?
-             <button>탈퇴하기</button>
-        </Box> */}
+        <Text bold size="16px" color="#7b7b7b">회원 탈퇴</Text>
+        <Box>탈퇴하실 경우, 모든 데이터가 삭제되며 복구가 불가능합니다.<br/>
+          안내 사항을 모두 확인하였으며, 이에 동의하십니까? <br/>
+             <button
+             onClick={() => {
+              dispatch(deleteUserDB());
+              window.alert("회원탈퇴에 성공하였습니다");
+              history.push("/login");
+            }}
+             >동의 및 탈퇴하기</button>
+             <button>돌아가기</button>
+        </Box>
         <Grid margin="70px 0 0 450px">
             <Button
             onClick={() => {
-              history.push("/mypage")
+              history.push(`/mypage/${userId}`)
             }}>수정취소</Button>
             <Button
             onClick={() => {
@@ -327,81 +348,73 @@ const Hr = styled.div`
 `;
 
 const LabelExp = styled.label`
+  margin-left: 10px; 
   input {
     display: none;
   }
   input + p {
-    margin: 10px;
-    width: 180px;
-    height: 50px;
-    flex-grow: 0;
+    width: 147px;
+    height: 64px;
+    box-sizing: border-box;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 11px auto;
-    border-radius: 3px;
-    border: solid 1px #000;
+    padding: 10px auto;
+    border-radius: 100px;
     cursor: pointer;
-    box-sizing: border-box;
+    background-color: #f0f0f0;
   }
   input:checked + p {
     background-color: #68f99e;
-    color: #000;
+    color: #030c37;
   }
-`;
+  `;
 
 const LabelDistance = styled.label`
+  margin-left: 10px; 
   input {
     display: none;
   }
   input + p {
-    margin: 10px;
-    width: 180px;
-    height: 74px;
-    flex-grow: 0;
+    width: 147px;
+    height: 64px;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 11px auto;
-    border-radius: 3px;
-    border: solid 1px #000;
+    padding: 10px 20px;
+    border-radius: 100px;
     cursor: pointer;
     box-sizing: border-box;
+    background-color: #f0f0f0;
   }
   input:checked + p {
     background-color: #68f99e;
-    color: #000;
+    color: #030c37;
   }
-`;
+  `;
 
 const Label = styled.label`
+  margin-left: 10px; 
   input {
     display: none;
   }
   input + p {
-    margin: 10px 5px;
-    width: 316px;
-    height: 74px;
-    flex-grow: 0;
+    width: 256px;
+    height: 56px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 24px auto;
-    border-radius: 3px;
-    border: solid 1px #000;
+    padding: 10px auto;
+    border-radius: 100px;
     cursor: pointer;
     box-sizing: border-box;
+    background-color: #f0f0f0;
   }
   input:checked + p {
     background-color: #68f99e;
-    color: #000;
+    color: #030c37;
   }
-`;
+  `;
 
 export default Edit;

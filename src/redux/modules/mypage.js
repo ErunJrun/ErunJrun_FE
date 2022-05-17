@@ -2,6 +2,7 @@
 import { handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/Api";
+import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
 import axios from "axios";
 
 // actions
@@ -16,6 +17,7 @@ const GET_EVALUATION = "GET_EVALUATION";
 const PATCH_EVALUATION = "PATCH_EVALUATION";
 const GET_ATTEND = "GET_ATTEND";
 const PATCH_ATTEND = "PATCH_ATTEND";
+const DELETE_USER = "DELETE_USER";
 
 // //action creators
 export const getProfile = (payload) => ({
@@ -70,6 +72,11 @@ export const getAttend = (payload) => ({
 
 export const patchAttend = (payload) => ({
   type: PATCH_ATTEND,
+  payload,
+});
+
+export const deleteUser = (payload) => ({
+  type: DELETE_USER,
   payload,
 });
 
@@ -187,7 +194,7 @@ export const editProfileDB = (
         },
       });
       console.log(data);
-      history.push("/mypage");
+      history.push(`/mypage/${userId}`);
     } catch (error) {
       console.log(error);
     }
@@ -311,6 +318,28 @@ export const patchAttendDB = (groupId, userId) => {
       console.log(data);
       history.push("/mypage");
       window.alert("출석체크가 완료되었습니다!");
+      history.push(`/mypage/${userId}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+//회원 탈퇴
+export const deleteUserDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.delete(`/user/delete`);
+      console.log(data);
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("nickname");
+      localStorage.removeItem("profileUrl");
+
+      dispatch(deleteUser());
+      window.alert("회원탈퇴에 성공하였습니다");
+      history.push("/login");
     } catch (error) {
       console.log(error);
     }
@@ -390,6 +419,14 @@ export default handleActions(
       produce(state, (draft) => {
         console.log(action.payload);
         draft.att = action.attendance;
+      }),
+
+    [DELETE_USER]: (state, action) =>
+      produce(state, (draft) => {
+        draft.user.nickname = null;
+        draft.user.userId = null;
+        draft.user.profileUrl = null;
+        draft.isLogin = false;
       }),
   },
   initialState

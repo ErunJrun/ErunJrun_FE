@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useState } from 'react';
 import { useSelector } from "react-redux";
 import { Text, Grid }from '../../elements';
@@ -21,14 +22,18 @@ const Schedule = () => {
       <>
      {profile_list.waiting.length === 0 ?  null :
       <Box>
+   
           <Text bold size="18px" margin="0px 0px 32px 0px">
             참여예정 그룹 러닝
           </Text>
 
-          <Text bold size="14px"  color="#000" margin="-53px 0px 0px 1140px"
+          <Text 
+          bold size="14px"  
+          color="#000" 
+          margin="-53px 0px 0px 1140px"
           _onClick={toggleModal}
-          >
-             
+          cursor="pointer"
+          >            
             전체보기
           </Text>
 
@@ -50,20 +55,31 @@ const Schedule = () => {
                     >
                       D-{profile_list.waiting[0]?.dDay}
                     </Text>
-                    <Text bold size="16px" margin="8px 0 0 0">{profile_list.waiting[0]?.title}</Text>
-                    <Text  size="14px" color="#000"  margin="8px 0 0 0">
+                    <Text 
+                    bold size="16px" 
+                    margin="8px 0 0 0"
+                    cursor="pointer"
+                    >
+                      {profile_list.waiting[0]?.title}
+                    </Text>
+                    <Text  
+                    size="14px" 
+                    color="#000" 
+                    margin="8px 0 0 0"
+                    cursor="pointer"
+                    >
                         {profile_list.waiting[0]?.date} &nbsp;
                         ( 소요시간 : {profile_list.waiting[0]?.totalTime} )
                     </Text>
-                    <Grid display="flex">
+                    <Grid display="flex" cursor="pointer">
                       <TextBox>{profile_list.waiting[0]?.location}</TextBox>
                       <TextBox>{profile_list.waiting[0]?.distance}</TextBox>
                       <TextBox>{profile_list.waiting[0]?.thema}</TextBox>
                     </Grid>
                 </div>
-                <Grid  margin="-120px 0 0 570px">
+                {/* <Grid  margin="-120px 0 0 570px">
                     <FiChevronRight  size="30" color='#AAA'/>
-                </Grid>       
+                </Grid>        */}
             </Grid>  
 
             <Grid margin="-180px 0 0 0px">
@@ -79,6 +95,7 @@ const Schedule = () => {
                     width="600px" 
                     height="180px" 
                     margin="-130px 0 0 650px"
+                    cursor="pointer"
                   >
                     <Text 
                       bold size="16px"
@@ -90,13 +107,9 @@ const Schedule = () => {
                       bg="#030c37"
                       textalign="center"    
                     >D-{waiting.dDay}</Text>
-                        <Text 
-                        width="180px"
-                        height="24px"
-                        bold 
-                        size="18px" 
-                        textalign="left"
-                        >{waiting.title}</Text>
+                        <_Text>
+                          {waiting.title}
+                        </_Text>
                         <div style={{margin:"0 30px 0 0", display:"flex"}}>
                             <TextBox>{waiting.location}</TextBox>
                             <TextBox>{waiting.distance}</TextBox>
@@ -109,7 +122,7 @@ const Schedule = () => {
             </Grid>
 
             {modal&&(
-              <Overlay>  
+              <Overlay  onClick = {toggleModal}>  
               <Wrap>
               <>
                 <Text margin="5px 0 10px 32px">참여예정 그룹러닝</Text>
@@ -172,7 +185,7 @@ const Schedule = () => {
             </Wrap>
             </Overlay>
             )}
-      
+           <Bar/>
         </Box>
       }
         </>
@@ -186,6 +199,14 @@ const Box = styled.div`
   padding: 24px 38px 32px 32px;
   border-radius: 6px;
   background-color: #f5f5f5;
+`;
+
+const Bar = styled.div`
+  width: 1.8px;
+  height: 140px;
+  flex-grow: 0;
+  margin: -183px 0px 0px 590px;
+  background-color: #b8b8b8;
 `;
 
 const TextBox = styled.div`
@@ -205,6 +226,9 @@ const MyImage = styled.img`
   width: 200px;
   height: 150px;
   margin: 35px 20px 0 0;
+  :hover{
+    opacity: 0.85;
+  }
 `;
 
 const Image = styled.img`
@@ -212,7 +236,9 @@ const Image = styled.img`
   height: 150px;
   margin: 36px 24px 36px 32px;
   border-radius: 3px;
-
+  :hover{
+    opacity: 0.85;
+  }
 `;
 
 
@@ -221,6 +247,25 @@ const Hr = styled.div`
   height:1px;
   background-color: #b8b8b8;
   margin: 0 42px 0 35px;
+`;
+
+const _Text = styled.div`
+  width: 180px;
+  height: 24px;
+  font-weight: 900;
+  font-size: 18px; 
+  text-align: left;
+  color: #000;
+  margin: 16px 55px 0 0;
+  :hover{
+    width: 180px;
+  height: 24px;
+  font-weight: 900;
+  font-size: 18px; 
+  text-align: left;
+  color: #666;
+  margin: 16px 55px 0 0;
+  }
 `;
 
 const Wrap = styled.div`
