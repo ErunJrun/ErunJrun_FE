@@ -78,7 +78,7 @@ const SmallBox = styled.div`
   display: flex;
   align-items: center;
 
-  width: 255px;
+  width: 400px;
   height: 23px;
   gap: 20px;
   margin-top: 10px;

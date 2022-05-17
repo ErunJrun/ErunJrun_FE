@@ -119,5 +119,6 @@ const Btn = styled.button`
   text-align: center;
   :hover {
     font-weight: 900;
+    background-color: #00F6AC;
   }
 `;

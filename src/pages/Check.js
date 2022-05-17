@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import { patchAttendDB } from "../redux/modules/mypage";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { getCookie } from "../shared/Cookie";
 
 const Check = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
+  // const isLogin = useSelector((state) => state.user.isLogin);
+  // const token = getCookie("accessToken");
 
-  console.log(groupId);
-
-  const [userId, setUserId] = useState([]);
-
-  console.log(userId);
-
+  console.log(groupId); 
+  
   const check_list = useSelector((state) => state.mypage.attend);
   console.log(check_list);
+
+  const [userId, setUserId] = useState([]);
+  console.log(userId);
 
   const choiceTime = (e, index) => {
     if (e.target.checked) {
@@ -28,6 +30,9 @@ const Check = () => {
       setUserId(userId.filter((el) => el !== index));
     }
   };
+  // useEffect(() => {
+  //   if(isLogin || token) history.push("/");
+  // }, [])
 
   if (check_list.length === 0) return <></>;
 

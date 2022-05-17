@@ -10,6 +10,7 @@ import Group from "../components/myPage/Group";
 import MyGroup from "../components/myPage/MyGroup";
 import { Text, Grid } from "../elements";
 import Tabs from "../components/myPage/Tabs";
+import { getCookie } from "../shared/Cookie";
 
 const Mypage = () => {
   const dispatch = useDispatch();
@@ -17,17 +18,26 @@ const Mypage = () => {
   console.log(params);
   const userId = params.userId;
   console.log(userId);
-  //const userId = localStorage.getItem("userId");
- // const userId = props.match.params.StoreId
+  const MyId = localStorage.getItem("userId");
+
+ const isLogin = useSelector((state) => state.user.isLogin);
+ const token = getCookie("accessToken");
 
    useEffect(() => {
      dispatch(getProfileDB(userId));
    }, []);
 
+   // useEffect(() => {
+//     if(isLogin || token) history.push("/");
+//   }, [])
+
   return (
     <Grid width="1200px" margin="auto">
       <Profile userId={userId} />
-      <Schedule userId={userId} />
+      {MyId === userId ? 
+        <Schedule userId={userId} />
+        :
+        null}
       
       <Tabs />
 
