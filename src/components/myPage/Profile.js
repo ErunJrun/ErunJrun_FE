@@ -21,9 +21,13 @@ const Profile = () => {
           </Text>
         </ImgBox>
 
-        <Introduce>
-          {profile_list?.userInfo?.bio}
+        <Introduce>   
           <Triangle />
+          <Text 
+          margin="-35px 0 0 0"
+          padding="20px">
+            {profile_list?.userInfo?.bio}
+          </Text>
         </Introduce>
 
         <Information>
@@ -98,6 +102,13 @@ const MyImage = styled.img`
   border-radius: 50%;
 `;
 
+const Bio = styled.div`
+  height: 100px;
+  width: 400px;
+  border: 1px solid black;
+  word-break: break-all;
+`;
+
 const Introduce = styled.div`
   white-space: nowrap;
   transform: translate(12%);
@@ -111,6 +122,7 @@ const Introduce = styled.div`
   text-align: center;
   padding-top: 25px;
   margin-top: 8px;
+  white-space: normal;
 `;
 
 const Triangle = styled.div`

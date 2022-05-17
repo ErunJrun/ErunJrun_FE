@@ -11,7 +11,7 @@ const Check = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
-  // const isLogin = useSelector((state) => state.user.isLogin);
+  const isLogin = useSelector((state) => state.user.isLogin);
   // const token = getCookie("accessToken");
 
   console.log(groupId); 
@@ -33,6 +33,12 @@ const Check = () => {
   // useEffect(() => {
   //   if(isLogin || token) history.push("/");
   // }, [])
+  useEffect(() => {
+    if (!isLogin) {
+      window.alert("로그인 후 이용해 주세요");
+      history.push("/login");
+    }
+  }, []);
 
   if (check_list.length === 0) return <></>;
 

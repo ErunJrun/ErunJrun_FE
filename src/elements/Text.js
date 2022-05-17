@@ -39,6 +39,7 @@ const Text = (props) => {
     lineHeight,
     regular,
     textLeft,
+    space,
   } = props;
   const styles = {
     onMouseOver,
@@ -75,6 +76,7 @@ const Text = (props) => {
     lineHeight,
     regular,
     textLeft,
+    space,
   };
   return (
     <React.Fragment>
@@ -123,6 +125,7 @@ Text.defaultProps = {
   hover: null,
   alignItems: null,
   lineHeight: null,
+  space: null,
 };
 const P = styled.p`
   line-height: ${(props) => props.lineHeight};
@@ -154,6 +157,7 @@ const P = styled.p`
   ${(props) => `position : ${props.position};`};
   ${(props) => `top : ${props.top};`};
   ${(props) => `left : ${props.left};`};
+  ${(props) => `white-space : ${props.space};`};
   ${(props) =>
     props.textalign
       ? `text-align: center;`

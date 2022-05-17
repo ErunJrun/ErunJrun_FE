@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editProfileDB, numberCheckMiddleware, getNumberCheckMiddleware, deleteUserDB } from "../../redux/modules/mypage"
@@ -13,6 +14,8 @@ const Edit = (props) => {
   const dispatch = useDispatch(); 
   const fileInput = useRef();
   const userId = localStorage.getItem("userId");
+  const isLogin = useSelector((state) => state.user.isLogin);
+
   
   const [nickname, setNickname] = useState(props.profile.nickname);
   const [image, setImage] = useState(props.profile.profileUrl);
@@ -22,9 +25,10 @@ const Edit = (props) => {
   const [likeDistance, setLikeDistance] = useState(props.profile.likeDistance);
   const [userLevel, setUserLevel] = useState(props.profile.userLevel);
   const [phone, setPhone] = useState(props.profile.phone);
-
+console.log(image);
   const [agreeSMS, setAgreeSMS] = useState(props.profile.agreeSMS);
   const [numberCK, setNumderCK] = useState("");
+  const [textLength, setTextLength] = useState(0);
 console.log(agreeSMS);
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
@@ -39,13 +43,13 @@ console.log(agreeSMS);
   ]);
 
   const [runDistance, setRunDistance] = useState([
+    "잘 모르겠어요",
     "5km미만",
     `    5km 이상 
     10km 미만`,
     `   10km 이상
     15km 미만`,
     "15km 이상",
-    "잘 모르겠어요",
   ]);
 
   const [runExp, setRunExp] = useState([
@@ -55,6 +59,12 @@ console.log(agreeSMS);
     "레드",
     "블랙",
   ]);
+
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal)
+  };
 
   const changeName = (e) => {
     setNickname(e.target.value);
@@ -106,6 +116,13 @@ console.log(agreeSMS);
     dispatch(editProfileDB(userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS));
   };
 
+  useEffect(() => {
+    if (!isLogin) {
+      window.alert("비정상적인 접근입니다.");
+      history.push("/");
+    }
+  }, []);
+
   return (
     <>
       <Grid maxWidth="800px" margin="68px auto" justify="center">
@@ -113,6 +130,7 @@ console.log(agreeSMS);
           <Text bold size="20px">
             회원정보 수정
           </Text>
+          <Hrr/>
           
           <Text bold size="16px">프로필 사진</Text>
           <MyImage src={
@@ -128,17 +146,26 @@ console.log(agreeSMS);
               id="input-file"
               encType="multipart/form-data"
               onChange={changeImage}
+              accept=".jpg, .jpeg, .png"
               ref={fileInput}/>
         </Grid>
 
         <Text bold size="16px">닉네임</Text>
             <Input value={nickname} onChange={changeName} type="text" 
             placeholder="닉네임을 입력해주세요!" />
+            <Text margin="0" size="14px">
+              {textLength}/28
+            </Text>
         <Text bold size="16px">자기소개</Text>
             <Input value={bio} onChange={changeContent} type="text" 
             placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"  />
 
-            <Hr></Hr>
+            <Hr style={{margin: "63px 0 80px 0"}}></Hr>
+
+        <Text bold size="20px">
+          휴대폰인증
+        </Text>
+        <Hrr/>
 
         <Text bold size="16px">핸드폰 번호</Text>
             <Grid display="felx">
@@ -172,18 +199,22 @@ console.log(agreeSMS);
             : 
               null
             }
-            
-
             <input checked={agreeSMS} value={agreeSMS} onChange={agree} type='checkbox'/>
               개인정보사용 동의 및 알림수신에 동의합니다.
-        <hr/>
+        <hr style={{margin: "58px 0 80px 0"}}/>
 
-        <Text bold size="20px">나의 러닝스타일</Text>
+        <Text 
+        bold 
+        size="20px"
+        margin="90px 0 18px 0"
+        >나의 러닝스타일</Text>
+        <Hrr/>
         <Grid margin="0 0 84px 0" display="flex" flexDirection="column">
-            <Text margin="0 0 16px 0" bold size="18px">
+            <Text 
+            margin="40px 0 16px 0"
+            bold size="18px">
               Step 1. 선호하는 러닝 지역을 선택해주세요!
             </Text>
-            <Hr />
 
           <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
             {runRegion.map((e, idx) => {
@@ -205,7 +236,10 @@ console.log(agreeSMS);
         </Grid>
 
         <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
-          <Text margin="0" bold size="18px">
+          <Text 
+          margin="0 0 18px 0" 
+          bold 
+          size="18px">
             Step 1. 선호하는 러닝 거리를 선택해주세요!
           </Text>
 
@@ -215,7 +249,7 @@ console.log(agreeSMS);
                 <Fragment key={idx}>
                   <LabelDistance checked={likeDistance}>
                     <input
-                      onClick={() => {choiceDistance(idx + 1); }}
+                      onClick={() => {choiceDistance(idx); }}
                       type="radio"
                       name="runDistance"
                       //checked={likeDistance}
@@ -230,7 +264,10 @@ console.log(agreeSMS);
         </Grid>
 
         <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
-           <Text margin="0" bold size="18px">
+           <Text 
+           margin="0 0 18px 0"
+           bold 
+           size="18px">
           Step 3. (1달 기준) 러닝 횟수를 선택해주세요!
           </Text>
 
@@ -255,19 +292,46 @@ console.log(agreeSMS);
             })}
           </Grid>
         </Grid>
-        <hr/>
-        <Text bold size="16px" color="#7b7b7b">회원 탈퇴</Text>
-        <Box>탈퇴하실 경우, 모든 데이터가 삭제되며 복구가 불가능합니다.<br/>
-          안내 사항을 모두 확인하였으며, 이에 동의하십니까? <br/>
-             <button
-             onClick={() => {
-              dispatch(deleteUserDB());
-              window.alert("회원탈퇴에 성공하였습니다");
-              history.push("/login");
-            }}
-             >동의 및 탈퇴하기</button>
-             <button>돌아가기</button>
-        </Box>
+        <hr style={{margin: "70px 0 0 0"}}/>
+        <Text 
+        bold size="16px" 
+        color="#7b7b7b"
+        _onClick={toggleModal}
+        >
+          회원 탈퇴
+        </Text>
+
+        {modal&&(
+            <Overlay  onClick = {toggleModal}>  
+              <Wrap>
+              <>
+                <Text 
+                size="18" 
+                textalign="center"
+                padding="35px 0 0 0"
+                >
+                  탈퇴하실 경우, 
+                  <span style={{fontWeight: "900"}}>
+                    모든 데이터가 삭제되며 복구가 불가능
+                  </span>
+                  합니다.<br/>
+                  안내 사항을 모두 확인하였으며, 이에 동의하십니까? <br/>
+                </Text>
+                  <Btn
+                  onClick={() => {
+                    dispatch(deleteUserDB());
+                  }}
+                  >동의 및 탈퇴하기
+                  </Btn>
+                  <_Btn
+                  onClick = {toggleModal}
+                  >돌아가기
+                  </_Btn>
+              </>
+              </Wrap>
+            </Overlay>
+            )}
+        
         <Grid margin="70px 0 0 450px">
             <Button
             onClick={() => {
@@ -284,17 +348,9 @@ console.log(agreeSMS);
 };
 
 
-
-const Box = styled.div`
-  height: 66px;
-  background: #ddd;
-  color: #000;
-  padding: 30px;
-`;
-
 const MyImage = styled.img`
-  height: 100px;
-  width: 100px;
+  height: 160px;
+  width: 160px;
   border-radius: 50%
 `;
 
@@ -345,6 +401,13 @@ const Hr = styled.div`
   width: 800px;
   height: 1px;
   background-color: #cbcbcb;
+`;
+
+const Hrr = styled.div`
+  width: 800px;
+  height: 2px;
+  background-color: #000;
+  margin: -8px 0 20px 0;
 `;
 
 const LabelExp = styled.label`
@@ -416,5 +479,66 @@ const Label = styled.label`
     color: #030c37;
   }
   `;
+
+const Wrap = styled.div`
+  z-index: 0;
+  position: absolute;
+  left:30%;
+  top: 210px;
+  margin: 0;
+  padding: 24px 10px;
+  width: 642px;
+  height: 222px;
+  background: #ffffff;
+  box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+`;
+
+const Overlay = styled.div`
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(49,49,49,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+`;
+
+const Btn = styled.button`
+  width: 245px;
+  height: 46px;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+  background-color: #ff2d55;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+  margin: 30px 30px 0 60px;
+  :hover{
+    background-color: #F10D43;
+  }
+`;
+
+const _Btn = styled.button`
+  width: 245px;
+  height: 46px;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+  background-color: #ddd;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  :hover{
+    background-color: #bbb;
+  }
+`;
 
 export default Edit;

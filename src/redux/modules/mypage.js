@@ -337,9 +337,10 @@ export const deleteUserDB = () => {
       localStorage.removeItem("nickname");
       localStorage.removeItem("profileUrl");
 
-      dispatch(deleteUser());
-      window.alert("회원탈퇴에 성공하였습니다");
+      
+      window.alert("회원탈퇴에 성공하였습니다");      
       history.push("/login");
+      dispatch(deleteUser());
     } catch (error) {
       console.log(error);
     }
