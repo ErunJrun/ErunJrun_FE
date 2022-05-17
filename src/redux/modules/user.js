@@ -8,7 +8,6 @@ import { handleActions } from "redux-actions";
 // Action
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
-
 const LOG_IN_INFO = "LOG_IN_INFO";
 const GET_ALARM = "GET_ALARM";
 const READ_ALARM = "READ_ALARM";
@@ -183,7 +182,6 @@ export const logoutDB = () => {
       localStorage.removeItem("profileUrl");
 
       dispatch(logOut());
-      window.alert("다음에 또 방문해 주세요");
       history.push("/login");
     } catch (error) {
       console.log(error);

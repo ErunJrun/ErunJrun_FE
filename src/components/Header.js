@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
-import Modal from "./main/Modal";
-import { Grid, IconButton } from "../elements";
-import { IoMdNotificationsOutline } from "react-icons/io";
+
+import { Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
-import Alarm from "./alarm/Alarm";
 import { _getAlarmDB, _readAlarmDB } from "../redux/modules/user";
 import { getCookie } from "../shared/Cookie";
-import alarmIcon from "../assets/header/alarmIcon.png";
 import headerLogo from "../assets/header/headerLogo.png";
+
+import alarmIcon from "../assets/header/alarmIcon.png";
+import AlarmModal from "../shared/modal/AlaramModal";
+import Modal from "./Modal";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -17,12 +18,14 @@ const Header = () => {
   const alarmList = useSelector((state) => state.user.alarm);
 
   const [alarmOpen, setAlarmOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+
   console.log(alarmList);
 
-  const readAlarm = () => {
+  const alarmToggle = () => {
     setAlarmOpen(!alarmOpen);
-    setModalOpen(false);
+  };
+
+  const readAlarm = () => {
     dispatch(_readAlarmDB());
   };
 
@@ -49,6 +52,7 @@ const Header = () => {
           maxWidth="1200px"
           display="flex"
           justifyContent="space-between"
+          alignItems="center"
         >
           <Grid
             display="flex"
@@ -89,12 +93,14 @@ const Header = () => {
               코스추천
             </Btn>
           </Grid>
+
           <Grid display="flex" width="auto" alignItems="center">
-            <Grid height="auto" display="flex" width="auto">
+            <Grid margin="0 24px 0 0" height="auto" display="flex" width="auto">
               <AlarmIcon
                 src={alarmIcon}
                 onClick={() => {
                   readAlarm();
+                  alarmToggle();
                 }}
               ></AlarmIcon>
               {alarmList?.unreadCount === 0 || alarmList === [] ? null : (
@@ -103,9 +109,12 @@ const Header = () => {
                 </Badge>
               )}
 
-              {alarmOpen ? <Alarm setAlarmOpen={setAlarmOpen}></Alarm> : null}
+              {alarmOpen ? (
+                <AlarmModal onClose={alarmToggle}></AlarmModal>
+              ) : null}
             </Grid>
-            <Modal modalOpen={modalOpen} setAlarmOpen={setAlarmOpen} />
+
+            <Modal />
           </Grid>
         </Grid>
       </HeaderBox>

@@ -13,10 +13,11 @@ const AlarmStart = (props) => {
           height="auto"
           display="flex"
           alignItems="flex-start"
+          justifyContent="left"
         >
           {!props?.check === true ? <NewDot /> : <NoneDot />}
 
-          <Grid margin="0" display="flex" maxWidth="316px">
+          <Grid margin="0" display="flex" width="315px">
             <Grid
               display="flex"
               alignItems="center"
@@ -33,19 +34,29 @@ const AlarmStart = (props) => {
             <Grid
               _onClick={() => {
                 history.push(`/groupdetail/${props?.groupId}`);
-                props.setAlarmOpen(false);
+                props.onClose();
               }}
               height="auto"
               display="flex"
             >
               {props.role === "host" ? (
-                <Text cursor="pointer" hover="font-weight:900;" margin="0">
+                <Text
+                  textLeft
+                  cursor="pointer"
+                  hover="font-weight:900;"
+                  margin="0"
+                >
                   30분 뒤{" "}
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
                   그룹러닝이 시작합니다. 출석체크를 해주세요.
                 </Text>
               ) : (
-                <Text cursor="pointer" hover="font-weight:900;" margin="0">
+                <Text
+                  textLeft
+                  cursor="pointer"
+                  hover="font-weight:900;"
+                  margin="0"
+                >
                   30분 뒤{" "}
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
                   러닝이 시작합니다.
@@ -69,7 +80,7 @@ const AlarmStart = (props) => {
         >
           {!props?.check ? <NewDot /> : <NoneDot />}
 
-          <Grid margin="0" display="flex" maxWidth="316px">
+          <Grid margin="0" display="flex" width="315px">
             <Grid
               display="flex"
               alignItems="center"
@@ -86,17 +97,28 @@ const AlarmStart = (props) => {
             <Grid
               _onClick={() => {
                 history.push(`/groupdetail/${props?.groupId}`);
+                props.onClose();
               }}
               height="auto"
               display="flex"
             >
               {props.role === "host" ? (
-                <Text cursor="pointer" hover="font-weight:900;" margin="0">
+                <Text
+                  textLeft
+                  cursor="pointer"
+                  hover="font-weight:900;"
+                  margin="0"
+                >
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
                   은 어떠셨나요? 당신은 멋진 크루장입니다!
                 </Text>
               ) : (
-                <Text cursor="pointer" hover="font-weight:900;" margin="0">
+                <Text
+                  textLeft
+                  cursor="pointer"
+                  hover="font-weight:900;"
+                  margin="0"
+                >
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
                   은 어떠셨나요? 크루장평가를 해주세요
                 </Text>
@@ -120,7 +142,7 @@ const AlarmStart = (props) => {
         >
           {!props?.check === true ? <NewDot /> : <NoneDot />}
 
-          <Grid margin="0" display="flex" maxWidth="316px">
+          <Grid margin="0" display="flex" width="315px">
             <Grid
               display="flex"
               alignItems="center"
@@ -141,7 +163,12 @@ const AlarmStart = (props) => {
               height="auto"
               display="flex"
             >
-              <Text cursor="pointer" hover="font-weight:900;" margin="0">
+              <Text
+                textLeft
+                cursor="pointer"
+                hover="font-weight:900;"
+                margin="0"
+              >
                 오늘은 이RUN 저RUN{" "}
                 <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
                 그룹 러닝이 있습니다.

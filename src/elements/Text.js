@@ -38,6 +38,7 @@ const Text = (props) => {
     alignItems,
     lineHeight,
     regular,
+    textLeft,
   } = props;
   const styles = {
     onMouseOver,
@@ -73,6 +74,7 @@ const Text = (props) => {
     alignItems,
     lineHeight,
     regular,
+    textLeft,
   };
   return (
     <React.Fragment>
@@ -152,7 +154,12 @@ const P = styled.p`
   ${(props) => `position : ${props.position};`};
   ${(props) => `top : ${props.top};`};
   ${(props) => `left : ${props.left};`};
-  ${(props) => (props.textalign ? `text-align: center;` : null)};
+  ${(props) =>
+    props.textalign
+      ? `text-align: center;`
+      : props.textLeft
+      ? `text-align: left;`
+      : null};
   vertical-align: middle;
   ${(props) => (props.justifycontent ? `justify-content: center;` : null)};
   ${(props) => (props.marginTop ? `margin-top: 30px;` : null)};

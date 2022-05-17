@@ -27,10 +27,11 @@ const GroupUpload = () => {
   const distance = useSelector((state) => state.uploadInfo.distance);
   const contents = useSelector((state) => state.uploadInfo.contents);
   const thumbnail = useSelector((state) => state.image.files);
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   const [address, setAddress] = useState("");
 
-  console.log(location, distance, thumbnail, contents);
+  console.log(location, distance, thumbnail, contents, isLogin);
 
   const lat = location[0]?.lat;
   const lng = location[0]?.lng;
@@ -105,6 +106,13 @@ const GroupUpload = () => {
 
   useEffect(() => {
     dispatch(resetMap());
+  }, []);
+
+  useEffect(() => {
+    if (!isLogin) {
+      window.alert("비정상적인 접근입니다.");
+      history.push("/");
+    }
   }, []);
 
   if (!isLoaded1) {

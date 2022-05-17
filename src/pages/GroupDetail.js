@@ -27,38 +27,46 @@ const GroupDetail = () => {
   return (
     <>
       <Grid
-        maxWidth="758px"
+        width="1200px"
         height="auto"
-        width="100%"
         display="flex"
-        justifyContent="center"
-        margin="80px auto 65px 360px"
+        justifyContent="space-between"
+        margin="80px auto 65px auto"
         position="relative"
       >
-        <ImageSlide />
-        <InfoCategory />
-        <div id="코스정보"></div>
-        <ServeInfo />
-        <Grid display="flex" alignItems="center" margin="0 0 15px 0">
-          <MapIconImg src={mapIcon} />
-          <Text bold size="18px">
-            지도로 보는 코스 정보
-          </Text>
-          <MapInfo />
-          <div id="소개"></div>
-        </Grid>
-        <Grid margin="0 0 96px 0">
-          <Text bold size="18px" margin="0 0 22px 0">
-            크루장의 소개글
-          </Text>
-          <Text size="16px">{detailGroup?.content}</Text>
-          <div id="크루원"></div>
-        </Grid>
-        <Appliers />
+        <Grid width="758px">
+          <ImageSlide />
+          <InfoCategory />
+          <div id="코스정보"></div>
+          <ServeInfo />
+          <Grid display="flex" alignItems="center" margin="0 0 15px 0">
+            <MapIconImg src={mapIcon} />
+            <Text bold size="18px">
+              지도로 보는 코스 정보
+            </Text>
+            <MapInfo />
+            <div id="소개"></div>
+          </Grid>
+          <Grid margin="0 0 96px 0">
+            <Text bold size="18px" margin="0 0 22px 0">
+              크루장의 소개글
+            </Text>
+            <Text size="16px">{detailGroup?.content}</Text>
+            <div id="크루원"></div>
+          </Grid>
+          <Appliers />
 
-        <CommentList />
-        <div id="Q&A"></div>
-        <Grid position="fixed" left="1158px" top="170px">
+          <CommentList />
+          <div id="Q&A"></div>
+        </Grid>
+        <Grid
+          position="sticky"
+          top="170px"
+          display="flex"
+          flexDirection="column"
+          margin="0"
+          width="auto"
+        >
           <MainInfo groupId={groupId} />
           <CrewLeaderInfo {...detailGroup} />
         </Grid>
