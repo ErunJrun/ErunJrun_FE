@@ -200,6 +200,7 @@ export const logoutDB = () => {
       localStorage.removeItem("nickname");
       localStorage.removeItem("profileUrl");
       localStorage.removeItem("firstLogin");
+      localStorage.removeItem("from");
 
       dispatch(logOut());
       history.push("/login");

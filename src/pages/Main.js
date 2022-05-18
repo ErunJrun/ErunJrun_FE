@@ -9,13 +9,6 @@ import { getCookie } from "../shared/Cookie";
 const Main = () => {
   const dispatch = useDispatch();
 
-  const from = localStorage.getItem("from");
-  console.log(from);
-
-  if (from) {
-    return history.replace(from);
-  }
-
   return (
     <div>
       <Banner />

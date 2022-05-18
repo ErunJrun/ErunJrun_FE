@@ -15,6 +15,7 @@ import "./GroupSlide.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Redirect } from "react-router-dom";
 
 const MGroupRunning = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,13 @@ const MGroupRunning = () => {
   useEffect(() => {
     dispatch(getMainDB());
   }, []);
+
+  const from = localStorage.getItem("from");
+  console.log(from);
+
+  if (from) {
+    return <Redirect to={{ pathname: from }}></Redirect>;
+  }
 
   return (
     <>

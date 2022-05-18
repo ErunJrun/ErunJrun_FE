@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
-import { patchAttendDB } from "../redux/modules/mypage";
+import { getAttendDB, patchAttendDB } from "../redux/modules/mypage";
 import styled from "styled-components";
 import { Redirect, useParams } from "react-router-dom";
 import { getCookie } from "../shared/Cookie";
@@ -36,6 +36,10 @@ const Check = () => {
       setUserId(userId.filter((el) => el !== index));
     }
   };
+
+  React.useEffect(() => {
+    dispatch(getAttendDB(groupId));
+  }, []);
 
   if (token) {
     return (
