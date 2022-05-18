@@ -37,7 +37,7 @@ const Check = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getAttendDB(groupId));
   }, []);
 
