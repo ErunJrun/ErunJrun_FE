@@ -63,7 +63,7 @@ api.interceptors.response.use(
         localStorage.removeItem("nickname");
         localStorage.removeItem("profileUrl");
         localStorage.removeItem("firstLogin");
-        localStorage.removeItem("from");
+
         window.alert("로그인이 시간이 만료되었습니다.");
 
         history.push("login");
