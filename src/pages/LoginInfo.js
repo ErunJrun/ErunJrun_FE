@@ -8,6 +8,7 @@ import LevelShoes from "../components/LevelShoes";
 
 import runStyleCharacter from "../assets/loginInfo/runStyleCharacter.png";
 import { history } from "../redux/configureStore";
+import Ready from "../shared/Ready";
 
 const LoginInfo = () => {
   const dispatch = useDispatch();
@@ -19,9 +20,11 @@ const LoginInfo = () => {
   const nickname = localStorage.getItem("nickname");
 
   useEffect(() => {
-    if (!firstLogin) {
+    if (firstLogin === "false") {
       window.alert("비정상적인 접근입니다.");
       history.replace("/login");
+    } else {
+      console.log("메롱");
     }
   }, []);
 
