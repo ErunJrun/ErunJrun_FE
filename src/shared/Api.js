@@ -15,6 +15,7 @@ export const api = axios.create({
   },
 });
 
+//요청 api에 두가지 토큰을 실어줌
 api.interceptors.request.use((config) => {
   const token = getCookie("accessToken");
   const refreshToken = getCookie("refreshToken");
@@ -27,6 +28,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+//요청 api가 실패시 rep에 대한 인터셉터
 api.interceptors.response.use(
   (response) => {
     return response;
