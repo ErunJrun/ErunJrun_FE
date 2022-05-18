@@ -165,13 +165,15 @@ const Edit = (props) => {
 
         <Text bold size="16px">닉네임</Text>
             <Input value={nickname} onChange={changeName} type="text" 
-            placeholder="닉네임을 입력해주세요!" />
+            placeholder="닉네임을 입력해주세요!"
+            maxLength={8} />
             <Text margin="0" size="14px">
-              {textLength}/28
+             
             </Text>
         <Text bold size="16px">자기소개</Text>
             <Input value={bio} onChange={changeContent} type="text" 
-            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"  />
+            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!" 
+            maxLength={50} />
 
             <Hr style={{margin: "63px 0 80px 0"}}></Hr>
 

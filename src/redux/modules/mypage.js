@@ -336,7 +336,7 @@ export const deleteUserDB = () => {
       localStorage.removeItem("userId");
       localStorage.removeItem("nickname");
       localStorage.removeItem("profileUrl");
-
+      localStorage.removeItem("firstLogin");
       
       window.alert("회원탈퇴에 성공하였습니다");      
       history.push("/login");
@@ -428,6 +428,7 @@ export default handleActions(
         draft.user.userId = null;
         draft.user.profileUrl = null;
         draft.isLogin = false;
+        draft.firstLogin = false;
       }),
   },
   initialState
