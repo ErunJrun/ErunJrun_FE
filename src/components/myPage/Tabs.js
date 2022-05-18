@@ -60,18 +60,43 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: "106%" }}>
-      <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
-        <Tabs
+      <Box sx={{ borderBottom: 3, borderColor: "divider" }}>
+        <Tabs sx={{
+          color: "#000", 
+          fontSize:"18px", 
+          fontWeight: "bold" 
+        }}
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="그룹 러닝" {...a11yProps(0)} />
-          <Tab label="추천 코스" {...a11yProps(1)} />
-          <Tab label="뱃지" {...a11yProps(2)} />
+          <Tab sx={{ 
+            color: "#909090", 
+            fontSize:"18px", 
+            fontWeight: "bold" 
+            }}
+            label="그룹 러닝" 
+            {...a11yProps(0)} 
+            />
+          <Tab sx={{ 
+            color: "#909090", 
+            fontSize:"18px", 
+            fontWeight: "bold" 
+            }}
+            label="추천 코스" 
+            {...a11yProps(1)} 
+            />
+          <Tab sx={{ 
+            color: "#909090", 
+            fontSize:"18px", 
+            fontWeight: "bold" 
+            }}
+            label="뱃지" 
+            {...a11yProps(2)} 
+            />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={0} >
         <Btn
           onClick={() => {
             setComplete(true);
@@ -112,13 +137,12 @@ const Btn = styled.button`
   padding-top: 1px;
   border-radius: 50px;
   border: none;
-  background-color: #95fbc7;
+  background-color:#68f99e;
   color: #030c37;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bold;
   text-align: center;
   :hover {
-    font-weight: 900;
-    background-color: #00f6ac;
+    background-color: #02FD7B;
   }
 `;

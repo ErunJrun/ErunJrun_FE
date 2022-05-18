@@ -70,7 +70,7 @@ const Profile = () => {
 
 const Box = styled.div`
   width: 1200px;
-  height: 310px;
+  height: 320px;
   margin: 64px auto 24px auto;
   padding: 24px 38px 32px 32px;
   border-radius: 6px;
@@ -87,7 +87,7 @@ const SmallBox = styled.div`
   width: 400px;
   height: 23px;
   gap: 20px;
-  margin-top: 10px;
+  margin-top: 15px;
 `;
 
 const TextBox = styled.div`
