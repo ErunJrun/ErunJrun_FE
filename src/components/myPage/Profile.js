@@ -12,18 +12,25 @@ const Profile = () => {
 
   return (
     <Box>
-      <MiddleBox>
-        <ImgBox>
+      <MiddleBox> 
           <MyImage src={profile_list?.userInfo?.profileUrl} />
-          <Text bold size="20px">
-            {" "}
-            {profile_list?.userInfo?.nickname}{" "}
-          </Text>
-        </ImgBox>
+          <TextBox>
+            <Text 
+              bold 
+              size="18px"
+              >
+                {" "}
+                {profile_list?.userInfo?.nickname}{" "} 님의 한 줄 소개
+            </Text> 
+          </TextBox>
 
         <Introduce>
-          {profile_list?.userInfo?.bio}
-          <Triangle />
+          <Triangle />    
+            <Text 
+            margin="-35px 0 0 0"
+            padding="20px">
+              {profile_list?.userInfo?.bio}
+            </Text>   
         </Introduce>
 
         <Information>
@@ -84,33 +91,41 @@ const SmallBox = styled.div`
   margin-top: 10px;
 `;
 
-const ImgBox = styled.div`
-  width: 100px;
-  height: 141px;
-  text-align: center;
-  line-height: 0.5;
-  margin-top: 8px;
+const TextBox = styled.div`
+  width: 431px;
+  height: 23px;
+  text-align: left;
+  margin: -3px 0 0 32px;
 `;
 
 const MyImage = styled.img`
   height: 100px;
   width: 100px;
   border-radius: 50%;
+  margin-top: 15px;
+`;
+
+const Bio = styled.div`
+  height: 100px;
+  width: 400px;
+  border: 1px solid black;
+  word-break: break-all;
 `;
 
 const Introduce = styled.div`
   white-space: nowrap;
   transform: translate(12%);
-  width: 480px;
-  height: 90px;
+  width: 540px;
+  //height: 60px;
   border-radius: 6px;
-  background-color: #e1e1e1;
+  background-color:  #f0f0f0;
   font-size: 16.5px;
   font-weight: 550;
   color: #000;
   text-align: center;
-  padding-top: 25px;
-  margin-top: 8px;
+  padding-top: 5px;
+  margin: 50px 0 30px -500px;
+  white-space: normal;
 `;
 
 const Triangle = styled.div`
@@ -118,8 +133,8 @@ const Triangle = styled.div`
   height: 0;
   border-style: solid;
   border-width: 1rem;
-  border-color: transparent #e1e1e1 transparent transparent;
-  transform: translate(-95%, 50%);
+  border-color: transparent #f0f0f0 transparent transparent;
+  transform: translate(-95%, 40%);
 `;
 
 const Information = styled.div`

@@ -25,12 +25,12 @@ const Group = () => {
     <>
     {running.data.length === 0 ? 
       <Box>
-        참여한 그룹러닝이 없습니다
+        참여완료한 그룹러닝이 없습니다
       </Box>
       : 
       <Grid display="flex">
       {running?.data?.map((data, index) => 
-        userId !== data.userId &&
+        {userId !== data.userId  ?
       (
         <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
           <Grid
@@ -84,7 +84,13 @@ const Group = () => {
           }
           
         </Grid>
-      ))}
+      )
+      :
+      <Box>
+        참여완료한 그룹러닝이 없습니다
+      </Box>
+      }
+      )}
     </Grid>
     }
     </>

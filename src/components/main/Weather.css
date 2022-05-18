@@ -8,7 +8,7 @@
     color: aliceblue;
     font-size: 18px;
     font-weight: 400;
-    margin-bottom: 8px;
+    
 }
 
 .weather-icon{
@@ -20,19 +20,21 @@
     color: rgb(240, 248, 255);
     font-size: 38px;
     font-weight: 800;
+    margin-right: 50px;
 }
 
 .feels {
     color: aliceblue;
     font-size: 19px;
-    font-weight: 300;
+    font-weight: 500;
+    margin-top: -10px;
 }
 
 .temp {
     color: aliceblue;
     display: flex;
     margin: 30px;
-    width: 220px;
+    width: 200px;
     justify-content: space-between;
     line-height: 1.5;
     font-size: 15px;

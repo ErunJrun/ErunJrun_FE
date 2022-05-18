@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import { history } from "../../redux/configureStore";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements";
 import Weather from "./Weather";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import blueBanner from "../../assets/main/blueBanner.png";
 import yellowBanner from "../../assets/main/yellowBanner.png";
@@ -16,6 +16,7 @@ import "swiper/css/pagination";
 import "./Banner.css";
 
 const Banner = () => {
+  const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.isLogin);
   const userName = localStorage.getItem("nickname");
 
