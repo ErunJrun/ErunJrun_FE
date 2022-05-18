@@ -228,10 +228,10 @@ export const getNumberCheckMiddleware = (phone, numberCK) => {
         code: numberCK,
       });
       console.log(data);
-      window.alert("인증되었습니다");
+      window.alert(data.message);
     } catch (error) {
       console.log(error);
-      window.alert("인증에 실패하였습니다");
+      window.alert(error.message);
     }
   };
 };
@@ -339,7 +339,10 @@ export const deleteUserDB = () => {
       localStorage.removeItem("nickname");
       localStorage.removeItem("profileUrl");
 
-      window.alert("회원탈퇴에 성공하였습니다");
+      localStorage.removeItem("firstLogin");
+      
+      window.alert("회원탈퇴에 성공하였습니다");      
+
       history.push("/login");
       dispatch(deleteUser());
     } catch (error) {
@@ -429,6 +432,7 @@ export default handleActions(
         draft.user.userId = null;
         draft.user.profileUrl = null;
         draft.isLogin = false;
+        draft.firstLogin = false;
       }),
   },
   initialState
