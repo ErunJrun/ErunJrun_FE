@@ -28,10 +28,10 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-//요청 api가 실패시 rep에 대한 인터셉터
 api.interceptors.response.use(
   (response) => {
     return response;
+    console.log(response);
   },
   async (error) => {
     const { config, response } = error;
@@ -59,6 +59,7 @@ api.interceptors.response.use(
       }
       window.alert(response.data.message);
       console.log(response.data.message);
+      dispatch(logoutDB());
     }
 
     // else {

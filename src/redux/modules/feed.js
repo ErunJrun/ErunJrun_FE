@@ -280,7 +280,11 @@ export const applyGroupDB = (groupId) => {
 
       dispatch(applyGroup(applyData));
     } catch (error) {
-      console.log(error);
+      console.log("시작줄");
+      console.log("안녕", error.data);
+      console.log("안녕2", error.message);
+      console.log("안녕3", error.error);
+      console.log("안녕4", error.response);
     }
   };
 };
@@ -300,8 +304,12 @@ export const applyDetailDB = (groupId) => {
       window.alert("신청이 완료되었습니다.");
       dispatch(getGroupDetailDB(groupId));
       dispatch(applyDetail(applyData));
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      console.log("안녕", error.data);
+      console.log("안녕2", error.message);
+      console.log("안녕3", error.error);
+      console.log("안녕4", error.response.data.message);
     }
   };
 };

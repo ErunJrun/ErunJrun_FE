@@ -100,6 +100,8 @@ const EditContent = (props) => {
   const [checkedSpeed, setCheckedSpeed] = useState(props.speed);
   const [chattingRoom, setChattingRoom] = useState(props.chattingRoom);
 
+  console.log(checkedType);
+
   const contents = [
     {
       title: title,

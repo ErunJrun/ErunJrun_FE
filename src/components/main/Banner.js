@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import { history } from "../../redux/configureStore";
@@ -39,18 +39,36 @@ const Banner = () => {
               width="729px"
               height="154px"
             >
-              <div className="text">
-                <Text height="41px" bold size="32px" color="white" margin="0">
+              <Grid
+                display="flex"
+                flexDirection="column"
+                position="absolute"
+                top="80px"
+                left="795px"
+                width="339px"
+                height="auto"
+                margin="0 0 0 40px"
+              >
+                <Text
+                  textLeft
+                  height="auto"
+                  bold
+                  size="32px"
+                  color="white"
+                  margin="0"
+                >
                   {userName} 님,
                 </Text>
                 <Text
+                  textLeft
                   bold
                   height="41px"
                   size="20px"
                   color="#ECF1F1"
-                  margin="0 0 32px 0"
+                  margin="0 0 26px 0"
                 >
-                  당신에게 어울리는 이런저런 코스를 알려드려요!
+                  당신에게 어울리는{" "}
+                  <span style={{ color: "#68F99E" }}>이런저런</span> 코스 추천!
                 </Text>
                 <button
                   className="btn"
@@ -60,7 +78,7 @@ const Banner = () => {
                 >
                   추천 코스 보러가기
                 </button>
-              </div>
+              </Grid>
 
               <Weather />
             </Grid>
@@ -71,31 +89,59 @@ const Banner = () => {
             <Grid
               display="flex"
               justifyContent="space-between"
-              width="729px"
+              width="1200px"
               height="154px"
+              bg="blue"
+              _onClick={() => {
+                history.push("/coursefeed");
+              }}
             >
-              <div className="text">
-                <Text height="41px" bold size="32px" color="white" margin="0">
+              <Grid
+                display="flex"
+                flexDirection="column"
+                position="absolute"
+                top="80px"
+                left="420px"
+                width="339px"
+                height="auto"
+                margin="0 0 0 40px"
+              >
+                <Text
+                  textLeft
+                  height="auto"
+                  bold
+                  size="22px"
+                  color="#303030"
+                  margin="0 0 12px 0"
+                >
+                  검증된 러닝 코스 즐기기
+                </Text>
+                <Text
+                  textLeft
+                  height="auto"
+                  bold
+                  size="32px"
+                  color="#303030"
+                  margin="0"
+                  cursor="pointer"
+                >
                   {userName} 님,
                 </Text>
                 <Text
+                  textLeft
                   bold
                   height="41px"
-                  size="20px"
-                  color="#ECF1F1"
-                  margin="0 0 32px 0"
+                  size="32px"
+                  color="#303030"
+                  margin="0 0 26px 0"
+                  cursor="pointer"
                 >
-                  당신에게 어울리는 이런저런 코스를 알려드려요!
+                  야경과 함께 뛰어보세요!
                 </Text>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    history.push("/coursefeed");
-                  }}
-                >
-                  추천 코스 보러가기
-                </button>
-              </div>
+                <Text textLeft size="18px" color="#303030" margin="0 0 26px 0">
+                  #야경 #밤러닝 #강변
+                </Text>
+              </Grid>
 
               <Weather />
             </Grid>
@@ -115,25 +161,121 @@ const Banner = () => {
         pagination={{ clickable: true }}
       >
         <SwiperSlide>
-          <BannerImg src={blueBanner} alt="blueBanner" />
-          <div className="text">
-            <Text bold size="35px" color="white">
-              runner 님,
-            </Text>
-            <Text bold size="22px" color="#ECF1F1">
-              러닝하기 좋은 코스를 알려드려요!
-            </Text>
-          </div>
-          <button
-            className="btn"
-            type="button"
-            onClick={() => {
+          <img src={blueBanner} alt="blueBanner" />
+          <Grid
+            display="flex"
+            justifyContent="space-between"
+            width="729px"
+            height="154px"
+          >
+            <Grid
+              display="flex"
+              flexDirection="column"
+              position="absolute"
+              top="80px"
+              left="795px"
+              width="339px"
+              height="auto"
+              margin="0 0 0 40px"
+            >
+              <Text
+                textLeft
+                height="auto"
+                bold
+                size="32px"
+                color="white"
+                margin="0"
+              >
+                Runner 님,
+              </Text>
+              <Text
+                textLeft
+                bold
+                height="41px"
+                size="20px"
+                color="#ECF1F1"
+                margin="0 0 26px 0"
+              >
+                당신에게 어울리는{" "}
+                <span style={{ color: "#68F99E" }}>이런저런</span> 코스 추천!
+              </Text>
+
+              <button
+                className="btn"
+                type="button"
+                onClick={() => {
+                  history.push("/coursefeed");
+                }}
+              >
+                추천 코스 보러가기
+              </button>
+            </Grid>
+
+            <Weather />
+          </Grid>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <img src={yellowBanner} alt="yellowBanner" />
+          <Grid
+            display="flex"
+            justifyContent="space-between"
+            width="1200px"
+            height="154px"
+            bg="blue"
+            _onClick={() => {
               history.push("/coursefeed");
             }}
           >
-            추천 코스 보러가기
-          </button>
-          <Weather />
+            <Grid
+              display="flex"
+              flexDirection="column"
+              position="absolute"
+              top="80px"
+              left="420px"
+              width="339px"
+              height="auto"
+              margin="0 0 0 40px"
+            >
+              <Text
+                textLeft
+                height="auto"
+                bold
+                size="22px"
+                color="#303030"
+                margin="0 0 12px 0"
+              >
+                검증된 러닝 코스 즐기기
+              </Text>
+              <Text
+                textLeft
+                height="auto"
+                bold
+                size="32px"
+                color="#303030"
+                margin="0"
+                cursor="pointer"
+              >
+                Runner 님,
+              </Text>
+              <Text
+                textLeft
+                bold
+                height="41px"
+                size="32px"
+                color="#303030"
+                margin="0 0 26px 0"
+                cursor="pointer"
+              >
+                야경과 함께 뛰어보세요!
+              </Text>
+              <Text textLeft size="18px" color="#303030" margin="0 0 26px 0">
+                #야경 #밤러닝 #강변
+              </Text>
+            </Grid>
+
+            <Weather />
+          </Grid>
         </SwiperSlide>
       </Swiper>
     </Box>
