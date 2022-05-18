@@ -318,9 +318,8 @@ export const patchAttendDB = (groupId, userId) => {
         }
       );
       console.log(data);
-      history.push("/mypage");
       window.alert("출석체크가 완료되었습니다!");
-      history.push(`/mypage/${userId}`);
+      //history.push(`/mypage/${userId}`);
     } catch (error) {
       console.log(error);
     }
