@@ -13,7 +13,7 @@ const Main = () => {
   console.log(from);
 
   if (from) {
-    return history.replace(from);
+    return <Redirect to={{ pathname: from }}></Redirect>;
   }
 
   return (

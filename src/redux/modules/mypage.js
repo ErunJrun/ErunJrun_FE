@@ -304,6 +304,8 @@ export const patchAttendDB = (groupId, userId) => {
       console.log(groupId, userId);
       const formData = new FormData();
 
+      localStorage.removeItem("from");
+
       formData.append("attendance", userId);
 
       const { data } = await api.patch(
@@ -336,9 +338,11 @@ export const deleteUserDB = () => {
       localStorage.removeItem("userId");
       localStorage.removeItem("nickname");
       localStorage.removeItem("profileUrl");
+
       localStorage.removeItem("firstLogin");
       
       window.alert("회원탈퇴에 성공하였습니다");      
+
       history.push("/login");
       dispatch(deleteUser());
     } catch (error) {

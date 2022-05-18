@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
-import { patchAttendDB } from "../redux/modules/mypage";
+import { getAttendDB, patchAttendDB } from "../redux/modules/mypage";
 import styled from "styled-components";
 import { Redirect, useParams } from "react-router-dom";
 import { getCookie } from "../shared/Cookie";
@@ -16,7 +16,6 @@ const Check = () => {
   const groupId = params.groupId;
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
-  localStorage.removeItem("from");
 
   //페이지 정보
   const { pathname } = useLocation();
@@ -36,6 +35,10 @@ const Check = () => {
       setUserId(userId.filter((el) => el !== index));
     }
   };
+
+  useEffect(() => {
+    dispatch(getAttendDB(groupId));
+  }, []);
 
   if (token) {
     return (
@@ -115,7 +118,6 @@ const Check = () => {
   }
 
   if (!token) {
-    window.alert("로그인 후 이용해주세요");
     return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />;
   }
 };
