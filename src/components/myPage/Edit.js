@@ -25,7 +25,7 @@ const Edit = (props) => {
   const [likeDistance, setLikeDistance] = useState(props.profile.likeDistance);
   const [userLevel, setUserLevel] = useState(props.profile.userLevel);
   const [phone, setPhone] = useState(props.profile.phone);
-console.log(image);
+console.log(image, likeLocation);
   const [agreeSMS, setAgreeSMS] = useState(props.profile.agreeSMS);
   const [numberCK, setNumderCK] = useState("");
   const [textLength, setTextLength] = useState(0);
@@ -61,6 +61,11 @@ console.log(agreeSMS);
   ]);
 
   const [modal, setModal] = useState(false);
+
+  
+  const choiceRunType = (e) => {
+    setLikeLocation(e);
+  };
 
   const toggleModal = () => {
     setModal(!modal)
@@ -220,12 +225,15 @@ console.log(agreeSMS);
             {runRegion.map((e, idx) => {
               return (
                 <Fragment key={idx}>
-                  <Label checked={likeLocation}>
-                    <input onClick={() => {choiceRegion(idx+1); }}
+                  <Label >
+                    <input 
+                    onClick={() => {
+                      choiceRegion(idx+1); 
+                    }}
                       type="radio"
-                      name="runRegion"
-                      //checked={likeLocation}
+                      name="runRegion"                    
                       value={e}
+                      checked={runRegion[likeLocation-1] === e ? e : ""}
                     ></input>
                     <Text bold>{e}</Text>
                   </Label>
@@ -247,12 +255,12 @@ console.log(agreeSMS);
             {runDistance.map((e, idx) => {
               return (
                 <Fragment key={idx}>
-                  <LabelDistance checked={likeDistance}>
+                  <LabelDistance>
                     <input
                       onClick={() => {choiceDistance(idx); }}
                       type="radio"
                       name="runDistance"
-                      //checked={likeDistance}
+                      checked={runDistance[likeDistance] === e ? e : ""}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>
@@ -282,7 +290,7 @@ console.log(agreeSMS);
                       }}
                       type="radio"
                       name="runExp"
-                      //checked={userLevel}
+                      checked={ userLevel === e ? e : ""}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>

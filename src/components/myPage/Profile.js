@@ -84,7 +84,6 @@ const MiddleBox = styled.div`
 const SmallBox = styled.div`
   display: flex;
   align-items: center;
-
   width: 400px;
   height: 23px;
   gap: 20px;
@@ -116,7 +115,7 @@ const Introduce = styled.div`
   white-space: nowrap;
   transform: translate(12%);
   width: 540px;
-  //height: 60px;
+  height: 60px;
   border-radius: 6px;
   background-color:  #f0f0f0;
   font-size: 16.5px;
