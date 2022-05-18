@@ -115,14 +115,14 @@ const Introduce = styled.div`
   white-space: nowrap;
   transform: translate(12%);
   width: 540px;
-  height: 60px;
+  height: 70px;
   border-radius: 6px;
   background-color:  #f0f0f0;
   font-size: 16.5px;
   font-weight: 550;
   color: #000;
   text-align: center;
-  padding-top: 5px;
+  padding-top: -5px;
   margin: 50px 0 30px -500px;
   white-space: normal;
 `;
@@ -133,7 +133,7 @@ const Triangle = styled.div`
   border-style: solid;
   border-width: 1rem;
   border-color: transparent #f0f0f0 transparent transparent;
-  transform: translate(-95%, 40%);
+  transform: translate(-95%, 50%);
 `;
 
 const Information = styled.div`

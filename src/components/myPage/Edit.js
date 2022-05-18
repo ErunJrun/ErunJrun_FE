@@ -65,8 +65,11 @@ const Edit = (props) => {
     setModal(!modal)
   };
 
-  const changeName = (e) => {
-    setNickname(e.target.value);
+  const changeName = (e) => { 
+    if(e.target.value.length >= 8) {
+      window.alert("8자 이상 작성할 수 없습니다.");
+    }
+    setNickname(e.target.value)
   };
 
   const changeImage = (event) => {
@@ -85,7 +88,10 @@ const Edit = (props) => {
   };
 
   const changeContent = (e) => {
-    setBio(e.target.value);
+    if(e.target.value.length >= 50) {
+      window.alert("50자 이상 작성할 수 없습니다.");
+    }
+    setBio(e.target.value)
   };
 
   const Number = (e) => {
@@ -164,7 +170,10 @@ const Edit = (props) => {
         </Grid>
 
         <Text bold size="16px">닉네임</Text>
-            <Input value={nickname} onChange={changeName} type="text" 
+            <Input 
+            value={nickname} 
+            onChange={changeName} 
+            type="text" 
             placeholder="닉네임을 입력해주세요!"
             maxLength={8} />
             <Text margin="0" size="14px">
