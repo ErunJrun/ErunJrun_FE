@@ -51,77 +51,82 @@ const initialState = {
 
 // 미들웨어
 export const kakaoLogin = (authorization_code) => {
-  return (dispatch, getState, { history }) => {
-    api
-      .get(`user/kakao/callback?code=${authorization_code}`)
-      .then((res) => {
-        console.log(res.data);
-        const userId = res.data.userId;
-        const nickname = res.data.nickname;
-        const profileUrl = res.data.profileUrl;
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.get(
+        `user/kakao/callback?code=${authorization_code}`
+      );
+      console.log(data);
+      const userId = data.userId;
+      const nickname = data.nickname;
+      const profileUrl = data.profileUrl;
+      const firstLogin = data.firstLogin;
 
-        setCookie("accessToken", res.data.token, 168);
-        setCookie("refreshToken", res.data.refreshToken, 168);
+      setCookie("accessToken", data.token, 168);
+      setCookie("refreshToken", data.refreshToken, 168);
 
-        localStorage.setItem("userId", userId);
-        localStorage.setItem("nickname", nickname);
-        localStorage.setItem("profileUrl", profileUrl);
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("nickname", nickname);
+      localStorage.setItem("profileUrl", profileUrl);
+      localStorage.setItem("firstLogin", firstLogin);
 
-        dispatch(
-          logIn({
-            nickname: nickname,
-            userId: userId,
-            profileUrl: profileUrl,
-          })
-        );
-        if (!res.data.firstLogin) {
-          history.replace("/");
-        } else {
-          history.replace("/loginInfo");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      dispatch(
+        logIn({
+          nickname: nickname,
+          userId: userId,
+          profileUrl: profileUrl,
+          firstLogin: firstLogin,
+        })
+      );
+
+      if (data.firstLogin) {
+        history.replace("/loginInfo");
+      } else {
+        history.replace("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
 export const naverLoginDB = (code, state) => {
-  return (dispatch, getState, { history }) => {
-    console.log(code, state);
-    api
-      .get(`user/naver/callback?code=${code}&state=${state}`)
-      .then((res) => {
-        console.log(res.data);
-        const userId = res.data.userId;
-        const nickname = res.data.nickname;
-        const profileUrl = res.data.profileUrl;
-        const firstLogin = res.data.firstLogin;
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.get(
+        `user/naver/callback?code=${code}&state=${state}`
+      );
+      console.log(data);
+      const userId = data.userId;
+      const nickname = data.nickname;
+      const profileUrl = data.profileUrl;
+      const firstLogin = data.firstLogin;
 
-        setCookie("accessToken", res.data.token, 168);
-        setCookie("refreshToken", res.data.refreshToken, 168);
+      setCookie("accessToken", data.token, 168);
+      setCookie("refreshToken", data.refreshToken, 168);
 
-        localStorage.setItem("userId", userId);
-        localStorage.setItem("nickname", nickname);
-        localStorage.setItem("profileUrl", profileUrl);
-        localStorage.setItem("firstLogin", firstLogin);
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("nickname", nickname);
+      localStorage.setItem("profileUrl", profileUrl);
+      localStorage.setItem("firstLogin", firstLogin);
 
-        dispatch(
-          logIn({
-            nickname: nickname,
-            userId: userId,
-            profileUrl: profileUrl,
-          })
-        );
-        if (!res.data.firstLogin) {
-          history.replace("/");
-        } else {
-          history.replace("/loginInfo");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      dispatch(
+        logIn({
+          nickname: nickname,
+          userId: userId,
+          profileUrl: profileUrl,
+          firstLogin: firstLogin,
+        })
+      );
+
+      if (data.firstLogin) {
+        history.replace("/loginInfo");
+      } else {
+        history.replace("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -150,11 +155,22 @@ export const loginCheckDB = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data) {
+          const userId = res.data.userId;
+          const nickname = res.data.nickname;
+          const profileUrl = res.data.profileUrl;
+          const firstLogin = res.data.firstLogin;
+
+          localStorage.setItem("userId", userId);
+          localStorage.setItem("nickname", nickname);
+          localStorage.setItem("profileUrl", profileUrl);
+          localStorage.setItem("firstLogin", firstLogin);
+
           dispatch(
             logIn({
-              nickname: res.data.nickname,
-              userId: res.data.userId,
-              profileUrl: res.data.profileUrl,
+              nickname: nickname,
+              userId: userId,
+              profileUrl: profileUrl,
+              firstLogin: firstLogin,
             })
           );
         } else {

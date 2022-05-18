@@ -19,7 +19,7 @@ const LoginInfo = () => {
   const nickname = localStorage.getItem("nickname");
 
   useEffect(() => {
-    if (firstLogin) {
+    if (!firstLogin) {
       window.alert("비정상적인 접근입니다.");
       history.replace("/login");
     }

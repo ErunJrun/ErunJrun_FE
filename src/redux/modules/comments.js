@@ -218,6 +218,7 @@ export default handleActions(
     [IS_EDIT]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
+
         const isEditList = state.list.map((e, i) => {
           if (action.payload === i) {
             if (e.is_edit === false) {
