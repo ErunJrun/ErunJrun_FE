@@ -33,21 +33,9 @@ const Check = () => {
     if (e.target.checked) {
       setUserId([...userId, index]);
     } else {
-      // 체크 해제
       setUserId(userId.filter((el) => el !== index));
     }
   };
-  // useEffect(() => {
-  //   if(isLogin || token) history.push("/");
-  // }, [])
-  // useEffect(() => {
-  //   if (!isLogin) {
-  //     window.alert("로그인 후 이용해 주세요");
-  //     history.push("/login");
-  //   }
-  // }, []);
-
-  // if (check_list.length === 0) return <></>;
 
   if (token) {
     return (
