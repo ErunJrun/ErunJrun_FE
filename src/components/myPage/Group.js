@@ -25,7 +25,7 @@ const Group = () => {
     <>
     {running.data.length === 0 ? 
       <Box>
-        참여한 그룹러닝이 없습니다
+        참여완료한 그룹러닝이 없습니다
       </Box>
       : 
       <Grid display="flex">
@@ -87,7 +87,7 @@ const Group = () => {
       )
       :
       <Box>
-        참여한 그룹러닝이 없습니다
+        참여완료한 그룹러닝이 없습니다
       </Box>
       }
       )}
