@@ -233,12 +233,6 @@ export default handleActions(
         draft.user.userId = null;
         draft.user.profileUrl = null;
         draft.isLogin = false;
-        deleteCookie("accessToken");
-        deleteCookie("refreshToken");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("nickname");
-        localStorage.removeItem("profileUrl");
-        localStorage.removeItem("firstLogin");
       }),
 
     [GET_ALARM]: (state, action) =>

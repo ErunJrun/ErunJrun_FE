@@ -378,7 +378,7 @@ const AlarmIcon = styled.img`
 
 const Badge = styled.div`
   position: absolute;
-  right: 21%;
+  right: 4.9%;
   top: 18px;
   border-radius: 100%;
   width: 20px;

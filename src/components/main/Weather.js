@@ -50,8 +50,8 @@ const Weather = () => {
 
   return (
     <Box>
-      {/* <div>날씨</div>
-      <div className="city">{cityName}</div>
+      <div style={{ height: "220px" }}>날씨</div>
+      {/* <div className="city">{cityName}</div>
       <div className="weather-box">
         <div className="weather-icon">
           <img src={iconURL} />

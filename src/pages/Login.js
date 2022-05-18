@@ -28,8 +28,8 @@ const Login = ({ location }) => {
   }
 
   useEffect(() => {
-    if (isLogin || token) history.push("/");
-  }, []);
+    if (token) history.push("/");
+  }, [token]);
 
   // const from = location.state.from;
 
