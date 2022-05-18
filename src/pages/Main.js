@@ -9,7 +9,7 @@ import { getCookie } from "../shared/Cookie";
 const Main = () => {
   const dispatch = useDispatch();
 
-  const from = getCookie("from");
+  const from = localStorage.getItem("from");
   console.log(from);
 
   if (from) {

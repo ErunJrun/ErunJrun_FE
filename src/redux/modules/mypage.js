@@ -304,7 +304,7 @@ export const patchAttendDB = (groupId, userId) => {
       console.log(groupId, userId);
       const formData = new FormData();
 
-      deleteCookie("from");
+      localStorage.removeItem("from");
 
       formData.append("attendance", userId);
 
