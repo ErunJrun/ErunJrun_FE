@@ -60,7 +60,7 @@ export const kakaoLogin = (authorization_code) => {
         const nickname = res.data.nickname;
         const profileUrl = res.data.profileUrl;
 
-        setCookie("accessToken", res.data.token, 1);
+        setCookie("accessToken", res.data.token, 168);
         setCookie("refreshToken", res.data.refreshToken, 168);
 
         localStorage.setItem("userId", userId);
@@ -96,13 +96,15 @@ export const naverLoginDB = (code, state) => {
         const userId = res.data.userId;
         const nickname = res.data.nickname;
         const profileUrl = res.data.profileUrl;
+        const firstLogin = res.data.firstLogin;
 
-        setCookie("accessToken", res.data.token, 1);
+        setCookie("accessToken", res.data.token, 168);
         setCookie("refreshToken", res.data.refreshToken, 168);
 
         localStorage.setItem("userId", userId);
         localStorage.setItem("nickname", nickname);
         localStorage.setItem("profileUrl", profileUrl);
+        localStorage.setItem("firstLogin", firstLogin);
 
         dispatch(
           logIn({
@@ -161,6 +163,7 @@ export const loginCheckDB = () => {
           localStorage.removeItem("userId");
           localStorage.removeItem("nickname");
           localStorage.removeItem("profileUrl");
+          localStorage.removeItem("firstLogin");
           dispatch(logOut());
         }
       })
@@ -180,6 +183,7 @@ export const logoutDB = () => {
       localStorage.removeItem("userId");
       localStorage.removeItem("nickname");
       localStorage.removeItem("profileUrl");
+      localStorage.removeItem("firstLogin");
 
       dispatch(logOut());
       history.push("/login");
@@ -229,6 +233,12 @@ export default handleActions(
         draft.user.userId = null;
         draft.user.profileUrl = null;
         draft.isLogin = false;
+        deleteCookie("accessToken");
+        deleteCookie("refreshToken");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("nickname");
+        localStorage.removeItem("profileUrl");
+        localStorage.removeItem("firstLogin");
       }),
 
     [GET_ALARM]: (state, action) =>

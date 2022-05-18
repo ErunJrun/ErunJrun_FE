@@ -22,7 +22,7 @@ const GroupCard = (props) => {
 
   return (
     <>
-      <Grid maxWidth="384px" width="100%" margin="0 8px 80px 8px">
+      <Grid width="384px" margin="0 8px 80px 8px">
         <Grid
           _onClick={() => {
             history.push(`/groupdetail/${props.groupId}`);
@@ -92,7 +92,7 @@ const GroupCard = (props) => {
               margin="0 0 10px 0"
             >
               <Text bold size="14px" margin="0">
-                완료된 그룹러닝
+                완료된 그룹 러닝
               </Text>
             </Grid>
           ) : (

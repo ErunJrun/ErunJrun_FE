@@ -7,6 +7,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useSelector } from "react-redux";
 
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const ImageSlide = () => {
   const detailGroup = useSelector((state) => state.feed.detail);
 

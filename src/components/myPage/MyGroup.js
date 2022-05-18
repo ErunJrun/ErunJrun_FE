@@ -18,70 +18,73 @@ const MyGroup = () => {
 
   return (
     <>
-    {my.data.length === 0 ? 
-    <Box>
-      진행한 그룹러닝이 없습니다
-    </Box>
-    :
-    <Grid display="flex">
-      {my.data?.map((data, index) => (
-        <Grid key={index} maxWidth="384px" width="100%" margin="0 8px 80px 8px">
-          <Grid
-            _onClick={() => {
-              history.push(`/groupdetail/${data.groupId}`);
-            }}
-            width="100%"
-            display="flex"
-            flexDirection="column"
-            cursor="pointer"
-          >
-            <Image
-              shape="imgBtn"
-              width="384px"
-              height="288px"
-              src={data.thumbnailUrl}
-              borderRadius="3px"
-            ></Image>
-
-            <Grid>
-              <Text cursor="pointer" size="18px" bold margin="0">
-                {data.title}
-              </Text>
-              <Text cursor="pointer" size="16px" margin="10px 0 0 0">
-                {data.date} (소요 시간 : {data.totalTime})
-              </Text>
-            </Grid>
-
-            <Grid cursor="pointer" display="flex">
-              <Tag>{data.location}</Tag>
-              <Tag>{data.distance}km</Tag>
-              <Tag>{data.thema}</Tag>
-            </Grid>
-            <Hr></Hr>
+      {my.data.length === 0 ? (
+        <Box>진행한 그룹 러닝이 없습니다</Box>
+      ) : (
+        <Grid display="flex">
+          {my.data?.map((data, index) => (
             <Grid
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              margin="0 0 10px 0"
-            ></Grid>
-          </Grid>
-
-          {data.attendance ? 
-            (<ApplyBtnFalse>체크완료</ApplyBtnFalse>)
-           : 
-            (<ApplyBtnTrue
-              onClick={() => {
-                history.push(`/check/${data.groupId}`);
-                dispatch(getAttendDB(data.groupId, data.userId, hostId));
-              }}
+              key={index}
+              maxWidth="384px"
+              width="100%"
+              margin="0 8px 80px 8px"
             >
-              출석체크하기
-            </ApplyBtnTrue>)
-          }
+              <Grid
+                _onClick={() => {
+                  history.push(`/groupdetail/${data.groupId}`);
+                }}
+                width="100%"
+                display="flex"
+                flexDirection="column"
+                cursor="pointer"
+              >
+                <Image
+                  shape="imgBtn"
+                  width="384px"
+                  height="288px"
+                  src={data.thumbnailUrl}
+                  borderRadius="3px"
+                ></Image>
+
+                <Grid>
+                  <Text cursor="pointer" size="18px" bold margin="0">
+                    {data.title}
+                  </Text>
+                  <Text cursor="pointer" size="16px" margin="10px 0 0 0">
+                    {data.date} (소요 시간 : {data.totalTime})
+                  </Text>
+                </Grid>
+
+                <Grid cursor="pointer" display="flex">
+                  <Tag>{data.location}</Tag>
+                  <Tag>{data.distance}km</Tag>
+                  <Tag>{data.thema}</Tag>
+                </Grid>
+                <Hr></Hr>
+                <Grid
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  margin="0 0 10px 0"
+                ></Grid>
+              </Grid>
+
+              {data.attendance ? (
+                <ApplyBtnFalse>체크완료</ApplyBtnFalse>
+              ) : (
+                <ApplyBtnTrue
+                  onClick={() => {
+                    history.push(`/check/${data.groupId}`);
+                    dispatch(getAttendDB(data.groupId, data.userId, hostId));
+                  }}
+                >
+                  출석체크하기
+                </ApplyBtnTrue>
+              )}
+            </Grid>
+          ))}
         </Grid>
-      ))}
-    </Grid>
-    } 
+      )}
     </>
   );
 };
@@ -157,7 +160,7 @@ const Box = styled.div`
   background-color: #fff;
   padding: 250px 11px;
   text-align: center;
-  border:none;
+  border: none;
 `;
 
 export default MyGroup;

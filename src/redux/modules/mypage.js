@@ -110,7 +110,7 @@ export const getProfileDB = (userId) => {
   };
 };
 
-//참여완료 그룹러닝
+//참여완료 그룹 러닝
 export const getRunningDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
@@ -125,7 +125,7 @@ export const getRunningDB = (userId) => {
   };
 };
 
-//내가만든 그룹러닝
+//내가만든 그룹 러닝
 export const getMyRunningDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
@@ -273,7 +273,7 @@ export const evaluationDB = (groupId, hostId, point) => {
           },
         }
       );
-      console.log(data); 
+      console.log(data);
       window.alert("호스트평가가 완료되었습니다!");
       history.push(`/mypage/${userId}`);
     } catch (error) {

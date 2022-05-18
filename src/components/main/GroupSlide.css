@@ -1,0 +1,12 @@
+#GroupCardSlide {
+  width: 1300px;
+  background-color: red;
+}
+
+#GroupCardSlide > .swiper-button-prev {
+  color: blue;
+}
+
+#GroupCardSlide > .swiper-button-next {
+  color: blue;
+}

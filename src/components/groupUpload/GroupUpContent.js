@@ -255,7 +255,7 @@ const GroupContent = (props) => {
                 margin="0 8px 0 14px"
               />
               <Text width="auto" color="#FF2D55" bold margin="0">
-                스탠바이로 지정한 시간의 4시간 전, 그룹러닝 모집이 마감됩니다.
+                스탠바이로 지정한 시간의 4시간 전, 그룹 러닝 모집이 마감됩니다.
               </Text>
             </Grid>
           </Grid>

@@ -25,7 +25,7 @@ const AlarmStart = (props) => {
               margin="0 0 10px 0"
             >
               <Text margin="0 8px 0 0" size="14px" display="inline">
-                그룹러닝
+                그룹 러닝
               </Text>
               <Text margin="0" size="12px" color="#828282" display="inline">
                 {props?.createdAt}
@@ -48,7 +48,7 @@ const AlarmStart = (props) => {
                 >
                   30분 뒤{" "}
                   <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
-                  그룹러닝이 시작합니다. 출석체크를 해주세요.
+                  그룹 러닝이 시작합니다. 출석체크를 해주세요.
                 </Text>
               ) : (
                 <Text
@@ -88,7 +88,7 @@ const AlarmStart = (props) => {
               margin="0 0 10px 0"
             >
               <Text margin="0 8px 0 0" size="14px" display="inline">
-                그룹러닝
+                그룹 러닝
               </Text>
               <Text margin="0" size="12px" color="#828282" display="inline">
                 {props?.createdAt}
@@ -150,7 +150,7 @@ const AlarmStart = (props) => {
               margin="0 0 10px 0"
             >
               <Text margin="0 8px 0 0" size="14px" display="inline">
-                그룹러닝
+                그룹 러닝
               </Text>
               <Text margin="0" size="12px" color="#828282" display="inline">
                 {props?.createdAt}

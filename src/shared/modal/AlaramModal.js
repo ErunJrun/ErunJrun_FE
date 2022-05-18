@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // 라이브러리, 패키지
@@ -18,6 +18,13 @@ const AlarmModal = ({ onClose }) => {
   const alarmList = useSelector((state) => state.user.alarm);
   console.log(alarmList);
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
+
   return (
     <>
       <ModalPortal>
@@ -32,7 +39,9 @@ const AlarmModal = ({ onClose }) => {
               e.stopPropagation();
             }}
           >
-            <Text margin="0 0 24px 24px">알림</Text>
+            <Text size="18px" bold margin="0 0 24px 0">
+              알림
+            </Text>
             {alarmList?.data?.length === {}
               ? null
               : alarmList?.data?.map((alarm, idx) => {
@@ -136,8 +145,8 @@ const Background = styled.div`
 `;
 
 const Content = styled.div`
+  transition: 4s;
   display: flex;
-
   flex-direction: column;
   align-items: flex-start;
   box-sizing: border-box;
@@ -150,8 +159,8 @@ const Content = styled.div`
   border-radius: 15px;
   position: absolute;
   top: 81px;
-  left: 1080px;
-  padding: 24px 10px;
+  left: 1100px;
+  padding: 24px;
   overflow: auto;
   overflow-x: hidden;
   &::-webkit-scrollbar {
@@ -164,6 +173,18 @@ const Content = styled.div`
   }
   &::-webkit-scrollbar-track {
     background-color: transition;
+  }
+  animation: scale-up-tr 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+
+  @keyframes scale-up-tr {
+    0% {
+      transform: scale(0.5);
+      transform-origin: 100% 0%;
+    }
+    100% {
+      transform: scale(1);
+      transform-origin: 100% 0%;
+    }
   }
 `;
 

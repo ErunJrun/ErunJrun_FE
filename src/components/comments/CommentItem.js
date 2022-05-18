@@ -14,6 +14,7 @@ import styled from "styled-components";
 import RecommentItem from "../recomment/RecommentItem";
 import RecommentWrite from "../recomment/RecommentWrite";
 import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
+import { history } from "../../redux/configureStore";
 
 const CommentItem = (props) => {
   const dispatch = useDispatch();
@@ -55,6 +56,10 @@ const CommentItem = (props) => {
             alignItems="center"
             width="auto"
             margin="0 0 4px 0"
+            _onClick={() => {
+              history.push(`/mypage/${props?.user.userId}`);
+            }}
+            cursor="pointer"
           >
             <Image
               imageType="circle"
@@ -182,13 +187,13 @@ const CommentItem = (props) => {
             if (e === null) {
               return;
             }
-            return (
+            return props.commentId === e.commentId ? (
               <Fragment key={idx}>
                 <Grid margin="0 0 12px 76px">
                   <RecommentItem commentId={props?.commentId} {...e} />
                 </Grid>
               </Fragment>
-            );
+            ) : null;
           })
         : null}
 

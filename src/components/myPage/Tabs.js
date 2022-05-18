@@ -66,8 +66,8 @@ export default function BasicTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="그룹러닝" {...a11yProps(0)} />
-          <Tab label="코스추천" {...a11yProps(1)} />
+          <Tab label="그룹 러닝" {...a11yProps(0)} />
+          <Tab label="추천 코스" {...a11yProps(1)} />
           <Tab label="뱃지" {...a11yProps(2)} />
         </Tabs>
       </Box>
@@ -119,6 +119,6 @@ const Btn = styled.button`
   text-align: center;
   :hover {
     font-weight: 900;
-    background-color: #00F6AC;
+    background-color: #00f6ac;
   }
 `;

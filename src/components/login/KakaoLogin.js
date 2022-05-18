@@ -2,8 +2,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { kakaoLogin } from "../../redux/modules/user";
 
-const KakaoLogin = () => {
+const KakaoLogin = ({ location }) => {
   const dispatch = useDispatch();
+
+  console.log(location);
 
   // 인가코드
   let params = new URLSearchParams(document.location.search);

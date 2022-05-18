@@ -64,6 +64,7 @@ const Banner = () => {
               <Weather />
             </Grid>
           </SwiperSlide>
+
           <SwiperSlide>
             <img src={yellowBanner} alt="yellowBanner" />
             <Grid

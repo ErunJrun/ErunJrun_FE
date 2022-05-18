@@ -76,7 +76,7 @@ const Logo = styled.div`
 const Btn = styled.button`
   cursor: pointer;
   border: none;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-size: 0.8rem;
   color: #ffffff;
   background-color: transparent;

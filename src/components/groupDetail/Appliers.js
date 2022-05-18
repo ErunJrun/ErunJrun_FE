@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { Grid, Text, Image } from "../../elements";
 import defaultProfile from "../../assets/defaultProfile.png";
+import { history } from "../../redux/configureStore";
 
 const Appliers = () => {
   const detailGroup = useSelector((state) => state.feed.detail);
@@ -27,12 +28,16 @@ const Appliers = () => {
             return (
               <Fragment key={idx}>
                 <Grid
+                  cursor="pointer"
                   width="auto"
                   display="flex"
                   flexDirection="column"
                   alignItems="center"
                   alignContent="flex-start"
                   margin="0 13px 0 0"
+                  _onClick={() => {
+                    history.push(`/mypage/${detailGroup?.userId}`);
+                  }}
                 >
                   <Image
                     imageType="circle"

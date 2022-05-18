@@ -91,7 +91,7 @@ const GroupFeed = () => {
             alignItems="center"
           >
             <Text margin="0 10px 0 0" bold size="20px">
-              그룹러닝
+              그룹 러닝
             </Text>
             <Text size="14px">함께 뛰면 즐거움이 두배!</Text>
           </Grid>

@@ -28,8 +28,8 @@ const RecommentItem = (props) => {
   //   dispatch(_getReCommentFX(props.commentId));
   // }, []);
 
-  const editToggle = () => {
-    dispatch(_isReEdit(recommentList.recommentId));
+  const editToggle = (recommentId) => {
+    dispatch(_isReEdit(recommentId));
   };
 
   const editReCommment = (recommentId) => {
@@ -56,7 +56,7 @@ const RecommentItem = (props) => {
             ></Image>
 
             <Grid display="flex" flexDirection="column" width="auto">
-              {props?.isEdit ? (
+              {props?.isRecomm ? (
                 <>
                   <EditInput
                     onChange={(e) => setNewComm(e.target.value)}
@@ -76,7 +76,7 @@ const RecommentItem = (props) => {
             </Grid>
           </Grid>
 
-          {props?.isEdit ? (
+          {props?.isRecomm ? (
             <>
               <Grid margin="0 0 0 48px" display="flex" alignItems="center">
                 <Text
