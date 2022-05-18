@@ -40,7 +40,7 @@ const GroupCard = (props) => {
             borderRadius="3px"
           ></Image>
 
-          {props.applyEndTime === "0 시간" ? (
+          {props.applyEndTime === "0 일" ? (
             <ApplyFinish>
               <Grid display="flex" alignItems="center" margin="0" width="auto">
                 <Text color="" bold size="14px" margin="0 5px 0 0">
@@ -84,7 +84,7 @@ const GroupCard = (props) => {
           </Grid>
           <Hr></Hr>
 
-          {props.applyEndTime === "0 시간" ? (
+          {props.applyEndTime === "0 일" ? (
             <Grid
               display="flex"
               justifyContent="center"
@@ -108,7 +108,7 @@ const GroupCard = (props) => {
             </Grid>
           )}
         </Grid>
-        {props.applyEndTime === "0 시간" ? (
+        {props.applyEndTime === "0 일" ? (
           <ApplyBtnFalse
             style={{ background: "black", color: "white" }}
             onClick={() => {
