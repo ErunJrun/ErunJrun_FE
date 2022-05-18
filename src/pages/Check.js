@@ -40,12 +40,12 @@ const Check = () => {
   // useEffect(() => {
   //   if(isLogin || token) history.push("/");
   // }, [])
-  useEffect(() => {
-    if (!isLogin) {
-      window.alert("로그인 후 이용해 주세요");
-      history.push("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!isLogin) {
+  //     window.alert("로그인 후 이용해 주세요");
+  //     history.push("/login");
+  //   }
+  // }, []);
 
   // if (check_list.length === 0) return <></>;
 
