@@ -36,10 +36,13 @@ api.interceptors.response.use(
     const originalRequest = config;
     const dispatch = useDispatch();
 
+    console.log(error);
+    console.log(response);
+
     if (response.data.token) {
       // access token이 재발급 된 상태,
       console.log(response);
-      setCookie("accessToken", response.data.token, 1);
+      setCookie("accessToken", response.data.token, 168);
       axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
       originalRequest.headers.Authorization = `Bearer ${response.data.token}`;
 
@@ -47,9 +50,13 @@ api.interceptors.response.use(
     }
 
     if (response.data.success === false) {
+      if (
+        response.data.message === "token에 문제가 있음(기한만료가 아닌 에러)"
+      ) {
+        dispatch(logoutDB());
+      }
       window.alert(response.data.message);
       console.log(response.data.message);
-      dispatch(logoutDB());
     }
 
     // else {

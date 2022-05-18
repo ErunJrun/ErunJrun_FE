@@ -1,27 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ModalPortal from "../shared/modal/ModalPortal";
 import ProfileModal from "../shared/modal/ProfileModal";
+import { getProfileDB } from "../redux/modules/mypage";
 
 const Modal = () => {
+  const dispatch = useDispatch();
   const profile = localStorage.getItem("profileUrl");
+  const userId = localStorage.getItem("userId");
+  const profile_list = useSelector((state) => state.mypage.list);
+
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
   };
 
+  useEffect(() => {
+    if (userId) {
+      dispatch(getProfileDB(userId));
+    }
+  }, []);
+
   return (
     <>
       <Wrap onClick={toggleModal}>
-        <ProfileImage src={profile} />
+        <ProfileImage src={profile_list?.userInfo?.profileUrl} />
+        <ModalPortal>
+          {modal ? <ProfileModal onClose={toggleModal} /> : null}
+        </ModalPortal>
       </Wrap>
-
-      <ModalPortal>
-        {modal ? <ProfileModal onClose={toggleModal} /> : null}
-      </ModalPortal>
     </>
   );
 };
@@ -31,7 +41,7 @@ const Wrap = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-
+  position: relative;
   padding: 0;
   margin: 0;
   display: block;

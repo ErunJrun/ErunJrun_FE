@@ -8,6 +8,14 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import courseFeedBanner from "../../assets/courseFeedBanner.png";
 import { getMainDB } from "../../redux/modules/feed";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper";
+
+import "./GroupSlide.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const MGroupRunning = () => {
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.feed.list);
@@ -32,7 +40,7 @@ const MGroupRunning = () => {
         >
           <Grid display="flex" alignItems="flex-end" width="auto">
             <Text bold size="26px" margin="0 16px 0 0">
-              그룹러닝
+              그룹 러닝
             </Text>
             <Text lineHeight="30px" size="16px" margin="0">
               함께 뛰면 즐거움이 두배!
@@ -49,11 +57,9 @@ const MGroupRunning = () => {
           </Btn>
         </Grid>
 
-        <Grid padding="0%" margin="auto" display="flex">
-          {postList?.map((item, idx) => {
-            return <GroupCard key={idx} {...item} />;
-          })}
-        </Grid>
+        {postList?.map((item, idx) => {
+          return <GroupCard key={idx} {...item} />;
+        })}
       </Grid>
 
       <Grid
@@ -70,7 +76,7 @@ const MGroupRunning = () => {
         >
           <Grid display="flex" alignItems="flex-end" width="auto">
             <Text bold size="26px" margin="0 16px 0 0">
-              코스추천
+              추천 코스
             </Text>
             <Text lineHeight="30px" size="16px" margin="0">
               나만의 코스를 추천해주세요!

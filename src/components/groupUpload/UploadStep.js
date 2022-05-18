@@ -17,7 +17,7 @@ const UploadStep = (props) => {
       label: "Step 2. 이미지 업로드",
     },
     {
-      label: "Step 3. 그룹러닝 정보 입력",
+      label: "Step 3. 그룹 러닝 정보 입력",
     },
   ];
 

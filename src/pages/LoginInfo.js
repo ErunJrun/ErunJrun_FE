@@ -15,12 +15,13 @@ const LoginInfo = () => {
   const [checkedDistance, setCheckedDistance] = useState("");
   const [checkedExp, setCheckedExp] = useState("");
 
+  const firstLogin = localStorage.getItem("firstLogin");
   const nickname = localStorage.getItem("nickname");
 
   useEffect(() => {
-    if (!nickname) {
+    if (firstLogin) {
       window.alert("비정상적인 접근입니다.");
-      history.push("/login");
+      history.replace("/login");
     }
   }, []);
 
@@ -76,9 +77,9 @@ const LoginInfo = () => {
 
   const addLoginInfo = () => {
     if (
-      checkedRegion === null ||
-      checkedDistance === null ||
-      checkedExp === null
+      checkedRegion === "1" ||
+      checkedDistance === "" ||
+      runExp[checkedExp] === undefined
     ) {
       return window.alert("미선택 된 항목이 있습니다.");
     } else {
@@ -88,7 +89,7 @@ const LoginInfo = () => {
 
   console.log(checkedRegion, checkedDistance, checkedExp, runExp[checkedExp]);
 
-  if (nickname) {
+  if (firstLogin) {
     return (
       <>
         <Grid maxWidth="800px" width="100%" margin="72px auto ">

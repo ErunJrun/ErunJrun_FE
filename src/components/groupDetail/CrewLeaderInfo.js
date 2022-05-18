@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Grid, Image, Text } from "../../elements";
 import styled from "styled-components";
 
+import { history } from "../../redux/configureStore";
+
 import LevelBox from "./LevelBox";
 
 import chatIcon from "../../assets/groupDetail/chat.png";
@@ -14,10 +16,12 @@ import shoesMintIcon from "../../assets/groupDetail/shoesMint.png";
 
 const CrewLeaderInfo = (props) => {
   const detailGroup = useSelector((state) => state.feed.detail);
+  console.log(detailGroup);
 
   return (
     <>
       <Grid
+        cursor="pointer"
         maxWidth="402px"
         width="100%"
         border="1px solid #EFEFEF"
@@ -30,6 +34,10 @@ const CrewLeaderInfo = (props) => {
         alignItems="center"
         boxShadow="0px 0px 6px rgba(141, 141, 141, 0.25)"
         position="relative"
+        _onClick={() => {
+          history.push(`/mypage/${detailGroup?.userId}`);
+        }}
+        hover="border:2px solid #68F99E;"
       >
         <CrewLeaderName src={crewLeaderName} />
         <Grid justifyContent="center" display="flex" width="auto">

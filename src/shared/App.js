@@ -48,9 +48,9 @@ function App() {
 
   return (
     <React.Fragment>
-      <Header></Header>
       <Wrapper>
         <ConnectedRouter history={history}>
+          <Header></Header>
           <ScrollToTop />
           <Route path="/" exact component={Main} />
           <Route path="/login" exact component={Login} />

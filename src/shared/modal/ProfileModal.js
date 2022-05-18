@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 // 라이브러리, 패키지
@@ -15,6 +15,13 @@ const ProfileModal = ({ onClose }) => {
   console.log(userId);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 
   return (
     <>
@@ -100,8 +107,21 @@ const Content = styled.div`
   background-color: #fff;
   position: absolute;
   top: 81px;
-  left: 1380px;
+  right: 360px;
   padding: 16px 0;
+
+  animation: scale-up-tr 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+
+  @keyframes scale-up-tr {
+    0% {
+      transform: scale(0.5);
+      transform-origin: 100% 0%;
+    }
+    100% {
+      transform: scale(1);
+      transform-origin: 100% 0%;
+    }
+  }
 `;
 
 const Hr = styled.hr`

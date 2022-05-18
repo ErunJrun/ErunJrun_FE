@@ -53,7 +53,7 @@ const CommImg = styled.img`
   margin: 0 14px 0 24px;
 `;
 
-const CommTextarea = styled.textarea`
+const CommTextarea = styled.input`
   margin: 0;
   position: relative;
   width: 75%;

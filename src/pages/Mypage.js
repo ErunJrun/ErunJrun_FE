@@ -20,27 +20,23 @@ const Mypage = () => {
   console.log(userId);
   const MyId = localStorage.getItem("userId");
 
- const isLogin = useSelector((state) => state.user.isLogin);
- const token = getCookie("accessToken");
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const token = getCookie("accessToken");
 
-   useEffect(() => {
-     dispatch(getProfileDB(userId));
-   }, []);
+  useEffect(() => {
+    dispatch(getProfileDB(userId));
+  }, []);
 
-   // useEffect(() => {
-//     if(isLogin || token) history.push("/");
-//   }, [])
+  // useEffect(() => {
+  //     if(isLogin || token) history.push("/");
+  //   }, [])
 
   return (
     <Grid width="1200px" margin="auto">
       <Profile userId={userId} />
-      {MyId === userId ? 
-        <Schedule userId={userId} />
-        :
-        null}
-      
-      <Tabs />
+      {MyId === userId ? <Schedule userId={userId} /> : null}
 
+      <Tabs />
     </Grid>
   );
 };

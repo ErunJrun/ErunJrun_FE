@@ -54,7 +54,13 @@ export const _getReCommentFX = (commentId) => {
       const { data } = await api.get(`/recomment/${commentId}`);
       console.log(data);
 
-      dispatch(getReComm(data.data));
+      let recomment_list = [];
+
+      data.data.map((data) => {
+        recomment_list.push({ isRecomm: false, ...data });
+      });
+
+      dispatch(getReComm(recomment_list));
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +76,14 @@ export const _addReCommentFX = (commentId, content) => {
         content: content,
       });
       console.log(data);
-      dispatch(getReComm(data.data));
+
+      let recomment_list = [];
+
+      data.data.map((data) => {
+        recomment_list.push({ isRecomm: false, ...data });
+      });
+
+      dispatch(getReComm(recomment_list));
       window.alert("대댓글 등록 완료");
     } catch (error) {
       console.log(error);
@@ -96,7 +109,7 @@ export const _isReEdit = (recommentId) => {
   return async function (dispatch, getState) {
     console.log(recommentId);
 
-    const _recomment_list = getState().comments.list;
+    const _recomment_list = getState().recomments.list;
     console.log(_recomment_list);
 
     const recomment_index = _recomment_list.findIndex((b) => {
@@ -149,12 +162,13 @@ export default handleActions(
     [IS_RE_EDIT]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
+        console.log(state.list);
         const isReEditList = state.list.map((e, i) => {
           if (action.payload === i) {
-            if (e.isEdit === false) {
-              return { ...e, isEdit: true };
+            if (e.isRecomm === false || null) {
+              return { ...e, isRecomm: true };
             } else {
-              return { ...e, isEdit: false };
+              return { ...e, isRecomm: false };
             }
           } else {
             return e;

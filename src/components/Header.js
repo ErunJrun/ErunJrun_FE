@@ -12,10 +12,18 @@ import alarmIcon from "../assets/header/alarmIcon.png";
 import AlarmModal from "../shared/modal/AlaramModal";
 import Modal from "./Modal";
 
+import { useLocation } from "react-router-dom";
+
 const Header = () => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.isLogin);
   const alarmList = useSelector((state) => state.user.alarm);
+
+  const path = useLocation().pathname;
+
+  const isHome = path === "/";
+  const isGroup = path === "/groupfeed";
+  const isCourse = path === "/coursefeed";
 
   const [alarmOpen, setAlarmOpen] = useState(false);
 
@@ -27,6 +35,7 @@ const Header = () => {
 
   const readAlarm = () => {
     dispatch(_readAlarmDB());
+    dispatch(_getAlarmDB());
   };
 
   const token = getCookie("accessToken");
@@ -49,53 +58,141 @@ const Header = () => {
         <Grid
           height="auto"
           margin="0"
-          maxWidth="1200px"
+          width="1200px"
           display="flex"
           justifyContent="space-between"
           alignItems="center"
+          position="relative"
         >
           <Grid
             display="flex"
             alignItems="center"
-            maxWidth="473px"
+            width="473px"
             justifyContent="space-between"
           >
             <Logo
               onClick={() => {
                 history.push("/");
-                setAlarmOpen(false);
               }}
             >
               <HeaderCi src={headerLogo} />
             </Logo>
-            <Btn
-              onClick={() => {
-                history.push("/");
-                setAlarmOpen(false);
-              }}
-            >
-              Home
-            </Btn>
-            <Btn
-              onClick={() => {
-                history.push("/groupfeed");
-                setAlarmOpen(false);
-              }}
-            >
-              그룹러닝
-            </Btn>
-            <Btn
-              onClick={() => {
-                history.push("/coursefeed");
-                setAlarmOpen(false);
-              }}
-            >
-              코스추천
-            </Btn>
+
+            {isHome ? (
+              <>
+                <Btn
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                >
+                  Home
+                </Btn>
+                <Btn
+                  style={{ color: "#687096" }}
+                  onClick={() => {
+                    history.push("/groupfeed");
+                  }}
+                >
+                  그룹 러닝
+                </Btn>
+                <Btn
+                  style={{ color: "#687096" }}
+                  onClick={() => {
+                    history.push("/coursefeed");
+                  }}
+                >
+                  추천 코스
+                </Btn>
+              </>
+            ) : isGroup ? (
+              <>
+                <Btn
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                  style={{ color: "#687096" }}
+                >
+                  Home
+                </Btn>
+                <Btn
+                  onClick={() => {
+                    history.push("/groupfeed");
+                  }}
+                >
+                  그룹 러닝
+                </Btn>
+                <Btn
+                  style={{ color: "#687096" }}
+                  onClick={() => {
+                    history.push("/coursefeed");
+                  }}
+                >
+                  추천 코스
+                </Btn>
+              </>
+            ) : isCourse ? (
+              <>
+                <Btn
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                  style={{ color: "#687096" }}
+                >
+                  Home
+                </Btn>
+                <Btn
+                  style={{ color: "#687096" }}
+                  onClick={() => {
+                    history.push("/groupfeed");
+                  }}
+                >
+                  그룹 러닝
+                </Btn>
+                <Btn
+                  onClick={() => {
+                    history.push("/coursefeed");
+                  }}
+                >
+                  추천 코스
+                </Btn>
+              </>
+            ) : (
+              <>
+                <Btn
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                  style={{ color: "#687096" }}
+                >
+                  Home
+                </Btn>
+                <Btn
+                  style={{ color: "#687096" }}
+                  onClick={() => {
+                    history.push("/groupfeed");
+                  }}
+                >
+                  그룹 러닝
+                </Btn>
+                <Btn
+                  style={{ color: "#687096" }}
+                  onClick={() => {
+                    history.push("/coursefeed");
+                  }}
+                >
+                  추천 코스
+                </Btn>
+              </>
+            )}
           </Grid>
 
-          <Grid display="flex" width="auto" alignItems="center">
-            <Grid margin="0 24px 0 0" height="auto" display="flex" width="auto">
+          <Grid
+            display="flex"
+            width="140px"
+            alignItems="center"
+            justifyContent="right"
+          >
+            <Grid margin="0 24px 0 0" height="auto" display="flex" width="29px">
               <AlarmIcon
                 src={alarmIcon}
                 onClick={() => {
@@ -123,11 +220,11 @@ const Header = () => {
 
   return (
     <HeaderBox id="1">
-      <Grid maxWidth="1200px" display="flex" justifyContent="space-between">
+      <Grid width="1200px" display="flex" justifyContent="space-between">
         <Grid
           display="flex"
           alignItems="center"
-          maxWidth="473px"
+          width="473px"
           justifyContent="space-between"
         >
           <Logo
@@ -137,30 +234,116 @@ const Header = () => {
           >
             <HeaderCi src={headerLogo} />
           </Logo>
-          <Btn
-            onClick={() => {
-              history.push("/");
-            }}
-          >
-            Home
-          </Btn>
-          <Btn
-            onClick={() => {
-              history.push("/groupfeed");
-            }}
-          >
-            그룹러닝
-          </Btn>
-          <Btn
-            onClick={() => {
-              history.push("/coursefeed");
-            }}
-          >
-            코스추천
-          </Btn>
+          {isHome ? (
+            <>
+              <Btn
+                onClick={() => {
+                  history.push("/");
+                }}
+              >
+                Home
+              </Btn>
+              <Btn
+                style={{ color: "#687096" }}
+                onClick={() => {
+                  history.push("/groupfeed");
+                }}
+              >
+                그룹 러닝
+              </Btn>
+              <Btn
+                style={{ color: "#687096" }}
+                onClick={() => {
+                  history.push("/coursefeed");
+                }}
+              >
+                추천 코스
+              </Btn>
+            </>
+          ) : isGroup ? (
+            <>
+              <Btn
+                onClick={() => {
+                  history.push("/");
+                }}
+                style={{ color: "#687096" }}
+              >
+                Home
+              </Btn>
+              <Btn
+                onClick={() => {
+                  history.push("/groupfeed");
+                }}
+              >
+                그룹 러닝
+              </Btn>
+              <Btn
+                style={{ color: "#687096" }}
+                onClick={() => {
+                  history.push("/coursefeed");
+                }}
+              >
+                추천 코스
+              </Btn>
+            </>
+          ) : isCourse ? (
+            <>
+              <Btn
+                onClick={() => {
+                  history.push("/");
+                }}
+                style={{ color: "#687096" }}
+              >
+                Home
+              </Btn>
+              <Btn
+                style={{ color: "#687096" }}
+                onClick={() => {
+                  history.push("/groupfeed");
+                }}
+              >
+                그룹 러닝
+              </Btn>
+              <Btn
+                onClick={() => {
+                  history.push("/coursefeed");
+                }}
+              >
+                추천 코스
+              </Btn>
+            </>
+          ) : (
+            <>
+              <Btn
+                onClick={() => {
+                  history.push("/");
+                }}
+                style={{ color: "#687096" }}
+              >
+                Home
+              </Btn>
+              <Btn
+                style={{ color: "#687096" }}
+                onClick={() => {
+                  history.push("/groupfeed");
+                }}
+              >
+                그룹 러닝
+              </Btn>
+              <Btn
+                style={{ color: "#687096" }}
+                onClick={() => {
+                  history.push("/coursefeed");
+                }}
+              >
+                추천 코스
+              </Btn>
+            </>
+          )}
         </Grid>
 
         <Btn
+          style={{ fontSize: "16px" }}
           onClick={() => {
             history.push("/login");
           }}
@@ -177,8 +360,9 @@ const HeaderBox = styled.div`
   height: 90px;
   background-color: #030c37;
   align-items: center;
-  width: 100%;
+  min-width: 700px;
   justify-content: center;
+  position: relative;
 `;
 
 const HeaderCi = styled.img`
@@ -194,7 +378,7 @@ const AlarmIcon = styled.img`
 
 const Badge = styled.div`
   position: absolute;
-  right: 22.4%;
+  right: 21%;
   top: 18px;
   border-radius: 100%;
   width: 20px;
@@ -212,10 +396,8 @@ const Badge = styled.div`
 `;
 
 const Logo = styled.div`
-  max-width: 128px;
-  width: 100%;
-  max-height: 71.1px;
-  height: 100%;
+  width: 128px;
+  height: 71.1px;
   margin-right: 20px;
   cursor: pointer;
 `;
