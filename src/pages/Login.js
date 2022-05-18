@@ -21,7 +21,7 @@ const Login = ({ location }) => {
   const token = getCookie("accessToken");
 
   console.log(isLogin);
-  console.log(location);
+  console.log("패쓰네임", location);
 
   if (location?.state) {
     localStorage.setItem("from", location?.state?.from);

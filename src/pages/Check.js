@@ -16,7 +16,6 @@ const Check = () => {
   const groupId = params.groupId;
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
-  localStorage.removeItem("from");
 
   //페이지 정보
   const { pathname } = useLocation();
@@ -38,6 +37,7 @@ const Check = () => {
   };
 
   useEffect(() => {
+    localStorage.removeItem("from");
     dispatch(getAttendDB(groupId));
   }, []);
 
