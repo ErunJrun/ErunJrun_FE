@@ -52,6 +52,8 @@ const Header = () => {
     }
   }, [token]);
 
+  if (path === "/loginInfo") return null;
+
   if (is_login) {
     return (
       <HeaderBox id="1">
