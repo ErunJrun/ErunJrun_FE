@@ -43,6 +43,9 @@ const MainInfo = (props) => {
   };
 
   const editGroup = () => {
+    if (props.applyEndTime === "0 시간") {
+      window.alert("모집이 마감 된 공고입니다.");
+    }
     closeEditMenu();
     history.push(`/groupEdit/${groupId}`);
   };
@@ -176,7 +179,7 @@ const MainInfo = (props) => {
 
         <Hr></Hr>
 
-        {detailGroup?.applyEndTime === "0 일" ? (
+        {detailGroup?.applyEndTime === "0 시간" ? (
           <ApplyBtnFalse
             onClick={() => {
               window.alert("기한이 종료되었습니다.");
@@ -203,7 +206,7 @@ const MainInfo = (props) => {
           </ApplyBtnFalse>
         )}
 
-        {detailGroup?.applyEndTime === "0 일" ? (
+        {detailGroup?.applyEndTime === "0 시간" ? (
           <Grid
             display="flex"
             justifyContent="space-between"
