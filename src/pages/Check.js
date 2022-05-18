@@ -99,7 +99,6 @@ const Check = () => {
               </Text>
             </Grid>
             <Label
-              //  onClick={() => {ckChange();}}
               onChange={(e) => {
                 choiceTime(e, index);
               }}
