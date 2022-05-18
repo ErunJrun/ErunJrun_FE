@@ -10,7 +10,7 @@ import LevelShoes from "../LevelShoes";
 
 
 const Edit = (props) => {
-  console.log(props);
+
   const dispatch = useDispatch(); 
   const fileInput = useRef();
   const userId = localStorage.getItem("userId");
@@ -27,7 +27,6 @@ const Edit = (props) => {
   const [agreeSMS, setAgreeSMS] = useState(props.profile.agreeSMS);
   const [numberCK, setNumderCK] = useState("");
   const [textLength, setTextLength] = useState(0);
-console.log(likeLocation,likeDistance);
 
   const certPhone = props.profile.certPhone;
   const [runRegion, setRunRegion] = useState([
