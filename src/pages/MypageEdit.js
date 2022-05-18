@@ -7,7 +7,6 @@ const MypageEdit = () => {
   
   const dispatch = useDispatch(); 
   
-
   useEffect(() => {
     dispatch(getInformationDB());
   }, []);
@@ -15,8 +14,7 @@ const MypageEdit = () => {
   const profile = useSelector((state) => state.mypage.info);
 
   if (profile.length === 0) { return <></>; }
-
-  
+ 
   return (
     <> 
       <Edit profile={profile}/>

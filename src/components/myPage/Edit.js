@@ -19,7 +19,7 @@ const Edit = (props) => {
   const [nickname, setNickname] = useState(props.profile.nickname);
   const [image, setImage] = useState(props.profile.profileUrl);
   const [imgBase, setImgBase] = useState(props.profile.profileUrl);
-  const [bio, setBio] = useState(props?.profile.bio);
+  const [bio, setBio] = useState(props.profile.bio);
   const [likeLocation, setLikeLocation] = useState(props.profile.likeLocation);
   const [likeDistance, setLikeDistance] = useState(props.profile.likeDistance);
   const [userLevel, setUserLevel] = useState(props?.profile.userLevel);
@@ -28,6 +28,7 @@ const Edit = (props) => {
   const [numberCK, setNumderCK] = useState("");
   const [textLength, setTextLength] = useState(0);
 console.log(likeLocation,likeDistance);
+
   const certPhone = props.profile.certPhone;
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
@@ -121,6 +122,20 @@ console.log(likeLocation,likeDistance);
       history.push("/");
     }
   }, []);*/}
+
+  useEffect(() => {
+    console.log("실행");
+    setNickname(props.profile.nickname);
+    setImage(props.profile.profileUrl);
+    setImgBase(props.profile.profileUrl);
+    setBio(props.profile.bio);
+    setLikeLocation(props.profile.likeLocation);
+    setLikeDistance(props.profile.likeDistance);
+    setUserLevel(props?.profile.userLevel);
+    setPhone(props.profile.phone);
+    setAgreeSMS(props.profile.agreeSMS);
+  }, [props]);
+  
 
   return (
     <>
