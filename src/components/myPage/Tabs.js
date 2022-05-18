@@ -88,7 +88,7 @@ export default function BasicTabs() {
             dispatch(getMyRunningDB(userId));
           }}
         >
-          진행완료 그룹 러닝
+          내가만든 그룹 러닝
         </Btn>
 
         {complete === true ? <Group /> : null}

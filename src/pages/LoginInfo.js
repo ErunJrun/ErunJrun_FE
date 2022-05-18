@@ -95,6 +95,15 @@ const LoginInfo = () => {
   if (firstLogin) {
     return (
       <>
+        <HeaderBox>
+        <Logo
+          onClick={() => {
+            history.push("/");
+          }}
+          >
+          <img src="https://ifh.cc/g/hmlgTz.png"/>
+        </Logo>
+        </HeaderBox>
         <Grid maxWidth="800px" width="100%" margin="72px auto ">
           <LoginCharacter src={runStyleCharacter}></LoginCharacter>
           <Grid margin="0 0 51px 0">
@@ -348,4 +357,21 @@ const StartBtn = styled.button`
   }
 `;
 
+const HeaderBox = styled.div`
+  display: flex;
+  height: 90px;
+  background-color: #030c37;
+  align-items: center;
+  min-width: 700px;
+  justify-content: center;
+  position: relative;
+`;
+
+const Logo = styled.div`
+  width: 128px;
+  height: 71.1px;
+  margin-right: 1100px;
+  cursor: pointer;
+  justify-content: flex-start;
+`;
 export default LoginInfo;
