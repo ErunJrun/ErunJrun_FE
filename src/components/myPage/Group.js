@@ -28,7 +28,7 @@ const Group = () => {
       ) : (
         <Grid display="flex">
           {running?.data?.map((data, index) => {
-            userId !== data.userId ? (
+            return userId !== data.userId ? (
               <Grid
                 key={index}
                 maxWidth="384px"
@@ -83,9 +83,7 @@ const Group = () => {
                   </div>
                 )}
               </Grid>
-            ) : (
-              <Box>참여완료한 그룹러닝이 없습니다</Box>
-            );
+            ) : null;
           })}
         </Grid>
       )}
