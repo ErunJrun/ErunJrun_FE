@@ -9,6 +9,13 @@ import { getCookie } from "../shared/Cookie";
 const Main = () => {
   const dispatch = useDispatch();
 
+  const from = localStorage.getItem("from");
+  console.log(from);
+
+  if (from) {
+    return <Redirect to={{ pathname: from }}></Redirect>;
+  }
+
   return (
     <div>
       <Banner />

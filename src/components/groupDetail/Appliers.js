@@ -36,7 +36,7 @@ const Appliers = () => {
                   alignContent="flex-start"
                   margin="0 13px 0 0"
                   _onClick={() => {
-                    history.push(`/mypage/${detailGroup?.userId}`);
+                    history.push(`/mypage/${e?.userId}`);
                   }}
                 >
                   <Image

@@ -25,12 +25,12 @@ const MGroupRunning = () => {
     dispatch(getMainDB());
   }, []);
 
-  const from = localStorage.getItem("from");
-  console.log(from);
+  // const from = localStorage.getItem("from");
+  // console.log(from);
 
-  if (from) {
-    return <Redirect to={{ pathname: from }}></Redirect>;
-  }
+  // if (from) {
+  //   return <Redirect to={{ pathname: from }}></Redirect>;
+  // }
 
   return (
     <>
@@ -64,10 +64,22 @@ const MGroupRunning = () => {
             <HiOutlineArrowNarrowRight />
           </Btn>
         </Grid>
-
-        {postList?.map((item, idx) => {
-          return <GroupCard key={idx} {...item} />;
-        })}
+        <Swiper
+          id="GroupCardSwiper"
+          modules={[Navigation, Pagination]}
+          spaceBetween={8}
+          slidesPerView={2}
+          navigation={{ clickable: true }}
+          pagination={{ clickable: true }}
+        >
+          {postList?.map((item, idx) => {
+            return (
+              <SwiperSlide id="GroupCardSlide">
+                <GroupCard key={idx} {...item} />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </Grid>
 
       <Grid

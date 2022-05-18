@@ -37,7 +37,6 @@ const Check = () => {
   };
 
   useEffect(() => {
-    localStorage.removeItem("from");
     dispatch(getAttendDB(groupId));
   }, []);
 

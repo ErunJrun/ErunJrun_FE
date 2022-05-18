@@ -1,12 +1,18 @@
-#GroupCardSlide {
+#GroupCardSwiper {
   width: 1300px;
+  height: 560px;
   background-color: red;
 }
 
-#GroupCardSlide > .swiper-button-prev {
+#GroupCardSlide {
+  width: auto;
+  height: auto;
+}
+
+#GroupCardSwiper > .swiper-button-prev {
   color: blue;
 }
 
-#GroupCardSlide > .swiper-button-next {
+#GroupCardSwiper > .swiper-button-next {
   color: blue;
 }
