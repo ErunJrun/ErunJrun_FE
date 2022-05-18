@@ -24,7 +24,7 @@ const Login = ({ location }) => {
   console.log("패쓰네임", location);
 
   if (location?.state) {
-    localStorage.setItem("from", location?.state?.from);
+    setCookie("from", location?.state?.from, 168);
   }
 
   useEffect(() => {
