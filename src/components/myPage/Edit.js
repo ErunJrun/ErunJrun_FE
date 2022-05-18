@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editProfileDB, numberCheckMiddleware, getNumberCheckMiddleware, deleteUserDB } from "../../redux/modules/mypage"
+import { getInformation,editProfileDB, numberCheckMiddleware, getNumberCheckMiddleware, deleteUserDB } from "../../redux/modules/mypage"
 import { history } from "../../redux/configureStore";
 import { Text, Grid } from "../../elements";
 import styled from "styled-components";
@@ -15,21 +15,20 @@ const Edit = (props) => {
   const fileInput = useRef();
   const userId = localStorage.getItem("userId");
   const isLogin = useSelector((state) => state.user.isLogin);
-
   
   const [nickname, setNickname] = useState(props.profile.nickname);
   const [image, setImage] = useState(props.profile.profileUrl);
   const [imgBase, setImgBase] = useState(props.profile.profileUrl);
-  const [bio, setBio] = useState(props.profile.bio);
+  const [bio, setBio] = useState(props?.profile.bio);
   const [likeLocation, setLikeLocation] = useState(props.profile.likeLocation);
   const [likeDistance, setLikeDistance] = useState(props.profile.likeDistance);
-  const [userLevel, setUserLevel] = useState(props.profile.userLevel);
+  const [userLevel, setUserLevel] = useState(props?.profile.userLevel);
   const [phone, setPhone] = useState(props.profile.phone);
-console.log(image, likeLocation);
   const [agreeSMS, setAgreeSMS] = useState(props.profile.agreeSMS);
   const [numberCK, setNumderCK] = useState("");
   const [textLength, setTextLength] = useState(0);
-console.log(agreeSMS);
+console.log(likeLocation,likeDistance);
+  const certPhone = props.profile.certPhone;
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
     "경기도",
@@ -61,11 +60,6 @@ console.log(agreeSMS);
   ]);
 
   const [modal, setModal] = useState(false);
-
-  
-  const choiceRunType = (e) => {
-    setLikeLocation(e);
-  };
 
   const toggleModal = () => {
     setModal(!modal)
@@ -121,12 +115,12 @@ console.log(agreeSMS);
     dispatch(editProfileDB(userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS));
   };
 
-  useEffect(() => {
+ {/* useEffect(() => {
     if (!isLogin) {
       window.alert("비정상적인 접근입니다.");
       history.push("/");
     }
-  }, []);
+  }, []);*/}
 
   return (
     <>
@@ -176,23 +170,20 @@ console.log(agreeSMS);
             <Grid display="felx">
                 <Inp value={phone} onChange={ Number } type="text" 
                 placeholder="010-1234-5678"  maxLength={20} />
-
-                { phone === null ?  
-                 <Button
-                    onClick={()=>{
-                    dispatch(numberCheckMiddleware(phone));
-                  }}
-                >
-                  인증요청
-                  </Button>
-                : 
-                  null
-                }
-               
             </Grid>
                 
-            { phone === null ? 
-              <Grid display="felx">
+            { certPhone === false ? 
+            <>
+            <_Box>
+              <Button
+                onClick={()=>{
+                dispatch(numberCheckMiddleware(phone));
+                }}
+              >
+                인증요청
+              </Button>
+            </_Box>
+              <Grid display="felx">      
                   <Inp value={numberCK} onChange={ NumderCK } type="text" 
                   placeholder="인증번호를 입력해주세요!"  maxLength={20} />
                   <Button
@@ -201,6 +192,7 @@ console.log(agreeSMS);
                     }}
                   >인증</Button>
               </Grid>
+              </>
             : 
               null
             }
@@ -229,6 +221,7 @@ console.log(agreeSMS);
                     <input 
                     onClick={() => {
                       choiceRegion(idx+1); 
+                      console.log(idx+1);
                     }}
                       type="radio"
                       name="runRegion"                    
@@ -257,7 +250,10 @@ console.log(agreeSMS);
                 <Fragment key={idx}>
                   <LabelDistance>
                     <input
-                      onClick={() => {choiceDistance(idx); }}
+                      onClick={() => {
+                        choiceDistance(idx); 
+                        console.log(idx)
+                      }}
                       type="radio"
                       name="runDistance"
                       checked={runDistance[likeDistance] === e ? e : ""}
@@ -376,6 +372,10 @@ const Button = styled.button`
   color: #fff;
   margin-left: 16px;
   :hover {font-size: 17px;}
+`;
+
+const _Box = styled.div`
+  margin: -74px 0 20px 340px ;
 `;
 
 const Input= styled.input`
