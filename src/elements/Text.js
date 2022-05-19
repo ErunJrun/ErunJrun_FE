@@ -97,7 +97,7 @@ Text.defaultProps = {
   display: null,
   size: null,
   bold: false,
-  color: "#323132",
+  color: "black",
   width: null,
   height: null,
   wordbreak: false,
