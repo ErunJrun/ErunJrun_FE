@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getProfileDB, getMyRunningDB } from "../redux/modules/mypage";
 import Profile from "../components/myPage/Profile";
 import Schedule from "../components/myPage/Schedule";
+import HostEvaluation from "../components/myPage/HostEvaluation";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
 import Group from "../components/myPage/Group";
@@ -34,6 +35,7 @@ const Mypage = () => {
   return (
     <Grid width="1200px" margin="auto">
       <Profile userId={userId} />
+      <HostEvaluation/>
       {MyId === userId ? <Schedule userId={userId} /> : null}
 
       <Tabs />
