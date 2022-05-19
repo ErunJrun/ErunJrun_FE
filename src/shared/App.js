@@ -33,8 +33,14 @@ import { getCookie } from "./Cookie";
 import "./GlobalStyles";
 import styled from "styled-components";
 
+import { useMediaQuery } from "react-responsive";
+
 function App() {
   const dispatch = useDispatch();
+
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
 
   const token = getCookie("accessToken");
 
@@ -50,7 +56,7 @@ function App() {
     <React.Fragment>
       <Wrapper>
         <ConnectedRouter history={history}>
-          <Header></Header>
+          {isMobile ? <p>모바일헤더</p> : <Header />}
           <ScrollToTop />
           <Route path="/" exact component={Main} />
           <Route path="/login" exact component={Login} />
@@ -73,7 +79,7 @@ function App() {
           <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
         </ConnectedRouter>
       </Wrapper>
-      <Footer></Footer>
+      {isMobile ? <p>모바일푸터</p> : <Footer />}
     </React.Fragment>
   );
 }
