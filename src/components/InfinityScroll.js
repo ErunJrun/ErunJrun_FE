@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 import _ from "lodash";
-import { useDispatch } from "react-redux";
 import { Spinner } from "../elements";
 
-function InfinityScroll(props) {
+const InfinityScroll = (props) => {
   const { children, callNext, is_next, loading } = props;
 
   const _handleScroll = _.throttle(() => {
@@ -44,7 +43,7 @@ function InfinityScroll(props) {
       {is_next && <Spinner />}
     </React.Fragment>
   );
-}
+};
 
 InfinityScroll.defaultProps = {
   children: null,
@@ -52,4 +51,5 @@ InfinityScroll.defaultProps = {
   is_next: false,
   loading: false,
 };
+
 export default InfinityScroll;

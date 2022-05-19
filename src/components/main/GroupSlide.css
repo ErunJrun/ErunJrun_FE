@@ -1,18 +1,60 @@
-#GroupCardSwiper {
-  width: 1300px;
-  height: 560px;
-  background-color: red;
+#GroupCardSlide {
+  width: 384px;
+  height: 500px;
+  display: flex;
+  transform: translate3d(-395px, 0px, 0px);
 }
 
-#GroupCardSlide {
-  width: auto;
-  height: auto;
+#GroupCardSwiper {
+  width: 1200px;
+  height: 580px;
 }
 
 #GroupCardSwiper > .swiper-button-prev {
-  color: blue;
+  /* right: 100px; */
+  top: 200px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  font-weight: bold;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+#GroupCardSwiper > .swiper-button-prev::after {
+  font-size: 20px;
+  color: #68f99e;
 }
 
 #GroupCardSwiper > .swiper-button-next {
-  color: blue;
+  top: 200px;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  font-weight: bold;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.05);
 }
+#GroupCardSwiper > .swiper-button-next::after {
+  font-size: 20px;
+  color: #68f99e;
+}
+
+/* #GroupCardSwiper > .append-buttons {
+  text-align: center;
+  margin-top: 20px;
+} */
+
+/* #GroupCardSwiper > .append-buttons button {
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #007aff;
+  color: #007aff;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin: 0 10px;
+  font-size: 13px;
+} */

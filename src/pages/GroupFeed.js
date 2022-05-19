@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Grid, IconButton, Text, Input } from "../elements";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
@@ -82,7 +82,7 @@ const GroupFeed = () => {
       console.log("그룹 게시물 클린업");
       dispatch(resetGroup());
     };
-  }, [finish]);
+  }, []);
 
   return (
     <>
@@ -175,6 +175,7 @@ const GroupFeed = () => {
               callNext={() => {
                 console.log("call next 제발");
                 console.log("페이지넘버", paging);
+
                 dispatch(getGroupDB(category, paging.page));
               }}
               is_next={paging.page ? true : false}
