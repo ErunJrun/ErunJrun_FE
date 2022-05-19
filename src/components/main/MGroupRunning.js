@@ -1,41 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { history } from "../../redux/configureStore";
 import styled from "styled-components";
-import GroupCard from "../groupFeed/GroupCard";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import courseFeedBanner from "../../assets/courseFeedBanner.png";
-import { getMainDB } from "../../redux/modules/feed";
+import { getMainDB, resetGroup } from "../../redux/modules/feed";
+import MGroupCard from "./MGroupCard";
 
+import SwiperCore, { Virtual, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
 
-import "./GroupSlide.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Redirect } from "react-router-dom";
+import "./Banner.css";
+import "./GroupSlide.css";
+
+SwiperCore.use([Virtual, Navigation, Pagination]);
 
 const MGroupRunning = () => {
   const dispatch = useDispatch();
-  const postList = useSelector((state) => state.feed.list);
+  const postList = useSelector((state) => state.feed.main);
+
+  const [swiperRef, setSwiperRef] = useState(null);
+
+  const [slides, setSlides] = useState(
+    Array.from({ length: 500 }).map((_, index) => `Slide ${index + 1}`)
+  );
+
+  const slideTo = (index) => {
+    swiperRef.slideTo(index - 1, 0);
+  };
 
   useEffect(() => {
     dispatch(getMainDB());
+
+    return () => {
+      console.log("그룹 게시물 클린업");
+      dispatch(resetGroup());
+    };
   }, []);
-
-  // const from = localStorage.getItem("from");
-  // console.log(from);
-
-  // if (from) {
-  //   return <Redirect to={{ pathname: from }}></Redirect>;
-  // }
 
   return (
     <>
       <Grid
-        maxWidth="1200px"
+        width="1200px"
         display="flex"
         justifyContent="column"
         margin="100px auto 160px auto"
@@ -64,18 +74,23 @@ const MGroupRunning = () => {
             <HiOutlineArrowNarrowRight />
           </Btn>
         </Grid>
+
         <Swiper
           id="GroupCardSwiper"
-          modules={[Navigation, Pagination]}
-          spaceBetween={8}
-          slidesPerView={2}
-          navigation={{ clickable: true }}
-          pagination={{ clickable: true }}
+          onSwiper={setSwiperRef}
+          slidesPerView={3}
+          centeredSlides={true}
+          spaceBetween={50}
+          pagination={{
+            type: "fraction",
+          }}
+          navigation={true}
+          virtual
         >
           {postList?.map((item, idx) => {
             return (
               <SwiperSlide id="GroupCardSlide">
-                <GroupCard key={idx} {...item} />
+                <MGroupCard key={idx} {...item} />{" "}
               </SwiperSlide>
             );
           })}
