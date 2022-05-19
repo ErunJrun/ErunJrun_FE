@@ -10,8 +10,13 @@ import groupChat from "../../assets/groupDetail/chat.png";
 import shareIcon from "../../assets/groupDetail/share.png";
 import shoesMint from "../../assets/groupDetail/shoesMint.png";
 import KakaoShareButton from "../KakaoShareButton";
+import { useMediaQuery } from "react-responsive";
 
 const MainInfo = (props) => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
@@ -50,6 +55,68 @@ const MainInfo = (props) => {
       history.push(`/groupEdit/${groupId}`);
     }
   };
+
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          width="375px"
+          margin="0"
+          padding="24px 16px"
+          bg="#FFFFFF"
+          height="auto"
+        >
+          <Grid height="auto" display="flex">
+            <Text margin="0 0 12px 0" size="14px" bold>
+              {detailGroup?.title}
+            </Text>
+          </Grid>
+
+          <Grid height="auto">
+            <Grid display="flex">
+              <Text size="12px" width="auto" margin="0 16px 8px 0">
+                일시
+              </Text>
+              <Text size="12px" width="auto" margin="0" bold>
+                {detailGroup?.datetime}
+              </Text>
+            </Grid>
+
+            <Grid display="flex">
+              <Text size="12px" width="auto" margin="0 16px 8px 0">
+                장소
+              </Text>
+              <Text size="12px" width="auto" margin="0" bold>
+                {detailGroup?.location}
+              </Text>
+            </Grid>
+
+            <Grid display="flex">
+              <Text size="12px" width="auto" margin="0 16px 8px 0">
+                거리
+              </Text>
+              <Text size="12px" width="auto" margin="0" bold>
+                {detailGroup?.distance} km
+              </Text>
+            </Grid>
+
+            <Grid display="flex">
+              <Text size="12px" width="auto" margin="0 16px 8px 0">
+                인원
+              </Text>
+              <Text size="12px" width="auto" margin="0 5px 0 0" bold>
+                최대 {detailGroup?.maxPeople}명
+              </Text>
+              <Text size="12px" width="auto" margin="0" bold color="#FF2D55">
+                (잔여 {detailGroup?.maxPeople - detailGroup?.Appliers?.length}
+                자리)
+              </Text>
+            </Grid>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>

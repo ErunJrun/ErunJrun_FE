@@ -13,8 +13,14 @@ import Appliers from "../components/groupDetail/Appliers";
 import CommentList from "../components/comments/CommentList";
 import InfoCategory from "../components/groupDetail/InfoCategory";
 import mapIcon from "../assets/groupDetail/map.png";
+import { useMediaQuery } from "react-responsive";
+import backIcon from "../assets/groupDetail/backIcon.png";
 
 const GroupDetail = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
@@ -23,6 +29,35 @@ const GroupDetail = () => {
   useEffect(() => {
     dispatch(getGroupDetailDB(groupId));
   }, [groupId]);
+
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          width="375px"
+          height="auto"
+          display="flex"
+          margin="0 auto"
+          justifyContent="center"
+        >
+          <Grid width="375px" display="flex" justifyContent="center">
+            <TitleWrap>
+              <img
+                style={{ width: "8px", height: "16px", marginRight: "24px" }}
+                src={backIcon}
+              />
+              <TitleBar>{detailGroup?.title}</TitleBar>
+            </TitleWrap>
+
+            <ImageSlide />
+            <MainInfo groupId={groupId} />
+            <CrewLeaderInfo {...detailGroup} />
+            <InfoCategory {...detailGroup} />
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>
@@ -79,6 +114,29 @@ const MapIconImg = styled.img`
   width: 14px;
   height: 20px;
   margin: 0 10px 0 0;
+`;
+
+const TitleWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 375px;
+  height: 51px;
+  position: fixed;
+  top: 90px;
+  z-index: 3;
+  background-color: white;
+`;
+
+const TitleBar = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 500;
+  font-size: 14px;
+  width: 268px;
+  height: 19px;
 `;
 
 export default GroupDetail;

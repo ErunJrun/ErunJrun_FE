@@ -3,7 +3,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: block;
-  margin: 0px auto 0px auto;
+  margin: 0px auto 0 auto;
 }
 
 ::-webkit-scrollbar {

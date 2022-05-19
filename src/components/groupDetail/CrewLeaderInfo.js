@@ -4,6 +4,7 @@ import { Grid, Image, Text } from "../../elements";
 import styled from "styled-components";
 
 import { history } from "../../redux/configureStore";
+import { useMediaQuery } from "react-responsive";
 
 import LevelBox from "./LevelBox";
 
@@ -15,8 +16,76 @@ import shareIcon from "../../assets/groupDetail/share.png";
 import shoesMintIcon from "../../assets/groupDetail/shoesMint.png";
 
 const CrewLeaderInfo = (props) => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
   const detailGroup = useSelector((state) => state.feed.detail);
   console.log(detailGroup);
+
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          cursor="pointer"
+          width="343px"
+          border="1px solid #F0F0F0"
+          borderRadius="3px"
+          margin="0 0 16px 0"
+          padding="12px"
+          bg="white"
+          height="88px"
+          display="flex"
+          alignItems="center"
+          boxShadow="0px 1px 5px rgba(0, 0, 0, 0.05);"
+          _onClick={() => {
+            history.push(`/mypage/${detailGroup?.userId}`);
+          }}
+          hover="border:2px solid #68F99E;"
+          position="relative"
+        >
+          <CrewLeaderName src={crewLeaderName} />
+          <Grid justifyContent="center" display="flex" width="auto">
+            <CrewLeaderProfile
+              style={{ width: "56px", height: "56px" }}
+              src={detailGroup?.profileUrl}
+            ></CrewLeaderProfile>
+            <LevelWrap>
+              <LevelBox userLevel={detailGroup?.userLevel}></LevelBox>
+            </LevelWrap>
+          </Grid>
+
+          <Grid
+            margin="0 0 0 20px"
+            width="auto"
+            height="auto"
+            display="flex"
+            flexDirection="column"
+          >
+            <Text margin="0 5px 10px 0" size="12px" bold>
+              {detailGroup?.nickname}
+            </Text>
+
+            <Grid
+              width="auto"
+              height="auto"
+              display="flex"
+              margin="0"
+              alignItems="center"
+            >
+              <CrewFlag style={{ width: "13px" }} src={crewLeaderFlag} />
+              <Text size="10px" margin="0 5px 0 0">
+                굿러너 레벨
+              </Text>
+              <Text size="10px" margin="0" bold>
+                {detailGroup?.mannerPoint}km
+              </Text>
+            </Grid>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>
