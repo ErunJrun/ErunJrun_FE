@@ -255,18 +255,18 @@ export const getEvaluationDB = (groupId, hostId, userId) => {
 };
 
 // 호스트 평가
-export const evaluationDB = (groupId, hostId, point) => {
+export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId, hostId, point);
       const formData = new FormData();
 
       formData.append("hostId", hostId);
       formData.append("point", point);
+      formData.append("evaluationCategory", evaluationCategory);
 
       const { data } = await api.patch(
         `/group/evaluation/${groupId}`,
-        { hostId: hostId, point: point },
+        { hostId: hostId, point: point, evaluationCategory: evaluationCategory},
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -274,10 +274,9 @@ export const evaluationDB = (groupId, hostId, point) => {
         }
       );
       console.log(data);
-      window.alert("호스트평가가 완료되었습니다!");
-      history.push(`/mypage/${userId}`);
+      window.alert("호스트 평가가 완료되었습니다!");
+      // history.push(`/mypage/${hostId}`);
     } catch (error) {
-      console.log(error);
     }
   };
 };
@@ -411,6 +410,7 @@ export default handleActions(
         console.log(action.payload);
         draft.evaluation = action.hostId;
         draft.evaluation = action.point;
+        draft.evaluation = action.evaluationCategory;
       }),
 
     [GET_ATTEND]: (state, action) =>
