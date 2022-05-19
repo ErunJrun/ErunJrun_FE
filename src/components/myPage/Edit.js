@@ -126,7 +126,8 @@ const Edit = (props) => {
       window.alert("비정상적인 접근입니다.");
       history.push("/");
     }
-  }, []);*/}
+  }, []);
+*/}
 
   useEffect(() => {
     console.log("실행");
