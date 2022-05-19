@@ -7,6 +7,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import courseFeedBanner from "../../assets/courseFeedBanner.png";
 import { getMainDB, resetGroup } from "../../redux/modules/feed";
 import MGroupCard from "./MGroupCard";
+import { useMediaQuery } from "react-responsive";
 
 import SwiperCore, { Virtual, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,6 +21,10 @@ import "./GroupSlide.css";
 SwiperCore.use([Virtual, Navigation, Pagination]);
 
 const MGroupRunning = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.feed.main);
 
@@ -41,6 +46,99 @@ const MGroupRunning = () => {
       dispatch(resetGroup());
     };
   }, []);
+
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          width="1200px"
+          display="flex"
+          justifyContent="column"
+          margin="100px auto 160px auto"
+        >
+          <Grid
+            display="flex"
+            justifyContent="space-between"
+            alignItems="flex-end"
+            margin="0 0 40px 0"
+          >
+            <Grid display="flex" alignItems="flex-end" width="auto">
+              <Text bold size="26px" margin="0 16px 0 0">
+                그룹 러닝
+              </Text>
+              <Text lineHeight="30px" size="16px" margin="0">
+                함께 뛰면 즐거움이 두배!
+              </Text>
+            </Grid>
+
+            <Btn
+              onClick={() => {
+                history.push("/groupfeed");
+              }}
+            >
+              더보기
+              <HiOutlineArrowNarrowRight />
+            </Btn>
+          </Grid>
+
+          <Swiper
+            id="GroupCardSwiper"
+            onSwiper={setSwiperRef}
+            slidesPerView={3}
+            centeredSlides={true}
+            spaceBetween={50}
+            pagination={{
+              type: "fraction",
+            }}
+            navigation={true}
+            virtual
+          >
+            {postList?.map((item, idx) => {
+              return (
+                <SwiperSlide id="GroupCardSlide">
+                  <MGroupCard key={idx} {...item} />{" "}
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </Grid>
+
+        <Grid
+          maxWidth="1200px"
+          display="flex"
+          justifyContent="column"
+          margin="0 auto 320px auto"
+        >
+          <Grid
+            display="flex"
+            justifyContent="space-between"
+            alignItems="flex-end"
+            margin="0 0 40px 0"
+          >
+            <Grid display="flex" alignItems="flex-end" width="auto">
+              <Text bold size="26px" margin="0 16px 0 0">
+                추천 코스
+              </Text>
+              <Text lineHeight="30px" size="16px" margin="0">
+                나만의 코스를 추천해주세요!
+              </Text>
+            </Grid>
+
+            <Btn
+              onClick={() => {
+                history.push("/coursefeed");
+              }}
+            >
+              더보기
+              <HiOutlineArrowNarrowRight />
+            </Btn>
+          </Grid>
+
+          <CourseBanner src={courseFeedBanner}></CourseBanner>
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>
