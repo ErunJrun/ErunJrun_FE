@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEvaluationDB, evaluationDB } from "../../redux/modules/mypage";
+import { getEvaluationDB, evaluationDB, getRunningDB } from "../../redux/modules/mypage";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { Text, Grid } from "../../elements";
@@ -53,7 +53,7 @@ const Evaluation = (props) => {
     setEmoji(!emoji);
   }
 
-  const choiceDistance = (idx) => {
+  const choiceCategory = (idx) => {
     setEvaluationCategory(idx);
   };
 
@@ -89,8 +89,7 @@ const Evaluation = (props) => {
               <Hr/>
 
               <Text bold size="20px" marginTop>
-                {group?.data?.hostUser?.user?.nickname}님의 그룹 러닝은
-                어땠나요?
+                {group?.data?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
               </Text>
               {emoji ? (
                 <>
@@ -118,7 +117,7 @@ const Evaluation = (props) => {
                           <LabelDistance>
                             <input
                               onClick={() => {
-                                choiceDistance(idx+1); 
+                                choiceCategory(idx+1); 
                                 console.log(idx+1)
                               }}
                               type="radio"
@@ -160,7 +159,7 @@ const Evaluation = (props) => {
                           <LabelDistance>
                             <input
                               onClick={() => {
-                                choiceDistance(idx+6); 
+                                choiceCategory(idx+6); 
                                 console.log(idx+6)
                               }}
                               type="radio"
@@ -179,13 +178,14 @@ const Evaluation = (props) => {
                 onClick={() => {
                   toggleModal();
                   dispatch(evaluationDB(groupId, hostId, point, evaluationCategory));
-                  history.push(`/mypage/${userId}`)
+                  dispatch(getRunningDB(userId));
+                  history.push(`/mypage/${userId}`);
                 }}>
                 평가완료
               </EvaluationButton>
 
               <button className="_close-modal" onClick={toggleModal}>
-                <AiOutlineClose />
+                <AiOutlineClose size="20" color="#222"/>
               </button>
             </Wrap>
           </Overlaye>

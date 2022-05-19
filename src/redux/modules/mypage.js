@@ -275,7 +275,7 @@ export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
       );
       console.log(data);
       window.alert("호스트 평가가 완료되었습니다!");
-      history.push(`/mypage/${userId}`);
+      // history.push(`/mypage/${hostId}`);
     } catch (error) {
     }
   };
