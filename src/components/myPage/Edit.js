@@ -176,7 +176,7 @@ const Edit = (props) => {
           자기소개
         </Text>
 
-        {bio === "null" ?
+        {bio === null ?
         (
           <Input           
             value={""} 
