@@ -1,9 +1,110 @@
 import React from "react";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
-import { Grid } from "../elements";
+import { Grid, Text } from "../elements";
+import { useMediaQuery } from "react-responsive";
+
+import courseIcon from "../assets/footer/courseIcon.png";
+import groupIcon from "../assets/footer/groupIcon.png";
+import homeIcon from "../assets/footer/homeIcon.png";
+import mypageIcon from "../assets/footer/mypageIcon.png";
 
 const Footer = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
+  const userId = localStorage.getItem("userId");
+
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          position="fixed"
+          bottom="0"
+          left="0"
+          width="100%"
+          height="59px"
+          display="flex"
+          bg="white"
+          padding="11px 42px"
+        >
+          <Grid
+            width="298px"
+            display="flex"
+            justifyContent="space-around"
+            alignItems="center"
+          >
+            <Grid
+              display="flex"
+              alignItems="center"
+              width="auto"
+              flexDirection="column"
+            >
+              <FooterIcon
+                src={homeIcon}
+                onClick={() => {
+                  history.push("/");
+                }}
+              />
+              <Text margin="0" width="auto" color="#B8B8B8" size="10px">
+                Home
+              </Text>
+            </Grid>
+
+            <Grid
+              display="flex"
+              alignItems="center"
+              width="auto"
+              flexDirection="column"
+            >
+              <FooterIcon
+                src={groupIcon}
+                onClick={() => {
+                  history.push("/groupfeed");
+                }}
+              />
+              <Text margin="0" color="#B8B8B8" size="10px">
+                그룹 러닝
+              </Text>
+            </Grid>
+            <Grid
+              display="flex"
+              alignItems="center"
+              width="auto"
+              flexDirection="column"
+            >
+              <FooterIcon
+                src={courseIcon}
+                onClick={() => {
+                  history.push("/coursefeed");
+                }}
+              />
+              <Text margin="0" color="#B8B8B8" size="10px">
+                추천 코스
+              </Text>
+            </Grid>
+            <Grid
+              display="flex"
+              alignItems="center"
+              width="auto"
+              flexDirection="column"
+            >
+              <FooterIcon
+                src={mypageIcon}
+                onClick={() => {
+                  history.push(`/mypage/${userId}`);
+                }}
+              />
+              <Text margin="0" color="#B8B8B8" size="10px">
+                마이페이지
+              </Text>
+            </Grid>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
   return (
     <HeaderBox>
       <Grid maxWidth="1200px">
@@ -56,7 +157,6 @@ const Footer = () => {
 
 const HeaderBox = styled.div`
   display: flex;
-
   height: 216px;
   background-color: #030c37;
   align-items: center;
@@ -87,6 +187,11 @@ const Btn = styled.button`
   :hover {
     color: #68f99e;
   }
+`;
+
+const FooterIcon = styled.img`
+  width: 20px;
+  height: 20px;
 `;
 
 export default Footer;

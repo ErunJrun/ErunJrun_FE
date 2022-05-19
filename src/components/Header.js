@@ -7,14 +7,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { _getAlarmDB, _readAlarmDB } from "../redux/modules/user";
 import { getCookie } from "../shared/Cookie";
 import headerLogo from "../assets/header/headerLogo.png";
+import headerLogoMobile from "../assets/header/headerLogoMobile.png";
 
 import alarmIcon from "../assets/header/alarmIcon.png";
+import alarmIconMob from "../assets/header/alarmIconMob.png";
+
 import AlarmModal from "../shared/modal/AlaramModal";
 import Modal from "./Modal";
 
 import { useLocation } from "react-router-dom";
 
+import { useMediaQuery } from "react-responsive";
+
 const Header = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.isLogin);
   const alarmList = useSelector((state) => state.user.alarm);
@@ -53,6 +62,59 @@ const Header = () => {
   }, [token]);
 
   if (path === "/loginInfo") return null;
+
+  if (isMobile) {
+    return (
+      <HeaderBoxMob>
+        <Grid
+          height="54px"
+          margin="0"
+          width="100%"
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          position="relative"
+          padding="15px"
+        >
+          <Grid
+            display="flex"
+            alignItems="center"
+            width="auto"
+            justifyContent="space-between"
+          >
+            <HeaderCiMob
+              onClick={() => {
+                history.push("/");
+              }}
+              src={headerLogoMobile}
+            />
+          </Grid>
+
+          <Grid
+            position="relative"
+            zIndex="200"
+            width="auto"
+            margin="0"
+            height="auto"
+            display="flex"
+          >
+            <AlarmIconMob
+              src={alarmIconMob}
+              onClick={() => {
+                readAlarm();
+                alarmToggle();
+              }}
+            ></AlarmIconMob>
+            {alarmList?.unreadCount === 0 || alarmList === [] ? null : (
+              <BadgeMob />
+            )}
+
+            {alarmOpen ? <AlarmModal onClose={alarmToggle}></AlarmModal> : null}
+          </Grid>
+        </Grid>
+      </HeaderBoxMob>
+    );
+  }
 
   if (is_login) {
     return (
@@ -367,13 +429,36 @@ const HeaderBox = styled.div`
   position: relative;
 `;
 
+const HeaderBoxMob = styled.div`
+  display: flex;
+  height: 54px;
+  background-color: white;
+  align-items: center;
+  min-width: 375px;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+`;
+
 const HeaderCi = styled.img`
   width: 140px;
   height: auto;
 `;
 
+const HeaderCiMob = styled.img`
+  width: 68.8px;
+  height: auto;
+`;
+
 const AlarmIcon = styled.img`
   width: 28px;
+  height: auto;
+  cursor: pointer;
+`;
+
+const AlarmIconMob = styled.img`
+  width: 19px;
   height: auto;
   cursor: pointer;
 `;
@@ -385,6 +470,25 @@ const Badge = styled.div`
   border-radius: 100%;
   width: 20px;
   height: 20px;
+  border: none;
+  color: black;
+  background-color: #68f99e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1px;
+  box-sizing: border-box;
+`;
+
+const BadgeMob = styled.div`
+  position: absolute;
+  right: 4.9%;
+  top: 18px;
+  border-radius: 100%;
+  width: 4px;
+  height: 4px;
   border: none;
   color: black;
   background-color: #68f99e;

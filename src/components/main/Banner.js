@@ -15,10 +15,88 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./Banner.css";
 
+import { useMediaQuery } from "react-responsive";
+
 const Banner = () => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.isLogin);
   const userName = localStorage.getItem("nickname");
+
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
+  if (isMobile) {
+    return (
+      <BoxMob>
+        <Swiper
+          id="SwiperMob"
+          modules={[Navigation, Pagination]}
+          spaceBetween={50}
+          slidesPerView={1}
+          navigation={{ clickable: true }}
+          pagination={{ clickable: true }}
+        >
+          <SwiperSlide id="SwiperSlideMob">
+            <img
+              style={{ width: "100%", height: "150px" }}
+              src={yellowBanner}
+              alt="yellowBanner"
+            />
+            <Grid
+              display="flex"
+              justifyContent="space-between"
+              width="375px"
+              height="150px"
+            >
+              <Grid
+                display="flex"
+                flexDirection="column"
+                position="absolute"
+                top="80px"
+                left="795px"
+                width="339px"
+                height="auto"
+                margin="0 0 0 40px"
+              >
+                <Text
+                  textLeft
+                  height="auto"
+                  bold
+                  size="32px"
+                  color="white"
+                  margin="0"
+                >
+                  Runner 님,
+                </Text>
+                <Text
+                  textLeft
+                  bold
+                  height="41px"
+                  size="20px"
+                  color="#ECF1F1"
+                  margin="0 0 26px 0"
+                >
+                  당신에게 어울리는{" "}
+                  <span style={{ color: "#68F99E" }}>이런저런</span> 코스 추천!
+                </Text>
+
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={() => {
+                    history.push("/coursefeed");
+                  }}
+                >
+                  추천 코스 보러가기
+                </button>
+              </Grid>
+            </Grid>
+          </SwiperSlide>
+        </Swiper>
+      </BoxMob>
+    );
+  }
 
   if (is_login) {
     return (
@@ -150,6 +228,7 @@ const Banner = () => {
       </Box>
     );
   }
+
   return (
     <Box>
       <Swiper
@@ -285,7 +364,12 @@ const Banner = () => {
 const Box = styled.div`
   width: 100%;
   height: 356px;
-  /* background-color: #5d79ff; */
+  overflow: hidden;
+`;
+
+const BoxMob = styled.div`
+  width: 100%;
+  height: 150px;
   overflow: hidden;
 `;
 
