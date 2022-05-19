@@ -14,6 +14,7 @@ const Check = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
+  const id = localStorage.getItem("userId");
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
 
@@ -43,10 +44,10 @@ const Check = () => {
   if (token) {
     return (
       <Box>
-        <Grid height="142px" bg="#030c37">
+        {/* <Grid height="142px" bg="#030c37">
           <Img src={check_list?.groupInfo?.user?.profileUrl} />
           <img src="https://ifh.cc/g/fkqsm3.png" />
-        </Grid>
+        </Grid> */}
 
         <InfoBox>
           <Grid display="flex">
@@ -107,7 +108,7 @@ const Check = () => {
 
         <Btn
           onClick={() => {
-            history.push("/mypage");
+            history.push(`/mypage/${id}`);
             dispatch(patchAttendDB(groupId, userId));
           }}
         >

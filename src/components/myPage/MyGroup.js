@@ -71,11 +71,20 @@ const MyGroup = () => {
 
               {data.attendance ? (
                 <ApplyBtnFalse>체크완료</ApplyBtnFalse>
-              ) : (
+              ) : ( 
+                data.applyEndTime === "0 일" ?
                 <ApplyBtnTrue
                   onClick={() => {
                     history.push(`/check/${data.groupId}`);
                     dispatch(getAttendDB(data.groupId, data.userId, hostId));
+                  }}
+                >
+                  출석체크하기
+                </ApplyBtnTrue> 
+                :
+                <ApplyBtnTrue
+                  onClick={() => {
+                    window.alert("아직 출석체크 시간이 아닙니다");
                   }}
                 >
                   출석체크하기

@@ -193,7 +193,7 @@ const Schedule = () => {
 const Box = styled.div`
   width: 1200px;
   height: 200px;
-  margin: 24px auto 64px auto;
+  margin: 30px auto 60px auto;
   padding: 24px 38px 32px 32px;
   border-radius: 6px;
   background-color: #f5f5f5;
