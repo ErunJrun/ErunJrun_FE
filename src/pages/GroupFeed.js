@@ -13,13 +13,20 @@ import { Link } from "react-scroll";
 import { getGroupDB, resetGroup } from "../redux/modules/feed";
 import Permit from "../shared/Permit";
 
+import InfinityScroll from "../components/InfinityScroll";
+
 const GroupFeed = () => {
   const dispatch = useDispatch();
 
   const nickname = localStorage.getItem("nickname");
 
   const feedList = useSelector((state) => state.feed.list);
+  const paging = useSelector((state) => state.feed.paging);
   const preferData = useSelector((state) => state.feed.preferData);
+  const isLoading = useSelector((state) => state.feed.isLoading);
+
+  console.log(paging.page);
+  console.log("피드리스트", feedList);
 
   const [finish, setFinish] = useState("0");
   const [startDate, setStartDate] = useState("");
@@ -66,8 +73,11 @@ const GroupFeed = () => {
   ]);
 
   useEffect(() => {
-    console.log("GET 그룹 게시물");
-    dispatch(getGroupDB(category));
+    if (feedList.length === 0) {
+      console.log("GET 그룹 게시물");
+      dispatch(getGroupDB(category));
+    }
+
     return () => {
       console.log("그룹 게시물 클린업");
       dispatch(resetGroup());
@@ -161,9 +171,19 @@ const GroupFeed = () => {
             </Text>
           </Grid>
           <Grid display="flex">
-            {feedList?.map((item, idx) => {
-              return <GroupCard key={idx} {...item}></GroupCard>;
-            })}
+            <InfinityScroll
+              callNext={() => {
+                console.log("call next 제발");
+                console.log("페이지넘버", paging);
+                dispatch(getGroupDB(category, paging.page));
+              }}
+              is_next={paging.page ? true : false}
+              loading={isLoading}
+            >
+              {feedList?.map((item, idx) => {
+                return <GroupCard key={idx} {...item}></GroupCard>;
+              })}
+            </InfinityScroll>
           </Grid>
         </Grid>
 

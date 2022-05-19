@@ -85,10 +85,10 @@ const ProfileModal = ({ onClose }) => {
 const Background = styled.div`
   z-index: 206;
   position: fixed;
-  left: 0;
+  right: auto;
   top: 0;
   height: 100%;
-  width: 100%;
+  width: 1920px;
   text-align: center;
 `;
 

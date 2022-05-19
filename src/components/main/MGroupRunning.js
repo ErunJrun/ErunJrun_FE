@@ -6,31 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import courseFeedBanner from "../../assets/courseFeedBanner.png";
-import { getMainDB } from "../../redux/modules/feed";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
-
-import "./GroupSlide.css";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Redirect } from "react-router-dom";
+import { getMainDB, resetGroup } from "../../redux/modules/feed";
 
 const MGroupRunning = () => {
   const dispatch = useDispatch();
-  const postList = useSelector((state) => state.feed.list);
+  const postList = useSelector((state) => state.feed.main);
 
   useEffect(() => {
     dispatch(getMainDB());
+
+    return () => {
+      console.log("그룹 게시물 클린업");
+      dispatch(resetGroup());
+    };
   }, []);
-
-  // const from = localStorage.getItem("from");
-  // console.log(from);
-
-  // if (from) {
-  //   return <Redirect to={{ pathname: from }}></Redirect>;
-  // }
 
   return (
     <>
@@ -64,22 +53,10 @@ const MGroupRunning = () => {
             <HiOutlineArrowNarrowRight />
           </Btn>
         </Grid>
-        <Swiper
-          id="GroupCardSwiper"
-          modules={[Navigation, Pagination]}
-          spaceBetween={8}
-          slidesPerView={2}
-          navigation={{ clickable: true }}
-          pagination={{ clickable: true }}
-        >
-          {postList?.map((item, idx) => {
-            return (
-              <SwiperSlide id="GroupCardSlide">
-                <GroupCard key={idx} {...item} />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+
+        {postList?.map((item, idx) => {
+          return <GroupCard key={idx} {...item} />;
+        })}
       </Grid>
 
       <Grid

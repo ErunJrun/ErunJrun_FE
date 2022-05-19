@@ -140,7 +140,7 @@ const Background = styled.div`
   left: 0;
   top: 0;
   height: 100%;
-  width: 100%;
+  width: 1920px;
   text-align: center;
 `;
 

@@ -59,7 +59,7 @@ const Header = () => {
       <HeaderBox id="1">
         <Grid
           height="auto"
-          margin="0"
+          margin="0 auto 0 360px"
           width="1200px"
           display="flex"
           justifyContent="space-between"
@@ -362,7 +362,7 @@ const HeaderBox = styled.div`
   height: 90px;
   background-color: #030c37;
   align-items: center;
-  min-width: 700px;
+  min-width: 1200px;
   justify-content: center;
   position: relative;
 `;

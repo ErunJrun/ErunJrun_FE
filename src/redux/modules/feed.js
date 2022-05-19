@@ -8,6 +8,7 @@ import axios from "axios";
 const RESET_GROUP = "RESET_GROUP";
 const ADD_GROUP = "ADD_GROUP";
 const GET_GROUP = "GET_GROUP";
+const GET_MAIN = "GET_MAIN";
 const DELETE_GROUP = "DELETE_GROUP";
 const EDIT_GROUP = "EDIT_GROUP";
 const GET_GROUP_DETAIL = "GET_GROUP_DETAIL";
@@ -19,6 +20,7 @@ const LOADING = "LOADING";
 //initialState
 const initialState = {
   list: [],
+  main: [],
   preferData: [],
   detail: {
     mapLatLng: [
@@ -26,6 +28,7 @@ const initialState = {
       { lat: 37.6, lng: 127.4 },
     ],
   },
+  paging: { page: 1, size: 3 },
   isLoading: false,
 };
 
@@ -39,9 +42,15 @@ export const addGroup = (payload) => ({
   payload,
 });
 
-export const getGroup = (payload) => ({
+export const getGroup = (feedList, paging) => ({
   type: GET_GROUP,
-  payload,
+  feedList,
+  paging,
+});
+
+export const getMain = (feedList) => ({
+  type: GET_MAIN,
+  feedList,
 });
 
 export const getGroupDetail = (payload) => ({
@@ -80,11 +89,17 @@ export const loading = (payload) => ({
 });
 
 //미들웨어
-export const getGroupDB = (category) => {
+export const getGroupDB = (category, page = 1, size = 3) => {
   return async function (dispatch, getState, { history }) {
-    try {
-      console.log(category);
+    console.log(category, page, size);
+    const _paging = getState().feed.paging;
+    if (!_paging.page) {
+      return;
+    }
 
+    dispatch(loading(true));
+
+    try {
       let region = "";
       category.region ? (region = category.region) : (region = "");
 
@@ -121,10 +136,16 @@ export const getGroupDB = (category) => {
       let finish = category?.finish;
 
       const { data } = await api.get(
-        `/group/all?date=${startDate}${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}`
+        `/group/all?date=${startDate}${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}&size=${size}&page=${page}`
       );
       console.log(data);
-      dispatch(getGroup(data));
+      console.log(data.data.length);
+      let paging = {
+        page: data.data.length === size ? page + 1 : null,
+        size: size,
+      };
+      console.log(paging);
+      dispatch(getGroup(data, paging));
     } catch (error) {
       console.log(error);
     }
@@ -136,7 +157,7 @@ export const getMainDB = () => {
     try {
       const { data } = await api.get(`/group/main`);
       console.log(data);
-      dispatch(getGroup(data));
+      dispatch(getMain(data));
     } catch (error) {
       console.log(error);
     }
@@ -322,9 +343,21 @@ export default handleActions(
       }),
     [GET_GROUP]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(state, action.payload);
-        draft.list = action.payload.data;
-        draft.preferData = action.payload.preferData;
+        console.log(action);
+        // draft.preferData = action.feedList.preferData;
+        draft.list.push(...action.feedList.data);
+        draft.isLoading = false;
+
+        if (action.paging) {
+          draft.paging = action.paging;
+        }
+      }),
+    [GET_MAIN]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action);
+        draft.preferData = action.feedList.preferData;
+        draft.main = action.feedList.data;
+        draft.isLoading = false;
       }),
     [GET_GROUP_DETAIL]: (state, action) =>
       produce(state, (draft) => {
