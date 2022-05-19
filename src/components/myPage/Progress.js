@@ -4,7 +4,7 @@ import { Text } from "../../elements"
 import "./Progress.css"
 
 const Progress = (props) => {
-console.log(props);
+
     const [style, setStyle] = useState({})
     const [run, setRun] = useState({})
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvaluationDB, evaluationDB } from "../../redux/modules/mypage";
 import styled from "styled-components";
@@ -13,6 +13,32 @@ const Evaluation = (props) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [emoji, setEmoji] = useState(true);
+  const [evaluationCategory, setEvaluationCategory] = useState();
+  const [point, setPoint]= useState(1);
+
+  const mpoint = () => {
+    if(emoji === true) {
+      setPoint(-1);
+    }else if(emoji === false){
+      setPoint(1);
+    }
+  }
+
+  const [likeCategory, setLikeCategory] = useState([
+    "코스 맛집이에요",
+    "안내사항이 명확해요",
+    "응답이 빨라요",
+    "사람들을 잘 이끌어줘요",
+    "시간 약속을 잘 지켜요",     
+  ]);
+
+  const [category, setCategory] = useState([    
+    "코스가 별로에요",
+    "응답이 느려요",
+    "사람들에게 불친절해요",
+    "시간 약속을 어겼어요",
+    "안내가 불확실해요",
+  ]);
   const userId = localStorage.getItem("userId");
   const groupId = props.running.groupId;
   const hostId = props.running.userId;
@@ -26,6 +52,10 @@ const Evaluation = (props) => {
   const change = () => {
     setEmoji(!emoji);
   }
+
+  const choiceDistance = (idx) => {
+    setEvaluationCategory(idx);
+  };
 
   return (
     <div>
@@ -64,25 +94,15 @@ const Evaluation = (props) => {
               </Text>
               {emoji ? (
                 <>
-                  <Btn
-                  // onClick={() => {
-                  //   toggleModal();
-                  //   dispatch(evaluationDB(groupId, hostId, 1));
-                  // }}
-                  >
+                  <Btn>
                     <Icon>
                       <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
                       <Text bold size="16px">좋았어요!</Text>
                     </Icon>
                   </Btn>
 
-                  <Btn
-                    // onClick={() => {
-                    //   toggleModal();
-                    //   dispatch(evaluationDB(groupId, hostId, -1));
-                    // }}
-                  >
-                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={change}/>
+                  <Btn>
+                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
                     <Text bold  size="16px">아쉬웠어요.</Text>
                   </Btn>
                   <Hr/>
@@ -91,34 +111,34 @@ const Evaluation = (props) => {
                     {group?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
                   </Text>
 
-                  <EvaluationBox>
-                    코스 맛집이에요
-                  </EvaluationBox>
-                  <EvaluationBox>
-                    안내사항이 명확해요
-                  </EvaluationBox>
-                  <EvaluationBox>
-                    응답이 빨라요
-                  </EvaluationBox>
-                  <EvaluationBox>
-                    사람들을 잘 이끌어줘요
-                  </EvaluationBox>
-                  <EvaluationBox>
-                    시간 약속을 잘 지켜요
-                  </EvaluationBox>
+                  <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
+                    {likeCategory.map((e, idx) => {
+                      return (
+                        <Fragment key={idx}>
+                          <LabelDistance>
+                            <input
+                              onClick={() => {
+                                choiceDistance(idx+1); 
+                                console.log(idx+1)
+                              }}
+                              type="radio"
+                              name="likeCategory"
+                              value={e}
+                            ></input>
+                            <Text bold>{e}</Text>
+                          </LabelDistance>
+                        </Fragment>
+                      );
+                    })}
+                  </Grid>
                 </>
               )
               :
               (
                 <>
-                  <Btn
-                  // onClick={() => {
-                  //   toggleModal();
-                  //   dispatch(evaluationDB(groupId, hostId, 1));
-                  // }}
-                  >
+                  <Btn>
                     <Icon>
-                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={change}/>
+                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
                     <Text bold size="16px">좋았어요!</Text>
                     </Icon>
                   </Btn>
@@ -137,25 +157,35 @@ const Evaluation = (props) => {
                   <Text bold size="20px" margin="30px 0 24px 0">
                     {group?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
                   </Text>
-                  <EvaluationBox>
-                    코스가 별로에요
-                  </EvaluationBox>
-                  <EvaluationBox>
-                    응답이 느려요
-                  </EvaluationBox>
-                  <EvaluationBox>
-                    사람들에게 불친절해요
-                  </EvaluationBox>
-                  <EvaluationBox>
-                    시간 약속을 어겼어요
-                  </EvaluationBox>
-                  <EvaluationBox>
-                    안내가 불확실해요
-                  </EvaluationBox>
+
+                  <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
+                    {category.map((e, idx) => {
+                      return (
+                        <Fragment key={idx}>
+                          <LabelDistance>
+                            <input
+                              onClick={() => {
+                                choiceDistance(idx+6); 
+                                console.log(idx+6)
+                              }}
+                              type="radio"
+                              name="category"
+                              value={e}
+                            ></input>
+                            <Text bold>{e}</Text>
+                          </LabelDistance>
+                        </Fragment>
+                      );
+                    })}
+                  </Grid>
                 </>
               )} 
-              
-              <EvaluationButton>
+              <EvaluationButton
+                onClick={() => {
+                  toggleModal();
+                  dispatch(evaluationDB(groupId, hostId, point, evaluationCategory));
+                  history.push(`/mypage/${userId}`)
+                }}>
                 평가완료
               </EvaluationButton>
 
@@ -190,7 +220,10 @@ const Hr = styled.div`
   background-color: #ddd;
 `;
 
-const EvaluationBox = styled.div`
+const EvaluationBox = styled.label`
+  input {
+    display: none;
+  }
   width: 440px;
   height: 30px;
   font-weight: 500; 
@@ -203,6 +236,10 @@ const EvaluationBox = styled.div`
   text-align: center;
   margin: 0px 0 16px 28px;
   font-size: 16px
+    input:checked {
+      background-color: #68f99e;
+      color: #030c37;
+    }
 `;
 
 const Btn = styled.button`
@@ -286,5 +323,28 @@ const Wrap = styled.div`
   text-align: center;
   line-height: 1.4;
 `;
+
+
+const LabelDistance = styled.label`
+  margin-left: 10px; 
+  input {
+    display: none;
+  }
+  input + p {
+    width: 440px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 80px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+  }
+  input:checked + p {
+    background-color: #68f99e;
+    color: #030c37;
+  }
+  `;
 
 export default Evaluation;
