@@ -20,17 +20,20 @@ const Footer = () => {
     return (
       <>
         <Grid
+          zIndex="2"
+          bg="white"
+          justifyContent="center"
           position="fixed"
           bottom="0"
           left="0"
           width="100%"
           height="59px"
           display="flex"
-          bg="white"
           padding="11px 42px"
+          boxShadow="0px -4px 6px rgba(227, 227, 227, 0.4);"
         >
           <Grid
-            width="298px"
+            width="375px"
             display="flex"
             justifyContent="space-around"
             alignItems="center"
@@ -105,6 +108,7 @@ const Footer = () => {
       </>
     );
   }
+
   return (
     <HeaderBox>
       <Grid maxWidth="1200px">

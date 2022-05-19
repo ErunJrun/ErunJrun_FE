@@ -102,7 +102,7 @@ const Banner = () => {
     return (
       <Box>
         <Swiper
-          className="mySwiper"
+          className="bannerSwiper"
           modules={[Navigation, Pagination]}
           spaceBetween={50}
           slidesPerView={1}
@@ -232,7 +232,7 @@ const Banner = () => {
   return (
     <Box>
       <Swiper
-        className="mySwiper"
+        className="bannerSwiper"
         modules={[Navigation, Pagination]}
         spaceBetween={50}
         slidesPerView={1}
@@ -368,9 +368,11 @@ const Box = styled.div`
 `;
 
 const BoxMob = styled.div`
+  max-width: 767px;
   width: 100%;
   height: 150px;
   overflow: hidden;
+  margin-top: 90px;
 `;
 
 const BannerImg = styled.img`

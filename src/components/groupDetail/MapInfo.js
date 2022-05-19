@@ -10,10 +10,67 @@ import { Grid, Input, Text } from "../../elements";
 import { history } from "../../redux/configureStore";
 import { useSelector } from "react-redux";
 
+import { useMediaQuery } from "react-responsive";
+
 function MapInfo(props) {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
   const detailGroup = useSelector((state) => state.feed.detail);
 
   const [map, setMap] = useState();
+
+  if (isMobile) {
+    return (
+      <>
+        <Grid margin="0 0 96px 0">
+          <Grid display="flex" padding="10px 16px" border="1px solid #F0F0F0">
+            <Grid width="auto" display="flex" margin="0 32px 0 0">
+              <Text margin="0 8px 0 0" size="12px" color="#7B7B7B">
+                장소
+              </Text>
+              <Text margin="0" size="12px">
+                {detailGroup?.location}
+              </Text>
+            </Grid>
+
+            <Grid width="auto" display="flex" margin="0">
+              <Text margin="0 8px 0 0" size="12px" color="#7B7B7B">
+                거리
+              </Text>
+              <Text margin="0" size="12px">
+                {detailGroup?.distance}km
+              </Text>
+            </Grid>
+          </Grid>
+          <Grid>
+            <Map
+              id={`map`}
+              center={{
+                lat: detailGroup?.mapLatLng[0]?.lat,
+                lng: detailGroup?.mapLatLng[0]?.lng,
+              }}
+              style={{
+                width: "343px",
+                height: "200px",
+              }}
+              level={5}
+              onCreate={setMap}
+            >
+              <Polyline
+                path={detailGroup?.mapLatLng}
+                strokeWeight={5}
+                strokeColor={"#686EF9"}
+                strokeOpacity={1}
+                strokeStyle={"solid"}
+              />
+            </Map>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>

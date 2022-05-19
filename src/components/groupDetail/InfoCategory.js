@@ -2,13 +2,27 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Grid, Text } from "../../elements";
 import styled from "styled-components";
 import { Link } from "react-scroll";
+import { useMediaQuery } from "react-responsive";
 
-const InfoCategory = () => {
-  const [checkedInfo, setCheckedInfo] = useState("");
-  const [courseInfo, setCourseInfo] = useState(true);
-  const [introduceInfo, setIntroduceInfo] = useState(false);
-  const [apllyInfo, setApllyInfo] = useState(false);
-  const [commentInfo, setCommentInfo] = useState(false);
+import { styled as muiStyled } from "@mui/material/styles";
+import Tabs from "@mui/material/Tabs";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+
+import TabPanel from "@mui/lab/TabPanel";
+
+import MapInfo from "./MapInfo";
+import Appliers from "./Appliers";
+import CommentList from "../comments/CommentList";
+import ServeInfo from "./ServeInfo";
+
+import mapIcon from "../../assets/groupDetail/map.png";
+
+const InfoCategory = (props) => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
 
   const [value, setValue] = React.useState("1");
 
@@ -16,7 +30,7 @@ const InfoCategory = () => {
     setValue(newValue);
   };
 
-  console.log(checkedInfo);
+  const [checkedInfo, setCheckedInfo] = useState("");
 
   const goInfo = (e) => {
     setCheckedInfo(e);
@@ -28,6 +42,129 @@ const InfoCategory = () => {
     "크루원",
     "Q&A",
   ]);
+
+  const AntTabs = muiStyled(Tabs)({
+    borderBottom: "1px solid #e8e8e8",
+    "& .MuiTabs-indicator": {
+      backgroundColor: "#68F99E",
+    },
+  });
+
+  const AntTab = muiStyled((props) => <Tab disableRipple {...props} />)(
+    ({ theme }) => ({
+      textTransform: "none",
+      minWidth: 0,
+      [theme.breakpoints.up("sm")]: {
+        minWidth: 0,
+      },
+      fontWeight: theme.typography.fontWeightRegular,
+      marginRight: theme.spacing(1),
+      color: "#7B7B7B",
+      fontFamily: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+      "&:hover": {
+        color: "#40a9ff",
+        opacity: 1,
+      },
+      "&.Mui-selected": {
+        color: "black",
+        fontWeight: theme.typography.fontWeightMedium,
+      },
+      "&.Mui-focusVisible": {
+        backgroundColor: "#d1eaff",
+      },
+    })
+  );
+
+  if (isMobile) {
+    return (
+      <>
+        <Box sx={{ width: "100%" }}>
+          <TabContext value={value}>
+            <Box sx={{ bgcolor: "#fff" }}>
+              <AntTabs value={value} onChange={handleChange}>
+                <AntTab
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    fontFamily: "Spoqa Han Sans Neo",
+                  }}
+                  value="1"
+                  label="코스 정보"
+                />
+                <AntTab
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    fontFamily: "Spoqa Han Sans Neo",
+                  }}
+                  value="2"
+                  label="상세 소개"
+                />
+                <AntTab
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    fontFamily: "Spoqa Han Sans Neo",
+                  }}
+                  value="3"
+                  label="크루원"
+                />
+                <AntTab
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    fontFamily: "Spoqa Han Sans Neo",
+                  }}
+                  value="4"
+                  label="Q&A"
+                />
+              </AntTabs>
+              <Box />
+            </Box>
+            <TabPanel style={{ padding: "32px 16px" }} value="1">
+              <Text bold size="13px" margin="0 0 10px 0">
+                상세 정보
+              </Text>
+              <ServeInfo />
+              <Grid display="flex" alignItems="center" margin="0 0 15px 0">
+                <MapIconImg src={mapIcon} />
+                <Text bold size="13px" margin="0 0 16px 0">
+                  지도로 보는 코스 정보
+                </Text>
+                <MapInfo />
+              </Grid>
+            </TabPanel>
+            <TabPanel style={{ padding: "32px 16px" }} value="2">
+              <Text bold size="13px" margin="0 0 20px 0">
+                상세 소개글
+              </Text>
+              <Text margin="0 0 137px 0" size="13px">
+                {props.content}
+              </Text>
+            </TabPanel>
+            <TabPanel style={{ padding: "32px 16px" }} value="3">
+              <Appliers />
+            </TabPanel>
+            <TabPanel style={{ padding: "32px 16px" }} value="4">
+              <CommentList />
+            </TabPanel>
+          </TabContext>
+        </Box>
+      </>
+    );
+  }
+
   return (
     <>
       <Grid display="flex" maxWidth="758px" margin="65px auto 0 auto">
@@ -42,7 +179,7 @@ const InfoCategory = () => {
         <Link to="소개" spy={true} smooth={true}>
           <Grid margin="0" display="flex" justifyContent="center">
             <Text cursor="pointer" size="18px" bold margin="0 45px 0 0">
-              소개
+              상세 소개
             </Text>
           </Grid>
         </Link>
@@ -74,6 +211,12 @@ const Hr = styled.hr`
   height: 0px;
   margin-top: 8px;
   margin-bottom: 48px;
+`;
+
+const MapIconImg = styled.img`
+  width: 14px;
+  height: 20px;
+  margin: 0 10px 16px 0;
 `;
 
 export default InfoCategory;

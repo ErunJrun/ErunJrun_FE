@@ -18,6 +18,7 @@ import Modal from "./Modal";
 import { useLocation } from "react-router-dom";
 
 import { useMediaQuery } from "react-responsive";
+import AdHeader from "./AdHeader";
 
 const Header = () => {
   const isMobile = useMediaQuery({
@@ -66,50 +67,59 @@ const Header = () => {
   if (isMobile) {
     return (
       <HeaderBoxMob>
-        <Grid
-          height="54px"
-          margin="0"
-          width="100%"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          position="relative"
-          padding="15px"
-        >
+        <Grid display="flex">
+          <AdHeader />
           <Grid
-            display="flex"
-            alignItems="center"
-            width="auto"
-            justifyContent="space-between"
-          >
-            <HeaderCiMob
-              onClick={() => {
-                history.push("/");
-              }}
-              src={headerLogoMobile}
-            />
-          </Grid>
-
-          <Grid
-            position="relative"
-            zIndex="200"
-            width="auto"
+            height="54px"
             margin="0"
-            height="auto"
+            width="100%"
             display="flex"
+            justifyContent="center"
+            alignItems="center"
+            position="relative"
+            padding="15px"
+            bg="white"
+            borderBottom="1px solid #F0F0F0"
           >
-            <AlarmIconMob
-              src={alarmIconMob}
-              onClick={() => {
-                readAlarm();
-                alarmToggle();
-              }}
-            ></AlarmIconMob>
-            {alarmList?.unreadCount === 0 || alarmList === [] ? null : (
-              <BadgeMob />
-            )}
+            <Grid
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              width="375px"
+            >
+              <Grid display="flex" alignItems="center" width="auto">
+                <HeaderCiMob
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                  src={headerLogoMobile}
+                />
+              </Grid>
 
-            {alarmOpen ? <AlarmModal onClose={alarmToggle}></AlarmModal> : null}
+              <Grid
+                position="relative"
+                zIndex="200"
+                width="auto"
+                margin="0"
+                height="auto"
+                display="flex"
+              >
+                <AlarmIconMob
+                  src={alarmIconMob}
+                  onClick={() => {
+                    readAlarm();
+                    alarmToggle();
+                  }}
+                ></AlarmIconMob>
+                {alarmList?.unreadCount === 0 || alarmList === [] ? null : (
+                  <BadgeMob />
+                )}
+
+                {alarmOpen ? (
+                  <AlarmModal onClose={alarmToggle}></AlarmModal>
+                ) : null}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </HeaderBoxMob>
@@ -434,11 +444,12 @@ const HeaderBoxMob = styled.div`
   height: 54px;
   background-color: white;
   align-items: center;
-  min-width: 375px;
+  width: 100%;
   justify-content: center;
   position: fixed;
   top: 0;
   z-index: 2;
+  border-bottom: 1px solid #f0f0f0;
 `;
 
 const HeaderCi = styled.img`
@@ -484,8 +495,8 @@ const Badge = styled.div`
 
 const BadgeMob = styled.div`
   position: absolute;
-  right: 4.9%;
-  top: 18px;
+  right: 0;
+  bottom: 20px;
   border-radius: 100%;
   width: 4px;
   height: 4px;

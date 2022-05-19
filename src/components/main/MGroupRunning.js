@@ -8,6 +8,7 @@ import courseFeedBanner from "../../assets/courseFeedBanner.png";
 import { getMainDB, resetGroup } from "../../redux/modules/feed";
 import MGroupCard from "./MGroupCard";
 import { useMediaQuery } from "react-responsive";
+import readyImage from "../../assets/errorPage.png";
 
 import SwiperCore, { Virtual, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,6 +18,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./Banner.css";
 import "./GroupSlide.css";
+
+import MGroupCardMob from "./MGroupCardMob";
 
 SwiperCore.use([Virtual, Navigation, Pagination]);
 
@@ -51,90 +54,68 @@ const MGroupRunning = () => {
     return (
       <>
         <Grid
-          width="1200px"
+          width="100%"
           display="flex"
+          flexDirection="space-between"
           justifyContent="column"
-          margin="100px auto 160px auto"
+          margin="75px 0 0 0"
         >
-          <Grid
-            display="flex"
-            justifyContent="space-between"
-            alignItems="flex-end"
-            margin="0 0 40px 0"
-          >
-            <Grid display="flex" alignItems="flex-end" width="auto">
-              <Text bold size="26px" margin="0 16px 0 0">
+          <Grid display="flex" justifyContent="center" margin="0">
+            <Grid display="flex" alignItems="flex-end" width="375px">
+              <Text bold size="16px" margin="0 0 16px 16px">
                 그룹 러닝
               </Text>
-              <Text lineHeight="30px" size="16px" margin="0">
-                함께 뛰면 즐거움이 두배!
-              </Text>
             </Grid>
-
-            <Btn
-              onClick={() => {
-                history.push("/groupfeed");
-              }}
-            >
-              더보기
-              <HiOutlineArrowNarrowRight />
-            </Btn>
           </Grid>
 
           <Swiper
-            id="GroupCardSwiper"
+            id="GroupCardSwiperMob"
             onSwiper={setSwiperRef}
             slidesPerView={3}
             centeredSlides={true}
-            spaceBetween={50}
-            pagination={{
-              type: "fraction",
-            }}
-            navigation={true}
+            spaceBetween={120}
+            navigation={{ clickable: true }}
+            pagination={{ clickable: true }}
             virtual
           >
             {postList?.map((item, idx) => {
               return (
-                <SwiperSlide id="GroupCardSlide">
-                  <MGroupCard key={idx} {...item} />{" "}
+                <SwiperSlide id="GroupCardSlideMob">
+                  <MGroupCardMob key={idx} {...item} />{" "}
                 </SwiperSlide>
               );
             })}
           </Swiper>
         </Grid>
 
-        <Grid
-          maxWidth="1200px"
-          display="flex"
-          justifyContent="column"
-          margin="0 auto 320px auto"
-        >
+        <Grid display="flex" justifyContent="column" margin="0 auto 100px auto">
           <Grid
             display="flex"
             justifyContent="space-between"
             alignItems="flex-end"
             margin="0 0 40px 0"
           >
-            <Grid display="flex" alignItems="flex-end" width="auto">
-              <Text bold size="26px" margin="0 16px 0 0">
-                추천 코스
-              </Text>
-              <Text lineHeight="30px" size="16px" margin="0">
-                나만의 코스를 추천해주세요!
-              </Text>
+            <Grid display="flex" justifyContent="center" margin="0">
+              <Grid display="flex" alignItems="flex-end" width="375px">
+                <Text bold size="16px" margin="0 0 0 16px">
+                  추천 코스
+                </Text>
+              </Grid>
             </Grid>
-
-            <Btn
-              onClick={() => {
-                history.push("/coursefeed");
-              }}
-            >
-              더보기
-              <HiOutlineArrowNarrowRight />
-            </Btn>
           </Grid>
-
-          <CourseBanner src={courseFeedBanner}></CourseBanner>
+          <Grid
+            display="flex"
+            flexDirection="column"
+            width="100%"
+            justifyContent="center"
+            alignItems="center"
+            margin="0 auto"
+          >
+            <img style={{ width: "168px" }} src={readyImage} />
+            <Text size="10px">
+              해당 서비스는 오픈 전입니다. 조금만 기다려주세요!
+            </Text>
+          </Grid>
         </Grid>
       </>
     );
@@ -179,9 +160,7 @@ const MGroupRunning = () => {
           slidesPerView={3}
           centeredSlides={true}
           spaceBetween={50}
-          pagination={{
-            type: "fraction",
-          }}
+          pagination={true}
           navigation={true}
           virtual
         >
