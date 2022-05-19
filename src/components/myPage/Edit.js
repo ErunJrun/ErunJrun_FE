@@ -26,9 +26,9 @@ const Edit = (props) => {
   const [phone, setPhone] = useState(props.profile.phone);
   const [agreeSMS, setAgreeSMS] = useState(props.profile.agreeSMS);
   const [numberCK, setNumderCK] = useState("");
-  const [textLength, setTextLength] = useState(0);
 
   const certPhone = props.profile.certPhone;
+
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
     "경기도",
@@ -121,14 +121,6 @@ const Edit = (props) => {
     dispatch(editProfileDB(userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS));
   };
 
- {/* useEffect(() => {
-    if (!isLogin) {
-      window.alert("비정상적인 접근입니다.");
-      history.push("/");
-    }
-  }, []);
-*/}
-
   useEffect(() => {
     console.log("실행");
     setNickname(props.profile.nickname);
@@ -177,16 +169,34 @@ const Edit = (props) => {
             type="text" 
             placeholder="닉네임을 입력해주세요!"
             maxLength={8} />
-            <Text margin="0" size="14px">
-             
-            </Text>
-        <Text bold size="16px">자기소개</Text>
-            <Input value={bio} onChange={changeContent} type="text" 
+        <Text 
+        bold 
+        size="16px"
+        >
+          자기소개
+        </Text>
+
+        {bio === "null" ?
+        (
+          <Input           
+            value={""} 
+            onChange={changeContent} 
+            type="text" 
             placeholder="예: 일주일에 7일 러닝하는 불꽃러너!" 
-            maxLength={50} />
-
-            <Hr style={{margin: "63px 0 80px 0"}}></Hr>
-
+            maxLength={50} 
+         /> 
+        )
+        :
+        (
+         <Input           
+            value={bio} 
+            onChange={changeContent} 
+            type="text" 
+            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!" 
+            maxLength={50} 
+            /> 
+        )}           
+            <Hr style={{margin: "63px 0 80px 0"}}/>
         <Text bold size="20px">
           휴대폰인증
         </Text>

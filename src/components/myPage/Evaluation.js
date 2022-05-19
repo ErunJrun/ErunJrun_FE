@@ -107,7 +107,7 @@ const Evaluation = (props) => {
                   </Btn>
                   <Hr/>
                 
-                  <Text bold size="20px" margin="30px 0 24px 0">
+                  <Text bold size="20px" margin="35px 0 10px 0">
                     {group?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
                   </Text>
 
@@ -143,18 +143,13 @@ const Evaluation = (props) => {
                     </Icon>
                   </Btn>
 
-                  <Btn
-                    // onClick={() => {
-                    //   toggleModal();
-                    //   dispatch(evaluationDB(groupId, hostId, -1));
-                    // }}
-                  >
+                  <Btn>
                     <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
                     <Text bold  size="16px">아쉬웠어요.</Text>
                   </Btn>
                   <Hr/>
 
-                  <Text bold size="20px" margin="30px 0 24px 0">
+                  <Text bold size="20px" margin="35px 0 10px 0">
                     {group?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
                   </Text>
 
@@ -218,28 +213,6 @@ const Hr = styled.div`
   height: 1px;
   margin: 30px 0 30px 20px;
   background-color: #ddd;
-`;
-
-const EvaluationBox = styled.label`
-  input {
-    display: none;
-  }
-  width: 440px;
-  height: 30px;
-  font-weight: 500; 
-  padding-top: 10px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-radius: 80px;
-  border: solid 1px #b8b8b8;
-  text-align: center;
-  margin: 0px 0 16px 28px;
-  font-size: 16px
-    input:checked {
-      background-color: #68f99e;
-      color: #030c37;
-    }
 `;
 
 const Btn = styled.button`
@@ -326,20 +299,20 @@ const Wrap = styled.div`
 
 
 const LabelDistance = styled.label`
-  margin-left: 10px; 
+  margin-left: 28px; 
   input {
     display: none;
   }
   input + p {
     width: 440px;
-    height: 40px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 80px;
     cursor: pointer;
     box-sizing: border-box;
-    background-color: #f0f0f0;
+    border: solid 1px #b8b8b8;
   }
   input:checked + p {
     background-color: #68f99e;

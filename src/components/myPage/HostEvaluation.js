@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
 
 const HostEvaluation = () => {
+  const profile_list = useSelector((state) => state.mypage.list);
 
   const [ emoji, setEmoji ] = useState(true);
 
@@ -37,6 +39,15 @@ const HostEvaluation = () => {
                   “시간 약속을 잘 지켰어요!”
                 </EvaluationBox>
               </LeftBox>
+              <EvaluationPoint>
+                {profile_list?.evaluation?.evaluationCategory1}<br/>
+                {profile_list?.evaluation?.evaluationCategory2}<br/>
+                {profile_list?.evaluation?.evaluationCategory3}
+              </EvaluationPoint>
+              <EvaluationPointL>
+                {profile_list?.evaluation?.evaluationCategory4}<br/>
+                {profile_list?.evaluation?.evaluationCategory5}
+              </EvaluationPointL>
             </Box>
           ):(
             <Box>
@@ -63,6 +74,15 @@ const HostEvaluation = () => {
                   “시간 약속을 잘 안지켰어요.”
                 </EvaluationBox>
               </LeftBox>
+              <EvaluationPoint>
+                {profile_list?.evaluation?.evaluationCategory6}<br/>
+                {profile_list?.evaluation?.evaluationCategory7}<br/>
+                {profile_list?.evaluation?.evaluationCategory8}
+              </EvaluationPoint>
+              <EvaluationPointL>
+                {profile_list?.evaluation?.evaluationCategory9}<br/>
+                {profile_list?.evaluation?.evaluationCategory10}
+              </EvaluationPointL>
           </Box>
           )}          
         </div>
@@ -106,6 +126,24 @@ const LeftBox = styled.div`
   width: 477px;
   height: 136px; 
   margin: -212px 0 0 690px;
+`;
+
+const EvaluationPoint = styled.div`
+  width: 477px;
+  height: 213px; 
+  margin: -145px 0 0 590px;
+  line-height: 4.25;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const EvaluationPointL = styled.div`
+  width: 477px;
+  height: 213px; 
+  margin: -212px 0 0 1112px;
+  line-height: 4.25;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 export default HostEvaluation;
