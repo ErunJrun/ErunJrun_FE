@@ -12,19 +12,20 @@ const Evaluation = (props) => {
   //console.log(props);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
-
+  const [emoji, setEmoji] = useState(true);
   const userId = localStorage.getItem("userId");
   const groupId = props.running.groupId;
   const hostId = props.running.userId;
-  //console.log(groupId,hostId);
-
+ 
   const group = useSelector((state) => state.mypage.host);
-
-  //console.log(group);
 
   const toggleModal = () => {
     setModal(!modal);
   };
+
+  const change = () => {
+    setEmoji(!emoji);
+  }
 
   return (
     <div>
@@ -61,74 +62,99 @@ const Evaluation = (props) => {
                 {group?.data?.hostUser?.user?.nickname}님의 그룹 러닝은
                 어땠나요?
               </Text>
+              {emoji ? (
+                <>
+                  <Btn
+                  // onClick={() => {
+                  //   toggleModal();
+                  //   dispatch(evaluationDB(groupId, hostId, 1));
+                  // }}
+                  >
+                    <Icon>
+                      <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
+                      <Text bold size="16px">좋았어요!</Text>
+                    </Icon>
+                  </Btn>
 
-              <Btn
-                onClick={() => {
-                  toggleModal();
-                  dispatch(evaluationDB(groupId, hostId, 1));
-                }}
-              >
-                <Icon>
-                <img
-                  style={{ margin: "15px 0 0 0" }}
-                  src="https://ifh.cc/g/DPpn4L.png"
-                />
-                <Text bold size="16px">좋았어요!</Text>
-                </Icon>
-              </Btn>
+                  <Btn
+                    // onClick={() => {
+                    //   toggleModal();
+                    //   dispatch(evaluationDB(groupId, hostId, -1));
+                    // }}
+                  >
+                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={change}/>
+                    <Text bold  size="16px">아쉬웠어요.</Text>
+                  </Btn>
+                  <Hr/>
+                
+                  <Text bold size="20px" margin="30px 0 24px 0">
+                    {group?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
+                  </Text>
 
-              <Btn
-                onClick={() => {
-                  toggleModal();
-                  dispatch(evaluationDB(groupId, hostId, -1));
-                }}
-              >
-                <img
-                  style={{ margin: "15px 0 0 0" }}
-                  src="https://ifh.cc/g/Nz1wV8.png"
-                />
-                <Text bold  size="16px">아쉬웠어요.</Text>
-              </Btn>
-              <Hr/>
+                  <EvaluationBox>
+                    코스 맛집이에요
+                  </EvaluationBox>
+                  <EvaluationBox>
+                    안내사항이 명확해요
+                  </EvaluationBox>
+                  <EvaluationBox>
+                    응답이 빨라요
+                  </EvaluationBox>
+                  <EvaluationBox>
+                    사람들을 잘 이끌어줘요
+                  </EvaluationBox>
+                  <EvaluationBox>
+                    시간 약속을 잘 지켜요
+                  </EvaluationBox>
+                </>
+              )
+              :
+              (
+                <>
+                  <Btn
+                  // onClick={() => {
+                  //   toggleModal();
+                  //   dispatch(evaluationDB(groupId, hostId, 1));
+                  // }}
+                  >
+                    <Icon>
+                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={change}/>
+                    <Text bold size="16px">좋았어요!</Text>
+                    </Icon>
+                  </Btn>
+
+                  <Btn
+                    // onClick={() => {
+                    //   toggleModal();
+                    //   dispatch(evaluationDB(groupId, hostId, -1));
+                    // }}
+                  >
+                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
+                    <Text bold  size="16px">아쉬웠어요.</Text>
+                  </Btn>
+                  <Hr/>
+
+                  <Text bold size="20px" margin="30px 0 24px 0">
+                    {group?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
+                  </Text>
+                  <EvaluationBox>
+                    코스가 별로에요
+                  </EvaluationBox>
+                  <EvaluationBox>
+                    응답이 느려요
+                  </EvaluationBox>
+                  <EvaluationBox>
+                    사람들에게 불친절해요
+                  </EvaluationBox>
+                  <EvaluationBox>
+                    시간 약속을 어겼어요
+                  </EvaluationBox>
+                  <EvaluationBox>
+                    안내가 불확실해요
+                  </EvaluationBox>
+                </>
+              )} 
               
-              <Text bold size="20px" margin="30px 0 24px 0">
-                {group?.data?.hostUser?.user?.nickname}님의 좋았던 점을 선택해주세요!
-              </Text>
-
-              <EvaluationBox>
-                코스 맛집이에요
-              </EvaluationBox>
-              <EvaluationBox>
-                안내사항이 명확해요
-              </EvaluationBox>
-              <EvaluationBox>
-                응답이 빨라요
-              </EvaluationBox>
-              <EvaluationBox>
-                사람들을 잘 이끌어줘요
-              </EvaluationBox>
-              <EvaluationBox>
-                시간 약속을 잘 지켜요
-              </EvaluationBox>
-
-              {/* <Text bold size="20px" margin="30px 0 5px 0">
-                {group?.data?.hostUser?.user?.nickname}님의 아쉬웠던 점을 선택해주세요!
-              </Text>
-              <EvaluationBox>
-                코스가 별로에요
-              </EvaluationBox>
-              <EvaluationBox>
-                응답이 느려요
-              </EvaluationBox>
-              <EvaluationBox>
-                사람들에게 불친절해요
-              </EvaluationBox>
-              <EvaluationBox>
-                시간 약속을 어겼어요
-              </EvaluationBox>
-              <EvaluationBox>
-                안내가 불확실해요
-              </EvaluationBox> */}
               <EvaluationButton>
                 평가완료
               </EvaluationButton>
