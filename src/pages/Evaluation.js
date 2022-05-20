@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react/jsx-pascal-case */
 import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvaluationDB, evaluationDB, getRunningDB } from "../redux/modules/mypage";
@@ -5,13 +7,16 @@ import styled from "styled-components";
 import { history } from "../redux/configureStore";
 import { Text, Grid } from "../elements";
 import { AiOutlineClose } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 import "../components/myPage/Evaluation.css";
-import user from "../redux/modules/user";
+import { Button } from "react-scroll";
 
-const Evaluation = (props) => {
-  console.log(props);
+const Evaluation = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:500px)",
+  });
+
   const dispatch = useDispatch();
   const [modal, setModal] = useState(true);
   const [emoji, setEmoji] = useState(true);
@@ -22,13 +27,8 @@ const Evaluation = (props) => {
   console.log(host);
 
   const userId = localStorage.getItem("userId");
-  console.log(userId);
   const groupId = host?.data?.hostUser?.groupId
   const hostId = host?.data?.hostUser?.user?.userId
-
-  // useEffect(() => {
-  //   dispatch(getEvaluationDB(userId));
-  // }, []);
 
   const mpoint = () => {
     if(emoji === true) {
@@ -67,18 +67,137 @@ const Evaluation = (props) => {
     setEvaluationCategory(idx);
   };
 
+  if (isMobile) {
+    return (
+      <Grid width="100%" justifyContent="center">
+        <_Wrap>
+          <Text bold size="19px" margin="100px 0 0 0">
+            크루장 평가
+          </Text>
+          <_MyImage src={host?.data?.hostUser?.user?.profileUrl} />
+          <Text bold size="19px">
+            {host?.data?.hostUser?.user?.nickname}
+          </Text>
+          <Text size="16px" color="#858585" >
+            {host?.data?.hostUser?.date} &nbsp;{" "}
+            {host?.data?.hostUser?.standbyTime} 에 &nbsp;{" "}<br/>
+            {host?.data?.hostUser?.title} 를 &nbsp;함께함
+          </Text>
+          <Text bold size="20px" margin="70px 0 0 0">
+            {host?.data?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
+          </Text>
+          
+          {emoji ? (
+            <>
+              <_Btn>
+                <Icon>
+                  <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
+                  <Text bold size="16px">좋았어요!</Text>
+                </Icon>
+              </_Btn>
+
+              <_Btn>
+                <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
+                <Text bold  size="16px">아쉬웠어요.</Text>
+              </_Btn>
+              <_Hr/>
+            
+              <Text bold size="19px" margin="35px 0 30px 0">
+                {host?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
+              </Text>
+
+              <Grid flexWrap="Wrap" width="100%" display="flex" justifyContent="center">                  
+                {likeCategory.map((e, idx) => {
+                  return (
+                    <Fragment key={idx}>
+                      <_LabelDistance>
+                        <input
+                          onClick={() => {
+                            choiceCategory(idx+1); 
+                            console.log(idx+1)
+                          }}
+                          type="radio"
+                          name="likeCategory"
+                          value={e}
+                        >
+                        </input>
+                        <Text 
+                        bold
+                        >
+                          {e}
+                        </Text>
+                      </_LabelDistance>
+                    </Fragment>
+                  );
+                })}
+              </Grid>
+            </>
+          )
+          :
+          (
+            <>
+              <_Btn>
+                <Icon>
+                <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
+                <Text bold size="16px">좋았어요!</Text>
+                </Icon>
+              </_Btn>
+
+              <_Btn>
+                <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
+                <Text bold  size="16px">아쉬웠어요.</Text>
+              </_Btn>
+              <_Hr/>
+
+              <Text bold size="19px" margin="35px 0 30px 0">
+                {host?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
+              </Text>
+
+              <Grid flexWrap="Wrap" width="100%" display="flex" justifyContent="center">                  
+                {category.map((e, idx) => {
+                  return (
+                    <Fragment key={idx}>
+                      <_LabelDistance>
+                        <input
+                          onClick={() => {
+                            choiceCategory(idx+6); 
+                            console.log(idx+6)
+                          }}
+                          type="radio"
+                          name="category"
+                          value={e}
+                        ></input>
+                        <Text bold>{e}</Text>
+                      </_LabelDistance>
+                    </Fragment>
+                  );
+                })}
+              </Grid>
+            </>
+          )} 
+          <_EvaluationButton
+            onClick={() => {
+              toggleModal();
+              dispatch(evaluationDB(groupId, hostId, point, evaluationCategory));
+              dispatch(getRunningDB(userId));
+              history.push(`/mypage/${userId}`);
+            }}
+            >
+            평가완료
+          </_EvaluationButton>
+        </_Wrap>
+        <CBtn onClick={()=> {
+          history.push(`/mypage/${userId}`);
+        }}
+        >
+          <AiOutlineClose size="22" color="#030c37"/>
+        </CBtn>
+      </Grid>
+    );
+  }
+
   return (
     <div>
-      {/* <Button
-        style={{ margin: "0 0 3px 0", border: "none" }}
-        onClick={() => {
-          toggleModal();
-          dispatch(getEvaluationDB(groupId, hostId, userId));
-        }}
-      >
-        크루장 평가하기
-      </Button> */}
-
       {modal && (
         <div>
           <Overlaye>
@@ -101,104 +220,111 @@ const Evaluation = (props) => {
               <Text bold size="20px">
                 {host?.data?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
               </Text>
-              {emoji ? (
-                <>
-                  <Btn>
-                    <Icon>
-                      <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
+                {emoji ? (
+                  <>
+                    <Btn>
+                      <Icon>
+                        <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
+                        <Text bold size="16px">좋았어요!</Text>
+                      </Icon>
+                    </Btn>
+
+                    <Btn>
+                      <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
+                      <Text bold  size="16px">아쉬웠어요.</Text>
+                    </Btn>
+                    <Hr/>
+                  
+                    <Text bold size="20px" margin="35px 0 10px 0">
+                      {host?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
+                    </Text>
+
+                    <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
+                      {likeCategory.map((e, idx) => {
+                        return (
+                          <Fragment key={idx}>
+                            <LabelDistance>
+                              <input
+                                onClick={() => {
+                                  choiceCategory(idx+1); 
+                                  console.log(idx+1)
+                                }}
+                                type="radio"
+                                name="likeCategory"
+                                value={e}
+                              >
+                              </input>
+                              <Text 
+                              bold
+                              >
+                                {e}
+                              </Text>
+                            </LabelDistance>
+                          </Fragment>
+                        );
+                      })}
+                    </Grid>
+                  </>
+                )
+                :
+                (
+                  <>
+                    <Btn>
+                      <Icon>
+                      <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
                       <Text bold size="16px">좋았어요!</Text>
-                    </Icon>
-                  </Btn>
+                      </Icon>
+                    </Btn>
 
-                  <Btn>
-                    <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
-                    <Text bold  size="16px">아쉬웠어요.</Text>
-                  </Btn>
-                  <Hr/>
-                
-                  <Text bold size="20px" margin="35px 0 10px 0">
-                    {host?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
-                  </Text>
+                    <Btn>
+                      <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
+                      <Text bold  size="16px">아쉬웠어요.</Text>
+                    </Btn>
+                    <Hr/>
 
-                  <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
-                    {likeCategory.map((e, idx) => {
-                      return (
-                        <Fragment key={idx}>
-                          <LabelDistance>
-                            <input
-                              onClick={() => {
-                                choiceCategory(idx+1); 
-                                console.log(idx+1)
-                              }}
-                              type="radio"
-                              name="likeCategory"
-                              value={e}
-                            ></input>
-                            <Text bold>{e}</Text>
-                          </LabelDistance>
-                        </Fragment>
-                      );
-                    })}
-                  </Grid>
-                </>
-              )
-              :
-              (
-                <>
-                  <Btn>
-                    <Icon>
-                    <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
-                    <Text bold size="16px">좋았어요!</Text>
-                    </Icon>
-                  </Btn>
+                    <Text bold size="20px" margin="35px 0 10px 0">
+                      {host?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
+                    </Text>
 
-                  <Btn>
-                    <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
-                    <Text bold  size="16px">아쉬웠어요.</Text>
-                  </Btn>
-                  <Hr/>
+                    <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
+                      {category.map((e, idx) => {
+                        return (
+                          <Fragment key={idx}>
+                            <LabelDistance>
+                              <input
+                                onClick={() => {
+                                  choiceCategory(idx+6); 
+                                  console.log(idx+6)
+                                }}
+                                type="radio"
+                                name="category"
+                                value={e}
+                              ></input>
+                              <Text bold>{e}</Text>
+                            </LabelDistance>
+                          </Fragment>
+                        );
+                      })}
+                    </Grid>
+                  </>
+                )} 
+                <EvaluationButton
+                  onClick={() => {
+                    toggleModal();
+                    dispatch(evaluationDB(groupId, hostId, point, evaluationCategory));
+                    dispatch(getRunningDB(userId));
+                    history.push(`/mypage/${userId}`);
+                  }}
+                  >
+                  평가완료
+                </EvaluationButton>
 
-                  <Text bold size="20px" margin="35px 0 10px 0">
-                    {host?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
-                  </Text>
-
-                  <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
-                    {category.map((e, idx) => {
-                      return (
-                        <Fragment key={idx}>
-                          <LabelDistance>
-                            <input
-                              onClick={() => {
-                                choiceCategory(idx+6); 
-                                console.log(idx+6)
-                              }}
-                              type="radio"
-                              name="category"
-                              value={e}
-                            ></input>
-                            <Text bold>{e}</Text>
-                          </LabelDistance>
-                        </Fragment>
-                      );
-                    })}
-                  </Grid>
-                </>
-              )} 
-              <EvaluationButton
-                onClick={() => {
-                  toggleModal();
-                  dispatch(evaluationDB(groupId, hostId, point, evaluationCategory));
-                  dispatch(getRunningDB(userId));
+                <button className="_close-modal" onClick={()=> {
                   history.push(`/mypage/${userId}`);
-                }}>
-                평가완료
-              </EvaluationButton>
-
-              <button className="_close-modal" onClick={()=> {
-                history.push(`/mypage/${userId}`);
-              }}>
-                <AiOutlineClose size="22" color="#222"/>
-              </button>
+                }}
+                >
+                  <AiOutlineClose size="22" color="#222"/>
+                </button>
             </Wrap>
           </Overlaye>
         </div>
@@ -214,6 +340,14 @@ const MyImage = styled.img`
   border-radius: 50%;
 `;
 
+const _MyImage = styled.img`
+  height: 140px;
+  width: 140px;
+  margin-top: 30px;
+  border-radius: 50%;
+  justify-content: center;
+`;
+
 const Icon = styled.div`
   margin-top: 10px;
   height: 80px;
@@ -227,12 +361,28 @@ const Hr = styled.div`
   background-color: #ddd;
 `;
 
+const _Hr = styled.div`
+  width: 100%;
+  height: 1px;
+  margin: 0px 0 40px 0;
+  background-color: #ddd;
+`;
+
 const Btn = styled.button`
   border: none;
   height: 80px;
   width: 200px;
   margin: 0 0 20px 10px;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fff;
+`;
+
+const _Btn = styled.button`
+  border: none;
+  align-items: center;
+  margin: 30px 30px;
   justify-content: center;
   flex-direction: column;
   background-color: #fff;
@@ -255,31 +405,21 @@ const EvaluationButton = styled.button`
 }
 `;
 
-
-const Button = styled.button`
-  max-width: 382px;
-  font-size: 16px;
-  font-weight: 500;
-  width: 100%;
-  background: #030c37;
-  border-radius: 3px;
-  height: 38px;
-  color: white;
+const _EvaluationButton = styled.button`
   border: none;
-  cursor: pointer;
+  height: 48px;
+  width: 168px; 
+  font-weight: bold; 
+  margin: 24px 0 100px 10px;
+  padding-top: 14px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #dedede;  
   :hover {
-    box-shadow: 0 0 3px black;
-    font-weight: 900;
-  }
-`;
-const ApplyBtnTrue = styled.button`
-  width: 430px;
-  background: #030c37;
-  border-radius: 3px;
-  height: 35px;
-  color: white;
-  border: none;
-  margin: -30px 0 30px 0px;
+  color: #fff;
+  background-color: #282932;
+}
 `;
 
 const Overlaye = styled.div`
@@ -311,6 +451,9 @@ const Wrap = styled.div`
   line-height: 1.4;
 `;
 
+const _Wrap = styled.div`
+  text-align: center;
+`;
 
 const LabelDistance = styled.label`
   margin: -16px 0 0 28px; 
@@ -334,15 +477,30 @@ const LabelDistance = styled.label`
   }
   `;
 
-  const closeBtn = styled.button`
-  border: none;
-  height: 80px;
-  width: 200px;
-  margin: 0 0 20px 10px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #fff;
+  const _LabelDistance = styled.label`
+  margin: -16px 0 0 0; 
+  input {
+    display: none;
+  }
+  input + p {
+    width: 320px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 80px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: solid 1px #b8b8b8;
+  }
+  input:checked + p {
+    background-color: #68f99e;
+    color: #030c37;
+  }
+  `;
+  
+ const CBtn = styled.div`
+  margin: -1250px 0 0 87%;
 `;
 
 export default Evaluation;
