@@ -1,20 +1,34 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEvaluationDB, evaluationDB, getRunningDB } from "../../redux/modules/mypage";
+import { getEvaluationDB, evaluationDB, getRunningDB } from "../redux/modules/mypage";
 import styled from "styled-components";
-import { history } from "../../redux/configureStore";
-import { Text, Grid } from "../../elements";
+import { history } from "../redux/configureStore";
+import { Text, Grid } from "../elements";
 import { AiOutlineClose } from "react-icons/ai";
+import { useParams } from "react-router-dom";
 
-import "./Evaluation.css";
+import "../components/myPage/Evaluation.css";
+import user from "../redux/modules/user";
 
 const Evaluation = (props) => {
-  //console.log(props);
+  console.log(props);
   const dispatch = useDispatch();
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
   const [emoji, setEmoji] = useState(true);
   const [evaluationCategory, setEvaluationCategory] = useState();
-  const [point, setPoint]= useState(1);
+  const [point, setPoint]= useState(1); 
+
+  const host = useSelector((state) => state.mypage.host);
+  console.log(host);
+
+  const userId = localStorage.getItem("userId");
+  console.log(userId);
+  const groupId = host?.data?.hostUser?.groupId
+  const hostId = host?.data?.hostUser?.user?.userId
+
+  // useEffect(() => {
+  //   dispatch(getEvaluationDB(userId));
+  // }, []);
 
   const mpoint = () => {
     if(emoji === true) {
@@ -39,11 +53,7 @@ const Evaluation = (props) => {
     "시간 약속을 어겼어요",
     "안내가 불확실해요",
   ]);
-  const userId = localStorage.getItem("userId");
-  const groupId = props.running.groupId;
-  const hostId = props.running.userId;
  
-  const group = useSelector((state) => state.mypage.host);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -59,7 +69,7 @@ const Evaluation = (props) => {
 
   return (
     <div>
-      <Button
+      {/* <Button
         style={{ margin: "0 0 3px 0", border: "none" }}
         onClick={() => {
           toggleModal();
@@ -67,29 +77,29 @@ const Evaluation = (props) => {
         }}
       >
         크루장 평가하기
-      </Button>
+      </Button> */}
 
       {modal && (
         <div>
           <Overlaye>
             <Wrap>
-              <Text bold size="18px" >
+              <Text bold size="18px" marginTop>
                 크루장 평가
               </Text>
-              <MyImage src={group?.data?.hostUser?.user?.profileUrl} />
+              <MyImage src={host?.data?.hostUser?.user?.profileUrl} />
               <Text bold size="16px">
-                {group?.data?.hostUser?.user?.nickname}
+                {host?.data?.hostUser?.user?.nickname}
               </Text>
 
               <Text size="13px" color="#858585" margin=" -8px 0 0 0">
-                {group?.data?.hostUser?.date} &nbsp;{" "}
-                {group?.data?.hostUser?.standbyTime} 에 &nbsp;{" "}
-                {group?.data?.hostUser?.title}를 &nbsp;함께함
+                {host?.data?.hostUser?.date} &nbsp;{" "}
+                {host?.data?.hostUser?.standbyTime} 에 &nbsp;{" "}
+                {host?.data?.hostUser?.title}를 &nbsp;함께함
               </Text>
               <Hr/>
 
               <Text bold size="20px">
-                {group?.data?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
+                {host?.data?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
               </Text>
               {emoji ? (
                 <>
@@ -107,7 +117,7 @@ const Evaluation = (props) => {
                   <Hr/>
                 
                   <Text bold size="20px" margin="35px 0 10px 0">
-                    {group?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
+                    {host?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
                   </Text>
 
                   <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
@@ -148,8 +158,8 @@ const Evaluation = (props) => {
                   </Btn>
                   <Hr/>
 
-                  <Text bold size="20px" margin="25px 0 10px 0">
-                    {group?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
+                  <Text bold size="20px" margin="35px 0 10px 0">
+                    {host?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
                   </Text>
 
                   <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
@@ -184,8 +194,10 @@ const Evaluation = (props) => {
                 평가완료
               </EvaluationButton>
 
-              <button className="_close-modal" onClick={toggleModal}>
-                <AiOutlineClose size="20" color="#222"/>
+              <button className="_close-modal" onClick={()=> {
+                history.push(`/mypage/${userId}`);
+              }}>
+                <AiOutlineClose size="22" color="#222"/>
               </button>
             </Wrap>
           </Overlaye>
@@ -211,7 +223,7 @@ const Icon = styled.div`
 const Hr = styled.div`
   width: 457px;
   height: 1px;
-  margin: 20px 0 20px 20px;
+  margin: 30px 0 20px 20px;
   background-color: #ddd;
 `;
 
@@ -285,8 +297,8 @@ const Overlaye = styled.div`
 const Wrap = styled.div`
   z-index: 0;
   position: absolute;
-  left: 36%;
-  top: 50px;
+  left: 35.3%;
+  top: 103px;
   margin: 0;
   padding: 14px 28px;
   max-width: 664px;
@@ -321,5 +333,16 @@ const LabelDistance = styled.label`
     color: #030c37;
   }
   `;
+
+  const closeBtn = styled.button`
+  border: none;
+  height: 80px;
+  width: 200px;
+  margin: 0 0 20px 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fff;
+`;
 
 export default Evaluation;
