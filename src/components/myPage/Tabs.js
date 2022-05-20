@@ -13,6 +13,7 @@ import { styled as muiStyled } from "@mui/material/styles";
 
 import { getProfileDB, getRunningDB, getMyRunningDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
+import { Grid } from "swiper";
 
 const TabPanel = (props) => {
   const { children, value, index } = props;
@@ -146,7 +147,7 @@ export default function BasicTabs() {
       <TabPanel value={value} index={0} >
 
       {expected ? 
-        <>
+        <CategoryBox>
           <Btn
           onClick={() => {
             setExpected(true);
@@ -155,7 +156,7 @@ export default function BasicTabs() {
             dispatch(getProfileDB(userId));
           }}
           >
-            참여예정 그룹 러닝
+            참여 예정
           </Btn>
           <Button
             onClick={() => {
@@ -165,7 +166,7 @@ export default function BasicTabs() {
             dispatch(getRunningDB(userId));
           }}
           >
-            참여완료 그룹 러닝
+            참여 완료
           </Button>
           <Button
             onClick={() => {
@@ -175,13 +176,13 @@ export default function BasicTabs() {
             dispatch(getMyRunningDB(userId));
           }}
           >
-            내가만든 그룹 러닝
+            My 모집
           </Button>
-        </>
+        </CategoryBox>
       :
         <>
           {complete ? 
-            <>
+            <CategoryBox>
               <Button
                 onClick={() => {
                 setExpected(true);
@@ -190,7 +191,7 @@ export default function BasicTabs() {
                 dispatch(getProfileDB(userId));
               }}
               >
-                참여예정 그룹 러닝
+                참여 예정
               </Button>
               <Btn
                 onClick={() => {
@@ -200,7 +201,7 @@ export default function BasicTabs() {
                 dispatch(getRunningDB(userId));
               }}
               >
-                참여완료 그룹 러닝
+                참여 완료
               </Btn>
               <Button
                 onClick={() => {
@@ -210,13 +211,13 @@ export default function BasicTabs() {
                 dispatch(getMyRunningDB(userId));
               }}
               >
-                내가만든 그룹 러닝
+                My 모집
               </Button>
-            </> 
+            </CategoryBox> 
           :
             <>
               {myGroup ? 
-                <>
+                <CategoryBox>
                   <Button
                     onClick={() => {
                     setExpected(true);
@@ -225,7 +226,7 @@ export default function BasicTabs() {
                     dispatch(getProfileDB(userId));
                   }}
                   >
-                    참여예정 그룹 러닝
+                    참여 예정
                   </Button>
                   <Button
                     onClick={() => {
@@ -235,7 +236,7 @@ export default function BasicTabs() {
                     dispatch(getRunningDB(userId));
                   }}
                   >
-                    참여완료 그룹 러닝
+                    참여 완료
                   </Button>
                   <Btn
                     onClick={() => {
@@ -245,9 +246,9 @@ export default function BasicTabs() {
                     dispatch(getMyRunningDB(userId));
                   }}
                   >
-                    내가만든 그룹 러닝
+                    My 모집
                   </Btn>
-                </> 
+                </CategoryBox> 
               :
                 null
               }
@@ -269,30 +270,34 @@ export default function BasicTabs() {
   );
 }
 
-const Btn = styled.button`
-  width: 184px;
-  height: 40px; 
+const CategoryBox = styled.div`
+  display: flex;
+`;
+
+const Btn = styled.div`
+  width: 143px;
+  height: 30px; 
   margin: 0px 20px 30px 0;
-  padding-top: 1px;
+  padding-top: 10px;
   border-radius: 50px;
   border: none;
   background-color:#68f99e;
   color: #030c37;
-  font-weight: 900;
+  font-weight: bold;
   font-size: 16px;
   text-align: center; 
 `;
 
-const Button = styled.button`
-  width: 184px;
-  height: 40px; 
+const Button = styled.div`
+  width: 143px;
+  height: 30px; 
   margin: 0px 20px 30px 0;
-  padding-top: 1px;
+  padding-top: 10px;
   border-radius: 50px;
   border: none;
   background-color: #f0f0f0;
   color: #7b7b7b;
-  font-weight: 900;
+  font-weight: bold;
   font-size: 16px;
   text-align: center;
 `;
