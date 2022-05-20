@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Grid, IconButton, Text, Input } from "../elements";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
@@ -25,9 +25,10 @@ const GroupFeed = () => {
   const preferData = useSelector((state) => state.feed.preferData);
   const isLoading = useSelector((state) => state.feed.isLoading);
 
-  console.log(paging.page);
+  console.log(paging);
   console.log("피드리스트", feedList);
 
+  const [is_next, setIsNext] = useState(paging.is_next);
   const [finish, setFinish] = useState("0");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -75,6 +76,7 @@ const GroupFeed = () => {
   useEffect(() => {
     if (feedList.length === 0) {
       console.log("GET 그룹 게시물");
+      dispatch(resetGroup());
       dispatch(getGroupDB(category));
     }
 
@@ -171,16 +173,7 @@ const GroupFeed = () => {
             </Text>
           </Grid>
           <Grid display="flex">
-            <InfinityScroll
-              callNext={() => {
-                console.log("call next 제발");
-                console.log("페이지넘버", paging);
-
-                dispatch(getGroupDB(category, paging.page));
-              }}
-              is_next={paging.page ? true : false}
-              loading={isLoading}
-            >
+            <InfinityScroll category={category}>
               {feedList?.map((item, idx) => {
                 return <GroupCard key={idx} {...item}></GroupCard>;
               })}

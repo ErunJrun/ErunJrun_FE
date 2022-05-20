@@ -28,7 +28,7 @@ const initialState = {
       { lat: 37.6, lng: 127.4 },
     ],
   },
-  paging: { page: 1, size: 3 },
+  paging: { page: 1, size: 3, is_next: false },
   isLoading: false,
 };
 
@@ -42,10 +42,9 @@ export const addGroup = (payload) => ({
   payload,
 });
 
-export const getGroup = (feedList, paging) => ({
+export const getGroup = (feedList) => ({
   type: GET_GROUP,
   feedList,
-  paging,
 });
 
 export const getMain = (feedList) => ({
@@ -143,6 +142,7 @@ export const getGroupDB = (category, page = 1, size = 3) => {
       let paging = {
         page: data.data.length === size ? page + 1 : null,
         size: size,
+        is_next: data.data.length === size ? true : false,
       };
       console.log(paging);
       dispatch(getGroup(data, paging));
@@ -335,6 +335,16 @@ export default handleActions(
     [RESET_GROUP]: (state, action) =>
       produce(state, (draft) => {
         draft.list = [];
+        draft.main = [];
+        draft.preferData = [];
+        draft.detail = {
+          mapLatLng: [
+            { lat: 37.498004414546934, lng: 127.02770621963765 },
+            { lat: 37.6, lng: 127.4 },
+          ],
+        };
+        draft.paging = { page: 1, size: 3, is_next: false };
+        draft.isLoading = false;
       }),
 
     [ADD_GROUP]: (state, action) =>
@@ -344,7 +354,7 @@ export default handleActions(
     [GET_GROUP]: (state, action) =>
       produce(state, (draft) => {
         console.log(action);
-        // draft.preferData = action.feedList.preferData;
+        draft.preferData = action.feedList.preferData;
         draft.list.push(...action.feedList.data);
         draft.isLoading = false;
 
