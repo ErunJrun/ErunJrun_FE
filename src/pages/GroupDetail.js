@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteGroupDB, getGroupDetailDB } from "../redux/modules/feed";
+import {
+  applyDetailDB,
+  deleteGroupDB,
+  getGroupDetailDB,
+} from "../redux/modules/feed";
 import ImageSlide from "../components/groupDetail/ImageSlide";
 import MainInfo from "../components/groupDetail/MainInfo";
 import { Grid, Text, IconButton } from "../elements";
@@ -17,6 +21,10 @@ import { useMediaQuery } from "react-responsive";
 import backIcon from "../assets/groupDetail/backIcon.png";
 import Permit from "../shared/Permit";
 import { history } from "../redux/configureStore";
+import chatMobColor from "../assets/groupDetail/chatMobColor.png";
+import chatMob from "../assets/groupDetail/chatMob.png";
+import shareMob from "../assets/groupDetail/shareMob.png";
+import KakaoShareButton from "../components/KakaoShareButton";
 
 const GroupDetail = () => {
   const isMobile = useMediaQuery({
@@ -31,6 +39,17 @@ const GroupDetail = () => {
 
   const nickname = localStorage.getItem("nickname");
   const isLogin = useSelector((state) => state.user.isLogin);
+
+  console.log(isLogin);
+  console.log(detailGroup);
+
+  const goApply = () => {
+    if (isLogin || nickname) {
+      dispatch(applyDetailDB(groupId));
+    } else {
+      window.alert("로그인 후 이용해 주세요");
+    }
+  };
 
   const handleEditMenu = () => {
     return setEditMenu(!editMenu);
@@ -114,10 +133,194 @@ const GroupDetail = () => {
             <CrewLeaderInfo {...detailGroup} />
             <InfoCategory {...detailGroup} />
           </Grid>
-          {/* <ApplyWrap>
-            <Grid bg="#030C37"></Grid>
-            <ApplyBar>신청하기</ApplyBar>
-          </ApplyWrap> */}
+          {detailGroup?.applyEndTime === "0 일" ? (
+            <>
+              <Grid
+                bg="#030C37"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                zIndex="3"
+                position="fixed"
+                bottom="73px"
+                left="0"
+                width="100%"
+                height="28px"
+              >
+                <Grid
+                  width="375px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Text size="12px" margin="0" color="white">
+                    마감되었습니다
+                  </Text>
+                </Grid>
+              </Grid>
+
+              <Grid
+                zIndex="3"
+                bg="white"
+                justifyContent="center"
+                position="fixed"
+                bottom="0"
+                left="0"
+                width="100%"
+                height="73px"
+                display="flex"
+                padding="10px 16px"
+              >
+                <Grid
+                  width="375px"
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  padding="0"
+                >
+                  <ChatMob
+                    onClick={() => {
+                      window.alert("기한이 종료되었습니다.");
+                    }}
+                    src={chatMob}
+                  />
+
+                  <ShareMob
+                    onClick={() => {
+                      window.alert("기한이 종료되었습니다.");
+                    }}
+                    src={shareMob}
+                  />
+
+                  <ApplyBtn style={{ background: "gray" }}>
+                    <Text margin="0" size="14px">
+                      기한 종료
+                    </Text>
+                  </ApplyBtn>
+                </Grid>
+              </Grid>
+            </>
+          ) : (
+            <>
+              <Grid
+                bg="#030C37"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                zIndex="3"
+                position="fixed"
+                bottom="73px"
+                left="0"
+                width="100%"
+                height="28px"
+              >
+                <Grid
+                  width="375px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Text size="12px" margin="0" color="white">
+                    약 {detailGroup?.applyEndTime} 후 마감!
+                  </Text>
+                </Grid>
+              </Grid>
+
+              <Grid
+                zIndex="3"
+                bg="white"
+                justifyContent="center"
+                position="fixed"
+                bottom="0"
+                left="0"
+                width="100%"
+                height="73px"
+                display="flex"
+                padding="10px 16px"
+              >
+                <Grid
+                  width="375px"
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  padding="0"
+                >
+                  {detailGroup?.chattingRoom === "" ? (
+                    !detailGroup?.applyState ? (
+                      <a
+                        style={{ textDecoration: "none", height: "44px" }}
+                        href={detailGroup?.chattingRoom}
+                      >
+                        <ChatMob src={chatMobColor} />
+                      </a>
+                    ) : (
+                      <ChatMob
+                        onClick={() => {
+                          window.alert("기한이 종료되었습니다.");
+                        }}
+                        src={chatMob}
+                      />
+                    )
+                  ) : !detailGroup?.applyState ? (
+                    <a
+                      style={{ textDecoration: "none", height: "44px" }}
+                      href={detailGroup?.chattingRoom}
+                    >
+                      <ChatMob src={chatMobColor} />
+                    </a>
+                  ) : (
+                    <ChatMob
+                      onClick={() => {
+                        window.alert("신청 후 이용해주세요");
+                      }}
+                      src={chatMob}
+                    />
+                  )}
+
+                  <KakaoShareButton isMobile={true} detailGroup={detailGroup} />
+
+                  {!detailGroup?.applyState ? (
+                    <ApplyBtn
+                      style={{
+                        background: "white",
+                        border: "1px solid #68f99e",
+                      }}
+                      onClick={() => {
+                        goApply();
+                      }}
+                    >
+                      <Text
+                        color="black"
+                        _onClick={() => {
+                          goApply();
+                        }}
+                        margin="0"
+                        size="14px"
+                      >
+                        신청취소
+                      </Text>
+                    </ApplyBtn>
+                  ) : (
+                    <ApplyBtn
+                      onClick={() => {
+                        goApply();
+                      }}
+                    >
+                      <Text
+                        _onClick={() => {
+                          goApply();
+                        }}
+                        margin="0"
+                        size="14px"
+                      >
+                        신청하기
+                      </Text>
+                    </ApplyBtn>
+                  )}
+                </Grid>
+              </Grid>
+            </>
+          )}
         </Grid>
       </>
     );
@@ -203,27 +406,63 @@ const TitleBar = styled.p`
   height: 19px;
 `;
 
-const ApplyWrap = styled.div`
+const ChatMob = styled.img`
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  cursor: pointer;
+`;
+
+const ShareMob = styled.img`
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  cursor: pointer;
+`;
+
+const ApplyBtn = styled.div`
+  background-color: #68f99e;
+  width: 239px;
+  height: 44px;
+  border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 375px;
-  height: 121px;
-  position: fixed;
-  bottom: 90px;
-  z-index: 3;
-  background-color: white;
-`;
-
-const ApplyBar = styled.p`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-family: "Spoqa Han Sans Neo";
-  font-weight: 500;
-  font-size: 14px;
-  width: 268px;
-  height: 19px;
+  margin: 0;
+  :hover {
+    -webkit-animation: shadow-drop-2-center 0.4s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: shadow-drop-2-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    @-webkit-keyframes shadow-drop-2-center {
+      0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+      }
+      100% {
+        -webkit-transform: translateZ(50px);
+        transform: translateZ(50px);
+        -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+      }
+    }
+    @keyframes shadow-drop-2-center {
+      0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+      }
+      100% {
+        -webkit-transform: translateZ(50px);
+        transform: translateZ(50px);
+        -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+      }
+    }
+  }
 `;
 
 const DropContent = styled.div`

@@ -48,8 +48,8 @@ function App() {
 
   return (
     <React.Fragment>
-      <Wrapper>
-        <ConnectedRouter history={history}>
+      <ConnectedRouter history={history}>
+        <Wrapper>
           <Header></Header>
           <ScrollToTop />
           <Route path="/" exact component={Main} />
@@ -71,9 +71,9 @@ function App() {
           <Route path="/serviceInfo" exact component={ServiceInfo} />
           <Route path="/serviceTerms" exact component={ServiceTerms} />
           <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
-        </ConnectedRouter>
-      </Wrapper>
-      <Footer></Footer>
+        </Wrapper>
+        <Footer></Footer>
+      </ConnectedRouter>
     </React.Fragment>
   );
 }

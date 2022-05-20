@@ -15,20 +15,19 @@ import Permit from "../shared/Permit";
 
 import InfinityScroll from "../components/InfinityScroll";
 
+import { useMediaQuery } from "react-responsive";
+
+import Ready from "../shared/Ready";
+
 const GroupFeed = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
   const dispatch = useDispatch();
 
   const nickname = localStorage.getItem("nickname");
 
-  const feedList = useSelector((state) => state.feed.list);
-  const paging = useSelector((state) => state.feed.paging);
-  const preferData = useSelector((state) => state.feed.preferData);
-  const isLoading = useSelector((state) => state.feed.isLoading);
-
-  console.log(paging);
-  console.log("피드리스트", feedList);
-
-  const [is_next, setIsNext] = useState(paging.is_next);
   const [finish, setFinish] = useState("0");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -41,6 +40,14 @@ const GroupFeed = () => {
   const [uploadBtn, setUploadBtn] = useState(false);
 
   console.log(uploadBtn);
+
+  const feedList = useSelector((state) => state.feed.list);
+  const paging = useSelector((state) => state.feed.paging);
+  const preferData = useSelector((state) => state.feed.preferData);
+  const isLoading = useSelector((state) => state.feed.isLoading);
+
+  console.log(paging);
+  console.log("피드리스트", feedList);
 
   const category = {
     region: region,
@@ -76,7 +83,6 @@ const GroupFeed = () => {
   useEffect(() => {
     if (feedList.length === 0) {
       console.log("GET 그룹 게시물");
-      dispatch(resetGroup());
       dispatch(getGroupDB(category));
     }
 
@@ -85,6 +91,14 @@ const GroupFeed = () => {
       dispatch(resetGroup());
     };
   }, []);
+
+  if (isMobile) {
+    return (
+      <>
+        <Ready />
+      </>
+    );
+  }
 
   return (
     <>
@@ -173,7 +187,15 @@ const GroupFeed = () => {
             </Text>
           </Grid>
           <Grid display="flex">
-            <InfinityScroll category={category}>
+            <InfinityScroll
+              callNext={() => {
+                console.log("콜넥스트실행");
+                console.log("콜넥스트 내부 페이지 번호", paging.page);
+                dispatch(getGroupDB(category, paging.page));
+              }}
+              is_next={paging.page ? true : false}
+              loading={isLoading}
+            >
               {feedList?.map((item, idx) => {
                 return <GroupCard key={idx} {...item}></GroupCard>;
               })}

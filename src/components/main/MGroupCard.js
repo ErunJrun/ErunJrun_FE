@@ -13,7 +13,7 @@ const MGroupCard = (props) => {
       <Grid width="384px" margin="0 8px 80px 8px">
         <Grid
           _onClick={() => {
-            history.push(`/groupfeed`);
+            history.push(`/groupdetail/${props.groupId}`);
           }}
           width="100%"
           display="flex"

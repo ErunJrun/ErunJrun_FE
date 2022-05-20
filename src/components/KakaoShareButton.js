@@ -6,8 +6,14 @@ import shareIcon from "../assets/groupDetail/share.png";
 import { Text } from "../elements";
 import { useLocation } from "react-router-dom";
 import { getGroupDetailDB } from "../redux/modules/feed";
+import shareMob from "../assets/groupDetail/shareMob.png";
+import { useMediaQuery } from "react-responsive";
 
-const KakaoShareButton = () => {
+const KakaoShareButton = (props) => {
+  // const isMobile = useMediaQuery({
+  //   query: "(max-width:767px)",
+  // });
+
   const dispatch = useDispatch();
   const groupDetail = useSelector((state) => state.feed.detail);
   const { pathname } = useLocation();
@@ -15,10 +21,6 @@ const KakaoShareButton = () => {
   const params = useParams();
   const groupId = params.groupId;
   console.log(groupDetail);
-
-  // const shareBtn = () => {
-  //   createKakaoButton();
-  // };
 
   useEffect(() => {
     console.log("디테일 소환");
@@ -63,64 +65,23 @@ const KakaoShareButton = () => {
               webUrl: window.location.href,
             },
           },
-          // {
-          //   title: "앱으로 보기",
-          //   link: {
-          //     mobileWebUrl: window.location.href,
-          //     webUrl: window.location.href,
-          //   },
-          // },
         ],
       });
     }
   };
 
-  // const createKakaoButton = () => {
-  //   // kakao sdk script이 정상적으로 불러와졌으면 window.Kakao로 접근이 가능합니다
-  //   if (window.Kakao) {
-  //     const kakao = window.Kakao;
-
-  //     // 중복 initialization 방지
-  //     if (!kakao.isInitialized()) {
-  //       // 두번째 step 에서 가져온 javascript key 를 이용하여 initialize
-  //       kakao.init(process.env.REACT_APP_KAKAO_KEY);
-  //     }
-
-  //     kakao.Link.createDefaultButton({
-  //       // Render 부분 id=kakao-link-btn 을 찾아 그부분에 렌더링을 합니다
-  //       container: "#kakao-link-btn",
-  //       objectType: "location",
-  //       address: groupDetail?.location,
-  //       addressTitle: groupDetail?.title,
-  //       content: {
-  //         title: groupDetail?.title,
-  //         description: groupDetail?.content,
-  //         imageUrl: groupDetail?.thumbnailUrl1,
-  //         link: {
-  //           mobileWebUrl: "https://developers.kakao.com/",
-  //           webUrl: "https://developers.kakao.com/",
-  //         },
-  //       },
-
-  //       buttons: [
-  //         {
-  //           title: "웹으로 보기",
-  //           link: {
-  //             mobileWebUrl: `https://developers.kakao.com/${groupId}`,
-  //             webUrl: `https://developers.kakao.com/${groupId}`,
-  //           },
-  //         },
-  //       ],
-  //     });
-  //   }
-  // };
-
   return (
     <>
-      <ShareBtn id="kakao-link-btn" onClick={shareKakao}>
-        <ChatImg src={shareIcon} />
-        <Text cursor="pointer">공유하기</Text>
-      </ShareBtn>
+      {props.isMobile ? (
+        <ShareMob id="kakao-link-btn" onClick={shareKakao} src={shareMob} />
+      ) : (
+        <>
+          <ShareBtn id="kakao-link-btn" onClick={shareKakao}>
+            <ChatImg src={shareIcon} />
+            <Text cursor="pointer">공유하기</Text>
+          </ShareBtn>
+        </>
+      )}
     </>
   );
 };
@@ -147,6 +108,13 @@ const ChatImg = styled.img`
   width: 21px;
   height: 19.2px;
   margin-right: 8px;
+  cursor: pointer;
+`;
+
+const ShareMob = styled.img`
+  width: 44px;
+  height: 44px;
+  margin: 0;
   cursor: pointer;
 `;
 

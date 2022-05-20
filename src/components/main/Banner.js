@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import blueBanner from "../../assets/main/blueBanner.png";
 import yellowBanner from "../../assets/main/yellowBanner.png";
+import yellowBannerMob from "../../assets/main/yellowBannerMob.png";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -32,7 +33,7 @@ const Banner = () => {
         <Swiper
           id="SwiperMob"
           modules={[Navigation, Pagination]}
-          spaceBetween={50}
+          spaceBetween={0}
           slidesPerView={1}
           navigation={{ clickable: true }}
           pagination={{ clickable: true }}
@@ -40,10 +41,10 @@ const Banner = () => {
           <SwiperSlide id="SwiperSlideMob">
             <img
               style={{ width: "100%", height: "150px" }}
-              src={yellowBanner}
-              alt="yellowBanner"
+              src={yellowBannerMob}
+              alt="yellowBannerMob"
             />
-            <Grid
+            {/* <Grid
               display="flex"
               justifyContent="space-between"
               width="375px"
@@ -91,7 +92,7 @@ const Banner = () => {
                   추천 코스 보러가기
                 </button>
               </Grid>
-            </Grid>
+            </Grid> */}
           </SwiperSlide>
         </Swiper>
       </BoxMob>
@@ -368,17 +369,9 @@ const Box = styled.div`
 `;
 
 const BoxMob = styled.div`
-  max-width: 767px;
   width: 100%;
   height: 150px;
-  overflow: hidden;
-  margin-top: 90px;
-`;
-
-const BannerImg = styled.img`
-  max-width: 1920px;
-  width: 100%;
-  height: auto;
+  margin: 90px auto 0 auto;
 `;
 
 export default Banner;

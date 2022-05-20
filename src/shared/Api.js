@@ -68,15 +68,7 @@ api.interceptors.response.use(
 
         history.push("login");
       } else {
-        deleteCookie("accessToken");
-        deleteCookie("refreshToken");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("nickname");
-        localStorage.removeItem("profileUrl");
-        localStorage.removeItem("firstLogin");
-
-        window.alert("로그인이 시간이 만료되었습니다.");
-        history.push("login");
+        window.alert(response.data.message);
       }
     }
 

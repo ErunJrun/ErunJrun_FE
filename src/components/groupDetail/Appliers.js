@@ -18,7 +18,7 @@ const Appliers = () => {
   if (isMobile) {
     return (
       <>
-        <Grid display="flex" margin="0" flexDirection="column">
+        <Grid display="flex" margin="0 0 100px 0" flexDirection="column">
           <Text bold size="13px" margin="0 0 20px 0">
             크루원 정보
           </Text>

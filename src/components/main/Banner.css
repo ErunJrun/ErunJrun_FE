@@ -20,16 +20,16 @@
   margin: 0 auto;
 }
 
+#SwiperSlideMob {
+  width: 100%;
+}
+
 #SwiperMob > .swiper-button-prev {
   display: none;
 }
 
 #SwiperMob > .swiper-button-next {
   display: none;
-}
-
-#SwiperSlideMob {
-  width: 100%;
 }
 
 .swiper-slide {

@@ -28,7 +28,7 @@ const initialState = {
       { lat: 37.6, lng: 127.4 },
     ],
   },
-  paging: { page: 1, size: 3, is_next: false },
+  paging: { page: 1, size: 3 },
   isLoading: false,
 };
 
@@ -42,9 +42,10 @@ export const addGroup = (payload) => ({
   payload,
 });
 
-export const getGroup = (feedList) => ({
+export const getGroup = (feedList, paging) => ({
   type: GET_GROUP,
   feedList,
+  paging,
 });
 
 export const getMain = (feedList) => ({
@@ -95,7 +96,6 @@ export const getGroupDB = (category, page = 1, size = 3) => {
     if (!_paging.page) {
       return;
     }
-
     dispatch(loading(true));
 
     try {
@@ -142,7 +142,6 @@ export const getGroupDB = (category, page = 1, size = 3) => {
       let paging = {
         page: data.data.length === size ? page + 1 : null,
         size: size,
-        is_next: data.data.length === size ? true : false,
       };
       console.log(paging);
       dispatch(getGroup(data, paging));
@@ -319,7 +318,6 @@ export const applyDetailDB = (groupId) => {
         applyState: data.data.applyState,
         applyPeople: data.data.applyPeople,
       };
-      window.alert("신청이 완료되었습니다.");
       dispatch(getGroupDetailDB(groupId));
       dispatch(applyDetail(applyData));
     } catch (error) {
@@ -357,7 +355,6 @@ export default handleActions(
         draft.preferData = action.feedList.preferData;
         draft.list.push(...action.feedList.data);
         draft.isLoading = false;
-
         if (action.paging) {
           draft.paging = action.paging;
         }

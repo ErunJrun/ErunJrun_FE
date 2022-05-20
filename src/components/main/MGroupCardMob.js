@@ -12,9 +12,6 @@ const MGroupCardMob = (props) => {
     <>
       <Grid width="156px" margin="0">
         <Grid
-          _onClick={() => {
-            history.push(`/groupfeed`);
-          }}
           width="156px"
           height="auto"
           display="flex"
@@ -22,6 +19,9 @@ const MGroupCardMob = (props) => {
           cursor="pointer"
         >
           <Image
+            _onClick={() => {
+              history.push(`/groupdetail/${props.groupId}`);
+            }}
             shape="imgBtn"
             width="156px"
             height="117px"

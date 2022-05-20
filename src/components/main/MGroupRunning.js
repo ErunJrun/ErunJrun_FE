@@ -16,7 +16,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "./Banner.css";
 import "./GroupSlide.css";
 
 import MGroupCardMob from "./MGroupCardMob";
@@ -54,11 +53,11 @@ const MGroupRunning = () => {
     return (
       <>
         <Grid
-          width="100%"
+          width="375px"
           display="flex"
           flexDirection="space-between"
           justifyContent="column"
-          margin="75px 0 0 0"
+          margin="75px auto 0 auto"
         >
           <Grid display="flex" justifyContent="center" margin="0">
             <Grid display="flex" alignItems="flex-end" width="375px">
@@ -73,7 +72,7 @@ const MGroupRunning = () => {
             onSwiper={setSwiperRef}
             slidesPerView={3}
             centeredSlides={true}
-            spaceBetween={120}
+            spaceBetween={130}
             navigation={{ clickable: true }}
             pagination={{ clickable: true }}
             virtual
@@ -88,12 +87,17 @@ const MGroupRunning = () => {
           </Swiper>
         </Grid>
 
-        <Grid display="flex" justifyContent="column" margin="0 auto 100px auto">
+        <Grid
+          width="375px"
+          display="flex"
+          justifyContent="column"
+          margin="0 auto 100px auto"
+        >
           <Grid
             display="flex"
             justifyContent="space-between"
             alignItems="flex-end"
-            margin="0 0 40px 0"
+            margin="0 auto 40px auto"
           >
             <Grid display="flex" justifyContent="center" margin="0">
               <Grid display="flex" alignItems="flex-end" width="375px">
@@ -112,7 +116,7 @@ const MGroupRunning = () => {
             margin="0 auto"
           >
             <img style={{ width: "168px" }} src={readyImage} />
-            <Text size="10px">
+            <Text margin="0 0 50px 0" size="10px">
               해당 서비스는 오픈 전입니다. 조금만 기다려주세요!
             </Text>
           </Grid>
