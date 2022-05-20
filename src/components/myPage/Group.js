@@ -31,9 +31,9 @@ const Group = () => {
             return userId !== data.userId ? (
               <Grid
                 key={index}
-                maxWidth="384px"
+                maxWidth="288px"
                 width="100%"
-                margin="0 8px 80px 8px"
+                margin="0 8px 55px 8px"
               >
                 <Grid
                   _onClick={() => {
@@ -46,22 +46,22 @@ const Group = () => {
                 >
                   <Image
                     shape="imgBtn"
-                    width="384px"
-                    height="288px"
+                    width="288px"
+                    height="216px"
                     src={data.thumbnailUrl}
                     borderRadius="3px"
                   ></Image>
 
                   <Grid>
-                    <Text cursor="pointer" size="18px" bold margin="0">
+                    <Text cursor="pointer" size="16px" bold margin="14px 0 0 0">
                       {data.title}
                     </Text>
-                    <Text cursor="pointer" size="16px" margin="10px 0 0 0">
+                    <Text cursor="pointer" size="13px" margin="2px 0 0 0">
                       {data.date} (소요 시간 : {data.totalTime})
                     </Text>
                   </Grid>
 
-                  <Grid cursor="pointer" display="flex">
+                  <Grid cursor="pointer" display="flex" margin="-10px 0 0 0">
                     <Tag>{data.location}</Tag>
                     <Tag>{data.distance}km</Tag>
                     <Tag>{data.thema}</Tag>
@@ -106,8 +106,9 @@ const ApplyEnd = styled.div`
 `;
 
 const Tag = styled.div`
+  font-size: 12px;
   font-weight: 500;
-  height: 24px;
+  height: 21px;
   background-color: #ddd;
   margin: 20px 12px 0 0;
   padding: 3px 11px;
@@ -144,12 +145,12 @@ const ApplyBtnTrue = styled.button`
 const ApplyBtnFalse = styled.button`
   max-width: 382px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bold;
   width: 100%;
-  background: gray;
+  background: #f0f0f0;
   border-radius: 3px;
   height: 38px;
-  color: white;
+  color: #7b7b7b;
   border: none;
 `;
 

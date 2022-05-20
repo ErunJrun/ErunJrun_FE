@@ -36,8 +36,7 @@ const Mypage = () => {
     <Grid width="1200px" margin="auto">
       <Profile userId={userId} />
       <HostEvaluation/>
-      {MyId === userId ? <Schedule userId={userId} /> : null}
-
+      {/* {MyId === userId ? <Schedule userId={userId} /> : null} */}
       <Tabs />
     </Grid>
   );

@@ -5,19 +5,17 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import styled from "styled-components";
+import Schedule from "./Schedule";
 import Group from "../myPage/Group";
 import MyGroup from "../myPage/MyGroup";
 import Ready from "../../shared/Ready";
+import { styled as muiStyled } from "@mui/material/styles";
 
-import { getRunningDB, getMyRunningDB } from "../../redux/modules/mypage";
+import { getProfileDB, getRunningDB, getMyRunningDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
 
 const TabPanel = (props) => {
   const { children, value, index } = props;
-
-  // useEffect(() => {
-  //   dispatch(getProfileDB(userId));
-  // }, []);
 
   return (
     <div
@@ -50,74 +48,215 @@ export default function BasicTabs() {
   const userId = localStorage.getItem("userId");
 
   const [value, setValue] = React.useState(0);
-
-  const [complete, setComplete] = useState(true);
+  const [expected, setExpected] = useState(true);
+  const [complete, setComplete] = useState(false);
   const [myGroup, setMyGroup] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const AntTabs = muiStyled(Tabs)({
+    borderBottom: "1px solid #e8e8e8",
+    "& .MuiTabs-indicator": {
+      backgroundColor: "#68F99E",
+      borderBottom: "2px solid #68F99E",
+    },
+  });
+
+  const AntTab = muiStyled((props) => <Tab disableRipple {...props} />)(
+    ({ theme }) => ({
+      textTransform: "none",
+     
+      minWidth: 0,
+      [theme.breakpoints.up("sm")]: {
+        minWidth: 0,
+      },
+      fontWeight: theme.typography.fontWeightRegular,
+      marginRight: theme.spacing(1),
+      color: "#7B7B7B",
+      fontFamily: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+      "&:hover": {
+        color: "#000",
+        opacity: 1,
+      },
+      "&.Mui-selected": {
+        color: "black",
+        fontWeight: theme.typography.fontWeightMedium,
+      },
+      "&.Mui-focusVisible": {
+        backgroundColor: "#d1eaff",
+      },
+    })
+  );
+
   return (
     <Box sx={{ width: "106%" }}>
-      <Box sx={{ borderBottom: 3, borderColor: "divider" }}>
-        <Tabs sx={{
+       <Box sx={{ bgcolor: "#fff" }}>
+        <AntTabs sx={{
           color: "#000", 
           fontSize:"18px", 
-          fontWeight: "bold" 
+          fontWeight: "bold",
+          fontFamily: "Spoqa Han Sans Neo"
         }}
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab sx={{ 
+          <AntTab sx={{ 
             color: "#909090", 
             fontSize:"18px", 
-            fontWeight: "bold" 
+            fontWeight: "bold",
+            fontFamily: "Spoqa Han Sans Neo",
             }}
             label="그룹 러닝" 
             {...a11yProps(0)} 
             />
-          <Tab sx={{ 
+          <AntTab sx={{ 
             color: "#909090", 
             fontSize:"18px", 
-            fontWeight: "bold" 
+            fontWeight: "bold",
+            fontFamily: "Spoqa Han Sans Neo", 
             }}
             label="추천 코스" 
             {...a11yProps(1)} 
             />
-          <Tab sx={{ 
+          <AntTab sx={{ 
             color: "#909090", 
             fontSize:"18px", 
-            fontWeight: "bold" 
+            fontWeight: "bold",
+            fontFamily: "Spoqa Han Sans Neo",
             }}
             label="뱃지" 
             {...a11yProps(2)} 
             />
-        </Tabs>
+        </AntTabs>
       </Box>
       <TabPanel value={value} index={0} >
-        <Btn
+
+      {expected ? 
+        <>
+          <Btn
           onClick={() => {
+            setExpected(true);
+            setComplete(false);
+            setMyGroup(false);
+            dispatch(getProfileDB(userId));
+          }}
+          >
+            참여예정 그룹 러닝
+          </Btn>
+          <Button
+            onClick={() => {
+            setExpected(false);
             setComplete(true);
             setMyGroup(false);
             dispatch(getRunningDB(userId));
           }}
-        >
-          참여완료 그룹 러닝
-        </Btn>
-        <Btn
-          onClick={() => {
-            setMyGroup(true);
+          >
+            참여완료 그룹 러닝
+          </Button>
+          <Button
+            onClick={() => {
+            setExpected(false);
             setComplete(false);
+            setMyGroup(true);
             dispatch(getMyRunningDB(userId));
           }}
-        >
-          내가만든 그룹 러닝
-        </Btn>
-
+          >
+            내가만든 그룹 러닝
+          </Button>
+        </>
+      :
+        <>
+          {complete ? 
+            <>
+              <Button
+                onClick={() => {
+                setExpected(true);
+                setComplete(false);
+                setMyGroup(false);
+                dispatch(getProfileDB(userId));
+              }}
+              >
+                참여예정 그룹 러닝
+              </Button>
+              <Btn
+                onClick={() => {
+                setExpected(false);
+                setComplete(true);
+                setMyGroup(false);
+                dispatch(getRunningDB(userId));
+              }}
+              >
+                참여완료 그룹 러닝
+              </Btn>
+              <Button
+                onClick={() => {
+                setExpected(false);
+                setComplete(false);
+                setMyGroup(true);
+                dispatch(getMyRunningDB(userId));
+              }}
+              >
+                내가만든 그룹 러닝
+              </Button>
+            </> 
+          :
+            <>
+              {myGroup ? 
+                <>
+                  <Button
+                    onClick={() => {
+                    setExpected(true);
+                    setComplete(false);
+                    setMyGroup(false);
+                    dispatch(getProfileDB(userId));
+                  }}
+                  >
+                    참여예정 그룹 러닝
+                  </Button>
+                  <Button
+                    onClick={() => {
+                    setExpected(false);
+                    setComplete(true);
+                    setMyGroup(false);
+                    dispatch(getRunningDB(userId));
+                  }}
+                  >
+                    참여완료 그룹 러닝
+                  </Button>
+                  <Btn
+                    onClick={() => {
+                    setExpected(false);
+                    setComplete(false);
+                    setMyGroup(true);
+                    dispatch(getMyRunningDB(userId));
+                  }}
+                  >
+                    내가만든 그룹 러닝
+                  </Btn>
+                </> 
+              :
+                null
+              }
+            </>
+          }        
+        </>
+      }
+        {expected === true ? <Schedule /> : null}
         {complete === true ? <Group /> : null}
-
         {myGroup === true ? <MyGroup /> : null}
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -132,17 +271,28 @@ export default function BasicTabs() {
 
 const Btn = styled.button`
   width: 184px;
-  height: 40px;
-  margin: 20px 20px 30px 0;
+  height: 40px; 
+  margin: 0px 20px 30px 0;
   padding-top: 1px;
   border-radius: 50px;
   border: none;
   background-color:#68f99e;
   color: #030c37;
+  font-weight: 900;
   font-size: 16px;
-  font-weight: bold;
+  text-align: center; 
+`;
+
+const Button = styled.button`
+  width: 184px;
+  height: 40px; 
+  margin: 0px 20px 30px 0;
+  padding-top: 1px;
+  border-radius: 50px;
+  border: none;
+  background-color: #f0f0f0;
+  color: #7b7b7b;
+  font-weight: 900;
+  font-size: 16px;
   text-align: center;
-  :hover {
-    background-color: #02FD7B;
-  }
 `;
