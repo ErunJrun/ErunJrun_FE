@@ -59,7 +59,7 @@ const ProfileModal = ({ onClose }) => {
               size="18px"
               regular
             >
-              계절설정
+              계정설정
             </Text>
             <Hr />
             <Text
