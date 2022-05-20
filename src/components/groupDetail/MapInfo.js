@@ -14,7 +14,7 @@ import { useMediaQuery } from "react-responsive";
 
 function MapInfo(props) {
   const isMobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:820px)",
   });
 
   const detailGroup = useSelector((state) => state.feed.detail);

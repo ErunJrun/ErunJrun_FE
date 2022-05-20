@@ -21,7 +21,7 @@ import mapIcon from "../../assets/groupDetail/map.png";
 
 const InfoCategory = (props) => {
   const isMobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:820px)",
   });
 
   const [value, setValue] = React.useState("1");

@@ -20,7 +20,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 const Footer = () => {
   const isMobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:820px)",
   });
 
   const userId = localStorage.getItem("userId");
@@ -325,7 +325,75 @@ const Footer = () => {
                   </Text>
                 </Grid>
               </>
-            ) : null}
+            ) : (
+              <>
+                <Grid
+                  display="flex"
+                  alignItems="center"
+                  width="auto"
+                  flexDirection="column"
+                >
+                  <FooterIcon
+                    src={homeIcon}
+                    onClick={() => {
+                      history.push("/");
+                    }}
+                  />
+                  <Text margin="0" width="auto" color="#B8B8B8" size="10px">
+                    Home
+                  </Text>
+                </Grid>
+
+                <Grid
+                  display="flex"
+                  alignItems="center"
+                  width="auto"
+                  flexDirection="column"
+                >
+                  <FooterIcon
+                    src={groupIcon}
+                    onClick={() => {
+                      history.push("/groupfeed");
+                    }}
+                  />
+                  <Text margin="0" color="#B8B8B8" size="10px">
+                    그룹 러닝
+                  </Text>
+                </Grid>
+                <Grid
+                  display="flex"
+                  alignItems="center"
+                  width="auto"
+                  flexDirection="column"
+                >
+                  <FooterIcon
+                    src={courseIcon}
+                    onClick={() => {
+                      history.push("/coursefeed");
+                    }}
+                  />
+                  <Text margin="0" color="#B8B8B8" size="10px">
+                    추천 코스
+                  </Text>
+                </Grid>
+                <Grid
+                  display="flex"
+                  alignItems="center"
+                  width="auto"
+                  flexDirection="column"
+                >
+                  <FooterIcon
+                    src={mypageIcon}
+                    onClick={() => {
+                      history.push(`/mypage/${userId}`);
+                    }}
+                  />
+                  <Text margin="0" color="#B8B8B8" size="10px">
+                    마이페이지
+                  </Text>
+                </Grid>
+              </>
+            )}
           </Grid>
         </Grid>
       </>

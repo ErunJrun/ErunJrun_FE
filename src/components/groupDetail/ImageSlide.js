@@ -24,7 +24,7 @@ import { Grid, Text } from "../../elements";
 
 const ImageSlide = () => {
   const isMobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:820px)",
   });
 
   const dispatch = useDispatch();

@@ -19,7 +19,7 @@ import { useMediaQuery } from "react-responsive";
 
 const CommentItem = (props) => {
   const isMobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:820px)",
   });
 
   const dispatch = useDispatch();

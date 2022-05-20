@@ -24,7 +24,7 @@ SwiperCore.use([Virtual, Navigation, Pagination]);
 
 const MGroupRunning = () => {
   const isMobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:820px)",
   });
 
   const dispatch = useDispatch();

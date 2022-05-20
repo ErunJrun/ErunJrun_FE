@@ -9,7 +9,7 @@ import { useMediaQuery } from "react-responsive";
 
 const LevelBox = (props) => {
   const isMobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:820px)",
   });
 
   console.log(props);

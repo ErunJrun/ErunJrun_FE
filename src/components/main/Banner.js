@@ -24,7 +24,7 @@ const Banner = () => {
   const userName = localStorage.getItem("nickname");
 
   const isMobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:820px)",
   });
 
   if (isMobile) {
