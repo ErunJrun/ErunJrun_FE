@@ -329,14 +329,14 @@ const ContentMob = styled.div`
   box-sizing: border-box;
   z-index: 205;
   width: 200px;
-  height: 150px;
+  height: 400px;
   border: 1px solid rgba(149, 149, 149, 0.25);
   background: #ffffff;
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   position: absolute;
-  top: 85px;
-  left: 180px;
+  top: 55px;
+  left: 140px;
   padding: 12px;
   overflow: auto;
   overflow-x: hidden;

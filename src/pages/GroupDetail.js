@@ -19,6 +19,8 @@ import InfoCategory from "../components/groupDetail/InfoCategory";
 import mapIcon from "../assets/groupDetail/map.png";
 import { useMediaQuery } from "react-responsive";
 import backIcon from "../assets/groupDetail/backIcon.png";
+import editIcon from "../assets/groupDetail/editIcon.png";
+
 import Permit from "../shared/Permit";
 import { history } from "../redux/configureStore";
 import chatMobColor from "../assets/groupDetail/chatMobColor.png";
@@ -51,23 +53,6 @@ const GroupDetail = () => {
     }
   };
 
-  const handleEditMenu = () => {
-    return setEditMenu(!editMenu);
-  };
-
-  const closeEditMenu = () => {
-    return setEditMenu(false);
-  };
-
-  const editGroup = () => {
-    if (detailGroup.applyEndTime === "0 일") {
-      return window.alert("모집이 마감 된 공고입니다.");
-    } else {
-      closeEditMenu();
-      history.push(`/groupEdit/${groupId}`);
-    }
-  };
-
   useEffect(() => {
     dispatch(getGroupDetailDB(groupId));
   }, [groupId]);
@@ -83,51 +68,6 @@ const GroupDetail = () => {
           justifyContent="center"
         >
           <Grid width="375px" display="flex" justifyContent="center">
-            <TitleWrap>
-              <img
-                style={{ width: "8px", height: "16px", marginRight: "24px" }}
-                src={backIcon}
-                onClick={() => {
-                  history.goBack();
-                }}
-              />
-              <TitleBar>{detailGroup?.title}</TitleBar>
-              <Permit>
-                {nickname === detailGroup?.nickname ? (
-                  <Grid margin="0" display="flex" width="auto" height="auto">
-                    <IconButton
-                      cursor="pointer"
-                      _onClick={handleEditMenu}
-                      moreDot
-                      color="gray"
-                    ></IconButton>
-                    {editMenu ? (
-                      <DropContent>
-                        <Text
-                          margin="0"
-                          _onClick={() => {
-                            editGroup();
-                          }}
-                        >
-                          수정하기
-                        </Text>
-                        <Line />
-                        <Text
-                          margin="0"
-                          _onClick={() => {
-                            dispatch(deleteGroupDB(detailGroup.groupId));
-                            closeEditMenu();
-                          }}
-                        >
-                          삭제하기
-                        </Text>
-                      </DropContent>
-                    ) : null}
-                  </Grid>
-                ) : null}
-              </Permit>
-            </TitleWrap>
-
             <ImageSlide />
             <MainInfo groupId={groupId} />
             <CrewLeaderInfo {...detailGroup} />

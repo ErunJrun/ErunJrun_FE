@@ -94,30 +94,31 @@ const Header = () => {
                   src={headerLogoMobile}
                 />
               </Grid>
+              {token ? (
+                <Grid
+                  position="relative"
+                  zIndex="200"
+                  width="auto"
+                  margin="0"
+                  height="auto"
+                  display="flex"
+                >
+                  <AlarmIconMob
+                    src={alarmIconMob}
+                    onClick={() => {
+                      readAlarm();
+                      alarmToggle();
+                    }}
+                  ></AlarmIconMob>
+                  {alarmList?.unreadCount === 0 || alarmList === [] ? null : (
+                    <BadgeMob />
+                  )}
 
-              <Grid
-                position="relative"
-                zIndex="200"
-                width="auto"
-                margin="0"
-                height="auto"
-                display="flex"
-              >
-                <AlarmIconMob
-                  src={alarmIconMob}
-                  onClick={() => {
-                    readAlarm();
-                    alarmToggle();
-                  }}
-                ></AlarmIconMob>
-                {alarmList?.unreadCount === 0 || alarmList === [] ? null : (
-                  <BadgeMob />
-                )}
-
-                {alarmOpen ? (
-                  <AlarmModal onClose={alarmToggle}></AlarmModal>
-                ) : null}
-              </Grid>
+                  {alarmOpen ? (
+                    <AlarmModal onClose={alarmToggle}></AlarmModal>
+                  ) : null}
+                </Grid>
+              ) : null}
             </Grid>
           </Grid>
         </Grid>
