@@ -72,7 +72,6 @@ const Header = () => {
           <Grid
             height="54px"
             margin="0"
-            width="100%"
             display="flex"
             justifyContent="center"
             alignItems="center"
@@ -86,6 +85,7 @@ const Header = () => {
               alignItems="center"
               justifyContent="space-between"
               width="375px"
+              padding="0 15px"
             >
               <Grid display="flex" alignItems="center" width="auto">
                 <HeaderCiMob

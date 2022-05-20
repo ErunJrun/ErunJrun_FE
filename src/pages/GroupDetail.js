@@ -68,6 +68,9 @@ const GroupDetail = () => {
               <img
                 style={{ width: "8px", height: "16px", marginRight: "24px" }}
                 src={backIcon}
+                onClick={() => {
+                  history.goBack();
+                }}
               />
               <TitleBar>{detailGroup?.title}</TitleBar>
               <Permit>
@@ -111,6 +114,10 @@ const GroupDetail = () => {
             <CrewLeaderInfo {...detailGroup} />
             <InfoCategory {...detailGroup} />
           </Grid>
+          {/* <ApplyWrap>
+            <Grid bg="#030C37"></Grid>
+            <ApplyBar>신청하기</ApplyBar>
+          </ApplyWrap> */}
         </Grid>
       </>
     );
@@ -196,6 +203,29 @@ const TitleBar = styled.p`
   height: 19px;
 `;
 
+const ApplyWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 375px;
+  height: 121px;
+  position: fixed;
+  bottom: 90px;
+  z-index: 3;
+  background-color: white;
+`;
+
+const ApplyBar = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 500;
+  font-size: 14px;
+  width: 268px;
+  height: 19px;
+`;
+
 const DropContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -203,6 +233,7 @@ const DropContent = styled.div`
   align-items: center;
   position: absolute;
   box-sizing: border-box;
+  top: 40px;
   left: 250px;
   background-color: #ffffff;
   border: 1px solid #dddddd;

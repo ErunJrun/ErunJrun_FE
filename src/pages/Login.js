@@ -71,27 +71,30 @@ const LogoImg = styled.img`
   width: 292px;
   height: 146px;
   margin: 135px auto 64px auto;
-  animation: wobble-hor-bottom 0.8s both;
+  animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    infinite both;
+
   @keyframes wobble-hor-bottom {
     0%,
     100% {
-      transform: translateX(0%);
-      transform-origin: 50% 50%;
+      transform: translateX(0);
     }
-    15% {
-      transform: translateX(-30px) rotate(-6deg);
+    10%,
+    30%,
+    50%,
+    70% {
+      transform: translateX(-10px);
     }
-    30% {
-      transform: translateX(15px) rotate(6deg);
-    }
-    45% {
-      transform: translateX(-15px) rotate(-3.6deg);
-    }
+    20%,
+    40%,
     60% {
-      transform: translateX(9px) rotate(2.4deg);
+      transform: translateX(10px);
     }
-    75% {
-      transform: translateX(-6px) rotate(-1.2deg);
+    80% {
+      transform: translateX(8px);
+    }
+    90% {
+      transform: translateX(-8px);
     }
   }
 `;
