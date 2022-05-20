@@ -3,6 +3,7 @@ import { handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/Api";
 import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
+import swal from 'sweetalert';
 import axios from "axios";
 
 // actions
@@ -105,7 +106,7 @@ export const getProfileDB = (userId) => {
       dispatch(getProfile(data.data));
     } catch (error) {
       console.log(error);
-      window.alert(error);
+      swal(error);
     }
   };
 };
@@ -120,7 +121,7 @@ export const getRunningDB = (userId) => {
       dispatch(getRunning(data));
     } catch (error) {
       console.log(error);
-      window.alert(error);
+      swal(error);
     }
   };
 };
@@ -135,7 +136,7 @@ export const getMyRunningDB = (userId) => {
       dispatch(getMyRunning(data));
     } catch (error) {
       console.log(error);
-      window.alert(error);
+      swal(error);
     }
   };
 };
@@ -148,7 +149,7 @@ export const getInformationDB = () => {
       dispatch(getInformation(data.data));
     } catch (error) {
       // console.log(error);
-      window.alert(error);
+      swal(error);
     }
   };
 };
@@ -210,10 +211,10 @@ export const numberCheckMiddleware = (phone) => {
         tel: phone,
       });
       console.log(data);
-      window.alert("인증번호가 발송 되었습니다");
+      swal("인증번호가 발송 되었습니다");
     } catch (error) {
       console.log(error);
-      window.alert(error);
+      swal(error);
     }
   };
 };
@@ -228,10 +229,10 @@ export const getNumberCheckMiddleware = (phone, numberCK) => {
         code: numberCK,
       });
       console.log(data);
-      window.alert(data.message);
+      swal(data.message);
     } catch (error) {
       console.log(error);
-      window.alert(error.message);
+      swal(error.message);
     }
   };
 };
@@ -274,7 +275,7 @@ export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
         }
       );
       console.log(data);
-      window.alert("호스트 평가가 완료되었습니다!");
+      swal("호스트 평가가 완료되었습니다!");
       // history.push(`/mypage/${hostId}`);
     } catch (error) {
     }
@@ -317,7 +318,7 @@ export const patchAttendDB = (groupId, userId) => {
         }
       );
       console.log(data);
-      window.alert("출석체크가 완료되었습니다!");
+      swal("출석체크가 완료되었습니다!");
       //history.push(`/mypage/${userId}`);
     } catch (error) {
       console.log(error);
@@ -339,7 +340,7 @@ export const deleteUserDB = () => {
 
       localStorage.removeItem("firstLogin");
       
-      window.alert("회원탈퇴에 성공하였습니다");      
+      swal("회원탈퇴에 성공하였습니다");      
 
       history.push("/login");
       dispatch(deleteUser());

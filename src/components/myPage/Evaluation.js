@@ -73,7 +73,7 @@ const Evaluation = (props) => {
         <div>
           <Overlaye>
             <Wrap>
-              <Text bold size="18px" marginTop>
+              <Text bold size="18px" >
                 크루장 평가
               </Text>
               <MyImage src={group?.data?.hostUser?.user?.profileUrl} />
@@ -88,20 +88,20 @@ const Evaluation = (props) => {
               </Text>
               <Hr/>
 
-              <Text bold size="20px" marginTop>
+              <Text bold size="20px">
                 {group?.data?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
               </Text>
               {emoji ? (
                 <>
                   <Btn>
                     <Icon>
-                      <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
+                      <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
                       <Text bold size="16px">좋았어요!</Text>
                     </Icon>
                   </Btn>
 
                   <Btn>
-                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
+                    <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
                     <Text bold  size="16px">아쉬웠어요.</Text>
                   </Btn>
                   <Hr/>
@@ -137,18 +137,18 @@ const Evaluation = (props) => {
                 <>
                   <Btn>
                     <Icon>
-                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
+                    <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
                     <Text bold size="16px">좋았어요!</Text>
                     </Icon>
                   </Btn>
 
                   <Btn>
-                    <img style={{ margin: "15px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
+                    <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
                     <Text bold  size="16px">아쉬웠어요.</Text>
                   </Btn>
                   <Hr/>
 
-                  <Text bold size="20px" margin="35px 0 10px 0">
+                  <Text bold size="20px" margin="25px 0 10px 0">
                     {group?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
                   </Text>
 
@@ -211,7 +211,7 @@ const Icon = styled.div`
 const Hr = styled.div`
   width: 457px;
   height: 1px;
-  margin: 30px 0 30px 20px;
+  margin: 20px 0 20px 20px;
   background-color: #ddd;
 `;
 
@@ -237,8 +237,10 @@ const EvaluationButton = styled.button`
   justify-content: center;
   flex-direction: column;
   background-color: #dedede;  
-  font-size: 16px
- 
+  :hover {
+  color: #fff;
+  background-color: #282932;
+}
 `;
 
 
@@ -284,7 +286,7 @@ const Wrap = styled.div`
   z-index: 0;
   position: absolute;
   left: 36%;
-  top: 100px;
+  top: 50px;
   margin: 0;
   padding: 14px 28px;
   max-width: 664px;
@@ -299,7 +301,7 @@ const Wrap = styled.div`
 
 
 const LabelDistance = styled.label`
-  margin-left: 28px; 
+  margin: -16px 0 0 28px; 
   input {
     display: none;
   }
