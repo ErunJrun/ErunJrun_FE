@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { getRunningDB } from "../../redux/modules/mypage";
+import { getRunningDB, getEvaluationDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid, Image, IconButton } from "../../elements";
-import Evaluation from "./Evaluation";
+import Evaluation from "../../pages/Evaluation";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 
@@ -78,9 +78,23 @@ const Group = () => {
                 {data.evaluation ? (
                   <ApplyBtnFalse>평가완료</ApplyBtnFalse>
                 ) : (
-                  <div>
-                    <Evaluation running={data} />
-                  </div>
+                  // <div  onClick={()=> {
+                  //   history.push("/evaluation")
+                  //   dispatch(getEvaluationDB(data.groupId, data.userId, userId));
+                  // }}>
+                  //   <Evaluation running={data} 
+                  //  />
+                  // </div>
+                  <ApplyBtnTrue
+                  
+                  onClick={() => { 
+                    dispatch(getEvaluationDB(data.groupId, data.userId, userId));
+                    history.push("/evaluation");
+                   
+                  }}   
+                >
+                  크루장 평가하기 
+                </ApplyBtnTrue> 
                 )}
               </Grid>
             ) : null;

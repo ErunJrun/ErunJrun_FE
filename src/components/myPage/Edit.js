@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/jsx-pascal-case */
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,7 +68,7 @@ const Edit = (props) => {
 
   const changeName = (e) => { 
     if(e.target.value.length >= 8) {
-      window.alert("8자 이상 작성할 수 없습니다.");
+      swal("8자 이상 작성할 수 없습니다.");
     }
     setNickname(e.target.value)
   };
@@ -89,7 +90,7 @@ const Edit = (props) => {
 
   const changeContent = (e) => {
     if(e.target.value.length >= 50) {
-      window.alert("50자 이상 작성할 수 없습니다.");
+      swal("50자 이상 작성할 수 없습니다.");
     }
     setBio(e.target.value)
   };

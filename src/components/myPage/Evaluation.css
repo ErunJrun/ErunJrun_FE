@@ -46,8 +46,8 @@ body.active-modal {
 
 ._close-modal {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 12px;
+    right: 18px;
     padding: 5px 7px;
     border: none;
     background-color: transparent;
