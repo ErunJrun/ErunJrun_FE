@@ -71,30 +71,33 @@ const LogoImg = styled.img`
   width: 292px;
   height: 146px;
   margin: 135px auto 64px auto;
-  animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955)
-    infinite both;
+  animation: shake-bottom 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite
+    both;
 
-  @keyframes wobble-hor-bottom {
+  @keyframes shake-bottom {
     0%,
     100% {
-      transform: translateX(0);
+      transform: rotate(0deg);
+      transform-origin: 50% 100%;
     }
-    10%,
-    30%,
-    50%,
-    70% {
-      transform: translateX(-10px);
+    10% {
+      transform: rotate(2deg);
     }
     20%,
     40%,
     60% {
-      transform: translateX(10px);
+      transform: rotate(-4deg);
+    }
+    30%,
+    50%,
+    70% {
+      transform: rotate(4deg);
     }
     80% {
-      transform: translateX(8px);
+      transform: rotate(-2deg);
     }
     90% {
-      transform: translateX(-8px);
+      transform: rotate(2deg);
     }
   }
 `;
