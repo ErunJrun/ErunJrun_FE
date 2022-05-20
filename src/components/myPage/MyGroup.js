@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid, Image, IconButton } from "../../elements";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { getAttendDB } from "../../redux/modules/mypage";
-
+//import swal from 'sweetalert';
 const MyGroup = () => {
   const dispatch = useDispatch();
   const hostId = localStorage.getItem("userId");
@@ -84,7 +85,7 @@ const MyGroup = () => {
                 :
                 <ApplyBtnTrue
                   onClick={() => {
-                    window.alert("아직 출석체크 시간이 아닙니다");
+                    swal("아직 출석체크 시간이 아닙니다");
                   }}
                 >
                   출석체크하기

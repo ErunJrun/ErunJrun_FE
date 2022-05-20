@@ -26,6 +26,7 @@ import Contact from "../pages/Contact";
 import ServiceTerms from "../pages/ServiceTerms";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import CourseFeed from "../pages/CourseFeed";
+import Evaluation from "../pages/Evaluation";
 
 import { useDispatch } from "react-redux";
 import { loginCheckDB, logoutDB } from "../redux/modules/user";
@@ -71,6 +72,7 @@ function App() {
           <Route path="/serviceInfo" exact component={ServiceInfo} />
           <Route path="/serviceTerms" exact component={ServiceTerms} />
           <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
+          <Route path="/evaluation" exact component={Evaluation} />
         </ConnectedRouter>
       </Wrapper>
       <Footer></Footer>
