@@ -1,9 +1,10 @@
-import axios from "axios";
 import { api } from "../../shared/Api";
 
 import { produce } from "immer";
 import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
 import { handleActions } from "redux-actions";
+
+import swal from "sweetalert";
 
 // Action
 const LOG_IN = "LOG_IN";
@@ -61,6 +62,7 @@ export const kakaoLogin = (authorization_code) => {
       const nickname = data.nickname;
       const profileUrl = data.profileUrl;
       const firstLogin = data.firstLogin;
+      const agreeSMS = data.agreeSMS;
 
       setCookie("accessToken", data.token, 168);
       setCookie("refreshToken", data.refreshToken, 168);
@@ -69,6 +71,7 @@ export const kakaoLogin = (authorization_code) => {
       localStorage.setItem("nickname", nickname);
       localStorage.setItem("profileUrl", profileUrl);
       localStorage.setItem("firstLogin", firstLogin);
+      localStorage.setItem("agreeSMS", agreeSMS);
 
       dispatch(
         logIn({
@@ -101,6 +104,7 @@ export const naverLoginDB = (code, state) => {
       const nickname = data.nickname;
       const profileUrl = data.profileUrl;
       const firstLogin = data.firstLogin;
+      const agreeSMS = data.agreeSMS;
 
       setCookie("accessToken", data.token, 168);
       setCookie("refreshToken", data.refreshToken, 168);
@@ -109,6 +113,7 @@ export const naverLoginDB = (code, state) => {
       localStorage.setItem("nickname", nickname);
       localStorage.setItem("profileUrl", profileUrl);
       localStorage.setItem("firstLogin", firstLogin);
+      localStorage.setItem("agreeSMS", agreeSMS);
 
       dispatch(
         logIn({
@@ -139,7 +144,7 @@ export const loginInfoDB = (likeLocation, likeDistance, userLevel) => {
         userLevel: userLevel,
       });
       console.log(data);
-      window.alert("이RUN 저RUN에서 즐거운 시간 되세요!");
+
       history.push("/");
     } catch (error) {
       console.log(error);
@@ -159,11 +164,13 @@ export const loginCheckDB = () => {
           const nickname = res.data.nickname;
           const profileUrl = res.data.profileUrl;
           const firstLogin = res.data.firstLogin;
+          const agreeSMS = res.data.agreeSMS;
 
           localStorage.setItem("userId", userId);
           localStorage.setItem("nickname", nickname);
           localStorage.setItem("profileUrl", profileUrl);
           localStorage.setItem("firstLogin", firstLogin);
+          localStorage.setItem("agreeSMS", agreeSMS);
 
           dispatch(
             logIn({
@@ -176,10 +183,7 @@ export const loginCheckDB = () => {
         } else {
           deleteCookie("accessToken");
           deleteCookie("refreshToken");
-          localStorage.removeItem("userId");
-          localStorage.removeItem("nickname");
-          localStorage.removeItem("profileUrl");
-          localStorage.removeItem("firstLogin");
+          localStorage.clear();
           dispatch(logOut());
         }
       })
@@ -196,10 +200,7 @@ export const logoutDB = () => {
       console.log(data);
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("nickname");
-      localStorage.removeItem("profileUrl");
-      localStorage.removeItem("firstLogin");
+      localStorage.clear();
 
       dispatch(logOut());
       history.push("/login");

@@ -51,7 +51,6 @@ const initialState = {
 export const _getCommentFX = (category, categoryId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(category, categoryId);
       const { data } = await api.get(`/comment/${category}/${categoryId}`);
       console.log(data);
 
@@ -60,8 +59,6 @@ export const _getCommentFX = (category, categoryId) => {
       data.data.map((data) => {
         comment_list.push({ isRecomm: false, is_edit: false, ...data });
       });
-
-      console.log(comment_list);
 
       dispatch(getComm(comment_list));
     } catch (error) {
@@ -191,19 +188,16 @@ export default handleActions(
   {
     [GET_COMM]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.list = action.payload;
       }),
 
     [ADD_COMM]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.list = action.payload;
       }),
 
     [EDIT_COMM]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.list = action.payload;
       }),
 
@@ -217,8 +211,6 @@ export default handleActions(
 
     [IS_EDIT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
-
         const isEditList = state.list.map((e, i) => {
           if (action.payload === i) {
             if (e.is_edit === false) {

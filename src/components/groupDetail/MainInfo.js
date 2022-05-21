@@ -23,13 +23,8 @@ const MainInfo = (props) => {
   const detailGroup = useSelector((state) => state.feed.detail);
   const [editMenu, setEditMenu] = React.useState(false);
 
-  console.log(props);
-  console.log(detailGroup);
-
   const nickname = localStorage.getItem("nickname");
   const isLogin = useSelector((state) => state.user.isLogin);
-
-  console.log(isLogin);
 
   const goApply = () => {
     if (isLogin) {

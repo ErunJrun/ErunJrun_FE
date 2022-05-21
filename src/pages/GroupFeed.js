@@ -39,15 +39,12 @@ const GroupFeed = () => {
   const [searchState, setSearchState] = useState(false);
   const [uploadBtn, setUploadBtn] = useState(false);
 
-  console.log(uploadBtn);
-
   const feedList = useSelector((state) => state.feed.list);
-  const paging = useSelector((state) => state.feed.paging);
   const preferData = useSelector((state) => state.feed.preferData);
   const isLoading = useSelector((state) => state.feed.isLoading);
+  const paging = useSelector((state) => state.feed.paging);
 
-  console.log(paging);
-  console.log("피드리스트", feedList);
+  console.log("피드 컴포넌트 페이지 번호", paging);
 
   const category = {
     region: region,
@@ -80,17 +77,27 @@ const GroupFeed = () => {
     "제주특별자치시",
   ]);
 
+  // useEffect(() => {
+  //   if (feedList.length === 0) {
+  //     console.log("GET 그룹 게시물");
+  //     dispatch(getGroupDB(category));
+  //   }
+
+  //   return () => {
+  //     console.log("그룹 게시물 클린업");
+  //     dispatch(resetGroup());
+  //   };
+  // }, []);
+
   useEffect(() => {
-    if (feedList.length === 0) {
-      console.log("GET 그룹 게시물");
-      dispatch(getGroupDB(category));
-    }
+    console.log("마감공고");
+    dispatch(getGroupDB(category));
 
     return () => {
       console.log("그룹 게시물 클린업");
       dispatch(resetGroup());
     };
-  }, []);
+  }, [finish]);
 
   if (isMobile) {
     return (
@@ -187,7 +194,7 @@ const GroupFeed = () => {
             </Text>
           </Grid>
           <Grid display="flex">
-            <InfinityScroll
+            {/* <InfinityScroll
               callNext={() => {
                 console.log("콜넥스트실행");
                 console.log("콜넥스트 내부 페이지 번호", paging.page);
@@ -195,11 +202,13 @@ const GroupFeed = () => {
               }}
               is_next={paging.page ? true : false}
               loading={isLoading}
-            >
-              {feedList?.map((item, idx) => {
-                return <GroupCard key={idx} {...item}></GroupCard>;
-              })}
-            </InfinityScroll>
+              pages={paging.page}
+              category={category}
+            > */}
+            {feedList?.map((item, idx) => {
+              return <GroupCard key={idx} {...item}></GroupCard>;
+            })}
+            {/* </InfinityScroll> */}
           </Grid>
         </Grid>
 

@@ -3,7 +3,7 @@ import { handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/Api";
 import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import axios from "axios";
 
 // actions
@@ -267,7 +267,11 @@ export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
 
       const { data } = await api.patch(
         `/group/evaluation/${groupId}`,
-        { hostId: hostId, point: point, evaluationCategory: evaluationCategory},
+        {
+          hostId: hostId,
+          point: point,
+          evaluationCategory: evaluationCategory,
+        },
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -277,8 +281,7 @@ export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
       console.log(data);
       swal("호스트 평가가 완료되었습니다!");
       // history.push(`/mypage/${hostId}`);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 };
 
@@ -334,13 +337,9 @@ export const deleteUserDB = () => {
       console.log(data);
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("nickname");
-      localStorage.removeItem("profileUrl");
+      localStorage.clear();
 
-      localStorage.removeItem("firstLogin");
-      
-      swal("회원탈퇴에 성공하였습니다");      
+      swal("회원탈퇴에 성공하였습니다");
 
       history.push("/login");
       dispatch(deleteUser());

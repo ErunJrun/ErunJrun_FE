@@ -22,7 +22,6 @@ const AlarmModal = ({ onClose }) => {
   });
 
   const alarmList = useSelector((state) => state.user.alarm);
-  console.log(alarmList);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";

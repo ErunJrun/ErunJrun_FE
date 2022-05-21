@@ -14,11 +14,8 @@ const RecommentWrite = (props) => {
   const dispatch = useDispatch();
   const [recomm, setReComm] = useState("");
 
-  console.log(props);
-
   const writeReComm = (e) => {
     setReComm(e.target.value);
-    console.log(recomm);
     dispatch(_addReCommentFX(props.commentId, recomm));
     props.setReComm(false);
     setReComm("");

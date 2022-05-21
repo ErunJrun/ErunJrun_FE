@@ -37,9 +37,6 @@ const ImageSlide = () => {
   const nickname = localStorage.getItem("nickname");
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  console.log(isLogin);
-  console.log(detailGroup);
-
   const closeEditMenu = () => {
     return setEditMenu(false);
   };

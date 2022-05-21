@@ -26,20 +26,17 @@ export default handleActions(
   {
     [SET_PRE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.data);
         draft.files = [...state.files, ...action.payload.data];
       }),
 
     [SET_SHOW]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.data);
         draft.show = [...state.show, ...action.payload.data];
       }),
 
     // 인덱스로 삭제를 함
     [DELETE_PRE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.imageId);
         draft.files = draft.files.filter(
           (i, idx) => idx !== action.payload.imageId
         );
@@ -47,7 +44,6 @@ export default handleActions(
 
     [DELETE_SHOW]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.imageId);
         draft.show = draft.show.filter(
           (i, idx) => idx !== action.payload.imageId
         );

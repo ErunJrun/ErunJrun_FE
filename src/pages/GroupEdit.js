@@ -15,8 +15,6 @@ const GroupEdit = () => {
   const detailGroup = useSelector((state) => state.feed.detail);
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  console.log(detailGroup);
-
   const [isLoaded1, setIsLoad1] = useState(false);
   const [isLoaded2, setIsLoad2] = useState(false);
 

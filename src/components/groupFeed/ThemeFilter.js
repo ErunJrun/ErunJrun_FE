@@ -9,8 +9,6 @@ const ThemeFilter = (props) => {
     props?.setFilterTheme(checkedInputs);
   }, [checkedInputs]);
 
-  console.log(checkedInputs);
-
   const [theme, setTheme] = useState([
     "전체",
     "도시",

@@ -31,9 +31,6 @@ const CommentItem = (props) => {
 
   const recommentList = useSelector((state) => state.recomments.list);
 
-  console.log(recommentList);
-  console.log(props);
-
   const editToggle = (commentId) => {
     dispatch(_isEdit(commentId));
   };

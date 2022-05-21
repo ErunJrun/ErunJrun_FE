@@ -8,7 +8,6 @@ import { addContents } from "../../redux/modules/uploadInfo";
 const GroupContent = (props) => {
   const dispatch = useDispatch();
   const contentsList = useSelector((state) => state.uploadInfo.contents);
-  console.log(contentsList);
 
   const [textLength, setTextLength] = useState(0);
   const [textLength600, setTextLength600] = useState(0);
@@ -46,11 +45,7 @@ const GroupContent = (props) => {
   const [checkedType, setCheckedType] = useState(contentsList.theme);
   const [checkedSpeed, setCheckedSpeed] = useState(contentsList.speed);
 
-  console.log(maxPeople);
-
   const datePick = (e) => {
-    console.log(dayjs(e.target.value).format("YYYYMMDD"));
-    console.log(dayjs(new Date()).format("YYYYMMDD"));
     if (
       dayjs(e.target.value).format("YYYYMMDD") <=
       dayjs(new Date()).format("YYYYMMDD")

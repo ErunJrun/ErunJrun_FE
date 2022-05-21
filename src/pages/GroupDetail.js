@@ -45,14 +45,11 @@ const GroupDetail = () => {
   const nickname = localStorage.getItem("nickname");
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  console.log(isLogin);
-  console.log(detailGroup);
-
   const goApply = () => {
     if (isLogin || nickname) {
       dispatch(applyDetailDB(groupId));
     } else {
-      window.alert("로그인 후 이용해 주세요");
+      alert("로그인 후 이용해 주세요");
     }
   };
 
@@ -230,7 +227,7 @@ const GroupDetail = () => {
 
                   <KakaoShareButton isMobile={true} detailGroup={detailGroup} />
 
-                  {!detailGroup?.applyState ? (
+                  {detailGroup?.applyState ? (
                     <ApplyBtn
                       style={{
                         background: "white",
@@ -358,6 +355,8 @@ const ShareMob = styled.img`
 
 const ApplyBtn = styled.div`
   background-color: #68f99e;
+  border: 1px solid #68f99e;
+  box-sizing: border-box;
   width: 239px;
   height: 44px;
   border-radius: 3px;
@@ -366,38 +365,6 @@ const ApplyBtn = styled.div`
   align-items: center;
   margin: 0;
   :hover {
-    -webkit-animation: shadow-drop-2-center 0.4s
-      cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    animation: shadow-drop-2-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      both;
-    @-webkit-keyframes shadow-drop-2-center {
-      0% {
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-      }
-      100% {
-        -webkit-transform: translateZ(50px);
-        transform: translateZ(50px);
-        -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
-        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
-      }
-    }
-    @keyframes shadow-drop-2-center {
-      0% {
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-      }
-      100% {
-        -webkit-transform: translateZ(50px);
-        transform: translateZ(50px);
-        -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
-        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
-      }
-    }
   }
 `;
 

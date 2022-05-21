@@ -20,8 +20,6 @@ api.interceptors.request.use((config) => {
   const token = getCookie("accessToken");
   const refreshToken = getCookie("refreshToken");
 
-  // console.log("액세스", token, "리프레쉬", refreshToken);
-
   config.headers.common["Authorization"] = `Bearer ${token}`;
   config.headers.common["reAuthorization"] = `Bearer ${refreshToken}`;
 
@@ -30,7 +28,6 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
   (response) => {
-    console.log(response);
     return response;
   },
   async (error) => {
@@ -38,9 +35,6 @@ api.interceptors.response.use(
 
     const { config, response } = error;
     const originalRequest = config;
-
-    console.log(error);
-    console.log(response);
 
     if (response.data.token) {
       // access token이 재발급 된 상태,
@@ -66,7 +60,7 @@ api.interceptors.response.use(
 
         window.alert("로그인이 시간이 만료되었습니다.");
 
-        history.push("login");
+        history.push("/login");
       } else {
         window.alert(response.data.message);
       }

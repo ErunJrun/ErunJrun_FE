@@ -3,12 +3,16 @@ import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Banner from "../components/main/Banner";
 import MGroupRunning from "../components/main/MGroupRunning";
+import { loginCheckDB } from "../redux/modules/user";
 
 const Main = () => {
   const dispatch = useDispatch();
 
   const from = localStorage.getItem("from");
-  console.log(from);
+
+  useEffect(() => {
+    dispatch(loginCheckDB());
+  }, []);
 
   if (from) {
     return <Redirect to={{ pathname: from }}></Redirect>;
