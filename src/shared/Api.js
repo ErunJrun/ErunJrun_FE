@@ -59,7 +59,7 @@ api.interceptors.response.use(
 
         history.push("/login");
       } else {
-        window.alert(response.data.message);
+        swal(response.data.message);
       }
     }
 
