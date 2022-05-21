@@ -42,6 +42,7 @@ const Grid = (props) => {
     className,
     alignContent,
     boxShadow,
+    lineHeight,
   } = props;
 
   const styles = {
@@ -81,6 +82,7 @@ const Grid = (props) => {
     alignContent,
     id,
     boxShadow: boxShadow,
+    lineHeight: lineHeight,
   };
 
   return (
@@ -130,6 +132,7 @@ Grid.defaultProps = {
   alignContent: null,
   hover: null,
   boxShadow: null,
+  lineHeight: null,
 };
 
 const GridBox = styled.div`
@@ -158,6 +161,7 @@ const GridBox = styled.div`
   cursor: ${(props) => props.cursor};
   border-top: ${(props) => props.borderTop};
   border-right: ${(props) => props.borderRight};
+  line-height: ${(props) => props.lineHeight};
   ${(props) => (props.padding ? `padding:${props.padding};` : "")}
   ${(props) => (props.margin ? `margin:${props.margin};` : "")}
 ${(props) => (props.bg ? `background-color:${props.bg};` : "")}

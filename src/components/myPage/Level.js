@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { getProfileDB } from "../../redux/modules/mypage"
+import { useSelector } from "react-redux";
 import MyModal from './MyModal';
 import Progress from './Progress';
 import styled from "styled-components";
@@ -20,12 +19,13 @@ const Level = () => {
         <Text 
           size="12px"
           >
-          굿러너 레벨  
-          &nbsp; <span style={{color: "#2f80ed"}}>
-          {profile_list?.userInfo?.mannerPoint}km    
+          굿러너 레벨 &nbsp;
+          <span style={{color: "#2f80ed"}}>
+            {profile_list?.userInfo?.mannerPoint}km    
           </span>
         </Text > 
-        <MyModal style={{margin: "-100px  0 0 0"}}/>   
+        <MyModal/>   
+        <Progress done={profile_list?.userInfo?.mannerPoint}/> 
       </Grid>
     );
   }

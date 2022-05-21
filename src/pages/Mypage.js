@@ -27,11 +27,74 @@ const Mypage = () => {
 
   if(isMobile) {
     return (
-      <Grid width="100%">
+      <Grid width="100%" margin="0 0 100px 0">
         <Profile userId={userId} />
         <HostEvaluation/>
-        {/* {MyId === userId ? <Schedule userId={userId} /> : null} */}
-        {/* <Tabs /> */}
+        <Grid margin="-15px 0 0 20px" lineHeight="24px">
+          <Text
+            bold
+            size="14px"
+          >
+            나의 그룹 러닝
+          </Text>
+          <Text
+            regular
+            size="13px"
+            color="#222"
+          >
+            참여 예정
+          </Text>
+          <Text
+            regular
+            size="13px"
+            color="#222"
+          >
+            참여 완료
+          </Text>
+          <Text
+            regular
+            size="13px"
+            color="#222"
+          >
+            My 모집
+          </Text>
+        </Grid>
+
+        <Hr/>
+
+        <Grid margin="0 0 0 20px" lineHeight="24px">
+          <Text
+            bold
+            size="14px"
+          >
+            나의 추천 코스
+          </Text>
+          <Text
+            regular
+            size="13px"
+            color="#222"
+          >
+            북마크
+          </Text>
+          <Text
+            regular
+            size="13px"
+            color="#222"
+          >
+            My 추천
+          </Text>
+        </Grid>
+          <Hr/>
+        
+          <Text
+            regular
+            size="12px"
+            margin="5px 0 0 20px"
+            color="#222"
+          >
+            로그아웃
+          </Text>
+        
       </Grid>
     );
   }
@@ -46,5 +109,10 @@ const Mypage = () => {
   );
 };
 
-
+const Hr = styled.div`
+  width: 91%;
+  height: 1px;
+  margin: 20px auto;
+  background-color: #ddd;
+`;
 export default Mypage;

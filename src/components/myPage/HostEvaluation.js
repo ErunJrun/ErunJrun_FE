@@ -42,7 +42,8 @@ const HostEvaluation = () => {
           <_Box>
             <_Img src="https://ifh.cc/g/9soljs.png"/>
             <Text 
-              bold 
+            
+            
               size="12px"
               margin="-4px 0 0 0"
             >
@@ -246,9 +247,9 @@ const EvaluationPointL = styled.div`
 `;
 
 const _Hr = styled.div`
-  width: 95%;
+  width: 102%;
   height: 1px;
-  margin: 0px 0 40px 2.5%;
+  //margin: 0px 0 40px 2.5%;
   background-color: #ddd;
 `;
 
