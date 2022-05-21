@@ -69,7 +69,7 @@ const GroupCard = (props) => {
           )}
 
           <Grid>
-            <Text cursor="pointer" size="18px" bold margin="0">
+            <Text hiddenText width cursor="pointer" size="18px" bold margin="0">
               {props?.title}
             </Text>
             <Text cursor="pointer" size="16px" margin="10px 0 0 0">

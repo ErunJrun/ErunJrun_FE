@@ -12,7 +12,25 @@ const LevelBox = (props) => {
     query: "(max-width:820px)",
   });
 
-  console.log(props);
+  if (props.loginInfo) {
+    if (props?.userLevel === "블랙") return <LoginInfoMob src={levelBlack} />;
+
+    if (props?.userLevel === "퍼플") return <LoginInfoMob src={levelPurple} />;
+
+    if (props?.userLevel === "레드") return <LoginInfoMob src={levelRed} />;
+
+    if (props?.userLevel === "오렌지")
+      return <LoginInfoMob src={levelOrange} />;
+
+    if (props?.userLevel === "처음이예요")
+      return <LoginInfoMob src={levelOrange} />;
+
+    if (props?.userLevel === "처음이에요")
+      return <LoginInfoMob src={levelOrange} />;
+
+    if (props?.userLevel === "블루") return <LoginInfoMob src={levelBlue} />;
+  }
+
   if (isMobile) {
     if (props?.userLevel === "블랙") return <LevelImgMob src={levelBlack} />;
 
@@ -52,11 +70,19 @@ const LevelBox = (props) => {
 const LevelImg = styled.img`
   width: 95px;
   height: auto;
+  margin: 0 6px;
 `;
 
 const LevelImgMob = styled.img`
   width: 64px;
   height: auto;
+  margin: 0 6px;
+`;
+
+const LoginInfoMob = styled.img`
+  width: 78px;
+  height: auto;
+  margin: 0 6px;
 `;
 
 export default LevelBox;

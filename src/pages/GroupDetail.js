@@ -20,6 +20,7 @@ import mapIcon from "../assets/groupDetail/map.png";
 import { useMediaQuery } from "react-responsive";
 import backIcon from "../assets/groupDetail/backIcon.png";
 import editIcon from "../assets/groupDetail/editIcon.png";
+import pageUpIcon from "../assets/groupDetail/pageUpIcon.png";
 
 import Permit from "../shared/Permit";
 import { history } from "../redux/configureStore";
@@ -27,6 +28,8 @@ import chatMobColor from "../assets/groupDetail/chatMobColor.png";
 import chatMob from "../assets/groupDetail/chatMob.png";
 import shareMob from "../assets/groupDetail/shareMob.png";
 import KakaoShareButton from "../components/KakaoShareButton";
+
+import { Link } from "react-scroll";
 
 const GroupDetail = () => {
   const isMobile = useMediaQuery({
@@ -66,13 +69,21 @@ const GroupDetail = () => {
           display="flex"
           margin="0 auto"
           justifyContent="center"
+          position="relative"
         >
-          <Grid width="375px" display="flex" justifyContent="center">
+          <div id="1Mob"></div>
+          <Grid
+            width="375px"
+            display="flex"
+            justifyContent="center"
+            position="relative"
+          >
             <ImageSlide />
             <MainInfo groupId={groupId} />
             <CrewLeaderInfo {...detailGroup} />
             <InfoCategory {...detailGroup} />
           </Grid>
+
           {detailGroup?.applyEndTime === "0 일" ? (
             <>
               <Grid
@@ -186,22 +197,22 @@ const GroupDetail = () => {
                   padding="0"
                 >
                   {detailGroup?.chattingRoom === "" ? (
-                    !detailGroup?.applyState ? (
-                      <a
-                        style={{ textDecoration: "none", height: "44px" }}
-                        href={detailGroup?.chattingRoom}
-                      >
-                        <ChatMob src={chatMobColor} />
-                      </a>
+                    detailGroup?.applyState ? (
+                      <ChatMob
+                        onClick={() => {
+                          window.alert("링크가 없습니다.");
+                        }}
+                        src={chatMob}
+                      />
                     ) : (
                       <ChatMob
                         onClick={() => {
-                          window.alert("기한이 종료되었습니다.");
+                          window.alert("신청 후 이용해주세요");
                         }}
                         src={chatMob}
                       />
                     )
-                  ) : !detailGroup?.applyState ? (
+                  ) : detailGroup?.applyState ? (
                     <a
                       style={{ textDecoration: "none", height: "44px" }}
                       href={detailGroup?.chattingRoom}
@@ -261,6 +272,14 @@ const GroupDetail = () => {
               </Grid>
             </>
           )}
+          <Link
+            style={{ position: "relative" }}
+            to="1Mob"
+            spy={true}
+            smooth={true}
+          >
+            <PageUpBtn src={pageUpIcon} />
+          </Link>
         </Grid>
       </>
     );
@@ -323,29 +342,6 @@ const MapIconImg = styled.img`
   margin: 0 10px 0 0;
 `;
 
-const TitleWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 375px;
-  height: 51px;
-  position: fixed;
-  top: 90px;
-  z-index: 3;
-  background-color: white;
-`;
-
-const TitleBar = styled.p`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-family: "Spoqa Han Sans Neo";
-  font-weight: 500;
-  font-size: 14px;
-  width: 268px;
-  height: 19px;
-`;
-
 const ChatMob = styled.img`
   width: 44px;
   height: 44px;
@@ -403,6 +399,17 @@ const ApplyBtn = styled.div`
       }
     }
   }
+`;
+
+const PageUpBtn = styled.img`
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  margin: 0;
+  position: fixed;
+  bottom: 117px;
+  right: 9px;
+  z-index: 4;
 `;
 
 const DropContent = styled.div`

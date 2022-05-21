@@ -63,6 +63,8 @@ const MGroupCardMob = (props) => {
 
           <Grid display="flex" flexDirection="column" height="auto">
             <Text
+              hiddenText
+              width="156px"
               height="auto"
               cursor="pointer"
               size="11px"

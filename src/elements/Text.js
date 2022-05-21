@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Text = (props) => {
   const {
+    hiddenText,
     onMouseOver,
     onMouseOut,
     id,
@@ -42,6 +43,7 @@ const Text = (props) => {
     space,
   } = props;
   const styles = {
+    hiddenText,
     onMouseOver,
     onMouseOut,
     display,
@@ -175,6 +177,10 @@ const P = styled.p`
     props.is_flex
       ? `display: flex; align-tiems: center; justify-content: space-between;`
       : ""}
+  ${(props) =>
+    props.hiddenText
+      ? "white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+      : ""};
 `;
 
 export default Text;

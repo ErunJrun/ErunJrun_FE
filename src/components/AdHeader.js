@@ -38,14 +38,17 @@ const AdHeader = () => {
                 color="white"
                 regular
                 size="12px"
+                cursor="pointer"
                 _onClick={() => {
                   history.push("/edit");
+                  closeHeader();
                 }}
               >
                 지금 <span style={{ fontWeight: "600" }}>휴대폰 인증</span>하고
                 알림을 받아보세요! &nbsp; >
               </Text>
               <Text
+                cursor="pointer"
                 regular
                 margin="0"
                 color="white"
@@ -84,14 +87,18 @@ const AdHeader = () => {
               color="white"
               regular
               size="18px"
+              cursor="pointer"
               _onClick={() => {
                 history.push("/edit");
+                closeHeader();
               }}
+              hover="color:#68F99E;"
             >
               지금 <span style={{ fontWeight: "600" }}>휴대폰 인증</span>하고
               알림을 받아보세요! >
             </Text>
             <Text
+              cursor="pointer"
               regular
               margin="-2px -470px 0 0"
               color="#999"

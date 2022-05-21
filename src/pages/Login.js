@@ -8,6 +8,7 @@ import kakaoLoginMob from "../assets/kakaoLoginMob.png";
 import naverLoginMob from "../assets/naverLoginMob.png";
 import { history } from "../redux/configureStore";
 import LoginLogo from "../assets/LoginLogo.png";
+import loginLogoMob from "../assets/loginLogoMob.png";
 import { getCookie, setCookie } from "../shared/Cookie";
 import { useMediaQuery } from "react-responsive";
 
@@ -46,7 +47,7 @@ const Login = ({ location }) => {
           margin="10px auto"
           width="375px"
         >
-          <LogoImgMob src={LoginLogo}></LogoImgMob>
+          <LogoImgMob src={loginLogoMob}></LogoImgMob>
 
           <KakaoBtnMob
             onClick={() => {
@@ -134,7 +135,7 @@ const LogoImg = styled.img`
 const LogoImgMob = styled.img`
   width: 189px;
   height: 81px;
-  margin: 120px auto 64px auto;
+  margin: 150px auto 64px auto;
   animation: shake-bottom 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite
     both;
 
@@ -189,7 +190,7 @@ const NaverBtn = styled.img`
 const KakaoBtnMob = styled.img`
   width: 250px;
   height: 44px;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
   cursor: pointer;
   :hover {
     box-shadow: 0 0 3px #142785;
@@ -199,7 +200,7 @@ const KakaoBtnMob = styled.img`
 const NaverBtnMob = styled.img`
   width: 250px;
   height: 44px;
-  margin-bottom: 297px;
+  margin-bottom: 200px;
   cursor: pointer;
   :hover {
     box-shadow: 0 0 3px black;

@@ -79,8 +79,8 @@ const MGroupRunning = () => {
           >
             {postList?.map((item, idx) => {
               return (
-                <SwiperSlide id="GroupCardSlideMob">
-                  <MGroupCardMob key={idx} {...item} />{" "}
+                <SwiperSlide key={idx} id="GroupCardSlideMob">
+                  <MGroupCardMob {...item} />{" "}
                 </SwiperSlide>
               );
             })}
