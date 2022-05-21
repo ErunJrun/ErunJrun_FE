@@ -39,19 +39,19 @@ const Evaluation = () => {
   }
 
   const [likeCategory, setLikeCategory] = useState([
-    "코스 맛집이에요",
-    "안내사항이 명확해요",
-    "응답이 빨라요",
-    "사람들을 잘 이끌어줘요",
-    "시간 약속을 잘 지켜요",     
+    "진행한 코스가 만족스러웠어요!",
+    "사람들을 잘 이끌어줬어요!",
+    "궁금한 점에 대해 빠르게 답해줬어요!",
+    "짐을 보관해줘서 편한 러닝이 가능했어요!",
+    "시간 약속을 잘 지켰어요!",     
   ]);
 
   const [category, setCategory] = useState([    
-    "코스가 별로에요",
-    "응답이 느려요",
-    "사람들에게 불친절해요",
-    "시간 약속을 어겼어요",
-    "안내가 불확실해요",
+    "진행한 코스가 아쉬웠어요.",
+    "크루원에게 불친절했어요.",
+    "응답이 늦었어요.",
+    "변경사항을 안내해주지 않았어요.",
+    "시간 약속을 잘 안지켰어요.",
   ]);
  
 
@@ -93,13 +93,13 @@ const Evaluation = () => {
                 <Icon>
                   <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
                   <Text bold size="16px">좋았어요!</Text>
-                </Icon>
+                </Icon>        
+                <Icon>
+                  <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
+                  <Text bold  size="16px">아쉬웠어요.</Text>
+                  </Icon>
               </_Btn>
-
-              <_Btn>
-                <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
-                <Text bold  size="16px">아쉬웠어요.</Text>
-              </_Btn>
+  
               <_Hr/>
             
               <Text bold size="19px" margin="35px 0 30px 0">
@@ -148,14 +148,13 @@ const Evaluation = () => {
             <>
               <_Btn>
                 <Icon>
-                <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
-                <Text bold size="16px">좋았어요!</Text>
+                  <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
+                  <Text bold size="16px">좋았어요!</Text>
                 </Icon>
-              </_Btn>
-
-              <_Btn>
-                <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
-                <Text bold  size="16px">아쉬웠어요.</Text>
+                <Icon>
+                  <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
+                  <Text bold  size="16px">아쉬웠어요.</Text>
+                </Icon>
               </_Btn>
               <_Hr/>
 
@@ -360,7 +359,6 @@ const _MyImage = styled.img`
 
 const Icon = styled.div`
   margin-top: 10px;
-  height: 80px;
   width: 80px; 
 `;
 
@@ -382,18 +380,19 @@ const Btn = styled.button`
   border: none;
   height: 80px;
   width: 200px;
-  margin: 0 0 20px 10px;
+  margin: 30px 0 20px 10px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background-color: #fff;
 `;
 
-const _Btn = styled.button`
+const _Btn = styled.div`
+  display:flex;
   border: none;
   align-items: center;
   margin: 30px 30px;
-  justify-content: center;
+  justify-content: space-evenly;
   background-color: transparent;
 `;
 
@@ -508,7 +507,7 @@ const LabelDistance = styled.label`
   `;
   
  const CBtn = styled.div`
-  margin: -1250px 0 0 87%;
+  margin: -1275px 0 0 87%;
 `;
 
 const Img = styled.img`

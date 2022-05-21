@@ -16,8 +16,16 @@ const Level = () => {
   console.log(profile_list);
   if(isMobile) {
     return (
-      <Grid width="100%" >
-
+      <Grid width="100%" margin="45px 0 0 16px">
+        <Text 
+          size="12px"
+          >
+          굿러너 레벨  
+          &nbsp; <span style={{color: "#2f80ed"}}>
+          {profile_list?.userInfo?.mannerPoint}km    
+          </span>
+        </Text > 
+        <MyModal style={{margin: "-100px  0 0 0"}}/>   
       </Grid>
     );
   }
@@ -25,10 +33,10 @@ const Level = () => {
       <div> 
           <Box>
             <Text 
-            bold 
-            size="16px"
+            bold
+            size="12px"
             >
-            굿러너 레벨          
+                굿러너 레벨          
             </Text> 
             <MyModal/> 
           </Box>        

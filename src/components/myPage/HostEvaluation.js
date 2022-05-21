@@ -69,7 +69,7 @@ const HostEvaluation = () => {
               </RightBox>
               <LeftBox>
                 <EvaluationBox>
-                  “응답이 늦었어요.”
+                  “변경사항을 안내해주지 않았어요.”
                 </EvaluationBox>
                 <EvaluationBox>
                   “시간 약속을 잘 안지켰어요.”

@@ -27,8 +27,8 @@ const Edit = (props) => {
   const [phone, setPhone] = useState(props.profile.phone);
   const [agreeSMS, setAgreeSMS] = useState(props.profile.agreeSMS);
   const [numberCK, setNumderCK] = useState("");
-
-  const certPhone = props.profile.certPhone;
+  const [certPhone, setCertPhone] = useState(props.profile.certPhone);
+  const [ck, setCk] = useState(false);
 
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
@@ -117,6 +117,10 @@ const Edit = (props) => {
     setUserLevel(e);
   };
 
+  const CK = (e) => {
+    setCk(true);
+  };
+
   const edit = () => {
     console.log("나와라");
     dispatch(editProfileDB(userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS));
@@ -133,6 +137,7 @@ const Edit = (props) => {
     setUserLevel(props?.profile.userLevel);
     setPhone(props.profile.phone);
     setAgreeSMS(props.profile.agreeSMS);
+    setCertPhone(props.profile.certPhone);
   }, [props]);
   
 
@@ -210,33 +215,60 @@ const Edit = (props) => {
             </Grid>
                 
             { certPhone === false ? 
-            <>
-            <_Box>
-              <Button
-                onClick={()=>{
-                dispatch(numberCheckMiddleware(phone));
-                }}
-              >
-                인증요청
-              </Button>
-            </_Box>
-              <Grid display="felx">      
-                  <Inp value={numberCK} onChange={ NumderCK } type="text" 
-                  placeholder="인증번호를 입력해주세요!"  maxLength={20} />
-                  <Button
-                    onClick={()=>{
-                      dispatch(getNumberCheckMiddleware(phone,numberCK));
-                    }}
-                  >인증</Button>
-              </Grid>
-              </>
+              <>
+              <_Box>
+                <Button
+                  onClick={()=>{
+                  dispatch(numberCheckMiddleware(phone));
+                  }}
+                >
+                  인증요청
+                </Button>
+              </_Box>
+                <Grid display="felx">      
+                    <Inp value={numberCK} onChange={ NumderCK } type="text" 
+                    placeholder="인증번호를 입력해주세요!"  maxLength={20} />
+                    <Button
+                      onClick={()=>{
+                        dispatch(getNumberCheckMiddleware(phone,numberCK));
+                        CK();
+                      }}
+                    >인증</Button>
+                </Grid>
+                
+                { ck === false ? 
+                <>
+                    <input 
+                    disabled checked
+                    value={agreeSMS} 
+                    onChange={agree} 
+                    type='checkbox' />
+                      개인정보사용 동의 및 알림수신에 동의합니다.
+                  </>
+                : 
+                  <>
+                    <input 
+                    checked={agreeSMS} 
+                    value={agreeSMS} 
+                    onChange={agree} 
+                    type='checkbox' />
+                      개인정보사용 동의 및 알림수신에 동의합니다.
+                  </>
+                }
+            </>
             : 
-              null
+              <>
+                <input 
+                checked={agreeSMS} 
+                value={agreeSMS} 
+                onChange={agree} 
+                type='checkbox' />
+                  개인정보사용 동의 및 알림수신에 동의합니다.
+              </>
             }
-            <input checked={agreeSMS} value={agreeSMS} onChange={agree} type='checkbox'/>
-              개인정보사용 동의 및 알림수신에 동의합니다.
-        <hr style={{margin: "58px 0 80px 0"}}/>
 
+
+        <hr style={{margin: "58px 0 80px 0"}}/>
         <Text 
         bold 
         size="20px"
