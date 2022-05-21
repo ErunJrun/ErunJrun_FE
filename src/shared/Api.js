@@ -5,7 +5,7 @@ import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { logoutDB } from "../redux/modules/user";
 
-// axios.defaults.withCredentials = true;
+import swal from "sweetalert";
 
 export const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -53,12 +53,9 @@ api.interceptors.response.use(
         console.log("인터셉터 토큰 오류", response.data.message);
         deleteCookie("accessToken");
         deleteCookie("refreshToken");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("nickname");
-        localStorage.removeItem("profileUrl");
-        localStorage.removeItem("firstLogin");
+        localStorage.clear();
 
-        window.alert("로그인이 시간이 만료되었습니다.");
+        swal("로그인 후 이용부탁드립니다.");
 
         history.push("/login");
       } else {
