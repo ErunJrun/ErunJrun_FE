@@ -14,7 +14,7 @@ import { Button } from "react-scroll";
 
 const Evaluation = () => {
   const isMobile = useMediaQuery({
-    query: "(max-width:500px)",
+    query: "(max-width:820px)",
   });
 
   const dispatch = useDispatch();
@@ -91,13 +91,13 @@ const Evaluation = () => {
             <>
               <_Btn>
                 <Icon>
-                  <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
+                  <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
                   <Text bold size="16px">좋았어요!</Text>
                 </Icon>
               </_Btn>
 
               <_Btn>
-                <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
+                <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
                 <Text bold  size="16px">아쉬웠어요.</Text>
               </_Btn>
               <_Hr/>
@@ -130,6 +130,16 @@ const Evaluation = () => {
                     </Fragment>
                   );
                 })}
+                <_EvaluationButton
+                  onClick={() => {
+                  toggleModal();
+                  dispatch(evaluationDB(groupId, hostId, point, evaluationCategory));
+                  dispatch(getRunningDB(userId));
+                  history.push(`/mypage/${userId}`);
+                }}
+                >
+                  평가완료
+                </_EvaluationButton>            
               </Grid>
             </>
           )
@@ -138,13 +148,13 @@ const Evaluation = () => {
             <>
               <_Btn>
                 <Icon>
-                <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
+                <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
                 <Text bold size="16px">좋았어요!</Text>
                 </Icon>
               </_Btn>
 
               <_Btn>
-                <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
+                <Image style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
                 <Text bold  size="16px">아쉬웠어요.</Text>
               </_Btn>
               <_Hr/>
@@ -172,19 +182,19 @@ const Evaluation = () => {
                     </Fragment>
                   );
                 })}
+                <_EvaluationButton
+                  onClick={() => {
+                  toggleModal();
+                  dispatch(evaluationDB(groupId, hostId, point, evaluationCategory));
+                  dispatch(getRunningDB(userId));
+                  history.push(`/mypage/${userId}`);
+                }}
+                >
+                  평가완료
+                </_EvaluationButton>
               </Grid>
             </>
           )} 
-          <_EvaluationButton
-            onClick={() => {
-              toggleModal();
-              dispatch(evaluationDB(groupId, hostId, point, evaluationCategory));
-              dispatch(getRunningDB(userId));
-              history.push(`/mypage/${userId}`);
-            }}
-            >
-            평가완료
-          </_EvaluationButton>
         </_Wrap>
         <CBtn onClick={()=> {
           history.push(`/mypage/${userId}`);
@@ -224,13 +234,13 @@ const Evaluation = () => {
                   <>
                     <Btn>
                       <Icon>
-                        <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
+                        <Img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
                         <Text bold size="16px">좋았어요!</Text>
                       </Icon>
                     </Btn>
 
                     <Btn>
-                      <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
+                      <Img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
                       <Text bold  size="16px">아쉬웠어요.</Text>
                     </Btn>
                     <Hr/>
@@ -271,13 +281,13 @@ const Evaluation = () => {
                   <>
                     <Btn>
                       <Icon>
-                      <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
+                      <Img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
                       <Text bold size="16px">좋았어요!</Text>
                       </Icon>
                     </Btn>
 
                     <Btn>
-                      <img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
+                      <Img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
                       <Text bold  size="16px">아쉬웠어요.</Text>
                     </Btn>
                     <Hr/>
@@ -384,16 +394,15 @@ const _Btn = styled.button`
   align-items: center;
   margin: 30px 30px;
   justify-content: center;
-  flex-direction: column;
-  background-color: #fff;
+  background-color: transparent;
 `;
 
-const EvaluationButton = styled.button`
+const EvaluationButton = styled.div`
   border: none;
-  height: 48px;
-  width: 168px; 
+  height: 38px;
+  width: 175px; 
   font-weight: bold; 
-  margin: 24px 0 25px 10px;
+  margin: 24px 0 25px 163px;
   padding-top: 14px;
   align-items: center;
   justify-content: center;
@@ -405,21 +414,20 @@ const EvaluationButton = styled.button`
 }
 `;
 
-const _EvaluationButton = styled.button`
+const _EvaluationButton = styled.div`
   border: none;
-  height: 48px;
+  height: 39px;
   width: 168px; 
-  font-weight: bold; 
-  margin: 24px 0 100px 10px;
+  font-weight: 500; 
+  margin: 30px 0 100px -10px;
   padding-top: 14px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #dedede;  
-  :hover {
-  color: #fff;
-  background-color: #282932;
-}
+  background-color: #030c37; 
+  border-radius: 3px; 
+  font-size: 16px;
+  color: #68f99e;
 `;
 
 const Overlaye = styled.div`
@@ -501,6 +509,16 @@ const LabelDistance = styled.label`
   
  const CBtn = styled.div`
   margin: -1250px 0 0 87%;
+`;
+
+const Img = styled.img`
+  width: 80px;
+  height: 80px;
+`;
+
+const Image = styled.img`
+  width: 90px;
+  height: 90px;
 `;
 
 export default Evaluation;
