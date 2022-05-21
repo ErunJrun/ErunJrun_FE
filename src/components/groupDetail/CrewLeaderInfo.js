@@ -21,7 +21,6 @@ const CrewLeaderInfo = (props) => {
   });
 
   const detailGroup = useSelector((state) => state.feed.detail);
-  console.log(detailGroup);
 
   if (isMobile) {
     return (

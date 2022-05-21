@@ -9,7 +9,6 @@ const ImagesUpload = () => {
   const dispatch = useDispatch();
   const totalImage = useSelector((state) => state.image.files);
   const showImages = useSelector((state) => state.image.show);
-  console.log(totalImage, showImages);
 
   //이미지 저장 및 미리보기
   const handleChangeFile = (event) => {

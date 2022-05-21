@@ -1,7 +1,6 @@
-import { handleActions, createAction } from "redux-actions";
+import { handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/Api";
-import axios from "axios";
 
 //액션
 
@@ -28,7 +27,7 @@ const initialState = {
       { lat: 37.6, lng: 127.4 },
     ],
   },
-  paging: { page: 1, size: 3 },
+  paging: { page: 1, size: 1 },
   isLoading: false,
 };
 
@@ -89,7 +88,7 @@ export const loading = (payload) => ({
 });
 
 //미들웨어
-export const getGroupDB = (category, page = 1, size = 3) => {
+export const getGroupDB = (category, page = 1, size = 1) => {
   return async function (dispatch, getState, { history }) {
     console.log(category, page, size);
     const _paging = getState().feed.paging;
@@ -135,7 +134,7 @@ export const getGroupDB = (category, page = 1, size = 3) => {
       let finish = category?.finish;
 
       const { data } = await api.get(
-        `/group/all?date=${startDate}${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}&size=${size}&page=${page}`
+        `/group/all?date=${startDate}${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}`
       );
       console.log(data);
       console.log(data.data.length);

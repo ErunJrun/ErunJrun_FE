@@ -38,8 +38,6 @@ const Header = () => {
 
   const [alarmOpen, setAlarmOpen] = useState(false);
 
-  console.log(alarmList);
-
   const alarmToggle = () => {
     setAlarmOpen(!alarmOpen);
   };
@@ -67,7 +65,7 @@ const Header = () => {
     return (
       <HeaderBoxMob>
         <Grid display="flex">
-          {isLoginInfo ? null : <AdHeader />}
+          {isHome || isGroup || isCourse ? <AdHeader /> : null}
           <Grid
             height="54px"
             margin="0"
@@ -125,16 +123,16 @@ const Header = () => {
     );
   }
 
-  if (is_login) {
+  if (is_login && token) {
     return (
       <>
-        {path === "/loginInfo" ? null : (
+        {isLoginInfo ? null : (
           <>
             <AdHeader />
             <HeaderBox id="1">
               <Grid
                 height="auto"
-                margin="0 auto 0 360px"
+                margin="0 auto"
                 width="1200px"
                 display="flex"
                 justifyContent="space-between"
@@ -305,7 +303,7 @@ const Header = () => {
 
   return (
     <>
-      {path === "/loginInfo" ? null : (
+      {isLoginInfo ? null : (
         <HeaderBox id="1">
           <Grid width="1200px" display="flex" justifyContent="space-between">
             <Grid
@@ -449,9 +447,10 @@ const HeaderBox = styled.div`
   height: 90px;
   background-color: #030c37;
   align-items: center;
-  min-width: 1200px;
+  width: 100%;
   justify-content: center;
   position: relative;
+  margin: 0;
 `;
 
 const HeaderBoxMob = styled.div`

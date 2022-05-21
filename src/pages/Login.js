@@ -25,8 +25,8 @@ const Login = ({ location }) => {
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
-
   console.log(isLogin);
+
   console.log("패쓰네임", location);
 
   if (location?.state) {
@@ -34,8 +34,8 @@ const Login = ({ location }) => {
   }
 
   useEffect(() => {
-    if (token) history.push("/");
-  }, [token]);
+    if (token && isLogin) history.push("/");
+  }, [isLogin]);
 
   if (isMobile) {
     return (

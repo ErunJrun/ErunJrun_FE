@@ -16,8 +16,6 @@ const CommentList = () => {
   const dispatch = useDispatch();
   const commentList = useSelector((state) => state.comments.list);
 
-  console.log(commentList);
-
   const groupId = params.groupId;
 
   React.useEffect(() => {

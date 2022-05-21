@@ -16,7 +16,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "./GroupSlide.css";
+import "./MGroupSlide.css";
 
 import MGroupCardMob from "./MGroupCardMob";
 
@@ -131,7 +131,7 @@ const MGroupRunning = () => {
         width="1200px"
         display="flex"
         justifyContent="column"
-        margin="100px auto 160px auto"
+        margin="100px auto 0 auto"
       >
         <Grid
           display="flex"
@@ -163,15 +163,15 @@ const MGroupRunning = () => {
           onSwiper={setSwiperRef}
           slidesPerView={3}
           centeredSlides={true}
-          spaceBetween={50}
+          spaceBetween={10}
           pagination={true}
           navigation={true}
           virtual
         >
           {postList?.map((item, idx) => {
             return (
-              <SwiperSlide id="GroupCardSlide">
-                <MGroupCard key={idx} {...item} />{" "}
+              <SwiperSlide key={idx} id="GroupCardSlide">
+                <MGroupCard {...item} />{" "}
               </SwiperSlide>
             );
           })}
@@ -217,16 +217,14 @@ const MGroupRunning = () => {
 
 const Btn = styled.button`
   border: none;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 18px;
   color: #000000;
   background-color: transparent;
-  font-weight: 1000;
-  text-align: center;
-  text-decoration: none;
-  margin-left: 30px;
-  width: 100px;
+  font-weight: 500;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 `;
 
 const CourseBanner = styled.img`

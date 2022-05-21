@@ -2,16 +2,20 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Text, Grid } from "../elements";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { loginInfoDB } from "../redux/modules/user";
+import { loginCheckDB, loginInfoDB } from "../redux/modules/user";
 import LevelBox from "../components/groupDetail/LevelBox";
 import LevelShoes from "../components/LevelShoes";
 import runStyleCharacterMob from "../assets/loginInfo/runStyleCharacterMob.png";
 import runStyleCharacter from "../assets/loginInfo/runStyleCharacter.png";
 import { history } from "../redux/configureStore";
 import Ready from "../shared/Ready";
+import headerLogo from "../assets/header/headerLogo.png";
+
 import { getCookie } from "../shared/Cookie";
 
 import { useMediaQuery } from "react-responsive";
+
+import swal from "sweetalert";
 
 const LoginInfo = () => {
   const isMobile = useMediaQuery({
@@ -29,8 +33,8 @@ const LoginInfo = () => {
 
   useEffect(() => {
     if (firstLogin === "false" || !token) {
-      window.alert("비정상적인 접근입니다.");
-      history.replace("/login");
+      swal("비정상적인 접근입니다.", "", "error");
+      history.push("/");
     }
   }, []);
 
@@ -92,14 +96,6 @@ const LoginInfo = () => {
     `15회 이상`,
   ]);
 
-  const [runExpCommentMob, setRunExpCommentMob] = useState([
-    "처음이에요",
-    "5회 미만",
-    "5회 이상 10회 미만",
-    "10회 이상 15회 미만",
-    "15회 이상",
-  ]);
-
   const choiceRegion = (idx) => {
     setCheckedRegion(idx);
   };
@@ -118,15 +114,14 @@ const LoginInfo = () => {
       checkedDistance === "" ||
       runExp[checkedExp] === undefined
     ) {
-      return window.alert("미선택 된 항목이 있습니다.");
+      swal("미선택 된 항목이 있습니다.");
     } else {
       dispatch(loginInfoDB(checkedRegion, checkedDistance, runExp[checkedExp]));
+      swal("가입을 환영합니다!", "", "success");
     }
   };
 
-  // console.log(checkedRegion, checkedDistance, checkedExp, runExp[checkedExp]);
-
-  if (isMobile && firstLogin) {
+  if (isMobile && firstLogin === "true") {
     return (
       <>
         <Grid
@@ -354,17 +349,23 @@ const LoginInfo = () => {
     );
   }
 
-  if (!firstLogin) {
+  if (firstLogin === "true") {
     return (
       <>
         <HeaderBox>
-          <Logo
-            onClick={() => {
-              history.push("/");
-            }}
+          <Grid
+            height="auto"
+            margin="0 auto"
+            width="1200px"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            position="relative"
           >
-            <img src="https://ifh.cc/g/hmlgTz.png" />
-          </Logo>
+            <Logo>
+              <HeaderCi src={headerLogo} />
+            </Logo>
+          </Grid>
         </HeaderBox>
         <Grid width="800px" margin="72px auto ">
           <LoginCharacter src={runStyleCharacter}></LoginCharacter>
@@ -509,6 +510,21 @@ const LoginInfo = () => {
             <StartBtn onClick={addLoginInfo}>러닝시작하기</StartBtn>
           </Grid>
         </Grid>
+        <HeaderBox>
+          <Grid
+            height="auto"
+            margin="0 auto"
+            width="1200px"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            position="relative"
+          >
+            <Logo>
+              <HeaderCi src={headerLogo} />
+            </Logo>
+          </Grid>
+        </HeaderBox>
       </>
     );
   }
@@ -679,6 +695,11 @@ const Label = styled.label`
   }
 `;
 
+const HeaderCi = styled.img`
+  width: 140px;
+  height: auto;
+`;
+
 const LabelMob = styled.label`
   input {
     display: none;
@@ -746,15 +767,14 @@ const HeaderBox = styled.div`
   height: 90px;
   background-color: #030c37;
   align-items: center;
-  min-width: 700px;
+  width: 100%;
   justify-content: center;
   position: relative;
 `;
 
 const Logo = styled.div`
   width: 128px;
-  height: 71.1px;
-  margin-right: 1100px;
+  height: 70px;
   cursor: pointer;
   justify-content: flex-start;
 `;

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 
 const AlarmComment = (props) => {
-  console.log(props);
   return (
     <Fragment>
       <Grid

@@ -21,7 +21,6 @@ function KakaoMap() {
   const dispatch = useDispatch();
 
   const mapInfoList = useSelector((state) => state.uploadInfo);
-  console.log(mapInfoList);
 
   const [isdrawing, setIsdrawing] = useState(false);
   const [clickLine, setClickLine] = useState();
@@ -51,8 +50,6 @@ function KakaoMap() {
   const handleSubmit = (e) => {
     setPlace(inputText);
   };
-
-  // console.log(paths, distances);
 
   const handleClick = (_map, mouseEvent) => {
     if (!isdrawing) {

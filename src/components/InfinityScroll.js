@@ -6,27 +6,21 @@ import { getGroupDB, resetGroup } from "../redux/modules/feed";
 
 const InfinityScroll = (props) => {
   const { children, callNext, is_next, loading } = props;
-
   const _handleScroll = _.throttle(() => {
+    if (loading) {
+      return;
+    }
     const { innerHeight } = window;
     const { scrollHeight } = document.body;
-
-    // 스크롤 계산하기
     const scrollTop =
       (document.documentElement && document.documentElement.scrollTop) ||
       document.body.scrollTop;
 
-    if (scrollHeight - innerHeight - scrollTop < 100) {
-      // 로딩 중이면 다음 걸 부르면 안되겠죠!
-      if (loading) {
-        return;
-      }
+    if (scrollHeight - innerHeight - scrollTop < 200) {
       callNext();
     }
   }, 300);
-
   const handleScroll = useCallback(_handleScroll, [loading]);
-
   React.useEffect(() => {
     if (loading) {
       return;

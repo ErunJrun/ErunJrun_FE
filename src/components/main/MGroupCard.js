@@ -20,13 +20,7 @@ const MGroupCard = (props) => {
           flexDirection="column"
           cursor="pointer"
         >
-          <Image
-            shape="imgBtn"
-            width="384px"
-            height="288px"
-            src={props?.thumbnailUrl}
-            borderRadius="3px"
-          ></Image>
+          <CardImage src={props?.thumbnailUrl}></CardImage>
 
           {props.applyEndTime === "0 일" ? (
             <ApplyFinish>
@@ -94,6 +88,12 @@ const MGroupCard = (props) => {
     </>
   );
 };
+
+const CardImage = styled.img`
+  width: 384px;
+  height: 288px;
+  border-radius: 3px;
+`;
 
 const ApplyEnd = styled.div`
   width: 384px;

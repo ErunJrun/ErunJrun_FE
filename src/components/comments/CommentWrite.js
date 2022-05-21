@@ -18,7 +18,6 @@ const CommentWrite = (props) => {
       window.alert("내용을 입력해주세요");
     }
     setComm(e.target.value);
-    console.log(comm);
     dispatch(_addCommentFX("group", props.groupId, comm));
     setComm("");
   };

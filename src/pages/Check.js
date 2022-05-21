@@ -21,13 +21,9 @@ const Check = () => {
   //페이지 정보
   const { pathname } = useLocation();
 
-  console.log(groupId);
-
   const check_list = useSelector((state) => state.mypage.attend);
-  console.log(check_list);
 
   const [userId, setUserId] = useState([]);
-  console.log(userId);
 
   const choiceTime = (e, index) => {
     if (e.target.checked) {
@@ -39,6 +35,7 @@ const Check = () => {
 
   useEffect(() => {
     dispatch(getAttendDB(groupId));
+    localStorage.removeItem("from");
   }, []);
 
   if (token) {

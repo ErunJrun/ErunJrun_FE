@@ -5,7 +5,7 @@ import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { logoutDB } from "../redux/modules/user";
 
-// axios.defaults.withCredentials = true;
+import swal from "sweetalert";
 
 export const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -20,8 +20,6 @@ api.interceptors.request.use((config) => {
   const token = getCookie("accessToken");
   const refreshToken = getCookie("refreshToken");
 
-  // console.log("액세스", token, "리프레쉬", refreshToken);
-
   config.headers.common["Authorization"] = `Bearer ${token}`;
   config.headers.common["reAuthorization"] = `Bearer ${refreshToken}`;
 
@@ -30,7 +28,6 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
   (response) => {
-    console.log(response);
     return response;
   },
   async (error) => {
@@ -38,9 +35,6 @@ api.interceptors.response.use(
 
     const { config, response } = error;
     const originalRequest = config;
-
-    console.log(error);
-    console.log(response);
 
     if (response.data.token) {
       // access token이 재발급 된 상태,
@@ -59,16 +53,13 @@ api.interceptors.response.use(
         console.log("인터셉터 토큰 오류", response.data.message);
         deleteCookie("accessToken");
         deleteCookie("refreshToken");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("nickname");
-        localStorage.removeItem("profileUrl");
-        localStorage.removeItem("firstLogin");
+        localStorage.clear();
 
-        window.alert("로그인이 시간이 만료되었습니다.");
+        swal("로그인 후 이용부탁드립니다.");
 
-        history.push("login");
+        history.push("/login");
       } else {
-        window.alert(response.data.message);
+        swal(response.data.message);
       }
     }
 

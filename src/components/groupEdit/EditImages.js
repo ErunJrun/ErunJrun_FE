@@ -24,8 +24,6 @@ const EditImages = (props) => {
   const [showImages, setShowImages] = useState([]);
   const totalImage = useSelector((state) => state.image.files);
   const editContents = useSelector((state) => state.feed.detail);
-  console.log(totalImage);
-  // console.log(showImages);
 
   const goBack1 = () => {
     props.setIsLoad1(false);
@@ -90,11 +88,9 @@ const EditImages = (props) => {
   totalImage.map((e, idx) => {
     if (e?.name) {
       newFiles.push(e);
-      console.log("새로운사진", newFiles);
     }
     if (!e?.name) {
       editUrl.push(e);
-      console.log("기존사진URL", editUrl);
     }
   });
 
@@ -103,12 +99,10 @@ const EditImages = (props) => {
     // 서버에서 받은 URL을 PreView에 넣어줌
     detailImageUrl.map((e, idx) => {
       if (e !== null) {
-        console.log(e);
         return editPreview.push(detailImageUrl[idx]);
       }
     });
     setShowImages(editPreview);
-    console.log(editPreview);
     // 리덕스에 files 인덱스를 맞추기 위해 URL도 같이 넣어줌
     dispatch(imgActions.setPre(editPreview));
   }, [props]);

@@ -20,17 +20,11 @@ const KakaoShareButton = (props) => {
 
   const params = useParams();
   const groupId = params.groupId;
-  console.log(groupDetail);
 
   useEffect(() => {
     console.log("디테일 소환");
     dispatch(getGroupDetailDB(groupId));
   }, [groupId]);
-
-  // useEffect(() => {
-  //   console.log("카카오 공유 실행");
-  //   createKakaoButton();
-  // }, []);
 
   const shareKakao = () => {
     // kakao sdk script이 정상적으로 불러와졌으면 window.Kakao로 접근이 가능합니다

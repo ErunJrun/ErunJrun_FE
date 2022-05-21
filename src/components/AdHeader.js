@@ -22,7 +22,6 @@ const AdHeader = () => {
             bg="#030C37"
             width="100%"
             height="36px"
-            padding="10px 16px"
             justifyContent="center"
             alignItems="center"
             display="flex"
@@ -32,6 +31,7 @@ const AdHeader = () => {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
+              padding="0 15px"
             >
               <Text
                 margin="0"
@@ -69,20 +69,21 @@ const AdHeader = () => {
       {header ? (
         <Grid
           bg="#000"
-          width="1925px"
+          width="100%"
           height="54px"
-          padding="10px 838px"
           justifyContent="center"
           alignItems="center"
           display="flex"
         >
           <Grid
-            width="725px"
+            width="1200px"
             display="flex"
             justifyContent="space-between"
             alignItems="center"
           >
             <Text
+              textalign
+              width="1190px"
               margin="0"
               color="white"
               regular
@@ -95,14 +96,15 @@ const AdHeader = () => {
               hover="color:#68F99E;"
             >
               지금 <span style={{ fontWeight: "600" }}>휴대폰 인증</span>하고
-              알림을 받아보세요! >
+              알림을 받아보세요!{"     "} >
             </Text>
             <Text
+              width="auto"
               cursor="pointer"
               regular
-              margin="-2px -470px 0 0"
+              margin="0"
               color="#999"
-              size="25px"
+              size="17px"
               _onClick={closeHeader}
             >
               x

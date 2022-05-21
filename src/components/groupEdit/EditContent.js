@@ -10,7 +10,6 @@ import dayjs from "dayjs";
 
 const EditContent = (props) => {
   const dispatch = useDispatch();
-  console.log(props);
 
   //글자 수 제한
   const [textLength, setTextLength] = useState(props?.title?.length);
@@ -100,8 +99,6 @@ const EditContent = (props) => {
   const [checkedSpeed, setCheckedSpeed] = useState(props.speed);
   const [chattingRoom, setChattingRoom] = useState(props.chattingRoom);
 
-  console.log(checkedType);
-
   const contents = [
     {
       title: title,
@@ -128,7 +125,6 @@ const EditContent = (props) => {
   };
 
   useEffect(() => {
-    console.log("실행");
     setTitle(props.title);
     setStandbyTime(props.standbyTime);
     setStartTime(props.startTime);
@@ -148,8 +144,6 @@ const EditContent = (props) => {
     props.setIsLoad2(true);
     dispatch(editGroupContent(contents));
   };
-
-  console.log(standbyTime, startTime, finishTime);
 
   const editStandbyTime = standbyTime
     ? standbyTime?.substr(0, 2) + ":" + standbyTime.substr(4, 2)

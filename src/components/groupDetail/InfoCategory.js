@@ -73,7 +73,7 @@ const InfoCategory = (props) => {
         '"Segoe UI Symbol"',
       ].join(","),
       "&:hover": {
-        color: "#40a9ff",
+        color: "#68F99E",
         opacity: 1,
       },
       "&.Mui-selected": {
@@ -132,7 +132,10 @@ const InfoCategory = (props) => {
               </AntTabs>
               <Box />
             </Box>
-            <TabPanel style={{ padding: "32px 16px" }} value="1">
+            <TabPanel
+              style={{ marginBottom: "100px", padding: "32px 16px" }}
+              value="1"
+            >
               <Text bold size="13px" margin="0 0 10px 0">
                 상세 정보
               </Text>
@@ -145,7 +148,10 @@ const InfoCategory = (props) => {
                 <MapInfo />
               </Grid>
             </TabPanel>
-            <TabPanel style={{ padding: "32px 16px" }} value="2">
+            <TabPanel
+              style={{ marginBottom: "100px", padding: "32px 16px" }}
+              value="2"
+            >
               <Text bold size="13px" margin="0 0 20px 0">
                 상세 소개글
               </Text>
@@ -153,10 +159,16 @@ const InfoCategory = (props) => {
                 {props.content}
               </Text>
             </TabPanel>
-            <TabPanel style={{ padding: "32px 16px" }} value="3">
+            <TabPanel
+              style={{ marginBottom: "100px", padding: "32px 16px" }}
+              value="3"
+            >
               <Appliers />
             </TabPanel>
-            <TabPanel style={{ padding: "32px 16px" }} value="4">
+            <TabPanel
+              style={{ marginBottom: "100px", padding: "32px 16px" }}
+              value="4"
+            >
               <CommentList />
             </TabPanel>
           </TabContext>
