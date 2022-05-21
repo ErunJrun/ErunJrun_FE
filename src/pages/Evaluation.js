@@ -211,11 +211,11 @@ const Evaluation = () => {
         <div>
           <Overlaye>
             <Wrap>
-              <Text bold size="18px" marginTop>
+              <Text bold size="16px">
                 크루장 평가
               </Text>
               <MyImage src={host?.data?.hostUser?.user?.profileUrl} />
-              <Text bold size="16px">
+              <Text bold size="14px" >
                 {host?.data?.hostUser?.user?.nickname}
               </Text>
 
@@ -226,25 +226,25 @@ const Evaluation = () => {
               </Text>
               <Hr/>
 
-              <Text bold size="20px">
+              <Text bold size="18px">
                 {host?.data?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
               </Text>
                 {emoji ? (
                   <>
                     <Btn>
                       <Icon>
-                        <Img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
-                        <Text bold size="16px">좋았어요!</Text>
+                        <Img style={{ margin: "-3px 0 -8px 0" }} src="https://ifh.cc/g/DPpn4L.png"/>
+                        <Text bold size="15px">좋았어요!</Text>
                       </Icon>
                     </Btn>
 
                     <Btn>
-                      <Img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
-                      <Text bold  size="16px">아쉬웠어요.</Text>
+                      <Img style={{ margin: "-3px 0 -8px 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
+                      <Text bold  size="15px">아쉬웠어요.</Text>
                     </Btn>
                     <Hr/>
                   
-                    <Text bold size="20px" margin="35px 0 10px 0">
+                    <Text bold size="20px" margin="20px 0 20px 0">
                       {host?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
                     </Text>
 
@@ -280,18 +280,18 @@ const Evaluation = () => {
                   <>
                     <Btn>
                       <Icon>
-                      <Img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
-                      <Text bold size="16px">좋았어요!</Text>
+                      <Img style={{ margin: "-3px 0 -8px 0" }} src="https://ifh.cc/g/cmv5yP.png" onClick={() =>{change(); mpoint();}}/>
+                      <Text bold size="15px">좋았어요!</Text>
                       </Icon>
                     </Btn>
 
                     <Btn>
-                      <Img style={{ margin: "5px 0 0 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
-                      <Text bold  size="16px">아쉬웠어요.</Text>
+                      <Img style={{ margin: "-3px 0 -8px 0" }} src="https://ifh.cc/g/Nz1wV8.png"/>
+                      <Text bold  size="15px">아쉬웠어요.</Text>
                     </Btn>
                     <Hr/>
 
-                    <Text bold size="20px" margin="35px 0 10px 0">
+                    <Text bold size="20px" margin="20px 0 20px 0">
                       {host?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
                     </Text>
 
@@ -343,9 +343,9 @@ const Evaluation = () => {
 };
 
 const MyImage = styled.img`
-  height: 104px;
-  width: 104px;
-  margin: 17px 40px 0px 40px;
+  height: 95px;
+  width: 95px;
+  margin: 10px 40px 0px 40px;
   border-radius: 50%;
 `;
 
@@ -365,7 +365,7 @@ const Icon = styled.div`
 const Hr = styled.div`
   width: 457px;
   height: 1px;
-  margin: 30px 0 20px 20px;
+  margin: 25px 0 15px 0px;
   background-color: #ddd;
 `;
 
@@ -380,7 +380,7 @@ const Btn = styled.button`
   border: none;
   height: 80px;
   width: 200px;
-  margin: 30px 0 20px 10px;
+  margin: 23px 0 0px 0px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -401,7 +401,7 @@ const EvaluationButton = styled.div`
   height: 38px;
   width: 175px; 
   font-weight: bold; 
-  margin: 24px 0 25px 163px;
+  margin: 24px 0 10px 130px;
   padding-top: 14px;
   align-items: center;
   justify-content: center;
@@ -445,12 +445,11 @@ const Wrap = styled.div`
   z-index: 0;
   position: absolute;
   left: 35.3%;
-  top: 103px;
+  top: 90px;
   margin: 0;
   padding: 14px 28px;
-  max-width: 664px;
-  width: 500px;
- // height: 530px;
+  width: 450px;
+ // height: 400px;
   background: #ffffff;
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -463,7 +462,7 @@ const _Wrap = styled.div`
 `;
 
 const LabelDistance = styled.label`
-  margin: -16px 0 0 28px; 
+  margin: -20px 0 0 0px; 
   input {
     display: none;
   }
@@ -511,8 +510,8 @@ const LabelDistance = styled.label`
 `;
 
 const Img = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
 `;
 
 const Image = styled.img`

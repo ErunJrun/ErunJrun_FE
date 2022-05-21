@@ -29,7 +29,7 @@ const Mypage = () => {
     return (
       <Grid width="100%">
         <Profile userId={userId} />
-        {/* <HostEvaluation/> */}
+        <HostEvaluation/>
         {/* {MyId === userId ? <Schedule userId={userId} /> : null} */}
         {/* <Tabs /> */}
       </Grid>

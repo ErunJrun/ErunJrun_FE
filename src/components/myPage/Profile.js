@@ -59,6 +59,7 @@ const Profile = () => {
             </Text>
           </_SmallBox>
         </_Box>
+        <_Hr/>
       </Grid>
     );
   }
@@ -220,5 +221,12 @@ const Information = styled.div`
   height: 90px;
   line-height: 0.2;
   margin: 7px 0 0 110px;
+`;
+
+const _Hr = styled.div`
+  width: 95%;
+  height: 1px;
+  margin: 0px 0 40px 2.5%;
+  background-color: #ddd;
 `;
 export default Profile;
