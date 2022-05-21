@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
@@ -17,8 +18,8 @@ const HostEvaluation = () => {
           {emoji ? (
             <Box>
               <Icon>
-                <img style={{marginTop:"30px"}} src="https://ifh.cc/g/DPpn4L.png"/>
-                <img style={{marginTop:"24px"}} src="https://ifh.cc/g/a8rsZ8.png" onClick={change}/>
+                <Img style={{marginTop:"30px"}} src="https://ifh.cc/g/9soljs.png"/>
+                <Img style={{marginTop:"24px"}} src="https://ifh.cc/g/NbRrk0.png" onClick={change}/>
               </Icon>
               <RightBox>
                 <EvaluationBox>
@@ -52,8 +53,8 @@ const HostEvaluation = () => {
           ):(
             <Box>
               <Icon>
-                <img style={{marginTop:"30px"}} src="https://ifh.cc/g/cmv5yP.png" onClick={change}/>
-                <img style={{marginTop:"24px"}} src="https://ifh.cc/g/Nz1wV8.png"/>
+                <Img style={{marginTop:"30px"}} src="https://ifh.cc/g/Za01L3.png" onClick={change}/>
+                <Img style={{marginTop:"24px"}} src="https://ifh.cc/g/byFtmr.png"/>
               </Icon> 
               <RightBox>
                 <EvaluationBox>
@@ -96,6 +97,11 @@ const Box = styled.div`
   padding: 24px 38px 32px 32px;
   border-radius: 6px;
   background-color: #f5f5f5;
+`;
+
+const Img = styled.img`
+  max-width: 87x;
+  max-height: 87px;
 `;
 
 const Icon = styled.div`

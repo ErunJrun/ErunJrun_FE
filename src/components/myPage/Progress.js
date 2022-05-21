@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
 import { VscTriangleDown } from "react-icons/vsc";
 import { Text } from "../../elements"
@@ -34,7 +35,7 @@ const Progress = (props) => {
                         {props.done} km                     
                     </div> 
                     <div className="e">    
-                        <img src="https://ifh.cc/g/qaxVJd.png" />
+                        <img  className="lee" src="https://ifh.cc/g/zqy9Pt.png" />
                     </div> 
                 </div>
                 </div>
