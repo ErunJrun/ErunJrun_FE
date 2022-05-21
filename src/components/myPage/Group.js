@@ -53,9 +53,9 @@ const Group = () => {
                   ></Image>
 
                   <Grid>
-                    <Text cursor="pointer" size="16px" bold margin="14px 0 0 0">
+                    <Title cursor="pointer" size="16px" bold margin="14px 0 0 0">
                       {data.title}
-                    </Text>
+                    </Title>
                     <Text cursor="pointer" size="13px" margin="2px 0 0 0">
                       {data.date} (소요 시간 : {data.totalTime})
                     </Text>
@@ -179,5 +179,18 @@ const Box = styled.div`
   text-align: center;
   border: none;
 `;
+
+const Title = styled.text`
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis; 
+white-space: nowrap; 
+display:block;
+font-weight: bold;
+font-size: 16px;
+cursor:pointer;
+margin:14px 0 0 0;
+`;
+
 
 export default Group;

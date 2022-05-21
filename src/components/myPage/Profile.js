@@ -1,15 +1,39 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useEffect } from "react";
 import Level from "./Level";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Text, Grid } from "../../elements";
 import LevelBox from "../groupDetail/LevelBox";
+import { useMediaQuery } from "react-responsive";
+import { history } from "../../redux/configureStore";
 
 const Profile = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:820px)",
+  });
   const profile_list = useSelector((state) => state.mypage.list);
-  // console.log(profile_list.userInfo.userLevel);
-  //if (profile_list.length === 0) { return <></>; }
 
+  if(isMobile) {
+    return (
+      <Grid width="100%" >
+          <_MyImage src={profile_list?.userInfo?.profileUrl} />
+          <Grid width="225px" height="65px" margin="-70px 0 0 100px">
+            <Text bold size="14px" >
+              {profile_list?.userInfo?.nickname}
+            </Text> 
+            <Text regular size="10.1px" width="225px"  margin="-12px 0 0 0">
+              {profile_list?.userInfo?.bio}
+            </Text> 
+          </Grid>
+          <Text bold size="20px" margin="-60px 0 0 90%" _onClick={()=>{history.push("/edit")}}>
+            >
+          </Text>
+          <Level/>
+
+      </Grid>
+    );
+  }
   return (
     <Box>
       <MiddleBox> 
@@ -104,6 +128,13 @@ const MyImage = styled.img`
   margin-top: 15px;
 `;
 
+const _MyImage = styled.img`
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  margin: 100px 0 0 16px;
+  border: solid 2px #ddd;
+`;
 const Bio = styled.div`
   height: 100px;
   width: 400px;
