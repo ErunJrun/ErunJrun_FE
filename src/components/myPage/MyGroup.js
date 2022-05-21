@@ -5,10 +5,13 @@ import { Text, Grid, Image, IconButton } from "../../elements";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { getAttendDB } from "../../redux/modules/mypage";
+import { useParams } from "react-router-dom";
 //import swal from 'sweetalert';
 const MyGroup = () => {
   const dispatch = useDispatch();
   const hostId = localStorage.getItem("userId");
+  const params = useParams();
+  const userId = params.userId;
 
   const my = useSelector((state) => state.mypage.mygroup);
   console.log(my);
@@ -62,35 +65,41 @@ const MyGroup = () => {
                   <Tag>{data.thema}</Tag>
                 </Grid>
                 <Hr></Hr>
+              </Grid>
+              { hostId === userId ? 
+              <>
                 <Grid
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
                   margin="0 0 10px 0"
-                ></Grid>
-              </Grid>
-
-              {data.attendance ? (
-                <ApplyBtnFalse>체크완료</ApplyBtnFalse>
-              ) : ( 
-                data.applyEndTime === "0 일" ?
-                <ApplyBtnTrue
-                  onClick={() => {
-                    history.push(`/check/${data.groupId}`);
-                    dispatch(getAttendDB(data.groupId, data.userId, hostId));
-                  }}
                 >
-                  출석체크하기
-                </ApplyBtnTrue> 
-                :
-                <ApplyBtnTrue
-                  onClick={() => {
-                    swal("아직 출석체크 시간이 아닙니다");
-                  }}
-                >
-                  출석체크하기
-                </ApplyBtnTrue>
-              )}
+                </Grid>
+                {data.attendance ? (
+                  <ApplyBtnFalse>체크완료</ApplyBtnFalse>
+                ) : ( 
+                  data.applyEndTime === "0 일" ?
+                  <ApplyBtnTrue
+                    onClick={() => {
+                      history.push(`/check/${data.groupId}`);
+                      dispatch(getAttendDB(data.groupId, data.userId, hostId));
+                    }}
+                  >
+                    출석체크하기
+                  </ApplyBtnTrue> 
+                  :
+                  <ApplyBtnTrue
+                    onClick={() => {
+                      swal("아직 출석체크 시간이 아닙니다");
+                    }}
+                  >
+                    출석체크하기
+                  </ApplyBtnTrue>
+                )}
+              </>
+              : 
+                null
+              }
             </Grid>
           ))}
         </Grid>

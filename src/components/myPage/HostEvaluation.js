@@ -1,10 +1,16 @@
+/* eslint-disable react/jsx-pascal-case */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
+import { useMediaQuery } from "react-responsive";
+import { history } from "../../redux/configureStore";
 
 const HostEvaluation = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:820px)",
+  });
   const profile_list = useSelector((state) => state.mypage.list);
 
   const [ emoji, setEmoji ] = useState(true);
@@ -13,6 +19,81 @@ const HostEvaluation = () => {
     setEmoji(!emoji);
   }
 
+  if(isMobile) {
+    return(
+      <Grid 
+      width="100%" 
+      padding="5%"
+      margin="-50px 0 0 0"
+      >
+        <Text bold size="14px">
+          받은 굿러너 평가 (총 &nbsp;
+          {profile_list?.totalEvaluationCount}
+          개)
+        </Text>
+        <Text bold size="20px" margin="-40px 0 0 95%" _onClick={()=>{history.push()}}>
+          >
+        </Text>
+        <Grid
+          display="flex"
+          alignItems="center"
+          margin="8px 0 0 5px"
+        >
+          <_Box>
+            <_Img src="https://ifh.cc/g/9soljs.png"/>
+            <Text 
+              bold 
+              size="12px"
+              margin="-4px 0 0 0"
+            >
+              {profile_list?.evaluation?.evaluationCategory1}
+            </Text>
+          </_Box>
+          <Text
+          regular
+            size="13px"
+            width="208px"
+            height="26px"
+            bg="#f0f0f0"
+            padding="8px 0 0 0"
+            textalign="center"
+            borderRadius="60px"
+          >
+            “진행한 코스가 만족스러웠어요!”
+          </Text>
+        </Grid>
+        <Grid 
+          display="flex"
+          alignItems="center"
+          margin="-5px 0 15px 5px"
+        >
+          <_Box>
+            <_Img src="https://ifh.cc/g/9soljs.png"/>
+            <Text
+              bold 
+              size="12px"
+              margin="-4px 0 0 0"
+            >
+              {profile_list?.evaluation?.evaluationCategory4}
+            </Text>
+          </_Box>
+          <Text
+            regular
+            size="13px"
+            width="262px"
+            height="26px"
+            bg="#f0f0f0"
+            padding="8px 0 0 0"
+            textalign="center"
+            borderRadius="60px"
+          >
+            “짐을 보관해줘서 편한 러닝이 가능했어요!”
+          </Text>
+        </Grid>
+        <_Hr/>
+      </Grid>
+    );
+  }
     return (
         <div>
           {emoji ? (
@@ -69,7 +150,7 @@ const HostEvaluation = () => {
               </RightBox>
               <LeftBox>
                 <EvaluationBox>
-                  “응답이 늦었어요.”
+                  “변경사항을 안내해주지 않았어요.”
                 </EvaluationBox>
                 <EvaluationBox>
                   “시간 약속을 잘 안지켰어요.”
@@ -99,9 +180,21 @@ const Box = styled.div`
   background-color: #f5f5f5;
 `;
 
+const _Box = styled.div`
+  width: 25px;
+  text-align: center;
+  margin-right: 10px
+`;
+
+
 const Img = styled.img`
   max-width: 87x;
   max-height: 87px;
+`;
+
+const _Img = styled.img`
+  max-width: 24px;
+  max-height: 24px;
 `;
 
 const Icon = styled.div`
@@ -150,6 +243,13 @@ const EvaluationPointL = styled.div`
   line-height: 4.25;
   font-size: 18px;
   font-weight: bold;
+`;
+
+const _Hr = styled.div`
+  width: 95%;
+  height: 1px;
+  margin: 0px 0 40px 2.5%;
+  background-color: #ddd;
 `;
 
 export default HostEvaluation;

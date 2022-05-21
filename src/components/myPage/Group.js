@@ -5,10 +5,13 @@ import { Text, Grid, Image, IconButton } from "../../elements";
 import Evaluation from "../../pages/Evaluation";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
+import { useParams } from "react-router-dom";
 
 const Group = () => {
   const dispatch = useDispatch();
-  const userId = localStorage.getItem("userId");
+  const myId = localStorage.getItem("userId");
+  const params = useParams();
+  const userId = params.userId;
 
   const running = useSelector((state) => state.mypage.group);
   console.log(running);
@@ -65,37 +68,35 @@ const Group = () => {
                     <Tag>{data.location}</Tag>
                     <Tag>{data.distance}km</Tag>
                     <Tag>{data.thema}</Tag>
-                  </Grid>
-                  <Hr></Hr>
-                  <Grid
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    margin="0 0 10px 0"
-                  ></Grid>
+                  </Grid><Hr></Hr>
                 </Grid>
-
-                {data.evaluation ? (
-                  <ApplyBtnFalse>평가완료</ApplyBtnFalse>
-                ) : (
-                  // <div  onClick={()=> {
-                  //   history.push("/evaluation")
-                  //   dispatch(getEvaluationDB(data.groupId, data.userId, userId));
-                  // }}>
-                  //   <Evaluation running={data} 
-                  //  />
-                  // </div>
-                  <ApplyBtnTrue
-                  
-                  onClick={() => { 
-                    dispatch(getEvaluationDB(data.groupId, data.userId, userId));
-                    history.push("/evaluation");
-                   
-                  }}   
-                >
-                  크루장 평가하기 
-                </ApplyBtnTrue> 
-                )}
+                  {myId === userId ? 
+                    <>
+                      <Grid
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        margin="0 0 10px 0"
+                      >
+                      </Grid>
+                      {data.evaluation ? (
+                        <ApplyBtnFalse>평가완료</ApplyBtnFalse>
+                      ) 
+                      :
+                      (
+                        <ApplyBtnTrue  
+                        onClick={() => { 
+                          dispatch(getEvaluationDB(data.groupId, data.userId, userId));
+                          history.push("/evaluation");                   
+                        }}   
+                      >
+                        크루장 평가하기 
+                      </ApplyBtnTrue> 
+                      )}
+                    </>
+                  : 
+                    null
+                  }
               </Grid>
             ) : null;
           })}

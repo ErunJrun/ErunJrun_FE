@@ -13,6 +13,7 @@ import { styled as muiStyled } from "@mui/material/styles";
 
 import { getProfileDB, getRunningDB, getMyRunningDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { Grid } from "swiper";
 
 const TabPanel = (props) => {
@@ -45,8 +46,9 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const dispatch = useDispatch();
-
-  const userId = localStorage.getItem("userId");
+  const params = useParams();
+  const userId = params.userId;
+  console.log(userId);
 
   const [value, setValue] = React.useState(0);
   const [expected, setExpected] = useState(true);

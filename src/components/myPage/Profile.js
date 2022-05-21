@@ -17,20 +17,49 @@ const Profile = () => {
   if(isMobile) {
     return (
       <Grid width="100%" >
-          <_MyImage src={profile_list?.userInfo?.profileUrl} />
-          <Grid width="225px" height="65px" margin="-70px 0 0 100px">
-            <Text bold size="14px" >
-              {profile_list?.userInfo?.nickname}
-            </Text> 
-            <Text regular size="10.1px" width="225px"  margin="-12px 0 0 0">
-              {profile_list?.userInfo?.bio}
-            </Text> 
-          </Grid>
-          <Text bold size="20px" margin="-60px 0 0 90%" _onClick={()=>{history.push("/edit")}}>
-            >
-          </Text>
-          <Level/>
-
+        <_MyImage src={profile_list?.userInfo?.profileUrl} />
+        <Grid width="225px" height="65px" margin="-70px 0 0 100px">
+          <Text bold size="14px" >
+            {profile_list?.userInfo?.nickname}
+          </Text> 
+          <Text regular size="10.1px" width="225px"  margin="-12px 0 0 0">
+            {profile_list?.userInfo?.bio}
+          </Text> 
+        </Grid>
+        <Text bold size="20px" margin="-60px 0 0 90%" _onClick={()=>{history.push("/edit")}}>
+          >
+        </Text>
+        <Level/>
+        <_Box>
+          <_SmallBox>
+            <Text  size="12px" color="#7b7b7b">
+              {" "}
+              러닝레벨{" "}
+            </Text>
+            <LevelBox userLevel={profile_list?.userInfo?.userLevel} />
+          </_SmallBox>
+          <_SmallBox>
+            <Text  size="12px" color="#7b7b7b">
+              {" "}
+              선호거리{" "}
+            </Text>
+            <Text size="12px" color="#000">
+              {" "}
+              {profile_list?.userInfo?.likeDistance}
+            </Text>
+          </_SmallBox>
+          <_SmallBox>
+            <Text  size="12px" color="#7b7b7b">
+              {" "}
+              선호지역{" "}
+            </Text>
+            <Text size="12px" color="#000">
+              {" "}
+              {profile_list?.userInfo?.likeLocation}
+            </Text>
+          </_SmallBox>
+        </_Box>
+        <_Hr/>
       </Grid>
     );
   }
@@ -101,6 +130,16 @@ const Box = styled.div`
   border: solid 2px #b8b8b8;
 `;
 
+const _Box = styled.div`
+  width: 343px;
+  height: 95px;
+  margin: 24px auto;
+  border-radius: 3px;
+  border: solid 1px #ddd;
+  background-color: #fff;
+  padding: 7px 0px;
+`;
+
 const MiddleBox = styled.div`
   display: flex;
 `;
@@ -111,7 +150,17 @@ const SmallBox = styled.div`
   width: 400px;
   height: 23px;
   gap: 20px;
-  margin-top: 15px;
+  margin-top: 13px;
+`;
+
+const _SmallBox = styled.div`
+  display: flex;
+  align-items: center;
+  width: 400px;
+  height: 16px;
+  gap: 16px;
+  margin: 12px 0 0 24px;
+
 `;
 
 const TextBox = styled.div`
@@ -132,7 +181,7 @@ const _MyImage = styled.img`
   height: 64px;
   width: 64px;
   border-radius: 50%;
-  margin: 100px 0 0 16px;
+  margin: 80px 0 0 16px;
   border: solid 2px #ddd;
 `;
 const Bio = styled.div`
@@ -172,5 +221,12 @@ const Information = styled.div`
   height: 90px;
   line-height: 0.2;
   margin: 7px 0 0 110px;
+`;
+
+const _Hr = styled.div`
+  width: 95%;
+  height: 1px;
+  margin: 0px 0 40px 2.5%;
+  background-color: #ddd;
 `;
 export default Profile;
