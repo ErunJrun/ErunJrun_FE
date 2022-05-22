@@ -9,10 +9,11 @@ const Main = () => {
   const dispatch = useDispatch();
 
   const from = localStorage.getItem("from");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    dispatch(loginCheckDB());
-  }, []);
+    if (userId) dispatch(loginCheckDB());
+  }, [userId]);
 
   if (from) {
     return <Redirect to={{ pathname: from }}></Redirect>;

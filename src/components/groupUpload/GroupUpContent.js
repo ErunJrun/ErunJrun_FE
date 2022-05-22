@@ -4,6 +4,7 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { addContents } from "../../redux/modules/uploadInfo";
+import swal from "sweetalert";
 
 const GroupContent = (props) => {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const GroupContent = (props) => {
       dayjs(e.target.value).format("YYYYMMDD") <=
       dayjs(new Date()).format("YYYYMMDD")
     ) {
-      window.alert("오늘 날짜 이후부터 선택이 가능합니다.");
+      swal("오늘 날짜 이후부터 선택이 가능합니다.");
       setDate("");
     }
   };
@@ -60,7 +61,7 @@ const GroupContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 28) {
-      window.alert("28자 이상 작성할 수 없습니다.");
+      swal("28자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength(wordLength);
@@ -70,7 +71,7 @@ const GroupContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 600) {
-      window.alert("600자 이상 작성할 수 없습니다.");
+      swal("600자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength600(wordLength);
@@ -80,7 +81,7 @@ const GroupContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 40) {
-      window.alert("40자 이상 작성할 수 없습니다.");
+      swal("40자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLengthPark(wordLength);
@@ -90,7 +91,7 @@ const GroupContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 40) {
-      window.alert("40자 이상 작성할 수 없습니다.");
+      swal("40자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLengthBag(wordLength);
@@ -100,7 +101,7 @@ const GroupContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 40) {
-      window.alert("40자 이상 작성할 수 없습니다.");
+      swal("40자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLengthChat(wordLength);
@@ -320,7 +321,7 @@ const GroupContent = (props) => {
               hover="border:1px solid #030C37;"
             >
               <GroupSelect
-                onChange={(e) => {
+                onClick={(e) => {
                   setMaxPeople(e.target.value);
                 }}
                 value={maxPeople}
@@ -421,8 +422,10 @@ const GroupContent = (props) => {
           </Grid>
           <Hr />
 
-          <Text bold>러닝타입</Text>
-          <Grid display="flex" justifyContent="space-between">
+          <Text margin="0" bold>
+            러닝 타입
+          </Text>
+          <Grid margin="0" display="flex" justifyContent="space-between">
             {runTypeList.map((e, idx) => {
               return (
                 <Fragment key={idx}>
@@ -458,8 +461,10 @@ const GroupContent = (props) => {
           </Grid>
 
           <Grid margin="0 0 64px 0">
-            <Text bold>러닝속도</Text>
-            <Grid display="flex" justifyContent="space-between">
+            <Text margin="0" bold>
+              러닝속도
+            </Text>
+            <Grid margin="0" display="flex" justifyContent="space-between">
               {runSpeedList.map((e, idx) => {
                 return (
                   <Fragment key={idx}>
@@ -642,7 +647,7 @@ const Label = styled.label`
     display: none;
   }
   input + p {
-    margin: 0;
+    margin: 20px 0 0 0;
     width: 132px;
     height: 44px;
     flex-grow: 0;
@@ -655,10 +660,13 @@ const Label = styled.label`
     border: 1px solid #000;
     cursor: pointer;
     box-sizing: border-box;
+    font-weight: 500;
   }
   input:checked + p {
     background-color: #68f99e;
+    border: 1px solid #68f99e;
     color: #000;
+    font-weight: 700;
   }
 `;
 

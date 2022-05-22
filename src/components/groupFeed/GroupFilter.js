@@ -3,11 +3,12 @@ import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Text, Grid, IconButton } from "../../elements";
-import { getGroupDB } from "../../redux/modules/feed";
+import { getGroupDB, resetGroup } from "../../redux/modules/feed";
 import CalendarFilter from "./CalendarFilter";
 import DistanceFilter from "./DistanceFilter";
 import TimeFilter from "./TimeFilter";
 import ThemeFilter from "./ThemeFilter";
+import swal from "sweetalert";
 
 const GroupFilter = (props) => {
   const dispatch = useDispatch();
@@ -80,7 +81,13 @@ const GroupFilter = (props) => {
     dispatch(getGroupDB(props.category));
   };
 
+  console.log(startDate);
+
   const getFilter = () => {
+    if (region.length === 0 || startDate === "NaN-NaN-NaN") {
+      swal("지역과 모집 일정은 필수입니다.", "", "warning");
+    }
+    dispatch(resetGroup());
     dispatch(getGroupDB(category));
     props.setSearchState(true);
   };

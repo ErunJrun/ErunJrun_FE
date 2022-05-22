@@ -1,6 +1,7 @@
 import { handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/Api";
+import swal from "sweetalert";
 
 //액션
 
@@ -27,7 +28,7 @@ const initialState = {
       { lat: 37.6, lng: 127.4 },
     ],
   },
-  paging: { page: 1, size: 1 },
+  paging: { page: 1, size: 3 },
   isLoading: false,
 };
 
@@ -88,7 +89,7 @@ export const loading = (payload) => ({
 });
 
 //미들웨어
-export const getGroupDB = (category, page = 1, size = 1) => {
+export const getGroupDB = (category, page = 1, size = 3) => {
   return async function (dispatch, getState, { history }) {
     console.log(category, page, size);
     const _paging = getState().feed.paging;
@@ -134,7 +135,7 @@ export const getGroupDB = (category, page = 1, size = 1) => {
       let finish = category?.finish;
 
       const { data } = await api.get(
-        `/group/all?date=${startDate}${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}`
+        `/group/all?date=${startDate}${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}&page=${page}&size=${size}`
       );
       console.log(data);
       console.log(data.data.length);
@@ -171,7 +172,7 @@ export const getGroupDetailDB = (groupId) => {
       dispatch(getGroupDetail(data.data));
     } catch (error) {
       console.log(error);
-      window.alert("해당 게시물이 존재하지 않습니다");
+      swal("해당 게시물이 존재하지 않습니다");
     }
   };
 };
@@ -211,7 +212,7 @@ export const addGroupDB = (
         },
       });
       console.log(data);
-      window.alert("게시물 등록 완료");
+      swal("게시물 등록 완료", "", "success");
       console.log("1");
       history.replace("/groupfeed");
     } catch (error) {
@@ -227,7 +228,7 @@ export const deleteGroupDB = (groupId) => {
       .delete(`/group/${groupId}`)
       .then((res) => {
         console.log(res);
-        window.alert("삭제 완료");
+        swal("삭제 완료");
 
         history.push("/groupfeed");
       })

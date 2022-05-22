@@ -6,6 +6,7 @@ import { applyGroupDB, getGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
 import shoesYellow from "../../assets/groupFeed/shoesYellow.png";
 import Permit from "../../shared/Permit";
+import swal from "sweetalert";
 
 const GroupCard = (props) => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const GroupCard = (props) => {
     if (isLogin) {
       dispatch(applyGroupDB(props.groupId));
     } else {
-      window.alert("로그인 후 이용해 주세요");
+      swal("로그인 후 이용해 주세요");
     }
   };
 
@@ -112,7 +113,7 @@ const GroupCard = (props) => {
           <ApplyBtnFalse
             style={{ background: "black", color: "white" }}
             onClick={() => {
-              window.alert("기한이 종료되었습니다.");
+              swal("기한이 종료되었습니다.");
             }}
           >
             종료

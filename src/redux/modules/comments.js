@@ -2,6 +2,7 @@ import { api } from "../../shared/Api";
 import { produce } from "immer";
 import { handleActions } from "redux-actions";
 import { _getReCommentFX } from "./recomments";
+import swal from "sweetalert";
 
 // Action
 const ADD_COMM = "ADD_COMM";
@@ -53,7 +54,7 @@ export const _getCommentFX = (category, categoryId) => {
     try {
       const { data } = await api.get(`/comment/${category}/${categoryId}`);
       console.log(data);
-
+      console.log("댓글 get");
       let comment_list = [];
 
       data.data.map((data) => {
@@ -83,7 +84,7 @@ export const _addCommentFX = (category, categoryId, content) => {
       });
 
       dispatch(addComm(comment_list));
-      window.alert("댓글 등록 완료");
+      swal("댓글 등록 완료");
     } catch (error) {
       console.log(error);
     }
@@ -99,7 +100,7 @@ export const _editCommentFX = (commentId, content) => {
       });
       console.log(data);
       dispatch(editComm(data.data));
-      window.alert("댓글 수정 완료");
+      swal("댓글 수정 완료");
     } catch (error) {
       console.log(error);
     }
@@ -112,7 +113,7 @@ export const _deleteCommentFX = (commentId) => {
       console.log(commentId);
       const { data } = await api.delete(`/comment/${commentId}`);
       console.log(data);
-      window.alert("댓글 삭제 완료");
+      swal("댓글 삭제 완료");
       dispatch(deleteComm(commentId));
     } catch (error) {
       console.log(error);

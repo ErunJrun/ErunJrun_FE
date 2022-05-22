@@ -5,6 +5,7 @@ import { Grid } from "../../elements";
 import { _addCommentFX } from "../../redux/modules/comments";
 import defaultProfile from "../../assets/defaultProfile.png";
 import { useMediaQuery } from "react-responsive";
+import swal from "sweetalert";
 
 const CommentWrite = (props) => {
   const isMobile = useMediaQuery({
@@ -15,7 +16,7 @@ const CommentWrite = (props) => {
 
   const writeComm = (e) => {
     if (comm === "") {
-      window.alert("내용을 입력해주세요");
+      swal("내용을 입력해주세요");
     }
     setComm(e.target.value);
     dispatch(_addCommentFX("group", props.groupId, comm));

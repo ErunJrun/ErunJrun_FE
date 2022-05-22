@@ -24,19 +24,16 @@ const CommentItem = (props) => {
 
   const dispatch = useDispatch();
   const [newComm, setNewComm] = useState("");
-  const [reComm, setReComm] = useState(false);
+  const [reCommBox, setReCommBox] = useState(false);
 
   const nickname = localStorage.getItem("nickname");
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const recommentList = useSelector((state) => state.recomments.list);
+  const commentList = useSelector((state) => state.comments.list);
 
   const editToggle = (commentId) => {
     dispatch(_isEdit(commentId));
-  };
-
-  const recommToggle = (commentId) => {
-    dispatch(_isRecommBox(commentId));
   };
 
   const editComm = (commentId) => {
@@ -47,7 +44,12 @@ const CommentItem = (props) => {
 
   React.useEffect(() => {
     dispatch(_getReCommentFX(props.commentId));
-  }, [props.commentId]);
+
+    return () => {
+      console.log("대댓글 클린업");
+      dispatch(resetReComm());
+    };
+  }, []);
 
   if (isMobile) {
     return (
@@ -150,16 +152,12 @@ const CommentItem = (props) => {
           {props?.is_edit ? null : (
             <Grid width="auto" display="flex" margin="0 0 0 42px">
               <Text
-                hover="color:#68F99E; font-weight:900;"
                 color="#818181"
                 margin="0 16px 0 0"
                 size="12px"
                 cursor="pointer"
-                _onClick={() => {
-                  recommToggle(props?.commentId);
-                }}
               >
-                답글 열기
+                답글 {props?.recommentCount}개
               </Text>
               <Permit>
                 <Text
@@ -169,7 +167,7 @@ const CommentItem = (props) => {
                   size="12px"
                   cursor="pointer"
                   _onClick={() => {
-                    setReComm(!reComm);
+                    setReCommBox(!reCommBox);
                   }}
                 >
                   답글 쓰기
@@ -210,6 +208,13 @@ const CommentItem = (props) => {
           <Hr></Hr>
         </Grid>
         <Grid margin="0 0 12px 0">
+          {reCommBox ? (
+            <RecommentWrite
+              setReCommBox={setReCommBox}
+              commentId={props?.commentId}
+            />
+          ) : null}
+
           {props.isRecomm
             ? recommentList?.map((e, idx) => {
                 if (e === null) {
@@ -224,12 +229,6 @@ const CommentItem = (props) => {
                 ) : null;
               })
             : null}
-          {reComm ? (
-            <RecommentWrite
-              setReComm={setReComm}
-              commentId={props?.commentId}
-            />
-          ) : null}
         </Grid>
       </>
     );
@@ -266,17 +265,22 @@ const CommentItem = (props) => {
                 </>
               ) : (
                 <>
-                  <Text
-                    _onClick={() => {
-                      history.push(`/mypage/${props?.user.userId}`);
-                    }}
-                    width="auto"
-                    size="16px"
-                    margin="0"
-                    bold
-                  >
-                    {props?.user?.nickname}
-                  </Text>
+                  <Grid display="flex" alignItems="center">
+                    <Text
+                      _onClick={() => {
+                        history.push(`/mypage/${props?.user.userId}`);
+                      }}
+                      width="auto"
+                      margin="0 5px 0 0"
+                      bold
+                    >
+                      {props?.user?.nickname}
+                    </Text>
+                    <Text color="#818181" margin="0 10px 0 0" size="12px">
+                      {props?.createdAt}
+                    </Text>
+                  </Grid>
+
                   <Text width="auto" margin="0" size="16px">
                     {props?.content}
                   </Text>
@@ -317,17 +321,14 @@ const CommentItem = (props) => {
         ) : (
           <Grid display="flex" margin="0 0 0 42px">
             <Text
-              hover="color:#68F99E; font-weight:900;"
               color="#818181"
               margin="0 16px 0 0"
               size="12px"
               cursor="pointer"
-              _onClick={() => {
-                recommToggle(props?.commentId);
-              }}
             >
-              답글 열기
+              답글 {props?.recommentCount}개
             </Text>
+
             <Permit>
               <Text
                 hover="color:#68F99E; font-weight:900;"
@@ -336,7 +337,7 @@ const CommentItem = (props) => {
                 size="12px"
                 cursor="pointer"
                 _onClick={() => {
-                  setReComm(!reComm);
+                  setReCommBox(!reCommBox);
                 }}
               >
                 답글 쓰기
@@ -375,7 +376,14 @@ const CommentItem = (props) => {
           </Grid>
         )}
       </Grid>
-      {props.isRecomm
+      {reCommBox ? (
+        <RecommentWrite
+          setReCommBox={setReCommBox}
+          commentId={props?.commentId}
+        />
+      ) : null}
+
+      {!props.isRecomm
         ? recommentList?.map((e, idx) => {
             if (e === null) {
               return;
@@ -384,7 +392,7 @@ const CommentItem = (props) => {
               <Fragment key={idx}>
                 <Grid margin="0 0 12px 76px">
                   <RecommentItem
-                    setReComm={setReComm}
+                    setReCommBox={setReCommBox}
                     commentId={props?.commentId}
                     {...e}
                   />
@@ -393,8 +401,6 @@ const CommentItem = (props) => {
             ) : null;
           })
         : null}
-
-      {reComm ? <RecommentWrite commentId={props?.commentId} /> : null}
     </>
   );
 };

@@ -4,6 +4,7 @@ import { Image, Grid, Text } from "../../elements";
 import ImageIcon from "../../assets/groupUpload/imageCamera.png";
 import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
+import swal from "sweetalert";
 
 const ImagesUpload = () => {
   const dispatch = useDispatch();
@@ -17,11 +18,11 @@ const ImagesUpload = () => {
     let imageUrlLists = [];
 
     if (imageLists.length > maxImageCnt) {
-      window.alert("첨부 파일은 최대 3개까지 가능합니다.");
+      swal("첨부 파일은 최대 3개까지 가능합니다.");
     }
 
     if (totalImage.length + imageLists.length > 3) {
-      window.alert("첨부 파일은 최대 3개까지 가능합니다.");
+      swal("첨부 파일은 최대 3개까지 가능합니다.");
     } else {
       let imgList = [];
 
@@ -63,6 +64,7 @@ const ImagesUpload = () => {
               width="280px"
               height="169px"
               border="1px solid #7B7B7B"
+              bg="#FFFFFF"
               borderRadius="3px"
               display="flex"
               justifyContent="center"
@@ -72,7 +74,7 @@ const ImagesUpload = () => {
               margin="0"
             >
               <UploadIcon src={ImageIcon} />
-              <Text color="#7B7B7B" size="14px">
+              <Text margin="16px 0 0 0" color="#7B7B7B" size="14px">
                 눌러서 이미지 업로드하기
               </Text>
             </Grid>
@@ -102,13 +104,14 @@ const ImagesUpload = () => {
                       border="1px solid #FFFFFF"
                       borderRadius="3px"
                       _onClick={() => handleDeleteImage(image, idx)}
-                      margin="92px 79px"
+                      margin="92px 90px"
                       display="flex"
                       justifycontent="center"
                       color="white"
                       alignItems="center"
                       cursor="pointer"
                       size="14px"
+                      hover="background-color:rgba(255, 255, 255, 0.9); color:black;"
                     >
                       삭제하기
                     </Text>
@@ -129,13 +132,14 @@ const ImagesUpload = () => {
                       border="1px solid #FFFFFF"
                       borderRadius="3px"
                       _onClick={() => handleDeleteImage(image, idx)}
-                      margin="92px 79px"
+                      margin="92px 90px"
                       display="flex"
                       justifycontent="center"
                       color="white"
                       alignItems="center"
                       cursor="pointer"
                       size="14px"
+                      hover="background-color:rgba(255, 255, 255, 0.9); color:black;"
                     >
                       삭제하기
                     </Text>

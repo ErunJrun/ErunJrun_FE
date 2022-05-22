@@ -14,6 +14,7 @@ import {
   addPaths,
   resetMap,
 } from "../../redux/modules/uploadInfo";
+import swal from "sweetalert";
 
 function KakaoMap() {
   const { kakao } = window;
@@ -88,7 +89,8 @@ function KakaoMap() {
   useEffect(() => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
-
+    console.log(map);
+    console.log(ps);
     ps.keywordSearch(place, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
@@ -112,7 +114,8 @@ function KakaoMap() {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
       } else {
-        window.alert("검색된 장소가 없습니다");
+        swal("검색된 장소가 없습니다", "", "warning");
+        setInputText("");
       }
     });
   }, [place]);
@@ -269,6 +272,7 @@ const LocationInput = styled.input`
 `;
 
 const SearchLocationBtn = styled.button`
+  font-family: "Spoqa Han Sans Neo";
   padding: 10px;
   max-width: 139px;
   width: 100%;

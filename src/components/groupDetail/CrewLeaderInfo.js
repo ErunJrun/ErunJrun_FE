@@ -40,7 +40,6 @@ const CrewLeaderInfo = (props) => {
           _onClick={() => {
             history.push(`/mypage/${detailGroup?.userId}`);
           }}
-          hover="border:2px solid #68F99E;"
           position="relative"
         >
           <CrewLeaderName src={crewLeaderName} />
@@ -73,10 +72,10 @@ const CrewLeaderInfo = (props) => {
               alignItems="center"
             >
               <CrewFlag style={{ width: "13px" }} src={crewLeaderFlag} />
-              <Text size="10px" margin="0 5px 0 0">
+              <Text cursor="pointer" size="10px" margin="0 5px 0 0">
                 굿러너 레벨
               </Text>
-              <Text size="10px" margin="0" bold>
+              <Text cursor="pointer" size="10px" margin="0" bold>
                 {detailGroup?.mannerPoint}km
               </Text>
             </Grid>
@@ -105,7 +104,7 @@ const CrewLeaderInfo = (props) => {
         _onClick={() => {
           history.push(`/mypage/${detailGroup?.userId}`);
         }}
-        hover="border:2px solid #68F99E;"
+        hover="box-shadow:0px 0px 6px rgba(141, 141, 141, 0.8);"
       >
         <CrewLeaderName src={crewLeaderName} />
         <Grid justifyContent="center" display="flex" width="auto">
@@ -122,7 +121,7 @@ const CrewLeaderInfo = (props) => {
           display="flex"
           flexDirection="column"
         >
-          <Text margin="0 5px 10px 0" size="16px" bold>
+          <Text cursor="pointer" margin="0 5px 10px 0" size="16px" bold>
             {detailGroup?.nickname}
           </Text>
 
@@ -134,10 +133,10 @@ const CrewLeaderInfo = (props) => {
             alignItems="center"
           >
             <CrewFlag src={crewLeaderFlag} />
-            <Text size="14px" margin="0 5px 0 0">
+            <Text cursor="pointer" size="14px" margin="0 5px 0 0">
               굿러너 레벨
             </Text>
-            <Text size="14px" margin="0" bold>
+            <Text cursor="pointer" size="14px" margin="0" bold>
               {detailGroup?.mannerPoint}km
             </Text>
           </Grid>
@@ -150,6 +149,7 @@ const CrewLeaderInfo = (props) => {
 const LevelWrap = styled.div`
   position: absolute;
   bottom: 10px;
+  cursor: pointer;
 `;
 
 const CrewLeaderName = styled.img`
@@ -158,6 +158,7 @@ const CrewLeaderName = styled.img`
   position: absolute;
   right: 16px;
   top: 0;
+  cursor: pointer;
 `;
 
 const CrewLeaderProfile = styled.img`
@@ -165,11 +166,13 @@ const CrewLeaderProfile = styled.img`
   width: 101px;
   height: 101px;
   border: 2px solid #dddddd;
+  cursor: pointer;
 `;
 
 const CrewFlag = styled.img`
   width: 16px;
   height: auto;
   margin-right: 6px;
+  cursor: pointer;
 `;
 export default CrewLeaderInfo;

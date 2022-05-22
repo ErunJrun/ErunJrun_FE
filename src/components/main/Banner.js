@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import blueBanner from "../../assets/main/blueBanner.png";
 import yellowBanner from "../../assets/main/yellowBanner.png";
-import yellowBannerMob from "../../assets/main/yellowBannerMob.png";
+import yellowBannerMob from "../../assets/main/yellowBannerMob.svg";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -40,59 +40,69 @@ const Banner = () => {
         >
           <SwiperSlide id="SwiperSlideMob">
             <img
-              style={{ width: "100%", height: "150px" }}
+              style={{
+                position: "relative",
+                width: "375px",
+                height: "150px",
+                margin: "0",
+              }}
               src={yellowBannerMob}
               alt="yellowBannerMob"
             />
-            {/* <Grid
+            <Grid
               display="flex"
-              justifyContent="space-between"
+              flexDirection="column"
               width="375px"
               height="150px"
+              position="absolute"
+              top="24px"
+              left="16px"
             >
-              <Grid
-                display="flex"
-                flexDirection="column"
-                position="absolute"
-                top="80px"
-                left="795px"
-                width="339px"
+              <Text
+                textLeft
+                width="auto"
                 height="auto"
-                margin="0 0 0 40px"
+                regular
+                size="12px"
+                color="#1C1C1C"
+                margin="0"
               >
-                <Text
-                  textLeft
-                  height="auto"
-                  bold
-                  size="32px"
-                  color="white"
-                  margin="0"
-                >
-                  Runner 님,
-                </Text>
-                <Text
-                  textLeft
-                  bold
-                  height="41px"
-                  size="20px"
-                  color="#ECF1F1"
-                  margin="0 0 26px 0"
-                >
-                  당신에게 어울리는{" "}
-                  <span style={{ color: "#68F99E" }}>이런저런</span> 코스 추천!
-                </Text>
-
-                <button
-                  className="btn"
-                  type="button"
-                  onClick={() => {
-                    history.push("/coursefeed");
-                  }}
-                >
-                  추천 코스 보러가기
-                </button>
-              </Grid>
-            </Grid> */}
+                검증된 러닝 코스 즐기기
+              </Text>
+              <Text
+                textLeft
+                width="auto"
+                height="auto"
+                bold
+                size="18px"
+                color="#1C1C1C"
+                margin="0"
+              >
+                {userName ? userName : "Runner"}님,
+              </Text>
+              <Text
+                textLeft
+                width="auto"
+                height="auto"
+                bold
+                size="18px"
+                color="#1C1C1C"
+                margin="0"
+              >
+                야경과 함께 뛰어보세요!
+              </Text>
+              <Text
+                textLeft
+                width="auto"
+                height="auto"
+                regular
+                size="10px"
+                color="#1C1C1C"
+                margin="0"
+              >
+                #아경 #밤러닝 #강변
+              </Text>
+            </Grid>
           </SwiperSlide>
         </Swiper>
       </BoxMob>

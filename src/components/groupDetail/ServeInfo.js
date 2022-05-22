@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Grid, Text } from "../../elements";
 import styled from "styled-components";
 
+import dayjs from "dayjs";
+
 import { useMediaQuery } from "react-responsive";
 
 const ServeInfo = () => {
@@ -12,6 +14,30 @@ const ServeInfo = () => {
 
   const detailGroup = useSelector((state) => state.feed.detail);
   const startTime = detailGroup?.datetime?.slice(-7);
+
+  const editStandbyTime = detailGroup?.standbyTime
+    ? detailGroup?.standbyTime?.substr(0, 2) +
+      "시" +
+      " " +
+      detailGroup?.standbyTime.substr(3, 2) +
+      "분"
+    : "";
+
+  const editStartTime = detailGroup?.startTime
+    ? detailGroup?.startTime?.substr(0, 2) +
+      "시" +
+      " " +
+      detailGroup?.startTime.substr(3, 2) +
+      "분"
+    : "";
+
+  const editFinishTime = detailGroup?.finishTime
+    ? detailGroup?.finishTime?.substr(0, 2) +
+      "시" +
+      " " +
+      detailGroup?.finishTime.substr(3, 2) +
+      "분"
+    : "";
 
   if (isMobile) {
     return (
@@ -48,7 +74,7 @@ const ServeInfo = () => {
                 스탠바이 시간
               </Text>
               <Text margin="0" size="12px">
-                {detailGroup?.standbyTime}
+                {editStandbyTime}
               </Text>
             </Grid>
 
@@ -57,7 +83,7 @@ const ServeInfo = () => {
                 출발 시간
               </Text>
               <Text color="" margin="0" size="12px">
-                {detailGroup?.startTime}
+                {editStartTime}
               </Text>
             </Grid>
 
@@ -66,7 +92,7 @@ const ServeInfo = () => {
                 도착 시간
               </Text>
               <Text margin="0" size="12px">
-                {detailGroup?.finishTime}
+                {editFinishTime}
               </Text>
             </Grid>
             <Grid width="auto" display="flex" margin="0 0 16px 0">
@@ -101,7 +127,7 @@ const ServeInfo = () => {
               스탠바이
             </Text>
             <Text bold margin="0" size="16px">
-              {detailGroup?.standbyTime}
+              {editStandbyTime}
             </Text>
           </Grid>
 
@@ -110,7 +136,7 @@ const ServeInfo = () => {
               출발 시간
             </Text>
             <Text bold color="" margin="0" size="16px">
-              {detailGroup?.startTime}
+              {editStartTime}
             </Text>
           </Grid>
 
@@ -119,7 +145,7 @@ const ServeInfo = () => {
               도착 시간
             </Text>
             <Text bold margin="0" size="16px">
-              {detailGroup?.finishTime}
+              {editFinishTime}
             </Text>
           </Grid>
         </Grid>

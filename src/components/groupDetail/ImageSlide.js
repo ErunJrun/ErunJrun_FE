@@ -22,6 +22,8 @@ import { useParams } from "react-router-dom";
 import { history } from "../../redux/configureStore";
 import { Grid, Text } from "../../elements";
 
+import swal from "sweetalert";
+
 const ImageSlide = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
@@ -47,7 +49,7 @@ const ImageSlide = () => {
 
   const editGroup = () => {
     if (detailGroup.applyEndTime === "0 일") {
-      return window.alert("모집이 마감 된 공고입니다.");
+      return swal("모집이 마감 된 공고입니다.");
     } else {
       closeEditMenu();
       history.push(`/groupEdit/${groupId}`);
@@ -121,21 +123,30 @@ const ImageSlide = () => {
         </TitleWrap>
         {detailGroup?.thumbnailUrl1 ? (
           <SwiperSlide>
-            <img src={detailGroup?.thumbnailUrl1}></img>
+            <img
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              src={detailGroup?.thumbnailUrl1}
+            ></img>
           </SwiperSlide>
         ) : (
           ""
         )}
         {detailGroup?.thumbnailUrl2 ? (
           <SwiperSlide>
-            <img src={detailGroup?.thumbnailUrl2}></img>
+            <img
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              src={detailGroup?.thumbnailUrl2}
+            ></img>
           </SwiperSlide>
         ) : (
           ""
         )}
         {detailGroup?.thumbnailUrl3 ? (
           <SwiperSlide>
-            <img src={detailGroup?.thumbnailUrl3}></img>
+            <img
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              src={detailGroup?.thumbnailUrl3}
+            ></img>
           </SwiperSlide>
         ) : (
           ""
@@ -156,21 +167,30 @@ const ImageSlide = () => {
       ``
       {detailGroup?.thumbnailUrl1 ? (
         <SwiperSlide id="GroupDetailSlide1">
-          <img src={detailGroup?.thumbnailUrl1}></img>
+          <img
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            src={detailGroup?.thumbnailUrl1}
+          ></img>
         </SwiperSlide>
       ) : (
         ""
       )}
       {detailGroup?.thumbnailUrl2 ? (
         <SwiperSlide>
-          <img src={detailGroup?.thumbnailUrl2}></img>
+          <img
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            src={detailGroup?.thumbnailUrl2}
+          ></img>
         </SwiperSlide>
       ) : (
         ""
       )}
       {detailGroup?.thumbnailUrl3 ? (
         <SwiperSlide>
-          <img src={detailGroup?.thumbnailUrl3}></img>
+          <img
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            src={detailGroup?.thumbnailUrl3}
+          ></img>
         </SwiperSlide>
       ) : (
         ""

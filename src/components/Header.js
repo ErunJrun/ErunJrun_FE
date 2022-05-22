@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
-import { _getAlarmDB, _readAlarmDB } from "../redux/modules/user";
+import { loginCheckDB, _getAlarmDB, _readAlarmDB } from "../redux/modules/user";
 import { getCookie } from "../shared/Cookie";
 import headerLogo from "../assets/header/headerLogo.png";
 import headerLogoMobile from "../assets/header/headerLogoMobile.png";
@@ -20,6 +20,8 @@ import { useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import AdHeader from "./AdHeader";
 
+import swal from "sweetalert";
+
 const Header = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
@@ -28,9 +30,10 @@ const Header = () => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.isLogin);
   const alarmList = useSelector((state) => state.user.alarm);
+  const agreeSMS = localStorage.getItem("agreeSMS");
+  const firstLogin = localStorage.getItem("firstLogin");
 
   const path = useLocation().pathname;
-
   const isHome = path === "/";
   const isGroup = path === "/groupfeed";
   const isCourse = path === "/coursefeed";
@@ -50,10 +53,23 @@ const Header = () => {
   const token = getCookie("accessToken");
 
   useEffect(() => {
-    if (token) {
-      dispatch(_getAlarmDB());
+    dispatch(loginCheckDB());
+  }, [path]);
+
+  useEffect(() => {
+    if (!isLoginInfo) {
+      if (firstLogin === "true") {
+        swal("러닝 스타일을 입력한 후 이용해주세요", "", "info");
+        history.push("/loginInfo");
+      }
     }
-  }, []);
+  }, [firstLogin]);
+
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(_getAlarmDB());
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (token) {
@@ -65,7 +81,11 @@ const Header = () => {
     return (
       <HeaderBoxMob>
         <Grid display="flex">
-          {isHome || isGroup || isCourse ? <AdHeader /> : null}
+          {agreeSMS === "false" ? (
+            isHome || isGroup || isCourse ? (
+              <AdHeader />
+            ) : null
+          ) : null}
           <Grid
             height="54px"
             margin="0"
@@ -128,7 +148,12 @@ const Header = () => {
       <>
         {isLoginInfo ? null : (
           <>
-            <AdHeader />
+            {agreeSMS === "false" ? (
+              isHome || isGroup || isCourse ? (
+                <AdHeader />
+              ) : null
+            ) : null}
+
             <HeaderBox id="1">
               <Grid
                 height="auto"

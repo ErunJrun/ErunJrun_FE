@@ -1,6 +1,7 @@
 import { api } from "../../shared/Api";
 import { produce } from "immer";
 import { handleActions } from "redux-actions";
+import swal from "sweetalert";
 
 // Action
 
@@ -76,6 +77,7 @@ export const _addReCommentFX = (commentId, content) => {
         content: content,
       });
       console.log(data);
+      console.log("대댓글등록");
 
       let recomment_list = [];
 
@@ -84,7 +86,7 @@ export const _addReCommentFX = (commentId, content) => {
       });
 
       dispatch(getReComm(recomment_list));
-      window.alert("대댓글 등록 완료");
+      swal("대댓글 등록 완료");
     } catch (error) {
       console.log(error);
     }
@@ -97,7 +99,7 @@ export const _deleteReCommentFX = (recommentId) => {
       console.log(recommentId);
       const { data } = await api.delete(`/recomment/${recommentId}`);
       console.log(data);
-      window.alert("대댓글 삭제 완료");
+      swal("대댓글 삭제 완료");
       dispatch(deleteReComm(recommentId));
     } catch (error) {
       console.log(error);
@@ -129,7 +131,7 @@ export const _editReCommentFX = (recommentId, content) => {
       });
       console.log(data);
       dispatch(editReComm(data.data));
-      window.alert("대댓글 수정 완료");
+      swal("대댓글 수정 완료");
     } catch (error) {
       console.log(error);
     }

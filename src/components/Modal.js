@@ -27,7 +27,7 @@ const Modal = () => {
   return (
     <>
       <Wrap onClick={toggleModal}>
-        <ProfileImage src={profile_list?.userInfo?.profileUrl} />
+        <ProfileImage src={profile} />
         <ModalPortal>
           {modal ? <ProfileModal onClose={toggleModal} /> : null}
         </ModalPortal>

@@ -74,6 +74,7 @@ const AdHeader = () => {
           justifyContent="center"
           alignItems="center"
           display="flex"
+          zIndex="1"
         >
           <Grid
             width="1200px"

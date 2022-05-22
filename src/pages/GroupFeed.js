@@ -1,5 +1,12 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import { Grid, IconButton, Text, Input } from "../elements";
+import React, { useEffect, useState } from "react";
+import {
+  Grid,
+  IconButton,
+  Text,
+  Input,
+  Spinner,
+  LogoSpinner,
+} from "../elements";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import GroupFilter from "../components/groupFeed/GroupFilter";
@@ -18,6 +25,9 @@ import InfinityScroll from "../components/InfinityScroll";
 import { useMediaQuery } from "react-responsive";
 
 import Ready from "../shared/Ready";
+import { resetMap } from "../redux/modules/uploadInfo";
+
+import { imgActions } from "../redux/modules/image";
 
 const GroupFeed = () => {
   const isMobile = useMediaQuery({
@@ -89,8 +99,15 @@ const GroupFeed = () => {
   //   };
   // }, []);
 
+  //그룹러닝 등록 중 페이지 이탈 시 등록 데이터 리셋
+  useEffect(() => {
+    dispatch(resetMap());
+    dispatch(imgActions.resetFile());
+  }, []);
+
   useEffect(() => {
     console.log("마감공고");
+    dispatch(resetGroup());
     dispatch(getGroupDB(category));
 
     return () => {
@@ -162,11 +179,15 @@ const GroupFeed = () => {
                     ? "#" + preferData?.likeLocation
                     : null}
                 </Text>
-                <Text size="16px" color="#686EF9">
-                  {preferData?.likeDistance
-                    ? "#" + preferData?.likeDistance
-                    : null}
-                </Text>
+                {preferData?.likeDistance ? (
+                  <Text size="16px" color="#686EF9">
+                    {"#" + preferData?.likeDistance}
+                  </Text>
+                ) : (
+                  <Text size="16px" color="#686EF9">
+                    {" "}
+                  </Text>
+                )}
               </>
             )}
           </Grid>
@@ -193,7 +214,7 @@ const GroupFeed = () => {
               마감공고 포함하기
             </Text>
           </Grid>
-          <Grid display="flex">
+          <Grid minHeight="600px" display="flex">
             {/* <InfinityScroll
               callNext={() => {
                 console.log("콜넥스트실행");
@@ -205,10 +226,28 @@ const GroupFeed = () => {
               pages={paging.page}
               category={category}
             > */}
-            {feedList?.map((item, idx) => {
-              return <GroupCard key={idx} {...item}></GroupCard>;
-            })}
+
+            {feedList.length !== 0 ? (
+              feedList?.map((item, idx) => {
+                return <GroupCard key={idx} {...item}></GroupCard>;
+              })
+            ) : (
+              <Spinner />
+            )}
+
             {/* </InfinityScroll> */}
+          </Grid>
+          <Grid
+            width="200px"
+            bg="red"
+            display="flex"
+            justifyContent="center"
+            alignItem="center"
+            _onClick={() => {
+              dispatch(getGroupDB(category, paging.page));
+            }}
+          >
+            <Text color="white">더보기</Text>
           </Grid>
         </Grid>
 

@@ -11,6 +11,7 @@ import shareIcon from "../../assets/groupDetail/share.png";
 import shoesMint from "../../assets/groupDetail/shoesMint.png";
 import KakaoShareButton from "../KakaoShareButton";
 import { useMediaQuery } from "react-responsive";
+import swal from "sweetalert";
 
 const MainInfo = (props) => {
   const isMobile = useMediaQuery({
@@ -30,7 +31,7 @@ const MainInfo = (props) => {
     if (isLogin) {
       dispatch(applyDetailDB(props.groupId));
     } else {
-      window.alert("로그인 후 이용해 주세요");
+      swal("로그인 후 이용해 주세요");
     }
   };
 
@@ -44,7 +45,7 @@ const MainInfo = (props) => {
 
   const editGroup = () => {
     if (detailGroup.applyEndTime === "0 일") {
-      return window.alert("모집이 마감 된 공고입니다.");
+      return swal("모집이 마감 된 공고입니다.");
     } else {
       closeEditMenu();
       history.push(`/groupEdit/${groupId}`);
@@ -245,7 +246,7 @@ const MainInfo = (props) => {
         {detailGroup?.applyEndTime === "0 일" ? (
           <ApplyBtnFalse
             onClick={() => {
-              window.alert("기한이 종료되었습니다.");
+              swal("기한이 종료되었습니다.");
             }}
             style={{ background: "black", color: "white" }}
           >
@@ -315,7 +316,7 @@ const MainInfo = (props) => {
               <ChatImg src={groupChat} />
               <Text
                 _onClick={() => {
-                  window.alert("신청 후 이용해 주세요");
+                  swal("신청 후 이용해 주세요");
                 }}
                 cursor="pointer"
                 margin="0"

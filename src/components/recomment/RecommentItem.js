@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Grid, Text, Image, IconButton } from "../../elements";
@@ -21,10 +21,6 @@ const RecommentItem = (props) => {
   const [newComm, setNewComm] = useState("");
 
   const nickname = localStorage.getItem("nickname");
-  const isLogin = useSelector((state) => state.user.isLogin);
-
-  // const commentList = useSelector((state) => state.comments.list);
-  const recommentList = useSelector((state) => state.recomments.list);
 
   const editToggle = (recommentId) => {
     dispatch(_isReEdit(recommentId));
@@ -196,9 +192,15 @@ const RecommentItem = (props) => {
                 </>
               ) : (
                 <>
-                  <Text width="auto" size="16px" margin="0" bold>
-                    {props?.user?.nickname}
-                  </Text>
+                  <Grid display="flex" alignItems="center">
+                    <Text width="auto" margin="0 5px 0 0" bold>
+                      {props?.user?.nickname}
+                    </Text>
+                    <Text color="#818181" margin="0 10px 0 0" size="12px">
+                      {props?.createdAt}
+                    </Text>
+                  </Grid>
+
                   <Text width="auto" margin="0" size="16px">
                     {props?.content}
                   </Text>

@@ -47,10 +47,6 @@ const MGroupCardMob = (props) => {
                 width="auto"
                 height="auto"
               >
-                <Grid width="12px" margin="0 5px 0 0 ">
-                  <ShoesImg src={shoesYellow} />
-                </Grid>
-
                 <Text width="auto" height="auto" size="8px" margin="0">
                   모집기한
                 </Text>

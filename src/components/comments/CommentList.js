@@ -15,12 +15,17 @@ const CommentList = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const commentList = useSelector((state) => state.comments.list);
+  const recommentList = useSelector((state) => state.recomments.list);
 
   const groupId = params.groupId;
 
+  // React.useEffect(() => {
+  //   dispatch(_getCommentFX("group", groupId));
+  // }, []);
+
   React.useEffect(() => {
     dispatch(_getCommentFX("group", groupId));
-  }, []);
+  }, [recommentList]);
 
   if (isMobile) {
     return (
@@ -36,7 +41,8 @@ const CommentList = () => {
               Q&A
             </Text>
             <Text regular size="10px" margin="0 0 20px 0">
-              댓글 {commentList ? commentList?.length : 0}개
+              댓글{" "}
+              {commentList ? commentList?.length + recommentList?.length : 0}개
             </Text>
           </Grid>
 
@@ -68,7 +74,10 @@ const CommentList = () => {
           border="1px solid #D3D3D3"
           borderRadius="0 0 3px 3px"
         >
-          <Text size="12px">댓글 {commentList?.length}개</Text>
+          <Text size="12px">
+            댓글 {commentList ? commentList?.length + recommentList?.length : 0}
+            개
+          </Text>
           {commentList?.map((comment, idx) => {
             if (comment == null) {
               return;

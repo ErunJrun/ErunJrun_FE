@@ -7,6 +7,7 @@ import EditImages from "../components/groupEdit/EditImages";
 import { Text } from "../elements";
 import { history } from "../redux/configureStore";
 import { getGroupDetailDB } from "../redux/modules/feed";
+import swal from "sweetalert";
 
 const GroupEdit = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const GroupEdit = () => {
 
   useEffect(() => {
     if (!isLogin) {
-      window.alert("비정상적인 접근입니다.");
+      swal("비정상적인 접근입니다.");
       history.push("/");
     }
   }, []);

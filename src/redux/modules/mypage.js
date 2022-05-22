@@ -250,7 +250,7 @@ export const getEvaluationDB = (groupId, hostId, userId) => {
       }
     } catch (error) {
       console.log(error);
-      //window.alert(error);
+      //swal(error);
     }
   };
 };
@@ -295,7 +295,7 @@ export const getAttendDB = (groupId, userId, hostId) => {
       dispatch(getAttend(data));
     } catch (error) {
       console.log(error);
-      //window.alert(error);
+      //swal(error);
     }
   };
 };

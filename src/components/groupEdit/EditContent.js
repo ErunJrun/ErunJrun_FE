@@ -6,7 +6,8 @@ import { Grid, Text, IconButton } from "../../elements";
 import { editGroupContent } from "../../redux/modules/feed";
 import editStep1 from "../../assets/groupUpload/editStep1.png";
 import groupRightBtn from "../../assets/groupUpload/groupRightBtn.png";
-import dayjs from "dayjs";
+
+import swal from "sweetalert";
 
 const EditContent = (props) => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const EditContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 28) {
-      window.alert("28자 이상 작성할 수 없습니다.");
+      swal("28자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength(wordLength);
@@ -33,7 +34,7 @@ const EditContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 600) {
-      window.alert("600자 이상 작성할 수 없습니다.");
+      swal("600자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength600(wordLength);
@@ -43,7 +44,7 @@ const EditContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 40) {
-      window.alert("40자 이상 작성할 수 없습니다.");
+      swal("40자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLengthPark(wordLength);
@@ -53,7 +54,7 @@ const EditContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 40) {
-      window.alert("40자 이상 작성할 수 없습니다.");
+      swal("40자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLengthBag(wordLength);
@@ -63,7 +64,7 @@ const EditContent = (props) => {
     let wordLength = e.target.value.length;
 
     if (wordLength >= 40) {
-      window.alert("40자 이상 작성할 수 없습니다.");
+      swal("40자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLengthChat(wordLength);
@@ -144,18 +145,6 @@ const EditContent = (props) => {
     props.setIsLoad2(true);
     dispatch(editGroupContent(contents));
   };
-
-  const editStandbyTime = standbyTime
-    ? standbyTime?.substr(0, 2) + ":" + standbyTime.substr(4, 2)
-    : "";
-
-  const editStartTime = startTime
-    ? startTime?.substr(0, 2) + ":" + startTime.substr(4, 2)
-    : "";
-
-  const editFinishTime = finishTime
-    ? finishTime?.substr(0, 2) + ":" + finishTime.substr(4, 2)
-    : "";
 
   return (
     <>
@@ -251,7 +240,7 @@ const EditContent = (props) => {
                     onChange={(e) => {
                       setStandbyTime(e.target.value);
                     }}
-                    value={editStandbyTime || ""}
+                    value={standbyTime || ""}
                   ></GroupInput>
                 </Grid>
               </Grid>
@@ -292,7 +281,7 @@ const EditContent = (props) => {
                   onChange={(e) => {
                     setStartTime(e.target.value);
                   }}
-                  value={editStartTime || ""}
+                  value={startTime || ""}
                 ></GroupInput>
               </Grid>
             </Grid>
@@ -317,7 +306,7 @@ const EditContent = (props) => {
                   onChange={(e) => {
                     setFinishTime(e.target.value);
                   }}
-                  value={editFinishTime || ""}
+                  value={finishTime || ""}
                 ></GroupInput>
               </Grid>
             </Grid>

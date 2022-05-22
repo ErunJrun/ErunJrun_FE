@@ -2,21 +2,25 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getInformation,editProfileDB, numberCheckMiddleware, getNumberCheckMiddleware, deleteUserDB } from "../../redux/modules/mypage"
+import {
+  getInformation,
+  editProfileDB,
+  numberCheckMiddleware,
+  getNumberCheckMiddleware,
+  deleteUserDB,
+} from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
 import { Text, Grid } from "../../elements";
 import styled from "styled-components";
 import LevelBox from "../groupDetail/LevelBox";
 import LevelShoes from "../LevelShoes";
 
-
 const Edit = (props) => {
-
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const fileInput = useRef();
   const userId = localStorage.getItem("userId");
   const isLogin = useSelector((state) => state.user.isLogin);
-  
+
   const [nickname, setNickname] = useState(props.profile.nickname);
   const [image, setImage] = useState(props.profile.profileUrl);
   const [imgBase, setImgBase] = useState(props.profile.profileUrl);
@@ -63,14 +67,14 @@ const Edit = (props) => {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
-    setModal(!modal)
+    setModal(!modal);
   };
 
-  const changeName = (e) => { 
-    if(e.target.value.length >= 8) {
+  const changeName = (e) => {
+    if (e.target.value.length >= 8) {
       swal("8자 이상 작성할 수 없습니다.");
     }
-    setNickname(e.target.value)
+    setNickname(e.target.value);
   };
 
   const changeImage = (event) => {
@@ -83,16 +87,16 @@ const Edit = (props) => {
     };
 
     if (event.target.files[0]) {
-      reader.readAsDataURL(event.target.files[0]); 
+      reader.readAsDataURL(event.target.files[0]);
       setImage(event.target.files[0]);
     }
   };
 
   const changeContent = (e) => {
-    if(e.target.value.length >= 50) {
+    if (e.target.value.length >= 50) {
       swal("50자 이상 작성할 수 없습니다.");
     }
-    setBio(e.target.value)
+    setBio(e.target.value);
   };
 
   const Number = (e) => {
@@ -123,7 +127,19 @@ const Edit = (props) => {
 
   const edit = () => {
     console.log("나와라");
-    dispatch(editProfileDB(userId, nickname, image, bio, likeLocation, likeDistance, userLevel, phone, agreeSMS));
+    dispatch(
+      editProfileDB(
+        userId,
+        nickname,
+        image,
+        bio,
+        likeLocation,
+        likeDistance,
+        userLevel,
+        phone,
+        agreeSMS
+      )
+    );
   };
 
   useEffect(() => {
@@ -139,7 +155,6 @@ const Edit = (props) => {
     setAgreeSMS(props.profile.agreeSMS);
     setCertPhone(props.profile.certPhone);
   }, [props]);
-  
 
   return (
     <>
@@ -148,154 +163,162 @@ const Edit = (props) => {
           <Text bold size="20px">
             회원정보 수정
           </Text>
-          <Hrr/>
-          
-          <Text bold size="16px">프로필 사진</Text>
-          <MyImage src={
-            imgBase
-            ? imgBase
-            : 
-            "https://ifh.cc/g/1cYtTJ.png"
-          }/>
+          <Hrr />
+
+          <Text bold size="16px">
+            프로필 사진
+          </Text>
+          <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
           <input
-              cursor="pointer"
-              type="file"
-              name="file"
-              id="input-file"
-              encType="multipart/form-data"
-              onChange={changeImage}
-              accept=".jpg, .jpeg, .png"
-              ref={fileInput}/>
+            cursor="pointer"
+            type="file"
+            name="file"
+            id="input-file"
+            encType="multipart/form-data"
+            onChange={changeImage}
+            accept=".jpg, .jpeg, .png"
+            ref={fileInput}
+          />
         </Grid>
 
-        <Text bold size="16px">닉네임</Text>
-            <Input 
-            value={nickname} 
-            onChange={changeName} 
-            type="text" 
-            placeholder="닉네임을 입력해주세요!"
-            maxLength={8} />
-        <Text 
-        bold 
-        size="16px"
-        >
+        <Text bold size="16px">
+          닉네임
+        </Text>
+        <Input
+          value={nickname}
+          onChange={changeName}
+          type="text"
+          placeholder="닉네임을 입력해주세요!"
+          maxLength={8}
+        />
+        <Text bold size="16px">
           자기소개
         </Text>
 
-        {bio === null ?
-        (
-          <Input           
-            value={""} 
-            onChange={changeContent} 
-            type="text" 
-            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!" 
-            maxLength={50} 
-         /> 
-        )
-        :
-        (
-         <Input           
-            value={bio} 
-            onChange={changeContent} 
-            type="text" 
-            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!" 
-            maxLength={50} 
-            /> 
-        )}           
-            <Hr style={{margin: "63px 0 80px 0"}}/>
+        {bio === null ? (
+          <Input
+            value={""}
+            onChange={changeContent}
+            type="text"
+            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
+            maxLength={50}
+          />
+        ) : (
+          <Input
+            value={bio}
+            onChange={changeContent}
+            type="text"
+            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
+            maxLength={50}
+          />
+        )}
+        <Hr style={{ margin: "63px 0 80px 0" }} />
         <Text bold size="20px">
           휴대폰인증
         </Text>
-        <Hrr/>
+        <Hrr />
 
-        <Text bold size="16px">핸드폰 번호</Text>
-            <Grid display="felx">
-                <Inp value={phone} onChange={ Number } type="text" 
-                placeholder="010-1234-5678"  maxLength={20} />
-            </Grid>
-                
-            { certPhone === false ? 
-              <>
-              <_Box>
-                <Button
-                  onClick={()=>{
+        <Text bold size="16px">
+          핸드폰 번호
+        </Text>
+        <Grid display="felx">
+          <Inp
+            value={phone}
+            onChange={Number}
+            type="text"
+            placeholder="010-1234-5678"
+            maxLength={20}
+          />
+        </Grid>
+
+        {certPhone === false ? (
+          <>
+            <_Box>
+              <Button
+                onClick={() => {
                   dispatch(numberCheckMiddleware(phone));
-                  }}
-                >
-                  인증요청
-                </Button>
-              </_Box>
-                <Grid display="felx">      
-                    <Inp value={numberCK} onChange={ NumderCK } type="text" 
-                    placeholder="인증번호를 입력해주세요!"  maxLength={20} />
-                    <Button
-                      onClick={()=>{
-                        dispatch(getNumberCheckMiddleware(phone,numberCK));
-                        CK();
-                      }}
-                    >인증</Button>
-                </Grid>
-                
-                { ck === false ? 
-                <>
-                    <input 
-                    disabled checked
-                    value={agreeSMS} 
-                    onChange={agree} 
-                    type='checkbox' />
-                      개인정보사용 동의 및 알림수신에 동의합니다.
-                  </>
-                : 
-                  <>
-                    <input 
-                    checked={agreeSMS} 
-                    value={agreeSMS} 
-                    onChange={agree} 
-                    type='checkbox' />
-                      개인정보사용 동의 및 알림수신에 동의합니다.
-                  </>
-                }
-            </>
-            : 
+                }}
+              >
+                인증요청
+              </Button>
+            </_Box>
+            <Grid display="felx">
+              <Inp
+                value={numberCK}
+                onChange={NumderCK}
+                type="text"
+                placeholder="인증번호를 입력해주세요!"
+                maxLength={20}
+              />
+              <Button
+                onClick={() => {
+                  dispatch(getNumberCheckMiddleware(phone, numberCK));
+                  CK();
+                }}
+              >
+                인증
+              </Button>
+            </Grid>
+
+            {ck === false ? (
               <>
-                <input 
-                checked={agreeSMS} 
-                value={agreeSMS} 
-                onChange={agree} 
-                type='checkbox' />
-                  개인정보사용 동의 및 알림수신에 동의합니다.
+                <input
+                  disabled
+                  checked
+                  value={agreeSMS}
+                  onChange={agree}
+                  type="checkbox"
+                />
+                개인정보사용 동의 및 알림수신에 동의합니다.
               </>
-            }
+            ) : (
+              <>
+                <input
+                  checked={agreeSMS}
+                  value={agreeSMS}
+                  onChange={agree}
+                  type="checkbox"
+                />
+                개인정보사용 동의 및 알림수신에 동의합니다.
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <input
+              checked={agreeSMS}
+              value={agreeSMS}
+              onChange={agree}
+              type="checkbox"
+            />
+            개인정보사용 동의 및 알림수신에 동의합니다.
+          </>
+        )}
 
-
-        <hr style={{margin: "58px 0 80px 0"}}/>
-        <Text 
-        bold 
-        size="20px"
-        margin="90px 0 18px 0"
-        >나의 러닝스타일</Text>
-        <Hrr/>
+        <hr style={{ margin: "58px 0 80px 0" }} />
+        <Text bold size="20px" margin="90px 0 18px 0">
+          나의 러닝스타일
+        </Text>
+        <Hrr />
         <Grid margin="0 0 84px 0" display="flex" flexDirection="column">
-            <Text 
-            margin="40px 0 16px 0"
-            bold size="18px">
-              Step 1. 선호하는 러닝 지역을 선택해주세요!
-            </Text>
+          <Text margin="40px 0 16px 0" bold size="18px">
+            Step 1. 선호하는 러닝 지역을 선택해주세요!
+          </Text>
 
           <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
             {runRegion.map((e, idx) => {
               return (
                 <Fragment key={idx}>
-                  <Label >
-                    <input 
-                    onClick={() => {
-                      choiceRegion(idx+1); 
-                      console.log(idx+1);
-                    }}
+                  <Label>
+                    <input
+                      onClick={() => {
+                        choiceRegion(idx + 1);
+                        console.log(idx + 1);
+                      }}
                       type="radio"
-                      name="runRegion"                    
+                      name="runRegion"
                       value={e}
-                      checked={runRegion[likeLocation-1] === e ? e : ""}
+                      checked={runRegion[likeLocation - 1] === e ? e : ""}
                     ></input>
                     <Text bold>{e}</Text>
                   </Label>
@@ -306,10 +329,7 @@ const Edit = (props) => {
         </Grid>
 
         <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
-          <Text 
-          margin="0 0 18px 0" 
-          bold 
-          size="18px">
+          <Text margin="0 0 18px 0" bold size="18px">
             Step 1. 선호하는 러닝 거리를 선택해주세요!
           </Text>
 
@@ -320,8 +340,8 @@ const Edit = (props) => {
                   <LabelDistance>
                     <input
                       onClick={() => {
-                        choiceDistance(idx); 
-                        console.log(idx)
+                        choiceDistance(idx);
+                        console.log(idx);
                       }}
                       type="radio"
                       name="runDistance"
@@ -337,11 +357,8 @@ const Edit = (props) => {
         </Grid>
 
         <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
-           <Text 
-           margin="0 0 18px 0"
-           bold 
-           size="18px">
-          Step 3. (1달 기준) 러닝 횟수를 선택해주세요!
+          <Text margin="0 0 18px 0" bold size="18px">
+            Step 3. (1달 기준) 러닝 횟수를 선택해주세요!
           </Text>
 
           <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
@@ -355,7 +372,7 @@ const Edit = (props) => {
                       }}
                       type="radio"
                       name="runExp"
-                      checked={ userLevel === e ? e : ""}
+                      checked={userLevel === e ? e : ""}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>
@@ -365,66 +382,62 @@ const Edit = (props) => {
             })}
           </Grid>
         </Grid>
-        <hr style={{margin: "70px 0 0 0"}}/>
-        <Text 
-        bold size="16px" 
-        color="#7b7b7b"
-        _onClick={toggleModal}
-        >
+        <hr style={{ margin: "70px 0 0 0" }} />
+        <Text bold size="16px" color="#7b7b7b" _onClick={toggleModal}>
           회원 탈퇴
         </Text>
 
-        {modal&&(
-            <Overlay  onClick = {toggleModal}>  
-              <Wrap>
+        {modal && (
+          <Overlay onClick={toggleModal}>
+            <Wrap>
               <>
-                <Text 
-                size="18" 
-                textalign="center"
-                padding="35px 0 0 0"
-                >
-                  탈퇴하실 경우, 
-                  <span style={{fontWeight: "900"}}>
+                <Text size="18" textalign="center" padding="35px 0 0 0">
+                  탈퇴하실 경우,
+                  <span style={{ fontWeight: "900" }}>
                     모든 데이터가 삭제되며 복구가 불가능
                   </span>
-                  합니다.<br/>
-                  안내 사항을 모두 확인하였으며, 이에 동의하십니까? <br/>
+                  합니다.
+                  <br />
+                  안내 사항을 모두 확인하였으며, 이에 동의하십니까? <br />
                 </Text>
-                  <Btn
+                <Btn
                   onClick={() => {
                     dispatch(deleteUserDB());
                   }}
-                  >동의 및 탈퇴하기
-                  </Btn>
-                  <_Btn
-                  onClick = {toggleModal}
-                  >돌아가기
-                  </_Btn>
+                >
+                  동의 및 탈퇴하기
+                </Btn>
+                <_Btn onClick={toggleModal}>돌아가기</_Btn>
               </>
-              </Wrap>
-            </Overlay>
-            )}
-        
+            </Wrap>
+          </Overlay>
+        )}
+
         <Grid margin="70px 0 0 450px">
-            <Button
+          <Button
             onClick={() => {
-              history.push(`/mypage/${userId}`)
-            }}>수정취소</Button>
-            <Button
+              history.push(`/mypage/${userId}`);
+            }}
+          >
+            수정취소
+          </Button>
+          <Button
             onClick={() => {
               edit();
-            }}>저장하기</Button>
+            }}
+          >
+            저장하기
+          </Button>
         </Grid>
       </Grid>
     </>
   );
 };
 
-
 const MyImage = styled.img`
   height: 160px;
   width: 160px;
-  border-radius: 50%
+  border-radius: 50%;
 `;
 
 const Button = styled.button`
@@ -440,14 +453,16 @@ const Button = styled.button`
   font-weight: bold;
   color: #fff;
   margin-left: 16px;
-  :hover {font-size: 17px;}
+  :hover {
+    font-size: 17px;
+  }
 `;
 
 const _Box = styled.div`
-  margin: -74px 0 20px 340px ;
+  margin: -74px 0 20px 340px;
 `;
 
-const Input= styled.input`
+const Input = styled.input`
   width: 767px;
   height: 55px;
   flex-direction: row;
@@ -460,7 +475,7 @@ const Input= styled.input`
   font-weight: 500;
 `;
 
-const Inp= styled.input`
+const Inp = styled.input`
   width: 302px;
   height: 55px;
   flex-direction: row;
@@ -488,7 +503,7 @@ const Hrr = styled.div`
 `;
 
 const LabelExp = styled.label`
-  margin-left: 10px; 
+  margin-left: 10px;
   input {
     display: none;
   }
@@ -508,10 +523,10 @@ const LabelExp = styled.label`
     background-color: #68f99e;
     color: #030c37;
   }
-  `;
+`;
 
 const LabelDistance = styled.label`
-  margin-left: 10px; 
+  margin-left: 10px;
   input {
     display: none;
   }
@@ -531,10 +546,10 @@ const LabelDistance = styled.label`
     background-color: #68f99e;
     color: #030c37;
   }
-  `;
+`;
 
 const Label = styled.label`
-  margin-left: 10px; 
+  margin-left: 10px;
   input {
     display: none;
   }
@@ -555,12 +570,12 @@ const Label = styled.label`
     background-color: #68f99e;
     color: #030c37;
   }
-  `;
+`;
 
 const Wrap = styled.div`
   z-index: 0;
   position: absolute;
-  left:30%;
+  left: 30%;
   top: 210px;
   margin: 0;
   padding: 24px 10px;
@@ -579,7 +594,7 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   position: fixed;
-  background: rgba(49,49,49,0.8);
+  background: rgba(49, 49, 49, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -598,8 +613,8 @@ const Btn = styled.button`
   text-align: center;
   color: #fff;
   margin: 30px 30px 0 60px;
-  :hover{
-    background-color: #F10D43;
+  :hover {
+    background-color: #f10d43;
   }
 `;
 
@@ -613,7 +628,7 @@ const _Btn = styled.button`
   font-size: 16px;
   font-weight: 500;
   color: #000;
-  :hover{
+  :hover {
     background-color: #bbb;
   }
 `;

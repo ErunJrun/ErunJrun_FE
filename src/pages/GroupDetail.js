@@ -29,6 +29,9 @@ import chatMob from "../assets/groupDetail/chatMob.png";
 import shareMob from "../assets/groupDetail/shareMob.png";
 import KakaoShareButton from "../components/KakaoShareButton";
 
+import swal from "sweetalert";
+
+
 import { Link } from "react-scroll";
 
 const GroupDetail = () => {
@@ -49,7 +52,7 @@ const GroupDetail = () => {
     if (isLogin || nickname) {
       dispatch(applyDetailDB(groupId));
     } else {
-      alert("로그인 후 이용해 주세요");
+      swal("로그인 후 이용해 주세요");
     }
   };
 
@@ -128,14 +131,14 @@ const GroupDetail = () => {
                 >
                   <ChatMob
                     onClick={() => {
-                      window.alert("기한이 종료되었습니다.");
+                      swal("기한이 종료되었습니다.");
                     }}
                     src={chatMob}
                   />
 
                   <ShareMob
                     onClick={() => {
-                      window.alert("기한이 종료되었습니다.");
+                      swal("기한이 종료되었습니다.");
                     }}
                     src={shareMob}
                   />
@@ -197,14 +200,14 @@ const GroupDetail = () => {
                     detailGroup?.applyState ? (
                       <ChatMob
                         onClick={() => {
-                          window.alert("링크가 없습니다.");
+                          swal("링크가 없습니다.");
                         }}
                         src={chatMob}
                       />
                     ) : (
                       <ChatMob
                         onClick={() => {
-                          window.alert("신청 후 이용해주세요");
+                          swal("신청 후 이용해주세요");
                         }}
                         src={chatMob}
                       />
@@ -219,7 +222,7 @@ const GroupDetail = () => {
                   ) : (
                     <ChatMob
                       onClick={() => {
-                        window.alert("신청 후 이용해주세요");
+                        swal("신청 후 이용해주세요");
                       }}
                       src={chatMob}
                     />

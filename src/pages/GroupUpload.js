@@ -15,6 +15,7 @@ import groupRightBtn from "../assets/groupUpload/groupRightBtn.png";
 import groupLeftBtn from "../assets/groupUpload/groupLeftBtn.png";
 import { Link } from "react-scroll";
 import { resetMap } from "../redux/modules/uploadInfo";
+import swal from "sweetalert";
 
 const GroupUpload = () => {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const GroupUpload = () => {
 
   const goNext2 = () => {
     if (location.length == 0) {
-      window.alert("경로를 입력해주세요");
+      swal("경로를 입력해주세요");
     } else {
       setIsLoad1(true);
       setIsLoad2(true);
@@ -65,28 +66,28 @@ const GroupUpload = () => {
 
   const goNext3 = () => {
     if (contents.title === "") {
-      return window.alert("제목을 입력해주세요");
+      return swal("제목을 입력해주세요");
     }
     if (contents.standbyTime === "") {
-      return window.alert("러닝 일시를 입력해주세요");
+      return swal("러닝 일시를 입력해주세요");
     }
     if (contents.finishTime === "") {
-      return window.alert("종료 시간을 입력해주세요");
+      return swal("종료 시간을 입력해주세요");
     }
     if (contents.maxPeople === "") {
-      return window.alert("모집인원을 입력해주세요");
+      return swal("모집인원을 입력해주세요");
     }
     if (contents.date === "") {
-      return window.alert("러닝 날짜를 입력해주세요");
+      return swal("러닝 날짜를 입력해주세요");
     }
     if (contents.speed === "") {
-      return window.alert("페이스를 선택해주세요");
+      return swal("페이스를 선택해주세요");
     }
     if (contents.content === "") {
-      return window.alert("상세설명을 입력해주세요");
+      return swal("상세설명을 입력해주세요");
     }
     if (contents.theme === "") {
-      return window.alert("러닝타입을 선택해주세요");
+      return swal("러닝타입을 선택해주세요");
     }
     setIsLoad2(false);
     setIsLoad3(true);
@@ -110,7 +111,7 @@ const GroupUpload = () => {
 
   useEffect(() => {
     if (!isLogin) {
-      window.alert("비정상적인 접근입니다.");
+      swal("비정상적인 접근입니다.");
       history.push("/");
     }
   }, []);
@@ -141,7 +142,7 @@ const GroupUpload = () => {
                 <RedPoint></RedPoint>
               </Grid>
 
-              <Text display="inline" margin="0 10px" size="16px">
+              <Text regular display="inline" margin="0 10px" size="16px">
                 왼쪽 클릭을 통해 경로를 설정한 후, 오른쪽 클릭으로 경로를 마무리
                 해주세요.
               </Text>
@@ -150,13 +151,13 @@ const GroupUpload = () => {
 
             <KakaoMap></KakaoMap>
 
-            <Grid display="flex">
+            <Grid margin="48px 0 0 0 " display="flex">
               <Grid
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
               >
-                <Text bold size="15px" margin="0 55px 0 0">
+                <Text bold margin="0 55px 0 0">
                   코스 위치 정보
                 </Text>
                 <Grid display="flex" width="714px">
@@ -226,7 +227,11 @@ const GroupUpload = () => {
           <Grid margin="80px auto 320px auto" width="865px">
             <GroupUpContent></GroupUpContent>
 
-            <Grid display="flex" margin="0" justifyContent="space-between">
+            <Grid
+              display="flex"
+              margin="160px 0 0 0"
+              justifyContent="space-between"
+            >
               <Link to="step2" spy={true}>
                 <StepBtn2 onClick={goBack1}>
                   <img
@@ -352,6 +357,7 @@ const DistanceInfo = styled.div`
 `;
 
 const StepBtn = styled.button`
+  font-family: "Spoqa Han Sans Neo";
   width: 173px;
   height: 45px;
   background: #030c37;
@@ -363,7 +369,7 @@ const StepBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 160px 0 200px auto;
+  margin: 160px 0 320px auto;
   border: none;
   cursor: pointer;
   :hover {
@@ -372,6 +378,7 @@ const StepBtn = styled.button`
 `;
 
 const StepBtn2 = styled.button`
+  font-family: "Spoqa Han Sans Neo";
   width: 173px;
   height: 45px;
   background: #030c37;

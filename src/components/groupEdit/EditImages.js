@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import ImageIcon from "../../assets/groupUpload/imageCamera.png";
 import editStep2 from "../../assets/groupUpload/editStep2.png";
 import groupLeftBtn from "../../assets/groupUpload/groupLeftBtn.png";
+import swal from "sweetalert";
 
 const EditImages = (props) => {
   const dispatch = useDispatch();
@@ -45,11 +46,11 @@ const EditImages = (props) => {
     let imageUrlLists = [...showImages];
 
     if (imageLists.length > maxImageCnt) {
-      window.alert("첨부 파일은 최대 3개까지 가능합니다.");
+      swal("첨부 파일은 최대 3개까지 가능합니다.");
     }
 
     if (totalImage.length + imageLists.length > 3) {
-      window.alert("첨부 파일은 최대 3개까지 가능합니다.");
+      swal("첨부 파일은 최대 3개까지 가능합니다.");
     } else {
       let imgList = [];
 

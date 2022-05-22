@@ -70,7 +70,7 @@ api.interceptors.response.use(
     //   localStorage.removeItem("userId");
     //   localStorage.removeItem("nickname");
     //   localStorage.removeItem("profileUrl");
-    //   window.alert("로그인 시간이 만료되었습니다.");
+    //   swal("로그인 시간이 만료되었습니다.");
     //   console.log("리프레쉬토큰 만료");
     //   history.push("/login");
     // }

@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import levelBlack from "../../assets/loginInfo/levelBlack.png";
-import levelBlue from "../../assets/loginInfo/levelBlue.png";
-import levelOrange from "../../assets/loginInfo/levelOrange.png";
-import levelPurple from "../../assets/loginInfo/levelPurple.png";
-import levelRed from "../../assets/loginInfo/levelRed.png";
+import levelBlack from "../../assets/loginInfo/levelBlack.svg";
+import levelBlue from "../../assets/loginInfo/levelBlue.svg";
+import levelOrange from "../../assets/loginInfo/levelOrange.svg";
+import levelPurple from "../../assets/loginInfo/levelPurple.svg";
+import levelRed from "../../assets/loginInfo/levelRed.svg";
+
 import { useMediaQuery } from "react-responsive";
 
 const LevelBox = (props) => {
