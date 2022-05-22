@@ -63,6 +63,7 @@ const Profile = () => {
       </Grid>
     );
   }
+  
   return (
     <Box>
       <MiddleBox> 
@@ -224,7 +225,7 @@ const Information = styled.div`
 `;
 
 const _Hr = styled.div`
-  width: 95%;
+  width: 94%;
   height: 1px;
   margin: 0px 0 40px 2.5%;
   background-color: #ddd;

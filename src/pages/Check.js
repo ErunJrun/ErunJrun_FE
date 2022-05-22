@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import { Text, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,10 +8,12 @@ import styled from "styled-components";
 import { Redirect, useParams } from "react-router-dom";
 import { getCookie } from "../shared/Cookie";
 import { useLocation } from "react-router-dom";
-
-import Ready from "../shared/Ready";
+import { useMediaQuery } from "react-responsive";
 
 const Check = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:820px)",
+  });
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
@@ -37,25 +40,92 @@ const Check = () => {
     dispatch(getAttendDB(groupId));
     localStorage.removeItem("from");
   }, []);
+  if(isMobile) {
+    return (
+      <Grid width="100%" margin="50px 0 0 0">
+        <_InfoBox>
+          <Grid display="flex">
+            <Text bold size="12px" margin="22px 10px 0 15px">
+              {check_list?.groupInfo?.date}
+            </Text>
+            <Text size="12px" margin="22px 0 0 0">
+              {check_list?.groupInfo?.title}
+            </Text>
+          </Grid>
+          <Text bold size="12px" margin="0 20px 0 0">
+            {check_list?.groupInfo?.attendanceCount}
+          </Text>
+        </_InfoBox>
+
+        <_Leader>
+          <Grid display="flex">
+            <_MyImage src={check_list?.groupInfo?.user?.profileUrl} />
+            <Text bold size="15px" margin="30px 0 0 25px">
+              {check_list?.groupInfo?.user?.nickname}
+            </Text>
+            <_Img src="https://ifh.cc/g/06D7Gr.png"/>
+          </Grid>
+          <Text
+            width="104px"
+            height="44px"
+            bold
+            size="15px"
+            color="#030c37"
+            margin="20px -10px 0 0"
+          >
+            크루장
+          </Text>
+        </_Leader>
+
+        {check_list?.applyUser?.map((applyUser, index) => (
+          <_UserBox key={index}>
+            <Grid display="flex" margin="32px 0 0 0">
+              <_Image src={applyUser.user.profileUrl} />
+              <Text bold size="15px" margin="21px 0 0 25px">
+                {applyUser.user.nickname}
+              </Text>
+            </Grid>
+            <_Label
+              onChange={(e) => {
+                choiceTime(e, index);
+              }}
+              checked={userId.includes(index)}
+            >
+              <input
+                type="checkbox"
+                name={applyUser.userId}
+                value={applyUser.userId}
+              />
+              <Text size="15px">출석</Text>
+            </_Label>
+          </_UserBox>
+        ))}
+
+        <_Btn
+          onClick={() => {
+            history.push(`/mypage/${id}`);
+            dispatch(patchAttendDB(groupId, userId));
+          }}
+        >
+          출석체크 완료
+        </_Btn>
+      </Grid>
+    );
+  }
 
   if (token) {
     return (
       <Box>
-        {/* <Grid height="142px" bg="#030c37">
-          <Img src={check_list?.groupInfo?.user?.profileUrl} />
-          <img src="https://ifh.cc/g/fkqsm3.png" />
-        </Grid> */}
-
         <InfoBox>
           <Grid display="flex">
-            <Text bold size="16px" margin="22px 15px 0 32px">
+            <Text bold size="15px" margin="22px 10px 0 24px">
               {check_list?.groupInfo?.date}
             </Text>
-            <Text size="16px" margin="22px 0 0 0">
+            <Text size="15px" margin="22px 0 0 0">
               {check_list?.groupInfo?.title}
             </Text>
           </Grid>
-          <Text bold size="16px" margin="0 50px 0 0">
+          <Text bold size="15px" margin="0 30px 0 0">
             {check_list?.groupInfo?.attendanceCount}
           </Text>
         </InfoBox>
@@ -66,6 +136,7 @@ const Check = () => {
             <Text bold size="16px" margin="30px 0 0 25px">
               {check_list?.groupInfo?.user?.nickname}
             </Text>
+            <Img src="https://ifh.cc/g/06D7Gr.png"/>
           </Grid>
           <Text
             width="104px"
@@ -134,9 +205,25 @@ const InfoBox = styled.div`
   align-items: center;
 `;
 
+const _InfoBox = styled.div`
+  height: 60px;
+  background-color: #f3f3f3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const Leader = styled.div`
   width: 510px;
   height: 84px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const _Leader = styled.div`
+  height: 50px;
   padding: 15px;
   display: flex;
   justify-content: space-between;
@@ -151,16 +238,36 @@ const MyImage = styled.img`
   margin-top: 7px;
 `;
 
+const _MyImage = styled.img`
+  height: 55px;
+  width: 55px;
+  border: 2px solid #68f99e;
+  border-radius: 50%;
+  margin-top: 7px;
+`;
+
 const Image = styled.img`
   height: 64px;
   width: 64px;
   border-radius: 50%;
 `;
 
-const Img = styled.img`
-  height: 50px;
-  width: 50px;
+const _Image = styled.img`
+  height: 55px;
+  width: 55px;
   border-radius: 50%;
+`;
+
+const Img = styled.img`
+  height: 27px;
+  width: 22px;
+  margin: 29px 0 0 10px;
+`;
+
+const _Img = styled.img`
+  height: 23px;
+  width: 18px;
+  margin: 29px 0 0 10px;
 `;
 
 const UserBox = styled.div`
@@ -172,10 +279,30 @@ const UserBox = styled.div`
   align-items: center; ;
 `;
 
+const _UserBox = styled.div`
+  height: 50px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; ;
+`;
+
 const Btn = styled.button`
   width: 186px;
   height: 56px;
   margin: 50px 0 100px 180px;
+  border-radius: 3px;
+  border: none;
+  background-color: #68f99e;
+  color: #030c37;
+  font-size: 16px;
+  font-weight: 550;
+`;
+
+const _Btn = styled.button`
+  width: 186px;
+  height: 56px;
+  margin: 50px auto;
   border-radius: 3px;
   border: none;
   background-color: #68f99e;
@@ -210,7 +337,36 @@ const Label = styled.label`
     color: #68f99e;
     font-weight: 500;
   }
-  margin: 0 8px 0 0;
+  margin: 0px 8px 0 0;
+`;
+
+const _Label = styled.label`
+  input {
+    display: none;
+  }
+  input + p {
+    width: 95px;
+    height: 36px;
+    padding: 8px 19px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: solid 1px #f0f0f0;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    box-sizing: border-box;
+    color: #000;
+    content: "dff";
+  }
+  input:checked + p {
+    border: solid 1px #030c37;
+    background-color: #030c37;
+    color: #68f99e;
+    font-weight: 500;
+  }
+  margin: 48px 8px 0 0;
 `;
 
 export default Check;
