@@ -108,7 +108,9 @@ const Mypage = () => {
               bold 
               size="20px" 
               margin="95px 0 0 90%" 
-              _onClick={()=>{history.push("/login")}}
+              _onClick={()=>{
+                history.push("/login")
+              }}
               >
               >
             </Text>   
