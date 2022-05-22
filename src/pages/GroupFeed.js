@@ -10,6 +10,7 @@ import {
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import GroupFilter from "../components/groupFeed/GroupFilter";
+import GroupFilterMob from "../components/groupFeed/GroupFilterMob";
 import GroupCard from "../components/groupFeed/GroupCard";
 import upload from "../assets/groupFeed/groupUploadBtn1.png";
 import uploadHover from "../assets/groupFeed/groupUploadBtn2.png";
@@ -119,7 +120,7 @@ const GroupFeed = () => {
   if (isMobile) {
     return (
       <>
-        <Ready />
+        <GroupFilterMob />
       </>
     );
   }
