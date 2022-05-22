@@ -27,6 +27,51 @@ const DistanceFilter = (props) => {
     }
   };
 
+  if (props.isMobile) {
+    return (
+      <Grid
+        display="flex"
+        width="295px"
+        flexDirection="column"
+        justifyContent="left"
+        alignItems="center"
+        margin="0"
+        height="auto"
+      >
+        <Text width="295px" height="auto" size="14px" bold margin="0 0 12px 0">
+          러닝 거리
+        </Text>
+
+        <Grid
+          height="120px"
+          margin="0"
+          width="295px"
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          {distance.map((e, idx) => {
+            return (
+              <Fragment key={idx}>
+                <LabelMob
+                  onChange={(e) => {
+                    choiceDistance(e, idx);
+                  }}
+                  checked={checkedInputs.includes(idx)}
+                >
+                  <input type="checkbox" name={e} value={idx} />
+                  <Text margin="0" color="#7B7B7B" regular size="13px">
+                    {e}
+                  </Text>
+                </LabelMob>
+              </Fragment>
+            );
+          })}
+        </Grid>
+      </Grid>
+    );
+  }
+
   return (
     <Grid display="flex" alignItems="center" width="100%" margin="0 auto">
       <Text size="16px" bold margin="0 16px 0 0">
@@ -77,6 +122,33 @@ const Label = styled.label`
     font-weight: 500;
   }
   margin: 0 12px 0 0;
+`;
+
+const LabelMob = styled.label`
+  input {
+    display: none;
+  }
+  input + p {
+    width: 142px;
+    height: 32px;
+    padding: 8px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 60px;
+    border: 1px solid #b8b8b8;
+    cursor: pointer;
+    box-sizing: border-box;
+    color: #7b7b7b;
+    margin: 0;
+  }
+  input:checked + p {
+    background: #68f99e;
+    border: 1px solid #68f99e;
+    border-radius: 60px;
+    color: #030c37;
+    font-weight: 500;
+  }
 `;
 
 export default DistanceFilter;

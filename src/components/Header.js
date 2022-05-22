@@ -53,7 +53,9 @@ const Header = () => {
   const token = getCookie("accessToken");
 
   useEffect(() => {
-    dispatch(loginCheckDB());
+    if (token) {
+      dispatch(loginCheckDB());
+    }
   }, [path]);
 
   useEffect(() => {
