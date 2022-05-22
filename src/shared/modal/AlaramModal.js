@@ -290,7 +290,7 @@ const Content = styled.div`
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   position: absolute;
-  top: 120px;
+  top: 81px;
   left: 1100px;
   padding: 24px;
   overflow: auto;

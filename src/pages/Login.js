@@ -34,7 +34,7 @@ const Login = ({ location }) => {
   }
 
   useEffect(() => {
-    if (token && isLogin) history.push("/");
+    if (token) history.push("/");
   }, [isLogin]);
 
   if (isMobile) {
