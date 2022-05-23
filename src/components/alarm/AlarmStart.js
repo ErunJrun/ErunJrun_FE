@@ -14,21 +14,20 @@ const AlarmStart = (props) => {
       return (
         <Fragment>
           <Grid
-            cursor="pointer"
             margin="0 0 32px 0"
             height="auto"
             display="flex"
             alignItems="flex-start"
-            justifyContent="left"
           >
             <Grid margin="0" display="flex" width="315px">
               <Grid
                 display="flex"
                 alignItems="center"
                 height="auto"
-                margin="0 0 10px 0"
+                margin="0 0 5px 0"
+                justifyContent="flex-start"
               >
-                <Text margin="0 5px 0 0" size="9px" display="inline">
+                <Text margin="0 8px 0 0" size="9px" display="inline">
                   그룹 러닝
                 </Text>
                 <Text
@@ -39,7 +38,7 @@ const AlarmStart = (props) => {
                 >
                   {props?.createdAt}
                 </Text>
-                {!props?.check === true ? <NewDotMob /> : <NoneDotMob />}
+                {props?.check ? <NewDotMob /> : <NoneDotMob />}
               </Grid>
               <Grid
                 _onClick={() => {
@@ -52,6 +51,7 @@ const AlarmStart = (props) => {
                 {props.role === "host" ? (
                   <Text
                     textLeft
+                    size="10px"
                     cursor="pointer"
                     hover="font-weight:900;"
                     margin="0"
@@ -64,6 +64,7 @@ const AlarmStart = (props) => {
                   </Text>
                 ) : (
                   <Text
+                    size="10px"
                     textLeft
                     cursor="pointer"
                     hover="font-weight:900;"
@@ -92,21 +93,26 @@ const AlarmStart = (props) => {
             display="flex"
             alignItems="flex-start"
           >
-            {!props?.check ? <NewDot /> : <NoneDot />}
-
             <Grid margin="0" display="flex" width="315px">
               <Grid
                 display="flex"
                 alignItems="center"
                 height="auto"
-                margin="0 0 10px 0"
+                margin="0 0 5px 0"
+                justifyContent="flex-start"
               >
-                <Text margin="0 8px 0 0" size="14px" display="inline">
+                <Text margin="0 8px 0 0" size="9px" display="inline">
                   그룹 러닝
                 </Text>
-                <Text margin="0" size="12px" color="#828282" display="inline">
+                <Text
+                  margin="0 4px 0 0"
+                  size="8px"
+                  color="#828282"
+                  display="inline"
+                >
                   {props?.createdAt}
                 </Text>
+                {props?.check ? <NewDotMob /> : <NoneDotMob />}
               </Grid>
               <Grid
                 _onClick={() => {
@@ -118,6 +124,7 @@ const AlarmStart = (props) => {
               >
                 {props.role === "host" ? (
                   <Text
+                    size="10px"
                     textLeft
                     cursor="pointer"
                     hover="font-weight:900;"
@@ -130,6 +137,7 @@ const AlarmStart = (props) => {
                   </Text>
                 ) : (
                   <Text
+                    size="10px"
                     textLeft
                     cursor="pointer"
                     hover="font-weight:900;"
@@ -152,36 +160,42 @@ const AlarmStart = (props) => {
       return (
         <Fragment>
           <Grid
-            cursor="pointer"
             margin="0 0 32px 0"
             height="auto"
             display="flex"
             alignItems="flex-start"
           >
-            {!props?.check === true ? <NewDot /> : <NoneDot />}
-
             <Grid margin="0" display="flex" width="315px">
               <Grid
                 display="flex"
                 alignItems="center"
                 height="auto"
-                margin="0 0 10px 0"
+                margin="0 0 5px 0"
+                justifyContent="flex-start"
               >
-                <Text margin="0 8px 0 0" size="14px" display="inline">
+                <Text margin="0 8px 0 0" size="9px" display="inline">
                   그룹 러닝
                 </Text>
-                <Text margin="0" size="12px" color="#828282" display="inline">
+                <Text
+                  margin="0 4px 0 0"
+                  size="8px"
+                  color="#828282"
+                  display="inline"
+                >
                   {props?.createdAt}
                 </Text>
+                {props?.check ? <NewDotMob /> : <NoneDotMob />}
               </Grid>
               <Grid
                 _onClick={() => {
                   history.push(`/groupdetail/${props?.groupId}`);
+                  props.onClose();
                 }}
                 height="auto"
                 display="flex"
               >
                 <Text
+                  size="10px"
                   textLeft
                   cursor="pointer"
                   hover="font-weight:900;"
@@ -210,8 +224,6 @@ const AlarmStart = (props) => {
           alignItems="flex-start"
           justifyContent="left"
         >
-          {!props?.check === true ? <NewDot /> : <NoneDot />}
-
           <Grid margin="0" display="flex" width="315px">
             <Grid
               display="flex"
@@ -225,6 +237,7 @@ const AlarmStart = (props) => {
               <Text margin="0" size="12px" color="#828282" display="inline">
                 {props?.createdAt}
               </Text>
+              {!props?.check === true ? <NewDot /> : <NoneDot />}
             </Grid>
             <Grid
               _onClick={() => {
@@ -273,8 +286,6 @@ const AlarmStart = (props) => {
           display="flex"
           alignItems="flex-start"
         >
-          {!props?.check ? <NewDot /> : <NoneDot />}
-
           <Grid margin="0" display="flex" width="315px">
             <Grid
               display="flex"
@@ -288,6 +299,7 @@ const AlarmStart = (props) => {
               <Text margin="0" size="12px" color="#828282" display="inline">
                 {props?.createdAt}
               </Text>
+              {!props?.check ? <NewDot /> : <NoneDot />}
             </Grid>
             <Grid
               _onClick={() => {
@@ -335,8 +347,6 @@ const AlarmStart = (props) => {
           display="flex"
           alignItems="flex-start"
         >
-          {!props?.check === true ? <NewDot /> : <NoneDot />}
-
           <Grid margin="0" display="flex" width="315px">
             <Grid
               display="flex"
@@ -350,6 +360,7 @@ const AlarmStart = (props) => {
               <Text margin="0" size="12px" color="#828282" display="inline">
                 {props?.createdAt}
               </Text>
+              {!props?.check === true ? <NewDot /> : <NoneDot />}
             </Grid>
             <Grid
               _onClick={() => {
@@ -381,7 +392,7 @@ const NewDot = styled.div`
   width: 13px;
   height: 13px;
   background-color: #68f99e;
-  margin: 4px 12px 1px 0;
+  margin: 0 0 0 12px;
 `;
 
 const NoneDot = styled.div`
@@ -389,11 +400,11 @@ const NoneDot = styled.div`
   width: 13px;
   height: 13px;
   background-color: white;
-  margin: 4px 12px 1px 0;
+  margin: 0 0 0 12px;
 `;
 
 const NewDotMob = styled.div`
-  border-radius: 100%;
+  border-radius: 500%;
   width: 8px;
   height: 8px;
   background-color: #68f99e;
@@ -401,7 +412,7 @@ const NewDotMob = styled.div`
 `;
 
 const NoneDotMob = styled.div`
-  border-radius: 100%;
+  border-radius: 50%;
   width: 8px;
   height: 8px;
   background-color: white;
