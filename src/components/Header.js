@@ -185,7 +185,7 @@ const Header = () => {
                     <Btn
                       style={{ color: "#687096" }}
                       onClick={() => {
-                        history.push("/groupfeed");
+                        history.push(`/groupfeed`);
                       }}
                     >
                       그룹 러닝

@@ -156,6 +156,7 @@ export const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
     console.log("로그인 체크 DB");
     const token = getCookie("accessToken");
+
     if (!token) {
       return;
     }

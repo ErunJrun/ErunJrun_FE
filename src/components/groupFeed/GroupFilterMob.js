@@ -89,9 +89,10 @@ const GroupFilterMob = (props) => {
     ) {
       return swal("지역과 모집 일정은 필수입니다.", "", "warning");
     }
-    dispatch(getGroupDB(category, paging.page));
     props.setSearchState(true);
     props.setFilterState(false);
+    dispatch(resetGroup());
+    dispatch(getGroupDB(category, 1, 100));
   };
 
   return (
@@ -128,6 +129,7 @@ const GroupFilterMob = (props) => {
                   src={backBtn}
                   onClick={() => {
                     props.setFilterState(false);
+                    props.setSearchState(false);
                   }}
                 />
                 <Text margin="0 0 0 130px" bold>

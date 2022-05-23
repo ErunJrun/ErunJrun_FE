@@ -71,24 +71,25 @@ const GroupFilter = (props) => {
   const resetFilter = () => {
     setStartDate("");
     setEndDate("");
-    setRegion([]);
+    setRegion("none");
     setFilterTime([]);
     setFilterDistance([]);
     setFilterTheme([]);
     props.setSearchState(false);
     setResetState(!resetState);
     setIsAddFilter(false);
-    dispatch(getGroupDB(props.category));
+    dispatch(resetGroup());
+    dispatch(getGroupDB(props.category, 1, 3));
   };
 
-  console.log(startDate);
+  console.log(region);
 
   const getFilter = () => {
     if (region.length === 0 || startDate === "NaN-NaN-NaN") {
       swal("지역과 모집 일정은 필수입니다.", "", "warning");
     }
     dispatch(resetGroup());
-    dispatch(getGroupDB(category));
+    dispatch(getGroupDB(category, 1, 100));
     props.setSearchState(true);
   };
 
@@ -111,6 +112,7 @@ const GroupFilter = (props) => {
                 onChange={(e) => {
                   setRegion(e.target.value);
                 }}
+                value={region}
               >
                 <option value="none" style={{ color: "#909090" }}>
                   지역

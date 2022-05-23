@@ -215,7 +215,7 @@ const CommentItem = (props) => {
             />
           ) : null}
 
-          {props.isRecomm
+          {!props.isRecomm
             ? recommentList?.map((e, idx) => {
                 if (e === null) {
                   return;

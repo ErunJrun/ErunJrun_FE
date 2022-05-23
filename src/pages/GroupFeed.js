@@ -11,6 +11,7 @@ import filterIcon from "../assets/groupFeed/filterIcon.svg";
 
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
+import noSearchData from "../assets/groupFeed/noSearchData.svg";
 import GroupFilter from "../components/groupFeed/GroupFilter";
 import GroupFilterMob from "../components/groupFeed/GroupFilterMob";
 import GroupCard from "../components/groupFeed/GroupCard";
@@ -34,6 +35,8 @@ import { resetMap } from "../redux/modules/uploadInfo";
 
 import { imgActions } from "../redux/modules/image";
 import { borderRadius } from "@mui/system";
+import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 const GroupFeed = () => {
   const isMobile = useMediaQuery({
@@ -41,6 +44,8 @@ const GroupFeed = () => {
   });
 
   const dispatch = useDispatch();
+  const params = useParams();
+  console.log(params);
 
   const nickname = localStorage.getItem("nickname");
 
@@ -75,8 +80,10 @@ const GroupFeed = () => {
   const finishCheck = () => {
     if (finish == 0) {
       setFinish(1);
+      setSearchState(true);
     } else {
       setFinish(0);
+      setSearchState(false);
     }
   };
 
@@ -148,6 +155,7 @@ const GroupFeed = () => {
               cursor="pointer"
               _onClick={() => {
                 setSearchState(true);
+                setFilterState(true);
               }}
             >
               <Text
@@ -162,6 +170,7 @@ const GroupFeed = () => {
               >
                 필터를 통해 그룹러닝을 검색해보세요.
               </Text>
+
               <img src={filterIcon} />
             </Grid>
             <HrMob />
@@ -225,28 +234,64 @@ const GroupFeed = () => {
               width="343px"
               justifyContent="space-between"
               display="flex"
-              margin="23.5px auto 100px auto"
+              margin="23.5px auto 10px auto"
             >
               {feedList.length !== 0 ? (
                 feedList?.map((item, idx) => {
                   return <GroupCardMob key={idx} {...item}></GroupCardMob>;
                 })
               ) : (
-                <Spinner />
+                <img
+                  style={{ margin: "0 auto 40px auto", width: "150px" }}
+                  src={noSearchData}
+                />
               )}
             </Grid>
-            <Grid
-              width="200px"
-              bg="red"
-              display="flex"
-              justifyContent="center"
-              alignItem="center"
-              _onClick={() => {
-                dispatch(getGroupDB(category, paging.page));
-              }}
-            >
-              <Text color="white">더보기</Text>
-            </Grid>
+
+            {feedList.length === 0 ? null : (
+              <Grid
+                width="343px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                margin="0 auto"
+              >
+                <Grid
+                  hover="box-shadow:1px 1px 8px gray;"
+                  cursor="pointer"
+                  margin="0"
+                  padding="5px"
+                  width="30px"
+                  height="30px"
+                  borderRadius="50%"
+                  bg="#ffffff"
+                  boxShadow="0px 1px 5px rgba(94, 94, 94, 0.45)"
+                  display="flex"
+                  justifyContent="center"
+                  alignItem="center"
+                  _onClick={() => {
+                    if (feedList.length === 0) {
+                      swal("게시물이 없습니다");
+                    }
+                    dispatch(getGroupDB(category, paging.page));
+                  }}
+                >
+                  <Text cursor="pointer" margin="0" size="15px" color="black">
+                    ∨
+                  </Text>
+                </Grid>
+              </Grid>
+            )}
+
+            <Permit>
+              <UploadBtnMob
+                onClick={() => {
+                  history.push("/groupupload");
+                }}
+              >
+                +
+              </UploadBtnMob>
+            </Permit>
           </Grid>
         )}
       </>
@@ -289,7 +334,7 @@ const GroupFeed = () => {
           >
             {searchState || !nickname ? (
               <>
-                <Text size="20px" bold>
+                <Text margin="0" size="20px" bold>
                   총{" "}
                   <span style={{ color: "#686EF9" }}>
                     {feedList.length ? feedList.length : "0"}
@@ -311,11 +356,11 @@ const GroupFeed = () => {
                     : null}
                 </Text>
                 {preferData?.likeDistance ? (
-                  <Text size="16px" color="#686EF9">
+                  <Text margin="0" size="16px" color="#686EF9">
                     {"#" + preferData?.likeDistance}
                   </Text>
                 ) : (
-                  <Text size="16px" color="#686EF9">
+                  <Text margin="0" size="16px" color="#686EF9">
                     {" "}
                   </Text>
                 )}
@@ -339,6 +384,7 @@ const GroupFeed = () => {
               type="checkbox"
               onChange={() => {
                 finishCheck();
+                setSearchState(!searchState);
               }}
             ></input>
             <Text bold margin="0">
@@ -346,40 +392,47 @@ const GroupFeed = () => {
             </Text>
           </Grid>
           <Grid minHeight="600px" display="flex">
-            {/* <InfinityScroll
-              callNext={() => {
-                console.log("콜넥스트실행");
-                console.log("콜넥스트 내부 페이지 번호", paging.page);
-                dispatch(getGroupDB(category, paging.page));
-              }}
-              is_next={paging.page ? true : false}
-              loading={isLoading}
-              pages={paging.page}
-              category={category}
-            > */}
-
             {feedList.length !== 0 ? (
               feedList?.map((item, idx) => {
                 return <GroupCard key={idx} {...item}></GroupCard>;
               })
             ) : (
-              <Spinner />
+              <img style={{ margin: "0 auto" }} src={noSearchData} />
             )}
-
-            {/* </InfinityScroll> */}
           </Grid>
-          <Grid
-            width="200px"
-            bg="red"
-            display="flex"
-            justifyContent="center"
-            alignItem="center"
-            _onClick={() => {
-              dispatch(getGroupDB(category, paging.page));
-            }}
-          >
-            <Text color="white">더보기</Text>
-          </Grid>
+          {feedList.length === 0 ? null : (
+            <Grid
+              width="1200px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid
+                hover="box-shadow:1px 1px 8px gray;"
+                cursor="pointer"
+                margin="0"
+                padding="12px"
+                width="60px"
+                height="60px"
+                borderRadius="50%"
+                bg="#ffffff"
+                boxShadow="0px 1px 5px rgba(94, 94, 94, 0.45)"
+                display="flex"
+                justifyContent="center"
+                alignItem="center"
+                _onClick={() => {
+                  if (feedList.length === 0) {
+                    swal("게시물이 없습니다");
+                  }
+                  dispatch(getGroupDB(category, paging.page));
+                }}
+              >
+                <Text cursor="pointer" margin="0" size="25px" color="black">
+                  ∨
+                </Text>
+              </Grid>
+            </Grid>
+          )}
         </Grid>
 
         <Grid
@@ -442,10 +495,40 @@ const Hr = styled.div`
   margin: 16px auto;
 `;
 
+const BottomHr = styled.div`
+  border: 1px solid #969696;
+  width: 500px;
+  height: 0;
+  margin: 0;
+`;
+
 const HrMob = styled.hr`
   width: 343px;
   border: 1px solid #f0f0f0;
   margin: 0 auto;
+`;
+
+const UploadBtnMob = styled.div`
+  box-sizing: border-box;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0px 1px 5px rgba(94, 94, 94, 0.45);
+  cursor: pointer;
+  margin: 0;
+  bottom: 95px;
+  right: 20px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  :hover {
+    box-shadow: 0px 1px 8px rgba(94, 94, 94, 0.45);
+    color: #68f99e;
+  }
 `;
 
 export default GroupFeed;
