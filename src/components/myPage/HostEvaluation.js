@@ -11,6 +11,7 @@ const HostEvaluation = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
+  
   const profile_list = useSelector((state) => state.mypage.list);
 
   const [ emoji, setEmoji ] = useState(true);

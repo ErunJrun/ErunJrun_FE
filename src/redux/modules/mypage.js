@@ -361,7 +361,7 @@ export default handleActions(
   {
     [RESET_INFORMATION]: (state, action) =>
     produce(state, (draft) => {
-      //draft.list = [];
+      draft.list = [];
       draft.group = [];
       draft.mygroup = [];
       draft.info = [];

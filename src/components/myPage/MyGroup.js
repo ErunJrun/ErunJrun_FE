@@ -102,7 +102,15 @@ const MyGroup = () => {
                 )}
               </>
               : 
-                null
+              <Grid margin="10px 0 0 0">
+                  <ApplyBtnTrue
+                    onClick={() => {
+                      history.push(`/groupdetail/${data.groupId}`);
+                    }}
+                  >
+                    상세보기
+                </ApplyBtnTrue>
+              </Grid>
               }
             </Grid>
           ))}

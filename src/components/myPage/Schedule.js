@@ -52,7 +52,7 @@ const Schedule = () => {
 
                 <Grid cursor="pointer" display="flex" margin="-10px 0 0 0">
                   <Tag>{waiting.location}</Tag>
-                  <Tag>{waiting.distance}km</Tag>
+                  <Tag>{waiting.distance}</Tag>
                   <Tag>{waiting.thema}</Tag>
                 </Grid>
                 <Hr></Hr>

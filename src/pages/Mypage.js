@@ -31,7 +31,7 @@ const Mypage = () => {
 
     return () => {
       console.log("마이페이지 클린업");
-      dispatch(resetProfile());
+      //dispatch(resetProfile());
     };
   }, []);
 
