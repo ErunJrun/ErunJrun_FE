@@ -33,6 +33,10 @@ const ServiceTerms = lazy(() => import("../pages/ServiceTerms"));
 const PrivacyPolicy = lazy(() => import("../pages/PrivacyPolicy"));
 const CourseFeed = lazy(() => import("../pages/CourseFeed"));
 const Evaluation = lazy(() => import("../pages/Evaluation"));
+const MobileEvaluation = lazy(() => import("../pages/mobile/MobileEvaluation"));
+const MobileSchedule = lazy(() => import("../pages/mobile/MobileSchedule"));
+const MobileGroup = lazy(() => import("../pages/mobile/MobileGroup"));
+const MobileMyGroup = lazy(() => import("../pages/mobile/MobileMyGroup"));
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +76,10 @@ function App() {
             <Route path="/serviceTerms" exact component={ServiceTerms} />
             <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
             <Route path="/evaluation" exact component={Evaluation} />
+            <Route path="/m/evaluation" exact component={MobileEvaluation} />
+            <Route path="/m/schedule" exact component={MobileSchedule} />
+            <Route path="/m/group" exact component={MobileGroup} />
+            <Route path="/m/mygroup" exact component={MobileMyGroup} />
           </Wrapper>
           <Footer></Footer>
         </Suspense>

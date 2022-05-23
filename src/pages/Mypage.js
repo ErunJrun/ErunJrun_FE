@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -12,6 +13,7 @@ import { getCookie } from "../shared/Cookie";
 import { useMediaQuery } from "react-responsive";
 import { history } from "../redux/configureStore";
 import { logoutDB } from "../redux/modules/user";
+import swal from 'sweetalert';
 
 const Mypage = () => {
   const isMobile = useMediaQuery({
@@ -43,13 +45,13 @@ const Mypage = () => {
             <HostEvaluation/>
             <__Hr/>
             <Grid 
-            margin="-15px auto 0 20px" 
-            lineHeight="24px" 
-            width="350px">
+              margin="-15px auto 0 20px" 
+              lineHeight="24px" 
+              width="350px"
+            >
               <Text
                 bold
                 size="14px"
-                _onClick={()=>{history.push("/edit")}}
               >
                 나의 그룹 러닝
               </Text>
@@ -57,7 +59,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push("/edit")}}
+                _onClick={()=>{history.push("/m/schedule")}}
               >
                 참여 예정
               </Text>
@@ -65,7 +67,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push("/edit")}}
+                _onClick={()=>{history.push("/m/group")}}
               >
                 참여 완료
               </Text>
@@ -73,7 +75,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push("/edit")}}
+                _onClick={()=>{history.push("/m/mygroup")}}
               >
                 My 모집
               </Text>
@@ -114,7 +116,7 @@ const Mypage = () => {
               <Text
                 regular
                 size="12px"
-                margin="5px 0 100px 20px"
+                margin="10px 0 100px 20px"
                 color="#222"
                 _onClick={() => {
                   dispatch(logoutDB());
@@ -165,6 +167,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 참여 예정
               </Text>
@@ -172,6 +177,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 참여 완료
               </Text>
@@ -179,6 +187,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 My 모집
               </Text>
@@ -197,6 +208,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 북마크
               </Text>
@@ -204,6 +218,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 My 추천
               </Text>

@@ -31,7 +31,15 @@ const HostEvaluation = () => {
           {profile_list?.totalEvaluationCount}
           개)
         </Text>
-        <Text bold size="20px" margin="-40px 0 0 95%" _onClick={()=>{history.push()}}>
+        <Text 
+          bold 
+          size="20px" 
+          margin="-40px 0 0 95%" 
+          profile_list={profile_list}
+          _onClick={()=>{
+            history.push("/m/evaluation");
+          }}
+        >
           >
         </Text>
         <Grid
