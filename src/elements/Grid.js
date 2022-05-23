@@ -43,6 +43,7 @@ const Grid = (props) => {
     alignContent,
     boxShadow,
     lineHeight,
+    textAlign,
   } = props;
 
   const styles = {
@@ -83,6 +84,7 @@ const Grid = (props) => {
     id,
     boxShadow: boxShadow,
     lineHeight: lineHeight,
+    textAlign: textAlign,
   };
 
   return (
@@ -133,6 +135,7 @@ Grid.defaultProps = {
   hover: null,
   boxShadow: null,
   lineHeight: null,
+  textAlign: null,
 };
 
 const GridBox = styled.div`
@@ -144,6 +147,7 @@ const GridBox = styled.div`
   }
   flex-wrap: wrap;
   align-content: ${(props) => props.alignContent};
+  text-align: ${(props) => props.textAlign};
   ${(props) => (props.className ? `className: ${props.className};` : "")}
   ${(props) => (props.wrap ? `flex-wrap: ${props.wrap};` : "")}
   z-index: ${(props) => props.zIndex};

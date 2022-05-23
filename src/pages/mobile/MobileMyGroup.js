@@ -33,16 +33,16 @@ const MobileMyGroup = () => {
 
   if(isMobile){
   return (
-    <Grid weight="100%" margin="80px 0 0 0">
+    <Grid weight="100%" margin="80px auto 50px auto" textAlign="-webkit-center">
       {my.data.length === 0 ? (
           <Box>진행한 그룹 러닝이 없습니다</Box>
       ) : (
-        <Grid display="flex" justifyContent="center">
+        <Grid display="flex" width="375px" >
           {my.data?.map((data, index) => (
             <Grid
               key={index}
               width="166px"
-              margin="0 8px 55px 8px"
+              margin="0 8px 40px 8px"
             >
               <Grid
                 _onClick={() => {
@@ -59,7 +59,7 @@ const MobileMyGroup = () => {
                   <Title>
                     {data.title}
                   </Title>
-                  <Text cursor="pointer" size="11px" margin="5px 0 0 0">
+                  <Text cursor="pointer" size="11px" margin="5px 0 0 0" textAlign="left">
                     {data.date}
                   </Text>
                 </Grid>
@@ -192,6 +192,7 @@ const Title = styled.text`
   font-size: 11px;
   cursor:pointer;
   margin:9px 0 0 0;
+  text-align: left;
 `;
 
 export default MobileMyGroup;
