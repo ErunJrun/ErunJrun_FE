@@ -16,10 +16,11 @@ import {
 } from "../../redux/modules/uploadInfo";
 import swal from "sweetalert";
 
-function KakaoMap() {
+const KakaoMapMob = () => {
   const { kakao } = window;
 
   const dispatch = useDispatch();
+  const [rightState, setRightState] = useState(false);
 
   const mapInfoList = useSelector((state) => state.uploadInfo);
 
@@ -70,6 +71,7 @@ function KakaoMap() {
       Math.round(clickLine.getLength() + moveLine.getLength()),
     ]);
     setIsdrawing(true);
+    setRightState(false);
   };
 
   const handleMouseMove = (_map, mouseEvent) => {
@@ -114,7 +116,7 @@ function KakaoMap() {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
       } else {
-        swal("검색된 장소가 없습니다", "", "warning");
+        // swal("검색된 장소가 없습니다", "", "warning");
         setInputText("");
       }
     });
@@ -147,8 +149,8 @@ function KakaoMap() {
 
   return (
     <>
-      <Grid margin="30px auto">
-        <Grid display="flex" margin="0 0 16px 0">
+      <Grid width="375px" margin="24px auto 56px auto">
+        <Grid width="343px" display="flex" margin="0 auto 16px auto">
           <LocationInput
             type="text"
             onChange={onChange}
@@ -159,7 +161,22 @@ function KakaoMap() {
           <SearchLocationBtn onClick={handleSubmit}>검색하기</SearchLocationBtn>
         </Grid>
 
-        <Grid>
+        <Grid width="375px">
+          <Grid
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height="58px"
+            margin="24px 0 0 0"
+            bg="#7b7b7b"
+            padding="5px 27px"
+          >
+            <Text size="11px" color="white">
+              지도위를 터치해 경로를 설정한 후, ‘경로완성’을 눌러
+              마무리해주세요. <br></br>다시 지도를 그리고 싶은 경우, 지도위에
+              새로 설정해주시면 됩니다.
+            </Text>
+          </Grid>
           <Map // 지도를 표시할 Container
             id={`map`}
             center={{
@@ -169,8 +186,8 @@ function KakaoMap() {
             }}
             style={{
               // 지도의 크기
-              width: "865px",
-              height: "464px",
+              width: "375px",
+              height: "320px",
             }}
             level={3} // 지도의 확대 레벨
             onClick={handleClick}
@@ -180,7 +197,7 @@ function KakaoMap() {
           >
             <Polyline
               path={paths}
-              strokeWeight={8} // 선의 두께입니다
+              strokeWeight={5} // 선의 두께입니다
               strokeColor={"#686EF9"} // 선의 색깔입니다
               strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
               strokeStyle={"solid"} // 선의 스타일입니다
@@ -216,7 +233,7 @@ function KakaoMap() {
               ))}
             <Polyline
               path={isdrawing ? [paths[paths.length - 1], mousePosition] : []}
-              strokeWeight={6} // 선의 두께입니다
+              strokeWeight={3} // 선의 두께입니다
               strokeColor={"#686EF9"} // 선의 색깔입니다
               strokeOpacity={0.5} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
               strokeStyle={"solid"} // 선의 스타일입니다
@@ -245,46 +262,92 @@ function KakaoMap() {
                 </MapMarker>
               ))} */}
           </Map>
+          {rightState ? (
+            <Grid
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              padding="13px"
+              width="343px"
+              height="44px"
+              margin="16px auto 0 auto"
+              borderRadius="39px"
+              bg="#F0F0F0"
+            >
+              <Text size="14px" margin="0">
+                경로종료
+              </Text>
+            </Grid>
+          ) : (
+            <Grid
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              padding="13px"
+              width="343px"
+              height="44px"
+              margin="16px auto 0 auto"
+              borderRadius="39px"
+              bg="#68f99e"
+              _onClick={() => {
+                handleRightClick();
+                setRightState(!rightState);
+              }}
+            >
+              <Text
+                _onClick={() => {
+                  handleRightClick();
+                  setRightState(!rightState);
+                }}
+                size="14px"
+                margin="0"
+              >
+                경로종료
+              </Text>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </>
   );
-}
+};
 
 const LocationInput = styled.input`
-  max-width: 694px;
-  width: 100%;
-  height: 52px;
+  width: 273px;
+  height: 44px;
   box-sizing: border-box;
-  border: 1px solid #cbcbcb;
-  border-radius: 3px;
+  border: 1px solid #b8b8b8;
+  border-radius: 3px 0 0 3px;
   padding: 10px 0px 10px 32px;
-  margin: 0 32px 0 0;
+  margin: 0;
+  outline: none;
+  font-weight: 400;
+  font-size: 13px;
+  color: black;
   :focus {
-    border: 1px solid #030c37;
-    outline: none;
+    border: 1px solid #68f99e;
   }
   ::placeholder {
     font-family: "Spoqa Han Sans Neo", "sans-serif";
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
+    color: #7b7b7b;
   }
 `;
 
 const SearchLocationBtn = styled.button`
   font-family: "Spoqa Han Sans Neo";
-  padding: 10px;
-  max-width: 139px;
-  width: 100%;
-  height: 52px;
+  padding: 5px;
+  width: 70px;
+  height: 44px;
   background: #030c37;
-  border: 1px solid #030c37;
-  border-radius: 3px;
+  border-radius: 0px 3px 3px 0px;
   color: white;
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 13px;
   box-sizing: border-box;
   margin: 0;
+  border: none;
   cursor: pointer;
   :hover {
     box-shadow: 0 0 3px #030c37;
@@ -302,4 +365,4 @@ const Final = styled.div`
   border-radius: 5px;
 `;
 
-export default KakaoMap;
+export default KakaoMapMob;

@@ -6,7 +6,11 @@ import styled from "styled-components";
 import { Text } from "../../elements";
 import { history } from "../../redux/configureStore";
 import { logoutDB } from "../../redux/modules/user";
-import { getProfileDB, getRunningDB ,getMyRunningDB } from "../../redux/modules/mypage";
+import {
+  getProfileDB,
+  getRunningDB,
+  getMyRunningDB,
+} from "../../redux/modules/mypage";
 
 // 모달
 import ModalPortal from "./ModalPortal";

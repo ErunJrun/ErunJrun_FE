@@ -45,7 +45,7 @@ const AlarmModal = ({ onClose }) => {
                 e.stopPropagation();
               }}
             >
-              <Text size="14px" bold margin="0">
+              <Text size="12px" bold margin="0 0 16px 0">
                 알림
               </Text>
               {alarmList?.data?.length === {}
@@ -161,7 +161,7 @@ const AlarmModal = ({ onClose }) => {
               e.stopPropagation();
             }}
           >
-            <Text size="18px" bold margin="0 0 24px 24px">
+            <Text size="18px" bold margin="0 0 24px -0">
               알림
             </Text>
             {alarmList?.data?.length === {}
@@ -273,8 +273,9 @@ const BackgroundMob = styled.div`
   left: 0;
   top: 0;
   height: 100%;
-  width: 767px;
+  width: 100%;
   text-align: center;
+  margin: 0 auto;
 `;
 
 const Content = styled.div`
@@ -284,16 +285,16 @@ const Content = styled.div`
   align-items: flex-start;
   box-sizing: border-box;
   z-index: 205;
-  width: 249px;
-  height: 265px;
-  border: 1px solid #f0f0f0;
+  width: 400px;
+  height: 547px;
+  border: 1px solid rgba(149, 149, 149, 0.25);
   background: #ffffff;
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border-radius: 15px;
   position: absolute;
-  top: 7%;
+  top: 70px;
   left: 56%;
-  padding: 24px;
+  padding: 24px 32px;
   overflow: auto;
   overflow-x: hidden;
   &::-webkit-scrollbar {
@@ -328,16 +329,16 @@ const ContentMob = styled.div`
   align-items: flex-start;
   box-sizing: border-box;
   z-index: 205;
-  width: 200px;
-  height: 400px;
-  border: 1px solid rgba(149, 149, 149, 0.25);
+  width: 249px;
+  height: 265px;
+  border: 1px solid #f0f0f0;
   background: #ffffff;
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
+  border-radius: 6px;
   position: absolute;
-  top: 55px;
-  left: 140px;
-  padding: 16px;
+  top: 6%;
+  left: 32%;
+  padding: 14px 16px;
   overflow: auto;
   overflow-x: hidden;
   &::-webkit-scrollbar {
