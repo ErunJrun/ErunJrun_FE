@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-pascal-case */
 import React, { Fragment, useState, useRef, useEffect } from "react";
@@ -14,8 +15,13 @@ import { Text, Grid } from "../../elements";
 import styled from "styled-components";
 import LevelBox from "../groupDetail/LevelBox";
 import LevelShoes from "../LevelShoes";
+import { useMediaQuery } from "react-responsive";
 
 const Edit = (props) => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:820px)",
+  });
+
   const dispatch = useDispatch();
   const fileInput = useRef();
   const userId = localStorage.getItem("userId");
@@ -27,7 +33,7 @@ const Edit = (props) => {
   const [bio, setBio] = useState(props.profile.bio);
   const [likeLocation, setLikeLocation] = useState(props.profile.likeLocation);
   const [likeDistance, setLikeDistance] = useState(props.profile.likeDistance);
-  const [userLevel, setUserLevel] = useState(props?.profile.userLevel);
+  const [userLevel, setUserLevel] = useState(props.profile.userLevel);
   const [phone, setPhone] = useState(props.profile.phone);
   const [agreeSMS, setAgreeSMS] = useState(props.profile.agreeSMS);
   const [numberCK, setNumderCK] = useState("");
@@ -46,6 +52,18 @@ const Edit = (props) => {
     "제주특별자치시",
   ]);
 
+  const [runRegionMob, setRunRegionMob] = useState([
+    "서울",
+    "경기",
+    "인천",
+    "강원",
+    "충청 / 세종 / 대전",
+    "경북 / 대구",
+    "경남 / 부산 / 울산",
+    "전라 / 광주",
+    "제주",
+  ]);
+
   const [runDistance, setRunDistance] = useState([
     "잘 모르겠어요",
     "5km미만",
@@ -56,12 +74,28 @@ const Edit = (props) => {
     "15km 이상",
   ]);
 
+  const [runDistanceMob, setRunDistanceMob] = useState([
+    "잘 모르겠어요",
+    "5km미만",
+    "5km 이상 10km 미만",
+    "10km 이상 15km 미만",
+    "15km 이상",
+  ]);
+
   const [runExp, setRunExp] = useState([
     "오렌지",
     "퍼플",
     "블루",
     "레드",
     "블랙",
+  ]);
+
+  const [runExpComment, setRunExpComment] = useState([
+    "처음이에요",
+    `5회 미만`,
+    `5회 이상 10회 미만`,
+    `10회 이상 15회 미만`,
+    `15회 이상`,
   ]);
 
   const [modal, setModal] = useState(false);
@@ -137,7 +171,7 @@ const Edit = (props) => {
         bio,
         likeLocation,
         likeDistance,
-        userLevel,
+        runExp[userLevel],
         phone,
         agreeSMS
       )
@@ -157,7 +191,300 @@ const Edit = (props) => {
     setAgreeSMS(props.profile.agreeSMS);
     setCertPhone(props.profile.certPhone);
   }, [props]);
+  if(isMobile) {
+    return (
+      <Grid
+          display="flex"
+          justifyContent="center"
+          width="343px"
+          margin="70px auto "
+        >
+          <Grid>
+            <Text bold size="14px">
+              회원정보 수정
+            </Text>
+            <_Hr/>
+            <Text size="13px">
+              프로필 사진
+            </Text>
+            
+            <Grid textAlign="center" flexDirection="column" width="100px">
+              <_MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
+                <_ProfileLabel for="input-file">사진 변경</_ProfileLabel>
+                <ProfileInput
+                  cursor="pointer"
+                  type="file"
+                  name="file"
+                  id="input-file"
+                  encType="multipart/form-data"
+                  onChange={changeImage}
+                  accept=".jpg, .jpeg, .png"
+                  ref={fileInput}
+                />
+              </Grid>
 
+            <Text size="13px">
+              닉네임
+            </Text>
+            <_Input
+              value={nickname}
+              onChange={changeName}
+              type="text"
+              placeholder="닉네임을 입력해주세요!"
+              maxLength={8}
+            />
+            <Text size="13px">
+              자기소개
+            </Text>
+            {bio === null ? (
+              <_Input
+                value={""}
+                onChange={changeContent}
+                type="text"
+                placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
+                maxLength={50}
+              />
+            ) : (
+              <_Input
+                value={bio}
+                onChange={changeContent}
+                type="text"
+                placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
+                maxLength={50}
+              />
+            )}
+          </Grid>
+
+          <Grid>
+            <Text bold size="14px">
+              휴대폰 인증
+            </Text>
+            <_Hr/>
+            <Text size="13px">
+              휴대폰 번호
+            </Text>
+            <Grid display="felx">
+              <Inp
+                value={phone}
+                onChange={Number}
+                type="text"
+                placeholder="010-1234-5678"
+                maxLength={20}
+              />
+            </Grid>
+
+            {certPhone === false ? (
+              <>
+                <_Box>
+                  <Button
+                    onClick={() => {
+                      dispatch(numberCheckMiddleware(phone));
+                    }}
+                  >
+                    인증요청
+                  </Button>
+                </_Box>
+                <Grid display="felx">
+                  <Inp
+                    value={numberCK}
+                    onChange={NumderCK}
+                    type="text"
+                    placeholder="인증번호를 입력"
+                    maxLength={20}
+                  />
+                  <Button
+                    onClick={() => {
+                      dispatch(getNumberCheckMiddleware(phone, numberCK));
+                      CK();
+                    }}
+                  >
+                    인증
+                  </Button>
+                </Grid>
+
+                {ck === false ? (
+                  <>
+                    <input
+                      disabled
+                      checked
+                      value={agreeSMS}
+                      onChange={agree}
+                      type="checkbox"
+                    />
+                    개인정보사용 동의 및 알림수신에 동의합니다.
+                  </>
+                ) : (
+                  <>
+                    <input
+                      checked={agreeSMS}
+                      value={agreeSMS}
+                      onChange={agree}
+                      type="checkbox"
+                    />
+                    개인정보사용 동의 및 알림수신에 동의합니다.
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <input
+                  checked={agreeSMS}
+                  value={agreeSMS}
+                  onChange={agree}
+                  type="checkbox"
+                />
+                개인정보사용 동의 및 알림수신에 동의합니다.
+              </>
+            )}
+
+          </Grid>
+
+          <Text bold size="14px" textAlign="left">
+            나의 러닝 스타일
+          </Text>
+          <_Hr/>
+          <Grid>
+          <Text margin="0 0 16px 0" size="13px" textAlign="left">
+            선호하는 러닝 지역
+          </Text>
+          <Grid
+            width="311px"
+            height="122px"
+            margin="0"
+            display="flex"
+            justifyContent="space-between"
+          >
+            {runRegionMob.map((e, idx) => {
+              return (
+                <Fragment key={idx}>
+                  <LabelMob>
+                  <input
+                    onClick={() => {
+                      choiceRegion(idx + 1);
+                      console.log(idx + 1);
+                    }}
+                    type="radio"
+                    name="runRegion"
+                    value={e}
+                    checked={runRegionMob[likeLocation - 1] === e ? e : ""}
+                    ></input>
+                    <Text margin="0" regular size="11px">
+                      {e}
+                    </Text>
+                  </LabelMob>
+                </Fragment>
+              );
+            })}
+          </Grid>
+    
+          <Text margin="37px 0 16px 0" size="13px" textAlign="left">
+            선호하는 러닝 거리
+          </Text>
+            <Grid
+              width="311px"
+              height="218px"
+              margin="0"
+              display="flex"
+              justifyContent="center"
+            >
+              {runDistanceMob.map((e, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <LabelDistanceMob>
+                    <input
+                      onClick={() => {
+                        choiceDistance(idx);
+                        console.log(idx);
+                      }}
+                      type="radio"
+                      name="runDistance"
+                      checked={runDistanceMob[likeDistance] === e ? e : ""}
+                      value={e}
+                    ></input>
+                      <Text margin="0" regular size="11px">
+                        {e}
+                      </Text>
+                    </LabelDistanceMob>
+                  </Fragment>
+                );
+              })}
+            </Grid>
+
+            <Text margin="37px 0 16px 0" size="13px" textAlign="left">
+              러닝 횟수(1달 기준)
+            </Text>
+            <Grid
+              width="311px"
+              height="218px"
+              margin="0 0 32px 0"
+              display="flex"
+              justifyContent="center"
+            >
+              {runExpComment.map((e, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <LabelExpMob checkLevel={userLevel} checked={userLevel}>
+                      <input
+                        onClick={() => {
+                          choiceExp(idx);
+                          console.log(idx);
+                        }}
+                        type="radio"
+                        name="runExp"
+                        checked={runExpComment[userLevel] === e ? e : ""}
+                        value={e}
+                      ></input>
+                      <Text margin="0" regular size="11px">
+                        {e}
+                      </Text>
+                    </LabelExpMob>
+                  </Fragment>
+                );
+              })}
+            </Grid>
+          </Grid>
+          <Grid
+            height="auto"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {userLevel >= 0 && userLevel !== "" ? (
+              <>
+                <LevelShoes userLevel={runExp[userLevel]} />
+                <Text
+                  display="flex"
+                  alignItems="center"
+                  size="12px"
+                  margin="0 0 0 8px"
+                >
+                  당신의 러닝 레벨은
+                  <LevelBox userLevel={runExp[userLevel]} />
+                  입니다!
+                </Text>
+              </>
+            ) : null}
+          </Grid>
+          <Grid display="flex" width="100%">
+            <_Button
+              onClick={() => {
+                history.push(`/mypage/${userId}`);
+              }}
+            >
+            취소
+            </_Button>
+            <__Button
+              onClick={() => {
+                edit();
+              }}
+            >
+              저장하기
+            </__Button>
+        </Grid>
+  
+        </Grid>
+    );
+  }
   return (
     <>
       <Grid maxWidth="800px" margin="68px auto" justify="center">
@@ -174,9 +501,8 @@ const Edit = (props) => {
             display="flex"
             alignItems="center"
           >
-            <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
-            <ProfileLabel for="input-file">사진 변경</ProfileLabel>
-          </Grid>
+          <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
+          <ProfileLabel for="input-file">사진 변경</ProfileLabel>
           <ProfileInput
             cursor="pointer"
             type="file"
@@ -187,6 +513,7 @@ const Edit = (props) => {
             accept=".jpg, .jpeg, .png"
             ref={fileInput}
           />
+          </Grid>
         </Grid>
 
         <Text bold size="16px">
@@ -255,7 +582,7 @@ const Edit = (props) => {
                 value={numberCK}
                 onChange={NumderCK}
                 type="text"
-                placeholder="인증번호를 입력해주세요!"
+                placeholder="인증번호를 입력"
                 maxLength={20}
               />
               <Button
@@ -310,7 +637,7 @@ const Edit = (props) => {
         <Hrr />
         <Grid margin="0 0 84px 0" display="flex" flexDirection="column">
           <Text margin="40px 0 16px 0" bold size="18px">
-            Step 1. 선호하는 러닝 지역을 선택해주세요!
+            선호하는 러닝 지역
           </Text>
 
           <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
@@ -319,7 +646,7 @@ const Edit = (props) => {
                 <Fragment key={idx}>
                   <Label>
                     <input
-                      onChange={() => {
+                      onClick={() => {
                         choiceRegion(idx + 1);
                         console.log(idx + 1);
                       }}
@@ -338,7 +665,7 @@ const Edit = (props) => {
 
         <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
           <Text margin="0 0 18px 0" bold size="18px">
-            Step 1. 선호하는 러닝 거리를 선택해주세요!
+            선호하는 러닝 거리
           </Text>
 
           <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
@@ -347,7 +674,7 @@ const Edit = (props) => {
                 <Fragment key={idx}>
                   <LabelDistance>
                     <input
-                      onChange={() => {
+                      onClick={() => {
                         choiceDistance(idx);
                         console.log(idx);
                       }}
@@ -366,21 +693,22 @@ const Edit = (props) => {
 
         <Grid margin="70px 0 0 0" display="flex" flexDirection="column">
           <Text margin="0 0 18px 0" bold size="18px">
-            Step 3. (1달 기준) 러닝 횟수를 선택해주세요!
+            러닝 횟수(1달 기준)
           </Text>
 
           <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
-            {runExp.map((e, idx) => {
+            {runExpComment.map((e, idx) => {
               return (
                 <Fragment key={idx}>
-                  <LabelExp checked={userLevel}>
+                  <LabelExp checkLevel={userLevel} checked={userLevel}>
                     <input
-                      onChange={() => {
-                        choiceExp(e);
+                      onClick={() => {
+                        choiceExp(idx);
+                        console.log(idx);
                       }}
                       type="radio"
                       name="runExp"
-                      checked={userLevel === e ? e : ""}
+                      checked={runExpComment[userLevel] === e ? e : ""}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>
@@ -389,6 +717,30 @@ const Edit = (props) => {
               );
             })}
           </Grid>
+
+          <Grid 
+          display="flex" 
+          justifyContent="center" 
+          alignItems="center"
+          margin="20px 0 0 0 "
+          >
+            {userLevel >= 0 && userLevel !== "" ? (
+              <>
+                <LevelShoes userLevel={runExp[userLevel]} />
+                <Text
+                  display="flex"
+                  alignItems="center"
+                  size="18px"
+                  bold
+                  margin="15px 0 10px 8px"
+                >  
+                  당신의 러닝 레벨은
+                  <LevelBox userLevel={runExp[userLevel]} />입니다.
+                </Text>
+              </>
+            ) : null}
+          </Grid>
+          
         </Grid>
         <hr style={{ margin: "70px 0 0 0" }} />
         <Text bold size="16px" color="#7b7b7b" _onClick={toggleModal}>
@@ -448,6 +800,46 @@ const MyImage = styled.img`
   border-radius: 50%;
 `;
 
+const _MyImage = styled.img`
+  height: 96px;
+  width: 96px;
+  border-radius: 50%;
+`;
+
+const ProfileLabel = styled.label`
+  font-size: 16px;
+  font-weight: bold;
+  border: solid 1px #030c37;
+  color: #030c37;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 6px 20px;
+  margin-left: 32px;
+`;
+
+const _ProfileLabel = styled.label`
+  width: 83px;
+  height: 26px; 
+  font-size: 11px;
+  font-weight: bold;
+  border: solid 1px #030c37;
+  color: #030c37;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 6px 20px;
+`;
+
+const ProfileInput = styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+`;
+
 const Button = styled.button`
   width: 156px;
   height: 55px;
@@ -466,6 +858,40 @@ const Button = styled.button`
   }
 `;
 
+const _Button = styled.button`
+  width: 160px;
+  height: 40px;
+  flex-direction: row;
+  align-items: center;
+  border: solid 1px #030c37;
+  background-color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #030c37;
+  margin-left: 16px;
+  :hover {
+    font-size: 15px;
+  }
+`;
+
+const __Button = styled.button`
+  width: 160px;
+  height: 40px;
+  flex-direction: row;
+  align-items: center;
+  border: solid 1px #030c37;
+  background-color: #030c37;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  margin-left: 16px;
+  :hover {
+    font-size: 15px;
+  }
+`;
+
 const _Box = styled.div`
   margin: -74px 0 20px 340px;
 `;
@@ -480,6 +906,19 @@ const Input = styled.input`
   border: solid 1px #cbcbcb;
   padding-left: 32px;
   font-size: 16px;
+  font-weight: 500;
+`;
+
+const _Input = styled.input`
+  width: 300px;
+  height: 44px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 3px;
+  border: solid 1px #cbcbcb;
+  padding-left: 32px;
+  font-size: 13px;
   font-weight: 500;
 `;
 
@@ -501,6 +940,12 @@ const Hr = styled.div`
   width: 800px;
   height: 1px;
   background-color: #cbcbcb;
+`;
+
+const _Hr = styled.div`
+  width: 343px;
+  height: 1px;
+  background-color: #000;
 `;
 
 const Hrr = styled.div`
@@ -530,6 +975,45 @@ const LabelExp = styled.label`
   input:checked + p {
     background-color: #68f99e;
     color: #030c37;
+  }
+`;
+
+const LabelExpMob = styled.label`
+  input {
+    display: none;
+  }
+
+  input + p {
+    width: 311px;
+    height: 34px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px auto;
+    border-radius: 35px;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid #b8b8b8;
+    gap: 8px;
+    color: #000;
+  }
+  input:checked + p {
+    ${(props) =>
+      props.checkLevel === 0
+        ? "background-color:  #FF823B;"
+        : props.checkLevel === 1
+        ? "background-color:  #BD6AFF;"
+        : props.checkLevel === 2
+        ? "background-color:  #4248C4;"
+        : props.checkLevel === 3
+        ? "background-color: #EE4343;"
+        : props.checkLevel === 4
+        ? "background-color:  #303030;"
+        : null}
+    ${(props) => (props.checkLevel === 4 ? "color:  white;" : "color: black;")}
+    font-weight: 500;
   }
 `;
 
@@ -641,26 +1125,59 @@ const _Btn = styled.button`
   }
 `;
 
-const ProfileLabel = styled.label`
-  font-size: 16px;
-  font-weight: bold;
-  border: solid 1px #030c37;
-  color: #030c37;
-  cursor: pointer;
-  border-radius: 3px;
-  padding: 6px 20px;
-  margin-left: 32px;
+const LabelMob = styled.label`
+  input {
+    display: none;
+  }
+  input + p {
+    width: 99px;
+    height: 34px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px auto;
+    border-radius: 35px;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+    border: solid 1px #b8b8b8;
+    gap: 8px;
+  }
+
+  input:checked + p {
+    background-color: #68f99e;
+    color: black;
+    border: #68f99e;
+    font-weight: 500;
+  }
 `;
 
-const ProfileInput = styled.input`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-`;
+const LabelDistanceMob = styled.label`
+  input {
+    display: none;
+  }
 
+  input + p {
+    width: 311px;
+    height: 34px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px auto;
+    border-radius: 35px;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+    border: solid 1px #b8b8b8;
+    gap: 8px;
+  }
+  input:checked + p {
+    background-color: #68f99e;
+    color: black;
+    border: 1px solid #68f99e;
+    font-weight: 500;
+  }
+`;
 export default Edit;

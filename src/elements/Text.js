@@ -41,6 +41,7 @@ const Text = (props) => {
     regular,
     textLeft,
     space,
+    textAlign,
   } = props;
   const styles = {
     hiddenText,
@@ -79,6 +80,7 @@ const Text = (props) => {
     regular,
     textLeft,
     space,
+    textAlign,
   };
   return (
     <React.Fragment>
@@ -128,10 +130,12 @@ Text.defaultProps = {
   alignItems: null,
   lineHeight: null,
   space: null,
+  textAlign:null,
 };
 const P = styled.p`
   line-height: ${(props) => props.lineHeight};
   align-items: ${(props) => props.alignItems};
+  text-align: ${(props) => props.textAlign};
   :hover {
     ${(props) => props.hover};
   }

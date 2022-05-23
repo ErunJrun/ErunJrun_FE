@@ -22,6 +22,7 @@ const Mypage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const userId = params.userId;
+  console.log(userId);
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
@@ -59,7 +60,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push("/m/schedule")}}
+                _onClick={()=>{history.push(`/m/schedule/${userId}`)}}
               >
                 참여 예정
               </Text>
@@ -67,7 +68,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push("/m/group")}}
+                _onClick={()=>{history.push(`/m/group/${userId}`)}}
               >
                 참여 완료
               </Text>
@@ -75,7 +76,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push("/m/mygroup")}}
+                _onClick={()=>{history.push(`/m/mygroup/${userId}`)}}
               >
                 My 모집
               </Text>

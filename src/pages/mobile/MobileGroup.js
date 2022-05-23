@@ -7,7 +7,7 @@ import { history } from "../../redux/configureStore";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
-const Group = () => {
+const MobileGroup = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
@@ -32,17 +32,36 @@ const Group = () => {
 
   if(isMobile) {
   return (
-    <Grid weight="100%" margin="80px 0 0 0">
+      <>
+      {/*<Grid
+        height="54px"
+        margin="0"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        position="relative"
+        bg="red"
+        borderBottom="1px solid #F0F0F0"
+        >
+            <Grid
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            width="375px"
+            padding="50px 15px"
+        ></Grid>gfgf
+  </Grid>*/}
+    <Grid weight="375px" margin="80px auto 50px auto" textAlign="-webkit-center">
       {running.data.length === 0 ? (
         <Box>참여완료한 그룹러닝이 없습니다</Box>
       ) : (
-        <Grid display="flex">
+        <Grid display="flex" width="375px">
           {running.data.map((data, index) => {
             return userId !== data.userId ? (
               <Grid
                 key={index}
                 width="166px"
-                margin="0 8px 55px 8px"
+                margin="0 8px 40px 8px"
               >
                 <Grid
                   _onClick={() => {
@@ -59,7 +78,7 @@ const Group = () => {
                     <Title>
                       {data.title}
                     </Title>
-                    <Text cursor="pointer" size="11px" margin="5px 0 0 0">
+                    <Text cursor="pointer" size="11px" margin="5px 0 0 0" textAlign="left">
                       {data.date} 
                     </Text>
                   </Grid>
@@ -111,6 +130,7 @@ const Group = () => {
         </Grid>
       )}
     </Grid>
+    </>
   );
 };
 };
@@ -186,7 +206,8 @@ const Title = styled.text`
   font-size: 11px;
   cursor:pointer;
   margin:9px 0 0 0;
+  text-align: left;
 `;
 
 
-export default Group;
+export default MobileGroup;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Text, Grid, Image } from "../../elements";
+import { Text, Grid } from "../../elements";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { useMediaQuery } from "react-responsive";
@@ -18,16 +18,16 @@ const MobileSchedule = () => {
 
 if(isMobile){
   return (
-    <Grid weight="100%" margin="80px 0 0 0">
+    <Grid weight="100%" margin="80px auto 50px auto" textAlign="-webkit-center">
       {profile_list.waiting.length === 0 ? (
         <Box>예정된 그룹 러닝이 없습니다</Box>
       ) : (
-        <Grid display="flex" justifyContent="center">
+        <Grid display="flex" width="375px">
           {profile_list.waiting?.map((waiting, index) => (
             <Grid
               key={index}
               width="166px"
-              margin="0 8px 55px 8px"
+              margin="0 8px 40px 8px"
             >
               <Grid
                 _onClick={() => {
@@ -44,7 +44,7 @@ if(isMobile){
                   <Title>
                     {waiting.title}
                   </Title>
-                  <Text regular cursor="pointer" size="11px" margin="5px 0 0 0">
+                  <Text regular cursor="pointer" size="11px" margin="5px 0 0 0" textAlign="left">
                     {waiting.date} 
                   </Text>
                 </Grid>
@@ -139,6 +139,7 @@ const Title = styled.text`
   font-size: 11px;
   cursor:pointer;
   margin:9px 0 0 0;
+  text-align: left;
 `;
 
 
