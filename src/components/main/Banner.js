@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Grid, Text } from "../../elements";
 import Weather from "./Weather";
 import { useSelector, useDispatch } from "react-redux";
+import { getCookie } from "../../shared/Cookie";
 
 import blueBanner from "../../assets/main/blueBanner.png";
 import yellowBanner from "../../assets/main/yellowBanner.png";
@@ -20,7 +21,7 @@ import { useMediaQuery } from "react-responsive";
 
 const Banner = () => {
   const dispatch = useDispatch();
-  const is_login = useSelector((state) => state.user.isLogin);
+  const is_login = getCookie("accessToken");
   const userName = localStorage.getItem("nickname");
 
   const isMobile = useMediaQuery({

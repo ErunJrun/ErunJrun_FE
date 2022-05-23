@@ -321,7 +321,7 @@ const GroupContent = (props) => {
               hover="border:1px solid #030C37;"
             >
               <GroupSelect
-                onClick={(e) => {
+                onChange={(e) => {
                   setMaxPeople(e.target.value);
                 }}
                 value={maxPeople}

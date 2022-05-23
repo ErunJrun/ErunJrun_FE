@@ -9,6 +9,12 @@ const TimeFilter = (props) => {
     props?.setFilterTime(checkedInputs);
   }, [checkedInputs]);
 
+  useEffect(() => {
+    if (props?.reset) {
+      setCheckedInputs([]);
+    }
+  }, [props.reset]);
+
   const [time, setTime] = useState([
     "전체 시간",
     "00:00 ~ 04:00",
@@ -54,13 +60,16 @@ const TimeFilter = (props) => {
           {time.map((e, idx) => {
             return (
               <Fragment key={idx}>
-                <LabelMob
-                  onChange={(e) => {
-                    choiceTime(e, idx);
-                  }}
-                  checked={checkedInputs.includes(idx)}
-                >
-                  <input type="checkbox" name={e} value={idx} />
+                <LabelMob>
+                  <input
+                    onChange={(e) => {
+                      choiceTime(e, idx);
+                    }}
+                    checked={checkedInputs.includes(idx)}
+                    type="checkbox"
+                    name={e}
+                    value={idx || ""}
+                  />
                   <Text margin="0" color="#7B7B7B" regular size="13px">
                     {e}
                   </Text>
@@ -88,7 +97,7 @@ const TimeFilter = (props) => {
               }}
               checked={checkedInputs.includes(idx)}
             >
-              <input type="checkbox" name={e} value={idx} />
+              <input type="checkbox" name={e} value={idx || ""} />
               <Text size="16px">{e}</Text>
             </Label>
           </Fragment>

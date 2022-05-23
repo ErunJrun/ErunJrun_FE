@@ -9,6 +9,12 @@ const ThemeFilter = (props) => {
     props?.setFilterTheme(checkedInputs);
   }, [checkedInputs]);
 
+  useEffect(() => {
+    if (props?.reset) {
+      setCheckedInputs([]);
+    }
+  }, [props.reset]);
+
   const [theme, setTheme] = useState([
     "전체",
     "도시",
@@ -54,13 +60,16 @@ const ThemeFilter = (props) => {
           {theme.map((e, idx) => {
             return (
               <Fragment key={idx}>
-                <LabelMob
-                  onChange={(e) => {
-                    choiceTheme(e, idx);
-                  }}
-                  checked={checkedInputs.includes(idx)}
-                >
-                  <input type="checkbox" name={e} value={idx} />
+                <LabelMob>
+                  <input
+                    onChange={(e) => {
+                      choiceTheme(e, idx);
+                    }}
+                    checked={checkedInputs.includes(e)}
+                    type="checkbox"
+                    name={e}
+                    value={e || ""}
+                  />
                   <Text margin="0" color="#7B7B7B" regular size="13px">
                     {e}
                   </Text>
@@ -88,7 +97,7 @@ const ThemeFilter = (props) => {
               }}
               checked={checkedInputs.includes(idx)}
             >
-              <input type="checkbox" name={e} value={idx} />
+              <input type="checkbox" name={e} value={idx || ""} />
               <Text>{e}</Text>
             </Label>
           </Fragment>

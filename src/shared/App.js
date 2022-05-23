@@ -70,8 +70,8 @@ function App() {
             <Route path="/loginInfo" exact component={LoginInfo} />
             <Route path="/groupEdit/:groupId" exact component={GroupEdit} />
             <Route path="/edit" exact component={MypageEdit} />
-            <Route path="/contact" exact component={CourseFeed} />
-            <Route path="/coursefeed" exact component={Contact} />
+            <Route path="/coursefeed" exact component={CourseFeed} />
+            <Route path="/contact" exact component={Contact} />
             <Route path="/serviceInfo" exact component={ServiceInfo} />
             <Route path="/serviceTerms" exact component={ServiceTerms} />
             <Route path="/privacyPolicy" exact component={PrivacyPolicy} />

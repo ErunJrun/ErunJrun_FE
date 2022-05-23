@@ -40,7 +40,7 @@ const Check = () => {
     dispatch(getAttendDB(groupId));
     localStorage.removeItem("from");
   }, []);
-  if(isMobile) {
+  if (isMobile) {
     return (
       <Grid width="100%" margin="50px 0 0 0">
         <_InfoBox>
@@ -63,7 +63,7 @@ const Check = () => {
             <Text bold size="15px" margin="30px 0 0 25px">
               {check_list?.groupInfo?.user?.nickname}
             </Text>
-            <_Img src="https://ifh.cc/g/06D7Gr.png"/>
+            <_Img src="https://ifh.cc/g/06D7Gr.png" />
           </Grid>
           <Text
             width="104px"
@@ -86,7 +86,7 @@ const Check = () => {
               </Text>
             </Grid>
             <_Label
-              onChange={(e) => {
+              onClick={(e) => {
                 choiceTime(e, index);
               }}
               checked={userId.includes(index)}
@@ -136,7 +136,7 @@ const Check = () => {
             <Text bold size="16px" margin="30px 0 0 25px">
               {check_list?.groupInfo?.user?.nickname}
             </Text>
-            <Img src="https://ifh.cc/g/06D7Gr.png"/>
+            <Img src="https://ifh.cc/g/06D7Gr.png" />
           </Grid>
           <Text
             width="104px"
@@ -159,7 +159,7 @@ const Check = () => {
               </Text>
             </Grid>
             <Label
-              onChange={(e) => {
+              onClick={(e) => {
                 choiceTime(e, index);
               }}
               checked={userId.includes(index)}

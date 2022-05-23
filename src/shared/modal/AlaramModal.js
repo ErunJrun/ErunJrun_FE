@@ -161,7 +161,7 @@ const AlarmModal = ({ onClose }) => {
               e.stopPropagation();
             }}
           >
-            <Text size="18px" bold margin="0 0 24px 0">
+            <Text size="18px" bold margin="0 0 24px 24px">
               알림
             </Text>
             {alarmList?.data?.length === {}
@@ -262,8 +262,9 @@ const Background = styled.div`
   left: 0;
   top: 0;
   height: 100%;
-  width: 1920px;
+  width: 100%;
   text-align: center;
+  margin: 0 auto;
 `;
 
 const BackgroundMob = styled.div`
@@ -283,15 +284,15 @@ const Content = styled.div`
   align-items: flex-start;
   box-sizing: border-box;
   z-index: 205;
-  width: 400px;
-  height: 547px;
-  border: 1px solid rgba(149, 149, 149, 0.25);
+  width: 249px;
+  height: 265px;
+  border: 1px solid #f0f0f0;
   background: #ffffff;
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
+  border-radius: 6px;
   position: absolute;
-  top: 81px;
-  left: 1100px;
+  top: 7%;
+  left: 56%;
   padding: 24px;
   overflow: auto;
   overflow-x: hidden;
@@ -336,7 +337,7 @@ const ContentMob = styled.div`
   position: absolute;
   top: 55px;
   left: 140px;
-  padding: 12px;
+  padding: 16px;
   overflow: auto;
   overflow-x: hidden;
   &::-webkit-scrollbar {
