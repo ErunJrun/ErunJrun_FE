@@ -7,16 +7,20 @@ import {
   Spinner,
   LogoSpinner,
 } from "../elements";
+import filterIcon from "../assets/groupFeed/filterIcon.svg";
+
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import GroupFilter from "../components/groupFeed/GroupFilter";
 import GroupFilterMob from "../components/groupFeed/GroupFilterMob";
 import GroupCard from "../components/groupFeed/GroupCard";
+import GroupCardMob from "../components/groupFeed/GroupCardMob";
 import upload from "../assets/groupFeed/groupUploadBtn1.png";
 import uploadHover from "../assets/groupFeed/groupUploadBtn2.png";
 import pageUp from "../assets/groupFeed/pageUpBtn.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-scroll";
+import shoesYellow from "../assets/groupFeed/shoesYellow.svg";
 
 import { getGroupDB, resetGroup } from "../redux/modules/feed";
 import Permit from "../shared/Permit";
@@ -29,6 +33,7 @@ import Ready from "../shared/Ready";
 import { resetMap } from "../redux/modules/uploadInfo";
 
 import { imgActions } from "../redux/modules/image";
+import { borderRadius } from "@mui/system";
 
 const GroupFeed = () => {
   const isMobile = useMediaQuery({
@@ -47,6 +52,7 @@ const GroupFeed = () => {
   const [filterDistance, setFilterDistance] = useState([]);
   const [filterTheme, setFilterTheme] = useState([]);
 
+  const [filterState, setFilterState] = useState(false);
   const [searchState, setSearchState] = useState(false);
   const [uploadBtn, setUploadBtn] = useState(false);
 
@@ -54,8 +60,6 @@ const GroupFeed = () => {
   const preferData = useSelector((state) => state.feed.preferData);
   const isLoading = useSelector((state) => state.feed.isLoading);
   const paging = useSelector((state) => state.feed.paging);
-
-  console.log("피드 컴포넌트 페이지 번호", paging);
 
   const category = {
     region: region,
@@ -66,6 +70,7 @@ const GroupFeed = () => {
     filterTheme: filterTheme,
     finish: finish,
   };
+  console.log("피드 카테고리", category);
 
   const finishCheck = () => {
     if (finish == 0) {
@@ -120,7 +125,130 @@ const GroupFeed = () => {
   if (isMobile) {
     return (
       <>
-        <GroupFilterMob />
+        {filterState ? (
+          <GroupFilterMob
+            category={category}
+            setSearchState={setSearchState}
+            setFilterState={setFilterState}
+            finish={finish}
+          ></GroupFilterMob>
+        ) : (
+          <Grid width="375px" height="auto" margin="110px auto 100px auto">
+            <Grid
+              margin="0 auto 16px auto"
+              width="343px"
+              height="46px"
+              padding="0 24px"
+              borderRadius="80px"
+              boxShadow="0 0 10px 0 rgba(104, 249, 158, 0.35)"
+              border="1px solid rgba(104, 249, 158, 0.5)"
+              bg="#fff"
+              display="flex"
+              justifyContent="space-between"
+              cursor="pointer"
+              _onClick={() => {
+                setSearchState(true);
+              }}
+            >
+              <Text
+                _onClick={() => {
+                  setFilterState(true);
+                }}
+                cursor="pointer"
+                height="auto"
+                size="14px"
+                regular
+                color="#7B7B7B"
+              >
+                필터를 통해 그룹러닝을 검색해보세요.
+              </Text>
+              <img src={filterIcon} />
+            </Grid>
+            <HrMob />
+            <Grid
+              margin="9.5px auto"
+              width="343px"
+              display="flex"
+              justifyContent="space-between"
+              alignItem="center"
+            >
+              {searchState || !nickname ? (
+                <>
+                  <Text width="auto" margin="0" size="12px" bold>
+                    총{" "}
+                    <span style={{ color: "#686EF9" }}>
+                      {feedList.length ? feedList.length : "0"}
+                    </span>
+                    건의 결과
+                  </Text>
+                </>
+              ) : (
+                <>
+                  <Grid display="flex" width="auto">
+                    <img style={{ width: "18.91px" }} src={shoesYellow} />
+                    <Text width="auto" margin="0 0 0 4.55px" size="12px" bold>
+                      추천 그룹 러닝입니다!
+                    </Text>
+                  </Grid>
+                </>
+              )}
+              <Grid
+                height="auto"
+                width="auto"
+                margin="0"
+                display="flex"
+                justifyContent="right"
+                alignItems="center"
+              >
+                <input
+                  style={{
+                    width: "13px",
+                    height: "13px",
+                    margin: "0 8px 0 0",
+                    cursor: "pointer",
+                    border: "0.8px solid  #000",
+                    borderRadius: "2.8px",
+                  }}
+                  type="checkbox"
+                  onChange={() => {
+                    finishCheck();
+                  }}
+                ></input>
+                <Text size="11px" margin="0">
+                  마감공고 포함하기
+                </Text>
+              </Grid>
+            </Grid>
+            <HrMob />
+
+            <Grid
+              width="343px"
+              justifyContent="space-between"
+              display="flex"
+              margin="23.5px auto 100px auto"
+            >
+              {feedList.length !== 0 ? (
+                feedList?.map((item, idx) => {
+                  return <GroupCardMob key={idx} {...item}></GroupCardMob>;
+                })
+              ) : (
+                <Spinner />
+              )}
+            </Grid>
+            <Grid
+              width="200px"
+              bg="red"
+              display="flex"
+              justifyContent="center"
+              alignItem="center"
+              _onClick={() => {
+                dispatch(getGroupDB(category, paging.page));
+              }}
+            >
+              <Text color="white">더보기</Text>
+            </Grid>
+          </Grid>
+        )}
       </>
     );
   }
@@ -130,7 +258,7 @@ const GroupFeed = () => {
       <Grid
         position="relative"
         width="1282px"
-        margin="0 auto 320px 360px"
+        margin="0 auto 240px auto"
         justifyContent="space-between"
         display="flex"
       >
@@ -139,12 +267,14 @@ const GroupFeed = () => {
             display="flex"
             justifyContent="left"
             margin="64px auto 32px auto"
-            alignItems="center"
+            alignItems="baseline"
           >
             <Text margin="0 10px 0 0" bold size="20px">
               그룹 러닝
             </Text>
-            <Text size="14px">함께 뛰면 즐거움이 두배!</Text>
+            <Text regular size="14px">
+              함께 뛰면 즐거움이 두배!
+            </Text>
           </Grid>
           <GroupFilter
             category={category}
@@ -207,7 +337,7 @@ const GroupFeed = () => {
                 cursor: "pointer",
               }}
               type="checkbox"
-              onClick={() => {
+              onChange={() => {
                 finishCheck();
               }}
             ></input>
@@ -310,6 +440,12 @@ const Hr = styled.div`
   border: 1px solid #969696;
   width: 100%;
   margin: 16px auto;
+`;
+
+const HrMob = styled.hr`
+  width: 343px;
+  border: 1px solid #f0f0f0;
+  margin: 0 auto;
 `;
 
 export default GroupFeed;

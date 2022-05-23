@@ -10,6 +10,13 @@ const DistanceFilter = (props) => {
     props?.setFilterDistance(checkedInputs);
   }, [checkedInputs]);
 
+  useEffect(() => {
+    if (props?.reset) {
+      setCheckedInputs([]);
+      props.setResetState(false);
+    }
+  }, [props.reset]);
+
   const [distance, setDistance] = useState([
     "전체",
     "5km 미만",
@@ -53,13 +60,16 @@ const DistanceFilter = (props) => {
           {distance.map((e, idx) => {
             return (
               <Fragment key={idx}>
-                <LabelMob
-                  onChange={(e) => {
-                    choiceDistance(e, idx);
-                  }}
-                  checked={checkedInputs.includes(idx)}
-                >
-                  <input type="checkbox" name={e} value={idx} />
+                <LabelMob>
+                  <input
+                    onChange={(e) => {
+                      choiceDistance(e, idx);
+                    }}
+                    checked={checkedInputs.includes(idx)}
+                    type="checkbox"
+                    name={e}
+                    value={idx || ""}
+                  />
                   <Text margin="0" color="#7B7B7B" regular size="13px">
                     {e}
                   </Text>
@@ -87,7 +97,7 @@ const DistanceFilter = (props) => {
               }}
               checked={checkedInputs.includes(idx)}
             >
-              <input type="checkbox" name={e} value={idx} />
+              <input type="checkbox" name={e} value={idx || ""} />
               <Text>{e}</Text>
             </Label>
           </Fragment>

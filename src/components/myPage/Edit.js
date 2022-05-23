@@ -311,7 +311,7 @@ const Edit = (props) => {
                 <Fragment key={idx}>
                   <Label>
                     <input
-                      onClick={() => {
+                      onChange={() => {
                         choiceRegion(idx + 1);
                         console.log(idx + 1);
                       }}
@@ -339,7 +339,7 @@ const Edit = (props) => {
                 <Fragment key={idx}>
                   <LabelDistance>
                     <input
-                      onClick={() => {
+                      onChange={() => {
                         choiceDistance(idx);
                         console.log(idx);
                       }}
@@ -367,7 +367,7 @@ const Edit = (props) => {
                 <Fragment key={idx}>
                   <LabelExp checked={userLevel}>
                     <input
-                      onClick={() => {
+                      onChange={() => {
                         choiceExp(e);
                       }}
                       type="radio"

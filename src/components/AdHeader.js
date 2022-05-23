@@ -78,14 +78,15 @@ const AdHeader = () => {
         >
           <Grid
             width="1200px"
+            margin="0 auto"
             display="flex"
             justifyContent="space-between"
             alignItems="center"
           >
             <Text
               textalign
-              width="1190px"
-              margin="0"
+              width="auto"
+              margin="0 auto"
               color="white"
               regular
               size="18px"
@@ -101,6 +102,7 @@ const AdHeader = () => {
             </Text>
             <Text
               width="auto"
+              height="auto"
               cursor="pointer"
               regular
               margin="0"

@@ -85,11 +85,12 @@ const ProfileModal = ({ onClose }) => {
 const Background = styled.div`
   z-index: 206;
   position: fixed;
-  right: auto;
+  left: 0;
   top: 0;
   height: 100%;
-  width: 1920px;
+  width: 100%;
   text-align: center;
+  margin: 0 auto;
 `;
 
 const Content = styled.div`
@@ -106,8 +107,8 @@ const Content = styled.div`
   border-radius: 10px;
   background-color: #fff;
   position: absolute;
-  top: 81px;
-  right: 360px;
+  top: 7%;
+  left: 71%;
   padding: 16px 0;
 
   animation: scale-up-tr 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;

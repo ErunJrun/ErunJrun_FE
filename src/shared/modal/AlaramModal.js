@@ -161,7 +161,7 @@ const AlarmModal = ({ onClose }) => {
               e.stopPropagation();
             }}
           >
-            <Text size="18px" bold margin="0 0 24px 0">
+            <Text size="18px" bold margin="0 0 24px 24px">
               알림
             </Text>
             {alarmList?.data?.length === {}
@@ -262,8 +262,9 @@ const Background = styled.div`
   left: 0;
   top: 0;
   height: 100%;
-  width: 1920px;
+  width: 100%;
   text-align: center;
+  margin: 0 auto;
 `;
 
 const BackgroundMob = styled.div`
@@ -290,8 +291,8 @@ const Content = styled.div`
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   position: absolute;
-  top: 81px;
-  left: 1100px;
+  top: 7%;
+  left: 56%;
   padding: 24px;
   overflow: auto;
   overflow-x: hidden;

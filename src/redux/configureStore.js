@@ -14,6 +14,7 @@ import Image from "./modules/image";
 import Post from "./modules/post";
 import Recomments from "./modules/recomments";
 import UploadInfo from "./modules/uploadInfo";
+import Course from "./modules/course";
 
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   uploadInfo: UploadInfo,
   image: Image,
   post: Post,
+  course: Course,
   router: connectRouter(history),
 });
 

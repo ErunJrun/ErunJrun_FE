@@ -17,6 +17,9 @@ const Footer = lazy(() => import("../components/Footer"));
 const Login = lazy(() => import("../pages/Login"));
 const Mypage = lazy(() => import("../pages/Mypage"));
 const GroupFeed = lazy(() => import("../pages/GroupFeed"));
+const GroupFilterMob = lazy(() =>
+  import("../components/groupFeed/GroupFilterMob")
+);
 const GroupUpload = lazy(() => import("../pages/GroupUpload"));
 const GroupDetail = lazy(() => import("../pages/GroupDetail"));
 const KakaoLogin = lazy(() => import("../components/login/KakaoLogin"));
@@ -56,6 +59,7 @@ function App() {
             <Route path="/login" exact component={Login} />
             <Route path="/mypage/:userId" exact component={Mypage} />
             <Route path="/groupfeed" exact component={GroupFeed} />
+            <Route path="/groupfeed/filter" exact component={GroupFilterMob} />
             <Route path="/groupupload" exact component={GroupUpload} />
             <Route path="/kakao" exact component={KakaoLogin}></Route>
             <Route path="/naver" exact component={NaverLogin}></Route>
@@ -66,8 +70,8 @@ function App() {
             <Route path="/loginInfo" exact component={LoginInfo} />
             <Route path="/groupEdit/:groupId" exact component={GroupEdit} />
             <Route path="/edit" exact component={MypageEdit} />
-            <Route path="/contact" exact component={CourseFeed} />
-            <Route path="/coursefeed" exact component={Contact} />
+            <Route path="/coursefeed" exact component={CourseFeed} />
+            <Route path="/contact" exact component={Contact} />
             <Route path="/serviceInfo" exact component={ServiceInfo} />
             <Route path="/serviceTerms" exact component={ServiceTerms} />
             <Route path="/privacyPolicy" exact component={PrivacyPolicy} />

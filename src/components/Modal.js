@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ModalPortal from "../shared/modal/ModalPortal";
 import ProfileModal from "../shared/modal/ProfileModal";
 import { getProfileDB } from "../redux/modules/mypage";
+import { Grid } from "../elements";
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const Wrap = styled.div`
   font-size: 18px;
   border: none;
   cursor: pointer;
+  position: relative;
 `;
 
 const ProfileImage = styled.img`
@@ -57,6 +59,7 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   margin: 0;
   box-sizing: border-box;
+  position: relative;
 `;
 
 export default Modal;
