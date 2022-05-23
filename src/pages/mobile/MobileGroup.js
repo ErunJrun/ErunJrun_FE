@@ -5,12 +5,19 @@ import { Text, Grid, Image, IconButton } from "../../elements";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 const Group = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:820px)",
+  });
+
   const dispatch = useDispatch();
-  const myId = localStorage.getItem("userId");
   const params = useParams();
   const userId = params.userId;
+  const myId = localStorage.getItem("userId");
+
+  console.log(userId);
 
   const running = useSelector((state) => state.mypage.group);
   console.log(running);
@@ -23,18 +30,18 @@ const Group = () => {
     return <></>;
   }
 
+  if(isMobile) {
   return (
-    <>
+    <Grid weight="100%" margin="80px 0 0 0">
       {running.data.length === 0 ? (
         <Box>참여완료한 그룹러닝이 없습니다</Box>
       ) : (
         <Grid display="flex">
-          {running?.data?.map((data, index) => {
+          {running.data.map((data, index) => {
             return userId !== data.userId ? (
               <Grid
                 key={index}
-                maxWidth="288px"
-                width="100%"
+                width="166px"
                 margin="0 8px 55px 8px"
               >
                 <Grid
@@ -46,28 +53,22 @@ const Group = () => {
                   flexDirection="column"
                   cursor="pointer"
                 >
-                  <Image
-                    shape="imgBtn"
-                    width="288px"
-                    height="216px"
-                    src={data.thumbnailUrl}
-                    borderRadius="3px"
-                  ></Image>
+                  <Img src={data.thumbnailUrl}/>
 
                   <Grid>
-                    <Title cursor="pointer" size="16px" bold margin="14px 0 0 0">
+                    <Title>
                       {data.title}
                     </Title>
-                    <Text cursor="pointer" size="13px" margin="2px 0 0 0">
-                      {data.date} (소요 시간 : {data.totalTime})
+                    <Text cursor="pointer" size="11px" margin="5px 0 0 0">
+                      {data.date} 
                     </Text>
                   </Grid>
 
-                  <Grid cursor="pointer" display="flex" margin="-10px 0 0 0">
+                  <Grid width="166px" cursor="pointer" display="flex">
                     <Tag>{data.location}</Tag>
                     <Tag>{data.distance}km</Tag>
-                    <Tag>{data.thema}</Tag>
-                  </Grid><Hr></Hr>
+                  </Grid>
+                  <Hr></Hr>
                 </Grid>
                   {myId === userId ? 
                     <>
@@ -109,52 +110,35 @@ const Group = () => {
           })}
         </Grid>
       )}
-    </>
+    </Grid>
   );
 };
+};
 
-const ApplyEnd = styled.div`
-  width: 384px;
-  height: 30px;
-  background-color: #c4c4c4;
-  margin: 16px 0 15px 0;
-  border-radius: 3px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 16px;
-  box-sizing: border-box;
-  background-color: #68f99e;
-`;
-
-const Tag = styled.div`
-  font-size: 12px;
-  font-weight: 500;
-  height: 21px;
+const Tag = styled.div` 
+  height: 15px;
+  font-size: 9px;
+  font-weight: 400; 
+  color: #7B7B7B;
   background-color: #ddd;
-  margin: 20px 12px 0 0;
-  padding: 3px 11px;
   border-radius: 2px;
-  :hover {
-    background-color: #68f99e;
-    box-shadow: 0 0 3px gray;
-  }
+  margin: 8px 9px 0 0;
+  padding: 2px 6px;
 `;
 
 const Hr = styled.div`
   border: 1px solid #e5e5e5;
-  width: 100%;
-  margin: 16px auto 10px auto;
+  width: 166px;
+  margin: 13px 0 -3px 0;
 `;
 
 const ApplyBtnTrue = styled.button`
-  max-width: 382px;
-  font-size: 16px;
+  font-size: 11px;
   font-weight: 500;
-  width: 100%;
+  width: 168px;
   background: #030c37;
   border-radius: 3px;
-  height: 38px;
+  height: 24px;
   color: white;
   border: none;
   cursor: pointer;
@@ -165,39 +149,43 @@ const ApplyBtnTrue = styled.button`
 `;
 
 const ApplyBtnFalse = styled.button`
-  max-width: 382px;
-  font-size: 16px;
-  font-weight: bold;
-  width: 100%;
+  font-size: 11px;
+  font-weight: 500;
+  width: 168px;
   background: #f0f0f0;
   border-radius: 3px;
-  height: 38px;
+  height: 24 px;
   color: #7b7b7b;
   border: none;
 `;
 
 const Box = styled.div`
-  font-weight: 900;
-  font-size: 26px;
+  font-size: 16px;
   color: #333;
   height: 100px;
-  width: 1220px;
+  width: 376px;
   background-color: #fff;
   padding: 250px 11px;
   text-align: center;
   border: none;
 `;
 
+const Img = styled.img`
+  height: 126px;
+  width: 166px;
+  border-radius: 3px;
+`;
+
 const Title = styled.text`
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis; 
-white-space: nowrap; 
-display:block;
-font-weight: bold;
-font-size: 16px;
-cursor:pointer;
-margin:14px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+  display:block;
+  font-weight: 700;
+  font-size: 11px;
+  cursor:pointer;
+  margin:9px 0 0 0;
 `;
 
 

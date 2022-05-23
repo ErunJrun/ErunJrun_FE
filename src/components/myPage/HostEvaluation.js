@@ -11,6 +11,7 @@ const HostEvaluation = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
+  
   const profile_list = useSelector((state) => state.mypage.list);
 
   const [ emoji, setEmoji ] = useState(true);
@@ -22,7 +23,7 @@ const HostEvaluation = () => {
   if(isMobile) {
     return(
       <Grid 
-      width="100%" 
+      width="375px"
       padding="5%"
       margin="-50px 0 0 0"
       >
@@ -31,7 +32,15 @@ const HostEvaluation = () => {
           {profile_list?.totalEvaluationCount}
           개)
         </Text>
-        <Text bold size="20px" margin="-40px 0 0 95%" _onClick={()=>{history.push()}}>
+        <Text 
+          bold 
+          size="20px" 
+          margin="-40px 0 0 95%" 
+          profile_list={profile_list}
+          _onClick={()=>{
+            history.push("/m/evaluation");
+          }}
+        >
           >
         </Text>
         <Grid
@@ -91,7 +100,6 @@ const HostEvaluation = () => {
             “짐을 보관해줘서 편한 러닝이 가능했어요!”
           </Text>
         </Grid>
-        <_Hr/>
       </Grid>
     );
   }

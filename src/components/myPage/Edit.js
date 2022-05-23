@@ -106,9 +106,11 @@ const Edit = (props) => {
   const agree = (e) => {
     setAgreeSMS(!agreeSMS);
   };
+
   const NumderCK = (e) => {
     setNumderCK(e.target.value);
   };
+
   const choiceRegion = (idx) => {
     setLikeLocation(idx);
   };
@@ -168,8 +170,14 @@ const Edit = (props) => {
           <Text bold size="16px">
             프로필 사진
           </Text>
-          <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
-          <input
+          <Grid 
+            display="flex"
+            alignItems="center"
+          >
+            <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
+            <ProfileLabel for="input-file">사진 변경</ProfileLabel>
+          </Grid>
+          <ProfileInput
             cursor="pointer"
             type="file"
             name="file"
@@ -631,6 +639,28 @@ const _Btn = styled.button`
   :hover {
     background-color: #bbb;
   }
+`;
+
+const ProfileLabel = styled.label`
+  font-size: 16px;
+  font-weight: bold;
+  border: solid 1px #030c37;
+  color: #030c37;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 6px 20px;
+  margin-left: 32px;
+`;
+
+const ProfileInput = styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 `;
 
 export default Edit;

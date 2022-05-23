@@ -16,7 +16,7 @@ const Profile = () => {
 
   if(isMobile) {
     return (
-      <Grid width="100%" >
+      <Grid width="375px" >
         <_MyImage src={profile_list?.userInfo?.profileUrl} />
         <Grid width="225px" height="65px" margin="-70px 0 0 100px">
           <Text bold size="14px" >
@@ -59,7 +59,6 @@ const Profile = () => {
             </Text>
           </_SmallBox>
         </_Box>
-        <_Hr/>
       </Grid>
     );
   }
@@ -157,7 +156,7 @@ const SmallBox = styled.div`
 const _SmallBox = styled.div`
   display: flex;
   align-items: center;
-  width: 400px;
+  width: 300px;
   height: 16px;
   gap: 16px;
   margin: 12px 0 0 24px;

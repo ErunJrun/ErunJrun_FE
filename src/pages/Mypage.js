@@ -1,8 +1,10 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getProfileDB, getMyRunningDB } from "../redux/modules/mypage";
+import { getProfileDB, resetProfile } from "../redux/modules/mypage";
 import Profile from "../components/myPage/Profile";
+import Ready from "../shared/Ready";
 import HostEvaluation from "../components/myPage/HostEvaluation";
 import styled from "styled-components";
 import { Text, Grid } from "../elements";
@@ -11,6 +13,7 @@ import { getCookie } from "../shared/Cookie";
 import { useMediaQuery } from "react-responsive";
 import { history } from "../redux/configureStore";
 import { logoutDB } from "../redux/modules/user";
+import swal from 'sweetalert';
 
 const Mypage = () => {
   const isMobile = useMediaQuery({
@@ -25,16 +28,27 @@ const Mypage = () => {
 
   useEffect(() => {
     dispatch(getProfileDB(userId));
+
+    return () => {
+      console.log("마이페이지 클린업");
+      //dispatch(resetProfile());
+    };
   }, []);
 
   if(isMobile) {
     return (
-      <Grid width="100%" margin="0 0 100px 0">
+      <Grid width="100%" padding="0px auto">
         {isLogin && token ? 
           <>
             <Profile userId={userId} />
+            <_Hr/>
             <HostEvaluation/>
-            <Grid margin="-15px 0 0 20px" lineHeight="24px">
+            <__Hr/>
+            <Grid 
+              margin="-15px auto 0 20px" 
+              lineHeight="24px" 
+              width="350px"
+            >
               <Text
                 bold
                 size="14px"
@@ -45,6 +59,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                _onClick={()=>{history.push("/m/schedule")}}
               >
                 참여 예정
               </Text>
@@ -52,6 +67,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                _onClick={()=>{history.push("/m/group")}}
               >
                 참여 완료
               </Text>
@@ -59,6 +75,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                _onClick={()=>{history.push("/m/mygroup")}}
               >
                 My 모집
               </Text>
@@ -66,7 +83,11 @@ const Mypage = () => {
     
             <Hr/>
     
-            <Grid margin="0 0 0 20px" lineHeight="24px">
+            <Grid 
+              margin="0px auto 0 20px" 
+              lineHeight="24px" 
+              width="350px"
+            >
               <Text
                 bold
                 size="14px"
@@ -77,6 +98,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                _onClick={()=>{history.push("/serviceTerms")}}
               >
                 북마크
               </Text>
@@ -84,6 +106,7 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                _onClick={()=>{history.push("/serviceTerms")}}
               >
                 My 추천
               </Text>
@@ -93,7 +116,7 @@ const Mypage = () => {
               <Text
                 regular
                 size="12px"
-                margin="5px 0 0 20px"
+                margin="10px 0 100px 20px"
                 color="#222"
                 _onClick={() => {
                   dispatch(logoutDB());
@@ -144,6 +167,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 참여 예정
               </Text>
@@ -151,6 +177,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 참여 완료
               </Text>
@@ -158,6 +187,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 My 모집
               </Text>
@@ -176,6 +208,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 북마크
               </Text>
@@ -183,6 +218,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
+                onClick={() => {
+                  swal("로그인 후 이용해주세요");
+                }}
               >
                 My 추천
               </Text>
@@ -209,7 +247,22 @@ const Mypage = () => {
 const Hr = styled.div`
   width: 91%;
   height: 1px;
-  margin: 20px auto;
+  margin: 20px 0 0 2.5%;
   background-color: #ddd;
 `;
+
+const _Hr = styled.div`
+  width: 91%;
+  height: 1px;
+  margin: 20px 0 40px 2.5%;
+  background-color: #ddd;
+`;
+
+const __Hr = styled.div`
+  width: 91%;
+  height: 1px;
+  margin: -20px 0 40px 2.5%;
+  background-color: #ddd;
+`;
+
 export default Mypage;

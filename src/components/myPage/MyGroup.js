@@ -1,12 +1,13 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Text, Grid, Image, IconButton } from "../../elements";
+import { Text, Grid, Image, Spinner } from "../../elements";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { getAttendDB } from "../../redux/modules/mypage";
 import { useParams } from "react-router-dom";
-//import swal from 'sweetalert';
+import swal from 'sweetalert';
+
 const MyGroup = () => {
   const dispatch = useDispatch();
   const hostId = localStorage.getItem("userId");
@@ -23,7 +24,10 @@ const MyGroup = () => {
   return (
     <>
       {my.data.length === 0 ? (
-        <Box>진행한 그룹 러닝이 없습니다</Box>
+        <Grid minHeight="600px" display="flex">
+          <Spinner/>
+          <Box>진행한 그룹 러닝이 없습니다</Box>
+        </Grid>
       ) : (
         <Grid display="flex">
           {my.data?.map((data, index) => (
@@ -85,7 +89,7 @@ const MyGroup = () => {
                       dispatch(getAttendDB(data.groupId, data.userId, hostId));
                     }}
                   >
-                    출석체크하기
+                    출석체크
                   </ApplyBtnTrue> 
                   :
                   <ApplyBtnTrue
@@ -93,12 +97,20 @@ const MyGroup = () => {
                       swal("아직 출석체크 시간이 아닙니다");
                     }}
                   >
-                    출석체크하기
+                    출석체크
                   </ApplyBtnTrue>
                 )}
               </>
               : 
-                null
+              <Grid margin="10px 0 0 0">
+                  <ApplyBtnTrue
+                    onClick={() => {
+                      history.push(`/groupdetail/${data.groupId}`);
+                    }}
+                  >
+                    상세보기
+                </ApplyBtnTrue>
+              </Grid>
               }
             </Grid>
           ))}

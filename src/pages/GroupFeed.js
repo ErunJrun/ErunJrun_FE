@@ -234,7 +234,7 @@ const GroupFeed = () => {
               })
             ) : (
               <Spinner />
-            )}
+            ) }
 
             {/* </InfinityScroll> */}
           </Grid>

@@ -3,25 +3,30 @@ import { useSelector } from "react-redux";
 import { Text, Grid, Image } from "../../elements";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
+import { useMediaQuery } from "react-responsive";
 
-const Schedule = () => {
+const MobileSchedule = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:820px)",
+  });
+        
   const profile_list = useSelector((state) => state.mypage.list);
   console.log(profile_list);
   if (profile_list.length === 0) {
     return <></>;
   }
 
+if(isMobile){
   return (
-    <>
+    <Grid weight="100%" margin="80px 0 0 0">
       {profile_list.waiting.length === 0 ? (
         <Box>예정된 그룹 러닝이 없습니다</Box>
       ) : (
-        <Grid display="flex">
+        <Grid display="flex" justifyContent="center">
           {profile_list.waiting?.map((waiting, index) => (
             <Grid
               key={index}
-              maxWidth="288px"
-              width="100%"
+              width="166px"
               margin="0 8px 55px 8px"
             >
               <Grid
@@ -33,27 +38,20 @@ const Schedule = () => {
                 flexDirection="column"
                 cursor="pointer"
               >
-                <Image
-                  shape="imgBtn"
-                  width="288px"
-                  height="216px"
-                  src={waiting.thumbnailUrl}
-                  borderRadius="3px"
-                ></Image>
+                <Img src={waiting.thumbnailUrl}/>
 
                 <Grid>
                   <Title>
                     {waiting.title}
                   </Title>
-                  <Text cursor="pointer" size="13px" margin="10px 0 0 0">
-                    {waiting.date} (소요 시간 : {waiting.totalTime})
+                  <Text regular cursor="pointer" size="11px" margin="5px 0 0 0">
+                    {waiting.date} 
                   </Text>
                 </Grid>
 
-                <Grid cursor="pointer" display="flex" margin="-10px 0 0 0">
+                <Grid width="166px" cursor="pointer" display="flex">
                   <Tag>{waiting.location}</Tag>
                   <Tag>{waiting.distance}</Tag>
-                  <Tag>{waiting.thema}</Tag>
                 </Grid>
                 <Hr></Hr>
                 <Grid
@@ -76,38 +74,35 @@ const Schedule = () => {
           ))}
         </Grid>
       )}
-    </>
+    </Grid>
   );
 };
+}
 
 const Tag = styled.div`
-  font-size: 12px;
-  font-weight: 500;
-  height: 21px;
+  height: 15px;
+  font-size: 9px;
+  font-weight: 400; 
+  color: #7B7B7B;
   background-color: #ddd;
-  margin: 20px 12px 0 0;
-  padding: 3px 11px;
   border-radius: 2px;
-  :hover {
-    background-color: #68f99e;
-    box-shadow: 0 0 3px gray;
-  }
+  margin: 8px 9px 0 0;
+  padding: 2px 6px;
 `;
 
 const Hr = styled.div`
   border: 1px solid #e5e5e5;
-  width: 100%;
-  margin: 16px auto 10px auto;
+  width: 166px;
+  margin: 13px 0 -3px 0;
 `;
 
 const ApplyBtnTrue = styled.button`
-  max-width: 382px;
-  font-size: 16px;
+  font-size: 11px;
   font-weight: 500;
-  width: 100%;
+  width: 168px;
   background: #030c37;
   border-radius: 3px;
-  height: 38px;
+  height: 24px;
   color: white;
   border: none;
   cursor: pointer;
@@ -117,41 +112,34 @@ const ApplyBtnTrue = styled.button`
   }
 `;
 
-const ApplyBtnFalse = styled.button`
-  max-width: 382px;
-  font-size: 16px;
-  font-weight: bold;
-  width: 100%;
-  background: #f0f0f0;
-  border-radius: 3px;
-  height: 38px;
-  color: #7b7b7b;
-  border: none;
-`;
-
 const Box = styled.div`
-  font-weight: 900;
-  font-size: 26px;
+  font-size: 16px;
   color: #333;
   height: 100px;
-  width: 1220px;
+  width: 376px;
   background-color: #fff;
   padding: 250px 11px;
   text-align: center;
   border: none;
 `;
 
+const Img = styled.img`
+  height: 126px;
+  width: 166px;
+  border-radius: 3px;
+`;
+
 const Title = styled.text`
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis; 
-white-space: nowrap; 
-display:block;
-font-weight: bold;
-font-size: 16px;
-cursor:pointer;
-margin:14px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+  display:block;
+  font-weight: 700;
+  font-size: 11px;
+  cursor:pointer;
+  margin:9px 0 0 0;
 `;
 
 
-export default Schedule;
+export default MobileSchedule;
