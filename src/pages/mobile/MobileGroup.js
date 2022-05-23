@@ -7,7 +7,7 @@ import { history } from "../../redux/configureStore";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
-const Group = () => {
+const MobileGroup = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
@@ -189,4 +189,4 @@ const Title = styled.text`
 `;
 
 
-export default Group;
+export default MobileGroup;
