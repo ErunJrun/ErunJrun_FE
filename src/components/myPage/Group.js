@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { getRunningDB, getEvaluationDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid, Image, IconButton } from "../../elements";
-import Evaluation from "../../pages/Evaluation";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { useParams } from "react-router-dom";

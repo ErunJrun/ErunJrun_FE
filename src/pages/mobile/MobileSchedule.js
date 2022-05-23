@@ -80,7 +80,6 @@ if(isMobile){
 }
 
 const Tag = styled.div`
-  
   height: 15px;
   font-size: 9px;
   font-weight: 400; 
