@@ -15,9 +15,13 @@ const Level = () => {
   console.log(profile_list);
   if(isMobile) {
     return (
-      <Grid width="100%" margin="45px 0 0 16px">
+      <Grid 
+        width="375px" 
+        margin="45px auto 0px auto"    
+      >
         <Text 
           size="12px"
+          margin="0 0 0 20px"
           >
           굿러너 레벨 &nbsp;
           <span style={{color: "#2f80ed"}}>

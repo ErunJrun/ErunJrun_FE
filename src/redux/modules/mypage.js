@@ -7,6 +7,7 @@ import swal from "sweetalert";
 import axios from "axios";
 
 // actions
+const RESET_INFORMATION = "RESET_INFORMATION";
 const GET_PROFILE = "GET_PROFILE";
 const GET_RUNNING = "GET_RUNNING";
 const GET_MYRUNNING = "GET_MYRUNNING";
@@ -20,7 +21,12 @@ const GET_ATTEND = "GET_ATTEND";
 const PATCH_ATTEND = "PATCH_ATTEND";
 const DELETE_USER = "DELETE_USER";
 
-// //action creators
+//action creators
+export const resetProfile = (payload) => ({
+  type: RESET_INFORMATION,
+  payload,
+});
+
 export const getProfile = (payload) => ({
   type: GET_PROFILE,
   payload,
@@ -353,6 +359,14 @@ export const deleteUserDB = () => {
 
 export default handleActions(
   {
+    [RESET_INFORMATION]: (state, action) =>
+    produce(state, (draft) => {
+      draft.list = [];
+      draft.group = [];
+      draft.mygroup = [];
+      draft.info = [];
+    }),
+    
     [GET_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload;

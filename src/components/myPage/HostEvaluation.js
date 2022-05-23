@@ -22,7 +22,7 @@ const HostEvaluation = () => {
   if(isMobile) {
     return(
       <Grid 
-      width="100%" 
+      width="375px"
       padding="5%"
       margin="-50px 0 0 0"
       >
@@ -91,7 +91,6 @@ const HostEvaluation = () => {
             “짐을 보관해줘서 편한 러닝이 가능했어요!”
           </Text>
         </Grid>
-        <_Hr/>
       </Grid>
     );
   }

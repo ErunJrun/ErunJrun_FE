@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Text } from "../../elements";
 import { history } from "../../redux/configureStore";
 import { logoutDB } from "../../redux/modules/user";
+import { getProfileDB } from "../../redux/modules/mypage";
 
 // 모달
 import ModalPortal from "./ModalPortal";
@@ -40,6 +41,7 @@ const ProfileModal = ({ onClose }) => {
             <Text
               cursor="pointer"
               _onClick={() => {
+                dispatch(getProfileDB(userId));
                 history.push(`/mypage/${userId}`);
                 onClose();
               }}
