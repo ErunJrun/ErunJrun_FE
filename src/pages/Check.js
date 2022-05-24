@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import { Text, Grid } from "../elements";
@@ -9,6 +10,7 @@ import { Redirect, useParams } from "react-router-dom";
 import { getCookie } from "../shared/Cookie";
 import { useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import backBtn from "../assets/groupFeed/backBtn.svg"
 
 const Check = () => {
   const isMobile = useMediaQuery({
@@ -40,9 +42,52 @@ const Check = () => {
     dispatch(getAttendDB(groupId));
     localStorage.removeItem("from");
   }, []);
+
+
+  if (!token && isMobile) {
+    return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />;
+  }
   if (isMobile) {
     return (
-      <Grid width="100%" margin="50px 0 0 0">
+      <>
+      <Grid
+      zIndex="3"
+      bg="#ffffff"
+      justifyContent="center"
+      alignItems="center"
+      position="fixed"
+      top="0"
+      left="0"
+      width="100%"
+      height="54px"
+      display="flex"
+      padding="10px 10px"
+      margin="0 auto"
+    >
+      <Grid
+        display="flex"
+        width="375px"
+        justifyContent="left"
+        alignItems="center"
+      >
+        <img
+          style={{ width: "10px", margin: "0 10px" }}
+          src={backBtn}
+          onClick={() => {
+            history.push(`/mypage/${id}`);
+          }}
+        />
+        <Text margin="0 0 0 130px" bold size="16px">
+          출석체크
+        </Text>
+      </Grid>
+    </Grid>
+      <Grid     
+        display="flex"
+        justifyContent="center"
+        width="100%"
+        margin="50px auto "
+      >
         <_InfoBox>
           <Grid display="flex">
             <Text bold size="12px" margin="22px 10px 0 15px">
@@ -66,12 +111,12 @@ const Check = () => {
             <_Img src="https://ifh.cc/g/06D7Gr.png" />
           </Grid>
           <Text
-            width="104px"
-            height="44px"
+            width="71px"
+            height="31px"
             bold
-            size="15px"
+            size="12px"
             color="#030c37"
-            margin="20px -10px 0 0"
+            margin="48px 0 0 0"
           >
             크루장
           </Text>
@@ -81,7 +126,7 @@ const Check = () => {
           <_UserBox key={index}>
             <Grid display="flex" margin="32px 0 0 0">
               <_Image src={applyUser.user.profileUrl} />
-              <Text bold size="15px" margin="21px 0 0 25px">
+              <Text bold size="12px" margin="21px 0 0 25px">
                 {applyUser.user.nickname}
               </Text>
             </Grid>
@@ -96,7 +141,7 @@ const Check = () => {
                 name={applyUser.userId}
                 value={applyUser.userId}
               />
-              <Text size="15px">출석</Text>
+              <Text size="12px">출석</Text>
             </_Label>
           </_UserBox>
         ))}
@@ -107,9 +152,10 @@ const Check = () => {
             dispatch(patchAttendDB(groupId, userId));
           }}
         >
-          출석체크 완료
+          출석체크 저장
         </_Btn>
       </Grid>
+      </>
     );
   }
 
@@ -211,6 +257,7 @@ const _InfoBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 `;
 
 const Leader = styled.div`
@@ -228,6 +275,7 @@ const _Leader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 375px;
 `;
 
 const MyImage = styled.img`
@@ -253,8 +301,8 @@ const Image = styled.img`
 `;
 
 const _Image = styled.img`
-  height: 55px;
-  width: 55px;
+  height: 60px;
+  width: 60px;
   border-radius: 50%;
 `;
 
@@ -284,7 +332,8 @@ const _UserBox = styled.div`
   padding: 15px;
   display: flex;
   justify-content: space-between;
-  align-items: center; ;
+  align-items: center; 
+  width: 375px;
 `;
 
 const Btn = styled.button`
@@ -300,14 +349,14 @@ const Btn = styled.button`
 `;
 
 const _Btn = styled.button`
-  width: 186px;
-  height: 56px;
-  margin: 50px auto;
+  width: 200px;
+  height: 44px;
+  margin: 109px auto;
   border-radius: 3px;
   border: none;
-  background-color: #68f99e;
-  color: #030c37;
-  font-size: 16px;
+  background-color: #030c37;
+  color: #68f99e;
+  font-size: 14px;
   font-weight: 550;
 `;
 
@@ -345,8 +394,8 @@ const _Label = styled.label`
     display: none;
   }
   input + p {
-    width: 95px;
-    height: 36px;
+    width: 71px;
+    height: 31px;
     padding: 8px 19px;
     display: flex;
     flex-direction: row;

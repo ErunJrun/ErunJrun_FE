@@ -21,7 +21,7 @@ const Level = () => {
       >
         <Text 
           size="12px"
-          margin="0 0 0 20px"
+          margin="0 0 0 0px"
           >
           굿러너 레벨 &nbsp;
           <span style={{color: "#2f80ed"}}>

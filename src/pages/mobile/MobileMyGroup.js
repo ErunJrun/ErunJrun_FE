@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
- /* eslint-disable no-undef */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
@@ -37,42 +35,42 @@ const MobileMyGroup = () => {
   return (
     <>
     <Grid
-          zIndex="3"
-          bg="#ffffff"
-          justifyContent="center"
-          alignItems="center"
-          position="fixed"
-          top="0"
-          left="0"
-          width="100%"
-          height="54px"
-          display="flex"
-          padding="10px 10px"
-          margin="0 auto"
-        >
-          <Grid
-            display="flex"
-            width="375px"
-            justifyContent="left"
-            alignItems="center"
-          >
-            <img
-              style={{ width: "10px", margin: "0 10px" }}
-              src={backBtn}
-              onClick={() => {
-                history.go(-1);
-              }}
-            />
-            <Text margin="0 0 0 130px" bold size="16px">
-              My 모집
-            </Text>
-          </Grid>
-        </Grid>
+      zIndex="3"
+      bg="#ffffff"
+      justifyContent="center"
+      alignItems="center"
+      position="fixed"
+      top="0"
+      left="0"
+      width="100%"
+      height="54px"
+      display="flex"
+      padding="10px 10px"
+      margin="0 auto"
+    >
+      <Grid
+        display="flex"
+        width="375px"
+        justifyContent="left"
+        alignItems="center"
+      >
+        <img
+          style={{ width: "10px", margin: "0 10px" }}
+          src={backBtn}
+          onClick={() => {
+            history.go(-1);
+          }}
+        />
+        <Text margin="0 0 0 130px" bold size="16px">
+          My 모집
+        </Text>
+      </Grid>
+    </Grid>
     <Grid weight="100%" margin="80px auto 50px auto" textAlign="-webkit-center">
       {my.data.length === 0 ? (
           <Box>진행한 그룹 러닝이 없습니다</Box>
       ) : (
-        <Grid display="flex" width="375px" >
+        <Grid display="flex" width="375px" justifyContent="space-between">
           {my.data?.map((data, index) => (
             <Grid
               key={index}
