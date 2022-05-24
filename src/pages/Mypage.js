@@ -1,10 +1,8 @@
-/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProfileDB, resetProfile } from "../redux/modules/mypage";
 import Profile from "../components/myPage/Profile";
-import Ready from "../shared/Ready";
 import HostEvaluation from "../components/myPage/HostEvaluation";
 import styled from "styled-components";
 import { Text, Grid } from "../elements";

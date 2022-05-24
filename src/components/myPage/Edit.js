@@ -1,7 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable no-sequences */
-/* eslint-disable no-undef */
-/* eslint-disable react/jsx-pascal-case */
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,6 +14,7 @@ import LevelBox from "../groupDetail/LevelBox";
 import LevelShoes from "../LevelShoes";
 import { useMediaQuery } from "react-responsive";
 import backBtn from "../../assets/groupFeed/backBtn.svg"
+import swal from "sweetalert";
 
 const Edit = (props) => {
   const isMobile = useMediaQuery({
@@ -248,7 +245,7 @@ const Edit = (props) => {
               <_MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
             </Grid>
             <Grid textAlign="center" width="100%" margin="15px 0 0 0">
-              <_ProfileLabel for="input-file">사진 변경</_ProfileLabel>
+              <_ProfileLabel htmlFor="input-file">사진 변경</_ProfileLabel>
               <ProfileInput
                 cursor="pointer"
                 type="file"
@@ -344,7 +341,7 @@ const Edit = (props) => {
                   <>
                     <input
                       disabled
-                      checked
+                      defaultChecked
                       value={agreeSMS}
                       onChange={agree}
                       type="checkbox"
@@ -354,7 +351,7 @@ const Edit = (props) => {
                 ) : (
                   <>
                     <input
-                      checked={agreeSMS}
+                      defaultChecked={agreeSMS}
                       value={agreeSMS}
                       onChange={agree}
                       type="checkbox"
@@ -366,7 +363,7 @@ const Edit = (props) => {
             ) : (
               <>
                 <input
-                  checked={agreeSMS}
+                  defaultChecked={agreeSMS}
                   value={agreeSMS}
                   onChange={agree}
                   type="checkbox"
@@ -403,7 +400,7 @@ const Edit = (props) => {
                     type="radio"
                     name="runRegion"
                     value={e}
-                    checked={runRegionMob[likeLocation - 1] === e ? e : ""}
+                    defaultChecked={runRegionMob[likeLocation - 1] === e ? e : ""}
                     ></input>
                     <Text margin="0" regular size="11px">
                       {e}
@@ -435,7 +432,7 @@ const Edit = (props) => {
                       }}
                       type="radio"
                       name="runDistance"
-                      checked={runDistanceMob[likeDistance] === e ? e : ""}
+                      defaultChecked={runDistanceMob[likeDistance] === e ? e : ""}
                       value={e}
                     ></input>
                       <Text margin="0" regular size="11px">
@@ -460,7 +457,7 @@ const Edit = (props) => {
               {runExpComment.map((e, idx) => {
                 return (
                   <Fragment key={idx}>
-                    <LabelExpMob checkLevel={userLevel} checked={userLevel}>
+                    <LabelExpMob checkLevel={userLevel} defaultChecked={userLevel}>
                       <input
                         onClick={() => {
                           choiceExp(idx);
@@ -468,7 +465,7 @@ const Edit = (props) => {
                         }}
                         type="radio"
                         name="runExp"
-                        checked={runExpComment[userLevel] === e ? e : ""}
+                        defaultChecked={runExpComment[userLevel] === e ? e : ""}
                         value={e}
                       ></input>
                       <Text margin="0" regular size="11px">
@@ -560,7 +557,7 @@ const Edit = (props) => {
             alignItems="center"
           >
           <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
-          <ProfileLabel for="input-file">사진 변경</ProfileLabel>
+          <ProfileLabel htmlFor="input-file">사진 변경</ProfileLabel>
           <ProfileInput
             cursor="pointer"
             type="file"
@@ -657,7 +654,7 @@ const Edit = (props) => {
               <>
                 <input
                   disabled
-                  checked
+                  defaultChecked
                   value={agreeSMS}
                   onChange={agree}
                   type="checkbox"
@@ -667,7 +664,7 @@ const Edit = (props) => {
             ) : (
               <>
                 <input
-                  checked={agreeSMS}
+                  defaultChecked={agreeSMS}
                   value={agreeSMS}
                   onChange={agree}
                   type="checkbox"
@@ -679,7 +676,7 @@ const Edit = (props) => {
         ) : (
           <>
             <input
-              checked={agreeSMS}
+              defaultChecked={agreeSMS}
               value={agreeSMS}
               onChange={agree}
               type="checkbox"
@@ -711,7 +708,7 @@ const Edit = (props) => {
                       type="radio"
                       name="runRegion"
                       value={e}
-                      checked={runRegion[likeLocation - 1] === e ? e : ""}
+                      defaultChecked={runRegion[likeLocation - 1] === e ? e : ""}
                     ></input>
                     <Text bold>{e}</Text>
                   </Label>
@@ -738,7 +735,7 @@ const Edit = (props) => {
                       }}
                       type="radio"
                       name="runDistance"
-                      checked={runDistance[likeDistance] === e ? e : ""}
+                      defaultChecked={runDistance[likeDistance] === e ? e : ""}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>
@@ -758,7 +755,7 @@ const Edit = (props) => {
             {runExpComment.map((e, idx) => {
               return (
                 <Fragment key={idx}>
-                  <LabelExp checkLevel={userLevel} checked={userLevel}>
+                  <LabelExp checkLevel={userLevel} defaultChecked={userLevel}>
                     <input
                       onClick={() => {
                         choiceExp(idx);
@@ -766,7 +763,7 @@ const Edit = (props) => {
                       }}
                       type="radio"
                       name="runExp"
-                      checked={runExpComment[userLevel] === e ? e : ""}
+                      defaultChecked={runExpComment[userLevel] === e ? e : ""}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>
@@ -919,19 +916,19 @@ const Button = styled.button`
 
 const Btn_ = styled.button`
   width: 88px;
-  height: 47px;
+  height: 50px;
   border: solid 1px #030c37;
   background-color: #030c37;
   border-radius: 3px;
   font-size: 11px;
   font-weight: 500;
   color: #fff;
-  margin: 10px 0 0 -95px;
+  margin: 8px 0 0 -94px;
 `;
 
 const Btn__ = styled.button`
   width: 88px;
-  height: 47px;
+  height: 50px;
   border: solid 1px #030c37;
   background-color: #030c37;
   border-radius: 3px;

@@ -24,7 +24,7 @@ const MyModal = () => {
                 width="16px" 
                 height="16px"
                  _onClick = {toggleModal}
-                 margin="-19px 0 0 120px"
+                 margin="-19px 0 0 100px"
                  >
                     <Img src='https://ifh.cc/g/8Sdtjg.png'/> 
                 </Grid>

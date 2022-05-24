@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-pascal-case */
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect } from 'react';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -15,14 +13,6 @@ const MobileEvaluation = () => {
     query: "(max-width:820px)",
   });
 
-  // const dispatch = useDispatch();
-//   const params = useParams();
-//   const userId = params.userId;
-   //console.log(props);
-
-//   useEffect(() => {
-//     dispatch(getProfileDB(userId));
-//   }, []);
   const myId = localStorage.getItem("userId");
   const profile_list = useSelector((state) => state.mypage.list);
   console.log(profile_list);

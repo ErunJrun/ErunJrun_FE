@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect } from "react";
 import { getRunningDB, getEvaluationDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,7 +34,7 @@ const MobileGroup = () => {
   if(isMobile) {
   return (
       <>
-            <Grid
+        <Grid
           zIndex="3"
           bg="#ffffff"
           justifyContent="center"
@@ -71,13 +70,13 @@ const MobileGroup = () => {
       {running.data.length === 0 ? (
         <Box>참여완료한 그룹러닝이 없습니다</Box>
       ) : (
-        <Grid display="flex" width="375px">
+        <Grid display="flex" width="375px" justifyContent="space-between">
           {running.data.map((data, index) => {
             return userId !== data.userId ? (
               <Grid
                 key={index}
                 width="166px"
-                margin="0 8px 40px 8px"
+                margin="0 10px 40px 10px"
               >
                 <Grid
                   _onClick={() => {
