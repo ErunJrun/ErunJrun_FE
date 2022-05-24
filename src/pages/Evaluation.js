@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/jsx-pascal-case */
 import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvaluationDB, evaluationDB, getRunningDB } from "../redux/modules/mypage";
@@ -11,6 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import { getCookie } from "../shared/Cookie";
 import { useLocation } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import "../components/myPage/Evaluation.css";
 import { Button } from "react-scroll";
@@ -30,10 +29,13 @@ const Evaluation = () => {
   console.log(host);
 
   const userId = localStorage.getItem("userId");
-  const groupId = host?.data?.hostUser?.groupId
-  const hostId = host?.data?.hostUser?.user?.userId
+  const hostId = host?.hostUser?.user?.userId
   const token = getCookie("accessToken");
   const { pathname } = useLocation();
+  const params = useParams();
+  const groupId = params.groupId;
+
+ 
 
   const mpoint = () => {
     if(emoji === true) {
@@ -58,7 +60,6 @@ const Evaluation = () => {
     "변경사항을 안내해주지 않았어요.",
     "시간 약속을 잘 안지켰어요.",
   ]);
- 
 
   const toggleModal = () => {
     setModal(!modal);
@@ -72,9 +73,14 @@ const Evaluation = () => {
     setEvaluationCategory(idx);
   };
 
-  if (!token && isMobile) {
-    return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />;
+  useEffect(() => {
+    dispatch(getEvaluationDB(groupId));
+  }, []);
+
+  if (!token && isMobile) {console.log(pathname);
+    return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />; 
   }
+  
   if (isMobile) {
     return (
       <Grid width="100%" justifyContent="center">
@@ -82,17 +88,17 @@ const Evaluation = () => {
           <Text bold size="19px" margin="100px 0 0 0">
             크루장 평가
           </Text>
-          <_MyImage src={host?.data?.hostUser?.user?.profileUrl} />
+          <_MyImage src={host?.hostUser?.user?.profileUrl} />
           <Text bold size="19px">
-            {host?.data?.hostUser?.user?.nickname}
+            {host?.hostUser?.user?.nickname}
           </Text>
           <Text size="16px" color="#858585" >
-            {host?.data?.hostUser?.date} &nbsp;{" "}
-            {host?.data?.hostUser?.standbyTime} 에 &nbsp;{" "}<br/>
-            {host?.data?.hostUser?.title} 를 &nbsp;함께함
+            {host?.hostUser?.date} &nbsp;{" "}
+            {host?.hostUser?.standbyTime} 에 &nbsp;{" "}<br/>
+            {host?.hostUser?.title} 를 &nbsp;함께함
           </Text>
           <Text bold size="20px" margin="70px 0 0 0">
-            {host?.data?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
+            {host?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
           </Text>
           
           {emoji ? (
@@ -111,7 +117,7 @@ const Evaluation = () => {
               <_Hr/>
             
               <Text bold size="19px" margin="35px 0 30px 0">
-                {host?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
+                {host?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
               </Text>
 
               <Grid flexWrap="Wrap" width="100%" display="flex" justifyContent="center">                  
@@ -167,7 +173,7 @@ const Evaluation = () => {
               <_Hr/>
 
               <Text bold size="19px" margin="35px 0 30px 0">
-                {host?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
+                {host?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
               </Text>
 
               <Grid flexWrap="Wrap" width="100%" display="flex" justifyContent="center">                  
@@ -223,20 +229,20 @@ const Evaluation = () => {
               <Text bold size="16px">
                 크루장 평가
               </Text>
-              <MyImage src={host?.data?.hostUser?.user?.profileUrl} />
+              <MyImage src={host?.hostUser?.user?.profileUrl} />
               <Text bold size="14px" >
-                {host?.data?.hostUser?.user?.nickname}
+                {host?.hostUser?.user?.nickname}
               </Text>
 
               <Text size="13px" color="#858585" margin=" -8px 0 0 0">
-                {host?.data?.hostUser?.date} &nbsp;{" "}
-                {host?.data?.hostUser?.standbyTime} 에 &nbsp;{" "}
-                {host?.data?.hostUser?.title}를 &nbsp;함께함
+                {host?.hostUser?.date} &nbsp;{" "}
+                {host?.hostUser?.standbyTime} 에 &nbsp;{" "}
+                {host?.hostUser?.title}를 &nbsp;함께함
               </Text>
               <Hr/>
 
               <Text bold size="18px">
-                {host?.data?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
+                {host?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
               </Text>
                 {emoji ? (
                   <>
@@ -249,12 +255,12 @@ const Evaluation = () => {
 
                     <Btn>
                       <Img style={{ margin: "-3px 0 -8px 0" }} src="https://ifh.cc/g/a8rsZ8.png" onClick={() =>{change(); mpoint();}}/>
-                      <Text bold  size="15px">아쉬웠어요.</Text>
+                      <Text bold size="15px">아쉬웠어요.</Text>
                     </Btn>
                     <Hr/>
                   
                     <Text bold size="20px" margin="20px 0 20px 0">
-                      {host?.data?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
+                      {host?.hostUser?.user?.nickname}님의 가장 좋았던 점을 선택해주세요!
                     </Text>
 
                     <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
@@ -301,7 +307,7 @@ const Evaluation = () => {
                     <Hr/>
 
                     <Text bold size="20px" margin="20px 0 20px 0">
-                      {host?.data?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
+                      {host?.hostUser?.user?.nickname}님의 가장 아쉬웠던 점을 선택해주세요!
                     </Text>
 
                     <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">                  
@@ -461,7 +467,7 @@ const Wrap = styled.div`
   margin: 0;
   padding: 14px 28px;
   width: 450px;
-  height: 600px;
+  height: 700px;
   background: #ffffff;
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
   border-radius: 10px;

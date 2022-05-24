@@ -121,7 +121,7 @@ const MobileGroup = () => {
                         <ApplyBtnTrue  
                         onClick={() => { 
                           dispatch(getEvaluationDB(data.groupId, data.userId, userId));
-                          history.push(`/groupdetail/${data.groupId}`);               
+                          history.push(`/evaluation/${data.groupId}`);               
                         }}   
                       >
                         크루장 평가하기 
