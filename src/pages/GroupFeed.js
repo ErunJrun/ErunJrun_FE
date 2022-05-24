@@ -485,8 +485,8 @@ const PageUpBtn = styled.img`
   margin: 0;
 `;
 
-const Hr = styled.div`
-  border: 1px solid #969696;
+const Hr = styled.hr`
+  border-top: 1px solid #969696;
   width: 100%;
   margin: 16px auto;
 `;

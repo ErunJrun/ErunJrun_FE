@@ -32,6 +32,8 @@ const CommentItem = (props) => {
   const recommentList = useSelector((state) => state.recomments.list);
   const commentList = useSelector((state) => state.comments.list);
 
+  console.log(recommentList);
+
   const editToggle = (commentId) => {
     dispatch(_isEdit(commentId));
   };
@@ -209,20 +211,15 @@ const CommentItem = (props) => {
             />
           ) : null}
 
-          {!props.isRecomm
-            ? recommentList?.map((e, idx) => {
-                if (e === null) {
-                  return;
-                }
-                return props.commentId === e.commentId ? (
-                  <Fragment key={idx}>
-                    <Grid bg="#F0F0F0" margin="0" padding="13px 0">
-                      <RecommentItem commentId={props?.commentId} {...e} />
-                    </Grid>
-                  </Fragment>
-                ) : null;
-              })
-            : null}
+          {recommentList?.map((e, idx) => {
+            return props.commentId === e.commentId ? (
+              <Fragment key={idx}>
+                <Grid bg="#F0F0F0" margin="0" padding="13px 0">
+                  <RecommentItem commentId={props?.commentId} {...e} />
+                </Grid>
+              </Fragment>
+            ) : null;
+          })}
         </Grid>
       </>
     );
