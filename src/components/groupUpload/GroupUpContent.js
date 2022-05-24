@@ -48,11 +48,45 @@ const GroupContent = (props) => {
 
   const datePick = (e) => {
     if (
-      dayjs(e.target.value).format("YYYYMMDD") <=
+      dayjs(e.target.value).format("YYYYMMDD") <
       dayjs(new Date()).format("YYYYMMDD")
     ) {
-      swal("오늘 날짜 이후부터 선택이 가능합니다.");
+      swal("지난 날짜는 선택이 불가능합니다.");
       setDate("");
+    }
+  };
+
+  //스탠바이 시간 선택
+  const standbyTimePick = (e) => {
+    if (
+      dayjs(date).format("YYYYMMDD") === dayjs(new Date()).format("YYYYMMDD")
+    ) {
+      if (dayjs().add(6, "hour").format("HH:mm") < dayjs().format("HH:mm")) {
+        swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
+        setStandbyTime("");
+        return;
+      }
+    } else {
+      if (e.target.value < dayjs().add(6, "hour").format("HH:mm")) {
+        swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
+        setStandbyTime("");
+      }
+    }
+  };
+
+  //출발 시간 선택
+  const startTimePick = (e) => {
+    if (e.target.value < standbyTime) {
+      swal("러닝 일시 시간보다 빠를 수 없습니다.");
+      setStartTime("");
+    }
+  };
+
+  //도착 시간 선택
+  const finishTimePick = (e) => {
+    if (e.target.value < startTime) {
+      swal("출발 시간보다 빠를 수 없습니다.");
+      setFinishTime("");
     }
   };
 
@@ -235,6 +269,7 @@ const GroupContent = (props) => {
                   type="time"
                   onChange={(e) => {
                     setStandbyTime(e.target.value);
+                    standbyTimePick(e);
                   }}
                   value={standbyTime}
                 ></GroupInput>
@@ -275,6 +310,7 @@ const GroupContent = (props) => {
                 type="time"
                 onChange={(e) => {
                   setStartTime(e.target.value);
+                  startTimePick(e);
                 }}
                 value={startTime}
               ></GroupInput>
@@ -300,6 +336,7 @@ const GroupContent = (props) => {
                 type="time"
                 onChange={(e) => {
                   setFinishTime(e.target.value);
+                  finishTimePick(e);
                 }}
                 value={finishTime}
               ></GroupInput>
