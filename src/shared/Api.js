@@ -50,6 +50,7 @@ api.interceptors.response.use(
         response.data.message === "token에 문제가 있음(기한만료가 아닌 에러)"
       ) {
         console.log("인터셉터 토큰 오류", response.data.message);
+        console.log("아아아아아아아아아아아아아아아아아아아아아앙ㅇㅇㅇㅇㅇㅇ");
         deleteCookie("accessToken");
         deleteCookie("refreshToken");
         localStorage.clear();

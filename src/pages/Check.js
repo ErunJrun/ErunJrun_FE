@@ -10,7 +10,8 @@ import { Redirect, useParams } from "react-router-dom";
 import { getCookie } from "../shared/Cookie";
 import { useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import backBtn from "../assets/groupFeed/backBtn.svg"
+import backBtn from "../assets/groupFeed/backBtn.svg";
+import swal from "sweetalert";
 
 const Check = () => {
   const isMobile = useMediaQuery({
@@ -20,6 +21,7 @@ const Check = () => {
   const params = useParams();
   const groupId = params.groupId;
   const id = localStorage.getItem("userId");
+  const from = localStorage.getItem("from");
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
 
@@ -39,122 +41,124 @@ const Check = () => {
   };
 
   useEffect(() => {
-    dispatch(getAttendDB(groupId));
-    localStorage.removeItem("from");
-  }, []);
-
+    if (token && from) {
+      dispatch(getAttendDB(groupId));
+      localStorage.removeItem("from");
+    }
+  }, [token]);
 
   if (!token && isMobile) {
+    swal("로그인 후 이용해 주세요");
     return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />;
   }
   if (isMobile) {
     return (
       <>
-      <Grid
-      zIndex="3"
-      bg="#ffffff"
-      justifyContent="center"
-      alignItems="center"
-      position="fixed"
-      top="0"
-      left="0"
-      width="100%"
-      height="54px"
-      display="flex"
-      padding="10px 10px"
-      margin="0 auto"
-    >
-      <Grid
-        display="flex"
-        width="375px"
-        justifyContent="left"
-        alignItems="center"
-      >
-        <img
-          style={{ width: "10px", margin: "0 10px" }}
-          src={backBtn}
-          onClick={() => {
-            history.push(`/mypage/${id}`);
-          }}
-        />
-        <Text margin="0 0 0 130px" bold size="16px">
-          출석체크
-        </Text>
-      </Grid>
-    </Grid>
-      <Grid     
-        display="flex"
-        justifyContent="center"
-        width="100%"
-        margin="50px auto "
-      >
-        <_InfoBox>
-          <Grid display="flex">
-            <Text bold size="12px" margin="22px 10px 0 15px">
-              {check_list?.groupInfo?.date}
-            </Text>
-            <Text size="12px" margin="22px 0 0 0">
-              {check_list?.groupInfo?.title}
-            </Text>
-          </Grid>
-          <Text bold size="12px" margin="0 20px 0 0">
-            {check_list?.groupInfo?.attendanceCount}
-          </Text>
-        </_InfoBox>
-
-        <_Leader>
-          <Grid display="flex">
-            <_MyImage src={check_list?.groupInfo?.user?.profileUrl} />
-            <Text bold size="15px" margin="30px 0 0 25px">
-              {check_list?.groupInfo?.user?.nickname}
-            </Text>
-            <_Img src="https://ifh.cc/g/06D7Gr.png" />
-          </Grid>
-          <Text
-            width="71px"
-            height="31px"
-            bold
-            size="12px"
-            color="#030c37"
-            margin="48px 0 0 0"
+        <Grid
+          zIndex="3"
+          bg="#ffffff"
+          justifyContent="center"
+          alignItems="center"
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="54px"
+          display="flex"
+          padding="10px 10px"
+          margin="0 auto"
+        >
+          <Grid
+            display="flex"
+            width="375px"
+            justifyContent="left"
+            alignItems="center"
           >
-            크루장
-          </Text>
-        </_Leader>
-
-        {check_list?.applyUser?.map((applyUser, index) => (
-          <_UserBox key={index}>
-            <Grid display="flex" margin="32px 0 0 0">
-              <_Image src={applyUser.user.profileUrl} />
-              <Text bold size="12px" margin="21px 0 0 25px">
-                {applyUser.user.nickname}
+            <img
+              style={{ width: "10px", margin: "0 10px" }}
+              src={backBtn}
+              onClick={() => {
+                history.push(`/mypage/${id}`);
+              }}
+            />
+            <Text margin="0 0 0 130px" bold size="16px">
+              출석체크
+            </Text>
+          </Grid>
+        </Grid>
+        <Grid
+          display="flex"
+          justifyContent="center"
+          width="100%"
+          margin="50px auto "
+        >
+          <_InfoBox>
+            <Grid display="flex">
+              <Text bold size="12px" margin="22px 10px 0 15px">
+                {check_list?.groupInfo?.date}
+              </Text>
+              <Text size="12px" margin="22px 0 0 0">
+                {check_list?.groupInfo?.title}
               </Text>
             </Grid>
-            <_Label
-              onClick={(e) => {
-                choiceTime(e, index);
-              }}
-              checked={userId.includes(index)}
-            >
-              <input
-                type="checkbox"
-                name={applyUser.userId}
-                value={applyUser.userId}
-              />
-              <Text size="12px">출석</Text>
-            </_Label>
-          </_UserBox>
-        ))}
+            <Text bold size="12px" margin="0 20px 0 0">
+              {check_list?.groupInfo?.attendanceCount}
+            </Text>
+          </_InfoBox>
 
-        <_Btn
-          onClick={() => {
-            history.push(`/mypage/${id}`);
-            dispatch(patchAttendDB(groupId, userId));
-          }}
-        >
-          출석체크 저장
-        </_Btn>
-      </Grid>
+          <_Leader>
+            <Grid display="flex">
+              <_MyImage src={check_list?.groupInfo?.user?.profileUrl} />
+              <Text bold size="15px" margin="30px 0 0 25px">
+                {check_list?.groupInfo?.user?.nickname}
+              </Text>
+              <_Img src="https://ifh.cc/g/06D7Gr.png" />
+            </Grid>
+            <Text
+              width="71px"
+              height="31px"
+              bold
+              size="12px"
+              color="#030c37"
+              margin="48px 0 0 0"
+            >
+              크루장
+            </Text>
+          </_Leader>
+
+          {check_list?.applyUser?.map((applyUser, index) => (
+            <_UserBox key={index}>
+              <Grid display="flex" margin="32px 0 0 0">
+                <_Image src={applyUser.user.profileUrl} />
+                <Text bold size="12px" margin="21px 0 0 25px">
+                  {applyUser.user.nickname}
+                </Text>
+              </Grid>
+              <_Label
+                onClick={(e) => {
+                  choiceTime(e, index);
+                }}
+                checked={userId.includes(index)}
+              >
+                <input
+                  type="checkbox"
+                  name={applyUser.userId}
+                  value={applyUser.userId}
+                />
+                <Text size="12px">출석</Text>
+              </_Label>
+            </_UserBox>
+          ))}
+
+          <_Btn
+            onClick={() => {
+              history.push(`/mypage/${id}`);
+              dispatch(patchAttendDB(groupId, userId));
+            }}
+          >
+            출석체크 저장
+          </_Btn>
+        </Grid>
       </>
     );
   }
@@ -233,6 +237,7 @@ const Check = () => {
   }
 
   if (!token) {
+    swal("로그인 후 이용해 주세요");
     return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />;
   }
 };
@@ -332,7 +337,7 @@ const _UserBox = styled.div`
   padding: 15px;
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
   width: 375px;
 `;
 
