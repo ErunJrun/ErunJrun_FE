@@ -35,6 +35,8 @@ const Evaluation = () => {
   const params = useParams();
   const groupId = params.groupId;
 
+ 
+
   const mpoint = () => {
     if(emoji === true) {
       setPoint(-1);
@@ -58,7 +60,6 @@ const Evaluation = () => {
     "변경사항을 안내해주지 않았어요.",
     "시간 약속을 잘 안지켰어요.",
   ]);
- 
 
   const toggleModal = () => {
     setModal(!modal);
@@ -76,10 +77,10 @@ const Evaluation = () => {
     dispatch(getEvaluationDB(groupId));
   }, []);
 
-
-  if (!token && isMobile) {
-    return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />;
+  if (!token && isMobile) {console.log(pathname);
+    return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />; 
   }
+  
   if (isMobile) {
     return (
       <Grid width="100%" justifyContent="center">

@@ -295,7 +295,7 @@ export const getAttendDB = (groupId, userId, hostId) => {
       dispatch(getAttend(data));
     } catch (error) {
       console.log(error);
-      //swal(error);
+      swal(error);
     }
   };
 };
