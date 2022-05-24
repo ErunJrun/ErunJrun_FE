@@ -9,6 +9,7 @@ import backBtn from "../../assets/groupFeed/backBtn.svg";
 import { history } from "../../redux/configureStore";
 import { editGroupContent } from "../../redux/modules/feed";
 import groupRightBtnWhite from "../../assets/groupUpload/groupRightBtnWhite.svg";
+import { Link } from "react-scroll";
 
 const EditContentMob = (props) => {
   const dispatch = useDispatch();
@@ -159,6 +160,7 @@ const EditContentMob = (props) => {
 
   return (
     <>
+      <div id="step1Mob"></div>
       <Grid
         zIndex="3"
         bg="#ffffff"
@@ -206,7 +208,7 @@ const EditContentMob = (props) => {
         padding="10px"
         margin="0 auto"
       >
-        <img style={{ width: "311px", margin: "0" }} src={editStep1} />
+        <img style={{ width: "247px", margin: "0" }} src={editStep1} />
       </Grid>
 
       <Grid margin="156px auto 152px auto" width="375px">
@@ -656,13 +658,15 @@ const EditContentMob = (props) => {
         </Grid>
 
         <Grid width="343px" margin="0 auto">
-          <Step2NextBtn onClick={goNext2}>
-            다음단계
-            <img
-              style={{ width: "5px", height: "13px", marginLeft: "10px" }}
-              src={groupRightBtnWhite}
-            ></img>
-          </Step2NextBtn>
+          <Link to="step1Mob" spy={true}>
+            <Step2NextBtn onClick={goNext2}>
+              다음단계
+              <img
+                style={{ width: "5px", height: "13px", marginLeft: "10px" }}
+                src={groupRightBtnWhite}
+              ></img>
+            </Step2NextBtn>
+          </Link>
         </Grid>
       </Grid>
     </>

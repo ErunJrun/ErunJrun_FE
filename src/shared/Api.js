@@ -54,14 +54,30 @@ api.interceptors.response.use(
         deleteCookie("refreshToken");
         localStorage.clear();
 
-        swal("로그인 후 이용해주세요.");
-        history.push("/login");
+        swal({
+          text: "로그인 후 이용해 주세요",
+          closeOnClickOutside: false,
+        }).then(function (result) {
+          console.log(result);
+
+          if (result) {
+            history.push("/login");
+          }
+        });
         return;
       }
 
       if (response.data.message === "유저 정보 불러오기에 실패하였습니다.") {
-        swal("로그인 후 이용해주세요.");
-        history.push("/login");
+        swal({
+          text: "로그인 후 이용해 주세요",
+          closeOnClickOutside: false,
+        }).then(function (result) {
+          console.log(result);
+
+          if (result) {
+            history.push("/login");
+          }
+        });
         return;
       } else {
         return swal(response.data.message);

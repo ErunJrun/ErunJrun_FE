@@ -93,15 +93,20 @@ const GroupFilter = (props) => {
 
   return (
     <>
-      <Grid padding="32px 37px" border="8px solid  #c0c2cd" bg="#fff">
-        <Grid display="flex" flexDirection="row" margin="0 auto">
+      <Grid
+        padding="32px 37px"
+        border="8px solid  #c0c2cd"
+        bg="#fff"
+        borderRadius="3px 3px 0px 0px"
+      >
+        <Grid display="flex" alignItems="center" margin="0 auto">
           <Grid
             display="flex"
             width="auto"
             alignItems="center"
             margin="0 72px 0 0"
           >
-            <Text size="16px" bold margin="0 16px 0 0">
+            <Text size="16px" margin="0 16px 0 0">
               지역
             </Text>
             <Grid width="317px">
@@ -113,7 +118,7 @@ const GroupFilter = (props) => {
                 value={region}
               >
                 <option value="none" style={{ color: "#909090" }}>
-                  지역
+                  희망 지역을 선택해주세요.
                 </option>
                 <option value="0">전국</option>
                 <option value="1">서울특별시</option>
@@ -129,8 +134,13 @@ const GroupFilter = (props) => {
             </Grid>
           </Grid>
 
-          <Grid display="flex" width="auto" alignItems="center">
-            <Text size="16px" bold margin="0 16px 0 0">
+          <Grid
+            display="flex"
+            width="auto"
+            alignItems="center"
+            margin="0 130px 0 0"
+          >
+            <Text size="16px" margin="0 16px 0 0">
               모집 일정
             </Text>
             <Grid width="317px">
@@ -141,21 +151,40 @@ const GroupFilter = (props) => {
               />
             </Grid>
           </Grid>
+          <Grid
+            margin="0"
+            display="flex"
+            justifyContent="right"
+            alignItems="center"
+            width="auto"
+          >
+            <input
+              style={{
+                width: "18px",
+                height: "18px",
+                margin: "0 8px 0 0",
+                cursor: "pointer",
+              }}
+              type="checkbox"
+              onChange={() => {
+                props.finishCheck();
+              }}
+            ></input>
+            <Text width="auto" size="14px" regular margin="0">
+              마감공고 포함하기
+            </Text>
+          </Grid>
         </Grid>
 
         <Hr></Hr>
 
         {isAddFilter ? (
           <>
-            <Grid display="flex" width="100%" margin="0 auto">
+            <Grid>
               <TimeFilter setFilterTime={setFilterTime} />
-            </Grid>
 
-            <Grid display="flex" width="100%" margin="0 auto">
               <DistanceFilter setFilterDistance={setFilterDistance} />
-            </Grid>
 
-            <Grid display="flex" width="100%" margin="0 auto">
               <ThemeFilter setFilterTheme={setFilterTheme} />
             </Grid>
 
@@ -164,12 +193,12 @@ const GroupFilter = (props) => {
             <Grid display="flex" alignItems="center" justifyContent="center">
               <Text
                 _onClick={switchAddFilter}
-                margin="0"
+                margin="0 7px 0 0"
                 cursor="pointer"
                 size="16px"
                 bold
               >
-                추가 검색조건 닫기
+                추가 필터 닫기
               </Text>
               <IconButton _onClick={switchAddFilter} upArrow color="black" />
             </Grid>
@@ -178,12 +207,12 @@ const GroupFilter = (props) => {
           <Grid display="flex" alignItems="center" justifyContent="center">
             <Text
               _onClick={switchAddFilter}
-              margin="0"
+              margin="0 7px 0 0"
               cursor="pointer"
               size="16px"
               bold
             >
-              추가 검색조건 펼치기
+              추가 필터 펼치기
             </Text>
             <IconButton _onClick={switchAddFilter} downArrow color="black" />
           </Grid>
@@ -315,6 +344,7 @@ const RegionSelect = styled.select`
   height: 46px;
   padding: 13px 16px;
   border: solid 1px #000;
+  outline: none;
   border-radius: 3px;
   font-size: 16px;
   font-weight: 400;
@@ -326,7 +356,7 @@ const RegionSelect = styled.select`
 `;
 
 const Hr = styled.hr`
-  margin: 23px auto;
+  margin: 24px auto;
   transform: scaleY(0.5);
   border: 0.5px solid #cbcbcb;
 `;

@@ -16,8 +16,16 @@ const GroupCardMob = (props) => {
     if (isLogin) {
       dispatch(applyGroupDB(props.groupId));
     } else {
-      swal("로그인 후 이용해 주세요");
-      history.push("/login");
+      swal({
+        text: "로그인 후 이용해 주세요",
+        closeOnClickOutside: false,
+      }).then(function (result) {
+        console.log(result);
+
+        if (result) {
+          history.push("/login");
+        }
+      });
     }
   };
 

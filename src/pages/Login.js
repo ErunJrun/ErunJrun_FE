@@ -7,7 +7,7 @@ import NaverLogin from "../assets/NaverLogin.png";
 import kakaoLoginMob from "../assets/kakaoLoginMob.png";
 import naverLoginMob from "../assets/naverLoginMob.png";
 import { history } from "../redux/configureStore";
-import LoginLogo from "../assets/LoginLogo.png";
+import LoginLogo from "../assets/loginLogo.svg";
 import loginLogoMob from "../assets/loginLogoMob.png";
 import { getCookie, setCookie } from "../shared/Cookie";
 import { useMediaQuery } from "react-responsive";
@@ -92,6 +92,18 @@ const Login = ({ location }) => {
           }}
           src={NaverLogin}
         ></NaverBtn>
+        <Text
+          _onClick={() => {
+            history.push("/");
+          }}
+          cursor="pointer"
+          margin="0 0 229px 0"
+          text_decoration
+          size="14px"
+          color="#7B7B7B"
+        >
+          홈으로 돌아가기
+        </Text>
       </Grid>
     </React.Fragment>
   );
@@ -180,7 +192,7 @@ const KakaoBtn = styled.img`
 const NaverBtn = styled.img`
   width: 360px;
   height: 54px;
-  margin-bottom: 297px;
+  margin-bottom: 48px;
   cursor: pointer;
   :hover {
     box-shadow: 0 0 3px black;

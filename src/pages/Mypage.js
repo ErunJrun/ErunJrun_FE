@@ -161,8 +161,16 @@ const Mypage = () => {
                 size="13px"
                 color="#222"
                 onClick={() => {
-                  swal("로그인 후 이용해주세요");
-                  history.push("/login");
+                  swal({
+                    text: "로그인 후 이용해 주세요",
+                    closeOnClickOutside: false,
+                  }).then(function (result) {
+                    console.log(result);
+
+                    if (result) {
+                      history.push("/login");
+                    }
+                  });
                 }}
               >
                 참여 예정
@@ -172,8 +180,16 @@ const Mypage = () => {
                 size="13px"
                 color="#222"
                 onClick={() => {
-                  swal("로그인 후 이용해주세요");
-                  history.push("/login");
+                  swal({
+                    text: "로그인 후 이용해 주세요",
+                    closeOnClickOutside: false,
+                  }).then(function (result) {
+                    console.log(result);
+
+                    if (result) {
+                      history.push("/login");
+                    }
+                  });
                 }}
               >
                 참여 완료
@@ -183,8 +199,16 @@ const Mypage = () => {
                 size="13px"
                 color="#222"
                 onClick={() => {
-                  swal("로그인 후 이용해주세요");
-                  history.push("/login");
+                  swal({
+                    text: "로그인 후 이용해 주세요",
+                    closeOnClickOutside: false,
+                  }).then(function (result) {
+                    console.log(result);
+
+                    if (result) {
+                      history.push("/login");
+                    }
+                  });
                 }}
               >
                 My 모집
@@ -202,8 +226,16 @@ const Mypage = () => {
                 size="13px"
                 color="#222"
                 onClick={() => {
-                  swal("로그인 후 이용해주세요");
-                  history.push("/login");
+                  swal({
+                    text: "로그인 후 이용해 주세요",
+                    closeOnClickOutside: false,
+                  }).then(function (result) {
+                    console.log(result);
+
+                    if (result) {
+                      history.push("/login");
+                    }
+                  });
                 }}
               >
                 북마크
@@ -213,8 +245,16 @@ const Mypage = () => {
                 size="13px"
                 color="#222"
                 onClick={() => {
-                  swal("로그인 후 이용해주세요");
-                  history.push("/login");
+                  swal({
+                    text: "로그인 후 이용해 주세요",
+                    closeOnClickOutside: false,
+                  }).then(function (result) {
+                    console.log(result);
+
+                    if (result) {
+                      history.push("/login");
+                    }
+                  });
                 }}
               >
                 My 추천
