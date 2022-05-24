@@ -6,52 +6,52 @@ import { useDispatch } from "react-redux";
 import "./Weather.css";
 
 const Weather = () => {
-  // const [latitude, setLatitude] = useState(0);
-  // const [longitude, setLongitude] = useState(0);
-  // const [temperature, setTemperature] = useState(0);
-  // const [cityName, setCityName] = useState("");
-  // const [icon, setIcon] = useState("");
-  // const [feelsLike, setFeelsLike] = useState(0);
-  // const [tempMax, setTempMax] = useState(0);
-  // const [tempMin, setTempMin] = useState(0);
-  // const [humidity, setHumidity] = useState(0);
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+  const [temperature, setTemperature] = useState(0);
+  const [cityName, setCityName] = useState("");
+  const [icon, setIcon] = useState("");
+  const [feelsLike, setFeelsLike] = useState(0);
+  const [tempMax, setTempMax] = useState(0);
+  const [tempMin, setTempMin] = useState(0);
+  const [humidity, setHumidity] = useState(0);
 
-  // const apiKey = process.env.REACT_APP_API_KEY;
+  const apiKey = process.env.REACT_APP_API_KEY;
 
-  // const savePositionToState = (position) => {
-  //   setLatitude(position.coords.lat);
-  //   setLongitude(position.coords.lon);
-  // };
+  const savePositionToState = (position) => {
+    setLatitude(position.coords.lat);
+    setLongitude(position.coords.lon);
+  };
 
-  // const iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
+  const iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
 
-  // const fetchWeather = async () => {
-  //   try {
-  //     window.navigator.geolocation.getCurrentPosition(savePositionToState);
-  //     const res = await axios.get(
-  //       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
-  //     );
-  //     setTemperature(res.data.main.temp);
-  //     setCityName(res.data.name);
-  //     setIcon(res.data.weather[0].icon);
-  //     setFeelsLike(res.data.main.feels_like);
-  //     setTempMax(res.data.main.temp_max);
-  //     setTempMin(res.data.main.temp_min);
-  //     setHumidity(res.data.main.humidity);
-  //     //console.log(res.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const fetchWeather = async () => {
+    try {
+      window.navigator.geolocation.getCurrentPosition(savePositionToState);
+      const res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
+      );
+      setTemperature(res.data.main.temp);
+      setCityName(res.data.name);
+      setIcon(res.data.weather[0].icon);
+      setFeelsLike(res.data.main.feels_like);
+      setTempMax(res.data.main.temp_max);
+      setTempMin(res.data.main.temp_min);
+      setHumidity(res.data.main.humidity);
+      //console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchWeather(latitude, longitude);
-  // }, [latitude, longitude]);
+  useEffect(() => {
+    fetchWeather(latitude, longitude);
+  }, [latitude, longitude]);
 
   return (
     <Box>
-      <div style={{ height: "220px" }}>날씨</div>
-      {/* <div className="city">{cityName}</div>
+      {/* <div style={{ height: "220px" }}>날씨</div> */}
+      <div className="city">{cityName}</div>
       <div className="weather-box">
         <div className="weather-icon">
           <img src={iconURL} />
@@ -70,7 +70,7 @@ const Weather = () => {
         <div>
           습도 <br /> {humidity}%
         </div>
-      </div> */}
+      </div>
     </Box>
   );
 };
