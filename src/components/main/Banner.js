@@ -101,7 +101,7 @@ const Banner = () => {
                 color="#1C1C1C"
                 margin="0"
               >
-                #아경 #밤러닝 #강변
+                #야경 #밤러닝 #강변
               </Text>
             </Grid>
           </SwiperSlide>
