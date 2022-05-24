@@ -38,15 +38,20 @@ const Mypage = () => {
 
   if(isMobile) {
     return (
-      <Grid width="100%" padding="0px auto">
+      <Grid 
+        display="flex"
+        justifyContent="center"
+        width="343px"
+        margin="0px auto "
+      >
         {isLogin && token ? 
           <>
             <Profile userId={userId} />
             <_Hr/>
             <HostEvaluation/>
-            <__Hr/>
+            <_Hr/>
             <Grid 
-              margin="-15px auto 0 20px" 
+              margin="-35px auto 0 0px" 
               lineHeight="24px" 
               width="350px"
             >
@@ -82,10 +87,10 @@ const Mypage = () => {
               </Text>
             </Grid>
     
-            <Hr/>
+            <_Hr/>
     
             <Grid 
-              margin="0px auto 0 20px" 
+              margin="-35px auto 5px 0px" 
               lineHeight="24px" 
               width="350px"
             >
@@ -112,12 +117,12 @@ const Mypage = () => {
                 My 추천
               </Text>
             </Grid>
-              <Hr/>
-            
+              <_Hr/>
+            <Grid textAlign="left">
               <Text
                 regular
                 size="12px"
-                margin="10px 0 100px 20px"
+                margin="-15px 0 100px 0px"
                 color="#222"
                 _onClick={() => {
                   dispatch(logoutDB());
@@ -125,6 +130,7 @@ const Mypage = () => {
               >
                 로그아웃
               </Text>
+            </Grid>
           </>
         :
           <>      
@@ -155,7 +161,7 @@ const Mypage = () => {
               </Text>
             </Grid>
 
-            <Hr/>
+            <_Hr/>
 
             <Grid margin="-2px 0 0 20px" lineHeight="24px">
               <Text
@@ -253,9 +259,9 @@ const Hr = styled.div`
 `;
 
 const _Hr = styled.div`
-  width: 91%;
+  width: 360px;
   height: 1px;
-  margin: 20px 0 40px 2.5%;
+  margin: 0px 0 40px 0;
   background-color: #ddd;
 `;
 

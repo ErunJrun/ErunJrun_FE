@@ -35,14 +35,15 @@ const Progress = (props) => {
     if(isMobile) {
         return ( 
           <Grid 
-            width="375px" 
-            margin="35px 0 50px 0" 
+            width="350px" 
+            margin="35px auto 50px auto" 
+            justifyContent="center"
             >
             <Grid
               width= "342px"
               height= "0px"
               bg="transparent"  
-              margin="0 0 0 20px"              
+              margin="0 0 0 0px"              
             >
               <div className="running" style={run}>
                 <Img src="https://ifh.cc/g/zqy9Pt.png"/>             
@@ -53,7 +54,7 @@ const Progress = (props) => {
               height="18px"
               bg="#d8d8d8"
               borderRadius="20px"
-              margin="0 0 0 20px"
+              margin="0 0 0 0px"
             >
               <div className="progress-done" style={style}></div>
             </Grid>
@@ -62,14 +63,14 @@ const Progress = (props) => {
             <Grid
               display="flex"
               justifyContent="space-between"
-              width="355px" 
+              width="340px" 
               margin="10px 0 0 0" 
             >
               <Text 
                 regular
                 size="11px"
                 color="#7b7b7b"
-                margin="0 0 0 20px"
+                margin="0 0 0 0px"
               >
                  0 km
               </Text>
@@ -77,7 +78,7 @@ const Progress = (props) => {
                 regular
                 size="11px"
                 color="#7b7b7b"
-                margin="0 0 0 20px"
+                margin="0 0 0 0px"
               >
                 출발점 50 km
               </Text>
@@ -85,7 +86,7 @@ const Progress = (props) => {
                 regular
                 size="11px"
                 color="#7b7b7b"
-                margin="0 0 0 20px"
+                margin="0 0 0 0px"
               >
                 100 km
               </Text>
@@ -159,7 +160,6 @@ const Bar = styled.div`
   width: 342px;
   background-color: #fff;
   margin-top: -13px;
-  margin-left: 20px;
   z-index: 1;
 `;
 
@@ -168,13 +168,12 @@ const _Bar = styled.div`
   width: 342px;
   background-color: #fff;
   margin-top: 4px;
-  margin-left: 20px;
   z-index: 1;
 `;
 
 const Box = styled.div`
   text-align: end;
-  margin: -55px 0 0 15px;
+  margin: -55px 0 0 -10px;
   width: 350px;
 `;
 export default Progress;

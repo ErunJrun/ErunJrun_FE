@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { useMediaQuery } from "react-responsive";
+import backBtn from "../../assets/groupFeed/backBtn.svg"
 
 const MobileSchedule = () => {
   const isMobile = useMediaQuery({
@@ -18,6 +20,39 @@ const MobileSchedule = () => {
 
 if(isMobile){
   return (
+    <>
+    <Grid
+          zIndex="3"
+          bg="#ffffff"
+          justifyContent="center"
+          alignItems="center"
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="54px"
+          display="flex"
+          padding="10px 10px"
+          margin="0 auto"
+        >
+          <Grid
+            display="flex"
+            width="375px"
+            justifyContent="left"
+            alignItems="center"
+          >
+            <img
+              style={{ width: "10px", margin: "0 10px" }}
+              src={backBtn}
+              onClick={() => {
+                history.go(-1);
+              }}
+            />
+            <Text margin="0 0 0 130px" bold size="16px">
+              참여 예정
+            </Text>
+          </Grid>
+        </Grid>
     <Grid weight="100%" margin="80px auto 50px auto" textAlign="-webkit-center">
       {profile_list.waiting.length === 0 ? (
         <Box>예정된 그룹 러닝이 없습니다</Box>
@@ -75,6 +110,7 @@ if(isMobile){
         </Grid>
       )}
     </Grid>
+    </>
   );
 };
 }

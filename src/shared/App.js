@@ -76,7 +76,7 @@ function App() {
             <Route path="/serviceTerms" exact component={ServiceTerms} />
             <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
             <Route path="/evaluation" exact component={Evaluation} />
-            <Route path="/m/evaluation/:userId" exact component={MobileEvaluation} />
+            <Route path="/m/evaluation" exact component={MobileEvaluation} />
             <Route path="/m/schedule/:userId" exact component={MobileSchedule} />
             <Route path="/m/group/:userId" exact component={MobileGroup} />
             <Route path="/m/mygroup/:userId" exact component={MobileMyGroup} />

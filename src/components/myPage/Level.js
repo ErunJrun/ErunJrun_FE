@@ -16,7 +16,7 @@ const Level = () => {
   if(isMobile) {
     return (
       <Grid 
-        width="375px" 
+        width="350px" 
         margin="45px auto 0px auto"    
       >
         <Text 
