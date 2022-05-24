@@ -360,13 +360,13 @@ export const deleteUserDB = () => {
 export default handleActions(
   {
     [RESET_INFORMATION]: (state, action) =>
-    produce(state, (draft) => {
-      draft.list = [];
-      draft.group = [];
-      draft.mygroup = [];
-      draft.info = [];
-    }),
-    
+      produce(state, (draft) => {
+        draft.list = [];
+        draft.group = [];
+        draft.mygroup = [];
+        draft.info = [];
+      }),
+
     [GET_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload;

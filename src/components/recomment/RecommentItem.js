@@ -17,6 +17,9 @@ const RecommentItem = (props) => {
     query: "(max-width:820px)",
   });
 
+  const params = useParams();
+  const groupId = params.groupId;
+
   const dispatch = useDispatch();
   const [newComm, setNewComm] = useState("");
 
@@ -27,7 +30,6 @@ const RecommentItem = (props) => {
   };
 
   const editReCommment = (recommentId) => {
-    console.log("대댓글 수정");
     dispatch(_editReCommentFX(recommentId, newComm));
     editToggle();
   };
@@ -143,7 +145,9 @@ const RecommentItem = (props) => {
                               hover="color:#68F99E; font-weight:900;"
                               cursor="pointer"
                               _onClick={() => {
-                                dispatch(_deleteReCommentFX(props.recommentId));
+                                dispatch(
+                                  _deleteReCommentFX(props.recommentId, groupId)
+                                );
                               }}
                               margin="0 16px 0 0"
                               size="12px"
@@ -258,7 +262,9 @@ const RecommentItem = (props) => {
                       hover="color:#68F99E; font-weight:900;"
                       cursor="pointer"
                       _onClick={() => {
-                        dispatch(_deleteReCommentFX(props.recommentId));
+                        dispatch(
+                          _deleteReCommentFX(props.recommentId, groupId)
+                        );
                       }}
                       margin="0 16px 0 0"
                       size="12px"

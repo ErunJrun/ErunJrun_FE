@@ -15,12 +15,13 @@ const RecommentWrite = (props) => {
 
   const dispatch = useDispatch();
   const params = useParams();
+  const groupId = params.groupId;
 
   const [recomm, setReComm] = useState("");
 
   const writeReComm = (e) => {
     setReComm(e.target.value);
-    dispatch(_addReCommentFX(props.commentId, recomm));
+    dispatch(_addReCommentFX(props.commentId, recomm, groupId));
     props.setReCommBox(false);
     setReComm("");
   };

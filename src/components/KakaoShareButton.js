@@ -22,7 +22,6 @@ const KakaoShareButton = (props) => {
   const groupId = params.groupId;
 
   useEffect(() => {
-    console.log("디테일 소환");
     dispatch(getGroupDetailDB(groupId));
   }, [groupId]);
 

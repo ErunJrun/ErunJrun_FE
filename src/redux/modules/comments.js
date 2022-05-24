@@ -5,6 +5,7 @@ import { _getReCommentFX } from "./recomments";
 import swal from "sweetalert";
 
 // Action
+const RESET_COMM = "RESET_COMM";
 const ADD_COMM = "ADD_COMM";
 const GET_COMM = "GET_COMM";
 const EDIT_COMM = "EDIT_COMM";
@@ -13,6 +14,10 @@ const IS_EDIT = "IS_EDIT";
 const IS_RECOMM_BOX = "IS_RECOMM_BOX";
 
 // Action creators
+export const resetComm = () => ({
+  type: GET_COMM,
+});
+
 export const getComm = (payload) => ({
   type: GET_COMM,
   payload,
@@ -187,6 +192,10 @@ export const _isRecommBox = (commentId) => {
 // Reducer
 export default handleActions(
   {
+    [RESET_COMM]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list = [];
+      }),
     [GET_COMM]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload;

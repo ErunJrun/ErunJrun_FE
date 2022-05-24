@@ -37,16 +37,17 @@ const CommentItem = (props) => {
   };
 
   const editComm = (commentId) => {
-    console.log("댓글 수정");
     dispatch(_editCommentFX(commentId, newComm));
     editToggle(commentId);
   };
 
   React.useEffect(() => {
-    dispatch(_getReCommentFX(props.commentId));
+    if (commentList.length > 0) {
+      console.log("대댓글 getRecomm");
+      dispatch(_getReCommentFX(commentList[0].commentId));
+    }
 
     return () => {
-      console.log("대댓글 클린업");
       dispatch(resetReComm());
     };
   }, []);
@@ -125,14 +126,7 @@ const CommentItem = (props) => {
                 ) : (
                   <>
                     <Grid display="flex">
-                      <Text
-                        _onClick={() => {
-                          history.push(`/mypage/${props?.user.userId}`);
-                        }}
-                        width="auto"
-                        size="12px"
-                        margin="0 5px 0 0"
-                      >
+                      <Text width="auto" size="12px" margin="0 5px 0 0">
                         {props?.user?.nickname}
                       </Text>
                       <Text color="#818181" margin="0 10px 0 0" size="12px">
@@ -243,12 +237,12 @@ const CommentItem = (props) => {
             alignItems="center"
             width="auto"
             margin="0 0 4px 0"
-            _onClick={() => {
-              history.push(`/mypage/${props?.user.userId}`);
-            }}
             cursor="pointer"
           >
             <Image
+              _onClick={() => {
+                history.push(`/mypage/${props?.user.userId}`);
+              }}
               imageType="circle"
               size="40"
               src={props?.user?.profileUrl}
@@ -266,14 +260,7 @@ const CommentItem = (props) => {
               ) : (
                 <>
                   <Grid display="flex" alignItems="center">
-                    <Text
-                      _onClick={() => {
-                        history.push(`/mypage/${props?.user.userId}`);
-                      }}
-                      width="auto"
-                      margin="0 5px 0 0"
-                      bold
-                    >
+                    <Text width="auto" margin="0 5px 0 0" bold>
                       {props?.user?.nickname}
                     </Text>
                     <Text color="#818181" margin="0 10px 0 0" size="12px">

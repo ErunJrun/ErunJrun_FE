@@ -79,8 +79,6 @@ const GroupFilterMob = (props) => {
     setResetState(!resetState);
   };
 
-  console.log(category);
-
   const getFilter = () => {
     if (
       region.length === 0 ||
