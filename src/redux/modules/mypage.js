@@ -239,16 +239,14 @@ export const getNumberCheckMiddleware = (phone, numberCK) => {
 };
 
 //호스트 정보
-export const getEvaluationDB = (groupId, hostId, userId) => {
+export const getEvaluationDB = (groupId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId, hostId, userId);
-      let data;
-      if (hostId !== userId) {
-        data = await api.get(`/group/evaluation/${groupId}`);
+      console.log(groupId);
+      const { data } = await api.get(`/group/evaluation/${groupId}`);
         console.log(data);
         dispatch(getEvaluation(data));
-      }
+      
     } catch (error) {
       console.log(error);
     }
@@ -281,7 +279,9 @@ export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
       console.log(data);
       swal("호스트 평가가 완료되었습니다!");
       //history.push("/");
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 

@@ -20,7 +20,6 @@ const Mypage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const userId = params.userId;
-
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
 

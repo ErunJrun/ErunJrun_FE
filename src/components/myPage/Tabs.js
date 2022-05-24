@@ -67,7 +67,7 @@ export default function BasicTabs() {
     },
   });
 
-  const AntTab = muiStyled((props) => <Tab disableRipple {...props} />)(
+  const AntTab = muiStyled((props) => <Tab disableRipple {...props} /> )(
     ({ theme }) => ({
       textTransform: "none",
      
@@ -103,7 +103,7 @@ export default function BasicTabs() {
       },
     })
   );
-
+  
   return (
     <Box sx={{ width: "106%" }}>
        <Box sx={{ bgcolor: "#fff" }}>

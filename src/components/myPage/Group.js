@@ -12,7 +12,7 @@ const Group = () => {
   const params = useParams();
   const userId = params.userId;
   const groupId = params.groupId;
-  console.log(groupId);
+  console.log(params);
 
   const running = useSelector((state) => state.mypage.group);
   console.log(running);
