@@ -31,7 +31,6 @@ import KakaoShareButton from "../components/KakaoShareButton";
 
 import swal from "sweetalert";
 
-
 import { Link } from "react-scroll";
 
 const GroupDetail = () => {
@@ -52,8 +51,16 @@ const GroupDetail = () => {
     if (isLogin || nickname) {
       dispatch(applyDetailDB(groupId));
     } else {
-      swal("로그인 후 이용해 주세요");
-      history.push("/login")
+      swal({
+        text: "로그인 후 이용해 주세요",
+        closeOnClickOutside: false,
+      }).then(function (result) {
+        console.log(result);
+
+        if (result) {
+          history.push("/login");
+        }
+      });
     }
   };
 

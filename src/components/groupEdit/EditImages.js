@@ -7,6 +7,7 @@ import { editGroupDB } from "../../redux/modules/feed";
 import { useParams } from "react-router-dom";
 import ImageIcon from "../../assets/groupUpload/imageCamera.png";
 import editStep2 from "../../assets/groupUpload/editStep2.png";
+import editStep2Mob from "../../assets/groupUpload/editStep2Mob.svg";
 import backBtn from "../../assets/groupFeed/backBtn.svg";
 import step3Mob from "../../assets/groupUpload/step3Mob.svg";
 import groupLeftBtn from "../../assets/groupUpload/groupLeftBtn.png";
@@ -162,7 +163,7 @@ const EditImages = (props) => {
           padding="10px"
           margin="0 auto"
         >
-          <img style={{ width: "311px", margin: "0" }} src={step3Mob} />
+          <img style={{ width: "247px", margin: "0" }} src={editStep2Mob} />
         </Grid>
         <Grid margin="156px auto 0 auto" width="375px">
           <Grid
@@ -531,7 +532,7 @@ const ThumbnailMob = styled.div`
   align-items: center;
   width: 37px;
   height: 17px;
-  z-index: 4;
+  z-index: 2;
   background: rgba(3, 12, 55, 0.5);
   border-radius: 2px;
   font-size: 9px;

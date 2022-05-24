@@ -31,8 +31,16 @@ const MainInfo = (props) => {
     if (isLogin) {
       dispatch(applyDetailDB(props.groupId));
     } else {
-      swal("로그인 후 이용해 주세요");
-      history.push("/login")
+      swal({
+        text: "로그인 후 이용해 주세요",
+        closeOnClickOutside: false,
+      }).then(function (result) {
+        console.log(result);
+
+        if (result) {
+          history.push("/login");
+        }
+      });
     }
   };
 

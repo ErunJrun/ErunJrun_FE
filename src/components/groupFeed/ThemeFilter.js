@@ -45,7 +45,7 @@ const ThemeFilter = (props) => {
         margin="32px 0 0 0"
         height="auto"
       >
-        <Text width="295px" height="auto" size="14px" bold margin="0 0 12px 0">
+        <Text width="295px" height="auto" size="14px" margin="0 0 12px 0">
           러닝 테마
         </Text>
 
@@ -84,7 +84,7 @@ const ThemeFilter = (props) => {
 
   return (
     <Grid display="flex" alignItems="center" width="100%" margin="0 auto">
-      <Text size="16px" bold margin="0 16px 0 0">
+      <Text size="16px" margin="0 34px 0 0">
         러닝 테마
       </Text>
 
@@ -98,7 +98,9 @@ const ThemeFilter = (props) => {
               checked={checkedInputs.includes(idx)}
             >
               <input type="checkbox" name={e} value={idx || ""} />
-              <Text>{e}</Text>
+              <Text margin="0" regular>
+                {e}
+              </Text>
             </Label>
           </Fragment>
         );

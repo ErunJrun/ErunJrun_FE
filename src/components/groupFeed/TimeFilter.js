@@ -45,7 +45,7 @@ const TimeFilter = (props) => {
         margin="0 0 32px 0"
         height="auto"
       >
-        <Text width="295px" height="auto" size="14px" bold margin="0 0 12px 0">
+        <Text width="295px" height="auto" size="14px" margin="0 0 12px 0">
           러닝 시간대
         </Text>
 
@@ -83,26 +83,35 @@ const TimeFilter = (props) => {
   }
 
   return (
-    <Grid display="flex" alignItems="center" width="100%" margin="0 auto">
-      <Text size="16px" bold margin="0 16px 0 0">
+    <Grid
+      display="flex"
+      alignItems="center"
+      width="100%"
+      margin="0 auto 24px auto"
+    >
+      <Text width="78px" size="16px" margin="0 16px 0 0">
         러닝 시간대
       </Text>
 
-      {time.map((e, idx) => {
-        return (
-          <Fragment key={idx}>
-            <Label
-              onChange={(e) => {
-                choiceTime(e, idx);
-              }}
-              checked={checkedInputs.includes(idx)}
-            >
-              <input type="checkbox" name={e} value={idx || ""} />
-              <Text size="16px">{e}</Text>
-            </Label>
-          </Fragment>
-        );
-      })}
+      <Grid width="1015px" display="flex" justifyContent="space-between">
+        {time.map((e, idx) => {
+          return (
+            <Fragment key={idx}>
+              <Label
+                onChange={(e) => {
+                  choiceTime(e, idx);
+                }}
+                checked={checkedInputs.includes(idx)}
+              >
+                <input type="checkbox" name={e} value={idx || ""} />
+                <Text margin="0" regular size="16px">
+                  {e}
+                </Text>
+              </Label>
+            </Fragment>
+          );
+        })}
+      </Grid>
     </Grid>
   );
 };
@@ -113,7 +122,7 @@ const Label = styled.label`
   }
   input + p {
     width: auto;
-    padding: 8px 19px;
+    padding: 8px 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -131,7 +140,7 @@ const Label = styled.label`
     color: #68f99e;
     font-weight: 500;
   }
-  margin: 0 8px 0 0;
+  margin: 0;
 `;
 
 const LabelMob = styled.label`

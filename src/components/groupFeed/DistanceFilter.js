@@ -83,8 +83,13 @@ const DistanceFilter = (props) => {
   }
 
   return (
-    <Grid display="flex" alignItems="center" width="100%" margin="0 auto">
-      <Text size="16px" bold margin="0 16px 0 0">
+    <Grid
+      display="flex"
+      alignItems="center"
+      width="100%"
+      margin="0 auto 24px auto"
+    >
+      <Text size="16px" margin="0 34px 0 0">
         러닝 거리
       </Text>
 
@@ -98,7 +103,9 @@ const DistanceFilter = (props) => {
               checked={checkedInputs.includes(idx)}
             >
               <input type="checkbox" name={e} value={idx || ""} />
-              <Text>{e}</Text>
+              <Text margin="0" regular>
+                {e}
+              </Text>
             </Label>
           </Fragment>
         );

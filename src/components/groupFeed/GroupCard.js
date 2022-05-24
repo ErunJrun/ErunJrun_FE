@@ -17,14 +17,22 @@ const GroupCard = (props) => {
     if (isLogin) {
       dispatch(applyGroupDB(props.groupId));
     } else {
-      swal("로그인 후 이용해 주세요");
-      history.push("/login")
+      swal({
+        text: "로그인 후 이용해 주세요",
+        closeOnClickOutside: false,
+      }).then(function (result) {
+        console.log(result);
+
+        if (result) {
+          history.push("/login");
+        }
+      });
     }
   };
 
   return (
     <>
-      <Grid width="384px" margin="0 8px 80px 8px">
+      <Grid width="384px" margin="0 0 80px 0">
         <Grid
           _onClick={() => {
             history.push(`/groupdetail/${props.groupId}`);
@@ -45,7 +53,7 @@ const GroupCard = (props) => {
           {props.applyEndTime === "0 일" ? (
             <ApplyFinish>
               <Grid display="flex" alignItems="center" margin="0" width="auto">
-                <Text color="" bold size="14px" margin="0 5px 0 0">
+                <Text size="14px" margin="0 5px 0 0">
                   모집기한종료
                 </Text>
               </Grid>
@@ -70,16 +78,32 @@ const GroupCard = (props) => {
             </ApplyEnd>
           )}
 
-          <Grid>
-            <Text hiddenText cursor="pointer" size="18px" bold margin="0">
+          <Grid margin="0">
+            <Text
+              display="flex"
+              alignItems="center"
+              height="23px"
+              hiddenText
+              cursor="pointer"
+              size="18px"
+              bold
+              margin="0"
+            >
               {props?.title}
             </Text>
-            <Text cursor="pointer" size="16px" margin="10px 0 0 0">
+            <Text
+              display="flex"
+              alignItems="center"
+              height="20px"
+              cursor="pointer"
+              size="16px"
+              margin="10px 0 0 0"
+            >
               {props?.date} (소요 시간 : {props?.totalTime})
             </Text>
           </Grid>
 
-          <Grid cursor="pointer" display="flex">
+          <Grid margin="16px 0 0 0" cursor="pointer" display="flex">
             <Tag>{props?.location}</Tag>
             <Tag>{props?.distance}km</Tag>
             <Tag>{props?.thema}</Tag>
@@ -132,7 +156,7 @@ const GroupCard = (props) => {
 const ApplyEnd = styled.div`
   width: 384px;
   height: 30px;
-  margin: 16px 0 15px 0;
+  margin: 16px 0;
   border-radius: 3px;
   display: flex;
   justify-content: space-between;
@@ -145,7 +169,7 @@ const ApplyEnd = styled.div`
 const ApplyFinish = styled.div`
   width: 384px;
   height: 30px;
-  margin: 16px 0 15px 0;
+  margin: 16px 0;
   border-radius: 3px;
   display: flex;
   justify-content: center;
@@ -159,11 +183,11 @@ const Tag = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
   height: 24px;
   background-color: #ddd;
-  margin: 20px 12px 0 0;
+  margin: 0 10px 0 0;
   padding: 1px 10px;
   border-radius: 2px;
   :hover {

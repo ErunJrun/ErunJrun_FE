@@ -272,15 +272,17 @@ const GroupUploadMob = () => {
               </Grid>
             </Grid>
 
-            <Link to="step1" spy={true}>
-              <StepBtn onClick={goNext2}>
-                다음단계
-                <img
-                  style={{ width: "8px", height: "auto", marginLeft: "16px" }}
-                  src={groupRightBtn}
-                ></img>
-              </StepBtn>
-            </Link>
+            <Grid width="343px" margin="0 auto">
+              <Link to="step1" spy={true}>
+                <StepBtn onClick={goNext2}>
+                  다음단계
+                  <img
+                    style={{ width: "8px", height: "auto", marginLeft: "16px" }}
+                    src={groupRightBtn}
+                  ></img>
+                </StepBtn>
+              </Link>
+            </Grid>
           </Grid>
         </Grid>
       </>
