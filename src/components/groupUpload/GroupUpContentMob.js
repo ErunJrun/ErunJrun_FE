@@ -48,10 +48,10 @@ const GroupContentMob = (props) => {
 
   const datePick = (e) => {
     if (
-      dayjs(e.target.value).format("YYYYMMDD") <=
+      dayjs(e.target.value).format("YYYYMMDD") <
       dayjs(new Date()).format("YYYYMMDD")
     ) {
-      swal("오늘 날짜 이후부터 선택이 가능합니다.");
+      swal("지난 날짜는 선택이 불가능합니다.");
       setDate("");
     }
   };

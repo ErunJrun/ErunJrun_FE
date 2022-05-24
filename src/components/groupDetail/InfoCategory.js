@@ -18,11 +18,16 @@ import CommentList from "../comments/CommentList";
 import ServeInfo from "./ServeInfo";
 
 import mapIcon from "../../assets/groupDetail/map.png";
+import { useDispatch, useSelector } from "react-redux";
+import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
 
 const InfoCategory = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
+
+  const commentList = useSelector((state) => state.comments.list);
+  const dispatch = useDispatch();
 
   const [value, setValue] = React.useState("1");
 
@@ -49,6 +54,17 @@ const InfoCategory = (props) => {
       backgroundColor: "#68F99E",
     },
   });
+
+  React.useEffect(() => {
+    if (commentList.length > 0) {
+      console.log("대댓글 getRecomm");
+      dispatch(_getReCommentFX(commentList[0].commentId));
+    }
+
+    return () => {
+      dispatch(resetReComm());
+    };
+  }, [commentList]);
 
   const AntTab = muiStyled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({

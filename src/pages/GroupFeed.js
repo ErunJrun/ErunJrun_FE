@@ -423,8 +423,14 @@ const GroupFeed = () => {
                   dispatch(getGroupDB(category, paging.page));
                 }}
               >
-                <Text cursor="pointer" margin="0" size="25px" color="black">
-                  ∨
+                <Text
+                  cursor="pointer"
+                  margin="0"
+                  bold
+                  size="15px"
+                  color="#030C37"
+                >
+                  더보기
                 </Text>
               </Grid>
             </Grid>
@@ -485,8 +491,8 @@ const PageUpBtn = styled.img`
   margin: 0;
 `;
 
-const Hr = styled.div`
-  border: 1px solid #969696;
+const Hr = styled.hr`
+  border-top: 1px solid #969696;
   width: 100%;
   margin: 16px auto;
 `;
