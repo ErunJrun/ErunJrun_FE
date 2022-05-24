@@ -193,7 +193,7 @@ const Edit = (props) => {
   }, [props]);
 
   if( bio === null ) {
-    setBio();
+    setBio("");
   }
 
   if (isMobile) {

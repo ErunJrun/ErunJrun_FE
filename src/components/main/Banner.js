@@ -170,7 +170,7 @@ const Banner = () => {
                 </button>
               </Grid>
 
-              <Weather />
+             
             </Grid>
           </SwiperSlide>
 
@@ -302,7 +302,7 @@ const Banner = () => {
               </button>
             </Grid>
 
-            <Weather />
+           
           </Grid>
         </SwiperSlide>
 
