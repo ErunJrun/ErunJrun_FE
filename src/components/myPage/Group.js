@@ -11,6 +11,8 @@ const Group = () => {
   const myId = localStorage.getItem("userId");
   const params = useParams();
   const userId = params.userId;
+  const groupId = params.groupId;
+  console.log(groupId);
 
   const running = useSelector((state) => state.mypage.group);
   console.log(running);
@@ -86,7 +88,7 @@ const Group = () => {
                         <ApplyBtnTrue  
                         onClick={() => { 
                           dispatch(getEvaluationDB(data.groupId, data.userId, userId));
-                          history.push("/evaluation");                   
+                          history.push(`/evaluation/${data.groupId}`);                   
                         }}   
                       >
                         크루장 평가하기 

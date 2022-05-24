@@ -280,7 +280,7 @@ export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
       );
       console.log(data);
       swal("호스트 평가가 완료되었습니다!");
-      // history.push(`/mypage/${hostId}`);
+      //history.push("/");
     } catch (error) {}
   };
 };
@@ -322,7 +322,7 @@ export const patchAttendDB = (groupId, userId) => {
       );
       console.log(data);
       swal("출석체크가 완료되었습니다!");
-      //history.push(`/mypage/${userId}`);
+      //history.push("/");
     } catch (error) {
       console.log(error);
     }

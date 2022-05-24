@@ -131,7 +131,7 @@ const Box = styled.div`
   margin: 64px auto 24px auto;
   padding: 24px 38px 32px 32px;
   border-radius: 6px;
-  border: solid 2px #b8b8b8;
+  border: solid 1px #b8b8b8;
 `;
 
 const _Box = styled.div`

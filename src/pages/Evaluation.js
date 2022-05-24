@@ -8,6 +8,9 @@ import { history } from "../redux/configureStore";
 import { Text, Grid } from "../elements";
 import { AiOutlineClose } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
+import { getCookie } from "../shared/Cookie";
+import { useLocation } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import "../components/myPage/Evaluation.css";
 import { Button } from "react-scroll";
@@ -29,6 +32,8 @@ const Evaluation = () => {
   const userId = localStorage.getItem("userId");
   const groupId = host?.data?.hostUser?.groupId
   const hostId = host?.data?.hostUser?.user?.userId
+  const token = getCookie("accessToken");
+  const { pathname } = useLocation();
 
   const mpoint = () => {
     if(emoji === true) {
@@ -67,6 +72,9 @@ const Evaluation = () => {
     setEvaluationCategory(idx);
   };
 
+  if (!token && isMobile) {
+    return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />;
+  }
   if (isMobile) {
     return (
       <Grid width="100%" justifyContent="center">
@@ -205,6 +213,7 @@ const Evaluation = () => {
     );
   }
 
+  if(token) {
   return (
     <div>
       {modal && (
@@ -339,7 +348,10 @@ const Evaluation = () => {
         </div>
       )}
     </div>
-  );
+  )};
+  if (!token) {
+    return <Redirect to={{ pathname: "/login", state: { from: pathname } }} />;
+  }
 };
 
 const MyImage = styled.img`
