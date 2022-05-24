@@ -25,7 +25,6 @@ const MyGroup = () => {
     <>
       {my.data.length === 0 ? (
         <Grid minHeight="600px" display="flex">
-          <Spinner/>
           <Box>진행한 그룹 러닝이 없습니다</Box>
         </Grid>
       ) : (
