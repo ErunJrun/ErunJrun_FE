@@ -423,8 +423,14 @@ const GroupFeed = () => {
                   dispatch(getGroupDB(category, paging.page));
                 }}
               >
-                <Text cursor="pointer" margin="0" size="25px" color="black">
-                  ∨
+                <Text
+                  cursor="pointer"
+                  margin="0"
+                  bold
+                  size="15px"
+                  color="#030C37"
+                >
+                  더보기
                 </Text>
               </Grid>
             </Grid>
