@@ -1,16 +1,18 @@
-/* eslint-disable react/jsx-pascal-case */
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
 import { useMediaQuery } from "react-responsive";
 import { history } from "../../redux/configureStore";
+import { useParams } from "react-router-dom";
 
 const HostEvaluation = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
+  const myId = localStorage.getItem("userId");
+  const params = useParams();
+  const userId = params.userId;
   
   const profile_list = useSelector((state) => state.mypage.list);
 
@@ -146,34 +148,47 @@ const HostEvaluation = () => {
                 <Img style={{marginTop:"30px"}} src="https://ifh.cc/g/Za01L3.png" onClick={change}/>
                 <Img style={{marginTop:"24px"}} src="https://ifh.cc/g/byFtmr.png"/>
               </Icon> 
-              <RightBox>
-                <EvaluationBox>
-                  “진행한 코스가 아쉬웠어요.”
-                </EvaluationBox>
-                <EvaluationBox>
-                  “크루원에게 불친절했어요.“
-                </EvaluationBox>
-                <EvaluationBox>
-                  “응답이 늦었어요.”
-                </EvaluationBox>
-              </RightBox>
-              <LeftBox>
-                <EvaluationBox>
-                  “변경사항을 안내해주지 않았어요.”
-                </EvaluationBox>
-                <EvaluationBox>
-                  “시간 약속을 잘 안지켰어요.”
-                </EvaluationBox>
-              </LeftBox>
-              <EvaluationPoint>
-                {profile_list?.evaluation?.evaluationCategory6}<br/>
-                {profile_list?.evaluation?.evaluationCategory7}<br/>
-                {profile_list?.evaluation?.evaluationCategory8}
-              </EvaluationPoint>
-              <EvaluationPointL>
-                {profile_list?.evaluation?.evaluationCategory9}<br/>
-                {profile_list?.evaluation?.evaluationCategory10}
-              </EvaluationPointL>
+              {userId === myId ? 
+                <>
+                  <RightBox>
+                    <EvaluationBox>
+                      “진행한 코스가 아쉬웠어요.”
+                    </EvaluationBox>
+                    <EvaluationBox>
+                      “크루원에게 불친절했어요.“
+                    </EvaluationBox>
+                    <EvaluationBox>
+                      “응답이 늦었어요.”
+                    </EvaluationBox>
+                  </RightBox>
+                  <LeftBox>
+                    <EvaluationBox>
+                      “변경사항을 안내해주지 않았어요.”
+                    </EvaluationBox>
+                    <EvaluationBox>
+                      “시간 약속을 잘 안지켰어요.”
+                    </EvaluationBox>
+                  </LeftBox>
+                  <EvaluationPoint>
+                    {profile_list?.evaluation?.evaluationCategory6}<br/>
+                    {profile_list?.evaluation?.evaluationCategory7}<br/>
+                    {profile_list?.evaluation?.evaluationCategory8}
+                  </EvaluationPoint>
+                  <EvaluationPointL>
+                    {profile_list?.evaluation?.evaluationCategory9}<br/>
+                    {profile_list?.evaluation?.evaluationCategory10}
+                  </EvaluationPointL>
+                </>
+              :
+              <Text 
+                size="20px" 
+                color="#7b7b7b"
+                margin="-80px 0 0 500px"
+              >
+                “아쉬웠어요.” 는 본인에게만 보여요!
+              </Text>
+              }
+              
           </Box>
           )}          
         </div>
