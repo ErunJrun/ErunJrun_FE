@@ -32,6 +32,7 @@ const MainInfo = (props) => {
       dispatch(applyDetailDB(props.groupId));
     } else {
       swal("로그인 후 이용해 주세요");
+      history.push("/login")
     }
   };
 

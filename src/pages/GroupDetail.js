@@ -53,6 +53,7 @@ const GroupDetail = () => {
       dispatch(applyDetailDB(groupId));
     } else {
       swal("로그인 후 이용해 주세요");
+      history.push("/login")
     }
   };
 

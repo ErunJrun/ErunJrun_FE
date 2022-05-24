@@ -45,7 +45,6 @@ const GroupFeed = () => {
 
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params);
 
   const nickname = localStorage.getItem("nickname");
 
@@ -75,7 +74,6 @@ const GroupFeed = () => {
     filterTheme: filterTheme,
     finish: finish,
   };
-  console.log("피드 카테고리", category);
 
   const finishCheck = () => {
     if (finish == 0) {
@@ -119,12 +117,10 @@ const GroupFeed = () => {
   }, []);
 
   useEffect(() => {
-    console.log("마감공고");
     dispatch(resetGroup());
     dispatch(getGroupDB(category));
 
     return () => {
-      console.log("그룹 게시물 클린업");
       dispatch(resetGroup());
     };
   }, [finish]);

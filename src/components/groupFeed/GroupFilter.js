@@ -79,10 +79,8 @@ const GroupFilter = (props) => {
     setResetState(!resetState);
     setIsAddFilter(false);
     dispatch(resetGroup());
-    dispatch(getGroupDB(props.category, 1, 3));
+    dispatch(getGroupDB(props.category, 1, 6));
   };
-
-  console.log(region);
 
   const getFilter = () => {
     if (region.length === 0 || startDate === "NaN-NaN-NaN") {

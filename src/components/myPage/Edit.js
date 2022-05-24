@@ -13,8 +13,9 @@ import styled from "styled-components";
 import LevelBox from "../groupDetail/LevelBox";
 import LevelShoes from "../LevelShoes";
 import { useMediaQuery } from "react-responsive";
-import backBtn from "../../assets/groupFeed/backBtn.svg"
+import backBtn from "../../assets/groupFeed/backBtn.svg";
 import swal from "sweetalert";
+import { loginCheckDB } from "../../redux/modules/user";
 
 const Edit = (props) => {
   const isMobile = useMediaQuery({
@@ -191,43 +192,42 @@ const Edit = (props) => {
     setCertPhone(props.profile.certPhone);
   }, [props]);
 
-  if(isMobile) {
-
+  if (isMobile) {
     return (
       <>
-      <Grid
-        zIndex="3"
-        bg="#ffffff"
-        justifyContent="center"
-        alignItems="center"
-        position="fixed"
-        top="0"
-        left="0"
-        width="100%"
-        height="54px"
-        display="flex"
-        padding="10px 10px"
-        margin="0 auto"
-      >
         <Grid
-          display="flex"
-          width="375px"
-          justifyContent="left"
+          zIndex="3"
+          bg="#ffffff"
+          justifyContent="center"
           alignItems="center"
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="54px"
+          display="flex"
+          padding="10px 10px"
+          margin="0 auto"
         >
-          <img
-            style={{ width: "10px", margin: "0 10px" }}
-            src={backBtn}
-            onClick={() => {
-              history.go(-1);
-            }}
-          />
-          <Text margin="0 0 0 130px" bold size="16px">
-            계정설정
-          </Text>
+          <Grid
+            display="flex"
+            width="375px"
+            justifyContent="left"
+            alignItems="center"
+          >
+            <img
+              style={{ width: "10px", margin: "0 10px" }}
+              src={backBtn}
+              onClick={() => {
+                history.go(-1);
+              }}
+            />
+            <Text margin="0 0 0 130px" bold size="16px">
+              계정설정
+            </Text>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid
+        <Grid
           display="flex"
           justifyContent="center"
           width="343px"
@@ -237,12 +237,12 @@ const Edit = (props) => {
             <Text bold size="14px">
               회원정보 수정
             </Text>
-            <_Hr/>
-            <Text size="13px">
-              프로필 사진
-            </Text>
-            <Grid textAlign="center" width="100%" >
-              <_MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
+            <_Hr />
+            <Text size="13px">프로필 사진</Text>
+            <Grid textAlign="center" width="100%">
+              <_MyImage
+                src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"}
+              />
             </Grid>
             <Grid textAlign="center" width="100%" margin="15px 0 0 0">
               <_ProfileLabel htmlFor="input-file">사진 변경</_ProfileLabel>
@@ -294,10 +294,8 @@ const Edit = (props) => {
             <Text bold size="14px" margin="60px 0 16px 0">
               휴대폰 인증
             </Text>
-            <_Hr/>
-            <Text size="13px">
-              휴대폰 번호
-            </Text>
+            <_Hr />
+            <Text size="13px">휴대폰 번호</Text>
             <Grid display="felx">
               <_Inp
                 value={phone}
@@ -371,13 +369,12 @@ const Edit = (props) => {
                 개인정보사용 동의 및 알림수신에 동의합니다.
               </>
             )}
-
-          </Grid>       
-          <Grid >
+          </Grid>
+          <Grid>
             <Text bold size="14px" textAlign="left" margin="60px 0 16px 0">
               나의 러닝 스타일
             </Text>
-            <_Hr/>
+            <_Hr />
             <Text margin="22px 0 16px 0" size="13px" textAlign="left">
               선호하는 러닝 지역
             </Text>
@@ -388,32 +385,32 @@ const Edit = (props) => {
               display="flex"
               justifyContent="space-between"
             >
-            {runRegionMob.map((e, idx) => {
-              return (
-                <Fragment key={idx}>
-                  <LabelMob>
-                  <input
-                    onChange={() => {
-                      choiceRegion(idx + 1);
-                      console.log(idx + 1);
-                    }}
-                    type="radio"
-                    name="runRegion"
-                    value={e}
-                    checked={runRegionMob[likeLocation - 1] === e ? e : ""}
-                    ></input>
-                    <Text margin="0" regular size="11px">
-                      {e}
-                    </Text>
-                  </LabelMob>
-                </Fragment>
-              );
-            })}
-          </Grid>
-    
-          <Text margin="37px 0 16px 0" size="13px" textAlign="left">
-            선호하는 러닝 거리
-          </Text>
+              {runRegionMob.map((e, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <LabelMob>
+                      <input
+                        onChange={() => {
+                          choiceRegion(idx + 1);
+                          console.log(idx + 1);
+                        }}
+                        type="radio"
+                        name="runRegion"
+                        value={e}
+                        checked={runRegionMob[likeLocation - 1] === e ? e : ""}
+                      ></input>
+                      <Text margin="0" regular size="11px">
+                        {e}
+                      </Text>
+                    </LabelMob>
+                  </Fragment>
+                );
+              })}
+            </Grid>
+
+            <Text margin="37px 0 16px 0" size="13px" textAlign="left">
+              선호하는 러닝 거리
+            </Text>
             <Grid
               width="343px"
               height="218px"
@@ -425,16 +422,16 @@ const Edit = (props) => {
                 return (
                   <Fragment key={idx}>
                     <LabelDistanceMob>
-                    <input
-                      onChange={() => {
-                        choiceDistance(idx);
-                        console.log(idx);
-                      }}
-                      type="radio"
-                      name="runDistance"
-                      checked={runDistanceMob[likeDistance] === e ? e : ""}
-                      value={e}
-                    ></input>
+                      <input
+                        onChange={() => {
+                          choiceDistance(idx);
+                          console.log(idx);
+                        }}
+                        type="radio"
+                        name="runDistance"
+                        checked={runDistanceMob[likeDistance] === e ? e : ""}
+                        value={e}
+                      ></input>
                       <Text margin="0" regular size="11px">
                         {e}
                       </Text>
@@ -528,7 +525,7 @@ const Edit = (props) => {
                 history.push(`/mypage/${userId}`);
               }}
             >
-            취소
+              취소
             </_Button>
             <__Button
               onClick={() => {
@@ -539,7 +536,7 @@ const Edit = (props) => {
             </__Button>
           </Grid>
         </Grid>
-      </> 
+      </>
     );
   }
   return (
@@ -554,22 +551,19 @@ const Edit = (props) => {
           <Text bold size="16px">
             프로필 사진
           </Text>
-          <Grid 
-            display="flex"
-            alignItems="center"
-          >
-          <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
-          <ProfileLabel htmlFor="input-file">사진 변경</ProfileLabel>
-          <ProfileInput
-            cursor="pointer"
-            type="file"
-            name="file"
-            id="input-file"
-            encType="multipart/form-data"
-            onChange={changeImage}
-            accept=".jpg, .jpeg, .png"
-            ref={fileInput}
-          />
+          <Grid display="flex" alignItems="center">
+            <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
+            <ProfileLabel htmlFor="input-file">사진 변경</ProfileLabel>
+            <ProfileInput
+              cursor="pointer"
+              type="file"
+              name="file"
+              id="input-file"
+              encType="multipart/form-data"
+              onChange={changeImage}
+              accept=".jpg, .jpeg, .png"
+              ref={fileInput}
+            />
           </Grid>
         </Grid>
 
@@ -775,11 +769,11 @@ const Edit = (props) => {
             })}
           </Grid>
 
-          <Grid 
-          display="flex" 
-          justifyContent="center" 
-          alignItems="center"
-          margin="20px 0 0 0 "
+          <Grid
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            margin="20px 0 0 0 "
           >
             {userLevel >= 0 && userLevel !== "" ? (
               <>
@@ -790,14 +784,14 @@ const Edit = (props) => {
                   size="18px"
                   bold
                   margin="15px 0 10px 8px"
-                >  
+                >
                   당신의 러닝 레벨은
-                  <LevelBox userLevel={runExp[userLevel]} />입니다.
+                  <LevelBox userLevel={runExp[userLevel]} />
+                  입니다.
                 </Text>
               </>
             ) : null}
           </Grid>
-          
         </Grid>
         <hr style={{ margin: "70px 0 0 0" }} />
         <Text bold size="16px" color="#7b7b7b" _onClick={toggleModal}>
@@ -861,7 +855,7 @@ const _MyImage = styled.img`
   height: 96px;
   width: 96px;
   border-radius: 50%;
-  text-align:center;
+  text-align: center;
 `;
 
 const ProfileLabel = styled.label`
@@ -877,7 +871,7 @@ const ProfileLabel = styled.label`
 
 const _ProfileLabel = styled.label`
   width: 83px;
-  height: 26px; 
+  height: 26px;
   font-size: 11px;
   font-weight: bold;
   border: solid 1px #030c37;
@@ -941,21 +935,21 @@ const Btn__ = styled.button`
 `;
 
 const _Button = styled.div`
-width: 164px;
-height: 44px;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px auto;
-border-radius: 3px;
-font-size: 14px;
-font-weight: 500;
-cursor: pointer;
-box-sizing: border-box;
-margin: 0;
-border: solid 1px #030c37;
-margin: 0px 4px;
+  width: 164px;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px auto;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin: 0;
+  border: solid 1px #030c37;
+  margin: 0px 4px;
 `;
 
 const __Button = styled.div`
@@ -1032,7 +1026,6 @@ const _Inp = styled.input`
   font-weight: normal;
   margin-bottom: 16px;
 `;
-
 
 const Hr = styled.div`
   width: 800px;

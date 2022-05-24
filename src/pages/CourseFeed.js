@@ -25,7 +25,6 @@ const CourseFeed = () => {
   const [uploadBtn, setUploadBtn] = useState(false);
 
   useEffect(() => {
-    console.log("코스피드 GET");
     dispatch(getCourseDB(0, "new", 1, 3));
   }, []);
 

@@ -28,7 +28,7 @@ const initialState = {
       { lat: 37.6, lng: 127.4 },
     ],
   },
-  paging: { page: 1, size: 4 },
+  paging: { page: 1, size: 6 },
   isLoading: false,
 };
 
@@ -89,7 +89,7 @@ export const loading = (payload) => ({
 });
 
 //미들웨어
-export const getGroupDB = (category, page = 1, size = 4) => {
+export const getGroupDB = (category, page = 1, size = 6) => {
   return async function (dispatch, getState, { history }) {
     console.log(category, page, size);
     const _paging = getState().feed.paging;

@@ -10,8 +10,8 @@ import Tabs from "../components/myPage/Tabs";
 import { getCookie } from "../shared/Cookie";
 import { useMediaQuery } from "react-responsive";
 import { history } from "../redux/configureStore";
-import { logoutDB } from "../redux/modules/user";
-import swal from 'sweetalert';
+import { loginCheckDB, logoutDB } from "../redux/modules/user";
+import swal from "sweetalert";
 
 const Mypage = () => {
   const isMobile = useMediaQuery({
@@ -20,13 +20,13 @@ const Mypage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const userId = params.userId;
-  console.log(userId);
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
 
   useEffect(() => {
     dispatch(getProfileDB(userId));
+    dispatch(loginCheckDB());
 
     return () => {
       console.log("마이페이지 클린업");
@@ -34,36 +34,31 @@ const Mypage = () => {
     };
   }, []);
 
-  if(isMobile) {
+  if (isMobile) {
     return (
-      <Grid 
+      <Grid
         display="flex"
         justifyContent="center"
         width="343px"
         margin="0px auto "
       >
-        {isLogin && token ? 
+        {isLogin && token ? (
           <>
             <Profile userId={userId} />
-            <_Hr/>
-            <HostEvaluation/>
-            <_Hr/>
-            <Grid 
-              margin="-35px auto 0 0px" 
-              lineHeight="24px" 
-              width="350px"
-            >
-              <Text
-                bold
-                size="14px"
-              >
+            <_Hr />
+            <HostEvaluation />
+            <_Hr />
+            <Grid margin="-35px auto 0 0px" lineHeight="24px" width="350px">
+              <Text bold size="14px">
                 나의 그룹 러닝
               </Text>
               <Text
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push(`/m/schedule/${userId}`)}}
+                _onClick={() => {
+                  history.push(`/m/schedule/${userId}`);
+                }}
               >
                 참여 예정
               </Text>
@@ -71,7 +66,9 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push(`/m/group/${userId}`)}}
+                _onClick={() => {
+                  history.push(`/m/group/${userId}`);
+                }}
               >
                 참여 완료
               </Text>
@@ -79,30 +76,27 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push(`/m/mygroup/${userId}`)}}
+                _onClick={() => {
+                  history.push(`/m/mygroup/${userId}`);
+                }}
               >
                 My 모집
               </Text>
             </Grid>
-    
-            <_Hr/>
-    
-            <Grid 
-              margin="-35px auto 5px 0px" 
-              lineHeight="24px" 
-              width="350px"
-            >
-              <Text
-                bold
-                size="14px"
-              >
+
+            <_Hr />
+
+            <Grid margin="-35px auto 5px 0px" lineHeight="24px" width="350px">
+              <Text bold size="14px">
                 나의 추천 코스
               </Text>
               <Text
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push("/serviceTerms")}}
+                _onClick={() => {
+                  history.push("/serviceTerms");
+                }}
               >
                 북마크
               </Text>
@@ -110,12 +104,14 @@ const Mypage = () => {
                 regular
                 size="13px"
                 color="#222"
-                _onClick={()=>{history.push("/serviceTerms")}}
+                _onClick={() => {
+                  history.push("/serviceTerms");
+                }}
               >
                 My 추천
               </Text>
             </Grid>
-              <_Hr/>
+            <_Hr />
             <Grid textAlign="left">
               <Text
                 regular
@@ -130,25 +126,18 @@ const Mypage = () => {
               </Text>
             </Grid>
           </>
-        :
+        ) : (
           <>
             <Grid
-              _onClick={()=>{
+              _onClick={() => {
                 history.push("/login");
               }}
-            >   
-              <Text 
-                bold 
-                size="20px" 
-                margin="95px 0 0 90%" 
+            >
+              <Text bold size="20px" margin="95px 0 0 90%">
                 >
-                >
-              </Text>   
+              </Text>
               <Grid margin="-48px 0 0 20px" lineHeight="24px">
-                <Text
-                  bold
-                  size="14px"
-                >
+                <Text bold size="14px">
                   로그인 및 회원가입
                 </Text>
                 <Text
@@ -160,14 +149,11 @@ const Mypage = () => {
                   로그인하고 더 즐겁게 러닝 하세요!
                 </Text>
               </Grid>
-            </Grid>   
-            <_Hr/>
+            </Grid>
+            <_Hr />
 
             <Grid margin="-2px 0 0 20px" lineHeight="24px">
-              <Text
-                bold
-                size="14px"
-              >
+              <Text bold size="14px">
                 나의 그룹 러닝
               </Text>
               <Text
@@ -176,6 +162,7 @@ const Mypage = () => {
                 color="#222"
                 onClick={() => {
                   swal("로그인 후 이용해주세요");
+                  history.push("/login");
                 }}
               >
                 참여 예정
@@ -186,6 +173,7 @@ const Mypage = () => {
                 color="#222"
                 onClick={() => {
                   swal("로그인 후 이용해주세요");
+                  history.push("/login");
                 }}
               >
                 참여 완료
@@ -196,19 +184,17 @@ const Mypage = () => {
                 color="#222"
                 onClick={() => {
                   swal("로그인 후 이용해주세요");
+                  history.push("/login");
                 }}
               >
                 My 모집
               </Text>
             </Grid>
-    
-            <Hr/>
-    
+
+            <Hr />
+
             <Grid margin="0 0 0 20px" lineHeight="24px">
-              <Text
-                bold
-                size="14px"
-              >
+              <Text bold size="14px">
                 나의 추천 코스
               </Text>
               <Text
@@ -217,6 +203,7 @@ const Mypage = () => {
                 color="#222"
                 onClick={() => {
                   swal("로그인 후 이용해주세요");
+                  history.push("/login");
                 }}
               >
                 북마크
@@ -227,16 +214,14 @@ const Mypage = () => {
                 color="#222"
                 onClick={() => {
                   swal("로그인 후 이용해주세요");
+                  history.push("/login");
                 }}
               >
                 My 추천
               </Text>
             </Grid>
           </>
-        }
-      
-
-        
+        )}
       </Grid>
     );
   }
@@ -244,7 +229,7 @@ const Mypage = () => {
   return (
     <Grid width="1200px" margin="auto">
       <Profile userId={userId} />
-      <HostEvaluation/>
+      <HostEvaluation />
       <Tabs />
     </Grid>
   );

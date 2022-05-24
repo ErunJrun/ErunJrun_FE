@@ -17,7 +17,6 @@ import ModalPortal from "./ModalPortal";
 
 const ProfileModal = ({ onClose }) => {
   const userId = localStorage.getItem("userId");
-  console.log(userId);
 
   const dispatch = useDispatch();
 

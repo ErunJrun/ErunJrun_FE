@@ -38,6 +38,7 @@ const Header = () => {
   const isGroup = path === "/groupfeed";
   const isCourse = path === "/coursefeed";
   const isLoginInfo = path === "/loginInfo";
+  const isLoginPage = path === "/login";
 
   const [alarmOpen, setAlarmOpen] = useState(false);
 
@@ -56,13 +57,19 @@ const Header = () => {
     if (token) {
       dispatch(loginCheckDB());
     }
-  }, [path]);
+  }, []);
 
   useEffect(() => {
-    if (!isLoginInfo) {
-      if (firstLogin === "true") {
+    if (isLoginInfo) {
+      return;
+    }
+    if (firstLogin === "true") {
+      if (!isLoginInfo) {
         swal("러닝 스타일을 입력한 후 이용해주세요", "", "info");
         history.push("/loginInfo");
+        return;
+      } else {
+        return;
       }
     }
   }, [firstLogin]);

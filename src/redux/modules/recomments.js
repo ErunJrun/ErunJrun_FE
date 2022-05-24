@@ -2,6 +2,7 @@ import { api } from "../../shared/Api";
 import { produce } from "immer";
 import { handleActions } from "redux-actions";
 import swal from "sweetalert";
+import { _getCommentFX } from "./comments";
 
 // Action
 
@@ -69,7 +70,7 @@ export const _getReCommentFX = (commentId) => {
 };
 
 //대댓글 미들웨어
-export const _addReCommentFX = (commentId, content) => {
+export const _addReCommentFX = (commentId, content, groupId) => {
   return async function (dispatch, { history }) {
     try {
       console.log(commentId, content);
@@ -86,21 +87,23 @@ export const _addReCommentFX = (commentId, content) => {
       });
 
       dispatch(getReComm(recomment_list));
-      swal("대댓글 등록 완료");
+      dispatch(_getCommentFX("group", groupId));
+      swal("답글 등록 완료");
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-export const _deleteReCommentFX = (recommentId) => {
+export const _deleteReCommentFX = (recommentId, groupId) => {
   return async function (dispatch, { history }) {
     try {
       console.log(recommentId);
       const { data } = await api.delete(`/recomment/${recommentId}`);
       console.log(data);
-      swal("대댓글 삭제 완료");
+      swal("답글 삭제 완료");
       dispatch(deleteReComm(recommentId));
+      dispatch(_getCommentFX("group", groupId));
     } catch (error) {
       console.log(error);
     }
@@ -131,7 +134,7 @@ export const _editReCommentFX = (recommentId, content) => {
       });
       console.log(data);
       dispatch(editReComm(data.data));
-      swal("대댓글 수정 완료");
+      swal("답글 수정 완료");
     } catch (error) {
       console.log(error);
     }

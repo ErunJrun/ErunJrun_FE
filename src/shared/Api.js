@@ -38,7 +38,6 @@ api.interceptors.response.use(
 
     if (response.data.token) {
       // access token이 재발급 된 상태,
-      console.log(response);
       setCookie("accessToken", response.data.token, 168);
       axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
       originalRequest.headers.Authorization = `Bearer ${response.data.token}`;
@@ -55,11 +54,17 @@ api.interceptors.response.use(
         deleteCookie("refreshToken");
         localStorage.clear();
 
-        swal("로그인 후 이용부탁드립니다.");
-
+        swal("로그인 후 이용해주세요.");
         history.push("/login");
+        return;
+      }
+
+      if (response.data.message === "유저 정보 불러오기에 실패하였습니다.") {
+        swal("로그인 후 이용해주세요.");
+        history.push("/login");
+        return;
       } else {
-        swal(response.data.message);
+        return swal(response.data.message);
       }
     }
 

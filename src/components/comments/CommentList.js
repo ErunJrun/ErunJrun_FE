@@ -1,16 +1,18 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Grid, Text } from "../../elements";
-import { _getCommentFX } from "../../redux/modules/comments";
+import { resetComm, _getCommentFX } from "../../redux/modules/comments";
 import CommentItem from "./CommentItem";
 import CommentWrite from "./CommentWrite";
 import { useMediaQuery } from "react-responsive";
+import { resetReComm } from "../../redux/modules/recomments";
 
 const CommentList = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
+  const path = useLocation().pathname;
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -20,12 +22,18 @@ const CommentList = () => {
   const groupId = params.groupId;
 
   // React.useEffect(() => {
+  //   // dispatch(resetComm);
+  //   // dispatch(resetReComm);
   //   dispatch(_getCommentFX("group", groupId));
   // }, []);
 
   React.useEffect(() => {
+    console.log("코멘트 리스트 get");
+
     dispatch(_getCommentFX("group", groupId));
-  }, [recommentList]);
+  }, []);
+
+  console.log(commentList, recommentList);
 
   if (isMobile) {
     return (

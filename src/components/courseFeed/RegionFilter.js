@@ -21,8 +21,6 @@ const RegionFilter = (props) => {
     setCheckedRegion(e);
   };
 
-  console.log(checkedRegion);
-
   return (
     <>
       <Grid
