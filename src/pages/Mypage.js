@@ -131,34 +131,36 @@ const Mypage = () => {
             </Grid>
           </>
         :
-          <>      
-            <Text 
-              bold 
-              size="20px" 
-              margin="95px 0 0 90%" 
+          <>
+            <Grid
               _onClick={()=>{
-                history.push("/login")
+                history.push("/login");
               }}
-              >
-              >
-            </Text>   
-            <Grid margin="-48px 0 0 20px" lineHeight="24px">
-              <Text
-                bold
-                size="14px"
-              >
-                로그인 및 회원가입
-              </Text>
-              <Text
-                regular
-                size="12px"
-                color="#7b7b7b"
-                margin="-12px 0 30px 3px"
-              >
-                로그인하고 더 즐겁게 러닝 하세요!
-              </Text>
-            </Grid>
-
+            >   
+              <Text 
+                bold 
+                size="20px" 
+                margin="95px 0 0 90%" 
+                >
+                >
+              </Text>   
+              <Grid margin="-48px 0 0 20px" lineHeight="24px">
+                <Text
+                  bold
+                  size="14px"
+                >
+                  로그인 및 회원가입
+                </Text>
+                <Text
+                  regular
+                  size="12px"
+                  color="#7b7b7b"
+                  margin="-12px 0 30px 3px"
+                >
+                  로그인하고 더 즐겁게 러닝 하세요!
+                </Text>
+              </Grid>
+            </Grid>   
             <_Hr/>
 
             <Grid margin="-2px 0 0 20px" lineHeight="24px">
@@ -243,7 +245,6 @@ const Mypage = () => {
     <Grid width="1200px" margin="auto">
       <Profile userId={userId} />
       <HostEvaluation/>
-      {/* {MyId === userId ? <Schedule userId={userId} /> : null} */}
       <Tabs />
     </Grid>
   );

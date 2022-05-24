@@ -185,7 +185,7 @@ const Edit = (props) => {
     setBio(props.profile.bio);
     setLikeLocation(props.profile.likeLocation);
     setLikeDistance(props.profile.likeDistance);
-    setUserLevel(props?.profile.userLevel);
+    setUserLevel(props.profile.userLevel);
     setPhone(props.profile.phone);
     setAgreeSMS(props.profile.agreeSMS);
     setCertPhone(props.profile.certPhone);
@@ -341,7 +341,7 @@ const Edit = (props) => {
                   <>
                     <input
                       disabled
-                      defaultChecked
+                      checked
                       value={agreeSMS}
                       onChange={agree}
                       type="checkbox"
@@ -351,7 +351,7 @@ const Edit = (props) => {
                 ) : (
                   <>
                     <input
-                      defaultChecked={agreeSMS}
+                      checked={agreeSMS}
                       value={agreeSMS}
                       onChange={agree}
                       type="checkbox"
@@ -363,7 +363,7 @@ const Edit = (props) => {
             ) : (
               <>
                 <input
-                  defaultChecked={agreeSMS}
+                  checked={agreeSMS}
                   value={agreeSMS}
                   onChange={agree}
                   type="checkbox"
@@ -393,14 +393,14 @@ const Edit = (props) => {
                 <Fragment key={idx}>
                   <LabelMob>
                   <input
-                    onClick={() => {
+                    onChange={() => {
                       choiceRegion(idx + 1);
                       console.log(idx + 1);
                     }}
                     type="radio"
                     name="runRegion"
                     value={e}
-                    defaultChecked={runRegionMob[likeLocation - 1] === e ? e : ""}
+                    checked={runRegionMob[likeLocation - 1] === e ? e : ""}
                     ></input>
                     <Text margin="0" regular size="11px">
                       {e}
@@ -426,13 +426,13 @@ const Edit = (props) => {
                   <Fragment key={idx}>
                     <LabelDistanceMob>
                     <input
-                      onClick={() => {
+                      onChange={() => {
                         choiceDistance(idx);
                         console.log(idx);
                       }}
                       type="radio"
                       name="runDistance"
-                      defaultChecked={runDistanceMob[likeDistance] === e ? e : ""}
+                      checked={runDistanceMob[likeDistance] === e ? e : ""}
                       value={e}
                     ></input>
                       <Text margin="0" regular size="11px">
@@ -457,15 +457,17 @@ const Edit = (props) => {
               {runExpComment.map((e, idx) => {
                 return (
                   <Fragment key={idx}>
-                    <LabelExpMob checkLevel={userLevel} defaultChecked={userLevel}>
+                    <LabelExpMob checkLevel={userLevel} checked={userLevel}>
                       <input
-                        onClick={() => {
+                        onChange={() => {
                           choiceExp(idx);
                           console.log(idx);
+                          console.log(e);
+                          console.log(userLevel);
                         }}
                         type="radio"
                         name="runExp"
-                        defaultChecked={runExpComment[userLevel] === e ? e : ""}
+                        checked={runExpComment[userLevel] === e ? e : ""}
                         value={e}
                       ></input>
                       <Text margin="0" regular size="11px">
@@ -654,7 +656,7 @@ const Edit = (props) => {
               <>
                 <input
                   disabled
-                  defaultChecked
+                  checked
                   value={agreeSMS}
                   onChange={agree}
                   type="checkbox"
@@ -664,7 +666,7 @@ const Edit = (props) => {
             ) : (
               <>
                 <input
-                  defaultChecked={agreeSMS}
+                  checked={agreeSMS}
                   value={agreeSMS}
                   onChange={agree}
                   type="checkbox"
@@ -676,7 +678,7 @@ const Edit = (props) => {
         ) : (
           <>
             <input
-              defaultChecked={agreeSMS}
+              checked={agreeSMS}
               value={agreeSMS}
               onChange={agree}
               type="checkbox"
@@ -701,14 +703,14 @@ const Edit = (props) => {
                 <Fragment key={idx}>
                   <Label>
                     <input
-                      onClick={() => {
+                      onChange={() => {
                         choiceRegion(idx + 1);
                         console.log(idx + 1);
                       }}
                       type="radio"
                       name="runRegion"
                       value={e}
-                      defaultChecked={runRegion[likeLocation - 1] === e ? e : ""}
+                      checked={runRegion[likeLocation - 1] === e ? e : ""}
                     ></input>
                     <Text bold>{e}</Text>
                   </Label>
@@ -729,13 +731,13 @@ const Edit = (props) => {
                 <Fragment key={idx}>
                   <LabelDistance>
                     <input
-                      onClick={() => {
+                      onChange={() => {
                         choiceDistance(idx);
                         console.log(idx);
                       }}
                       type="radio"
                       name="runDistance"
-                      defaultChecked={runDistance[likeDistance] === e ? e : ""}
+                      checked={runDistance[likeDistance] === e ? e : ""}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>
@@ -755,15 +757,15 @@ const Edit = (props) => {
             {runExpComment.map((e, idx) => {
               return (
                 <Fragment key={idx}>
-                  <LabelExp checkLevel={userLevel} defaultChecked={userLevel}>
+                  <LabelExp checkLevel={userLevel} checked={userLevel}>
                     <input
-                      onClick={() => {
+                      onChange={() => {
                         choiceExp(idx);
                         console.log(idx);
                       }}
                       type="radio"
                       name="runExp"
-                      defaultChecked={runExpComment[userLevel] === e ? e : ""}
+                      checked={runExpComment[userLevel] === e ? e : ""}
                       value={e}
                     ></input>
                     <Text bold>{e}</Text>

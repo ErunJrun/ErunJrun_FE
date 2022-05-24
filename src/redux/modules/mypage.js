@@ -1,8 +1,7 @@
-/* eslint-disable no-undef */
 import { handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/Api";
-import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
+import { deleteCookie } from "../../shared/Cookie";
 import swal from "sweetalert";
 import axios from "axios";
 
@@ -112,7 +111,6 @@ export const getProfileDB = (userId) => {
       dispatch(getProfile(data.data));
     } catch (error) {
       console.log(error);
-      swal(error);
     }
   };
 };
@@ -127,7 +125,6 @@ export const getRunningDB = (userId) => {
       dispatch(getRunning(data));
     } catch (error) {
       console.log(error);
-      swal(error);
     }
   };
 };
@@ -142,7 +139,6 @@ export const getMyRunningDB = (userId) => {
       dispatch(getMyRunning(data));
     } catch (error) {
       console.log(error);
-      swal(error);
     }
   };
 };
@@ -155,7 +151,6 @@ export const getInformationDB = () => {
       dispatch(getInformation(data.data));
     } catch (error) {
       // console.log(error);
-      swal(error);
     }
   };
 };
@@ -256,7 +251,6 @@ export const getEvaluationDB = (groupId, hostId, userId) => {
       }
     } catch (error) {
       console.log(error);
-      //swal(error);
     }
   };
 };
