@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect } from "react";
 import { getRunningDB, getEvaluationDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +7,7 @@ import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import backBtn from "../../assets/groupFeed/backBtn.svg"
 
 const MobileGroup = () => {
   const isMobile = useMediaQuery({
@@ -33,24 +35,38 @@ const MobileGroup = () => {
   if(isMobile) {
   return (
       <>
-      {/*<Grid
-        height="54px"
-        margin="0"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        position="relative"
-        bg="red"
-        borderBottom="1px solid #F0F0F0"
-        >
             <Grid
+          zIndex="3"
+          bg="#ffffff"
+          justifyContent="center"
+          alignItems="center"
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="54px"
+          display="flex"
+          padding="10px 10px"
+          margin="0 auto"
+        >
+          <Grid
             display="flex"
-            alignItems="center"
-            justifyContent="space-between"
             width="375px"
-            padding="50px 15px"
-        ></Grid>gfgf
-  </Grid>*/}
+            justifyContent="left"
+            alignItems="center"
+          >
+            <img
+              style={{ width: "10px", margin: "0 10px" }}
+              src={backBtn}
+              onClick={() => {
+                history.go(-1);
+              }}
+            />
+            <Text margin="0 0 0 130px" bold size="16px">
+              참여 완료
+            </Text>
+          </Grid>
+        </Grid>
     <Grid weight="375px" margin="80px auto 50px auto" textAlign="-webkit-center">
       {running.data.length === 0 ? (
         <Box>참여완료한 그룹러닝이 없습니다</Box>

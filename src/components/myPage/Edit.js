@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-sequences */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-pascal-case */
@@ -16,6 +17,7 @@ import styled from "styled-components";
 import LevelBox from "../groupDetail/LevelBox";
 import LevelShoes from "../LevelShoes";
 import { useMediaQuery } from "react-responsive";
+import backBtn from "../../assets/groupFeed/backBtn.svg"
 
 const Edit = (props) => {
   const isMobile = useMediaQuery({
@@ -191,8 +193,43 @@ const Edit = (props) => {
     setAgreeSMS(props.profile.agreeSMS);
     setCertPhone(props.profile.certPhone);
   }, [props]);
+
   if(isMobile) {
+
     return (
+      <>
+      <Grid
+        zIndex="3"
+        bg="#ffffff"
+        justifyContent="center"
+        alignItems="center"
+        position="fixed"
+        top="0"
+        left="0"
+        width="100%"
+        height="54px"
+        display="flex"
+        padding="10px 10px"
+        margin="0 auto"
+      >
+        <Grid
+          display="flex"
+          width="375px"
+          justifyContent="left"
+          alignItems="center"
+        >
+          <img
+            style={{ width: "10px", margin: "0 10px" }}
+            src={backBtn}
+            onClick={() => {
+              history.go(-1);
+            }}
+          />
+          <Text margin="0 0 0 130px" bold size="16px">
+            계정설정
+          </Text>
+        </Grid>
+      </Grid>
       <Grid
           display="flex"
           justifyContent="center"
@@ -207,23 +244,24 @@ const Edit = (props) => {
             <Text size="13px">
               프로필 사진
             </Text>
-            
-            <Grid textAlign="center" flexDirection="column" width="100px">
+            <Grid textAlign="center" width="100%" >
               <_MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
-                <_ProfileLabel for="input-file">사진 변경</_ProfileLabel>
-                <ProfileInput
-                  cursor="pointer"
-                  type="file"
-                  name="file"
-                  id="input-file"
-                  encType="multipart/form-data"
-                  onChange={changeImage}
-                  accept=".jpg, .jpeg, .png"
-                  ref={fileInput}
-                />
-              </Grid>
+            </Grid>
+            <Grid textAlign="center" width="100%" margin="15px 0 0 0">
+              <_ProfileLabel for="input-file">사진 변경</_ProfileLabel>
+              <ProfileInput
+                cursor="pointer"
+                type="file"
+                name="file"
+                id="input-file"
+                encType="multipart/form-data"
+                onChange={changeImage}
+                accept=".jpg, .jpeg, .png"
+                ref={fileInput}
+              />
+            </Grid>
 
-            <Text size="13px">
+            <Text size="13px" margin="35px 0 16px 0">
               닉네임
             </Text>
             <_Input
@@ -233,7 +271,7 @@ const Edit = (props) => {
               placeholder="닉네임을 입력해주세요!"
               maxLength={8}
             />
-            <Text size="13px">
+            <Text size="13px" margin="22px 0 16px 0">
               자기소개
             </Text>
             {bio === null ? (
@@ -256,7 +294,7 @@ const Edit = (props) => {
           </Grid>
 
           <Grid>
-            <Text bold size="14px">
+            <Text bold size="14px" margin="60px 0 16px 0">
               휴대폰 인증
             </Text>
             <_Hr/>
@@ -264,7 +302,7 @@ const Edit = (props) => {
               휴대폰 번호
             </Text>
             <Grid display="felx">
-              <Inp
+              <_Inp
                 value={phone}
                 onChange={Number}
                 type="text"
@@ -276,30 +314,30 @@ const Edit = (props) => {
             {certPhone === false ? (
               <>
                 <_Box>
-                  <Button
+                  <Btn_
                     onClick={() => {
                       dispatch(numberCheckMiddleware(phone));
                     }}
                   >
                     인증요청
-                  </Button>
+                  </Btn_>
                 </_Box>
                 <Grid display="felx">
-                  <Inp
+                  <_Inp
                     value={numberCK}
                     onChange={NumderCK}
                     type="text"
-                    placeholder="인증번호를 입력"
+                    placeholder="인증번호 입력"
                     maxLength={20}
                   />
-                  <Button
+                  <Btn__
                     onClick={() => {
                       dispatch(getNumberCheckMiddleware(phone, numberCK));
                       CK();
                     }}
                   >
-                    인증
-                  </Button>
+                    확인
+                  </Btn__>
                 </Grid>
 
                 {ck === false ? (
@@ -337,23 +375,22 @@ const Edit = (props) => {
               </>
             )}
 
-          </Grid>
-
-          <Text bold size="14px" textAlign="left">
-            나의 러닝 스타일
-          </Text>
-          <_Hr/>
-          <Grid>
-          <Text margin="0 0 16px 0" size="13px" textAlign="left">
-            선호하는 러닝 지역
-          </Text>
-          <Grid
-            width="311px"
-            height="122px"
-            margin="0"
-            display="flex"
-            justifyContent="space-between"
-          >
+          </Grid>       
+          <Grid >
+            <Text bold size="14px" textAlign="left" margin="60px 0 16px 0">
+              나의 러닝 스타일
+            </Text>
+            <_Hr/>
+            <Text margin="22px 0 16px 0" size="13px" textAlign="left">
+              선호하는 러닝 지역
+            </Text>
+            <Grid
+              width="343px"
+              height="122px"
+              margin="0 auto"
+              display="flex"
+              justifyContent="space-between"
+            >
             {runRegionMob.map((e, idx) => {
               return (
                 <Fragment key={idx}>
@@ -381,9 +418,9 @@ const Edit = (props) => {
             선호하는 러닝 거리
           </Text>
             <Grid
-              width="311px"
+              width="343px"
               height="218px"
-              margin="0"
+              margin="0 auto"
               display="flex"
               justifyContent="center"
             >
@@ -414,9 +451,9 @@ const Edit = (props) => {
               러닝 횟수(1달 기준)
             </Text>
             <Grid
-              width="311px"
+              width="343px"
               height="218px"
-              margin="0 0 32px 0"
+              margin="0 auto 32px auto"
               display="flex"
               justifyContent="center"
             >
@@ -448,6 +485,7 @@ const Edit = (props) => {
             display="flex"
             justifyContent="center"
             alignItems="center"
+            margin="0 0 80px 0"
           >
             {userLevel >= 0 && userLevel !== "" ? (
               <>
@@ -465,7 +503,27 @@ const Edit = (props) => {
               </>
             ) : null}
           </Grid>
-          <Grid display="flex" width="100%">
+        </Grid>
+
+        <Grid
+          zIndex="3"
+          bg="#fff"
+          justifyContent="center"
+          position="fixed"
+          bottom="0"
+          left="0"
+          width="100%"
+          height="75px"
+          display="flex"
+          padding="11px 13px"
+          boxShadow="0px -4px 6px rgba(227, 227, 227, 0.4);"
+        >
+          <Grid
+            width="375px"
+            display="flex"
+            justifyContent="center"
+            height="59px"
+          >
             <_Button
               onClick={() => {
                 history.push(`/mypage/${userId}`);
@@ -480,9 +538,9 @@ const Edit = (props) => {
             >
               저장하기
             </__Button>
+          </Grid>
         </Grid>
-  
-        </Grid>
+      </> 
     );
   }
   return (
@@ -582,7 +640,7 @@ const Edit = (props) => {
                 value={numberCK}
                 onChange={NumderCK}
                 type="text"
-                placeholder="인증번호를 입력"
+                placeholder="인증번호 입력"
                 maxLength={20}
               />
               <Button
@@ -804,6 +862,7 @@ const _MyImage = styled.img`
   height: 96px;
   width: 96px;
   border-radius: 50%;
+  text-align:center;
 `;
 
 const ProfileLabel = styled.label`
@@ -858,38 +917,63 @@ const Button = styled.button`
   }
 `;
 
-const _Button = styled.button`
-  width: 160px;
-  height: 40px;
-  flex-direction: row;
-  align-items: center;
-  border: solid 1px #030c37;
-  background-color: #fff;
-  border-radius: 3px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #030c37;
-  margin-left: 16px;
-  :hover {
-    font-size: 15px;
-  }
-`;
-
-const __Button = styled.button`
-  width: 160px;
-  height: 40px;
-  flex-direction: row;
-  align-items: center;
+const Btn_ = styled.button`
+  width: 88px;
+  height: 47px;
   border: solid 1px #030c37;
   background-color: #030c37;
   border-radius: 3px;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 500;
   color: #fff;
-  margin-left: 16px;
-  :hover {
-    font-size: 15px;
-  }
+  margin: 10px 0 0 -95px;
+`;
+
+const Btn__ = styled.button`
+  width: 88px;
+  height: 47px;
+  border: solid 1px #030c37;
+  background-color: #030c37;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #fff;
+  margin: -3px 0px;
+`;
+
+const _Button = styled.div`
+width: 164px;
+height: 44px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px auto;
+border-radius: 3px;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+box-sizing: border-box;
+margin: 0;
+border: solid 1px #030c37;
+margin: 0px 4px;
+`;
+
+const __Button = styled.div`
+  width: 164px;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px auto;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color: #030c37;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0px 4px;
 `;
 
 const _Box = styled.div`
@@ -935,6 +1019,21 @@ const Inp = styled.input`
   font-weight: 500;
   margin-bottom: 16px;
 `;
+
+const _Inp = styled.input`
+  width: 210px;
+  height: 44px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 3px;
+  border: solid 1px #cbcbcb;
+  padding-left: 32px;
+  font-size: 13px;
+  font-weight: normal;
+  margin-bottom: 16px;
+`;
+
 
 const Hr = styled.div`
   width: 800px;
@@ -984,7 +1083,7 @@ const LabelExpMob = styled.label`
   }
 
   input + p {
-    width: 311px;
+    width: 343px;
     height: 34px;
     display: flex;
     flex-direction: row;
@@ -1130,7 +1229,7 @@ const LabelMob = styled.label`
     display: none;
   }
   input + p {
-    width: 99px;
+    width: 110px;
     height: 34px;
     display: flex;
     flex-direction: row;
@@ -1140,7 +1239,7 @@ const LabelMob = styled.label`
     border-radius: 35px;
     cursor: pointer;
     box-sizing: border-box;
-    margin: 0;
+    margin: 0 0 12px 0;
     border: solid 1px #b8b8b8;
     gap: 8px;
   }
@@ -1159,7 +1258,7 @@ const LabelDistanceMob = styled.label`
   }
 
   input + p {
-    width: 311px;
+    width: 343px;
     height: 34px;
     display: flex;
     flex-direction: row;

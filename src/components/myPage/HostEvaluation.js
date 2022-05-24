@@ -23,9 +23,9 @@ const HostEvaluation = () => {
   if(isMobile) {
     return(
       <Grid 
-      width="375px"
+      width="350px"
       padding="5%"
-      margin="-50px 0 0 0"
+      margin="-45px auto -20px -17px"
       >
         <Text bold size="14px">
           받은 굿러너 평가 (총 &nbsp;
@@ -35,7 +35,7 @@ const HostEvaluation = () => {
         <Text 
           bold 
           size="20px" 
-          margin="-40px 0 0 95%" 
+          margin="-40px 0 0 100%" 
           profile_list={profile_list}
           _onClick={()=>{
             history.push("/m/evaluation");

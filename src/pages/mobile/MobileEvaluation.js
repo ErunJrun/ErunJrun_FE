@@ -6,7 +6,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
 import { useMediaQuery } from "react-responsive";
-import { getProfileDB } from "../../redux/modules/mypage"
+import { getProfileDB } from "../../redux/modules/mypage";
+import { history } from '../../redux/configureStore';
+import backBtn from "../../assets/groupFeed/backBtn.svg"
 
 const MobileEvaluation = () => {
   const isMobile = useMediaQuery({
@@ -28,6 +30,40 @@ const MobileEvaluation = () => {
   if(isMobile) {
 
     return (
+      <>
+      <Grid
+          zIndex="3"
+          bg="#ffffff"
+          justifyContent="center"
+          alignItems="center"
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="54px"
+          display="flex"
+          padding="10px 10px"
+          margin="0 auto"
+        >
+          <Grid
+            display="flex"
+            width="375px"
+            justifyContent="left"
+            alignItems="center"
+          >
+            <img
+              style={{ width: "10px", margin: "0 10px" }}
+              src={backBtn}
+              onClick={() => {
+                history.go(-1);
+              }}
+            />
+            <Text margin="0 0 0 96px" bold size="16px">
+              굿러너 평가 상세
+            </Text>
+          </Grid>
+        </Grid>
+
         <Grid weight="100%" margin="80px auto 100px auto">
           <Box>
             <_Box>
@@ -140,6 +176,7 @@ const MobileEvaluation = () => {
  
           </Box>
         </Grid>
+        </>
     );
 };
 };

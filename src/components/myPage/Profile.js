@@ -16,13 +16,17 @@ const Profile = () => {
 
   if(isMobile) {
     return (
-      <Grid width="375px" >
+      <Grid width="350px" >
         <_MyImage src={profile_list?.userInfo?.profileUrl} />
-        <Grid width="225px" height="65px" margin="-70px 0 0 100px">
+        <Grid 
+          width="225px" 
+          height="65px" 
+          margin="-70px 0 0 85px"
+        >
           <Text bold size="14px" >
             {profile_list?.userInfo?.nickname}
           </Text> 
-          <Text regular size="10.1px" width="225px"  margin="-12px 0 0 0">
+          <Text regular size="10.3px" width="225px"  margin="-12px 0 0 0">
             {profile_list?.userInfo?.bio}
           </Text> 
         </Grid>
@@ -181,7 +185,7 @@ const _MyImage = styled.img`
   height: 64px;
   width: 64px;
   border-radius: 50%;
-  margin: 80px 0 0 16px;
+  margin: 80px 0 0 0px;
   border: solid 2px #ddd;
 `;
 const Bio = styled.div`
