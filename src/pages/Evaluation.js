@@ -252,23 +252,23 @@ const Evaluation = () => {
                       {likeCategory.map((e, idx) => {
                         return (
                           <Fragment key={idx}>
-                            <LabelDistance>
-                              <input
-                                onClick={() => {
-                                  choiceCategory(idx+1); 
-                                  console.log(idx+1)
-                                }}
-                                type="radio"
-                                name="likeCategory"
-                                value={e}
-                              >
-                              </input>
-                              <Text 
-                              bold
-                              >
-                                {e}
-                              </Text>
-                            </LabelDistance>
+                              <LabelDistance>
+                                <input
+                                  onClick={() => {
+                                    choiceCategory(idx+1); 
+                                    console.log(idx+1)
+                                  }}
+                                  type="radio"
+                                  name="likeCategory"
+                                  value={e}
+                                >
+                                </input>
+                                <Text 
+                                bold
+                                >
+                                  {e}
+                                </Text>
+                              </LabelDistance>
                           </Fragment>
                         );
                       })}
@@ -445,16 +445,26 @@ const Wrap = styled.div`
   z-index: 0;
   position: absolute;
   left: 35.3%;
-  top: 90px;
+  top: 120px;
   margin: 0;
   padding: 14px 28px;
   width: 450px;
- // height: 400px;
+  height: 600px;
   background: #ffffff;
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   text-align: center;
   line-height: 1.4;
+  overflow: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10%;
+    background-color: gray;
+    border-radius: 10px;
+  }
 `;
 
 const _Wrap = styled.div`
@@ -462,9 +472,9 @@ const _Wrap = styled.div`
 `;
 
 const LabelDistance = styled.label`
-  margin: -20px 0 0 0px; 
   input {
     display: none;
+    
   }
   input + p {
     width: 440px;
@@ -476,6 +486,7 @@ const LabelDistance = styled.label`
     cursor: pointer;
     box-sizing: border-box;
     border: solid 1px #b8b8b8;
+    
   }
   input:checked + p {
     background-color: #68f99e;

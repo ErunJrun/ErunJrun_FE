@@ -192,6 +192,10 @@ const Edit = (props) => {
     setCertPhone(props.profile.certPhone);
   }, [props]);
 
+  if( bio === null ) {
+    setBio("")
+  }
+
   if (isMobile) {
     return (
       <>
@@ -271,15 +275,7 @@ const Edit = (props) => {
             <Text size="13px" margin="22px 0 16px 0">
               자기소개
             </Text>
-            {bio === null ? (
-              <_Input
-                value={""}
-                onChange={changeContent}
-                type="text"
-                placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
-                maxLength={50}
-              />
-            ) : (
+
               <_Input
                 value={bio}
                 onChange={changeContent}
@@ -287,7 +283,7 @@ const Edit = (props) => {
                 placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
                 maxLength={50}
               />
-            )}
+  
           </Grid>
 
           <Grid>
@@ -581,15 +577,6 @@ const Edit = (props) => {
           자기소개
         </Text>
 
-        {bio === null ? (
-          <Input
-            value={""}
-            onChange={changeContent}
-            type="text"
-            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
-            maxLength={50}
-          />
-        ) : (
           <Input
             value={bio}
             onChange={changeContent}
@@ -597,7 +584,7 @@ const Edit = (props) => {
             placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
             maxLength={50}
           />
-        )}
+
         <Hr style={{ margin: "63px 0 80px 0" }} />
         <Text bold size="20px">
           휴대폰인증
@@ -1091,6 +1078,34 @@ const LabelExpMob = styled.label`
     color: #000;
   }
   input:checked + p {
+    background-color: #68f99e;
+    color: #030c37;
+    font-weight: 500;
+  }
+`;
+
+{/*const LabelExpMob = styled.label`
+  input {
+    display: none;
+  }
+
+  input + p {
+    width: 343px;
+    height: 34px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px auto;
+    border-radius: 35px;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid #b8b8b8;
+    gap: 8px;
+    color: #000;
+  }
+  input:checked + p {
     ${(props) =>
       props.checkLevel === 0
         ? "background-color:  #FF823B;"
@@ -1106,7 +1121,7 @@ const LabelExpMob = styled.label`
     ${(props) => (props.checkLevel === 4 ? "color:  white;" : "color: black;")}
     font-weight: 500;
   }
-`;
+`;*/}
 
 const LabelDistance = styled.label`
   margin-left: 10px;
