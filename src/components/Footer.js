@@ -35,11 +35,12 @@ const Footer = () => {
   const isCourse = path === "/coursefeed";
   const isMypage = path === `/mypage/${userId}`;
   const isLoginInfo = path === "/loginInfo";
+  const isGroupUpload = path === "/groupupload";
 
   if (isMobile) {
     return (
       <>
-        {!isLoginInfo ? (
+        {!isLoginInfo && !isGroupUpload ? (
           <>
             <Grid
               zIndex="2"
@@ -59,7 +60,7 @@ const Footer = () => {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                padding="0 43px"
+                padding="0 20px"
               >
                 {isHome ? (
                   <>

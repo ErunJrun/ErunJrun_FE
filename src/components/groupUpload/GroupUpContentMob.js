@@ -168,6 +168,7 @@ const GroupContentMob = (props) => {
               hover="border:1px solid #68F99E;"
             >
               <GroupInput
+                style={{ width: "90%" }}
                 type="text"
                 onChange={(e) => {
                   setTitle(e.target.value);
@@ -176,7 +177,7 @@ const GroupContentMob = (props) => {
                 value={title}
                 placeholder="그룹 러닝명을 입력해주세요."
               ></GroupInput>
-              <Text margin="0" size="13px">
+              <Text margin="0" size="11px" color="#7B7B7B">
                 {textLength}/28
               </Text>
             </Grid>
@@ -230,14 +231,11 @@ const GroupContentMob = (props) => {
               </Grid>
             </Grid>
 
-            <Text
+            <Grid
               display="flex"
               justifyContent="left"
               margin="10px 0 0 0"
-              size="11px"
               width="auto"
-              color="#FF2D55"
-              bold
             >
               <IconButton
                 waring
@@ -245,10 +243,12 @@ const GroupContentMob = (props) => {
                 size="14.4"
                 height="12px"
                 width="12px"
-                margin="1px 6px 0 0"
+                margin="-2px 6px 0 0"
               />
-              스탠바이로 지정한 시간의 4시간 전, 그룹러닝 모집이 마감됩니다.
-            </Text>
+              <Text margin="0" size="11px" width="auto" color="#FF2D55" bold>
+                스탠바이로 지정한 시간의 4시간 전, 그룹러닝 모집이 마감됩니다.
+              </Text>
+            </Grid>
           </Grid>
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
@@ -256,7 +256,7 @@ const GroupContentMob = (props) => {
               출발 시간
             </Text>
             <Grid
-              margin="0 0 32px 0"
+              margin="0"
               display="flex"
               alignItems="center"
               padding="5px 16px"
@@ -281,7 +281,7 @@ const GroupContentMob = (props) => {
               도착 시간
             </Text>
             <Grid
-              margin="0 0 32px 0"
+              margin="0"
               display="flex"
               alignItems="center"
               padding="5px 16px"
@@ -302,18 +302,19 @@ const GroupContentMob = (props) => {
           </Grid>
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold margin="0 85px 0 0">
+            <Text size="13px" display="inline" margin="0 73px 16px 0">
               모집 인원
             </Text>
             <Grid
+              margin="0"
               display="flex"
               alignItems="center"
-              padding="10px 20px"
-              maxWidth="714px"
-              height="75px"
-              border="1px solid #CBCBCB"
+              padding="5px 16px"
+              width="343px"
+              height="44px"
+              border="1px solid #B8B8B8"
               borderRadius="3px"
-              hover="border:1px solid #030C37;"
+              hover="border:1px solid #68F99E;"
             >
               <GroupSelect
                 onChange={(e) => {
@@ -337,21 +338,20 @@ const GroupContentMob = (props) => {
             </Grid>
           </Grid>
 
-          <Grid display="flex" margin="0 0 32px 0">
-            <Text display="inline" bold margin="30px 85px 0 0">
+          <Grid display="flex" alignItems="center" margin="0 0 32px 0">
+            <Text size="13px" display="inline" margin="0 73px 16px 0">
               상세 소개
             </Text>
             <Grid
+              margin="0"
               display="flex"
               alignItems="center"
-              justifyContent="center"
-              padding="10px 20px"
-              maxWidth="714px"
-              height="462px"
-              border="1px solid #CBCBCB"
+              padding="14px"
+              width="343px"
+              height="136px"
+              border="1px solid #B8B8B8"
               borderRadius="3px"
-              hover="border:1px solid #030C37;"
-              margin="0"
+              hover="border:1px solid #68F99E;"
             >
               <GroupTextArea
                 type="text"
@@ -360,8 +360,7 @@ const GroupContentMob = (props) => {
                   checkMaxLength600(e);
                 }}
                 value={content}
-                placeholder=" 600자 이내로 그룹 러닝에 대한 소개를 작성해주세요.
-                ex) 호수공원 러닝 참 좋아하는데요~ 함께 뛰면 두배로 즐거울 것 같아 그룹 러닝을 모집합니다!"
+                placeholder="600자 이내로 그룹 러닝에 대한 소개를 작성해주세요.      예시) 환복하실 분들은 공원 화장실을 이용해주세요!"
               ></GroupTextArea>
               <Grid
                 height="auto"
@@ -369,28 +368,31 @@ const GroupContentMob = (props) => {
                 justifyContent="right"
                 margin="0"
               >
-                <Text size="14px" margin="0">
+                <Text color="#7B7B7B" size="11px" margin="0">
                   {textLength600} / 600
                 </Text>
               </Grid>
             </Grid>
           </Grid>
 
-          <Grid display="flex" alignItems="center" margin="0 0 64px 0">
-            <Text display="inline" bold margin="0 45px 0 0">
-              그룹채팅방 링크
+          <Grid display="flex" alignItems="center" margin="0 0 80px 0">
+            <Text size="13px" display="inline" margin="0 73px 16px 0">
+              그룹 채팅방 링크
             </Text>
             <Grid
+              margin="0 0 32px 0"
               display="flex"
+              justifyContent="space-between"
               alignItems="center"
-              padding="10px 20px"
-              maxWidth="714px"
-              height="75px"
-              border="1px solid #CBCBCB"
+              padding="5px 16px"
+              width="343px"
+              height="44px"
+              border="1px solid #B8B8B8"
               borderRadius="3px"
-              hover="border:1px solid #030C37;"
+              hover="border:1px solid #68F99E;"
             >
               <GroupInput
+                style={{ width: "90%" }}
                 type="url"
                 onChange={(e) => {
                   setChattingRoom(e.target.value);
@@ -399,28 +401,36 @@ const GroupContentMob = (props) => {
                 value={chattingRoom}
                 placeholder="크루원들과 소통할 오픈채팅방 링크를 추가해주세요."
               ></GroupInput>
-              <Text margin="0" size="14px">
+              <Text color="#7B7B7B" size="11px" margin="0">
                 {textLengthChat}/40
               </Text>
             </Grid>
           </Grid>
 
-          <MidHr />
-
-          <Grid display="flex" margin="0 0 18px 0" alignItems="center">
-            <Grid display="flex" width="auto">
-              <Text margin="0" height="auto" display="inline" bold size="20px">
+          <Grid
+            width="343px"
+            display="flex"
+            margin="0 auto"
+            alignItems="center"
+          >
+            <Grid display="flex">
+              <Text margin="0" height="auto" display="inline" bold size="13px">
                 러닝 스타일 정보
               </Text>
-              <RedPoint></RedPoint>
+              <RedPoint />
             </Grid>
           </Grid>
           <Hr />
 
-          <Text margin="0" bold>
-            러닝 타입
+          <Text size="13px" margin="0 0 16px 0">
+            러닝 테마
           </Text>
-          <Grid margin="0" display="flex" justifyContent="space-between">
+          <Grid
+            margin="0"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="flex-start"
+          >
             {runTypeList.map((e, idx) => {
               return (
                 <Fragment key={idx}>
@@ -434,77 +444,94 @@ const GroupContentMob = (props) => {
                       value={e}
                       checked={checkedType === e ? e : ""}
                     ></input>
-                    <Text bold>{e}</Text>
+                    <Text regular size="12px">
+                      {e}
+                    </Text>
                   </Label>
                 </Fragment>
               );
             })}
           </Grid>
-          <Grid display="flex" alignItems="center" margin="16px 0 32px 0">
+          <Grid
+            display="flex"
+            justifyContent="left"
+            margin="6px 0 0 0"
+            width="auto"
+          >
             <IconButton
               waring
               color="#FF2D55"
-              size="19.21"
-              height="19.2px"
-              width="16px"
-              margin="0 8px 0 0"
+              size="14.4"
+              height="12px"
+              width="12px"
+              margin="-2px 6px 0 0"
             />
-            <Text width="auto" color="#FF2D55" bold margin="0">
+            <Text margin="0" size="11px" width="auto" color="#FF2D55" bold>
               이미지를 추가하지 않는 경우, 러닝타입에 따른 기본 썸네일이
               사용됩니다.
             </Text>
           </Grid>
 
-          <Grid margin="0 0 64px 0">
-            <Text margin="0" bold>
-              러닝속도
-            </Text>
-            <Grid margin="0" display="flex" justifyContent="space-between">
-              {runSpeedList.map((e, idx) => {
-                return (
-                  <Fragment key={idx}>
-                    <Label>
-                      <input
-                        onChange={() => {
-                          choiceSpeed(e);
-                        }}
-                        type="radio"
-                        name="speed"
-                        value={e}
-                        checked={checkedSpeed === e ? e : ""}
-                      ></input>
-                      <Text bold>{e}</Text>
-                    </Label>
-                  </Fragment>
-                );
-              })}
-            </Grid>
+          <Text size="13px" margin="32px 0 16px 0">
+            러닝 속도
+          </Text>
+          <Grid
+            margin="0"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="flex-start"
+          >
+            {runSpeedList.map((e, idx) => {
+              return (
+                <Fragment key={idx}>
+                  <Label>
+                    <input
+                      onChange={() => {
+                        choiceSpeed(e);
+                      }}
+                      type="radio"
+                      name="speed"
+                      value={e}
+                      checked={checkedSpeed === e ? e : ""}
+                    ></input>
+                    <Text regular size="12px">
+                      {e}
+                    </Text>
+                  </Label>
+                </Fragment>
+              );
+            })}
           </Grid>
-
-          <MidHr />
-
-          <Grid display="flex" margin="0 0 18px 0" alignItems="center">
-            <Text margin="0" height="auto" display="inline" bold size="20px">
+          <Grid
+            width="343px"
+            display="flex"
+            margin="80px auto 0 auto"
+            alignItems="center"
+          >
+            <Text margin="0" height="auto" display="inline" bold size="13px">
               추가 정보
             </Text>
           </Grid>
           <Hr />
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold margin="0 86px 0 0">
+            <Text size="13px" margin="0 0 16px 0">
               주차 방법
             </Text>
             <Grid
+              margin="0"
               display="flex"
+              justifyContent="space-between"
               alignItems="center"
-              padding="10px 20px"
-              maxWidth="714px"
-              height="75px"
-              border="1px solid #CBCBCB"
+              padding="5px 16px"
+              width="343px"
+              height="44px"
+              border="1px solid #B8B8B8"
               borderRadius="3px"
-              hover="border:1px solid #030C37;"
+              hover="border:1px solid #68F99E;"
             >
               <GroupInput
+                style={{ width: "90%" }}
                 type="text"
                 onChange={(e) => {
                   setParking(e.target.value);
@@ -513,36 +540,39 @@ const GroupContentMob = (props) => {
                 value={parking}
                 placeholder="주변 주차 정보가 있다면 추가해주세요."
               ></GroupInput>
-              <Text margin="0" size="14px">
+              <Text margin="0" size="11px" color="#B8B8B8">
                 {textLengthPark}/40
               </Text>
             </Grid>
           </Grid>
 
-          <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold margin="0 73px 0 0">
+          <Grid display="flex" alignItems="center" margin="0">
+            <Text size="13px" margin="0 0 16px 0">
               짐보관 방법
             </Text>
             <Grid
+              margin="0"
               display="flex"
+              justifyContent="space-between"
               alignItems="center"
-              padding="10px 20px"
-              maxWidth="714px"
-              height="75px"
-              border="1px solid #CBCBCB"
+              padding="5px 16px"
+              width="343px"
+              height="44px"
+              border="1px solid #B8B8B8"
               borderRadius="3px"
-              hover="border:1px solid #030C37;"
+              hover="border:1px solid #68F99E;"
             >
               <GroupInput
+                style={{ width: "90%" }}
                 type="text"
                 onChange={(e) => {
                   setBaggage(e.target.value);
                   checkMaxLengthBag(e);
                 }}
                 value={baggage}
-                placeholder="예 : 개별 보관"
+                placeholder="예시) 개별 보관"
               ></GroupInput>
-              <Text margin="0" size="14px">
+              <Text margin="0" size="11px" color="#B8B8B8">
                 {textLengthBag}/40
               </Text>
             </Grid>
@@ -554,16 +584,15 @@ const GroupContentMob = (props) => {
 };
 
 const Hr = styled.hr`
-  width: 865px;
-  height: 0px;
-  margin: 0 0 48px 0;
-  border: 1px solid #000000;
-  transform: rotate(180deg);
+  width: 343px;
+  height: 1px;
+  margin: 11.5px auto 23.5px auto;
+  background-color: #000;
 `;
 
 const RedPoint = styled.div`
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 100%;
   background: #ff2d55;
 `;
@@ -575,7 +604,7 @@ const GroupInput = styled.input`
   margin: 0;
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 100%;
   height: auto;
   border: none;
   border-radius: 3px;
@@ -592,42 +621,39 @@ const GroupInput = styled.input`
 `;
 
 const GroupTextArea = styled.textarea`
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-family: "Spoqa Han Sans Neo";
   font-weight: 400;
-  font-size: 16px;
-  padding: 10px;
+  font-size: 13px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   width: 100%;
   height: 96%;
   border: none;
-  border-radius: 3px;
   resize: none;
   :focus {
     outline: none;
   }
   ::placeholder {
-    font-family: "Spoqa Han Sans Neo", "sans-serif";
-    font-size: 16px;
+    font-family: "Spoqa Han Sans Neo";
+    font-size: 13px;
     font-weight: 400;
     color: #818181;
   }
 `;
 
 const GroupSelect = styled.select`
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  color: #000000;
-  border: 1px solid #4e4e4e;
   box-sizing: border-box;
-  border-radius: 5px;
+  font-family: "Spoqa Han Sans Neo";
+  font-size: 13px;
+  margin: 0;
+  display: flex;
+  align-items: center;
   width: 100%;
-  height: 40px;
-  text-align: center;
-  outline: none;
+  height: auto;
   border: none;
+  border-radius: 3px;
+  color: #7b7b7b;
 `;
 
 const MidHr = styled.hr`
@@ -644,17 +670,16 @@ const Label = styled.label`
     display: none;
   }
   input + p {
-    margin: 20px 0 0 0;
-    width: 132px;
-    height: 44px;
+    margin: 0 0 10px 0;
+    width: 109px;
+    height: 35px;
     flex-grow: 0;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 5px;
+    padding: 10px;
     border-radius: 60px;
-    border: 1px solid #000;
+    border: 1px solid #7b7b7b;
     cursor: pointer;
     box-sizing: border-box;
     font-weight: 500;

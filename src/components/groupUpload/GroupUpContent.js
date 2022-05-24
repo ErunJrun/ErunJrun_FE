@@ -150,7 +150,7 @@ const GroupContent = (props) => {
 
   return (
     <>
-      <Grid margin="0 auto" width="865px">
+      <Grid margin="0 auto">
         <Grid display="flex" margin="0 0 18px 0" alignItems="center">
           <Grid display="flex" width="auto">
             <Text margin="0" height="auto" display="inline" bold size="20px">
