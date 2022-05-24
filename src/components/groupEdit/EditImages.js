@@ -7,8 +7,12 @@ import { editGroupDB } from "../../redux/modules/feed";
 import { useParams } from "react-router-dom";
 import ImageIcon from "../../assets/groupUpload/imageCamera.png";
 import editStep2 from "../../assets/groupUpload/editStep2.png";
+import backBtn from "../../assets/groupFeed/backBtn.svg";
+import step3Mob from "../../assets/groupUpload/step3Mob.svg";
 import groupLeftBtn from "../../assets/groupUpload/groupLeftBtn.png";
 import swal from "sweetalert";
+import { history } from "../../redux/configureStore";
+import groupLeftBtnBlack from "../../assets/groupUpload/groupLeftBtnBlack.svg";
 
 const EditImages = (props) => {
   const dispatch = useDispatch();
@@ -107,6 +111,238 @@ const EditImages = (props) => {
     // 리덕스에 files 인덱스를 맞추기 위해 URL도 같이 넣어줌
     dispatch(imgActions.setPre(editPreview));
   }, [props]);
+
+  if (props.isMobile) {
+    return (
+      <>
+        <Grid
+          zIndex="3"
+          bg="#ffffff"
+          justifyContent="center"
+          alignItems="center"
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="54px"
+          display="flex"
+          padding="10px 0"
+          margin="0 auto"
+        >
+          <Grid
+            display="flex"
+            width="375px"
+            justifyContent="left"
+            alignItems="center"
+          >
+            <img
+              style={{ width: "10px", margin: "0 10px" }}
+              src={backBtn}
+              onClick={() => {
+                history.push("/groupfeed");
+              }}
+            />
+            <Text margin="0 0 0 110px" bold>
+              그룹 러닝 작성
+            </Text>
+          </Grid>
+        </Grid>
+
+        <Grid
+          zIndex="3"
+          bg="#f0f0f0"
+          justifyContent="center"
+          alignItems="center"
+          position="fixed"
+          top="54px"
+          left="0"
+          width="100%"
+          height="70px"
+          display="flex"
+          padding="10px"
+          margin="0 auto"
+        >
+          <img style={{ width: "311px", margin: "0" }} src={step3Mob} />
+        </Grid>
+        <Grid margin="156px auto 0 auto" width="375px">
+          <Grid
+            width="343px"
+            display="flex"
+            margin="0 auto"
+            alignItems="center"
+          >
+            <Text margin="0" height="auto" display="inline" bold size="13px">
+              추가 사진
+            </Text>
+          </Grid>
+          <HrMob />
+
+          <Grid display="flex" width="343px" margin="0 auto">
+            <Text margin="0 0 16px 0" size="13px">
+              {`업로드 된 이미지 (${totalImage.length}/3`})
+            </Text>
+          </Grid>
+
+          <Grid display="flex" width="343px" margin="0 auto">
+            <Grid width="166px" margin="0 auto 0 0">
+              <label style={{ width: "166px" }} htmlFor="profile_image">
+                <Grid
+                  width="166px"
+                  height="100px"
+                  border="1px solid #7B7B7B"
+                  bg="#FFFFFF"
+                  borderRadius="3px"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  flexDirection="column"
+                  cursor="pointer"
+                  margin="0"
+                >
+                  <UploadIconMob src={ImageIcon} />
+                  <Text
+                    margin="9.82px 0 0 0"
+                    color="#7B7B7B"
+                    size="11px"
+                    regular
+                  >
+                    눌러서 이미지 업로드하기
+                  </Text>
+                </Grid>
+                <ImageInput
+                  type="file"
+                  multiple="multiple"
+                  id="profile_image"
+                  onChange={handleChangeFile}
+                  accept=".jpg, .jpeg, .png"
+                ></ImageInput>
+              </label>
+            </Grid>
+
+            <Grid
+              display="flex"
+              margin="0 0 16px 0"
+              justifyContent="space-between"
+            >
+              {showImages.map((image, idx) => {
+                if (idx === 0) {
+                  return (
+                    <Fragment key={idx}>
+                      <Grid position="relative" width="auto">
+                        <ThumbnailMob>대표</ThumbnailMob>
+                        <Text
+                          zindex
+                          position="absolute"
+                          width="50px"
+                          height="20px"
+                          bg="rgba(255, 255, 255, 0.3)"
+                          border="1px solid #FFFFFF"
+                          borderRadius="3px"
+                          _onClick={() => handleDeleteImage(image, idx)}
+                          margin="65px 60px"
+                          display="flex"
+                          justifycontent="center"
+                          color="white"
+                          alignItems="center"
+                          cursor="pointer"
+                          size="11px"
+                          hover="background-color:rgba(255, 255, 255, 0.9); color:black;"
+                        >
+                          삭제하기
+                        </Text>
+                        <ImagePreviewMob src={image} />
+                      </Grid>
+                    </Fragment>
+                  );
+                } else {
+                  return (
+                    <Fragment key={idx}>
+                      <Grid display="relative" width="auto">
+                        <Text
+                          zindex
+                          position="absolute"
+                          width="50px"
+                          height="20px"
+                          bg="rgba(255, 255, 255, 0.3)"
+                          border="1px solid #FFFFFF"
+                          borderRadius="3px"
+                          _onClick={() => handleDeleteImage(image, idx)}
+                          margin="65px 60px"
+                          display="flex"
+                          justifycontent="center"
+                          color="white"
+                          alignItems="center"
+                          cursor="pointer"
+                          size="11px"
+                          hover="background-color:rgba(255, 255, 255, 0.9); color:black;"
+                        >
+                          삭제하기
+                        </Text>
+                        <ImagePreviewMob src={image} />
+                      </Grid>
+                    </Fragment>
+                  );
+                }
+              })}
+            </Grid>
+          </Grid>
+
+          <MidHrMob />
+          <Grid
+            bg="#F0F0F0"
+            padding="16px"
+            height="146px"
+            display="flex"
+            width="343px"
+            flexDirection="column"
+            justifyContent="center"
+            margin="0 auto"
+          >
+            <Text margin="0" size="10px" regular>
+              <li style={{ marginBottom: "10px" }}>
+                업로드 가능한 이미지 최대 용량은 30MB 입니다.
+              </li>
+              <li style={{ marginBottom: "10px" }}>
+                504px*378px 사이즈의 이미지 크기를 권장합니다.
+              </li>
+              <li style={{ marginBottom: "10px" }}>
+                가로길이 504px, 세로길이 378px 아하 크기의 이미지 경우 화질이{" "}
+                <br></br>
+                {"        "}깨질 수도 있습니다.
+              </li>
+              <li>
+                지나치게 선정적이나 폭력적인 이미지를 업로드할 경우 제재가
+                <br></br>
+                {"        "}있을 수도 있습니다.
+              </li>
+            </Text>
+          </Grid>
+          <Grid
+            display="flex"
+            width="343px"
+            justifyContent="space-between"
+            margin="96px auto 252px auto"
+          >
+            <Step2BackBtn onClick={goBack1}>
+              <img
+                style={{ width: "5px", height: "10px", marginRight: "10px" }}
+                src={groupLeftBtnBlack}
+              ></img>
+              이전단계
+            </Step2BackBtn>
+            <Step2NextBtn
+              onClick={() => {
+                editGroupPost();
+              }}
+              style={{ color: "#68F99E" }}
+            >
+              작성완료
+            </Step2NextBtn>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>
@@ -285,12 +521,35 @@ const Thumbnail = styled.div`
   color: white;
 `;
 
+const ThumbnailMob = styled.div`
+  position: absolute;
+  box-sizing: border-box;
+  top: 32px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 37px;
+  height: 17px;
+  z-index: 4;
+  background: rgba(3, 12, 55, 0.5);
+  border-radius: 2px;
+  font-size: 9px;
+  font-weight: 700;
+  color: white;
+`;
+
 const ImageInput = styled.input`
   display: none;
 `;
 
 const UploadIcon = styled.img`
   width: 61px;
+  height: auto;
+`;
+
+const UploadIconMob = styled.img`
+  width: 37px;
   height: auto;
 `;
 
@@ -302,6 +561,14 @@ const ImagePreview = styled.img`
   object-fit: cover;
 `;
 
+const ImagePreviewMob = styled.img`
+  height: 100px;
+  width: 166px;
+  position: relative;
+  margin: 24px 0 0 0;
+  object-fit: cover;
+`;
+
 const MidHr = styled.hr`
   width: 100%;
   height: 0px;
@@ -309,6 +576,15 @@ const MidHr = styled.hr`
   border: 1px solid #cbcbcb;
   transform: rotate(180deg);
   margin-bottom: 32px;
+`;
+
+const MidHrMob = styled.hr`
+  width: 343px;
+  height: 0px;
+  background: #cbcbcb;
+  border: 1px solid #dddddd;
+  transform: rotate(180deg);
+  margin-bottom: 16px;
 `;
 
 const Step1Img = styled.img`
@@ -327,6 +603,13 @@ const Hr = styled.hr`
   transform: rotate(180deg);
 `;
 
+const HrMob = styled.hr`
+  width: 343px;
+  height: 1px;
+  margin: 11.5px 16px 23.5px;
+  background-color: #000;
+`;
+
 const StepBtn2 = styled.button`
   max-width: 173px;
   width: 100%;
@@ -341,6 +624,46 @@ const StepBtn2 = styled.button`
   align-items: center;
   justify-content: center;
   border: none;
+  cursor: pointer;
+  :hover {
+    box-shadow: 0 0 3px #030c37;
+  }
+`;
+
+const Step2NextBtn = styled.button`
+  font-family: "Spoqa Han Sans Neo";
+  width: 167px;
+  height: 44px;
+  border: 1px solid #030c37;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #030c37;
+  cursor: pointer;
+  :hover {
+    box-shadow: 0 0 3px #030c37;
+  }
+`;
+
+const Step2BackBtn = styled.button`
+  font-family: "Spoqa Han Sans Neo";
+  width: 167px;
+  height: 44px;
+  border: 1px solid #030c37;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 10px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
   cursor: pointer;
   :hover {
     box-shadow: 0 0 3px #030c37;
