@@ -262,7 +262,6 @@ const Banner = () => {
                 </Text>
               </Grid>
 
-              {/* <Weather /> */}
             </Grid>
           </SwiperSlide>
         </Swiper>
@@ -404,8 +403,6 @@ const Banner = () => {
                 #야경 #밤러닝 #강변
               </Text>
             </Grid>
-
-            {/* <Weather /> */}
           </Grid>
         </SwiperSlide>
       </Swiper>
