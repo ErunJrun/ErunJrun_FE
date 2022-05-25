@@ -44,9 +44,7 @@ const Banner = () => {
           <SwiperSlide id="SwiperSlideMob">
             <img
               onClick={() => {
-                window.open(
-                  "https://docs.google.com/forms/d/e/1FAIpQLSfp9X0wBPprYgmoIsWxle2KK24mGpyqvJrH6_ddo6u_muFX4A/viewform"
-                );
+                window.open("https://forms.gle/4sR3uintjzuHX9pV6");
               }}
               style={{
                 position: "relative",
@@ -143,9 +141,7 @@ const Banner = () => {
           <SwiperSlide>
             <img
               onClick={() => {
-                window.open(
-                  "https://docs.google.com/forms/d/e/1FAIpQLSfp9X0wBPprYgmoIsWxle2KK24mGpyqvJrH6_ddo6u_muFX4A/viewform"
-                );
+                window.open("https://forms.gle/4sR3uintjzuHX9pV6");
               }}
               style={{ width: "1920px", cursor: "pointer" }}
               src={adBanner}
@@ -261,7 +257,6 @@ const Banner = () => {
                   #야경 #밤러닝 #강변
                 </Text>
               </Grid>
-
             </Grid>
           </SwiperSlide>
         </Swiper>

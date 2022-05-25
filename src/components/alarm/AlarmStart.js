@@ -38,7 +38,7 @@ const AlarmStart = (props) => {
                 >
                   {props?.createdAt}
                 </Text>
-                {props?.check ? <NewDotMob /> : <NoneDotMob />}
+                {!props?.check ? <NewDotMob /> : <NoneDotMob />}
               </Grid>
               <Grid
                 _onClick={() => {
@@ -112,7 +112,7 @@ const AlarmStart = (props) => {
                 >
                   {props?.createdAt}
                 </Text>
-                {props?.check ? <NewDotMob /> : <NoneDotMob />}
+                {!props?.check ? <NewDotMob /> : <NoneDotMob />}
               </Grid>
               <Grid
                 _onClick={() => {
@@ -184,7 +184,7 @@ const AlarmStart = (props) => {
                 >
                   {props?.createdAt}
                 </Text>
-                {props?.check ? <NewDotMob /> : <NoneDotMob />}
+                {!props?.check ? <NewDotMob /> : <NoneDotMob />}
               </Grid>
               <Grid
                 _onClick={() => {

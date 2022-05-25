@@ -84,7 +84,7 @@ const GroupFilter = (props) => {
 
   const getFilter = () => {
     if (region.length === 0 || startDate === "NaN-NaN-NaN") {
-      swal("지역과 모집 일정은 필수입니다.", "", "warning");
+      return swal("지역과 모집 일정은 필수입니다.", "", "warning");
     }
     dispatch(resetGroup());
     dispatch(getGroupDB(category, 1, 100));
