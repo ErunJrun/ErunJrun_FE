@@ -76,6 +76,13 @@ const Evaluation = () => {
   };
 
   useEffect(() => {
+    if (token) {
+      dispatch(getEvaluationDB(groupId));
+      localStorage.removeItem("from");
+    }
+  }, []);
+
+  useEffect(() => {
     if (token && from) {
       dispatch(getEvaluationDB(groupId));
       localStorage.removeItem("from");

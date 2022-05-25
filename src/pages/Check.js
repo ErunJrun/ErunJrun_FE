@@ -30,6 +30,8 @@ const Check = () => {
 
   const check_list = useSelector((state) => state.mypage.attend);
 
+  console.log(check_list);
+
   const [userId, setUserId] = useState([]);
 
   const choiceTime = (e, index) => {
