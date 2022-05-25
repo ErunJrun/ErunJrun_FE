@@ -178,7 +178,7 @@ const Evaluation = () => {
                       evaluationDB(groupId, hostId, point, evaluationCategory, userId)
                     );
                     dispatch(getRunningDB(userId));
-                    history.push(`/mypage/${userId}`);
+                    
                   }}
                 >
                   평가완료
