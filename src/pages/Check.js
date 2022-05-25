@@ -43,6 +43,13 @@ const Check = () => {
   };
 
   useEffect(() => {
+    if (token) {
+      dispatch(getAttendDB(groupId));
+      localStorage.removeItem("from");
+    }
+  }, [token]);
+
+  useEffect(() => {
     if (token && from) {
       dispatch(getAttendDB(groupId));
       localStorage.removeItem("from");
