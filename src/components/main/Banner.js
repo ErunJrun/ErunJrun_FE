@@ -4,7 +4,6 @@ import { Navigation, Pagination } from "swiper";
 import { history } from "../../redux/configureStore";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements";
-import Weather from "./Weather";
 import { useSelector, useDispatch } from "react-redux";
 import { getCookie } from "../../shared/Cookie";
 
@@ -262,8 +261,6 @@ const Banner = () => {
                   #야경 #밤러닝 #강변
                 </Text>
               </Grid>
-
-              <Weather />
             </Grid>
           </SwiperSlide>
         </Swiper>
@@ -405,8 +402,6 @@ const Banner = () => {
                 #야경 #밤러닝 #강변
               </Text>
             </Grid>
-
-            {/* <Weather /> */}
           </Grid>
         </SwiperSlide>
       </Swiper>

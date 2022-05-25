@@ -31,7 +31,7 @@ const Evaluation = () => {
   const [point, setPoint] = useState(1);
 
   const host = useSelector((state) => state.mypage.host);
-
+  const from = localStorage.getItem("from");
   const userId = localStorage.getItem("userId");
   const hostId = host?.hostUser?.user?.userId;
   const token = getCookie("accessToken");
@@ -76,8 +76,11 @@ const Evaluation = () => {
   };
 
   useEffect(() => {
-    dispatch(getEvaluationDB(groupId));
-  }, []);
+    if (token && from) {
+      dispatch(getEvaluationDB(groupId));
+      localStorage.removeItem("from");
+    }
+  }, [token]);
 
   if (!token && isMobile) {
     swal("로그인 후 이용해 주세요");
