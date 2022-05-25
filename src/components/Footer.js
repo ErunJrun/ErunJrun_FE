@@ -598,7 +598,7 @@ const Footer = () => {
     <>
       {isLoginInfo ? null : (
         <HeaderBox>
-          <Grid width="1200px">
+          <Grid width="1200px" display="flex" alignItems="center">
             <Grid
               display="flex"
               width="685px"
@@ -612,7 +612,62 @@ const Footer = () => {
               >
                 <img src="https://ifh.cc/g/fkqsm3.png" />
               </Logo>
-              <Btn
+            </Grid>
+
+            <Grid 
+              display="flex"
+              width="600px"
+              margin="-80px 0 0 260px"
+            >
+              <Grid width="200px">
+                <Text 
+                  color="#68f99e" 
+                  size="18px" 
+                >
+                  Backend
+                </Text>
+                <Text 
+                  regular 
+                  color="#FAFAFA" 
+                  size="13px"
+                >
+                  유현준 &nbsp; 오지우 &nbsp; 신동영
+                </Text>
+              </Grid>
+              
+              <Grid width="200px">
+                <Text
+                  color="#68f99e" 
+                  size="18px"
+                  >
+                  Frontend
+                </Text>
+                <Text 
+                  regular 
+                  color="#FAFAFA" 
+                  size="13px"
+                >
+                  류진열 &nbsp; 김다운
+                </Text>
+              </Grid>
+              <Grid width="200px">
+                <Text 
+                  color="#68f99e" 
+                  size="18px"
+                >
+                  Designer
+                </Text>
+                <Text 
+                  regular 
+                  color="#FAFAFA"
+                  size="13px"
+                 >
+                  김희영 &nbsp; 방남지
+                </Text>
+              </Grid>
+            </Grid>
+              
+              {/* <Btn
                 onClick={() => {
                   history.push("/serviceInfo");
                 }}
@@ -639,8 +694,8 @@ const Footer = () => {
                 }}
               >
                 Contact
-              </Btn>
-            </Grid>
+              </Btn> */}
+            
           </Grid>
         </HeaderBox>
       )}

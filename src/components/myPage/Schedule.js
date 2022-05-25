@@ -16,13 +16,17 @@ const Schedule = () => {
       {profile_list.waiting.length === 0 ? (
         <Box>예정된 그룹 러닝이 없습니다</Box>
       ) : (
-        <Grid display="flex">
+        <Grid
+          display="flex" 
+          width="1230px"
+          margin="0 0 0 -31px"
+        >
           {profile_list.waiting?.map((waiting, index) => (
             <Grid
               key={index}
-              maxWidth="288px"
-              width="100%"
+              width="288px"
               margin="0 8px 55px 8px"
+              justify-content= "space-between"
             >
               <Grid
                 _onClick={() => {

@@ -28,13 +28,17 @@ const MyGroup = () => {
           <Box>진행한 그룹 러닝이 없습니다</Box>
         </Grid>
       ) : (
-        <Grid display="flex">
+        <Grid 
+          display="flex"
+          width="1230px"
+          margin="0 0 0 -31px"
+        >
           {my.data?.map((data, index) => (
             <Grid
               key={index}
-              maxWidth="288px"
-              width="100%"
+              width="288px"
               margin="0 8px 55px 8px"
+              justify-content= "space-between"
             >
               <Grid
                 _onClick={() => {

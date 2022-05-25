@@ -105,7 +105,7 @@ export default function BasicTabs() {
   );
   
   return (
-    <Box sx={{ width: "106%" }}>
+    <Box sx={{ width: "1200px" }}>
        <Box sx={{ bgcolor: "#fff" }}>
         <AntTabs sx={{
           color: "#000", 
@@ -121,7 +121,7 @@ export default function BasicTabs() {
             color: "#909090", 
             fontSize:"18px", 
             fontWeight: "bold",
-            fontFamily: "Spoqa Han Sans Neo",
+            fontFamily: "Spoqa Han Sans Neo"
             }}
             label="그룹 러닝" 
             {...a11yProps(0)} 
@@ -274,6 +274,7 @@ export default function BasicTabs() {
 
 const CategoryBox = styled.div`
   display: flex;
+  margin-left: -23px;
 `;
 
 const Btn = styled.div`

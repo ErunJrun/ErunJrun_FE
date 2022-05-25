@@ -12,6 +12,8 @@ const Profile = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
+
+  const myId = localStorage.getItem("userId");
   const profile_list = useSelector((state) => state.mypage.list);
 
   if(isMobile) {
@@ -30,9 +32,14 @@ const Profile = () => {
             {profile_list?.userInfo?.bio}
           </Text> 
         </Grid>
-        <Text bold size="20px" margin="-60px 0 0 90%" _onClick={()=>{history.push("/edit")}}>
-          >
-        </Text>
+
+        {profile_list?.userInfo?.userId === myId ?
+          <Text bold size="20px" margin="-60px 0 0 90%" _onClick={()=>{history.push("/edit")}}>
+            >
+          </Text>
+        :
+          null
+        }
         <Level/>
         <_Box>
           <_SmallBox>
@@ -73,7 +80,7 @@ const Profile = () => {
           <MyImage src={profile_list?.userInfo?.profileUrl} />
           <TextBox>
             <Text 
-              bold 
+              margin="39px 0 0 0"
               size="18px"
               >
                 {" "}
@@ -84,8 +91,8 @@ const Profile = () => {
         <Introduce>
           <Triangle />    
             <Text 
-            margin="-35px 0 0 0"
-            padding="20px">
+              margin="-35px 0 0 0"
+              padding="20px">
               {profile_list?.userInfo?.bio}
             </Text>   
         </Introduce>
@@ -127,9 +134,9 @@ const Profile = () => {
 
 const Box = styled.div`
   width: 1200px;
-  height: 320px;
+  height: 348px;
   margin: 64px auto 24px auto;
-  padding: 24px 38px 32px 32px;
+  //padding: 24px 38px 32px 32px;
   border-radius: 6px;
   border: solid 1px #b8b8b8;
 `;
@@ -154,7 +161,7 @@ const SmallBox = styled.div`
   width: 400px;
   height: 23px;
   gap: 20px;
-  margin-top: 13px;
+  margin-top: 18px;
 `;
 
 const _SmallBox = styled.div`
@@ -178,7 +185,8 @@ const MyImage = styled.img`
   height: 100px;
   width: 100px;
   border-radius: 50%;
-  margin-top: 15px;
+  margin: 38px 0 0 40px;
+  border: solid 2px #ddd;
 `;
 
 const _MyImage = styled.img`
@@ -207,7 +215,7 @@ const Introduce = styled.div`
   color: #000;
   text-align: center;
   padding-top: -5px;
-  margin: 50px 0 30px -500px;
+  margin: 76px 0 30px -490px;
   white-space: normal;
 `;
 
@@ -217,14 +225,14 @@ const Triangle = styled.div`
   border-style: solid;
   border-width: 1rem;
   border-color: transparent #f0f0f0 transparent transparent;
-  transform: translate(-95%, 50%);
+  transform: translate(-95%, 60%);
 `;
 
 const Information = styled.div`
   width: 450px;
-  height: 90px;
-  line-height: 0.2;
-  margin: 7px 0 0 110px;
+  height: 101px;
+  line-height: 0.6;
+  margin: 25px 0 0 120px;
 `;
 
 const _Hr = styled.div`

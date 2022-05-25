@@ -197,11 +197,12 @@ const HostEvaluation = () => {
 
 const Box = styled.div`
   width: 1200px;
-  height: 246px;
+  height: 292px;
   margin: 30px auto 60px auto;
-  padding: 24px 38px 32px 32px;
+  //padding: 24px 38px 32px 32px;
   border-radius: 6px;
   background-color: #f5f5f5;
+  border: 1px solid #f5f5f5;
 `;
 
 const _Box = styled.div`
@@ -224,7 +225,7 @@ const _Img = styled.img`
 const Icon = styled.div`
   width: 87px;
   height: 194px;
-  margin: 0px 0 0 32px;
+  margin: 18px 0 0 40px;
 `;
 
 const EvaluationBox = styled.div`
