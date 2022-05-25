@@ -30,6 +30,8 @@ const Check = () => {
 
   const check_list = useSelector((state) => state.mypage.attend);
 
+  console.log(check_list);
+
   const [userId, setUserId] = useState([]);
 
   const choiceTime = (e, index) => {
@@ -39,6 +41,13 @@ const Check = () => {
       setUserId(userId.filter((el) => el !== index));
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getAttendDB(groupId));
+      localStorage.removeItem("from");
+    }
+  }, [token]);
 
   useEffect(() => {
     if (token && from) {
@@ -93,16 +102,13 @@ const Check = () => {
           margin="50px auto "
         >
           <_InfoBox>
-            <Grid 
-              display="block"
-              textAlign="left"
-            >
+            <Grid display="block" textAlign="left">
               <Text bold size="12px" margin="15px 0 0 10px">
                 {check_list?.groupInfo?.title}
               </Text>
               <Text regular size="12px" margin="4px 10px 0 10px">
                 {check_list?.groupInfo?.date}
-              </Text>    
+              </Text>
             </Grid>
             <Text size="12px" margin="0 20px 0 0">
               {check_list?.groupInfo?.attendanceCount}
@@ -170,23 +176,11 @@ const Check = () => {
     return (
       <Box>
         <InfoBox>
-          <Grid 
-          display="block"
-          textAlign="left"
-          >
-            <Text 
-              bold 
-              size="15px" 
-              margin="12px 0 0 14px"
-            >
+          <Grid display="block" textAlign="left">
+            <Text bold size="15px" margin="12px 0 0 14px">
               {check_list?.groupInfo?.title}
             </Text>
-            <Text  
-              regular
-              size="15px" 
-              margin="6px 10px 0 14px"
-              weight="232px"
-            >
+            <Text regular size="15px" margin="6px 10px 0 14px" weight="232px">
               {check_list?.groupInfo?.date}
             </Text>
           </Grid>

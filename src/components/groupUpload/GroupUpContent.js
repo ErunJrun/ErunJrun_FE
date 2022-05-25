@@ -66,9 +66,16 @@ const GroupContent = (props) => {
         setStandbyTime("");
         return;
       }
-    } else {
+
       if (e.target.value < dayjs().add(6, "hour").format("HH:mm")) {
         swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
+        setStandbyTime("");
+        return;
+      }
+    } else {
+      if (e.target.value > dayjs().add(6, "hour").format("HH:mm")) {
+        if (e.target.value < dayjs().add(30, "hour").format("HH:mm"))
+          swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
         setStandbyTime("");
       }
     }
@@ -310,7 +317,6 @@ const GroupContent = (props) => {
                 type="time"
                 onChange={(e) => {
                   setStartTime(e.target.value);
-                  startTimePick(e);
                 }}
                 value={startTime || ""}
               ></GroupInput>
@@ -336,7 +342,6 @@ const GroupContent = (props) => {
                 type="time"
                 onChange={(e) => {
                   setFinishTime(e.target.value);
-                  finishTimePick(e);
                 }}
                 value={finishTime || ""}
               ></GroupInput>

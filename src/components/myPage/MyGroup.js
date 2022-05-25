@@ -15,6 +15,7 @@ const MyGroup = () => {
   const userId = params.userId;
 
   const my = useSelector((state) => state.mypage.mygroup);
+  console.log(my);
 
   if (my.length === 0) {
     return <></>;
