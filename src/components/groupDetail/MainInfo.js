@@ -6,8 +6,8 @@ import Permit from "../../shared/Permit";
 import { applyDetailDB, deleteGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
 import { Link, useParams } from "react-router-dom";
-import groupChat from "../../assets/groupDetail/chat.png";
-import shareIcon from "../../assets/groupDetail/share.png";
+import groupChat from "../../assets/groupDetail/chat.svg";
+import shareIcon from "../../assets/groupDetail/share.svg";
 import shoesMint from "../../assets/groupDetail/shoesMint.png";
 import KakaoShareButton from "../KakaoShareButton";
 import { useMediaQuery } from "react-responsive";
@@ -130,7 +130,7 @@ const MainInfo = (props) => {
         border="1px solid #EFEFEF"
         borderRadius="3px"
         margin="0"
-        padding="18px 32px"
+        padding="24px 32px"
         bg="#FFFFFF"
         height="auto"
         boxShadow="0px 0px 6px rgba(141, 141, 141, 0.25)"
@@ -192,59 +192,59 @@ const MainInfo = (props) => {
 
         <Grid height="auto">
           <Grid display="flex">
-            <Text width="auto" margin="0 16px 16px 0">
+            <Text regular width="auto" margin="0 16px 16px 0">
               일시
             </Text>
-            <Text width="auto" margin="0" bold>
+            <Text width="auto" margin="0">
               {detailGroup?.datetime}
             </Text>
           </Grid>
 
           <Grid display="flex">
-            <Text width="auto" margin="0 16px 16px 0">
+            <Text regular width="auto" margin="0 16px 16px 0">
               장소
             </Text>
-            <Text width="auto" margin="0" bold>
+            <Text width="auto" margin="0">
               {detailGroup?.location}
             </Text>
           </Grid>
 
           <Grid display="flex">
-            <Text width="auto" margin="0 16px 16px 0">
+            <Text regular width="auto" margin="0 16px 16px 0">
               타입
             </Text>
-            <Text width="auto" margin="0" bold>
+            <Text width="auto" margin="0">
               {detailGroup?.thema}
             </Text>
           </Grid>
 
           <Grid display="flex">
-            <Text width="auto" margin="0 16px 16px 0">
+            <Text regular width="auto" margin="0 16px 16px 0">
               인원
             </Text>
-            <Text width="auto" margin="0 5px 0 0" bold>
+            <Text width="auto" margin="0 9px 0 0">
               최대 {detailGroup?.maxPeople}명
             </Text>
-            <Text width="auto" margin="0" bold color="#FF2D55">
+            <Text width="auto" margin="0" color="#FF2D55">
               (잔여 {detailGroup?.maxPeople - detailGroup?.Appliers?.length}
               자리)
             </Text>
           </Grid>
 
           <Grid display="flex">
-            <Text width="auto" margin="0 16px 16px 0">
+            <Text regular width="auto" margin="0 16px 16px 0">
               거리
             </Text>
-            <Text width="auto" margin="0" bold>
+            <Text width="auto" margin="0">
               {detailGroup?.distance} km
             </Text>
           </Grid>
 
           <Grid display="flex">
-            <Text width="auto" margin="0 16px 0 0">
+            <Text regular width="auto" margin="0 16px 0 0">
               속도
             </Text>
-            <Text width="auto" margin="0" bold>
+            <Text width="auto" margin="0">
               {detailGroup?.speed}
             </Text>
           </Grid>
@@ -300,17 +300,18 @@ const MainInfo = (props) => {
             margin="16px 0 0 0"
             height="auto"
           >
-            <a
-              style={{ textDecoration: "none" }}
-              href={detailGroup.chattingRoom}
-            >
-              <ChatBtn style={{ background: "#FAE301" }}>
-                <ChatImg src={groupChat} />
-                <Text cursor="pointer" margin="0">
-                  그룹 채팅방
-                </Text>
-              </ChatBtn>
-            </a>
+            <ChatBtn style={{ background: "#FAE301" }}>
+              <ChatImg src={groupChat} />
+              <Text
+                _onClick={() => {
+                  window.open(detailGroup?.chattingRoom);
+                }}
+                cursor="pointer"
+                margin="0"
+              >
+                그룹 채팅방
+              </Text>
+            </ChatBtn>
 
             <KakaoShareButton detailGroup={detailGroup} />
           </Grid>
@@ -429,7 +430,7 @@ const ChatImg = styled.img`
 const Line = styled.hr`
   width: 106px;
   margin: 16px 0;
-  border: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
 `;
 
 const DropContent = styled.div`

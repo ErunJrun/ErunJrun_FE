@@ -10,7 +10,7 @@ const RESET_MAP = "RESET_MAP";
 
 //initialState
 const initialState = {
-  paths: [],
+  paths: [{ lat: 37.498004414546934, lng: 127.02770621963765 }],
   distance: 0,
   contents: {
     title: "",

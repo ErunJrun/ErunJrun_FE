@@ -12,7 +12,7 @@ const AlarmUpdate = (props) => {
     return (
       <Fragment>
         <Grid
-          margin="0 0 32px 0"
+          margin="0 0 16px 0"
           height="auto"
           display="flex"
           alignItems="flex-start"

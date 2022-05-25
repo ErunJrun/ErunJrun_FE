@@ -13,7 +13,7 @@ const AlarmComment = (props) => {
     return (
       <Fragment>
         <Grid
-          margin="0 0 32px 0"
+          margin="0 0 16px 0"
           height="auto"
           display="flex"
           alignItems="flex-start"
@@ -57,7 +57,6 @@ const AlarmComment = (props) => {
                   hover="font-weight:900;"
                   cursor="pointer"
                   margin="0"
-                  bold
                 >
                   <span style={{ color: "#FF2D55", fontWeight: "700" }}>
                     {props?.groupTitle}

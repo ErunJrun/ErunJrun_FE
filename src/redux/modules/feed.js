@@ -21,7 +21,7 @@ const LOADING = "LOADING";
 const initialState = {
   list: [],
   main: [],
-  preferData: [],
+  preferData: [{ likeDistance: "", likeLocation: "", state: false }],
   detail: {
     mapLatLng: [
       { lat: 37.498004414546934, lng: 127.02770621963765 },

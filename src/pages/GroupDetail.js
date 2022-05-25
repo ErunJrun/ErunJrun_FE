@@ -409,10 +409,4 @@ const DropContent = styled.div`
   padding: 10px;
 `;
 
-const Line = styled.hr`
-  width: 106px;
-  margin: 16px 0;
-  border: 1px solid #dddddd;
-`;
-
 export default GroupDetail;

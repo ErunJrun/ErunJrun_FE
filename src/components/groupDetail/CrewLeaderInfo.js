@@ -8,11 +8,11 @@ import { useMediaQuery } from "react-responsive";
 
 import LevelBox from "./LevelBox";
 
-import chatIcon from "../../assets/groupDetail/chat.png";
+import chatIcon from "../../assets/groupDetail/chat.svg";
 import crewLeaderFlag from "../../assets/groupDetail/crewLeaderFlag.png";
 import crewLeaderName from "../../assets/groupDetail/crewLeaderName.png";
 import mapIcon from "../../assets/groupDetail/map.png";
-import shareIcon from "../../assets/groupDetail/share.png";
+import shareIcon from "../../assets/groupDetail/share.svg";
 import shoesMintIcon from "../../assets/groupDetail/shoesMint.png";
 
 const CrewLeaderInfo = (props) => {

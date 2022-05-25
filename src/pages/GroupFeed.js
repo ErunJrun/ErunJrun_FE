@@ -369,19 +369,28 @@ const GroupFeed = () => {
                       님을 위한 추천 그룹 러닝입니다!
                     </Text>
                     <Text color="#686EF9" margin="0 8px 0 0" size="16px">
-                      {preferData?.likeLocation
-                        ? "#" + preferData?.likeLocation
+                      {preferData
+                        ? preferData?.likeLocation === undefined ||
+                          preferData?.likeLocation === null ||
+                          preferData?.likeLocation === ""
+                          ? null
+                          : "#" + preferData?.likeLocation
                         : null}
                     </Text>
-                    {preferData?.likeDistance ? (
-                      <Text margin="0" size="16px" color="#686EF9">
-                        {"#" + preferData?.likeDistance}
-                      </Text>
-                    ) : (
-                      <Text margin="0" size="16px" color="#686EF9">
-                        {" "}
-                      </Text>
-                    )}
+                    {preferData ? (
+                      preferData?.likeDistance === "미정" ||
+                      preferData?.likeDistance === undefined ||
+                      preferData?.likeDistance === null ||
+                      "" ? (
+                        <Text margin="0" size="16px" color="#686EF9">
+                          {" "}
+                        </Text>
+                      ) : (
+                        <Text margin="0" size="16px" color="#686EF9">
+                          {"#" + preferData?.likeDistance}
+                        </Text>
+                      )
+                    ) : null}
                   </>
                 )}
               </Grid>
@@ -416,21 +425,17 @@ const GroupFeed = () => {
             </Grid>
 
             <Hr></Hr>
-
-            <Grid
-              margin="34px auto 0 auto"
-              minHeight="600px"
-              display="flex"
-              justifyContent="space-between"
-            >
-              {feedList.length !== 0 ? (
-                feedList?.map((item, idx) => {
-                  return <GroupCard key={idx} {...item}></GroupCard>;
-                })
-              ) : (
-                <img style={{ margin: "0 auto" }} src={noSearchData} />
-              )}
-            </Grid>
+            <OpenAnimation>
+              <Grid margin="34px auto 0 auto" minHeight="600px" display="flex">
+                {feedList.length !== 0 ? (
+                  feedList?.map((item, idx) => {
+                    return <GroupCard key={idx} {...item}></GroupCard>;
+                  })
+                ) : (
+                  <img style={{ margin: "0 auto" }} src={noSearchData} />
+                )}
+              </Grid>
+            </OpenAnimation>
             {feedList.length === 0 || paging.page === null ? null : (
               <Grid
                 width="1200px"
@@ -514,6 +519,44 @@ const GroupFeed = () => {
   );
 };
 
+const OpenAnimation = styled.div`
+  -webkit-animation: swing-in-top-fwd 0.5s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  @-webkit-keyframes swing-in-top-fwd {
+    0% {
+      -webkit-transform: rotateX(-100deg);
+      transform: rotateX(-100deg);
+      -webkit-transform-origin: top;
+      transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+      -webkit-transform-origin: top;
+      transform-origin: top;
+      opacity: 1;
+    }
+  }
+  @keyframes swing-in-top-fwd {
+    0% {
+      -webkit-transform: rotateX(-100deg);
+      transform: rotateX(-100deg);
+      -webkit-transform-origin: top;
+      transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+      -webkit-transform-origin: top;
+      transform-origin: top;
+      opacity: 1;
+    }
+  }
+`;
+
 const UploadBtn = styled.img`
   width: 60px;
   height: 60px;
@@ -534,16 +577,9 @@ const Hr = styled.hr`
   margin: 16px auto;
 `;
 
-const BottomHr = styled.div`
-  border: 1px solid #969696;
-  width: 500px;
-  height: 0;
-  margin: 0;
-`;
-
 const HrMob = styled.hr`
   width: 343px;
-  border: 1px solid #f0f0f0;
+  border-top: 1px solid #f0f0f0;
   margin: 0 auto;
 `;
 

@@ -164,7 +164,8 @@ const GroupFilterMob = (props) => {
                     onChange={(e) => {
                       setRegion(e.target.value);
                     }}
-                    value={region}
+                    value={region || ""}
+                    multiple={false}
                   >
                     <option value="none" style={{ color: "#909090" }}>
                       희망 지역 선택

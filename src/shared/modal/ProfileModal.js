@@ -135,7 +135,7 @@ const Content = styled.div`
 const Hr = styled.hr`
   width: 158px;
   height: 0px;
-  border: 1px solid rgba(149, 149, 149, 0.25);
+  border-top: 1px solid rgba(149, 149, 149, 0.25);
   margin: 16px 0;
 `;
 

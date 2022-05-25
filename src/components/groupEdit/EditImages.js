@@ -600,7 +600,7 @@ const Hr = styled.hr`
   width: 865px;
   height: 0px;
   margin: 0 0 48px 0;
-  border: 1px solid #000000;
+  border-top: 1px solid #000000;
   transform: rotate(180deg);
 `;
 

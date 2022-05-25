@@ -179,14 +179,10 @@ const Tag = styled.div`
   margin: 8px 6px 0 0;
   padding: 2px 6px;
   border-radius: 1px;
-  :hover {
-    background-color: #68f99e;
-    box-shadow: 0 0 3px gray;
-  }
 `;
 
 const Hr = styled.hr`
-  border: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
   width: 168px;
   height: 0px;
   margin: 7.1px 0 4px 0;

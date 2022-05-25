@@ -388,7 +388,7 @@ const MidHr = styled.hr`
   width: 100%;
   height: 0px;
   background: #cbcbcb;
-  border: 1px solid #cbcbcb;
+  border-top: 1px solid #cbcbcb;
   transform: rotate(180deg);
   margin-bottom: 32px;
 `;
@@ -397,7 +397,7 @@ const MidHrMob = styled.hr`
   width: 343px;
   height: 0px;
   background: #cbcbcb;
-  border: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
   transform: rotate(180deg);
   margin-bottom: 16px;
 `;

@@ -232,7 +232,7 @@ const DropContent = styled.div`
 const Line = styled.hr`
   width: 105px;
   margin: 16px 0;
-  border: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
 `;
 
 export default ImageSlide;
