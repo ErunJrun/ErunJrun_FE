@@ -323,6 +323,7 @@ const Evaluation = () => {
                       flexWrap="Wrap"
                       maxWidth="1000px"
                       width="100%"
+                      height="400px"
                       display="flex"
                     >
                       {likeCategory.map((e, idx) => {
@@ -383,6 +384,7 @@ const Evaluation = () => {
                       flexWrap="Wrap"
                       maxWidth="1000px"
                       width="100%"
+                      height="400px"
                       display="flex"
                     >
                       {category.map((e, idx) => {
@@ -583,6 +585,7 @@ const LabelDistance = styled.label`
     cursor: pointer;
     box-sizing: border-box;
     border: solid 1px #b8b8b8;
+    padding: 20% auto;
   }
   input:checked + p {
     background-color: #68f99e;

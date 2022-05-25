@@ -93,15 +93,18 @@ const Check = () => {
           margin="50px auto "
         >
           <_InfoBox>
-            <Grid display="flex">
-              <Text bold size="12px" margin="22px 10px 0 15px">
-                {check_list?.groupInfo?.date}
-              </Text>
-              <Text size="12px" margin="22px 0 0 0">
+            <Grid 
+              display="block"
+              textAlign="left"
+            >
+              <Text bold size="12px" margin="15px 0 0 10px">
                 {check_list?.groupInfo?.title}
               </Text>
+              <Text regular size="12px" margin="4px 10px 0 10px">
+                {check_list?.groupInfo?.date}
+              </Text>    
             </Grid>
-            <Text bold size="12px" margin="0 20px 0 0">
+            <Text size="12px" margin="0 20px 0 0">
               {check_list?.groupInfo?.attendanceCount}
             </Text>
           </_InfoBox>
@@ -167,15 +170,27 @@ const Check = () => {
     return (
       <Box>
         <InfoBox>
-          <Grid display="flex">
-            <Text bold size="15px" margin="22px 10px 0 24px">
-              {check_list?.groupInfo?.date}
-            </Text>
-            <Text size="15px" margin="22px 0 0 0">
+          <Grid 
+          display="block"
+          textAlign="left"
+          >
+            <Text 
+              bold 
+              size="15px" 
+              margin="12px 0 0 14px"
+            >
               {check_list?.groupInfo?.title}
             </Text>
+            <Text  
+              regular
+              size="15px" 
+              margin="6px 10px 0 14px"
+              weight="232px"
+            >
+              {check_list?.groupInfo?.date}
+            </Text>
           </Grid>
-          <Text bold size="15px" margin="0 30px 0 0">
+          <Text size="15px" margin="0 30px 0 0">
             {check_list?.groupInfo?.attendanceCount}
           </Text>
         </InfoBox>
@@ -249,7 +264,7 @@ const Box = styled.div`
 `;
 
 const InfoBox = styled.div`
-  height: 65px;
+  height: 70px;
   background-color: #f3f3f3;
   display: flex;
   justify-content: space-between;
@@ -347,8 +362,8 @@ const Btn = styled.button`
   margin: 50px 0 100px 180px;
   border-radius: 3px;
   border: none;
-  background-color: #68f99e;
-  color: #030c37;
+  background-color: #030c37;
+  color: #68f99e;
   font-size: 16px;
   font-weight: 550;
 `;
