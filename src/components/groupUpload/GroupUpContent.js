@@ -253,12 +253,11 @@ const GroupContent = (props) => {
               >
                 <GroupInput
                   type="date"
-                  onClick={(e) => {
-                    console.log(e);
+                  onChange={(e) => {
                     setDate(e.target.value);
                     datePick(e);
                   }}
-                  value={date || ""}
+                  value={date}
                 ></GroupInput>
               </Grid>
 
