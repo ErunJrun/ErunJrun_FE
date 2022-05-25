@@ -65,6 +65,8 @@ api.interceptors.response.use(
       }
 
       if (response.data.message === "유저 정보 불러오기에 실패하였습니다.") {
+        deleteCookie("accessToken");
+        deleteCookie("refreshToken");
         swal({
           text: "로그인 후 이용해 주세요",
           closeOnClickOutside: false,
