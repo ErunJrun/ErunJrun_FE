@@ -238,7 +238,7 @@ const Evaluation = () => {
                       evaluationDB(groupId, hostId, point, evaluationCategory)
                     );
                     dispatch(getRunningDB(userId));
-                    history.push(`/mypage/${userId}`);
+                 
                   }}
                 >
                   평가완료
@@ -410,7 +410,7 @@ const Evaluation = () => {
                       evaluationDB(groupId, hostId, point, evaluationCategory)
                     );
                     dispatch(getRunningDB(userId));
-                    history.push(`/mypage/${userId}`);
+                
                   }}
                 >
                   평가완료
@@ -502,6 +502,7 @@ const EvaluationButton = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: #dedede;
+  cursor: pointer;
   :hover {
     color: #fff;
     background-color: #282932;

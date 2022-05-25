@@ -155,7 +155,7 @@ const Check = () => {
 
           <_Btn
             onClick={() => {
-              history.push(`/mypage/${id}`);
+           
               dispatch(patchAttendDB(groupId, userId, id));
             }}
           >
@@ -241,7 +241,7 @@ const Check = () => {
 
         <Btn
           onClick={() => {
-            history.push(`/mypage/${id}`);
+     
             dispatch(patchAttendDB(groupId, userId));
           }}
         >

@@ -262,12 +262,13 @@ const EvaluationPoint = styled.div`
 `;
 
 const EvaluationPointL = styled.div`
-  width: 477px;
+  width: 1120px;
   height: 213px; 
-  margin: -212px 0 0 1112px;
+  margin: -212px 0 0 0px;
   line-height: 4.25;
   font-size: 18px;
   font-weight: bold;
+  text-align: end;
 `;
 
 const _Hr = styled.div`
