@@ -77,7 +77,14 @@ api.interceptors.response.use(
         });
         return;
       } else {
-        return swal(response.data.message);
+        swal({
+          text: response.data.message,
+          closeOnClickOutside: false,
+        }).then(function (result) {
+          if (result) {
+            history.push("/");
+          }
+        });
       }
     }
 
