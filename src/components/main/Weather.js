@@ -38,9 +38,8 @@ const Weather = () => {
       setTempMax(res.data.main.temp_max);
       setTempMin(res.data.main.temp_min);
       setHumidity(res.data.main.humidity);
-      //console.log(res.data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

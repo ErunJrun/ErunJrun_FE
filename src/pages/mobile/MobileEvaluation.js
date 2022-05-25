@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
 import { useMediaQuery } from "react-responsive";
 import { getProfileDB } from "../../redux/modules/mypage";
-import { history } from '../../redux/configureStore';
-import backBtn from "../../assets/groupFeed/backBtn.svg"
+import { history } from "../../redux/configureStore";
+import backBtn from "../../assets/groupFeed/backBtn.svg";
 
 const MobileEvaluation = () => {
   const isMobile = useMediaQuery({
@@ -15,13 +15,11 @@ const MobileEvaluation = () => {
 
   const myId = localStorage.getItem("userId");
   const profile_list = useSelector((state) => state.mypage.list);
-  console.log(profile_list);
 
-  if(isMobile) {
-
+  if (isMobile) {
     return (
       <>
-      <Grid
+        <Grid
           zIndex="3"
           bg="#ffffff"
           justifyContent="center"
@@ -57,118 +55,72 @@ const MobileEvaluation = () => {
         <Grid weight="100%" margin="80px auto 100px auto">
           <Box>
             <_Box>
-                <Img src="https://ifh.cc/g/9soljs.png"/>
-                <Text bold size="14px" margin="0 0 0px 10px">
-                    좋았어요!
-                </Text>
+              <Img src="https://ifh.cc/g/9soljs.png" />
+              <Text bold size="14px" margin="0 0 0px 10px">
+                좋았어요!
+              </Text>
             </_Box>
             <EvaluationBox>
-                <Text>
-                  “진행한 코스가 만족스러웠어요!”
-                </Text>
-                <Text>
-                  {profile_list?.evaluation?.evaluationCategory1}
-                </Text>
+              <Text>“진행한 코스가 만족스러웠어요!”</Text>
+              <Text>{profile_list?.evaluation?.evaluationCategory1}</Text>
             </EvaluationBox>
             <EvaluationBox>
-                <Text>
-                  “사람들을 잘 이끌어줬어요!“
-                </Text>
-                <Text>
-                  {profile_list?.evaluation?.evaluationCategory2}
-                </Text>
+              <Text>“사람들을 잘 이끌어줬어요!“</Text>
+              <Text>{profile_list?.evaluation?.evaluationCategory2}</Text>
             </EvaluationBox>
             <EvaluationBox>
-                <Text>
-                  “궁금한 점에 대해 빠르게 답해줬어요!”
-                </Text>
-                <Text>
-                  {profile_list?.evaluation?.evaluationCategory3}
-                </Text>
+              <Text>“궁금한 점에 대해 빠르게 답해줬어요!”</Text>
+              <Text>{profile_list?.evaluation?.evaluationCategory3}</Text>
             </EvaluationBox>
             <EvaluationBox>
-                <Text>
-                  “짐을 보관해줘서 편한 러닝이 가능했어요!”
-                </Text>
-                <Text>
-                  {profile_list?.evaluation?.evaluationCategory4}
-                </Text>
+              <Text>“짐을 보관해줘서 편한 러닝이 가능했어요!”</Text>
+              <Text>{profile_list?.evaluation?.evaluationCategory4}</Text>
             </EvaluationBox>
             <EvaluationBox>
-                <Text>
-                  “시간 약속을 잘 지켰어요!”
-                </Text>
-                <Text>
-                  {profile_list?.evaluation?.evaluationCategory5}
-                </Text>
+              <Text>“시간 약속을 잘 지켰어요!”</Text>
+              <Text>{profile_list?.evaluation?.evaluationCategory5}</Text>
             </EvaluationBox>
 
             <_Box>
-                <Img src="https://ifh.cc/g/byFtmr.png"/>
-                <Text bold size="14px" margin="0 0 0px 10px">
+              <Img src="https://ifh.cc/g/byFtmr.png" />
+              <Text bold size="14px" margin="0 0 0px 10px">
                 아쉬웠어요.
-                </Text>
+              </Text>
             </_Box>
 
-            {profile_list?.userInfo?.userId === myId ?
+            {profile_list?.userInfo?.userId === myId ? (
               <>
                 <EvaluationBox>
-                    <Text>
-                      “진행한 코스가 아쉬웠어요.”
-                    </Text>
-                    <Text>
-                      {profile_list?.evaluation?.evaluationCategory6}
-                    </Text>
+                  <Text>“진행한 코스가 아쉬웠어요.”</Text>
+                  <Text>{profile_list?.evaluation?.evaluationCategory6}</Text>
                 </EvaluationBox>
                 <EvaluationBox>
-                    <Text>
-                      “크루원에게 불친절했어요.“
-                    </Text>
-                    <Text>
-                      {profile_list?.evaluation?.evaluationCategory7}
-                    </Text>
+                  <Text>“크루원에게 불친절했어요.“</Text>
+                  <Text>{profile_list?.evaluation?.evaluationCategory7}</Text>
                 </EvaluationBox>
                 <EvaluationBox>
-                    <Text>
-                      “응답이 늦었어요.”
-                    </Text>  
-                    <Text>
-                      {profile_list?.evaluation?.evaluationCategory8}
-                    </Text>
+                  <Text>“응답이 늦었어요.”</Text>
+                  <Text>{profile_list?.evaluation?.evaluationCategory8}</Text>
                 </EvaluationBox>
                 <EvaluationBox>
-                    <Text>
-                      “변경사항을 안내해주지 않았어요.”
-                    </Text>  
-                    <Text>
-                      {profile_list?.evaluation?.evaluationCategory9}
-                    </Text>
+                  <Text>“변경사항을 안내해주지 않았어요.”</Text>
+                  <Text>{profile_list?.evaluation?.evaluationCategory9}</Text>
                 </EvaluationBox>
                 <EvaluationBox>
-                    <Text>
-                      “시간 약속을 잘 안지켰어요.”
-                    </Text>  
-                    <Text>
-                      {profile_list?.evaluation?.evaluationCategory10}
-                    </Text>
+                  <Text>“시간 약속을 잘 안지켰어요.”</Text>
+                  <Text>{profile_list?.evaluation?.evaluationCategory10}</Text>
                 </EvaluationBox>
               </>
-          :          
-            <Text
-              regular
-              size="14px"
-              color="#7b7b7b"
-              margin="0 0 0 20px"
-            >
-              “아쉬웠어요.” 는 본인에게만 보여요!
-            </Text>
-          }
- 
+            ) : (
+              <Text regular size="14px" color="#7b7b7b" margin="0 0 0 20px">
+                “아쉬웠어요.” 는 본인에게만 보여요!
+              </Text>
+            )}
           </Box>
         </Grid>
-        </>
+      </>
     );
-};
+  }
 };
 
 const Box = styled.div`
@@ -192,7 +144,7 @@ const Img = styled.img`
 
 const EvaluationBox = styled.div`
   width: 305px;
-  height: 43px; 
+  height: 43px;
   font-weight: normal;
   border: solid 1px #ddd;
   border-radius: 60px;

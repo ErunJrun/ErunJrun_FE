@@ -64,7 +64,6 @@ const GroupFeed = () => {
   const preferData = useSelector((state) => state.feed.preferData);
   const isLoading = useSelector((state) => state.feed.isLoading);
   const paging = useSelector((state) => state.feed.paging);
-  console.log(paging);
 
   const category = {
     region: region,

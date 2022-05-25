@@ -73,13 +73,10 @@ export const loading = (payload) => ({
 //미들웨어
 export const getCourseDB = (region = 0, sort = "new", page = 1, size = 3) => {
   return async function (dispatch, getState, { history }) {
-    console.log(region, sort);
-
     try {
       const { data } = await api.get(
         `/course/all?region=${region}&sort=${sort}&page=${page}&size=${size}`
       );
-      console.log(data);
       // console.log(data.data.length);
       // let paging = {
       //   page: data.data.length === size ? page + 1 : null,
@@ -88,7 +85,7 @@ export const getCourseDB = (region = 0, sort = "new", page = 1, size = 3) => {
       // console.log(paging);
       // dispatch(getGroup(data, paging));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -296,7 +293,6 @@ export default handleActions(
 
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.isLoading = action.payload.isLoading;
       }),
   },

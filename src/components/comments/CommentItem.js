@@ -32,8 +32,6 @@ const CommentItem = (props) => {
   const recommentList = useSelector((state) => state.recomments.list);
   const commentList = useSelector((state) => state.comments.list);
 
-  console.log(recommentList);
-
   const editToggle = (commentId) => {
     dispatch(_isEdit(commentId));
   };
@@ -45,7 +43,6 @@ const CommentItem = (props) => {
 
   React.useEffect(() => {
     if (commentList.length > 0) {
-      console.log("대댓글 getRecomm");
       dispatch(_getReCommentFX(commentList[0].commentId));
     }
 

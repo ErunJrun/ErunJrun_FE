@@ -57,7 +57,6 @@ const InfoCategory = (props) => {
 
   React.useEffect(() => {
     if (commentList.length > 0) {
-      console.log("대댓글 getRecomm");
       dispatch(_getReCommentFX(commentList[0].commentId));
     }
 

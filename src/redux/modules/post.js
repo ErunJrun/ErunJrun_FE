@@ -25,7 +25,7 @@ export const getPostDB = (category) => {
       const { data } = await api.get(`/group/main`);
       dispatch(getPost(data.data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };

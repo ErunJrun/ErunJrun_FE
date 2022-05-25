@@ -63,7 +63,6 @@ export default handleActions(
 
     [ADD_CONTENTS]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.contents = action.payload;
       }),
 

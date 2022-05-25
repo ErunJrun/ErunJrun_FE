@@ -162,7 +162,6 @@ const Edit = (props) => {
   };
 
   const edit = () => {
-    console.log("나와라");
     dispatch(
       editProfileDB(
         userId,
@@ -179,7 +178,6 @@ const Edit = (props) => {
   };
 
   useEffect(() => {
-    console.log("실행");
     setNickname(props.profile.nickname);
     setImage(props.profile.profileUrl);
     setImgBase(props.profile.profileUrl);
@@ -192,7 +190,7 @@ const Edit = (props) => {
     setCertPhone(props.profile.certPhone);
   }, [props]);
 
-  if( bio === null ) {
+  if (bio === null) {
     setBio("");
   }
 
@@ -276,14 +274,13 @@ const Edit = (props) => {
               자기소개
             </Text>
 
-              <_Input
-                value={bio}
-                onChange={changeContent}
-                type="text"
-                placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
-                maxLength={50}
-              />
-  
+            <_Input
+              value={bio}
+              onChange={changeContent}
+              type="text"
+              placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
+              maxLength={50}
+            />
           </Grid>
 
           <Grid>
@@ -388,7 +385,6 @@ const Edit = (props) => {
                       <input
                         onChange={() => {
                           choiceRegion(idx + 1);
-                          console.log(idx + 1);
                         }}
                         type="radio"
                         name="runRegion"
@@ -421,7 +417,6 @@ const Edit = (props) => {
                       <input
                         onChange={() => {
                           choiceDistance(idx);
-                          console.log(idx);
                         }}
                         type="radio"
                         name="runDistance"
@@ -454,9 +449,6 @@ const Edit = (props) => {
                       <input
                         onChange={() => {
                           choiceExp(idx);
-                          console.log(idx);
-                          console.log(e);
-                          console.log(userLevel);
                         }}
                         type="radio"
                         name="runExp"
@@ -577,13 +569,13 @@ const Edit = (props) => {
           자기소개
         </Text>
 
-          <Input
-            value={bio}
-            onChange={changeContent}
-            type="text"
-            placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
-            maxLength={50}
-          />
+        <Input
+          value={bio}
+          onChange={changeContent}
+          type="text"
+          placeholder="예: 일주일에 7일 러닝하는 불꽃러너!"
+          maxLength={50}
+        />
 
         <Hr style={{ margin: "63px 0 80px 0" }} />
         <Text bold size="20px">
@@ -686,7 +678,6 @@ const Edit = (props) => {
                     <input
                       onChange={() => {
                         choiceRegion(idx + 1);
-                        console.log(idx + 1);
                       }}
                       type="radio"
                       name="runRegion"
@@ -714,7 +705,6 @@ const Edit = (props) => {
                     <input
                       onChange={() => {
                         choiceDistance(idx);
-                        console.log(idx);
                       }}
                       type="radio"
                       name="runDistance"
@@ -742,7 +732,6 @@ const Edit = (props) => {
                     <input
                       onChange={() => {
                         choiceExp(idx);
-                        console.log(idx);
                       }}
                       type="radio"
                       name="runExp"
@@ -1084,7 +1073,8 @@ const LabelExpMob = styled.label`
   }
 `;
 
-{/*const LabelExpMob = styled.label`
+{
+  /*const LabelExpMob = styled.label`
   input {
     display: none;
   }
@@ -1121,7 +1111,8 @@ const LabelExpMob = styled.label`
     ${(props) => (props.checkLevel === 4 ? "color:  white;" : "color: black;")}
     font-weight: 500;
   }
-`;*/}
+`;*/
+}
 
 const LabelDistance = styled.label`
   margin-left: 10px;

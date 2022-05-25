@@ -25,9 +25,6 @@ const Login = ({ location }) => {
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
-  console.log("로그인 page isLogin", isLogin);
-
-  console.log("패쓰네임", location);
 
   if (location?.state) {
     localStorage.setItem("from", location?.state?.from);

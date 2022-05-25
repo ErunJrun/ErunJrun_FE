@@ -18,6 +18,7 @@ import { resetMap } from "../redux/modules/uploadInfo";
 import swal from "sweetalert";
 import { useMediaQuery } from "react-responsive";
 import GroupUploadMob from "./GroupUploadMob";
+import { getCookie } from "../shared/Cookie";
 
 const GroupUpload = () => {
   const isMobile = useMediaQuery({
@@ -113,8 +114,10 @@ const GroupUpload = () => {
     dispatch(resetMap());
   }, []);
 
+  const token = getCookie("accessToken");
+
   useEffect(() => {
-    if (!isLogin) {
+    if (!token) {
       swal("비정상적인 접근입니다.");
       history.push("/");
     }

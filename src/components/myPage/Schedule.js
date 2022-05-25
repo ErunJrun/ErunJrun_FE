@@ -6,7 +6,6 @@ import { history } from "../../redux/configureStore";
 
 const Schedule = () => {
   const profile_list = useSelector((state) => state.mypage.list);
-  console.log(profile_list);
   if (profile_list.length === 0) {
     return <></>;
   }
@@ -16,17 +15,13 @@ const Schedule = () => {
       {profile_list.waiting.length === 0 ? (
         <Box>예정된 그룹 러닝이 없습니다</Box>
       ) : (
-        <Grid
-          display="flex" 
-          width="1230px"
-          margin="0 0 0 -31px"
-        >
+        <Grid display="flex" width="1230px" margin="0 0 0 -31px">
           {profile_list.waiting?.map((waiting, index) => (
             <Grid
               key={index}
               width="288px"
               margin="0 8px 55px 8px"
-              justify-content= "space-between"
+              justify-content="space-between"
             >
               <Grid
                 _onClick={() => {
@@ -46,9 +41,7 @@ const Schedule = () => {
                 ></Image>
 
                 <Grid>
-                  <Title>
-                    {waiting.title}
-                  </Title>
+                  <Title>{waiting.title}</Title>
                   <Text cursor="pointer" size="13px" margin="10px 0 0 0">
                     {waiting.date} (소요 시간 : {waiting.totalTime})
                   </Text>
@@ -68,14 +61,13 @@ const Schedule = () => {
                 ></Grid>
               </Grid>
 
-                <ApplyBtnTrue
-                  onClick={() => {
-                    history.push(`/groupdetail/${waiting.groupId}`);
-                  }}
-                >
-                  상세보기
-                </ApplyBtnTrue>
-              
+              <ApplyBtnTrue
+                onClick={() => {
+                  history.push(`/groupdetail/${waiting.groupId}`);
+                }}
+              >
+                상세보기
+              </ApplyBtnTrue>
             </Grid>
           ))}
         </Grid>
@@ -146,16 +138,15 @@ const Box = styled.div`
 `;
 
 const Title = styled.text`
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis; 
-white-space: nowrap; 
-display:block;
-font-weight: bold;
-font-size: 16px;
-cursor:pointer;
-margin:14px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 14px 0 0 0;
 `;
-
 
 export default Schedule;

@@ -57,7 +57,6 @@ export const kakaoLogin = (authorization_code) => {
       const { data } = await api.get(
         `user/kakao/callback?code=${authorization_code}`
       );
-      console.log(data);
       const userId = data.userId;
       const nickname = data.nickname;
       const profileUrl = data.profileUrl;
@@ -88,7 +87,7 @@ export const kakaoLogin = (authorization_code) => {
         history.replace("/");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -99,7 +98,6 @@ export const naverLoginDB = (code, state) => {
       const { data } = await api.get(
         `user/naver/callback?code=${code}&state=${state}`
       );
-      console.log(data);
       const userId = data.userId;
       const nickname = data.nickname;
       const profileUrl = data.profileUrl;
@@ -130,7 +128,7 @@ export const naverLoginDB = (code, state) => {
         history.replace("/");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -143,18 +141,16 @@ export const loginInfoDB = (likeLocation, likeDistance, userLevel) => {
         likeDistance: likeDistance,
         userLevel: userLevel,
       });
-      console.log(data);
 
       history.push("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
 
 export const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
-    console.log("로그인 체크 DB");
     const token = getCookie("accessToken");
 
     if (!token) {
@@ -163,7 +159,6 @@ export const loginCheckDB = () => {
     api
       .get("/user/auth")
       .then((res) => {
-        console.log(res.data);
         if (res.data) {
           const userId = res.data.userId;
           const nickname = res.data.nickname;
@@ -193,7 +188,7 @@ export const loginCheckDB = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 };
@@ -202,7 +197,6 @@ export const logoutDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await api.delete(`/user/logout`);
-      console.log(data);
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
       localStorage.clear();
@@ -210,7 +204,7 @@ export const logoutDB = () => {
       dispatch(logOut());
       history.push("/login");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -219,10 +213,9 @@ export const _getAlarmDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const data = await api.get(`/alarm`);
-      console.log(data);
       dispatch(getAlarm(data.data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -231,10 +224,9 @@ export const _readAlarmDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const data = await api.patch(`/alarm`);
-      console.log(data);
       // dispatch(readAlarm(data.data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -259,7 +251,6 @@ export default handleActions(
 
     [GET_ALARM]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.alarm = action.payload;
       }),
   },

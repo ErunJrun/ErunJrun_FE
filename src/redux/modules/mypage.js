@@ -110,7 +110,7 @@ export const getProfileDB = (userId) => {
       //console.log(data.data);
       dispatch(getProfile(data.data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -119,12 +119,10 @@ export const getProfileDB = (userId) => {
 export const getRunningDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(userId);
       const { data } = await api.get(`/group/complete?userId=${userId}`);
-      console.log(data);
       dispatch(getRunning(data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -133,12 +131,10 @@ export const getRunningDB = (userId) => {
 export const getMyRunningDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(userId);
       const { data } = await api.get(`/group/mypage?userId=${userId}`);
-      console.log(data);
       dispatch(getMyRunning(data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -169,17 +165,6 @@ export const editProfileDB = (
 ) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(
-        userId,
-        nickname,
-        image,
-        bio,
-        likeLocation,
-        likeDistance,
-        userLevel,
-        phone,
-        agreeSMS
-      );
       const formData = new FormData();
 
       formData.append("nickname", nickname);
@@ -195,10 +180,9 @@ export const editProfileDB = (
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data);
       history.push(`/mypage/${userId}`);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -207,15 +191,13 @@ export const editProfileDB = (
 export const numberCheckMiddleware = (phone) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(phone);
       const { data } = await api.post(`/user/message`, {
         tel: phone,
       });
-      console.log(data);
       swal("인증번호가 발송 되었습니다");
     } catch (error) {
-      console.log(error);
-      swal(error);
+      // console.log(error);
+      swal(error.message);
     }
   };
 };
@@ -224,15 +206,13 @@ export const numberCheckMiddleware = (phone) => {
 export const getNumberCheckMiddleware = (phone, numberCK) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(phone, numberCK);
       const { data } = await api.post(`/user/verify`, {
         tel: phone,
         code: numberCK,
       });
-      console.log(data);
       swal(data.message);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       swal(error.message);
     }
   };
@@ -242,13 +222,10 @@ export const getNumberCheckMiddleware = (phone, numberCK) => {
 export const getEvaluationDB = (groupId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId);
       const { data } = await api.get(`/group/evaluation/${groupId}`);
-        console.log(data);
-        dispatch(getEvaluation(data));
-      
+      dispatch(getEvaluation(data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -276,11 +253,10 @@ export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
           },
         }
       );
-      console.log(data);
       swal("호스트 평가가 완료되었습니다!");
       //history.push("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -289,13 +265,11 @@ export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
 export const getAttendDB = (groupId, userId, hostId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId, userId, hostId);
       const { data } = await api.get(`/group/attendance/${groupId}`);
-      console.log(data);
       dispatch(getAttend(data));
     } catch (error) {
-      console.log(error);
-      swal(error);
+      // console.log(error);
+      swal(error.message);
     }
   };
 };
@@ -304,7 +278,6 @@ export const getAttendDB = (groupId, userId, hostId) => {
 export const patchAttendDB = (groupId, userId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId, userId);
       const formData = new FormData();
 
       localStorage.removeItem("from");
@@ -320,11 +293,10 @@ export const patchAttendDB = (groupId, userId) => {
           },
         }
       );
-      console.log(data);
       swal("출석체크가 완료되었습니다!");
       //history.push("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -334,7 +306,6 @@ export const deleteUserDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await api.delete(`/user/delete`);
-      console.log(data);
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
       localStorage.clear();
@@ -344,7 +315,7 @@ export const deleteUserDB = () => {
       history.push("/login");
       dispatch(deleteUser());
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -378,13 +349,11 @@ export default handleActions(
 
     [GET_INFORMATION]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.info = action.payload;
       }),
 
     [EDIT_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.list = action.payload.nickname;
         draft.list = action.payload.image;
         draft.list = action.payload.bio;
@@ -397,25 +366,21 @@ export default handleActions(
 
     [NUMBER_CHECK]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.phoneNumber = action.payload;
       }),
 
     [GETNUMBER_CHECK]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.phoneNumber = action.payload;
       }),
 
     [GET_EVALUATION]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.host = action.payload;
       }),
 
     [PATCH_EVALUATION]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.evaluation = action.hostId;
         draft.evaluation = action.point;
         draft.evaluation = action.evaluationCategory;
@@ -423,13 +388,11 @@ export default handleActions(
 
     [GET_ATTEND]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.attend = action.payload;
       }),
 
     [PATCH_ATTEND]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.att = action.attendance;
       }),
 

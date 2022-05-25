@@ -55,8 +55,6 @@ const GroupDetail = () => {
         text: "로그인 후 이용해 주세요",
         closeOnClickOutside: false,
       }).then(function (result) {
-        console.log(result);
-
         if (result) {
           history.push("/login");
         }

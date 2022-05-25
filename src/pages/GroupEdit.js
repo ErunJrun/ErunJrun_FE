@@ -10,6 +10,7 @@ import { getGroupDetailDB } from "../redux/modules/feed";
 import swal from "sweetalert";
 import { useMediaQuery } from "react-responsive";
 import EditContentMob from "../components/groupEdit/EditContentMob";
+import { getCookie } from "../shared/Cookie";
 
 const GroupEdit = () => {
   const isMobile = useMediaQuery({
@@ -29,8 +30,10 @@ const GroupEdit = () => {
     dispatch(getGroupDetailDB(groupId));
   }, []);
 
+  const token = getCookie("accessToken");
+
   useEffect(() => {
-    if (!isLogin) {
+    if (!token) {
       swal("비정상적인 접근입니다.");
       history.push("/");
     }

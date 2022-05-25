@@ -34,8 +34,6 @@ const KakaoMapMob = () => {
   });
   const [moveLine, setMoveLine] = useState();
 
-  console.log(paths, mousePosition, clickLine);
-
   //서버에 보내줄 최종 거리(km)
 
   const totalDistance = (distances[distances.length - 1] / 1000).toFixed(2);

@@ -12,10 +12,8 @@ const Group = () => {
   const params = useParams();
   const userId = params.userId;
   const groupId = params.groupId;
-  console.log(params);
 
   const running = useSelector((state) => state.mypage.group);
-  console.log(running);
 
   useEffect(() => {
     dispatch(getRunningDB(userId));
@@ -30,18 +28,14 @@ const Group = () => {
       {running.data.length === 0 ? (
         <Box>참여완료한 그룹러닝이 없습니다</Box>
       ) : (
-        <Grid 
-        display="flex" 
-        width="1230px"
-        margin="0 0 0 -31px"
-        >
+        <Grid display="flex" width="1230px" margin="0 0 0 -31px">
           {running?.data?.map((data, index) => {
             return userId !== data.userId ? (
               <Grid
                 key={index}
                 width="288px"
                 margin="0 8px 55px 8px"
-                justify-content= "space-between"
+                justify-content="space-between"
               >
                 <Grid
                   _onClick={() => {
@@ -61,7 +55,12 @@ const Group = () => {
                   ></Image>
 
                   <Grid>
-                    <Title cursor="pointer" size="16px" bold margin="14px 0 0 0">
+                    <Title
+                      cursor="pointer"
+                      size="16px"
+                      bold
+                      margin="14px 0 0 0"
+                    >
                       {data.title}
                     </Title>
                     <Text cursor="pointer" size="13px" margin="2px 0 0 0">
@@ -73,43 +72,43 @@ const Group = () => {
                     <Tag>{data.location}</Tag>
                     <Tag>{data.distance}km</Tag>
                     <Tag>{data.thema}</Tag>
-                  </Grid><Hr></Hr>
+                  </Grid>
+                  <Hr></Hr>
                 </Grid>
-                  {myId === userId ? 
-                    <>
-                      <Grid
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        margin="0 0 10px 0"
-                      >
-                      </Grid>
-                      {data.evaluation ? (
-                        <ApplyBtnFalse>평가완료</ApplyBtnFalse>
-                      ) 
-                      :
-                      (
-                        <ApplyBtnTrue  
-                        onClick={() => { 
-                          dispatch(getEvaluationDB(data.groupId, data.userId, userId));
-                          history.push(`/evaluation/${data.groupId}`);                   
-                        }}   
-                      >
-                        크루장 평가하기 
-                      </ApplyBtnTrue> 
-                      )}
-                    </>
-                  : 
-                    <Grid margin="10px 0 0 0">
+                {myId === userId ? (
+                  <>
+                    <Grid
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                      margin="0 0 10px 0"
+                    ></Grid>
+                    {data.evaluation ? (
+                      <ApplyBtnFalse>평가완료</ApplyBtnFalse>
+                    ) : (
                       <ApplyBtnTrue
                         onClick={() => {
-                          history.push(`/groupdetail/${data.groupId}`);
+                          dispatch(
+                            getEvaluationDB(data.groupId, data.userId, userId)
+                          );
+                          history.push(`/evaluation/${data.groupId}`);
                         }}
                       >
-                        상세보기
+                        크루장 평가하기
                       </ApplyBtnTrue>
-                    </Grid>
-                  }
+                    )}
+                  </>
+                ) : (
+                  <Grid margin="10px 0 0 0">
+                    <ApplyBtnTrue
+                      onClick={() => {
+                        history.push(`/groupdetail/${data.groupId}`);
+                      }}
+                    >
+                      상세보기
+                    </ApplyBtnTrue>
+                  </Grid>
+                )}
               </Grid>
             ) : null;
           })}
@@ -195,16 +194,15 @@ const Box = styled.div`
 `;
 
 const Title = styled.text`
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis; 
-white-space: nowrap; 
-display:block;
-font-weight: bold;
-font-size: 16px;
-cursor:pointer;
-margin:14px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 14px 0 0 0;
 `;
-
 
 export default Group;

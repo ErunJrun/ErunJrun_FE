@@ -28,12 +28,8 @@ const CommentList = () => {
   // }, []);
 
   React.useEffect(() => {
-    console.log("코멘트 리스트 get");
-
     dispatch(_getCommentFX("group", groupId));
   }, []);
-
-  console.log(commentList, recommentList);
 
   if (isMobile) {
     return (

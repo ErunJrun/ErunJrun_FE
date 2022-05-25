@@ -11,7 +11,11 @@ import MyGroup from "../myPage/MyGroup";
 import Ready from "../../shared/Ready";
 import { styled as muiStyled } from "@mui/material/styles";
 
-import { getProfileDB, getRunningDB, getMyRunningDB } from "../../redux/modules/mypage";
+import {
+  getProfileDB,
+  getRunningDB,
+  getMyRunningDB,
+} from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Grid } from "swiper";
@@ -48,7 +52,6 @@ export default function BasicTabs() {
   const dispatch = useDispatch();
   const params = useParams();
   const userId = params.userId;
-  console.log(userId);
 
   const [value, setValue] = React.useState(0);
   const [expected, setExpected] = useState(true);
@@ -67,10 +70,10 @@ export default function BasicTabs() {
     },
   });
 
-  const AntTab = muiStyled((props) => <Tab disableRipple {...props} /> )(
+  const AntTab = muiStyled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({
       textTransform: "none",
-     
+
       minWidth: 0,
       [theme.breakpoints.up("sm")]: {
         minWidth: 0,
@@ -103,161 +106,162 @@ export default function BasicTabs() {
       },
     })
   );
-  
+
   return (
     <Box sx={{ width: "1200px" }}>
-       <Box sx={{ bgcolor: "#fff" }}>
-        <AntTabs sx={{
-          color: "#000", 
-          fontSize:"18px", 
-          fontWeight: "bold",
-          fontFamily: "Spoqa Han Sans Neo"
-        }}
+      <Box sx={{ bgcolor: "#fff" }}>
+        <AntTabs
+          sx={{
+            color: "#000",
+            fontSize: "18px",
+            fontWeight: "bold",
+            fontFamily: "Spoqa Han Sans Neo",
+          }}
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <AntTab sx={{ 
-            color: "#909090", 
-            fontSize:"18px", 
-            fontWeight: "bold",
-            fontFamily: "Spoqa Han Sans Neo"
+          <AntTab
+            sx={{
+              color: "#909090",
+              fontSize: "18px",
+              fontWeight: "bold",
+              fontFamily: "Spoqa Han Sans Neo",
             }}
-            label="그룹 러닝" 
-            {...a11yProps(0)} 
-            />
-          <AntTab sx={{ 
-            color: "#909090", 
-            fontSize:"18px", 
-            fontWeight: "bold",
-            fontFamily: "Spoqa Han Sans Neo", 
+            label="그룹 러닝"
+            {...a11yProps(0)}
+          />
+          <AntTab
+            sx={{
+              color: "#909090",
+              fontSize: "18px",
+              fontWeight: "bold",
+              fontFamily: "Spoqa Han Sans Neo",
             }}
-            label="추천 코스" 
-            {...a11yProps(1)} 
-            />
-          <AntTab sx={{ 
-            color: "#909090", 
-            fontSize:"18px", 
-            fontWeight: "bold",
-            fontFamily: "Spoqa Han Sans Neo",
+            label="추천 코스"
+            {...a11yProps(1)}
+          />
+          <AntTab
+            sx={{
+              color: "#909090",
+              fontSize: "18px",
+              fontWeight: "bold",
+              fontFamily: "Spoqa Han Sans Neo",
             }}
-            label="뱃지" 
-            {...a11yProps(2)} 
-            />
+            label="뱃지"
+            {...a11yProps(2)}
+          />
         </AntTabs>
       </Box>
-      <TabPanel value={value} index={0} >
-
-      {expected ? 
-        <CategoryBox>
-          <Btn
-          onClick={() => {
-            setExpected(true);
-            setComplete(false);
-            setMyGroup(false);
-            dispatch(getProfileDB(userId));
-          }}
-          >
-            참여 예정
-          </Btn>
-          <Button
-            onClick={() => {
-            setExpected(false);
-            setComplete(true);
-            setMyGroup(false);
-            dispatch(getRunningDB(userId));
-          }}
-          >
-            참여 완료
-          </Button>
-          <Button
-            onClick={() => {
-            setExpected(false);
-            setComplete(false);
-            setMyGroup(true);
-            dispatch(getMyRunningDB(userId));
-          }}
-          >
-            My 모집
-          </Button>
-        </CategoryBox>
-      :
-        <>
-          {complete ? 
-            <CategoryBox>
-              <Button
-                onClick={() => {
+      <TabPanel value={value} index={0}>
+        {expected ? (
+          <CategoryBox>
+            <Btn
+              onClick={() => {
                 setExpected(true);
                 setComplete(false);
                 setMyGroup(false);
                 dispatch(getProfileDB(userId));
               }}
-              >
-                참여 예정
-              </Button>
-              <Btn
-                onClick={() => {
+            >
+              참여 예정
+            </Btn>
+            <Button
+              onClick={() => {
                 setExpected(false);
                 setComplete(true);
                 setMyGroup(false);
                 dispatch(getRunningDB(userId));
               }}
-              >
-                참여 완료
-              </Btn>
-              <Button
-                onClick={() => {
+            >
+              참여 완료
+            </Button>
+            <Button
+              onClick={() => {
                 setExpected(false);
                 setComplete(false);
                 setMyGroup(true);
                 dispatch(getMyRunningDB(userId));
               }}
-              >
-                My 모집
-              </Button>
-            </CategoryBox> 
-          :
-            <>
-              {myGroup ? 
-                <CategoryBox>
-                  <Button
-                    onClick={() => {
+            >
+              My 모집
+            </Button>
+          </CategoryBox>
+        ) : (
+          <>
+            {complete ? (
+              <CategoryBox>
+                <Button
+                  onClick={() => {
                     setExpected(true);
                     setComplete(false);
                     setMyGroup(false);
                     dispatch(getProfileDB(userId));
                   }}
-                  >
-                    참여 예정
-                  </Button>
-                  <Button
-                    onClick={() => {
+                >
+                  참여 예정
+                </Button>
+                <Btn
+                  onClick={() => {
                     setExpected(false);
                     setComplete(true);
                     setMyGroup(false);
                     dispatch(getRunningDB(userId));
                   }}
-                  >
-                    참여 완료
-                  </Button>
-                  <Btn
-                    onClick={() => {
+                >
+                  참여 완료
+                </Btn>
+                <Button
+                  onClick={() => {
                     setExpected(false);
                     setComplete(false);
                     setMyGroup(true);
                     dispatch(getMyRunningDB(userId));
                   }}
-                  >
-                    My 모집
-                  </Btn>
-                </CategoryBox> 
-              :
-                null
-              }
-            </>
-          }        
-        </>
-      }
+                >
+                  My 모집
+                </Button>
+              </CategoryBox>
+            ) : (
+              <>
+                {myGroup ? (
+                  <CategoryBox>
+                    <Button
+                      onClick={() => {
+                        setExpected(true);
+                        setComplete(false);
+                        setMyGroup(false);
+                        dispatch(getProfileDB(userId));
+                      }}
+                    >
+                      참여 예정
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setExpected(false);
+                        setComplete(true);
+                        setMyGroup(false);
+                        dispatch(getRunningDB(userId));
+                      }}
+                    >
+                      참여 완료
+                    </Button>
+                    <Btn
+                      onClick={() => {
+                        setExpected(false);
+                        setComplete(false);
+                        setMyGroup(true);
+                        dispatch(getMyRunningDB(userId));
+                      }}
+                    >
+                      My 모집
+                    </Btn>
+                  </CategoryBox>
+                ) : null}
+              </>
+            )}
+          </>
+        )}
         {expected === true ? <Schedule /> : null}
         {complete === true ? <Group /> : null}
         {myGroup === true ? <MyGroup /> : null}
@@ -279,21 +283,21 @@ const CategoryBox = styled.div`
 
 const Btn = styled.div`
   width: 143px;
-  height: 30px; 
+  height: 30px;
   margin: 0px 20px 30px 0;
   padding-top: 10px;
   border-radius: 50px;
   border: none;
-  background-color:#68f99e;
+  background-color: #68f99e;
   color: #030c37;
   font-weight: bold;
   font-size: 16px;
-  text-align: center; 
+  text-align: center;
 `;
 
 const Button = styled.div`
   width: 143px;
-  height: 30px; 
+  height: 30px;
   margin: 0px 20px 30px 0;
   padding-top: 10px;
   border-radius: 50px;

@@ -91,7 +91,6 @@ export const loading = (payload) => ({
 //미들웨어
 export const getGroupDB = (category, page = 1, size = 6) => {
   return async function (dispatch, getState, { history }) {
-    console.log(category, page, size);
     const _paging = getState().feed.paging;
     if (!_paging.page) {
       return;
@@ -137,17 +136,14 @@ export const getGroupDB = (category, page = 1, size = 6) => {
       const { data } = await api.get(
         `/group/all?date=${startDate}${endDate}&region=${region}&time=${time}&distance=${distance}&finish=${finish}&thema=${theme}&page=${page}&size=${size}`
       );
-      console.log(data);
-      console.log(data.data.length);
       let paging = {
         page: data.data.length === size ? page + 1 : null,
         size: size,
       };
-      console.log(paging);
 
       dispatch(getGroup(data, paging));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -156,10 +152,9 @@ export const getMainDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await api.get(`/group/main`);
-      console.log(data);
       dispatch(getMain(data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -167,12 +162,10 @@ export const getMainDB = () => {
 export const getGroupDetailDB = (groupId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId);
       const { data } = await api.get(`/group/detail/${groupId}`);
-      console.log(data.data);
       dispatch(getGroupDetail(data.data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       swal("해당 게시물이 존재하지 않습니다");
     }
   };
@@ -186,7 +179,6 @@ export const addGroupDB = (
   distance
 ) => {
   return async function (dispatch, getState, { history }) {
-    console.log(mapLatLng, thumbnail, contents, address, distance);
     const formData = new FormData();
     thumbnail?.map((e, idx) => {
       return formData.append("thumbnail", e);
@@ -212,30 +204,26 @@ export const addGroupDB = (
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data);
       swal("게시물 등록 완료", "", "success");
-      console.log("1");
       history.replace("/groupfeed");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
 
 export const deleteGroupDB = (groupId) => {
   return function (dispatch, getState, { history }) {
-    console.log(groupId);
     api
       .delete(`/group/${groupId}`)
       .then((res) => {
-        console.log(res);
         swal("삭제 완료");
 
         history.push("/groupfeed");
       })
 
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 };
@@ -243,14 +231,6 @@ export const deleteGroupDB = (groupId) => {
 export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(
-        groupId,
-        contents,
-        "url=>=>",
-        thumbnailUrl,
-        "새사진파일 =>=>",
-        thumbnail
-      );
       const formData = new FormData();
 
       thumbnail?.map((e, idx) => {
@@ -278,10 +258,9 @@ export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data.data);
       history.push("/groupfeed");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -289,9 +268,7 @@ export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
 export const applyGroupDB = (groupId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId);
       const { data } = await api.post(`/group/${groupId}/apply`);
-      console.log(data.data);
 
       const applyData = {
         groupId: groupId,
@@ -301,8 +278,7 @@ export const applyGroupDB = (groupId) => {
 
       dispatch(applyGroup(applyData));
     } catch (error) {
-      console.log(error);
-      console.log("안녕", error.message);
+      // console.log(error);
     }
   };
 };
@@ -310,9 +286,7 @@ export const applyGroupDB = (groupId) => {
 export const applyDetailDB = (groupId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(groupId);
       const { data } = await api.post(`/group/${groupId}/apply`);
-      console.log(data.data);
 
       const applyData = {
         groupId: groupId,
@@ -322,8 +296,7 @@ export const applyDetailDB = (groupId) => {
       dispatch(getGroupDetailDB(groupId));
       dispatch(applyDetail(applyData));
     } catch (error) {
-      console.log(error);
-      console.log("안녕2", error.message);
+      // console.log(error);
     }
   };
 };
@@ -352,7 +325,6 @@ export default handleActions(
       }),
     [GET_GROUP]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action);
         draft.preferData = action.feedList.preferData;
         draft.list.push(...action.feedList.data);
         draft.isLoading = false;
@@ -362,7 +334,6 @@ export default handleActions(
       }),
     [GET_MAIN]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action);
         draft.preferData = action.feedList.preferData;
         draft.main = action.feedList.data;
         draft.isLoading = false;
@@ -375,7 +346,6 @@ export default handleActions(
 
     [EDIT_GROUP_CONTENT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.detail.baggage = action.payload[0]?.baggage;
         draft.detail.content = action.payload[0]?.content;
         draft.detail.date = action.payload[0]?.date;
@@ -391,7 +361,6 @@ export default handleActions(
 
     [APPLY_GROUP]: (state, action) =>
       produce(state, (draft) => {
-        console.log(state);
         draft.list.map((e, i) => {
           if (action.payload.groupId === e.groupId) {
             e.applyState = action.payload.applyState;
@@ -402,14 +371,12 @@ export default handleActions(
 
     [APPLY_DETAIL]: (state, action) =>
       produce(state, (draft) => {
-        console.log(state);
         draft.detail.applyState = action.payload.applyState;
         draft.detail.applyPeople = action.payload.applyPeople;
       }),
 
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.isLoading = action.payload.isLoading;
       }),
   },

@@ -31,7 +31,6 @@ const Evaluation = () => {
   const [point, setPoint] = useState(1);
 
   const host = useSelector((state) => state.mypage.host);
-  console.log(host);
 
   const userId = localStorage.getItem("userId");
   const hostId = host?.hostUser?.user?.userId;
@@ -152,7 +151,6 @@ const Evaluation = () => {
                         <input
                           onClick={() => {
                             choiceCategory(idx + 1);
-                            console.log(idx + 1);
                           }}
                           type="radio"
                           name="likeCategory"
@@ -223,7 +221,6 @@ const Evaluation = () => {
                         <input
                           onClick={() => {
                             choiceCategory(idx + 6);
-                            console.log(idx + 6);
                           }}
                           type="radio"
                           name="category"
@@ -333,7 +330,6 @@ const Evaluation = () => {
                               <input
                                 onClick={() => {
                                   choiceCategory(idx + 1);
-                                  console.log(idx + 1);
                                 }}
                                 type="radio"
                                 name="likeCategory"
@@ -394,7 +390,6 @@ const Evaluation = () => {
                               <input
                                 onClick={() => {
                                   choiceCategory(idx + 6);
-                                  console.log(idx + 6);
                                 }}
                                 type="radio"
                                 name="category"

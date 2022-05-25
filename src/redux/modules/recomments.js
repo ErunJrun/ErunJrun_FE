@@ -52,9 +52,7 @@ const initialState = {
 export const _getReCommentFX = (commentId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(commentId);
       const { data } = await api.get(`/recomment/${commentId}`);
-      console.log(data);
 
       let recomment_list = [];
 
@@ -64,7 +62,7 @@ export const _getReCommentFX = (commentId) => {
 
       dispatch(getReComm(recomment_list));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -73,12 +71,9 @@ export const _getReCommentFX = (commentId) => {
 export const _addReCommentFX = (commentId, content, groupId) => {
   return async function (dispatch, { history }) {
     try {
-      console.log(commentId, content);
       const { data } = await api.post(`/recomment/${commentId}`, {
         content: content,
       });
-      console.log(data);
-      console.log("대댓글등록");
 
       let recomment_list = [];
 
@@ -90,7 +85,7 @@ export const _addReCommentFX = (commentId, content, groupId) => {
       dispatch(_getCommentFX("group", groupId));
       swal("답글 등록 완료");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -98,29 +93,23 @@ export const _addReCommentFX = (commentId, content, groupId) => {
 export const _deleteReCommentFX = (recommentId, groupId) => {
   return async function (dispatch, { history }) {
     try {
-      console.log(recommentId);
       const { data } = await api.delete(`/recomment/${recommentId}`);
-      console.log(data);
       swal("답글 삭제 완료");
       dispatch(deleteReComm(recommentId));
       dispatch(_getCommentFX("group", groupId));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
 
 export const _isReEdit = (recommentId) => {
   return async function (dispatch, getState) {
-    console.log(recommentId);
-
     const _recomment_list = getState().recomments.list;
-    console.log(_recomment_list);
 
     const recomment_index = _recomment_list.findIndex((b) => {
       return b.recommentId === recommentId;
     });
-    console.log(recomment_index);
     dispatch(isReEdit(recomment_index));
   };
 };
@@ -128,15 +117,13 @@ export const _isReEdit = (recommentId) => {
 export const _editReCommentFX = (recommentId, content) => {
   return async function (dispatch, { history }) {
     try {
-      console.log(recommentId, content);
       const { data } = await api.patch(`/recomment/${recommentId}`, {
         content: content,
       });
-      console.log(data);
       dispatch(editReComm(data.data));
       swal("답글 수정 완료");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -146,7 +133,6 @@ export default handleActions(
   {
     [GET_RE_COMM]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.list = action.payload;
       }),
 
@@ -160,14 +146,11 @@ export default handleActions(
 
     [EDIT_RE_COMM]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.list = action.payload;
       }),
 
     [IS_RE_EDIT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
-        console.log(state.list);
         const isReEditList = state.list.map((e, i) => {
           if (action.payload === i) {
             if (e.isRecomm === false || null) {

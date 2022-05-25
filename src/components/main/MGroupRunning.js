@@ -44,7 +44,6 @@ const MGroupRunning = () => {
     dispatch(getMainDB());
 
     return () => {
-      console.log("그룹 게시물 클린업");
       dispatch(resetGroup());
     };
   }, []);

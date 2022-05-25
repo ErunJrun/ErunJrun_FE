@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import backBtn from "../../assets/groupFeed/backBtn.svg"
+import backBtn from "../../assets/groupFeed/backBtn.svg";
 
 const MobileGroup = () => {
   const isMobile = useMediaQuery({
@@ -18,10 +18,7 @@ const MobileGroup = () => {
   const userId = params.userId;
   const myId = localStorage.getItem("userId");
 
-  console.log(userId);
-
   const running = useSelector((state) => state.mypage.group);
-  console.log(running);
 
   useEffect(() => {
     dispatch(getRunningDB(userId));
@@ -31,8 +28,8 @@ const MobileGroup = () => {
     return <></>;
   }
 
-  if(isMobile) {
-  return (
+  if (isMobile) {
+    return (
       <>
         <Grid
           zIndex="3"
@@ -66,95 +63,101 @@ const MobileGroup = () => {
             </Text>
           </Grid>
         </Grid>
-    <Grid weight="375px" margin="80px auto 50px auto" textAlign="-webkit-center">
-      {running.data.length === 0 ? (
-        <Box>참여완료한 그룹러닝이 없습니다</Box>
-      ) : (
-        <Grid display="flex" width="375px" justifyContent="space-between">
-          {running.data.map((data, index) => {
-            return userId !== data.userId ? (
-              <Grid
-                key={index}
-                width="166px"
-                margin="0 10px 40px 10px"
-              >
-                <Grid
-                  _onClick={() => {
-                    history.push(`/groupdetail/${data.groupId}`);
-                  }}
-                  width="100%"
-                  display="flex"
-                  flexDirection="column"
-                  cursor="pointer"
-                >
-                  <Img src={data.thumbnailUrl}/>
+        <Grid
+          weight="375px"
+          margin="80px auto 50px auto"
+          textAlign="-webkit-center"
+        >
+          {running.data.length === 0 ? (
+            <Box>참여완료한 그룹러닝이 없습니다</Box>
+          ) : (
+            <Grid display="flex" width="375px" justifyContent="space-between">
+              {running.data.map((data, index) => {
+                return userId !== data.userId ? (
+                  <Grid key={index} width="166px" margin="0 10px 40px 10px">
+                    <Grid
+                      _onClick={() => {
+                        history.push(`/groupdetail/${data.groupId}`);
+                      }}
+                      width="100%"
+                      display="flex"
+                      flexDirection="column"
+                      cursor="pointer"
+                    >
+                      <Img src={data.thumbnailUrl} />
 
-                  <Grid>
-                    <Title>
-                      {data.title}
-                    </Title>
-                    <Text cursor="pointer" size="11px" margin="5px 0 0 0" textAlign="left">
-                      {data.date} 
-                    </Text>
-                  </Grid>
-
-                  <Grid width="166px" cursor="pointer" display="flex">
-                    <Tag>{data.location}</Tag>
-                    <Tag>{data.distance}km</Tag>
-                  </Grid>
-                  <Hr></Hr>
-                </Grid>
-                  {myId === userId ? 
-                    <>
-                      <Grid
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        margin="0 0 10px 0"
-                      >
+                      <Grid>
+                        <Title>{data.title}</Title>
+                        <Text
+                          cursor="pointer"
+                          size="11px"
+                          margin="5px 0 0 0"
+                          textAlign="left"
+                        >
+                          {data.date}
+                        </Text>
                       </Grid>
-                      {data.evaluation ? (
-                        <ApplyBtnFalse>평가완료</ApplyBtnFalse>
-                      ) 
-                      :
-                      (
-                        <ApplyBtnTrue  
-                        onClick={() => { 
-                          dispatch(getEvaluationDB(data.groupId, data.userId, userId));
-                          history.push(`/evaluation/${data.groupId}`);               
-                        }}   
-                      >
-                        크루장 평가하기 
-                      </ApplyBtnTrue> 
-                      )}
-                    </>
-                  : 
-                    <Grid margin="10px 0 0 0">
-                      <ApplyBtnTrue
-                        onClick={() => {
-                          history.push(`/groupdetail/${data.groupId}`);
-                        }}
-                      >
-                        상세보기
-                      </ApplyBtnTrue>
+
+                      <Grid width="166px" cursor="pointer" display="flex">
+                        <Tag>{data.location}</Tag>
+                        <Tag>{data.distance}km</Tag>
+                      </Grid>
+                      <Hr></Hr>
                     </Grid>
-                  }
-              </Grid>
-            ) : null;
-          })}
+                    {myId === userId ? (
+                      <>
+                        <Grid
+                          display="flex"
+                          justifyContent="center"
+                          alignItems="center"
+                          margin="0 0 10px 0"
+                        ></Grid>
+                        {data.evaluation ? (
+                          <ApplyBtnFalse>평가완료</ApplyBtnFalse>
+                        ) : (
+                          <ApplyBtnTrue
+                            onClick={() => {
+                              dispatch(
+                                getEvaluationDB(
+                                  data.groupId,
+                                  data.userId,
+                                  userId
+                                )
+                              );
+                              history.push(`/evaluation/${data.groupId}`);
+                            }}
+                          >
+                            크루장 평가하기
+                          </ApplyBtnTrue>
+                        )}
+                      </>
+                    ) : (
+                      <Grid margin="10px 0 0 0">
+                        <ApplyBtnTrue
+                          onClick={() => {
+                            history.push(`/groupdetail/${data.groupId}`);
+                          }}
+                        >
+                          상세보기
+                        </ApplyBtnTrue>
+                      </Grid>
+                    )}
+                  </Grid>
+                ) : null;
+              })}
+            </Grid>
+          )}
         </Grid>
-      )}
-    </Grid>
-    </>
-  );
-};
+      </>
+    );
+  }
 };
 
-const Tag = styled.div` 
+const Tag = styled.div`
   height: 15px;
   font-size: 9px;
-  font-weight: 400; 
-  color: #7B7B7B;
+  font-weight: 400;
+  color: #7b7b7b;
   background-color: #ddd;
   border-radius: 2px;
   margin: 8px 9px 0 0;
@@ -214,15 +217,14 @@ const Img = styled.img`
 const Title = styled.text`
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
-  white-space: nowrap; 
-  display:block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
   font-weight: 700;
   font-size: 11px;
-  cursor:pointer;
-  margin:9px 0 0 0;
+  cursor: pointer;
+  margin: 9px 0 0 0;
   text-align: left;
 `;
-
 
 export default MobileGroup;

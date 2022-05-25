@@ -58,8 +58,6 @@ export const _getCommentFX = (category, categoryId) => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await api.get(`/comment/${category}/${categoryId}`);
-      console.log(data);
-      console.log("댓글 get");
       let comment_list = [];
 
       data.data.map((data) => {
@@ -68,7 +66,7 @@ export const _getCommentFX = (category, categoryId) => {
 
       dispatch(getComm(comment_list));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -76,11 +74,9 @@ export const _getCommentFX = (category, categoryId) => {
 export const _addCommentFX = (category, categoryId, content) => {
   return async function (dispatch, { history }) {
     try {
-      console.log(category, categoryId, content);
       const { data } = await api.post(`/comment/${category}/${categoryId}`, {
         content: content,
       });
-      console.log(data);
 
       let comment_list = [];
 
@@ -90,24 +86,20 @@ export const _addCommentFX = (category, categoryId, content) => {
 
       dispatch(addComm(comment_list));
       swal("댓글 등록 완료");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
 export const _editCommentFX = (commentId, content) => {
   return async function (dispatch, { history }) {
     try {
-      console.log(commentId, content);
       const { data } = await api.patch(`/comment/${commentId}`, {
         content: content,
       });
-      console.log(data);
       dispatch(editComm(data.data));
       swal("댓글 수정 완료");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -115,38 +107,29 @@ export const _editCommentFX = (commentId, content) => {
 export const _deleteCommentFX = (commentId) => {
   return async function (dispatch, { history }) {
     try {
-      console.log(commentId);
       const { data } = await api.delete(`/comment/${commentId}`);
-      console.log(data);
       swal("댓글 삭제 완료");
       dispatch(deleteComm(commentId));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
 
 export const _isEdit = (commentId) => {
   return async function (dispatch, getState) {
-    console.log(commentId);
-
     const _comment_list = getState().comments.list;
-    console.log(_comment_list);
 
     const comment_index = _comment_list.findIndex((b) => {
       return b.commentId === commentId;
     });
-    console.log(comment_index);
     dispatch(isEdit(comment_index));
   };
 };
 
 export const _isRecommBox = (commentId) => {
   return async function (dispatch, getState) {
-    console.log(commentId);
-
     const _comment_list = getState().comments.list;
-    console.log(_comment_list);
 
     const comment_index = _comment_list.findIndex((b) => {
       return b.commentId === commentId;

@@ -6,8 +6,8 @@ import { history } from "../../redux/configureStore";
 import { getAttendDB, getMyRunningDB } from "../../redux/modules/mypage";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import backBtn from "../../assets/groupFeed/backBtn.svg"
-import swal from 'sweetalert';
+import backBtn from "../../assets/groupFeed/backBtn.svg";
+import swal from "sweetalert";
 
 const MobileMyGroup = () => {
   const isMobile = useMediaQuery({
@@ -19,9 +19,7 @@ const MobileMyGroup = () => {
   const params = useParams();
   const userId = params.userId;
 
-  console.log(userId);
   const my = useSelector((state) => state.mypage.mygroup);
-  console.log(my);
 
   useEffect(() => {
     dispatch(getMyRunningDB(userId));
@@ -31,135 +29,138 @@ const MobileMyGroup = () => {
     return <></>;
   }
 
-  if(isMobile){
-  return (
-    <>
-    <Grid
-      zIndex="3"
-      bg="#ffffff"
-      justifyContent="center"
-      alignItems="center"
-      position="fixed"
-      top="0"
-      left="0"
-      width="100%"
-      height="54px"
-      display="flex"
-      padding="10px 10px"
-      margin="0 auto"
-    >
-      <Grid
-        display="flex"
-        width="375px"
-        justifyContent="left"
-        alignItems="center"
-      >
-        <img
-          style={{ width: "10px", margin: "0 10px" }}
-          src={backBtn}
-          onClick={() => {
-            history.go(-1);
-          }}
-        />
-        <Text margin="0 0 0 130px" bold size="16px">
-          My 모집
-        </Text>
-      </Grid>
-    </Grid>
-    <Grid weight="100%" margin="80px auto 50px auto" textAlign="-webkit-center">
-      {my.data.length === 0 ? (
-          <Box>진행한 그룹 러닝이 없습니다</Box>
-      ) : (
-        <Grid display="flex" width="375px" justifyContent="space-between">
-          {my.data?.map((data, index) => (
-            <Grid
-              key={index}
-              width="166px"
-              margin="0 8px 40px 8px"
-            >
-              <Grid
-                _onClick={() => {
-                  history.push(`/groupdetail/${data.groupId}`);
-                }}
-                width="100%"
-                display="flex"
-                flexDirection="column"
-                cursor="pointer"
-              >
-                <Img src={data.thumbnailUrl} />
-
-                <Grid>
-                  <Title>
-                    {data.title}
-                  </Title>
-                  <Text cursor="pointer" size="11px" margin="5px 0 0 0" textAlign="left">
-                    {data.date}
-                  </Text>
-                </Grid>
-
-                <Grid width="166px" cursor="pointer" display="flex">
-                  <Tag>{data.location}</Tag>
-                  <Tag>{data.distance}km</Tag>
-                </Grid>
-                <Hr></Hr>
-              </Grid>
-              { hostId === userId ? 
-              <>
-                <Grid
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  margin="0 0 10px 0"
-                >
-                </Grid>
-                {data.attendance ? (
-                  <ApplyBtnFalse>체크완료</ApplyBtnFalse>
-                ) : ( 
-                  data.applyEndTime === "0 일" ?
-                  <ApplyBtnTrue
-                    onClick={() => {
-                      history.push(`/check/${data.groupId}`);
-                      dispatch(getAttendDB(data.groupId, data.userId, hostId));
-                    }}
-                  >
-                    출석체크
-                  </ApplyBtnTrue> 
-                  :
-                  <ApplyBtnTrue
-                    onClick={() => {
-                      swal("아직 출석체크 시간이 아닙니다");
-                    }}
-                  >
-                    출석체크
-                  </ApplyBtnTrue>
-                )}
-              </>
-              : 
-              <Grid margin="10px 0 0 0">
-                  <ApplyBtnTrue
-                    onClick={() => {
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          zIndex="3"
+          bg="#ffffff"
+          justifyContent="center"
+          alignItems="center"
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="54px"
+          display="flex"
+          padding="10px 10px"
+          margin="0 auto"
+        >
+          <Grid
+            display="flex"
+            width="375px"
+            justifyContent="left"
+            alignItems="center"
+          >
+            <img
+              style={{ width: "10px", margin: "0 10px" }}
+              src={backBtn}
+              onClick={() => {
+                history.go(-1);
+              }}
+            />
+            <Text margin="0 0 0 130px" bold size="16px">
+              My 모집
+            </Text>
+          </Grid>
+        </Grid>
+        <Grid
+          weight="100%"
+          margin="80px auto 50px auto"
+          textAlign="-webkit-center"
+        >
+          {my.data.length === 0 ? (
+            <Box>진행한 그룹 러닝이 없습니다</Box>
+          ) : (
+            <Grid display="flex" width="375px" justifyContent="space-between">
+              {my.data?.map((data, index) => (
+                <Grid key={index} width="166px" margin="0 8px 40px 8px">
+                  <Grid
+                    _onClick={() => {
                       history.push(`/groupdetail/${data.groupId}`);
                     }}
+                    width="100%"
+                    display="flex"
+                    flexDirection="column"
+                    cursor="pointer"
                   >
-                    상세보기
-                </ApplyBtnTrue>
-              </Grid>
-              }
+                    <Img src={data.thumbnailUrl} />
+
+                    <Grid>
+                      <Title>{data.title}</Title>
+                      <Text
+                        cursor="pointer"
+                        size="11px"
+                        margin="5px 0 0 0"
+                        textAlign="left"
+                      >
+                        {data.date}
+                      </Text>
+                    </Grid>
+
+                    <Grid width="166px" cursor="pointer" display="flex">
+                      <Tag>{data.location}</Tag>
+                      <Tag>{data.distance}km</Tag>
+                    </Grid>
+                    <Hr></Hr>
+                  </Grid>
+                  {hostId === userId ? (
+                    <>
+                      <Grid
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        margin="0 0 10px 0"
+                      ></Grid>
+                      {data.attendance ? (
+                        <ApplyBtnFalse>체크완료</ApplyBtnFalse>
+                      ) : data.applyEndTime === "0 일" ? (
+                        <ApplyBtnTrue
+                          onClick={() => {
+                            history.push(`/check/${data.groupId}`);
+                            dispatch(
+                              getAttendDB(data.groupId, data.userId, hostId)
+                            );
+                          }}
+                        >
+                          출석체크
+                        </ApplyBtnTrue>
+                      ) : (
+                        <ApplyBtnTrue
+                          onClick={() => {
+                            swal("아직 출석체크 시간이 아닙니다");
+                          }}
+                        >
+                          출석체크
+                        </ApplyBtnTrue>
+                      )}
+                    </>
+                  ) : (
+                    <Grid margin="10px 0 0 0">
+                      <ApplyBtnTrue
+                        onClick={() => {
+                          history.push(`/groupdetail/${data.groupId}`);
+                        }}
+                      >
+                        상세보기
+                      </ApplyBtnTrue>
+                    </Grid>
+                  )}
+                </Grid>
+              ))}
             </Grid>
-          ))}
+          )}
         </Grid>
-      )}
-    </Grid>
-    </>
-  );
-};
+      </>
+    );
+  }
 };
 
-const Tag = styled.div` 
+const Tag = styled.div`
   height: 15px;
   font-size: 9px;
-  font-weight: 400; 
-  color: #7B7B7B;
+  font-weight: 400;
+  color: #7b7b7b;
   background-color: #ddd;
   border-radius: 2px;
   margin: 8px 9px 0 0;
@@ -219,13 +220,13 @@ const Img = styled.img`
 const Title = styled.text`
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
-  white-space: nowrap; 
-  display:block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
   font-weight: 700;
   font-size: 11px;
-  cursor:pointer;
-  margin:9px 0 0 0;
+  cursor: pointer;
+  margin: 9px 0 0 0;
   text-align: left;
 `;
 

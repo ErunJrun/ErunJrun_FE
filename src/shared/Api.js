@@ -49,8 +49,6 @@ api.interceptors.response.use(
       if (
         response.data.message === "token에 문제가 있음(기한만료가 아닌 에러)"
       ) {
-        console.log("인터셉터 토큰 오류", response.data.message);
-        console.log("아아아아아아아아아아아아아아아아아아아아아앙ㅇㅇㅇㅇㅇㅇ");
         deleteCookie("accessToken");
         deleteCookie("refreshToken");
         localStorage.clear();
@@ -59,8 +57,6 @@ api.interceptors.response.use(
           text: "로그인 후 이용해 주세요",
           closeOnClickOutside: false,
         }).then(function (result) {
-          console.log(result);
-
           if (result) {
             history.push("/login");
           }
@@ -73,8 +69,6 @@ api.interceptors.response.use(
           text: "로그인 후 이용해 주세요",
           closeOnClickOutside: false,
         }).then(function (result) {
-          console.log(result);
-
           if (result) {
             history.push("/login");
           }

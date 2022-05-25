@@ -34,7 +34,6 @@ const Header = () => {
   const firstLogin = localStorage.getItem("firstLogin");
 
   const path = useLocation().pathname;
-  console.log(path.slice(1, 12));
   const isGroupDetail = path.slice(1, 12) === "groupdetail" ? true : false;
   const isHome = path === "/";
   const isGroup = path === "/groupfeed";

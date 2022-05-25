@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { getAttendDB } from "../../redux/modules/mypage";
 import { useParams } from "react-router-dom";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 const MyGroup = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const MyGroup = () => {
   const userId = params.userId;
 
   const my = useSelector((state) => state.mypage.mygroup);
-  console.log(my);
 
   if (my.length === 0) {
     return <></>;
@@ -28,17 +27,13 @@ const MyGroup = () => {
           <Box>진행한 그룹 러닝이 없습니다</Box>
         </Grid>
       ) : (
-        <Grid 
-          display="flex"
-          width="1230px"
-          margin="0 0 0 -31px"
-        >
+        <Grid display="flex" width="1230px" margin="0 0 0 -31px">
           {my.data?.map((data, index) => (
             <Grid
               key={index}
               width="288px"
               margin="0 8px 55px 8px"
-              justify-content= "space-between"
+              justify-content="space-between"
             >
               <Grid
                 _onClick={() => {
@@ -58,7 +53,7 @@ const MyGroup = () => {
                 ></Image>
 
                 <Grid>
-                  <Title cursor="pointer" size="16px" bold  margin="14px 0 0 0">
+                  <Title cursor="pointer" size="16px" bold margin="14px 0 0 0">
                     {data.title}
                   </Title>
                   <Text cursor="pointer" size="13px" margin="10px 0 0 0">
@@ -73,48 +68,48 @@ const MyGroup = () => {
                 </Grid>
                 <Hr></Hr>
               </Grid>
-              { hostId === userId ? 
-              <>
-                <Grid
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  margin="0 0 10px 0"
-                >
-                </Grid>
-                {data.attendance ? (
-                  <ApplyBtnFalse>체크완료</ApplyBtnFalse>
-                ) : ( 
-                  data.applyEndTime === "0 일" ?
-                  <ApplyBtnTrue
-                    onClick={() => {
-                      history.push(`/check/${data.groupId}`);
-                      dispatch(getAttendDB(data.groupId, data.userId, hostId));
-                    }}
-                  >
-                    출석체크
-                  </ApplyBtnTrue> 
-                  :
-                  <ApplyBtnTrue
-                    onClick={() => {
-                      swal("아직 출석체크 시간이 아닙니다");
-                    }}
-                  >
-                    출석체크
-                  </ApplyBtnTrue>
-                )}
-              </>
-              : 
-              <Grid margin="10px 0 0 0">
+              {hostId === userId ? (
+                <>
+                  <Grid
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    margin="0 0 10px 0"
+                  ></Grid>
+                  {data.attendance ? (
+                    <ApplyBtnFalse>체크완료</ApplyBtnFalse>
+                  ) : data.applyEndTime === "0 일" ? (
+                    <ApplyBtnTrue
+                      onClick={() => {
+                        history.push(`/check/${data.groupId}`);
+                        dispatch(
+                          getAttendDB(data.groupId, data.userId, hostId)
+                        );
+                      }}
+                    >
+                      출석체크
+                    </ApplyBtnTrue>
+                  ) : (
+                    <ApplyBtnTrue
+                      onClick={() => {
+                        swal("아직 출석체크 시간이 아닙니다");
+                      }}
+                    >
+                      출석체크
+                    </ApplyBtnTrue>
+                  )}
+                </>
+              ) : (
+                <Grid margin="10px 0 0 0">
                   <ApplyBtnTrue
                     onClick={() => {
                       history.push(`/groupdetail/${data.groupId}`);
                     }}
                   >
                     상세보기
-                </ApplyBtnTrue>
-              </Grid>
-              }
+                  </ApplyBtnTrue>
+                </Grid>
+              )}
             </Grid>
           ))}
         </Grid>
@@ -199,16 +194,15 @@ const Box = styled.div`
 `;
 
 const Title = styled.text`
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis; 
-white-space: nowrap; 
-display:block;
-font-weight: bold;
-font-size: 16px;
-cursor:pointer;
-margin:14px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 14px 0 0 0;
 `;
-
 
 export default MyGroup;

@@ -20,6 +20,7 @@ import swal from "sweetalert";
 import KakaoMapMob from "../components/groupUpload/KakaoMapMob";
 import groupLeftBtnBlack from "../assets/groupUpload/groupLeftBtnBlack.svg";
 import groupRightBtnWhite from "../assets/groupUpload/groupRightBtnWhite.svg";
+import { getCookie } from "../shared/Cookie";
 
 const GroupUploadMob = () => {
   const dispatch = useDispatch();
@@ -111,8 +112,10 @@ const GroupUploadMob = () => {
     dispatch(resetMap());
   }, []);
 
+  const token = getCookie("accessToken");
+
   useEffect(() => {
-    if (!isLogin) {
+    if (!token) {
       swal("비정상적인 접근입니다.");
       history.push("/");
     }
