@@ -162,7 +162,7 @@ const Check = () => {
           <_Btn
             onClick={() => {
               history.push(`/mypage/${id}`);
-              dispatch(patchAttendDB(groupId, userId));
+              dispatch(patchAttendDB(groupId, userId, id));
             }}
           >
             출석체크 저장
