@@ -647,7 +647,7 @@ const Footer = () => {
                   color="#FAFAFA" 
                   size="13px"
                 >
-                  류진열 &nbsp; 김다운
+                  유진열 &nbsp; 김다운
                 </Text>
               </Grid>
               <Grid width="200px">

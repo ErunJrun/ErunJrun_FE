@@ -231,7 +231,7 @@ export const getEvaluationDB = (groupId) => {
 };
 
 // 호스트 평가
-export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
+export const evaluationDB = (groupId, hostId, point, evaluationCategory, userId) => {
   return async function (dispatch, getState, { history }) {
     try {
       const formData = new FormData();
@@ -254,7 +254,7 @@ export const evaluationDB = (groupId, hostId, point, evaluationCategory) => {
         }
       );
       swal("호스트 평가가 완료되었습니다!");
-      //history.push("/");
+      history.push(`/mypage/${userId}`);
     } catch (error) {
       // console.log(error);
     }
@@ -275,7 +275,7 @@ export const getAttendDB = (groupId, userId, hostId) => {
 };
 
 // 출석체크
-export const patchAttendDB = (groupId, userId) => {
+export const patchAttendDB = (groupId, userId, id) => {
   return async function (dispatch, getState, { history }) {
     try {
       const formData = new FormData();
@@ -294,7 +294,7 @@ export const patchAttendDB = (groupId, userId) => {
         }
       );
       swal("출석체크가 완료되었습니다!");
-      //history.push("/");
+      history.push(`/mypage/${id}`);
     } catch (error) {
       // console.log(error);
     }

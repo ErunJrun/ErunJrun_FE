@@ -4,7 +4,6 @@ import { Navigation, Pagination } from "swiper";
 import { history } from "../../redux/configureStore";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements";
-import Weather from "./Weather";
 import { useSelector, useDispatch } from "react-redux";
 import { getCookie } from "../../shared/Cookie";
 
@@ -263,7 +262,7 @@ const Banner = () => {
                 </Text>
               </Grid>
 
-              <Weather />
+              {/* <Weather /> */}
             </Grid>
           </SwiperSlide>
         </Swiper>
