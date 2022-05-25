@@ -168,7 +168,7 @@ const Evaluation = () => {
                   onClick={() => {
                     toggleModal();
                     dispatch(
-                      evaluationDB(groupId, hostId, point, evaluationCategory)
+                      evaluationDB(groupId, hostId, point, evaluationCategory, userId)
                     );
                     dispatch(getRunningDB(userId));
                     history.push(`/mypage/${userId}`);

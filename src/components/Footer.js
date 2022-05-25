@@ -628,7 +628,10 @@ const Footer = () => {
                 <Text color="#68f99e" size="18px">
                   Frontend
                 </Text>
+
+
                 <Text regular color="#FAFAFA" size="13px">
+
                   유진열 &nbsp; 김다운
                 </Text>
               </Grid>
