@@ -645,6 +645,7 @@ const GroupInput = styled.input`
   height: auto;
   border: none;
   border-radius: 3px;
+  background-color: white;
 
   :focus {
     outline: none;
@@ -697,7 +698,7 @@ const MidHr = styled.hr`
   width: 100%;
   height: 0px;
   background: #cbcbcb;
-  border: 1px solid #cbcbcb;
+  border-top: 1px solid #cbcbcb;
   transform: rotate(180deg);
   margin-bottom: 106px;
 `;

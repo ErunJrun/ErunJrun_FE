@@ -15,7 +15,7 @@ const GroupFilter = (props) => {
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [region, setRegion] = useState([]);
+  const [region, setRegion] = useState("");
   const [filterTime, setFilterTime] = useState([]);
   const [filterDistance, setFilterDistance] = useState([]);
   const [filterTheme, setFilterTheme] = useState([]);
@@ -115,7 +115,8 @@ const GroupFilter = (props) => {
                 onChange={(e) => {
                   setRegion(e.target.value);
                 }}
-                value={region}
+                value={region || ""}
+                multiple={false}
               >
                 <option value="none" style={{ color: "#909090" }}>
                   희망 지역을 선택해주세요.
@@ -180,16 +181,33 @@ const GroupFilter = (props) => {
 
         {isAddFilter ? (
           <>
-            <Grid>
-              <TimeFilter setFilterTime={setFilterTime} />
+            <FilterOpen>
+              <Grid>
+                <TimeFilter setFilterTime={setFilterTime} />
 
-              <DistanceFilter setFilterDistance={setFilterDistance} />
+                <DistanceFilter setFilterDistance={setFilterDistance} />
 
-              <ThemeFilter setFilterTheme={setFilterTheme} />
-            </Grid>
+                <ThemeFilter setFilterTheme={setFilterTheme} />
+              </Grid>
 
-            <Hr></Hr>
+              <Hr></Hr>
 
+              <Grid display="flex" alignItems="center" justifyContent="center">
+                <Text
+                  _onClick={switchAddFilter}
+                  margin="0 7px 0 0"
+                  cursor="pointer"
+                  size="16px"
+                  bold
+                >
+                  추가 필터 닫기
+                </Text>
+                <IconButton _onClick={switchAddFilter} upArrow color="black" />
+              </Grid>
+            </FilterOpen>
+          </>
+        ) : (
+          <FilterClose>
             <Grid display="flex" alignItems="center" justifyContent="center">
               <Text
                 _onClick={switchAddFilter}
@@ -198,24 +216,11 @@ const GroupFilter = (props) => {
                 size="16px"
                 bold
               >
-                추가 필터 닫기
+                추가 필터 펼치기
               </Text>
-              <IconButton _onClick={switchAddFilter} upArrow color="black" />
+              <IconButton _onClick={switchAddFilter} downArrow color="black" />
             </Grid>
-          </>
-        ) : (
-          <Grid display="flex" alignItems="center" justifyContent="center">
-            <Text
-              _onClick={switchAddFilter}
-              margin="0 7px 0 0"
-              cursor="pointer"
-              size="16px"
-              bold
-            >
-              추가 필터 펼치기
-            </Text>
-            <IconButton _onClick={switchAddFilter} downArrow color="black" />
-          </Grid>
+          </FilterClose>
         )}
       </Grid>
 
@@ -229,21 +234,20 @@ const GroupFilter = (props) => {
           display="flex"
           justifyContent="left"
           flexDirection="column"
-          maxWidth="850px"
-          width="100%"
+          width="880px"
         >
           <Grid display="flex" justifyContent="left" width="auto">
             {region === "none" || region.length === 0 ? null : (
               <>
-                <Text bold color="#333A5D" margin="0 20px 0 0" size="14px">
-                  {region === NaN ? null : "#" + regionTag[region]}
+                <Text regular color="#030C37" margin="0 20px 0 0" size="14px">
+                  {region === NaN ? null : "# " + regionTag[region]}
                 </Text>
               </>
             )}
 
             {startDate && endDate ? (
-              <Text bold color="#333A5D" margin="0 20px 0 0" size="14px">
-                {startDate === "NaN-NaN-NaN" ? null : "#" + startDate + "~"}
+              <Text regular color="#030C37" margin="0 20px 0 0" size="14px">
+                {startDate === "NaN-NaN-NaN" ? null : "# " + startDate + "~"}
                 {endDate === "NaN-NaN-NaN" ? null : endDate}
               </Text>
             ) : null}
@@ -261,12 +265,12 @@ const GroupFilter = (props) => {
                   return (
                     <Fragment key={idx}>
                       <Text
-                        bold
-                        color="#333A5D"
+                        regular
+                        color="#030C37"
                         margin="0 20px 11px 0"
                         size="14px"
                       >
-                        #{timeTag[e]}
+                        # {timeTag[e]}
                       </Text>
                     </Fragment>
                   );
@@ -278,12 +282,12 @@ const GroupFilter = (props) => {
                   return (
                     <Fragment key={idx}>
                       <Text
-                        bold
-                        color="#333A5D"
+                        regular
+                        color="#030C37"
                         margin="0 20px 0 0"
                         size="14px"
                       >
-                        #{distanceTag[e]}
+                        # {distanceTag[e]}
                       </Text>
                     </Fragment>
                   );
@@ -295,12 +299,12 @@ const GroupFilter = (props) => {
                   return (
                     <Fragment key={idx}>
                       <Text
-                        bold
-                        color="#333A5D"
+                        regular
+                        color="#030C37"
                         margin="0 20px 0 0"
                         size="14px"
                       >
-                        #{e}
+                        # {e}
                       </Text>
                     </Fragment>
                   );
@@ -339,6 +343,33 @@ const GroupFilter = (props) => {
   );
 };
 
+const FilterOpen = styled.div`
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  @-webkit-keyframes slide-top {
+    0% {
+      -webkit-transform: translateY(-30);
+      transform: translateY(30px);
+    }
+    100% {
+      -webkit-transform: translateY(0px);
+      transform: translateY(0px);
+    }
+  }
+  @keyframes slide-top {
+    0% {
+      -webkit-transform: translateY(-30);
+      transform: translateY(30px);
+    }
+    100% {
+      -webkit-transform: translateY(0px);
+      transform: translateY(0px);
+    }
+  }
+`;
+
+const FilterClose = styled.div``;
+
 const RegionSelect = styled.select`
   width: 317px;
   height: 46px;
@@ -358,10 +389,11 @@ const RegionSelect = styled.select`
 const Hr = styled.hr`
   margin: 24px auto;
   transform: scaleY(0.5);
-  border: 0.5px solid #cbcbcb;
+  border-top: 1px solid #cbcbcb;
 `;
 
 const SearchBtn = styled.button`
+  font-family: "Spoqa Han Sans Neo";
   background: #030c37;
   margin: 0 0 0 16px;
   border-radius: 3px;

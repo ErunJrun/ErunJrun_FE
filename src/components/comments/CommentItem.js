@@ -404,7 +404,7 @@ const EditInput = styled.textarea`
 const Hr = styled.hr`
   width: 343px;
   height: 0px;
-  border: 1px solid #f0f0f0;
+  border-top: 1px solid #f0f0f0;
   margin: 16px 0 0 0;
 `;
 

@@ -34,6 +34,8 @@ const KakaoMapMob = () => {
   });
   const [moveLine, setMoveLine] = useState();
 
+  console.log(paths, mousePosition, clickLine);
+
   //서버에 보내줄 최종 거리(km)
 
   const totalDistance = (distances[distances.length - 1] / 1000).toFixed(2);
@@ -66,6 +68,11 @@ const KakaoMapMob = () => {
         lng: mouseEvent.latLng.getLng(),
       },
     ]);
+    setMousePosition({
+      lat: mouseEvent.latLng.getLat(),
+      lng: mouseEvent.latLng.getLng(),
+    });
+
     setDistances((prev) => [
       ...prev,
       Math.round(clickLine.getLength() + moveLine.getLength()),
@@ -191,7 +198,7 @@ const KakaoMapMob = () => {
             level={3} // 지도의 확대 레벨
             onClick={handleClick}
             onRightClick={handleRightClick}
-            onMouseMove={handleMouseMove}
+            // onMouseMove={handleMouseMove}
             onCreate={setMap}
           >
             <Polyline

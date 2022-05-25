@@ -132,10 +132,6 @@ const Tag = styled.div`
   margin: 20px 12px 0 0;
   padding: 1px 10px;
   border-radius: 2px;
-  :hover {
-    background-color: #68f99e;
-    box-shadow: 0 0 3px gray;
-  }
 `;
 
 const ShoesImg = styled.img`

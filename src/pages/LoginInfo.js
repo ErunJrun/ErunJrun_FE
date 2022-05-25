@@ -546,7 +546,7 @@ const LoginCharacterMob = styled.img`
 const Hr = styled.hr`
   width: 800px;
   height: 0px;
-  border: 1px solid #000000;
+  border-top: 1px solid #000000;
   margin: 0;
 `;
 

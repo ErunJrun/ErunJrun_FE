@@ -157,25 +157,26 @@ const MGroupRunning = () => {
             <HiOutlineArrowNarrowRight />
           </Btn>
         </Grid>
-
-        <Swiper
-          id="GroupCardSwiper"
-          onSwiper={setSwiperRef}
-          slidesPerView={3}
-          centeredSlides={true}
-          spaceBetween={10}
-          pagination={true}
-          navigation={true}
-          virtual
-        >
-          {postList?.map((item, idx) => {
-            return (
-              <SwiperSlide key={idx} id="GroupCardSlide">
-                <MGroupCard {...item} />{" "}
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+        <OpenAnimation>
+          <Swiper
+            id="GroupCardSwiper"
+            onSwiper={setSwiperRef}
+            slidesPerView={3}
+            centeredSlides={true}
+            spaceBetween={10}
+            pagination={true}
+            navigation={true}
+            virtual
+          >
+            {postList?.map((item, idx) => {
+              return (
+                <SwiperSlide key={idx} id="GroupCardSlide">
+                  <MGroupCard {...item} />{" "}
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </OpenAnimation>
       </Grid>
 
       <Grid
@@ -214,6 +215,44 @@ const MGroupRunning = () => {
     </>
   );
 };
+
+const OpenAnimation = styled.div`
+  -webkit-animation: swing-in-top-fwd 0.5s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  @-webkit-keyframes swing-in-top-fwd {
+    0% {
+      -webkit-transform: rotateX(-100deg);
+      transform: rotateX(-100deg);
+      -webkit-transform-origin: top;
+      transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+      -webkit-transform-origin: top;
+      transform-origin: top;
+      opacity: 1;
+    }
+  }
+  @keyframes swing-in-top-fwd {
+    0% {
+      -webkit-transform: rotateX(-100deg);
+      transform: rotateX(-100deg);
+      -webkit-transform-origin: top;
+      transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+      -webkit-transform-origin: top;
+      transform-origin: top;
+      opacity: 1;
+    }
+  }
+`;
 
 const Btn = styled.button`
   border: none;

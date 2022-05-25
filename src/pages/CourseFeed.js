@@ -31,112 +31,130 @@ const CourseFeed = () => {
   if (isMobile) {
     return (
       <>
-        <Ready />
+        <AniWrap>
+          <Ready />
+        </AniWrap>
       </>
     );
   }
 
   return (
     <>
-      <Grid
-        position="relative"
-        width="1282px"
-        margin="0 auto 320px auto"
-        justifyContent="space-between"
-        display="flex"
-      >
-        <Grid margin="0 0 100px 0" width="1200px">
-          <Grid
-            display="flex"
-            justifyContent="left"
-            margin="64px auto 32px auto"
-            alignItems="baseline"
-          >
-            <Text margin="0 10px 0 0" bold size="20px">
-              코스 추천
-            </Text>
-            <Text regular size="14px">
-              러닝에 빼놓을 수 없는 나만의 코스 추천!
-            </Text>
-          </Grid>
-
-          <BestCourse />
-        </Grid>
-        <RegionFilter />
-
-        <Grid width="1200px">
-          <Grid
-            display="flex"
-            justifyContent="space-between"
-            alignItems="baseline"
-            margin="64px 0 0 0"
-          >
-            <Text margin="0" width="auto" size="20px" bold>
-              총{" "}
-              <span style={{ color: "#686EF9" }}>
-                {/* {feedList.length ? feedList.length : "0"} */}
-                00
-              </span>
-              개의 코스추천
-            </Text>
-            <Grid margin="0" width="auto" display="flex" alignItems="center">
-              <Text bold margin="0 16px 0 0">
-                최신순
-              </Text>
-              <Text color="#B8B8B8" bold margin="0 16px 0 0">
-                별점높은순
-              </Text>
-              <Text color="#B8B8B8" bold margin="0 16px 0 0">
-                댓글많은순
-              </Text>
-              <Text color="#B8B8B8" bold margin="0">
-                북마크많은순
-              </Text>
-            </Grid>
-          </Grid>
-          <Hr></Hr>
-        </Grid>
-
-        <CourseCard />
-
-        <Grid
-          display="flex"
-          flexDirection="column"
-          position="sticky"
-          top="726px"
-          margin="0"
-          width="auto"
-        >
-          <Permit>
-            {uploadBtn === true ? (
-              <UploadBtn
-                onClick={() => {
-                  history.push("/groupupload");
-                }}
-                src={uploadHover}
-              />
-            ) : (
-              <UploadBtn
-                onClick={() => {
-                  history.push("/groupupload");
-                }}
-                src={upload}
-              />
-            )}
-          </Permit>
-
-          <Link
-            style={{ position: "relative" }}
-            to="1"
-            spy={true}
-            smooth={true}
-          >
-            <PageUpBtn src={pageUp} />
-          </Link>
-        </Grid>
-      </Grid>
+      <AniWrap>
+        <Ready />
+      </AniWrap>
     </>
   );
+
+  // return (
+  //   <>
+  //     <Grid
+  //       display="flex"
+  //       justifyContent="center"
+  //       alignItem="center"
+  //       width="100%"
+  //       margin="0 auto"
+  //     >
+  //       <Grid
+  //         position="relative"
+  //         width="1282px"
+  //         margin="0 278px 320px 360px"
+  //         justifyContent="space-between"
+  //         display="flex"
+  //       >
+  //         <Grid margin="0 0 100px 0" width="1200px">
+  //           <Grid
+  //             display="flex"
+  //             justifyContent="left"
+  //             margin="64px auto 32px auto"
+  //             alignItems="baseline"
+  //           >
+  //             <Text margin="0 10px 0 0" bold size="20px">
+  //               코스 추천
+  //             </Text>
+  //             <Text regular size="14px">
+  //               러닝에 빼놓을 수 없는 나만의 코스 추천!
+  //             </Text>
+  //           </Grid>
+
+  //           <BestCourse />
+  //         </Grid>
+  //         <RegionFilter />
+
+  //         <Grid width="1200px">
+  //           <Grid
+  //             display="flex"
+  //             justifyContent="space-between"
+  //             alignItems="baseline"
+  //             margin="64px 0 0 0"
+  //           >
+  //             <Text margin="0" width="auto" size="20px" bold>
+  //               총{" "}
+  //               <span style={{ color: "#686EF9" }}>
+  //                 {/* {feedList.length ? feedList.length : "0"} */}
+  //                 00
+  //               </span>
+  //               개의 코스추천
+  //             </Text>
+  //             <Grid margin="0" width="auto" display="flex" alignItems="center">
+  //               <Text bold margin="0 16px 0 0">
+  //                 최신순
+  //               </Text>
+  //               <Text color="#B8B8B8" bold margin="0 16px 0 0">
+  //                 별점높은순
+  //               </Text>
+  //               <Text color="#B8B8B8" bold margin="0 16px 0 0">
+  //                 댓글많은순
+  //               </Text>
+  //               <Text color="#B8B8B8" bold margin="0">
+  //                 북마크많은순
+  //               </Text>
+  //             </Grid>
+  //           </Grid>
+  //           <Hr></Hr>
+  //         </Grid>
+
+  //         <CourseCard />
+
+  //         <Grid
+  //           display="flex"
+  //           flexDirection="column"
+  //           position="sticky"
+  //           top="726px"
+  //           margin="0"
+  //           width="auto"
+  //         >
+  //           <Permit>
+  //             {uploadBtn === true ? (
+  //               <UploadBtn
+  //                 onClick={() => {
+  //                   history.push("/groupupload");
+  //                 }}
+  //                 src={uploadHover}
+  //               />
+  //             ) : (
+  //               <UploadBtn
+  //                 onClick={() => {
+  //                   history.push("/groupupload");
+  //                 }}
+  //                 src={upload}
+  //               />
+  //             )}
+  //           </Permit>
+
+  //           <Link
+  //             style={{ position: "relative" }}
+  //             to="1"
+  //             spy={true}
+  //             smooth={true}
+  //           >
+  //             <PageUpBtn src={pageUp} />
+  //           </Link>
+  //         </Grid>
+  //       </Grid>
+  //     </Grid>
+  //   </>
+  // );
 };
 
 const Hr = styled.div`
@@ -159,4 +177,112 @@ const PageUpBtn = styled.img`
   margin: 0;
 `;
 
+const AniWrap = styled.div`
+  -webkit-animation: bounce-in-top 1.1s both;
+  animation: bounce-in-top 1.1s both;
+  @-webkit-keyframes bounce-in-top {
+    0% {
+      -webkit-transform: translateY(-500px);
+      transform: translateY(-500px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+      opacity: 0;
+    }
+    38% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+      opacity: 1;
+    }
+    55% {
+      -webkit-transform: translateY(-65px);
+      transform: translateY(-65px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    72% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    81% {
+      -webkit-transform: translateY(-28px);
+      transform: translateY(-28px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    90% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    95% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  }
+  @keyframes bounce-in-top {
+    0% {
+      -webkit-transform: translateY(-500px);
+      transform: translateY(-500px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+      opacity: 0;
+    }
+    38% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+      opacity: 1;
+    }
+    55% {
+      -webkit-transform: translateY(-65px);
+      transform: translateY(-65px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    72% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    81% {
+      -webkit-transform: translateY(-28px);
+      transform: translateY(-28px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    90% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    95% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  }
+`;
 export default CourseFeed;

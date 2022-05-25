@@ -10,7 +10,10 @@ import { getCookie } from "../../shared/Cookie";
 
 import blueBanner from "../../assets/main/blueBanner.png";
 import yellowBanner from "../../assets/main/yellowBanner.png";
+import adBanner from "../../assets/main/adBanner.png";
+
 import yellowBannerMob from "../../assets/main/yellowBannerMob.svg";
+import adBannerMob from "../../assets/main/adBannerMov.png";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -39,6 +42,23 @@ const Banner = () => {
           navigation={{ clickable: true }}
           pagination={{ clickable: true }}
         >
+          <SwiperSlide id="SwiperSlideMob">
+            <img
+              onClick={() => {
+                window.open(
+                  "https://docs.google.com/forms/d/e/1FAIpQLSfp9X0wBPprYgmoIsWxle2KK24mGpyqvJrH6_ddo6u_muFX4A/viewform"
+                );
+              }}
+              style={{
+                position: "relative",
+                width: "375px",
+                height: "150px",
+                margin: "0",
+              }}
+              src={adBannerMob}
+              alt="adBannerMob"
+            />
+          </SwiperSlide>
           <SwiperSlide id="SwiperSlideMob">
             <img
               style={{
@@ -122,6 +142,18 @@ const Banner = () => {
           pagination={{ clickable: true }}
         >
           <SwiperSlide>
+            <img
+              onClick={() => {
+                window.open(
+                  "https://docs.google.com/forms/d/e/1FAIpQLSfp9X0wBPprYgmoIsWxle2KK24mGpyqvJrH6_ddo6u_muFX4A/viewform"
+                );
+              }}
+              style={{ width: "1920px", cursor: "pointer" }}
+              src={adBanner}
+              alt="adBanner"
+            />
+          </SwiperSlide>
+          {/* <SwiperSlide>
             <img src={blueBanner} alt="blueBanner" />
             <Grid
               display="flex"
@@ -169,10 +201,8 @@ const Banner = () => {
                   추천 코스 보러가기
                 </button>
               </Grid>
-
-             
             </Grid>
-          </SwiperSlide>
+          </SwiperSlide> */}
 
           <SwiperSlide>
             <img src={yellowBanner} alt="yellowBanner" />
@@ -252,6 +282,19 @@ const Banner = () => {
         pagination={{ clickable: true }}
       >
         <SwiperSlide>
+          <img
+            onClick={() => {
+              window.open(
+                "https://docs.google.com/forms/d/e/1FAIpQLSfp9X0wBPprYgmoIsWxle2KK24mGpyqvJrH6_ddo6u_muFX4A/viewform"
+              );
+            }}
+            style={{ width: "1920px", cursor: "pointer" }}
+            src={adBanner}
+            alt="adBanner"
+          />
+        </SwiperSlide>
+
+        {/* <SwiperSlide>
           <img src={blueBanner} alt="blueBanner" />
           <Grid
             display="flex"
@@ -301,10 +344,8 @@ const Banner = () => {
                 추천 코스 보러가기
               </button>
             </Grid>
-
-           
           </Grid>
-        </SwiperSlide>
+        </SwiperSlide> */}
 
         <SwiperSlide>
           <img src={yellowBanner} alt="yellowBanner" />
@@ -365,7 +406,7 @@ const Banner = () => {
               </Text>
             </Grid>
 
-            <Weather />
+            {/* <Weather /> */}
           </Grid>
         </SwiperSlide>
       </Swiper>

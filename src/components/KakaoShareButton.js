@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import shareIcon from "../assets/groupDetail/share.png";
+import shareIcon from "../assets/groupDetail/share.svg";
 import { Text } from "../elements";
 import { useLocation } from "react-router-dom";
 import { getGroupDetailDB } from "../redux/modules/feed";

@@ -216,7 +216,7 @@ const GroupContent = (props) => {
                   setTitle(e.target.value);
                   checkMaxLength(e);
                 }}
-                value={title}
+                value={title || ""}
                 placeholder="그룹 러닝명을 입력해주세요."
               ></GroupInput>
               <Text margin="0" size="14px">
@@ -251,7 +251,7 @@ const GroupContent = (props) => {
                     setDate(e.target.value);
                     datePick(e);
                   }}
-                  value={date}
+                  value={date || ""}
                 ></GroupInput>
               </Grid>
 
@@ -271,7 +271,7 @@ const GroupContent = (props) => {
                     setStandbyTime(e.target.value);
                     standbyTimePick(e);
                   }}
-                  value={standbyTime}
+                  value={standbyTime || ""}
                 ></GroupInput>
               </Grid>
             </Grid>
@@ -312,7 +312,7 @@ const GroupContent = (props) => {
                   setStartTime(e.target.value);
                   startTimePick(e);
                 }}
-                value={startTime}
+                value={startTime || ""}
               ></GroupInput>
             </Grid>
           </Grid>
@@ -338,7 +338,7 @@ const GroupContent = (props) => {
                   setFinishTime(e.target.value);
                   finishTimePick(e);
                 }}
-                value={finishTime}
+                value={finishTime || ""}
               ></GroupInput>
             </Grid>
           </Grid>
@@ -361,7 +361,7 @@ const GroupContent = (props) => {
                 onChange={(e) => {
                   setMaxPeople(e.target.value);
                 }}
-                value={maxPeople}
+                value={maxPeople || ""}
               >
                 <option style={{ color: "#818181" }} value="null">
                   모집 인원을 입력해주세요.(최대 10명)
@@ -401,7 +401,7 @@ const GroupContent = (props) => {
                   setContent(e.target.value);
                   checkMaxLength600(e);
                 }}
-                value={content}
+                value={content || ""}
                 placeholder=" 600자 이내로 그룹 러닝에 대한 소개를 작성해주세요.
                 ex) 호수공원 러닝 참 좋아하는데요~ 함께 뛰면 두배로 즐거울 것 같아 그룹 러닝을 모집합니다!"
               ></GroupTextArea>
@@ -438,7 +438,7 @@ const GroupContent = (props) => {
                   setChattingRoom(e.target.value);
                   checkMaxLengthChat(e);
                 }}
-                value={chattingRoom}
+                value={chattingRoom || ""}
                 placeholder="크루원들과 소통할 오픈채팅방 링크를 추가해주세요."
               ></GroupInput>
               <Text margin="0" size="14px">
@@ -473,7 +473,7 @@ const GroupContent = (props) => {
                       }}
                       type="radio"
                       name="runType"
-                      value={e}
+                      value={e || ""}
                       checked={checkedType === e ? e : ""}
                     ></input>
                     <Text bold>{e}</Text>
@@ -512,7 +512,7 @@ const GroupContent = (props) => {
                         }}
                         type="radio"
                         name="speed"
-                        value={e}
+                        value={e || ""}
                         checked={checkedSpeed === e ? e : ""}
                       ></input>
                       <Text bold>{e}</Text>
@@ -552,7 +552,7 @@ const GroupContent = (props) => {
                   setParking(e.target.value);
                   checkMaxLengthPark(e);
                 }}
-                value={parking}
+                value={parking || ""}
                 placeholder="주변 주차 정보가 있다면 추가해주세요."
               ></GroupInput>
               <Text margin="0" size="14px">
@@ -581,7 +581,7 @@ const GroupContent = (props) => {
                   setBaggage(e.target.value);
                   checkMaxLengthBag(e);
                 }}
-                value={baggage}
+                value={baggage || ""}
                 placeholder="예 : 개별 보관"
               ></GroupInput>
               <Text margin="0" size="14px">
@@ -599,7 +599,7 @@ const Hr = styled.hr`
   width: 865px;
   height: 0px;
   margin: 0 0 48px 0;
-  border: 1px solid #000000;
+  border-top: 1px solid #000000;
   transform: rotate(180deg);
 `;
 
@@ -674,7 +674,7 @@ const MidHr = styled.hr`
   width: 100%;
   height: 0px;
   background: #cbcbcb;
-  border: 1px solid #cbcbcb;
+  border-top: 1px solid #cbcbcb;
   transform: rotate(180deg);
   margin-bottom: 106px;
 `;

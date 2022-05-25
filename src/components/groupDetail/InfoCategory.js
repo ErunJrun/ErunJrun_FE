@@ -234,7 +234,7 @@ const InfoCategory = (props) => {
 };
 
 const Hr = styled.hr`
-  border: 1px solid #68f99e;
+  border-top: 1px solid #68f99e;
   width: 100%;
   height: 0px;
   margin-top: 8px;
