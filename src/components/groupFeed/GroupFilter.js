@@ -104,7 +104,7 @@ const GroupFilter = (props) => {
             display="flex"
             width="auto"
             alignItems="center"
-            margin="0 72px 0 0"
+            margin="0 40px 0 0"
           >
             <Text size="16px" margin="0 16px 0 0">
               지역
@@ -139,12 +139,12 @@ const GroupFilter = (props) => {
             display="flex"
             width="auto"
             alignItems="center"
-            margin="0 130px 0 0"
+            margin="0 48px 0 0"
           >
             <Text size="16px" margin="0 16px 0 0">
               모집 일정
             </Text>
-            <Grid width="317px">
+            <Grid width="auto">
               <CalendarFilter
                 reset={resetState}
                 setStartDate={setStartDate}
