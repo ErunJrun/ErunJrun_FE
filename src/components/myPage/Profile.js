@@ -83,15 +83,19 @@ const Profile = () => {
               margin="39px 0 0 0"
               size="18px"
               >
+                <span style={{fontWeight:"700"}}>
                 {" "}
-                {profile_list?.userInfo?.nickname}{" "} 님의 한 줄 소개
+                {profile_list?.userInfo?.nickname}{" "} 
+                </span>
+                님의 한 줄 소개
             </Text> 
           </TextBox>
 
         <Introduce>
           <Triangle />    
             <Text 
-              margin="-35px 0 0 0"
+              size="14px"
+              margin="-30px 0 0 0"
               padding="20px">
               {profile_list?.userInfo?.bio}
             </Text>   
@@ -110,7 +114,7 @@ const Profile = () => {
               {" "}
               선호거리{" "}
             </Text>
-            <Text size="17px" color="#000">
+            <Text size="18px" color="#000">
               {" "}
               {profile_list?.userInfo?.likeDistance}
             </Text>
@@ -120,7 +124,7 @@ const Profile = () => {
               {" "}
               선호지역{" "}
             </Text>
-            <Text size="17px" color="#000">
+            <Text size="18px" color="#000">
               {" "}
               {profile_list?.userInfo?.likeLocation}
             </Text>
@@ -133,7 +137,7 @@ const Profile = () => {
 };
 
 const Box = styled.div`
-  width: 1200px;
+  width: 1198px;
   height: 348px;
   margin: 64px auto 24px auto;
   //padding: 24px 38px 32px 32px;
@@ -161,7 +165,7 @@ const SmallBox = styled.div`
   width: 400px;
   height: 23px;
   gap: 20px;
-  margin-top: 18px;
+  margin-top: 16px;
 `;
 
 const _SmallBox = styled.div`
@@ -182,8 +186,8 @@ const TextBox = styled.div`
 `;
 
 const MyImage = styled.img`
-  height: 100px;
-  width: 100px;
+  height: 96px;
+  width: 96px;
   border-radius: 50%;
   margin: 38px 0 0 40px;
   border: solid 2px #ddd;
@@ -207,7 +211,7 @@ const Introduce = styled.div`
   white-space: nowrap;
   transform: translate(12%);
   width: 540px;
-  height: 70px;
+  height: 62px;
   border-radius: 6px;
   background-color:  #f0f0f0;
   font-size: 16.5px;
@@ -215,7 +219,7 @@ const Introduce = styled.div`
   color: #000;
   text-align: center;
   padding-top: -5px;
-  margin: 76px 0 30px -490px;
+  margin: 72px 0 30px -479px;
   white-space: normal;
 `;
 
@@ -225,14 +229,14 @@ const Triangle = styled.div`
   border-style: solid;
   border-width: 1rem;
   border-color: transparent #f0f0f0 transparent transparent;
-  transform: translate(-95%, 60%);
+  transform: translate(-95%, 50%);
 `;
 
 const Information = styled.div`
   width: 450px;
   height: 101px;
   line-height: 0.6;
-  margin: 25px 0 0 120px;
+  margin: 22px 0 0 120px;
 `;
 
 const _Hr = styled.div`

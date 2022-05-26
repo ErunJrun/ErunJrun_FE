@@ -196,7 +196,7 @@ const HostEvaluation = () => {
 };
 
 const Box = styled.div`
-  width: 1200px;
+  width: 1198px;
   height: 292px;
   margin: 30px auto 60px auto;
   //padding: 24px 38px 32px 32px;

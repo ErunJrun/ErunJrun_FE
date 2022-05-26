@@ -99,7 +99,7 @@ const MobileGroup = () => {
                       </Grid>
 
                       <Grid width="166px" cursor="pointer" display="flex">
-                        <Tag>{data.location}</Tag>
+                        <Tagg>{data.location}</Tagg>
                         <Tag>{data.distance}km</Tag>
                       </Grid>
                       <Hr></Hr>
@@ -155,6 +155,22 @@ const MobileGroup = () => {
 
 const Tag = styled.div`
   height: 15px;
+  font-size: 9px;
+  font-weight: 400;
+  color: #7b7b7b;
+  background-color: #ddd;
+  border-radius: 2px;
+  margin: 8px 9px 0 0;
+  padding: 2px 6px;
+`;
+
+const Tagg = styled.div`
+  height: 15px;
+  width: 57px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 9px;
   font-weight: 400;
   color: #7b7b7b;

@@ -18,6 +18,7 @@ import swal from "sweetalert";
 import { loginCheckDB } from "../../redux/modules/user";
 
 const Edit = (props) => {
+  //console.log(props);
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });

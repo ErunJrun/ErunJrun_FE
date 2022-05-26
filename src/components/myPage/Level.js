@@ -29,7 +29,7 @@ const Level = () => {
   return (
     <div>
       <Box>
-        <Text bold size="12px">
+        <Text bold size="16px">
           굿러너 레벨
         </Text>
         <MyModal />
@@ -42,7 +42,7 @@ const Level = () => {
 const Box = styled.div`
   display: flex;
   align-items: center;
-  margin: -12px 0px -20px 172px;
+  margin: -15px 0px -24px 176px;
 `;
 
 export default Level;

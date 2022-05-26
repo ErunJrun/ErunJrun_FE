@@ -12,7 +12,7 @@ const MypageEdit = () => {
   }, []);
 
   const profile = useSelector((state) => state.mypage.info);
-
+//console.log(profile);
   if (profile.length === 0) { return <></>; }
  
   return (

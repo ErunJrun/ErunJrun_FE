@@ -145,6 +145,7 @@ export const getInformationDB = () => {
     try {
       const { data } = await api.get(`/auth/updateUser`);
       dispatch(getInformation(data.data));
+      //console.log(data.data);
     } catch (error) {
       // console.log(error);
     }
@@ -231,7 +232,13 @@ export const getEvaluationDB = (groupId) => {
 };
 
 // 호스트 평가
-export const evaluationDB = (groupId, hostId, point, evaluationCategory, userId) => {
+export const evaluationDB = (
+  groupId,
+  hostId,
+  point,
+  evaluationCategory,
+  userId
+) => {
   return async function (dispatch, getState, { history }) {
     try {
       const formData = new FormData();
@@ -269,7 +276,7 @@ export const getAttendDB = (groupId, userId, hostId) => {
       dispatch(getAttend(data));
     } catch (error) {
       // console.log(error);
-      swal(error.message);
+      // swal(error.message);
     }
   };
 };
@@ -349,6 +356,7 @@ export default handleActions(
 
     [GET_INFORMATION]: (state, action) =>
       produce(state, (draft) => {
+        //console.log(action.payload);
         draft.info = action.payload;
       }),
 

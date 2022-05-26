@@ -41,14 +41,16 @@ const Schedule = () => {
                 ></Image>
 
                 <Grid>
-                  <Title>{waiting.title}</Title>
-                  <Text cursor="pointer" size="13px" margin="10px 0 0 0">
+                  <Title  margin="8px 0 0 0">
+                    {waiting.title}
+                  </Title>
+                  <Text cursor="pointer" size="13px" margin="8px 0 0 0">
                     {waiting.date} (소요 시간 : {waiting.totalTime})
                   </Text>
                 </Grid>
 
-                <Grid cursor="pointer" display="flex" margin="-10px 0 0 0">
-                  <Tag>{waiting.location}</Tag>
+                <Grid cursor="pointer" display="flex" margin="-4px 0 0 0">
+                  <Tagg>{waiting.location}</Tagg>
                   <Tag>{waiting.distance}</Tag>
                   <Tag>{waiting.thema}</Tag>
                 </Grid>
@@ -90,20 +92,39 @@ const Tag = styled.div`
   }
 `;
 
+const Tagg = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+  height: 21px;
+  width: 65px;
+  background-color: #ddd;
+  margin: 20px 12px 0 0;
+  padding: 3px 11px;
+  border-radius: 2px;
+  :hover {
+    background-color: #68f99e;
+    box-shadow: 0 0 3px gray;
+  }
+`;
+
 const Hr = styled.div`
-  border: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
   width: 100%;
   margin: 16px auto 10px auto;
 `;
 
 const ApplyBtnTrue = styled.button`
   max-width: 382px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: bold;
   width: 100%;
   background: #030c37;
   border-radius: 3px;
-  height: 38px;
+  height: 32px;
   color: white;
   border: none;
   cursor: pointer;
@@ -111,18 +132,6 @@ const ApplyBtnTrue = styled.button`
     box-shadow: 0 0 3px black;
     font-weight: 900;
   }
-`;
-
-const ApplyBtnFalse = styled.button`
-  max-width: 382px;
-  font-size: 16px;
-  font-weight: bold;
-  width: 100%;
-  background: #f0f0f0;
-  border-radius: 3px;
-  height: 38px;
-  color: #7b7b7b;
-  border: none;
 `;
 
 const Box = styled.div`
