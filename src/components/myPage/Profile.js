@@ -191,6 +191,7 @@ const MyImage = styled.img`
   border-radius: 50%;
   margin: 38px 0 0 40px;
   border: solid 2px #ddd;
+  object-fit: cover;
 `;
 
 const _MyImage = styled.img`
@@ -199,6 +200,7 @@ const _MyImage = styled.img`
   border-radius: 50%;
   margin: 80px 0 0 0px;
   border: solid 2px #ddd;
+  object-fit: cover;
 `;
 const Bio = styled.div`
   height: 100px;

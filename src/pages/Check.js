@@ -298,6 +298,7 @@ const MyImage = styled.img`
   border: 2px solid #68f99e;
   border-radius: 50%;
   margin-top: 7px;
+  object-fit: cover;
 `;
 
 const _MyImage = styled.img`
@@ -306,18 +307,21 @@ const _MyImage = styled.img`
   border: 2px solid #68f99e;
   border-radius: 50%;
   margin-top: 7px;
+  object-fit: cover;
 `;
 
 const Image = styled.img`
   height: 64px;
   width: 64px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const _Image = styled.img`
   height: 60px;
   width: 60px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const Img = styled.img`

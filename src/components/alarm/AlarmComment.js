@@ -26,10 +26,16 @@ const AlarmComment = (props) => {
               margin="0 0 5px 0"
               justifyContent="flex-start"
             >
-              <Text margin="0 8px 0 0" size="9px" display="inline">
+              <Text 
+                bold
+                margin="0 8px 0 0" 
+                size="9px" 
+                display="inline"
+              >
                 댓글등록
               </Text>
               <Text
+                bold
                 margin="0 4px 0 0"
                 size="8px"
                 color="#828282"
@@ -52,13 +58,14 @@ const AlarmComment = (props) => {
             >
               {props.category === "comment" ? (
                 <Text
+                  regular
                   textLeft
                   size="10px"
                   hover="font-weight:900;"
                   cursor="pointer"
                   margin="0"
                 >
-                  <span style={{ color: "#FF2D55", fontWeight: "700" }}>
+                  <span style={{ color: "#000", fontWeight: "700" }}>
                     {props?.groupTitle}
                   </span>
                   {"   "}
@@ -66,17 +73,18 @@ const AlarmComment = (props) => {
                 </Text>
               ) : (
                 <Text
+                  regular
                   textLeft
                   size="10px"
                   hover="font-weight:900;"
                   cursor="pointer"
                   margin="0"
                 >
-                  <span style={{ color: "#FF2D55", fontWeight: "700" }}>
+                  <span style={{ color: "#000", fontWeight: "700" }}>
                     {props?.groupTitle}
                   </span>{" "}
                   의{"   "}
-                  <span style={{ color: "#68F99E", fontWeight: "700" }}>
+                  <span style={{ color: "#000", fontWeight: "400" }}>
                     {props?.commentContent}
                   </span>
                   {"   "}
@@ -106,10 +114,21 @@ const AlarmComment = (props) => {
             margin="0 0 10px 0"
             justifyContent="flex-start"
           >
-            <Text margin="0 8px 0 0" size="14px" display="inline">
+            <Text 
+              bold 
+              margin="0 8px 0 0" 
+              size="14px" 
+              display="inline"
+            >
               댓글등록
             </Text>
-            <Text margin="0" size="12px" color="#828282" display="inline">
+            <Text 
+              bold
+              margin="0" 
+              size="12px" 
+              color="#828282" 
+              display="inline"
+            >
               {props?.createdAt}
             </Text>
             {!props?.check ? <NewDot /> : <NoneDot />}
@@ -128,25 +147,27 @@ const AlarmComment = (props) => {
           >
             {props.category === "comment" ? (
               <Text
+                regular
                 textLeft
                 hover="font-weight:900;"
                 cursor="pointer"
                 margin="0"
               >
-                <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
+                <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>
                 {"   "}
                 게시물에 댓글이 달렸습니다.
               </Text>
             ) : (
               <Text
+                regular
                 textLeft
                 hover="font-weight:900;"
                 cursor="pointer"
                 margin="0"
               >
-                <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span> 의
+                <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span> 의
                 {"   "}
-                <span style={{ color: "#68F99E" }}>
+                <span style={{ color: "#000", fontWeight: "400" }}>
                   {props?.commentContent}
                 </span>
                 {"   "}

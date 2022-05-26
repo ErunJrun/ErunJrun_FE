@@ -27,10 +27,11 @@ const AlarmStart = (props) => {
                 margin="0 0 5px 0"
                 justifyContent="flex-start"
               >
-                <Text margin="0 8px 0 0" size="9px" display="inline">
+                <Text bold margin="0 8px 0 0" size="9px" display="inline">
                   그룹 러닝
                 </Text>
                 <Text
+                  bold
                   margin="0 4px 0 0"
                   size="8px"
                   color="#828282"
@@ -50,28 +51,34 @@ const AlarmStart = (props) => {
               >
                 {props.role === "host" ? (
                   <Text
+                    regular
                     textLeft
                     size="10px"
                     cursor="pointer"
                     hover="font-weight:900;"
                     margin="0"
                   >
-                    30분 뒤{" "}
-                    <span style={{ color: "#FF2D55" }}>
+                    <span style={{ color: "#FF2D55", fontWeight:"700" }}>
+                      30분 뒤{" "}
+                    </span>
+                    <span style={{ color: "#000", fontWeight:"700" }}>
                       {props?.groupTitle}
                     </span>{" "}
                     그룹 러닝이 시작합니다. 출석체크를 해주세요.
                   </Text>
                 ) : (
                   <Text
+                    regular
                     size="10px"
                     textLeft
                     cursor="pointer"
                     hover="font-weight:900;"
                     margin="0"
                   >
+                    <span style={{ color: "#FF2D55", fontWeight:"700" }}>
                     30분 뒤{" "}
-                    <span style={{ color: "#FF2D55" }}>
+                    </span>
+                    <span style={{ color: "#000", fontWeight:"700" }}>
                       {props?.groupTitle}
                     </span>{" "}
                     러닝이 시작합니다.
@@ -101,10 +108,16 @@ const AlarmStart = (props) => {
                 margin="0 0 5px 0"
                 justifyContent="flex-start"
               >
-                <Text margin="0 8px 0 0" size="9px" display="inline">
+                <Text  
+                  bold 
+                  margin="0 8px 0 0" 
+                  size="9px" 
+                  display="inline"
+                >
                   그룹 러닝
                 </Text>
                 <Text
+                  bold
                   margin="0 4px 0 0"
                   size="8px"
                   color="#828282"
@@ -124,26 +137,28 @@ const AlarmStart = (props) => {
               >
                 {props.role === "host" ? (
                   <Text
+                    regular
                     size="10px"
                     textLeft
                     cursor="pointer"
                     hover="font-weight:900;"
                     margin="0"
                   >
-                    <span style={{ color: "#FF2D55" }}>
+                    <span style={{ color: "#000", fontWeight: "700" }}>
                       {props?.groupTitle}
                     </span>
                     은 어떠셨나요? 당신은 멋진 크루장입니다!
                   </Text>
                 ) : (
                   <Text
+                    regular
                     size="10px"
                     textLeft
                     cursor="pointer"
                     hover="font-weight:900;"
                     margin="0"
                   >
-                    <span style={{ color: "#FF2D55" }}>
+                    <span style={{ color: "#000", fontWeight: "700" }}>
                       {props?.groupTitle}
                     </span>{" "}
                     은 어떠셨나요? 크루장평가를 해주세요
@@ -173,10 +188,16 @@ const AlarmStart = (props) => {
                 margin="0 0 5px 0"
                 justifyContent="flex-start"
               >
-                <Text margin="0 8px 0 0" size="9px" display="inline">
+                <Text 
+                  bold 
+                  margin="0 8px 0 0" 
+                  size="9px" 
+                  display="inline"
+                >
                   그룹 러닝
                 </Text>
                 <Text
+                  bold
                   margin="0 4px 0 0"
                   size="8px"
                   color="#828282"
@@ -195,6 +216,7 @@ const AlarmStart = (props) => {
                 display="flex"
               >
                 <Text
+                  regular
                   size="10px"
                   textLeft
                   cursor="pointer"
@@ -202,7 +224,7 @@ const AlarmStart = (props) => {
                   margin="0"
                 >
                   오늘은 이RUN 저RUN{" "}
-                  <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
+                  <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>
                   그룹 러닝이 있습니다.
                 </Text>
               </Grid>
@@ -231,10 +253,21 @@ const AlarmStart = (props) => {
               height="auto"
               margin="0 0 10px 0"
             >
-              <Text margin="0 8px 0 0" size="14px" display="inline">
+              <Text 
+                bold 
+                margin="0 8px 0 0" 
+                size="14px" 
+                display="inline"
+              >
                 그룹 러닝
               </Text>
-              <Text margin="0" size="12px" color="#828282" display="inline">
+              <Text 
+                bold
+                margin="0" 
+                size="12px" 
+                color="#828282" 
+                display="inline"
+              >
                 {props?.createdAt}
               </Text>
               {!props?.check === true ? <NewDot /> : <NoneDot />}
@@ -249,24 +282,30 @@ const AlarmStart = (props) => {
             >
               {props.role === "host" ? (
                 <Text
+                  regular
                   textLeft
                   cursor="pointer"
                   hover="font-weight:900;"
                   margin="0"
                 >
-                  30분 뒤{" "}
-                  <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
+                  <span style={{ color: "#FF2D55", fontWeight: "700" }}>
+                    30분 뒤{" "}
+                  </span>
+                  <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>{" "}
                   그룹 러닝이 시작합니다. 출석체크를 해주세요.
                 </Text>
               ) : (
                 <Text
+                  regular
                   textLeft
                   cursor="pointer"
                   hover="font-weight:900;"
                   margin="0"
                 >
-                  30분 뒤{" "}
-                  <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
+                  <span style={{ color: "#FF2D55", fontWeight: "700" }}>
+                    30분 뒤{" "}
+                  </span>
+                  <span style={{ color: "#FF2D55", fontWeight: "700" }}>{props?.groupTitle}</span>{" "}
                   러닝이 시작합니다.
                 </Text>
               )}
@@ -293,10 +332,21 @@ const AlarmStart = (props) => {
               height="auto"
               margin="0 0 10px 0"
             >
-              <Text margin="0 8px 0 0" size="14px" display="inline">
+              <Text 
+                bold 
+                margin="0 8px 0 0" 
+                size="14px" 
+                display="inline"
+              >
                 그룹 러닝
               </Text>
-              <Text margin="0" size="12px" color="#828282" display="inline">
+              <Text 
+                bold 
+                margin="0" 
+                size="12px" 
+                color="#828282" 
+                display="inline"
+              >
                 {props?.createdAt}
               </Text>
               {!props?.check ? <NewDot /> : <NoneDot />}
@@ -311,22 +361,24 @@ const AlarmStart = (props) => {
             >
               {props.role === "host" ? (
                 <Text
+                  regular
                   textLeft
                   cursor="pointer"
                   hover="font-weight:900;"
                   margin="0"
                 >
-                  <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
+                  <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>
                   은 어떠셨나요? 당신은 멋진 크루장입니다!
                 </Text>
               ) : (
                 <Text
+                  regular
                   textLeft
                   cursor="pointer"
                   hover="font-weight:900;"
                   margin="0"
                 >
-                  <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>{" "}
+                  <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>{" "}
                   은 어떠셨나요? 크루장평가를 해주세요
                 </Text>
               )}
@@ -354,10 +406,21 @@ const AlarmStart = (props) => {
               height="auto"
               margin="0 0 10px 0"
             >
-              <Text margin="0 8px 0 0" size="14px" display="inline">
+              <Text 
+                bold 
+                margin="0 8px 0 0" 
+                size="14px" 
+                display="inline"
+              >
                 그룹 러닝
               </Text>
-              <Text margin="0" size="12px" color="#828282" display="inline">
+              <Text 
+                bold 
+                margin="0" 
+                size="12px" 
+                color="#828282" 
+                display="inline"
+              >
                 {props?.createdAt}
               </Text>
               {!props?.check === true ? <NewDot /> : <NoneDot />}
@@ -370,13 +433,14 @@ const AlarmStart = (props) => {
               display="flex"
             >
               <Text
+                regular
                 textLeft
                 cursor="pointer"
                 hover="font-weight:900;"
                 margin="0"
               >
                 오늘은 이RUN 저RUN{" "}
-                <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
+                <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>
                 그룹 러닝이 있습니다.
               </Text>
             </Grid>

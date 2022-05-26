@@ -49,7 +49,7 @@ const Edit = (props) => {
     "충청도 / 세종특별자치시 / 대전광역시",
     "경상북도 / 대구광역시",
     "경상남도 / 부산광역시 / 울산광역시",
-    "전라 도 / 광주광역시",
+    "전라도 / 광주광역시",
     "제주특별자치시",
   ]);
 
@@ -537,10 +537,18 @@ const Edit = (props) => {
           </Text>
           <Hrr />
 
-          <Text bold size="16px">
+          <Text 
+            bold 
+            size="16px"
+            margin="48px 0 0 0"
+          >
             프로필 사진
           </Text>
-          <Grid display="flex" alignItems="center">
+          <Grid 
+            display="flex" 
+            alignItems="center" 
+            margin="24px 0 0 0"
+          >
             <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
             <ProfileLabel htmlFor="input-file">사진 변경</ProfileLabel>
             <ProfileInput
@@ -556,7 +564,11 @@ const Edit = (props) => {
           </Grid>
         </Grid>
 
-        <Text bold size="16px">
+        <Text 
+          bold 
+          size="16px" 
+          margin="32px 0 16px 0"
+        >
           닉네임
         </Text>
         <Input
@@ -566,8 +578,12 @@ const Edit = (props) => {
           placeholder="닉네임을 입력해주세요!"
           maxLength={8}
         />
-        <Text bold size="16px">
-          자기소개
+        <Text 
+          bold 
+          size="16px" 
+          margin="32px 0 16px 0"
+        >
+          한 줄 소개
         </Text>
 
         <Input
@@ -579,12 +595,16 @@ const Edit = (props) => {
         />
 
         <Hr style={{ margin: "63px 0 80px 0" }} />
-        <Text bold size="20px">
+        <Text bold size="20px" margin="104px 0 15px 0">
           휴대폰인증
         </Text>
         <Hrr />
 
-        <Text bold size="16px">
+        <Text 
+          bold 
+          size="16px" 
+          margin="32px 0 16px 0"
+        >
           핸드폰 번호
         </Text>
         <Grid display="felx">
@@ -616,18 +636,24 @@ const Edit = (props) => {
                 placeholder="인증번호 입력"
                 maxLength={20}
               />
-              <Button
-                onClick={() => {
-                  dispatch(getNumberCheckMiddleware(phone, numberCK));
-                  CK();
-                }}
-              >
-                인증
-              </Button>
+              {numberCK.length === 0 ? 
+                <Btn1>
+                  확인
+                </Btn1>
+              :
+                <Btn0
+                  onClick={() => {
+                    dispatch(getNumberCheckMiddleware(phone, numberCK));
+                    CK();
+                  }}
+                  >
+                  확인
+                </Btn0>
+              }
             </Grid>
 
             {ck === false ? (
-              <>
+              <Grid margin="0 0 64px 0">
                 <input
                   disabled
                   checked
@@ -635,34 +661,34 @@ const Edit = (props) => {
                   onChange={agree}
                   type="checkbox"
                 />
-                개인정보사용 동의 및 알림수신에 동의합니다.
-              </>
+                &nbsp;개인정보사용 동의 및 알림수신에 동의합니다.
+              </Grid>
             ) : (
-              <>
+              <Grid margin="0 0 64px 0">
                 <input
                   checked={agreeSMS}
                   value={agreeSMS}
                   onChange={agree}
                   type="checkbox"
                 />
-                개인정보사용 동의 및 알림수신에 동의합니다.
-              </>
+                &nbsp;개인정보사용 동의 및 알림수신에 동의합니다.
+              </Grid>
             )}
           </>
         ) : (
-          <>
+          <Grid margin="0 0 64px 0">
             <input
               checked={agreeSMS}
               value={agreeSMS}
               onChange={agree}
               type="checkbox"
             />
-            개인정보사용 동의 및 알림수신에 동의합니다.
-          </>
+            &nbsp;개인정보사용 동의 및 알림수신에 동의합니다.
+          </Grid>
         )}
 
-        <hr style={{ margin: "58px 0 80px 0" }} />
-        <Text bold size="20px" margin="90px 0 18px 0">
+        <hr/>
+        <Text bold size="20px" margin="104px 0 18px 0">
           나의 러닝스타일
         </Text>
         <Hrr />
@@ -671,7 +697,13 @@ const Edit = (props) => {
             선호하는 러닝 지역
           </Text>
 
-          <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
+          <Grid 
+            flexWrap="Wrap" 
+            maxWidth="800px" 
+            width="100%" 
+            display="flex" 
+            justifyContent= "space-between"
+          >
             {runRegion.map((e, idx) => {
               return (
                 <Fragment key={idx}>
@@ -698,7 +730,13 @@ const Edit = (props) => {
             선호하는 러닝 거리
           </Text>
 
-          <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
+          <Grid 
+            flexWrap="Wrap" 
+            maxWidth="800px" 
+            width="100%" 
+            display="flex" 
+            justifyContent= "space-between"
+          >
             {runDistance.map((e, idx) => {
               return (
                 <Fragment key={idx}>
@@ -725,7 +763,13 @@ const Edit = (props) => {
             러닝 횟수(1달 기준)
           </Text>
 
-          <Grid flexWrap="Wrap" maxWidth="1000px" width="100%" display="flex">
+          <Grid 
+            flexWrap="Wrap"
+            maxWidth="800px" 
+            width="100%" 
+            display="flex" 
+            justifyContent= "space-between"
+          >
             {runExpComment.map((e, idx) => {
               return (
                 <Fragment key={idx}>
@@ -750,7 +794,7 @@ const Edit = (props) => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            margin="20px 0 0 0 "
+            margin="10px 0 0 0 "
           >
             {userLevel >= 0 && userLevel !== "" ? (
               <>
@@ -759,7 +803,6 @@ const Edit = (props) => {
                   display="flex"
                   alignItems="center"
                   size="18px"
-                  bold
                   margin="15px 0 10px 8px"
                 >
                   당신의 러닝 레벨은
@@ -770,8 +813,13 @@ const Edit = (props) => {
             ) : null}
           </Grid>
         </Grid>
-        <hr style={{ margin: "70px 0 0 0" }} />
-        <Text bold size="16px" color="#7b7b7b" _onClick={toggleModal}>
+        <hr style={{ margin: "104px 0 0 0" }} />
+        <Text 
+          size="16px" 
+          color="#7b7b7b" 
+          text_decoration="underline"
+          _onClick={toggleModal}
+        >
           회원 탈퇴
         </Text>
 
@@ -801,21 +849,25 @@ const Edit = (props) => {
           </Overlay>
         )}
 
-        <Grid margin="70px 0 0 450px">
-          <Button
+        <Grid
+          margin="104px 0 320px 0"
+          width="800px"
+          textAlign="right"
+        >
+          <Button1
             onClick={() => {
               history.push(`/mypage/${userId}`);
             }}
           >
-            수정취소
-          </Button>
-          <Button
+            취소
+          </Button1>
+          <Button2
             onClick={() => {
               edit();
             }}
           >
             저장하기
-          </Button>
+          </Button2>
         </Grid>
       </Grid>
     </>
@@ -823,9 +875,11 @@ const Edit = (props) => {
 };
 
 const MyImage = styled.img`
-  height: 160px;
-  width: 160px;
+  height: 154px;
+  width: 154px;
   border-radius: 50%;
+  object-fit: cover;
+  border: solid 3px #ddd;
 `;
 
 const _MyImage = styled.img`
@@ -833,6 +887,7 @@ const _MyImage = styled.img`
   width: 96px;
   border-radius: 50%;
   text-align: center;
+  object-fit: cover;
 `;
 
 const ProfileLabel = styled.label`
@@ -870,7 +925,7 @@ const ProfileInput = styled.input`
 `;
 
 const Button = styled.button`
-  width: 156px;
+  width: 155px;
   height: 55px;
   flex-direction: row;
   justify-content: flex-start;
@@ -882,10 +937,39 @@ const Button = styled.button`
   font-weight: bold;
   color: #fff;
   margin-left: 16px;
-  :hover {
-    font-size: 17px;
-  }
 `;
+
+const Btn0 = styled.button`
+  width: 156px;
+  height: 55px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: solid 1px #030c37;
+  background-color: #fff;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #030c37;
+  margin-left: 17px;
+`;
+
+const Btn1 = styled.button`
+  width: 156px;
+  height: 55px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: solid 1px  #ddd;
+  background-color:  #ddd;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #7b7b7b;
+  margin-left: 17px;
+`;
+
+
 
 const Btn_ = styled.button`
   width: 88px;
@@ -951,7 +1035,7 @@ const _Box = styled.div`
 `;
 
 const Input = styled.input`
-  width: 767px;
+  width: 764px;
   height: 55px;
   flex-direction: row;
   justify-content: flex-start;
@@ -1020,11 +1104,33 @@ const Hrr = styled.div`
   width: 800px;
   height: 2px;
   background-color: #000;
-  margin: -8px 0 20px 0;
+`;
+
+const Button1 = styled.button`
+  width: 140px;
+  height: 45px;
+  flex-grow: 0;
+  border-radius: 3px;
+  border: solid 1px #030c37;
+  background-color: transparent;
+  color: #030c37;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const Button2 = styled.button`
+  width: 173px;
+  height: 45px;
+  flex-grow: 0;
+  border-radius: 3px;
+  background-color: #030c37;
+  margin-left: 16px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 const LabelExp = styled.label`
-  margin-left: 10px;
   input {
     display: none;
   }
@@ -1039,6 +1145,8 @@ const LabelExp = styled.label`
     border-radius: 100px;
     cursor: pointer;
     background-color: #f0f0f0;
+    font-size: 14px;
+    font-weight: 500;
   }
   input:checked + p {
     background-color: #68f99e;
@@ -1116,7 +1224,6 @@ const LabelExpMob = styled.label`
 }
 
 const LabelDistance = styled.label`
-  margin-left: 10px;
   input {
     display: none;
   }
@@ -1131,6 +1238,8 @@ const LabelDistance = styled.label`
     cursor: pointer;
     box-sizing: border-box;
     background-color: #f0f0f0;
+    font-size: 14px;
+    font-weight: 500;
   }
   input:checked + p {
     background-color: #68f99e;
@@ -1139,7 +1248,6 @@ const LabelDistance = styled.label`
 `;
 
 const Label = styled.label`
-  margin-left: 10px;
   input {
     display: none;
   }
@@ -1155,6 +1263,8 @@ const Label = styled.label`
     cursor: pointer;
     box-sizing: border-box;
     background-color: #f0f0f0;
+    font-size: 14px;
+    font-weight: 500;
   }
   input:checked + p {
     background-color: #68f99e;

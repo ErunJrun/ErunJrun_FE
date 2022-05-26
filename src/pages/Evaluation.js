@@ -452,6 +452,7 @@ const MyImage = styled.img`
   width: 95px;
   margin: 10px 40px 0px 40px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const _MyImage = styled.img`
@@ -460,6 +461,7 @@ const _MyImage = styled.img`
   margin-top: 30px;
   border-radius: 50%;
   justify-content: center;
+  object-fit: cover;
 `;
 
 const Icon = styled.div`

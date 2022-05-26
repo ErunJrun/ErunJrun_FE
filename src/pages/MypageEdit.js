@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getInformationDB} from "../redux/modules/mypage"
 import Edit from "../components/myPage/Edit";
 
-const MypageEdit = () => {
-  
+const MypageEdit = () => { 
   const dispatch = useDispatch(); 
   
   useEffect(() => {
@@ -12,7 +11,7 @@ const MypageEdit = () => {
   }, []);
 
   const profile = useSelector((state) => state.mypage.info);
-//console.log(profile);
+
   if (profile.length === 0) { return <></>; }
  
   return (

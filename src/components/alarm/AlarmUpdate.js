@@ -25,10 +25,16 @@ const AlarmUpdate = (props) => {
               margin="0 0 5px 0"
               justifyContent="flex-start"
             >
-              <Text margin="0 8px 0 0" size="9px" display="inline">
+              <Text 
+                bold
+                margin="0 8px 0 0" 
+                size="9px" 
+                display="inline"
+              >
                 게시글
               </Text>
               <Text
+                bold
                 margin="0 4px 0 0"
                 size="8px"
                 color="#828282"
@@ -41,6 +47,7 @@ const AlarmUpdate = (props) => {
             <Grid height="auto" display="flex">
               {props.category === "update" ? (
                 <Text
+                  regular
                   size="10px"
                   textLeft
                   _onClick={() => {
@@ -50,11 +57,12 @@ const AlarmUpdate = (props) => {
                   cursor="pointer"
                   margin="0"
                 >
-                  <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
+                  <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>
                   게시물이 수정되었습니다.
                 </Text>
               ) : (
                 <Text
+                  regular
                   size="10px"
                   textLeft
                   _onClick={() => {
@@ -64,7 +72,7 @@ const AlarmUpdate = (props) => {
                   cursor="pointer"
                   margin="0"
                 >
-                  <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
+                  <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>
                   게시물이 삭제되었습니다.
                 </Text>
               )}
@@ -92,16 +100,28 @@ const AlarmUpdate = (props) => {
             height="auto"
             margin="0 0 10px 0"
           >
-            <Text margin="0 8px 0 0" size="14px" display="inline">
+            <Text 
+              bold 
+              margin="0 8px 0 0" 
+              size="14px" 
+              display="inline"
+            >
               게시글
             </Text>
-            <Text margin="0" size="12px" color="#828282" display="inline">
+            <Text 
+              bold
+              margin="0" 
+              size="12px" 
+              color="#828282" 
+              display="inline"
+            >
               {props?.createdAt}
             </Text>
           </Grid>
           <Grid height="auto" display="flex">
             {props.category === "update" ? (
               <Text
+                regular
                 textLeft
                 _onClick={() => {
                   props.setAlarmOpen(false);
@@ -110,11 +130,12 @@ const AlarmUpdate = (props) => {
                 cursor="pointer"
                 margin="0"
               >
-                <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
+                <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>
                 게시물이 수정되었습니다.
               </Text>
             ) : (
               <Text
+                regular
                 textLeft
                 _onClick={() => {
                   props.setAlarmOpen(false);
@@ -123,7 +144,7 @@ const AlarmUpdate = (props) => {
                 cursor="pointer"
                 margin="0"
               >
-                <span style={{ color: "#FF2D55" }}>{props?.groupTitle}</span>
+                <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>
                 게시물이 삭제되었습니다.
               </Text>
             )}

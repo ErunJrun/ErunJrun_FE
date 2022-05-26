@@ -50,7 +50,7 @@ const ProfileModal = ({ onClose }) => {
                 history.push(`/mypage/${userId}`);
                 onClose();
               }}
-              margin="0 0 16px 24px"
+              margin="16px 0 15px 24px"
               size="18px"
               regular
             >
@@ -62,7 +62,7 @@ const ProfileModal = ({ onClose }) => {
                 history.push("/edit");
                 onClose();
               }}
-              margin="0 0 0 24px"
+              margin="15px 0 16px 24px"
               size="18px"
               regular
             >
@@ -75,7 +75,7 @@ const ProfileModal = ({ onClose }) => {
                 dispatch(logoutDB());
                 onClose();
               }}
-              margin="0 0 0 24px"
+              margin="0px 0 16px 24px"
               size="18px"
               regular
               color="#FF2D55"
@@ -114,8 +114,8 @@ const Content = styled.div`
   border-radius: 10px;
   background-color: #fff;
   position: absolute;
-  top: 7%;
-  left: 71%;
+  top: 6%;
+  left: 73%;
   padding: 16px 0;
 
   animation: scale-up-tr 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
@@ -132,11 +132,10 @@ const Content = styled.div`
   }
 `;
 
-const Hr = styled.hr`
+const Hr = styled.div`
+  border-top: 1px solid #E4E4E4;
   width: 158px;
-  height: 0px;
-  border-top: 1px solid rgba(149, 149, 149, 0.25);
-  margin: 16px 0;
+  margin: 0px 0px 12px 0px;
 `;
 
 export default ProfileModal;

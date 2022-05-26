@@ -286,7 +286,7 @@ const Content = styled.div`
   box-sizing: border-box;
   z-index: 205;
   width: 400px;
-  height: 547px;
+  height: 472px;
   border: 1px solid rgba(149, 149, 149, 0.25);
   background: #ffffff;
   box-shadow: 3px 8px 17px rgba(0, 0, 0, 0.2);
