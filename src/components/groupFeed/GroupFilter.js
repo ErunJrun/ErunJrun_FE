@@ -84,7 +84,7 @@ const GroupFilter = (props) => {
 
   const getFilter = () => {
     if (region.length === 0 || startDate === "NaN-NaN-NaN") {
-      swal("지역과 모집 일정은 필수입니다.", "", "warning");
+      return swal("지역과 모집 일정은 필수입니다.", "", "warning");
     }
     dispatch(resetGroup());
     dispatch(getGroupDB(category, 1, 100));
@@ -104,7 +104,7 @@ const GroupFilter = (props) => {
             display="flex"
             width="auto"
             alignItems="center"
-            margin="0 72px 0 0"
+            margin="0 40px 0 0"
           >
             <Text size="16px" margin="0 16px 0 0">
               지역
@@ -139,12 +139,12 @@ const GroupFilter = (props) => {
             display="flex"
             width="auto"
             alignItems="center"
-            margin="0 130px 0 0"
+            margin="0 48px 0 0"
           >
             <Text size="16px" margin="0 16px 0 0">
               모집 일정
             </Text>
-            <Grid width="317px">
+            <Grid width="auto">
               <CalendarFilter
                 reset={resetState}
                 setStartDate={setStartDate}

@@ -77,6 +77,7 @@ api.interceptors.response.use(
         });
         return;
       } else {
+        console.log(response.data.message);
         swal({
           text: response.data.message,
           closeOnClickOutside: false,

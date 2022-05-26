@@ -64,13 +64,12 @@ const GroupContent = (props) => {
       if (dayjs().add(6, "hour").format("HH:mm") < dayjs().format("HH:mm")) {
         swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
         setStandbyTime("");
-        return;
+        console.log(e);
       }
 
       if (e.target.value < dayjs().add(6, "hour").format("HH:mm")) {
         swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
         setStandbyTime("");
-        return;
       }
     } else {
       if (e.target.value > dayjs().add(6, "hour").format("HH:mm")) {
@@ -258,7 +257,7 @@ const GroupContent = (props) => {
                     setDate(e.target.value);
                     datePick(e);
                   }}
-                  value={date || ""}
+                  value={date}
                 ></GroupInput>
               </Grid>
 
@@ -276,7 +275,7 @@ const GroupContent = (props) => {
                   type="time"
                   onChange={(e) => {
                     setStandbyTime(e.target.value);
-                    standbyTimePick(e);
+                    // standbyTimePick(e);
                   }}
                   value={standbyTime || ""}
                 ></GroupInput>

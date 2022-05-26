@@ -266,7 +266,7 @@ const GroupContentMob = (props) => {
                   type="time"
                   onChange={(e) => {
                     setStandbyTime(e.target.value);
-                    standbyTimePick(e);
+                    // standbyTimePick(e);
                   }}
                   value={standbyTime}
                 ></GroupInput>
