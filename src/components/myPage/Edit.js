@@ -290,18 +290,18 @@ const Edit = (props) => {
             </Text>
             <_Hr />
             <Text size="13px">휴대폰 번호</Text>
-            <Grid display="felx">
-              <_Inp
-                value={phone}
-                onChange={Number}
-                type="text"
-                placeholder="010-1234-5678"
-                maxLength={20}
-              />
-            </Grid>
 
             {certPhone === false ? (
               <>
+                <Grid display="felx">
+                  <_Inp
+                    value={phone}
+                    onChange={Number}
+                    type="text"
+                    placeholder="010-1234-5678"
+                    maxLength={20}
+                  />
+                </Grid>
                 <_Box>
                   <Btn_
                     onClick={() => {
@@ -354,6 +354,16 @@ const Edit = (props) => {
               </>
             ) : (
               <>
+                <Grid display="felx">
+                  <_Inp
+                    value={phone}
+                    onChange={Number}
+                    type="text"
+                    placeholder="010-1234-5678"
+                    maxLength={20}
+                    readOnly
+                  />
+                </Grid>
                 <input
                   checked={agreeSMS}
                   value={agreeSMS}
@@ -530,7 +540,11 @@ const Edit = (props) => {
   }
   return (
     <>
-      <Grid maxWidth="800px" margin="68px auto" justify="center">
+      <Grid 
+        maxWidth="800px" 
+        margin="68px auto" 
+        justify="center"
+      >
         <Grid>
           <Text bold size="20px">
             회원정보 수정
