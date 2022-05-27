@@ -9,6 +9,7 @@ import {
 } from "../elements";
 import filterIcon from "../assets/groupFeed/filterIcon.svg";
 import categoryLine from "../assets/groupFeed/categoryLine.svg";
+import inputArrowGray from "../assets/groupUpload/inputArrowGray.svg";
 
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
@@ -43,6 +44,7 @@ import { imgActions } from "../redux/modules/image";
 import { borderRadius } from "@mui/system";
 import { useParams } from "react-router-dom";
 import swal from "sweetalert";
+import DrawerCategory from "../components/groupFeed/DrawerCategory";
 
 const GroupFeed = () => {
   const isMobile = useMediaQuery({
@@ -69,6 +71,8 @@ const GroupFeed = () => {
     setAllCheck(false);
     setSearchState(false);
   };
+
+  const [drawerState, setDrawerState] = useState(false);
 
   const [finish, setFinish] = useState("0");
   const [startDate, setStartDate] = useState("");
@@ -105,6 +109,10 @@ const GroupFeed = () => {
       setFinish(0);
       setSearchState(false);
     }
+  };
+
+  const drawerToggle = () => {
+    setDrawerState(!drawerState);
   };
 
   const [regionTag, setRegionTag] = useState([
@@ -152,6 +160,7 @@ const GroupFeed = () => {
       <>
         {filterState ? (
           <GroupFilterMob
+            finishCheck={finishCheck}
             category={category}
             setSearchState={setSearchState}
             setFilterState={setFilterState}
@@ -212,14 +221,32 @@ const GroupFeed = () => {
               ) : (
                 <>
                   <Grid display="flex" width="auto">
-                    <img style={{ width: "18.91px" }} src={shoesYellow} />
+                    {/* <img style={{ width: "18.91px" }} src={shoesYellow} />
                     <Text width="auto" margin="0 0 0 4.55px" size="12px" bold>
                       추천 그룹 러닝입니다!
+                    </Text> */}
+                    <Text width="auto" margin="0" size="12px" bold>
+                      총{" "}
+                      <span style={{ color: "#686EF9" }}>
+                        {feedList.length ? feedList.length : "0"}
+                      </span>
+                      건의 결과
                     </Text>
                   </Grid>
                 </>
               )}
               <Grid
+                height="auto"
+                width="auto"
+                margin="0"
+                display="flex"
+                justifyContent="right"
+                alignItems="center"
+              >
+                <DrawerCategory />
+              </Grid>
+
+              {/* <Grid
                 height="auto"
                 width="auto"
                 margin="0"
@@ -244,7 +271,7 @@ const GroupFeed = () => {
                 <Text size="11px" margin="0">
                   마감공고 포함하기
                 </Text>
-              </Grid>
+              </Grid> */}
             </Grid>
             <HrMob />
 
@@ -687,7 +714,7 @@ const UploadBtnMob = styled.div`
   margin: 0;
   bottom: 95px;
   right: 20px;
-  z-index: 4;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;

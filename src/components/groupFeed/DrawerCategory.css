@@ -1,0 +1,27 @@
+.css-h4y409-MuiList-root {
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* .css-10hburv-MuiTypography-root {
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 32px;
+  text-align: center;
+} */
+
+.css-1u2w381-MuiModal-root-MuiDrawer-root {
+  z-index: 1;
+}
+
+.MuiPaper-elevation16 {
+  z-index: 1;
+  border-radius: 6px 6px 0px 0px;
+}
+
+/* .css-1u2w381-MuiModal-root-MuiDrawer-root {
+  z-index: 1;
+} */

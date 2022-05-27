@@ -286,6 +286,7 @@ const GroupUploadMob = () => {
                       반복 횟수
                     </Text>
                     <RepeatInput
+                      style={{ width: "50%" }}
                       type="text"
                       placeholder="반복 횟수(1~99회)"
                       value={repeatCnt || 1}

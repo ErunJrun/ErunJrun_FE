@@ -24,6 +24,7 @@ const GroupFilterMob = (props) => {
   const [filterTime, setFilterTime] = useState([]);
   const [filterDistance, setFilterDistance] = useState([]);
   const [filterTheme, setFilterTheme] = useState([]);
+  const [finish, setFinish] = useState(0);
 
   const [isAddFilter, setIsAddFilter] = useState(false);
   const [resetState, setResetState] = useState(false);
@@ -66,7 +67,7 @@ const GroupFilterMob = (props) => {
     startDate: startDate,
     endDate: endDate,
     filterTheme: filterTheme,
-    finish: props.finish,
+    finish: finish,
   };
 
   const resetFilter = () => {
@@ -77,6 +78,14 @@ const GroupFilterMob = (props) => {
     setFilterDistance([]);
     setFilterTheme([]);
     setResetState(!resetState);
+  };
+
+  const finishCheck = () => {
+    if (finish == 0) {
+      setFinish(1);
+    } else {
+      setFinish(0);
+    }
   };
 
   const getFilter = () => {
@@ -139,8 +148,8 @@ const GroupFilterMob = (props) => {
             <Grid
               margin="0 auto"
               width="343px"
-              height="244px"
-              padding="24px"
+              height="292px"
+              padding="24px 24px 40px 24px"
               border="1px solid #F0F0F0"
               boxShadow="0px 0px 12px rgba(183, 183, 183, 0.35)"
               bg="#fff"
@@ -205,6 +214,33 @@ const GroupFilterMob = (props) => {
                     setEndDate={setEndDate}
                   />
                 </Grid>
+              </Grid>
+
+              <Grid
+                height="auto"
+                width="auto"
+                margin="0"
+                display="flex"
+                justifyContent="left"
+                alignItems="center"
+              >
+                <input
+                  style={{
+                    width: "13px",
+                    height: "13px",
+                    margin: "0 8px 0 0",
+                    cursor: "pointer",
+                    border: "0.8px solid  #000",
+                    borderRadius: "2.8px",
+                  }}
+                  type="checkbox"
+                  onChange={() => {
+                    finishCheck();
+                  }}
+                ></input>
+                <Text size="11px" margin="0">
+                  마감공고 포함하기
+                </Text>
               </Grid>
             </Grid>
 

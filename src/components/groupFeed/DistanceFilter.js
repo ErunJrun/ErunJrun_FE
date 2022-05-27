@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 const DistanceFilter = (props) => {
   const [checkedInputs, setCheckedInputs] = useState([]);
+  const [allState, setAllState] = useState(false);
 
   useEffect(() => {
     props?.setFilterDistance(checkedInputs);
@@ -18,7 +19,6 @@ const DistanceFilter = (props) => {
   }, [props.reset]);
 
   const [distance, setDistance] = useState([
-    "전체",
     "5km 미만",
     "5km 이상 10km 미만",
     "10km 이상 15km 미만",
@@ -28,6 +28,7 @@ const DistanceFilter = (props) => {
   const choiceDistance = (e, idx) => {
     if (e.target.checked) {
       setCheckedInputs([...checkedInputs, idx]);
+      setAllState(false);
     } else {
       // 체크 해제
       setCheckedInputs(checkedInputs.filter((el) => el !== idx));
@@ -57,18 +58,73 @@ const DistanceFilter = (props) => {
           alignItems="center"
           justifyContent="space-between"
         >
+          {!allState ? (
+            <Grid
+              _onClick={() => {
+                setCheckedInputs([]);
+                setAllState(true);
+              }}
+              width="142px"
+              height="32px"
+              padding="8px auto"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              borderRadius="60px"
+              border="1px solid #b8b8b8"
+              bg="white"
+              cursor="pointer"
+            >
+              <Text
+                color="#7b7b7b"
+                cursor="pointer"
+                margin="0"
+                regular
+                size="13px"
+              >
+                전체
+              </Text>
+            </Grid>
+          ) : (
+            <Grid
+              _onClick={() => {
+                setCheckedInputs([]);
+                setAllState(false);
+              }}
+              width="142px"
+              height="32px"
+              padding="8px auto"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              borderRadius="60px"
+              border="1px solid #68f99e"
+              bg="#68f99e"
+              cursor="pointer"
+            >
+              <Text
+                color="#030c37"
+                cursor="pointer"
+                margin="0"
+                regular
+                size="13px"
+              >
+                전체
+              </Text>
+            </Grid>
+          )}
           {distance.map((e, idx) => {
             return (
               <Fragment key={idx}>
                 <LabelMob>
                   <input
                     onChange={(e) => {
-                      choiceDistance(e, idx);
+                      choiceDistance(e, idx + 1);
                     }}
-                    checked={checkedInputs.includes(idx)}
+                    checked={checkedInputs.includes(idx + 1)}
                     type="checkbox"
                     name={e}
-                    value={idx || ""}
+                    value={idx + 1 || ""}
                   />
                   <Text margin="0" color="#7B7B7B" regular size="13px">
                     {e}
@@ -93,23 +149,72 @@ const DistanceFilter = (props) => {
         러닝 거리
       </Text>
 
-      {distance.map((e, idx) => {
-        return (
-          <Fragment key={idx}>
-            <Label
-              onChange={(e) => {
-                choiceDistance(e, idx);
-              }}
-              checked={checkedInputs.includes(idx)}
-            >
-              <input type="checkbox" name={e} value={idx || ""} />
-              <Text margin="0" regular>
-                {e}
-              </Text>
-            </Label>
-          </Fragment>
-        );
-      })}
+      <Grid width="723px" display="flex" justifyContent="space-between">
+        {!allState ? (
+          <Grid
+            _onClick={() => {
+              setCheckedInputs([]);
+              setAllState(true);
+            }}
+            width="auto"
+            padding="8px 20px"
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            borderRadius="60px"
+            border="1px solid #f0f0f0"
+            bg="#f0f0f0"
+            cursor="pointer"
+          >
+            <Text cursor="pointer" margin="0" regular size="16px">
+              전체
+            </Text>
+          </Grid>
+        ) : (
+          <Grid
+            _onClick={() => {
+              setCheckedInputs([]);
+              setAllState(false);
+            }}
+            width="auto"
+            padding="8px 20px"
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            borderRadius="60px"
+            border="1px solid #030c37"
+            bg="#030c37"
+            cursor="pointer"
+          >
+            <Text cursor="pointer" color="#68f99e" margin="0" size="16px">
+              전체
+            </Text>
+          </Grid>
+        )}
+
+        {distance.map((e, idx) => {
+          return (
+            <Fragment key={idx}>
+              <Label>
+                <input
+                  onChange={(e) => {
+                    choiceDistance(e, idx + 1);
+                  }}
+                  checked={checkedInputs.includes(idx + 1)}
+                  type="checkbox"
+                  name={e}
+                  value={idx + 1 || ""}
+                />
+                <Text margin="0" regular>
+                  {e}
+                </Text>
+              </Label>
+            </Fragment>
+          );
+        })}
+      </Grid>
     </Grid>
   );
 };
@@ -138,7 +243,7 @@ const Label = styled.label`
     color: #68f99e;
     font-weight: 500;
   }
-  margin: 0 12px 0 0;
+  margin: 0;
 `;
 
 const LabelMob = styled.label`

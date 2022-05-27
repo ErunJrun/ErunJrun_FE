@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const ThemeFilter = (props) => {
   const [checkedInputs, setCheckedInputs] = useState([]);
+  const [allState, setAllState] = useState(false);
 
   useEffect(() => {
     props?.setFilterTheme(checkedInputs);
@@ -16,7 +17,6 @@ const ThemeFilter = (props) => {
   }, [props.reset]);
 
   const [theme, setTheme] = useState([
-    "전체",
     "도시",
     "공원",
     "트랙",
@@ -28,6 +28,7 @@ const ThemeFilter = (props) => {
   const choiceTheme = (e, idx) => {
     if (e.target.checked) {
       setCheckedInputs([...checkedInputs, theme[idx]]);
+      setAllState(false);
     } else {
       // 체크 해제
       setCheckedInputs(checkedInputs.filter((el) => el !== theme[idx]));
@@ -57,6 +58,61 @@ const ThemeFilter = (props) => {
           alignItems="center"
           justifyContent="space-between"
         >
+          {!allState ? (
+            <Grid
+              _onClick={() => {
+                setCheckedInputs([]);
+                setAllState(true);
+              }}
+              width="91px"
+              height="32px"
+              padding="8px 14px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              borderRadius="60px"
+              border="1px solid #b8b8b8"
+              bg="white"
+              cursor="pointer"
+            >
+              <Text
+                color="#7b7b7b"
+                cursor="pointer"
+                margin="0"
+                regular
+                size="13px"
+              >
+                전체
+              </Text>
+            </Grid>
+          ) : (
+            <Grid
+              _onClick={() => {
+                setCheckedInputs([]);
+                setAllState(false);
+              }}
+              width="91px"
+              height="32px"
+              padding="8px 14px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              borderRadius="60px"
+              border="1px solid #68f99e"
+              bg="#68f99e"
+              cursor="pointer"
+            >
+              <Text
+                color="#030c37"
+                cursor="pointer"
+                margin="0"
+                regular
+                size="13px"
+              >
+                전체
+              </Text>
+            </Grid>
+          )}
           {theme.map((e, idx) => {
             return (
               <Fragment key={idx}>
@@ -87,24 +143,72 @@ const ThemeFilter = (props) => {
       <Text size="16px" margin="0 34px 0 0">
         러닝 테마
       </Text>
+      <Grid width="547px" display="flex" justifyContent="space-between">
+        {!allState ? (
+          <Grid
+            _onClick={() => {
+              setCheckedInputs([]);
+              setAllState(true);
+            }}
+            width="auto"
+            padding="8px 20px"
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            borderRadius="60px"
+            border="1px solid #f0f0f0"
+            bg="#f0f0f0"
+            cursor="pointer"
+          >
+            <Text cursor="pointer" margin="0" regular size="16px">
+              전체
+            </Text>
+          </Grid>
+        ) : (
+          <Grid
+            _onClick={() => {
+              setCheckedInputs([]);
+              setAllState(false);
+            }}
+            width="auto"
+            padding="8px 20px"
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            borderRadius="60px"
+            border="1px solid #030c37"
+            bg="#030c37"
+            cursor="pointer"
+          >
+            <Text cursor="pointer" color="#68f99e" margin="0" size="16px">
+              전체
+            </Text>
+          </Grid>
+        )}
 
-      {theme.map((e, idx) => {
-        return (
-          <Fragment key={idx}>
-            <Label
-              onChange={(e) => {
-                choiceTheme(e, idx);
-              }}
-              checked={checkedInputs.includes(idx)}
-            >
-              <input type="checkbox" name={e} value={idx || ""} />
-              <Text margin="0" regular>
-                {e}
-              </Text>
-            </Label>
-          </Fragment>
-        );
-      })}
+        {theme.map((e, idx) => {
+          return (
+            <Fragment key={idx}>
+              <Label>
+                <input
+                  onChange={(e) => {
+                    choiceTheme(e, idx);
+                  }}
+                  checked={checkedInputs.includes(e)}
+                  type="checkbox"
+                  name={e}
+                  value={idx || ""}
+                />
+                <Text margin="0" regular>
+                  {e}
+                </Text>
+              </Label>
+            </Fragment>
+          );
+        })}
+      </Grid>
     </Grid>
   );
 };
@@ -133,7 +237,7 @@ const Label = styled.label`
     color: #68f99e;
     font-weight: 500;
   }
-  margin: 0 12px 0 0;
+  margin: 0;
 `;
 
 const LabelMob = styled.label`
