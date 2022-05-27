@@ -46,11 +46,20 @@ const Mypage = () => {
             <_Hr />
             <HostEvaluation />
             <_Hr />
-            <Grid margin="-35px auto 0 0px" lineHeight="24px" width="350px">
-              <Text bold size="14px">
+            <Grid 
+              margin="0px auto 0 0px" 
+              lineHeight="24px" 
+              width="350px"
+            >
+              <Text 
+                bold 
+                size="14px" 
+                margin="24px 0 24px 0"
+              >
                 나의 그룹 러닝
               </Text>
               <Text
+                margin="0 0 24px 0"
                 regular
                 size="13px"
                 color="#222"
@@ -61,6 +70,7 @@ const Mypage = () => {
                 참여 예정
               </Text>
               <Text
+                margin="0 0 24px 0"
                 regular
                 size="13px"
                 color="#222"
@@ -71,6 +81,7 @@ const Mypage = () => {
                 참여 완료
               </Text>
               <Text
+                margin="0 0 24px 0"
                 regular
                 size="13px"
                 color="#222"
@@ -84,11 +95,20 @@ const Mypage = () => {
 
             <_Hr />
 
-            <Grid margin="-35px auto 5px 0px" lineHeight="24px" width="350px">
-              <Text bold size="14px">
+            <Grid 
+              margin="0px auto 5px 0px" 
+              lineHeight="24px" 
+              width="350px"
+            >
+              <Text 
+                bold 
+                size="14px"
+                margin="24px 0 24px 0"
+              >
                 나의 추천 코스
               </Text>
               <Text
+                margin="0 0 24px 0"
                 regular
                 size="13px"
                 color="#222"
@@ -99,6 +119,7 @@ const Mypage = () => {
                 북마크
               </Text>
               <Text
+                margin="0 0 24px 0"
                 regular
                 size="13px"
                 color="#222"
@@ -114,7 +135,7 @@ const Mypage = () => {
               <Text
                 regular
                 size="12px"
-                margin="-15px 0 100px 0px"
+                margin="24px 0 100px 0px"
                 color="#222"
                 _onClick={() => {
                   dispatch(logoutDB());
@@ -150,7 +171,10 @@ const Mypage = () => {
             </Grid>
             <_Hr />
 
-            <Grid margin="-2px 0 0 20px" lineHeight="24px">
+            <Grid 
+              margin="-2px 0 0 20px" 
+              lineHeight="24px"
+            >
               <Text bold size="14px">
                 나의 그룹 러닝
               </Text>
@@ -209,7 +233,10 @@ const Mypage = () => {
 
             <Hr />
 
-            <Grid margin="0 0 0 20px" lineHeight="24px">
+            <Grid 
+              margin="0 0 0 20px" 
+              lineHeight="24px"
+            >
               <Text bold size="14px">
                 나의 추천 코스
               </Text>
@@ -273,7 +300,6 @@ const Hr = styled.div`
 const _Hr = styled.div`
   width: 360px;
   height: 1px;
-  margin: 0px 0 40px 0;
   background-color: #ddd;
 `;
 

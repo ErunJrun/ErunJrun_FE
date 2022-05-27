@@ -17,7 +17,7 @@ const Level = () => {
       <Grid width="350px" margin="45px auto 0px auto">
         <Text size="12px" margin="0 0 0 0px">
           굿러너 레벨 &nbsp;
-          <span style={{ color: "#2f80ed" }}>
+          <span style={{ color: "#2f80ed", fontWeight: "700" }}>
             {profile_list?.userInfo?.mannerPoint}km
           </span>
         </Text>
