@@ -74,9 +74,7 @@ const GroupUploadMob = () => {
     if (contents.standbyTime === "") {
       return swal("러닝 일시를 입력해주세요");
     }
-    if (contents.finishTime === "") {
-      return swal("종료 시간을 입력해주세요");
-    }
+
     if (contents.maxPeople === "") {
       return swal("모집인원을 입력해주세요");
     }
