@@ -19,6 +19,7 @@ import swal from "sweetalert";
 import { useMediaQuery } from "react-responsive";
 import GroupUploadMob from "./GroupUploadMob";
 import { getCookie } from "../shared/Cookie";
+import inputArrowGray from "../assets/groupUpload/inputArrowGray.svg";
 
 const GroupUpload = () => {
   const isMobile = useMediaQuery({
@@ -27,12 +28,15 @@ const GroupUpload = () => {
 
   const dispatch = useDispatch();
 
+  const [repeatCnt, setRepeatCnt] = useState(1);
   const [isLoaded1, setIsLoad1] = useState(false);
   const [isLoaded2, setIsLoad2] = useState(false);
   const [isLoaded3, setIsLoad3] = useState(false);
 
   const location = useSelector((state) => state.uploadInfo.paths);
   const distance = useSelector((state) => state.uploadInfo.distance);
+  console.log(distance);
+  const finalDistance = (distance * repeatCnt).toFixed(2);
   const contents = useSelector((state) => state.uploadInfo.contents);
   const thumbnail = useSelector((state) => state.image.files);
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -71,6 +75,11 @@ const GroupUpload = () => {
     setIsLoad2(false);
   };
 
+  const a = "https://open.kakao.com/o/gbS50Dfe";
+  const b = "open.kakao";
+  console.log(a.includes(b) ? true : false);
+
+  // cosnt chattingRoomCheck = contents.chattingRoom.slice(6,)
   const goNext3 = () => {
     if (contents.title === "") {
       return swal("제목을 입력해주세요");
@@ -97,6 +106,12 @@ const GroupUpload = () => {
     if (contents.theme === "") {
       return swal("러닝타입을 선택해주세요");
     }
+    if (contents.chattingRoom.length >= 1) {
+      if (!contents.chattingRoom.includes("open.kakao.com")) {
+        return swal("올바른 카카오톡 오픈 채팅방 링크를 입력해주세요");
+      }
+    }
+
     setIsLoad2(false);
     setIsLoad3(true);
     // setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -108,8 +123,15 @@ const GroupUpload = () => {
     // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const checkNumber = (e) => {
+    const regex = /^[0-9]{0,2}$/;
+    if (regex.test(e.target.value)) {
+      setRepeatCnt(e.target.value);
+    }
+  };
+
   const addGroupPost = () => {
-    dispatch(addGroupDB(location, thumbnail, contents, address, distance));
+    dispatch(addGroupDB(location, thumbnail, contents, address, finalDistance));
     dispatch(imgActions.resetFile());
   };
 
@@ -156,11 +178,6 @@ const GroupUpload = () => {
                   </Text>
                   <RedPoint></RedPoint>
                 </Grid>
-
-                <Text regular display="inline" margin="0 10px" size="16px">
-                  왼쪽 클릭을 통해 경로를 설정한 후, 오른쪽 클릭으로 경로를
-                  마무리 해주세요.
-                </Text>
               </Grid>
               <Hr />
 
@@ -171,31 +188,65 @@ const GroupUpload = () => {
                   display="flex"
                   alignItems="center"
                   justifyContent="space-between"
+                  margin="0 0 32px 0"
                 >
                   <Text bold margin="0 55px 0 0">
                     코스 위치 정보
                   </Text>
-                  <Grid display="flex" width="714px">
-                    <LocationInfo>
-                      {address ? (
-                        <Text size="16px">{address}</Text>
-                      ) : (
-                        <Text size="16px" color="#818181">
-                          지정하신 시작 위치가 자동으로 입력됩니다.
-                        </Text>
-                      )}
-                    </LocationInfo>
+
+                  <LocationInfo>
+                    {address ? (
+                      <Text size="16px">{address}</Text>
+                    ) : (
+                      <Text size="16px" color="#818181">
+                        지정하신 시작 위치가 자동으로 입력됩니다.
+                      </Text>
+                    )}
+                  </LocationInfo>
+                </Grid>
+
+                <Grid
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Text bold margin="0 55px 0 0">
+                    최종 코스 거리
+                  </Text>
+                  <Grid display="flex" width="auto" margin="0">
+                    <RepeatInfo>
+                      <Text color="#818181">
+                        반복 횟수
+                        <br />
+                      </Text>
+                      <RepeatInput
+                        type="text"
+                        placeholder="반복 횟수(1~99회)"
+                        value={repeatCnt || 1}
+                        onChange={(e) => {
+                          checkNumber(e);
+                        }}
+                        min="1"
+                        max="99"
+                      ></RepeatInput>
+                    </RepeatInfo>
                     <DistanceInfo>
                       {distance !== "NaN" ? (
-                        <Text size="16px">{distance} km</Text>
-                      ) : (
-                        <Text size="16px" color="#818181">
-                          코스 거리 km
+                        <Text width="100%" textalign size="16px">
+                          {finalDistance} km
                         </Text>
+                      ) : (
+                        <>
+                          <Text size="16px" color="#818181">
+                            코스 거리 km
+                          </Text>
+                          <img src={inputArrowGray} />
+                        </>
                       )}
                     </DistanceInfo>
                   </Grid>
                 </Grid>
+
                 <Grid
                   display="flex"
                   alignItems="center"
@@ -360,8 +411,8 @@ const StepImg = styled.img`
 `;
 
 const LocationInfo = styled.div`
-  width: 546px;
-  height: 75px;
+  width: 714px;
+  height: 68px;
   box-sizing: border-box;
   border: 1px solid #cbcbcb;
   border-radius: 3px 0 0 3px;
@@ -372,18 +423,47 @@ const LocationInfo = styled.div`
 `;
 
 const DistanceInfo = styled.div`
-  width: 168px;
-
-  height: 75px;
+  width: 357px;
+  height: 68px;
   box-sizing: border-box;
   border: 1px solid #cbcbcb;
   border-left: none;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   display: flex;
   align-items: center;
   padding: 24px 32px;
-  justify-content: center;
+  justify-content: space-between;
   margin: 0;
+`;
+
+const RepeatInfo = styled.div`
+  width: 357px;
+  height: 68px;
+  box-sizing: border-box;
+  border: 1px solid #cbcbcb;
+  border-radius: 03px 0 0 3px;
+  display: flex;
+  align-items: center;
+  padding: 10px 32px;
+  justify-content: space-between;
+  margin: 0;
+`;
+
+const RepeatInput = styled.input`
+  width: 70%;
+  height: 100%;
+  text-align: center;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: "Spoqa Han Sans Neo";
+  ::placeholder {
+    font-weight: 500;
+    font-size: 16px;
+    font-family: "Spoqa Han Sans Neo";
+    color: #818181;
+  }
 `;
 
 const StepBtn = styled.button`
@@ -432,7 +512,6 @@ const Hr = styled.hr`
   height: 0px;
   margin: 0 0 48px 0;
   border-top: 1px solid #000000;
-  transform: rotate(180deg);
 `;
 
 const RedPoint = styled.div`

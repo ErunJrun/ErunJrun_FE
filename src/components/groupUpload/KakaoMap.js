@@ -37,7 +37,7 @@ function KakaoMap() {
 
   const totalDistance = (distances[distances.length - 1] / 1000).toFixed(2);
 
-  // const [info, setInfo] = useState();
+  const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
 
   const [map, setMap] = useState();
@@ -46,6 +46,12 @@ function KakaoMap() {
 
   const onChange = (e) => {
     setInputText(e.target.value);
+  };
+
+  const onCheckEnter = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
   };
 
   const handleSubmit = (e) => {
@@ -153,9 +159,22 @@ function KakaoMap() {
             onChange={onChange}
             placeholder="장소를 검색하여 코스를 지정하세요."
             value={inputText}
-            onKeyPress={handleSubmit}
+            onKeyPress={onCheckEnter}
           />
           <SearchLocationBtn onClick={handleSubmit}>검색하기</SearchLocationBtn>
+        </Grid>
+
+        <Grid
+          width="865px"
+          height="68px"
+          bg="#7B7B7B"
+          padding="24px"
+          margin="32px 0 0 0"
+        >
+          <Text regular margin="0" color="white">
+            왼쪽 클릭을 통해 경로를 설정한 후, 오른쪽 클릭으로 경로를 마무리
+            해주세요.
+          </Text>
         </Grid>
 
         <Grid>
@@ -179,7 +198,7 @@ function KakaoMap() {
           >
             <Polyline
               path={paths}
-              strokeWeight={8} // 선의 두께입니다
+              strokeWeight={6} // 선의 두께입니다
               strokeColor={"#686EF9"} // 선의 색깔입니다
               strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
               strokeStyle={"solid"} // 선의 스타일입니다
@@ -233,16 +252,18 @@ function KakaoMap() {
               </CustomOverlayMap>
             )}
             {/* {markers.map((marker) => (
-                <MapMarker
-                  key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-                  position={marker.position}
-                  onClick={() => setInfo(marker)}
-                >
-                  {info && info.content === marker.content && (
-                    <div style={{ color: "#000" }}>{marker.content}</div>
-                  )}
-                </MapMarker>
-              ))} */}
+              <MapMarker
+                key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+                position={marker.position}
+                onMouseOver={() => setInfo(marker)}
+              >
+                {info && info.content === marker.content && (
+                  <Text margin="3px auto" width="152px" textalign>
+                    {marker.content}
+                  </Text>
+                )}
+              </MapMarker>
+            ))} */}
           </Map>
         </Grid>
       </Grid>
@@ -251,6 +272,9 @@ function KakaoMap() {
 }
 
 const LocationInput = styled.input`
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-size: 16px;
+  font-weight: 500;
   max-width: 694px;
   width: 100%;
   height: 52px;

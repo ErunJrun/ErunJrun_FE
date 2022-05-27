@@ -84,7 +84,7 @@ const ImagesUpload = (props) => {
                 multiple="multiple"
                 id="profile_image"
                 onChange={handleChangeFile}
-                accept=".jpg, .jpeg, .png"
+                accept=".jpg, .jpeg, .png, .gif, .svg, .bmp, .webp, .heic, .heif, .jfif"
               ></ImageInput>
             </label>
           </Grid>
@@ -219,7 +219,7 @@ const ImagesUpload = (props) => {
               multiple="multiple"
               id="profile_image"
               onChange={handleChangeFile}
-              accept=".jpg, .jpeg, .png"
+              accept=".jpg, .jpeg, .png, .gif, .svg, .bmp, .webp, .heic, .heif, .jfif"
             ></ImageInput>
           </label>
         </Grid>

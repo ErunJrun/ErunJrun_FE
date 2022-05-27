@@ -29,8 +29,12 @@ const GroupUploadMob = () => {
   const [isLoaded2, setIsLoad2] = useState(false);
   const [isLoaded3, setIsLoad3] = useState(false);
 
+  const [repeatCnt, setRepeatCnt] = useState(1);
+
   const location = useSelector((state) => state.uploadInfo.paths);
   const distance = useSelector((state) => state.uploadInfo.distance);
+  console.log(distance);
+  const finalDistance = (distance * repeatCnt).toFixed(2);
   const contents = useSelector((state) => state.uploadInfo.contents);
   const thumbnail = useSelector((state) => state.image.files);
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -67,6 +71,13 @@ const GroupUploadMob = () => {
     setIsLoad2(false);
   };
 
+  const checkNumber = (e) => {
+    const regex = /^[0-9]{0,2}$/;
+    if (regex.test(e.target.value)) {
+      setRepeatCnt(e.target.value);
+    }
+  };
+
   const goNext3 = () => {
     if (contents.title === "") {
       return swal("제목을 입력해주세요");
@@ -94,6 +105,12 @@ const GroupUploadMob = () => {
     if (contents.theme === "") {
       return swal("러닝타입을 선택해주세요");
     }
+
+    if (contents.chattingRoom.length >= 1) {
+      if (!contents.chattingRoom.includes("open.kakao.com")) {
+        return swal("올바른 카카오톡 오픈 채팅방 링크를 입력해주세요");
+      }
+    }
     setIsLoad2(false);
     setIsLoad3(true);
     // setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -106,7 +123,7 @@ const GroupUploadMob = () => {
   };
 
   const addGroupPost = () => {
-    dispatch(addGroupDB(location, thumbnail, contents, address, distance));
+    dispatch(addGroupDB(location, thumbnail, contents, address, finalDistance));
     dispatch(imgActions.resetFile());
   };
 
@@ -230,11 +247,60 @@ const GroupUploadMob = () => {
                       </Text>
                     )}
                   </LocationInfo>
+                </Grid>
+              </Grid>
+              <Grid
+                display="flex"
+                justifyContent="left"
+                margin="0 0 32px 0"
+                width="auto"
+              >
+                <IconButton
+                  waring
+                  color="#FF2D55"
+                  size="14.4"
+                  height="12px"
+                  width="12px"
+                  margin="-2px 6px 0 0"
+                />
+                <Text margin="0" size="11px" width="auto" color="#FF2D55" bold>
+                  러닝 코스는 업로드 이후 수정이 불가능합니다. 해당 위치가
+                  맞는지 다시 <br></br>한 번 확인해 주세요!
+                </Text>
+              </Grid>
+            </Grid>
+
+            <Grid width="343px" margin="0 auto" display="flex">
+              <Grid
+                margin="0 auto"
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text size="13px" margin="0 0 16px 0">
+                  최종 코스 거리
+                </Text>
+                <Grid display="flex">
+                  <RepeatInfo>
+                    <Text size="13px" regular color="#7B7B7B">
+                      반복 횟수
+                    </Text>
+                    <RepeatInput
+                      type="text"
+                      placeholder="반복 횟수(1~99회)"
+                      value={repeatCnt || 1}
+                      onChange={(e) => {
+                        checkNumber(e);
+                      }}
+                      min="1"
+                      max="99"
+                    ></RepeatInput>
+                  </RepeatInfo>
                   <DistanceInfo>
                     {distance !== "NaN" ? (
                       <>
                         <Text textalign width="300px" margin="0" size="13px">
-                          {distance}
+                          {finalDistance}
                         </Text>
                         <Text margin="0" size="13px">
                           km
@@ -255,25 +321,6 @@ const GroupUploadMob = () => {
                     )}
                   </DistanceInfo>
                 </Grid>
-              </Grid>
-              <Grid
-                display="flex"
-                justifyContent="left"
-                margin="18px 0 0 0"
-                width="auto"
-              >
-                <IconButton
-                  waring
-                  color="#FF2D55"
-                  size="14.4"
-                  height="12px"
-                  width="12px"
-                  margin="-2px 6px 0 0"
-                />
-                <Text margin="0" size="11px" width="auto" color="#FF2D55" bold>
-                  러닝 코스는 업로드 이후 수정이 불가능합니다. 해당 위치가
-                  맞는지 다시 <br></br>한 번 확인해 주세요!
-                </Text>
               </Grid>
             </Grid>
 
@@ -512,7 +559,7 @@ const LocationInfo = styled.div`
   height: 44px;
   box-sizing: border-box;
   border-radius: 3px;
-  border: solid 1px #ddd;
+  border: solid 1px #b8b8b8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -521,13 +568,14 @@ const LocationInfo = styled.div`
 `;
 
 const DistanceInfo = styled.div`
-  width: 343px;
+  width: 171px;
   height: 44px;
   box-sizing: border-box;
   margin: 0;
-  padding: 14px;
-  border-radius: 3px;
-  border: solid 1px #ddd;
+  padding: 10px 14px;
+  border-radius: 0 3px 3px 0;
+  border: solid 1px #b8b8b8;
+  border-left: none;
   display: flex;
   justify-content: space-between;
 `;
@@ -596,9 +644,9 @@ const Step2NextBtn = styled.button`
 
 const Hr = styled.hr`
   width: 343px;
-  height: 1px;
+  height: 0px;
   margin: 11.5px 16px 23.5px;
-  background-color: #000;
+  border-top: 1px solid #000000;
 `;
 
 const RedPoint = styled.div`
@@ -606,6 +654,36 @@ const RedPoint = styled.div`
   height: 4px;
   border-radius: 100%;
   background: #ff2d55;
+`;
+
+const RepeatInfo = styled.div`
+  width: 171px;
+  height: 44px;
+  box-sizing: border-box;
+  border: 1px solid #b8b8b8;
+  border-radius: 3px 0 0 3px;
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  justify-content: space-between;
+  margin: 0;
+`;
+
+const RepeatInput = styled.input`
+  width: 70%;
+  height: 100%;
+  text-align: center;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  font-size: 13px;
+  font-family: "Spoqa Han Sans Neo";
+  ::placeholder {
+    font-weight: 500;
+    font-size: 13px;
+    font-family: "Spoqa Han Sans Neo";
+    color: #818181;
+  }
 `;
 
 export default GroupUploadMob;

@@ -85,7 +85,6 @@ export const _addCommentFX = (category, categoryId, content) => {
       });
 
       dispatch(addComm(comment_list));
-      swal("댓글 등록 완료");
     } catch (error) {}
   };
 };

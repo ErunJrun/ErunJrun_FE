@@ -14,11 +14,12 @@ const CalendarFilter = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
-
+  console.log(props);
   // const [dateRange, setDateRange] = useState(["", ""]);
   // const [startDate, endDate] = dateRange;
 
   const [startDate, setStartDate] = useState("");
+  const [uploadDate, setUploadDate] = useState(props.date);
   const [endDate, setEndDate] = useState("");
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -34,17 +35,21 @@ const CalendarFilter = (props) => {
 
   const onChange2 = (e) => {
     console.log(e);
-    setStartDate(e);
-    if (startDate) {
+    setUploadDate(e);
+    if (uploadDate) {
       setIsCalendarOpen(false);
     }
   };
 
   const _startDate = formatDate(startDate);
   const _endDate = formatDate(endDate);
+  const _uploadDate = formatDate(uploadDate);
+
+  console.log(uploadDate, _uploadDate);
 
   const koStartDate = dayjs(_startDate).format("YYYY년 M월 D일");
   const koEndDate = dayjs(_endDate).format("YYYY년 M월 D일");
+  const koUploadDate = dayjs(_uploadDate).format("YYYY년 M월 D일");
 
   //날짜 포맷 변환
   function formatDate(date) {
@@ -59,9 +64,9 @@ const CalendarFilter = (props) => {
 
   useEffect(() => {
     if (props.upload) {
-      props.setDate(_startDate);
+      props.setDate(_uploadDate);
     }
-  }, [startDate]);
+  }, [uploadDate]);
 
   useEffect(() => {
     props.setStartDate(_startDate);
@@ -71,7 +76,13 @@ const CalendarFilter = (props) => {
   useEffect(() => {
     setStartDate("");
     setEndDate("");
+    setUploadDate("");
+    setIsCalendarOpen(false);
   }, [props.reset]);
+
+  useEffect(() => {
+    setIsCalendarOpen(false);
+  }, [props.closeCalendar]);
 
   if (props.upload && !isMobile) {
     return (
@@ -79,7 +90,7 @@ const CalendarFilter = (props) => {
         <Grid
           display="flex"
           alignItems="center"
-          padding="10px 32px"
+          padding="10px 20px"
           width="357px"
           height="75px"
           border="1px solid #CBCBCB"
@@ -91,7 +102,7 @@ const CalendarFilter = (props) => {
             setIsCalendarOpen(!isCalendarOpen);
           }}
         >
-          {_startDate === "NaN-NaN-NaN" ? (
+          {_uploadDate === "NaN-NaN-NaN" ? (
             <>
               <Grid
                 display="flex"
@@ -112,7 +123,7 @@ const CalendarFilter = (props) => {
                 alignItems="center"
               >
                 <Text textalign width="auto" margin="0 4px 0 0" regular>
-                  {koStartDate}
+                  {koUploadDate}
                 </Text>
                 <img src={inputArrowGray} />
               </Grid>
@@ -123,18 +134,130 @@ const CalendarFilter = (props) => {
           {isCalendarOpen ? (
             <DatePicker
               calendarClassName="rasta-stripes"
-              selected={startDate}
+              selected={uploadDate}
               onChange={(e) => {
                 onChange2(e);
                 setIsCalendarOpen(false);
               }}
-              startDate={startDate}
+              startDate={uploadDate}
               minDate={new Date()}
               inline
               locale={ko}
             />
           ) : null}
         </Grid>
+      </>
+    );
+  }
+
+  if (!props.upload && isMobile) {
+    return (
+      <>
+        <Grid width="295px" display="flex">
+          <Grid
+            display="flex"
+            justifyContent="right"
+            alignItems="center"
+            padding="10px 14px"
+            width="147.5px"
+            height="44px"
+            border="1px solid #CBCBCB"
+            borderRadius="3px 0 0 3px"
+            hover="border:1px solid #030C37;"
+            margin="0"
+            _onClick={() => {
+              setIsCalendarOpen(!isCalendarOpen);
+            }}
+          >
+            {_startDate === "NaN-NaN-NaN" ? (
+              <>
+                <Text
+                  size="13px"
+                  textalign
+                  width="120px"
+                  margin="0 8px 0 0"
+                  regular
+                ></Text>
+                <Text
+                  size="13px"
+                  width="auto"
+                  margin="0"
+                  regular
+                  color="#818181"
+                >
+                  부터
+                </Text>
+              </>
+            ) : (
+              <Text
+                size="13px"
+                textalign
+                width="120px"
+                margin="0 8px 0 0"
+                regular
+              >
+                {koStartDate}
+              </Text>
+            )}
+          </Grid>
+
+          <Grid
+            display="flex"
+            alignItems="center"
+            justifyContent="right"
+            padding="10px 14px"
+            width="147.5px"
+            height="44px"
+            border="1px solid #CBCBCB"
+            borderRadius="3px 0 0 3px"
+            hover="border:1px solid #030C37;"
+            margin="0"
+            _onClick={() => {
+              setIsCalendarOpen(!isCalendarOpen);
+            }}
+          >
+            {_endDate === "1970-01-01" || _endDate === "NaN-NaN-NaN" ? (
+              <>
+                <Text
+                  size="13px"
+                  textalign
+                  width="120px"
+                  margin="0 8px 0 0"
+                  regular
+                ></Text>
+                <Text
+                  size="13px"
+                  width="auto"
+                  margin="0 6px 0 0"
+                  regular
+                  color="#818181"
+                >
+                  까지
+                </Text>
+              </>
+            ) : (
+              <Text size="13px" textalign width="100px" margin="0" regular>
+                {koEndDate}
+              </Text>
+            )}
+
+            <img style={{ width: "10px" }} src={inputArrow} />
+          </Grid>
+        </Grid>
+
+        {isCalendarOpen ? (
+          <Grid width="295px" display="relative">
+            <DatePicker
+              selected={startDate}
+              onChange={onChange}
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
+              inline
+              locale={ko}
+            />
+          </Grid>
+        ) : null}
       </>
     );
   }
@@ -156,7 +279,7 @@ const CalendarFilter = (props) => {
             setIsCalendarOpen(!isCalendarOpen);
           }}
         >
-          {_startDate === "NaN-NaN-NaN" ? (
+          {_uploadDate === "NaN-NaN-NaN" ? (
             <>
               <Grid
                 display="flex"
@@ -190,7 +313,7 @@ const CalendarFilter = (props) => {
                   width="auto"
                   margin="0 4px 0 0"
                 >
-                  {koStartDate}
+                  {koUploadDate}
                 </Text>
                 <img src={inputArrowGray} />
               </Grid>
@@ -201,12 +324,12 @@ const CalendarFilter = (props) => {
           {isCalendarOpen ? (
             <DatePicker
               calendarClassName="rasta-stripes"
-              selected={startDate}
+              selected={uploadDate}
               onChange={(e) => {
                 onChange2(e);
                 setIsCalendarOpen(false);
               }}
-              startDate={startDate}
+              startDate={uploadDate}
               minDate={new Date()}
               inline
               locale={ko}

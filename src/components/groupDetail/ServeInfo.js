@@ -71,30 +71,13 @@ const ServeInfo = () => {
 
             <Grid width="auto" display="flex" margin="0 0 16px 0">
               <Text margin="0 8px 0 0" size="12px" color="#7B7B7B">
-                스탠바이 시간
+                출발 시간
               </Text>
               <Text margin="0" size="12px">
                 {editStandbyTime}
               </Text>
             </Grid>
 
-            <Grid width="auto" display="flex" margin="0 0 16px 0">
-              <Text margin="0 8px 0 0" size="12px" color="#7B7B7B">
-                출발 시간
-              </Text>
-              <Text color="" margin="0" size="12px">
-                {editStartTime}
-              </Text>
-            </Grid>
-
-            <Grid width="auto" display="flex" margin="0 0 16px 0">
-              <Text margin="0 8px 0 0" size="12px" color="#7B7B7B">
-                도착 시간
-              </Text>
-              <Text margin="0" size="12px">
-                {editFinishTime}
-              </Text>
-            </Grid>
             <Grid width="auto" display="flex" margin="0 0 16px 0">
               <Text margin="0 8px 0 0" size="12px" color="#7B7B7B">
                 주차시설
@@ -124,7 +107,7 @@ const ServeInfo = () => {
         <Grid display="flex" margin="0 0 16px 0">
           <Grid width="auto" display="flex" margin="0 64px 0 0">
             <Text margin="0 16px 0 0" size="16px" color="#818181">
-              스탠바이
+              출발 시간
             </Text>
             <Text bold margin="0" size="16px">
               {editStandbyTime}
@@ -133,24 +116,24 @@ const ServeInfo = () => {
 
           <Grid width="auto" display="flex" margin="0 64px 0 0">
             <Text margin="0 16px 0 0" size="16px" color="#818181">
-              출발 시간
+              주차 시설
             </Text>
             <Text bold color="" margin="0" size="16px">
-              {editStartTime}
+              {detailGroup?.parking}
             </Text>
           </Grid>
 
           <Grid width="auto" display="flex" margin="0 64px 0 0">
             <Text margin="0 16px 0 0" size="16px" color="#818181">
-              도착 시간
+              짐 보관
             </Text>
             <Text bold margin="0" size="16px">
-              {editFinishTime}
+              {detailGroup?.baggage}
             </Text>
           </Grid>
         </Grid>
 
-        <Grid display="flex" margin="0 0 16px 0">
+        {/* <Grid display="flex" margin="0 0 16px 0">
           <Text margin="0 16px 0 0" size="16px" color="#818181">
             주차시설
           </Text>
@@ -166,7 +149,7 @@ const ServeInfo = () => {
           <Text bold margin="0" size="16px">
             {detailGroup?.baggage}
           </Text>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );

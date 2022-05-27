@@ -49,6 +49,12 @@ const KakaoMapMob = () => {
     setInputText(e.target.value);
   };
 
+  const onCheckEnter = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   const handleSubmit = (e) => {
     setPlace(inputText);
   };
@@ -160,7 +166,7 @@ const KakaoMapMob = () => {
             onChange={onChange}
             placeholder="장소를 검색하여 코스를 지정하세요."
             value={inputText}
-            onKeyPress={handleSubmit}
+            onKeyPress={onCheckEnter}
           />
           <SearchLocationBtn onClick={handleSubmit}>검색하기</SearchLocationBtn>
         </Grid>

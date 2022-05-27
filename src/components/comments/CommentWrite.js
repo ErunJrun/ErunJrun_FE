@@ -15,12 +15,22 @@ const CommentWrite = (props) => {
   const [comm, setComm] = useState("");
 
   const writeComm = (e) => {
-    if (comm === "") {
-      swal("내용을 입력해주세요");
+    if (comm.trim() === "" || comm === null) {
+      setComm("");
+      return swal("내용을 입력해주세요");
     }
-    setComm(e.target.value);
+
     dispatch(_addCommentFX("group", props.groupId, comm));
     setComm("");
+  };
+
+  const checkMaxLength = (e) => {
+    let wordLength = e.target.value.length;
+
+    if (wordLength >= 40) {
+      swal("40자 이상 작성할 수 없습니다.");
+      return;
+    }
   };
 
   if (isMobile) {
@@ -36,10 +46,11 @@ const CommentWrite = (props) => {
             <Grid display="flex" alignItems="center" padding="14px">
               <CommTextareaMob
                 type="text"
-                placeholder="궁금하신 점을 댓글로 남겨보세요!"
+                placeholder="궁금하신 점을 댓글로 남겨보세요! (40자)"
                 value={comm}
                 onChange={(e) => {
                   setComm(e.target.value);
+                  checkMaxLength(e);
                 }}
               ></CommTextareaMob>
             </Grid>
@@ -64,10 +75,11 @@ const CommentWrite = (props) => {
             <CommImg src={defaultProfile} />
             <CommTextarea
               type="text"
-              placeholder="궁금하신 점을 댓글로 남겨보세요!"
+              placeholder="궁금하신 점을 댓글로 남겨보세요! (40자이내)"
               value={comm}
               onChange={(e) => {
                 setComm(e.target.value);
+                checkMaxLength(e);
               }}
             ></CommTextarea>
           </Grid>

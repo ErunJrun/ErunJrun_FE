@@ -607,6 +607,7 @@ const GroupTextArea = styled.textarea`
   height: 96%;
   border: none;
   resize: none;
+
   :focus {
     outline: none;
   }
@@ -630,6 +631,8 @@ const GroupSelect = styled.select`
   border: none;
   border-radius: 3px;
   color: #7b7b7b;
+  -webkit-text-fill-color: white;
+  opacity: 1;
 `;
 
 const MidHr = styled.hr`

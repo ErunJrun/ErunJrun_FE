@@ -160,8 +160,6 @@ const GroupContent = (props) => {
     setCheckedSpeed(e);
   };
 
-  console.log(startTime);
-
   const contents = {
     title: title,
     standbyTime: standbyTime,
@@ -194,6 +192,8 @@ const GroupContent = (props) => {
     checkedType,
     chattingRoom,
   ]);
+
+  console.log(contentsList);
 
   return (
     <>
@@ -249,6 +249,7 @@ const GroupContent = (props) => {
             >
               <Grid width="auto">
                 <CalendarFilter
+                  date={contentsList.date}
                   setDate={setDate}
                   upload={true}
                   reset={resetState}
@@ -299,7 +300,7 @@ const GroupContent = (props) => {
                 }}
                 value={maxPeople || ""}
               >
-                <option style={{ color: "#818181" }} value="null">
+                <option value="null">
                   모집 인원을 입력해주세요.(최대 10명)
                 </option>
                 <option value="2">2명</option>
@@ -548,6 +549,7 @@ const RedPoint = styled.div`
 
 const GroupInput = styled.input`
   font-size: 16px;
+  font-weight: 500;
   box-sizing: border-box;
   margin: 0 20px 0 0;
   display: flex;
@@ -562,7 +564,7 @@ const GroupInput = styled.input`
   ::placeholder {
     font-family: "Spoqa Han Sans Neo", "sans-serif";
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 500;
     color: #818181;
   }
 `;
@@ -571,7 +573,7 @@ const GroupTextArea = styled.textarea`
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-weight: 400;
   font-size: 16px;
-  padding: 10px;
+  padding: 10px 0;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -592,18 +594,24 @@ const GroupTextArea = styled.textarea`
 `;
 
 const GroupSelect = styled.select`
+  font-family: "Spoqa Han Sans Neo";
+  padding: 0;
+  color: #818181;
   font-weight: 500;
   font-size: 16px;
   line-height: 22px;
-  color: #000000;
-  border: 1px solid #4e4e4e;
   box-sizing: border-box;
-  border-radius: 5px;
   width: 100%;
   height: 40px;
-  text-align: center;
+  text-align: left;
   outline: none;
   border: none;
+  option {
+    font-family: "Spoqa Han Sans Neo";
+    font-weight: 500;
+    font-size: 16px;
+    color: #818181;
+  }
 `;
 
 const MidHr = styled.hr`

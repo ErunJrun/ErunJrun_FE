@@ -83,7 +83,6 @@ export const _addReCommentFX = (commentId, content, groupId) => {
 
       dispatch(getReComm(recomment_list));
       dispatch(_getCommentFX("group", groupId));
-      swal("답글 등록 완료");
     } catch (error) {
       // console.log(error);
     }

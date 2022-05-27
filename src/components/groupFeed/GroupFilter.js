@@ -22,6 +22,7 @@ const GroupFilter = (props) => {
 
   const [isAddFilter, setIsAddFilter] = useState(false);
   const [resetState, setResetState] = useState(false);
+  const [closeCalendar, setCloseCalender] = useState(false);
 
   const switchAddFilter = () => {
     setIsAddFilter(!isAddFilter);
@@ -83,12 +84,14 @@ const GroupFilter = (props) => {
   };
 
   const getFilter = () => {
-    if (region.length === 0 || startDate === "NaN-NaN-NaN") {
-      return swal("지역과 모집 일정은 필수입니다.", "", "warning");
-    }
+    // if (region.length === 0 || startDate === "NaN-NaN-NaN") {
+    //   return swal("지역과 모집 일정은 필수입니다.", "", "warning");
+    // }
     dispatch(resetGroup());
     dispatch(getGroupDB(category, 1, 100));
     props.setSearchState(true);
+    props.setAllCheck(true);
+    setCloseCalender(true);
   };
 
   return (
@@ -146,6 +149,7 @@ const GroupFilter = (props) => {
             </Text>
             <Grid width="auto">
               <CalendarFilter
+                closeCalendar={closeCalendar}
                 reset={resetState}
                 setStartDate={setStartDate}
                 setEndDate={setEndDate}
@@ -248,7 +252,9 @@ const GroupFilter = (props) => {
             {startDate && endDate ? (
               <Text regular color="#030C37" margin="0 20px 0 0" size="14px">
                 {startDate === "NaN-NaN-NaN" ? null : "# " + startDate + "~"}
-                {endDate === "NaN-NaN-NaN" ? null : endDate}
+                {endDate === "NaN-NaN-NaN" || endDate === "1970-01-01"
+                  ? null
+                  : endDate}
               </Text>
             ) : null}
           </Grid>

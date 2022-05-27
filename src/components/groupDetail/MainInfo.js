@@ -300,15 +300,27 @@ const MainInfo = (props) => {
           >
             <ChatBtn style={{ background: "#FAE301" }}>
               <ChatImg src={groupChat} />
-              <Text
-                _onClick={() => {
-                  window.open(detailGroup?.chattingRoom);
-                }}
-                cursor="pointer"
-                margin="0"
-              >
-                그룹 채팅방
-              </Text>
+              {detailGroup?.chattingRoom ? (
+                <Text
+                  _onClick={() => {
+                    window.open(detailGroup?.chattingRoom);
+                  }}
+                  cursor="pointer"
+                  margin="0"
+                >
+                  그룹 채팅방
+                </Text>
+              ) : (
+                <Text
+                  _onClick={() => {
+                    swal("입력된 채팅방 링크가 없습니다.");
+                  }}
+                  cursor="pointer"
+                  margin="0"
+                >
+                  그룹 채팅방
+                </Text>
+              )}
             </ChatBtn>
 
             <KakaoShareButton detailGroup={detailGroup} />

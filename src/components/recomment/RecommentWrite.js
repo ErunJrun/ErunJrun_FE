@@ -7,6 +7,7 @@ import { resetReComm, _addReCommentFX } from "../../redux/modules/recomments";
 import { useMediaQuery } from "react-responsive";
 import { _getCommentFX, _isRecommBox } from "../../redux/modules/comments";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 const RecommentWrite = (props) => {
   const isMobile = useMediaQuery({
@@ -20,10 +21,22 @@ const RecommentWrite = (props) => {
   const [recomm, setReComm] = useState("");
 
   const writeReComm = (e) => {
-    setReComm(e.target.value);
+    if (recomm.trim() === "" || recomm === null) {
+      setReComm("");
+      return swal("내용을 입력해주세요");
+    }
     dispatch(_addReCommentFX(props.commentId, recomm, groupId));
     props.setReCommBox(false);
     setReComm("");
+  };
+
+  const checkMaxLength = (e) => {
+    let wordLength = e.target.value.length;
+
+    if (wordLength >= 40) {
+      swal("40자 이상 작성할 수 없습니다.");
+      return;
+    }
   };
 
   if (isMobile) {
@@ -43,10 +56,11 @@ const RecommentWrite = (props) => {
             <Grid display="flex" alignItems="center" padding="14px">
               <CommTextareaMob
                 type="text"
-                placeholder="답글을 남겨주세요!"
+                placeholder="답글을 남겨주세요! (40자이내)"
                 value={recomm}
                 onChange={(e) => {
                   setReComm(e.target.value);
+                  checkMaxLength(e);
                 }}
               ></CommTextareaMob>
             </Grid>
@@ -77,10 +91,11 @@ const RecommentWrite = (props) => {
             <CommImg src={defaultProfile2} />
             <CommTextarea
               type="text"
-              placeholder="답글을 남겨보세요!"
+              placeholder="답글을 남겨보세요!(40자이내)"
               value={recomm}
               onChange={(e) => {
                 setReComm(e.target.value);
+                checkMaxLength(e);
               }}
             ></CommTextarea>
           </Grid>

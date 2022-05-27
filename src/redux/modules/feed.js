@@ -148,6 +148,54 @@ export const getGroupDB = (category, page = 1, size = 6) => {
   };
 };
 
+export const getAllDB = (page = 1, size = 6) => {
+  return async function (dispatch, getState, { history }) {
+    // const _paging = getState().feed.paging;
+    // if (!_paging.page) {
+    //   return;
+    // }
+    // dispatch(loading(true));
+
+    try {
+      const { data } = await api.get(`/group/all?page=${page}&size=${size}`);
+      console.log(data);
+
+      let paging = {
+        page: data.data.length === size ? page + 1 : null,
+        size: size,
+      };
+
+      dispatch(getGroup(data, paging));
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+};
+
+export const getPreferDB = (page = 1, size = 6) => {
+  return async function (dispatch, getState, { history }) {
+    // const _paging = getState().feed.paging;
+    // if (!_paging.page) {
+    //   return;
+    // }
+    // dispatch(loading(true));
+
+    try {
+      const { data } = await api.get(`/group/prefer?page=${page}&size=${size}`);
+      console.log(data);
+
+      let paging = {
+        page: data.data.length === size ? page + 1 : null,
+        size: size,
+      };
+
+      dispatch(getGroup(data, paging));
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+};
+
 export const getMainDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
@@ -187,8 +235,8 @@ export const addGroupDB = (
     formData.append("maxPeople", contents.maxPeople);
     formData.append("date", contents.date);
     formData.append("standbyTime", contents.standbyTime);
-    formData.append("startTime", contents.startTime);
-    formData.append("finishTime", contents.finishTime);
+    formData.append("startTime", contents.standbyTime);
+    formData.append("finishTime", "23:00");
     formData.append("parking", contents.parking);
     formData.append("speed", contents.speed);
     formData.append("baggage", contents.baggage);

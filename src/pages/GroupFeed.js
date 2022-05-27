@@ -8,6 +8,7 @@ import {
   LogoSpinner,
 } from "../elements";
 import filterIcon from "../assets/groupFeed/filterIcon.svg";
+import categoryLine from "../assets/groupFeed/categoryLine.svg";
 
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
@@ -23,7 +24,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-scroll";
 import shoesYellow from "../assets/groupFeed/shoesYellow.svg";
 
-import { getGroupDB, resetGroup } from "../redux/modules/feed";
+import {
+  getAllDB,
+  getGroupDB,
+  getPreferDB,
+  resetGroup,
+} from "../redux/modules/feed";
 import Permit from "../shared/Permit";
 
 import InfinityScroll from "../components/InfinityScroll";
@@ -47,6 +53,22 @@ const GroupFeed = () => {
   const params = useParams();
 
   const nickname = localStorage.getItem("nickname");
+
+  const [allCheck, setAllCheck] = useState(true);
+
+  const allGroup = () => {
+    dispatch(resetGroup());
+    dispatch(getAllDB(paging.page, 6));
+    setAllCheck(true);
+    setSearchState(false);
+  };
+
+  const preferGroup = () => {
+    dispatch(resetGroup());
+    dispatch(getPreferDB(paging.page, 6));
+    setAllCheck(false);
+    setSearchState(false);
+  };
 
   const [finish, setFinish] = useState("0");
   const [startDate, setStartDate] = useState("");
@@ -331,6 +353,7 @@ const GroupFeed = () => {
               </Text>
             </Grid>
             <GroupFilter
+              setAllCheck={setAllCheck}
               setSearchState={setSearchState}
               category={category}
               finishCheck={finishCheck}
@@ -349,7 +372,7 @@ const GroupFeed = () => {
                 margin="0"
                 width="auto"
               >
-                {searchState || !nickname ? (
+                {allCheck ? (
                   <>
                     <Text margin="0" size="20px" bold>
                       총{" "}
@@ -393,37 +416,107 @@ const GroupFeed = () => {
                   </>
                 )}
               </Grid>
-
-              <Grid
-                display="flex"
-                alignItem="center"
-                justifyContent="center"
-                padding="5px"
-                width="96px"
-                height="32px"
-                bg="#68F99E"
-                border="none"
-                borderRadius="3px"
-                cursor="pointer"
-                _onClick={() => {
-                  history.push("/groupupload");
-                }}
-              >
-                <Text
+              <Permit>
+                <Grid
+                  display="flex"
+                  alignItem="center"
+                  justifyContent="center"
+                  padding="5px"
+                  width="96px"
+                  height="32px"
+                  bg="#68F99E"
+                  border="none"
+                  borderRadius="3px"
+                  cursor="pointer"
                   _onClick={() => {
                     history.push("/groupupload");
                   }}
-                  cursor="pointer"
-                  margin="0"
-                  size="14px"
-                  color="#030C37"
                 >
-                  글쓰기
-                </Text>
-              </Grid>
+                  <Text
+                    _onClick={() => {
+                      history.push("/groupupload");
+                    }}
+                    cursor="pointer"
+                    margin="0"
+                    size="14px"
+                    color="#030C37"
+                  >
+                    글쓰기
+                  </Text>
+                </Grid>
+              </Permit>
             </Grid>
-
             <Hr></Hr>
+            <Grid display="flex" alignItem="center" justifyContent="left">
+              {allCheck ? (
+                <>
+                  {!searchState ? (
+                    <Text
+                      _onClick={() => {
+                        allGroup();
+                      }}
+                      height="auto"
+                      margin="0 12px 0 0"
+                      bold
+                      cursor="pointer"
+                    >
+                      전체
+                    </Text>
+                  ) : (
+                    <Text
+                      _onClick={() => {
+                        allGroup();
+                      }}
+                      height="auto"
+                      margin="0 12px 0 0"
+                      bold
+                      cursor="pointer"
+                    >
+                      필터 적용(클릭 시 전체보기 전환)
+                    </Text>
+                  )}
+
+                  <img style={{ marginRight: "12px" }} src={categoryLine} />
+                  <Text
+                    _onClick={() => {
+                      preferGroup();
+                    }}
+                    color="#B8B8B8"
+                    height="auto"
+                    margin="0"
+                    cursor="pointer"
+                  >
+                    추천 그룹 러닝
+                  </Text>
+                </>
+              ) : (
+                <>
+                  <Text
+                    _onClick={() => {
+                      allGroup();
+                    }}
+                    height="auto"
+                    margin="0 12px 0 0"
+                    color="#B8B8B8"
+                    cursor="pointer"
+                  >
+                    전체
+                  </Text>
+                  <img style={{ marginRight: "12px" }} src={categoryLine} />
+                  <Text
+                    _onClick={() => {
+                      preferGroup();
+                    }}
+                    height="auto"
+                    margin="0"
+                    bold
+                    cursor="pointer"
+                  >
+                    추천 그룹 러닝
+                  </Text>
+                </>
+              )}
+            </Grid>
             <OpenAnimation>
               <Grid margin="34px auto 0 auto" minHeight="600px" display="flex">
                 {feedList.length !== 0 ? (
@@ -482,7 +575,7 @@ const GroupFeed = () => {
             flexDirection="column"
             position="sticky"
             top="726px"
-            margin="0"
+            margin="auto"
             width="auto"
           >
             <Permit>
