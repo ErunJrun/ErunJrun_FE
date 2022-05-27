@@ -607,18 +607,19 @@ const Edit = (props) => {
         >
           핸드폰 번호
         </Text>
-        <Grid display="felx">
-          <Inp
-            value={phone}
-            onChange={Number}
-            type="text"
-            placeholder="010-1234-5678"
-            maxLength={20}
-          />
-        </Grid>
+
 
         {certPhone === false ? (
           <>
+            <Grid display="felx">
+              <Inp
+                value={phone}
+                onChange={Number}
+                type="text"
+                placeholder="010-1234-5678"
+                maxLength={20}
+              />
+            </Grid>
             <_Box>
               <Button
                 onClick={() => {
@@ -676,15 +677,27 @@ const Edit = (props) => {
             )}
           </>
         ) : (
-          <Grid margin="0 0 64px 0">
-            <input
-              checked={agreeSMS}
-              value={agreeSMS}
-              onChange={agree}
-              type="checkbox"
-            />
-            &nbsp;개인정보사용 동의 및 알림수신에 동의합니다.
-          </Grid>
+          <>
+            <Grid display="felx">
+              <Inp
+                value={phone}
+                onChange={Number}
+                type="text"
+                placeholder="010-1234-5678"
+                maxLength={20}
+                readOnly
+              />
+            </Grid>
+            <Grid margin="0 0 64px 0">
+              <input
+                checked={agreeSMS}
+                value={agreeSMS}
+                onChange={agree}
+                type="checkbox"
+              />
+              &nbsp;개인정보사용 동의 및 알림수신에 동의합니다.
+            </Grid>
+          </>
         )}
 
         <hr/>
@@ -1181,47 +1194,6 @@ const LabelExpMob = styled.label`
     font-weight: 500;
   }
 `;
-
-{
-  /*const LabelExpMob = styled.label`
-  input {
-    display: none;
-  }
-
-  input + p {
-    width: 343px;
-    height: 34px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 10px auto;
-    border-radius: 35px;
-    cursor: pointer;
-    box-sizing: border-box;
-    margin: 0;
-    border: 1px solid #b8b8b8;
-    gap: 8px;
-    color: #000;
-  }
-  input:checked + p {
-    ${(props) =>
-      props.checkLevel === 0
-        ? "background-color:  #FF823B;"
-        : props.checkLevel === 1
-        ? "background-color:  #BD6AFF;"
-        : props.checkLevel === 2
-        ? "background-color:  #4248C4;"
-        : props.checkLevel === 3
-        ? "background-color: #EE4343;"
-        : props.checkLevel === 4
-        ? "background-color:  #303030;"
-        : null}
-    ${(props) => (props.checkLevel === 4 ? "color:  white;" : "color: black;")}
-    font-weight: 500;
-  }
-`;*/
-}
 
 const LabelDistance = styled.label`
   input {
