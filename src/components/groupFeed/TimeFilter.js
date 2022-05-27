@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const TimeFilter = (props) => {
   const [checkedInputs, setCheckedInputs] = useState([]);
+  const [allState, setAllState] = useState(false);
 
   useEffect(() => {
     props?.setFilterTime(checkedInputs);
@@ -16,7 +17,6 @@ const TimeFilter = (props) => {
   }, [props.reset]);
 
   const [time, setTime] = useState([
-    "전체 시간",
     "00:00 ~ 04:00",
     "04:00 ~ 08:00",
     "08:00 ~ 12:00",
@@ -28,11 +28,16 @@ const TimeFilter = (props) => {
   const choiceTime = (e, idx) => {
     if (e.target.checked) {
       setCheckedInputs([...checkedInputs, idx]);
+      setAllState(false);
     } else {
       // 체크 해제
       setCheckedInputs(checkedInputs.filter((el) => el !== idx));
     }
   };
+
+  console.log(allState);
+
+  console.log(checkedInputs);
 
   if (props.isMobile) {
     return (
@@ -94,16 +99,63 @@ const TimeFilter = (props) => {
       </Text>
 
       <Grid width="1015px" display="flex" justifyContent="space-between">
+        {!allState ? (
+          <Grid
+            _onClick={() => {
+              setCheckedInputs([]);
+              setAllState(true);
+            }}
+            width="auto"
+            padding="8px 20px"
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            borderRadius="60px"
+            border="1px solid #f0f0f0"
+            bg="#f0f0f0"
+            cursor="pointer"
+          >
+            <Text cursor="pointer" margin="0" regular size="16px">
+              전체보기
+            </Text>
+          </Grid>
+        ) : (
+          <Grid
+            _onClick={() => {
+              setCheckedInputs([]);
+              setAllState(false);
+            }}
+            width="auto"
+            padding="8px 20px"
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            borderRadius="60px"
+            border="1px solid #030c37"
+            bg="#030c37"
+            cursor="pointer"
+          >
+            <Text cursor="pointer" color="#68f99e" margin="0" size="16px">
+              전체보기
+            </Text>
+          </Grid>
+        )}
+
         {time.map((e, idx) => {
           return (
             <Fragment key={idx}>
-              <Label
-                onChange={(e) => {
-                  choiceTime(e, idx);
-                }}
-                checked={checkedInputs.includes(idx)}
-              >
-                <input type="checkbox" name={e} value={idx || ""} />
+              <Label>
+                <input
+                  onChange={(e) => {
+                    choiceTime(e, idx + 1);
+                  }}
+                  checked={checkedInputs.includes(idx + 1)}
+                  type="checkbox"
+                  name={e}
+                  value={idx + 1 || ""}
+                />
                 <Text margin="0" regular size="16px">
                   {e}
                 </Text>
