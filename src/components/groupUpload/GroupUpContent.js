@@ -397,7 +397,7 @@ const GroupContent = (props) => {
           <Hr />
 
           <Text margin="0" bold>
-            러닝 타입
+            러닝 테마
           </Text>
           <Grid margin="0" display="flex" justifyContent="space-between">
             {runTypeList.map((e, idx) => {

@@ -35,10 +35,6 @@ const TimeFilter = (props) => {
     }
   };
 
-  console.log(allState);
-
-  console.log(checkedInputs);
-
   if (props.isMobile) {
     return (
       <Grid
@@ -62,18 +58,73 @@ const TimeFilter = (props) => {
           alignItems="center"
           justifyContent="space-between"
         >
+          {!allState ? (
+            <Grid
+              _onClick={() => {
+                setCheckedInputs([]);
+                setAllState(true);
+              }}
+              width="142px"
+              height="32px"
+              padding="8px auto"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              borderRadius="60px"
+              border="1px solid #b8b8b8"
+              bg="white"
+              cursor="pointer"
+            >
+              <Text
+                color="#7b7b7b"
+                cursor="pointer"
+                margin="0"
+                regular
+                size="13px"
+              >
+                전체보기
+              </Text>
+            </Grid>
+          ) : (
+            <Grid
+              _onClick={() => {
+                setCheckedInputs([]);
+                setAllState(false);
+              }}
+              width="142px"
+              height="32px"
+              padding="8px auto"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              borderRadius="60px"
+              border="1px solid #68f99e"
+              bg="#68f99e"
+              cursor="pointer"
+            >
+              <Text
+                color="#030c37"
+                cursor="pointer"
+                margin="0"
+                regular
+                size="13px"
+              >
+                전체보기
+              </Text>
+            </Grid>
+          )}
           {time.map((e, idx) => {
             return (
               <Fragment key={idx}>
                 <LabelMob>
                   <input
                     onChange={(e) => {
-                      choiceTime(e, idx);
+                      choiceTime(e, idx + 1);
                     }}
-                    checked={checkedInputs.includes(idx)}
+                    checked={checkedInputs.includes(idx + 1)}
                     type="checkbox"
                     name={e}
-                    value={idx || ""}
+                    value={idx + 1 || ""}
                   />
                   <Text margin="0" color="#7B7B7B" regular size="13px">
                     {e}
