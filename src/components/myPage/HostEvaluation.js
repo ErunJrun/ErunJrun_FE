@@ -27,9 +27,13 @@ const HostEvaluation = () => {
       <Grid 
       width="350px"
       padding="5%"
-      margin="-45px auto -20px -17px"
+      margin="0px auto -14px -17px"
       >
-        <Text bold size="14px">
+        <Text 
+        bold 
+        size="14px"
+        margin="12px 0 0 0"
+        >
           받은 굿러너 평가 (총 &nbsp;
           {profile_list?.totalEvaluationCount}
           개)
@@ -37,7 +41,7 @@ const HostEvaluation = () => {
         <Text 
           bold 
           size="20px" 
-          margin="-40px 0 0 100%" 
+          margin="-25px 0 0 100%" 
           profile_list={profile_list}
           _onClick={()=>{
             history.push("/m/evaluation");
@@ -53,9 +57,8 @@ const HostEvaluation = () => {
           <_Box>
             <_Img src="https://ifh.cc/g/9soljs.png"/>
             <Text 
-            
-            
-              size="12px"
+              bold
+              size="11px"
               margin="-4px 0 0 0"
             >
               {profile_list?.evaluation?.evaluationCategory1}
@@ -83,7 +86,7 @@ const HostEvaluation = () => {
             <_Img src="https://ifh.cc/g/9soljs.png"/>
             <Text
               bold 
-              size="12px"
+              size="11px"
               margin="-4px 0 0 0"
             >
               {profile_list?.evaluation?.evaluationCategory4}

@@ -40,7 +40,7 @@ const MobileEvaluation = () => {
             alignItems="center"
           >
             <img
-              style={{ width: "10px", margin: "0 10px" }}
+              style={{ width: "10px", margin: "0 15px" }}
               src={backBtn}
               onClick={() => {
                 history.go(-1);
@@ -61,24 +61,24 @@ const MobileEvaluation = () => {
               </Text>
             </_Box>
             <EvaluationBox>
-              <Text>“진행한 코스가 만족스러웠어요!”</Text>
-              <Text>{profile_list?.evaluation?.evaluationCategory1}</Text>
+              <Text regular>“진행한 코스가 만족스러웠어요!”</Text>
+              <Text bold>{profile_list?.evaluation?.evaluationCategory1}</Text>
             </EvaluationBox>
             <EvaluationBox>
-              <Text>“사람들을 잘 이끌어줬어요!“</Text>
-              <Text>{profile_list?.evaluation?.evaluationCategory2}</Text>
+              <Text regular>“사람들을 잘 이끌어줬어요!“</Text>
+              <Text bold>{profile_list?.evaluation?.evaluationCategory2}</Text>
             </EvaluationBox>
             <EvaluationBox>
-              <Text>“궁금한 점에 대해 빠르게 답해줬어요!”</Text>
-              <Text>{profile_list?.evaluation?.evaluationCategory3}</Text>
+              <Text regular>“궁금한 점에 대해 빠르게 답해줬어요!”</Text>
+              <Text bold>{profile_list?.evaluation?.evaluationCategory3}</Text>
             </EvaluationBox>
             <EvaluationBox>
-              <Text>“짐을 보관해줘서 편한 러닝이 가능했어요!”</Text>
-              <Text>{profile_list?.evaluation?.evaluationCategory4}</Text>
+              <Text regular>“짐을 보관해줘서 편한 러닝이 가능했어요!”</Text>
+              <Text bold>{profile_list?.evaluation?.evaluationCategory4}</Text>
             </EvaluationBox>
             <EvaluationBox>
-              <Text>“시간 약속을 잘 지켰어요!”</Text>
-              <Text>{profile_list?.evaluation?.evaluationCategory5}</Text>
+              <Text regular>“시간 약속을 잘 지켰어요!”</Text>
+              <Text bold>{profile_list?.evaluation?.evaluationCategory5}</Text>
             </EvaluationBox>
 
             <_Box>
@@ -91,24 +91,24 @@ const MobileEvaluation = () => {
             {profile_list?.userInfo?.userId === myId ? (
               <>
                 <EvaluationBox>
-                  <Text>“진행한 코스가 아쉬웠어요.”</Text>
-                  <Text>{profile_list?.evaluation?.evaluationCategory6}</Text>
+                  <Text regular>“진행한 코스가 아쉬웠어요.”</Text>
+                  <Text bold>{profile_list?.evaluation?.evaluationCategory6}</Text>
                 </EvaluationBox>
                 <EvaluationBox>
-                  <Text>“크루원에게 불친절했어요.“</Text>
-                  <Text>{profile_list?.evaluation?.evaluationCategory7}</Text>
+                  <Text regular>“크루원에게 불친절했어요.“</Text>
+                  <Text bold>{profile_list?.evaluation?.evaluationCategory7}</Text>
                 </EvaluationBox>
                 <EvaluationBox>
-                  <Text>“응답이 늦었어요.”</Text>
-                  <Text>{profile_list?.evaluation?.evaluationCategory8}</Text>
+                  <Text regular>“응답이 늦었어요.”</Text>
+                  <Text bold>{profile_list?.evaluation?.evaluationCategory8}</Text>
                 </EvaluationBox>
                 <EvaluationBox>
-                  <Text>“변경사항을 안내해주지 않았어요.”</Text>
-                  <Text>{profile_list?.evaluation?.evaluationCategory9}</Text>
+                  <Text regular>“변경사항을 안내해주지 않았어요.”</Text>
+                  <Text bold>{profile_list?.evaluation?.evaluationCategory9}</Text>
                 </EvaluationBox>
                 <EvaluationBox>
-                  <Text>“시간 약속을 잘 안지켰어요.”</Text>
-                  <Text>{profile_list?.evaluation?.evaluationCategory10}</Text>
+                  <Text regular>“시간 약속을 잘 안지켰어요.”</Text>
+                  <Text bold>{profile_list?.evaluation?.evaluationCategory10}</Text>
                 </EvaluationBox>
               </>
             ) : (
@@ -143,9 +143,8 @@ const Img = styled.img`
 `;
 
 const EvaluationBox = styled.div`
-  width: 305px;
-  height: 43px;
-  font-weight: normal;
+  width: 301px;
+  height: 44px;
   border: solid 1px #ddd;
   border-radius: 60px;
   background-color: #fff;
