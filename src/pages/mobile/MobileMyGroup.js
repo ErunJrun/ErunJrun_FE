@@ -45,6 +45,7 @@ const MobileMyGroup = () => {
           display="flex"
           padding="10px 10px"
           margin="0 auto"
+          boxShadow=" 0px 0px 30px #eee"
         >
           <Grid
             display="flex"
@@ -53,13 +54,17 @@ const MobileMyGroup = () => {
             alignItems="center"
           >
             <img
-              style={{ width: "10px", margin: "0 10px" }}
+              style={{ width: "10px", margin: "0 15px" }}
               src={backBtn}
               onClick={() => {
                 history.go(-1);
               }}
             />
-            <Text margin="0 0 0 130px" bold size="16px">
+            <Text 
+              margin="0 0 0 130px" 
+              bold 
+              size="16px"
+            >
               My 모집
             </Text>
           </Grid>
@@ -72,9 +77,17 @@ const MobileMyGroup = () => {
           {my.data.length === 0 ? (
             <Box>진행한 그룹 러닝이 없습니다</Box>
           ) : (
-            <Grid display="flex" width="375px" justifyContent="space-between">
+            <Grid 
+              display="flex" 
+              width="343px" 
+              justifyContent="space-between"
+            >
               {my.data?.map((data, index) => (
-                <Grid key={index} width="166px" margin="0 8px 40px 8px">
+                <Grid 
+                  key={index} 
+                  width="166px" 
+                  margin="0 0px 32px 0px"
+                >
                   <Grid
                     _onClick={() => {
                       history.push(`/groupdetail/${data.groupId}`);
@@ -87,7 +100,9 @@ const MobileMyGroup = () => {
                     <Img src={data.thumbnailUrl} />
 
                     <Grid>
-                      <Title>{data.title}</Title>
+                      <Title>
+                        {data.title}
+                      </Title>
                       <Text
                         cursor="pointer"
                         size="11px"
@@ -98,9 +113,17 @@ const MobileMyGroup = () => {
                       </Text>
                     </Grid>
 
-                    <Grid width="166px" cursor="pointer" display="flex">
-                      <Tagg>{data.location}</Tagg>
-                      <Tag>{data.distance}km</Tag>
+                    <Grid 
+                      width="166px" 
+                      cursor="pointer" 
+                      display="flex"
+                    >
+                      <Tagg>
+                        {data.location}
+                      </Tagg>
+                      <Tag>
+                        {data.distance}km
+                      </Tag>
                     </Grid>
                     <Hr></Hr>
                   </Grid>
@@ -158,7 +181,7 @@ const MobileMyGroup = () => {
 
 const Tag = styled.div`
   height: 15px;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 400;
   color: #7b7b7b;
   background-color: #ddd;
@@ -174,7 +197,7 @@ const Tagg = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 400;
   color: #7b7b7b;
   background-color: #ddd;
@@ -189,15 +212,16 @@ const Hr = styled.div`
   margin: 13px 0 -3px 0;
 `;
 
-const ApplyBtnTrue = styled.button`
+const ApplyBtnTrue = styled.div`
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 400;
   width: 168px;
   background: #030c37;
   border-radius: 3px;
-  height: 24px;
+  height: 19px;
   color: white;
   border: none;
+  padding-top: 5px;
   cursor: pointer;
   :hover {
     box-shadow: 0 0 3px black;
@@ -205,13 +229,14 @@ const ApplyBtnTrue = styled.button`
   }
 `;
 
-const ApplyBtnFalse = styled.button`
+const ApplyBtnFalse = styled.div`
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 400;
   width: 168px;
   background: #f0f0f0;
   border-radius: 3px;
-  height: 24 px;
+  height: 19px;
+  padding-top: 5px;
   color: #7b7b7b;
   border: none;
 `;
@@ -229,8 +254,9 @@ const Box = styled.div`
 
 const Img = styled.img`
   height: 126px;
-  width: 166px;
+  width: 168px;
   border-radius: 3px;
+  object-fit: cover;
 `;
 
 const Title = styled.text`

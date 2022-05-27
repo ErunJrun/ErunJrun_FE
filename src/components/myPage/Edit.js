@@ -128,8 +128,8 @@ const Edit = (props) => {
   };
 
   const changeContent = (e) => {
-    if (e.target.value.length >= 50) {
-      swal("50자 이상 작성할 수 없습니다.");
+    if (e.target.value.length >= 30) {
+      swal("30자 이상 작성할 수 없습니다.");
     }
     setBio(e.target.value);
   };
@@ -272,7 +272,7 @@ const Edit = (props) => {
               maxLength={8}
             />
             <Text size="13px" margin="22px 0 16px 0">
-              자기소개
+              한 줄 소개
             </Text>
 
             <_Input

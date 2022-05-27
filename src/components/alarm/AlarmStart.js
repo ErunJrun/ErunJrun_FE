@@ -305,7 +305,7 @@ const AlarmStart = (props) => {
                   <span style={{ color: "#FF2D55", fontWeight: "700" }}>
                     30분 뒤{" "}
                   </span>
-                  <span style={{ color: "#FF2D55", fontWeight: "700" }}>{props?.groupTitle}</span>{" "}
+                  <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>{" "}
                   러닝이 시작합니다.
                 </Text>
               )}

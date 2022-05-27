@@ -40,7 +40,7 @@ const Progress = (props) => {
             justifyContent="center"
             >
             <Grid
-              width= "342px"
+              width= "343px"
               height= "0px"
               bg="transparent"  
               margin="0 0 0 0px"              
@@ -50,7 +50,7 @@ const Progress = (props) => {
               </div>
             </Grid>
             <Grid
-              width= "342px"
+              width= "343px"
               height="18px"
               bg="#d8d8d8"
               borderRadius="20px"

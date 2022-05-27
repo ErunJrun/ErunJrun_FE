@@ -7,6 +7,7 @@ import { Text, Grid } from "../../elements";
 import LevelBox from "../groupDetail/LevelBox";
 import { useMediaQuery } from "react-responsive";
 import { history } from "../../redux/configureStore";
+import { HiOutlineChevronRight } from "react-icons/hi";
 
 const Profile = () => {
   const isMobile = useMediaQuery({
@@ -28,14 +29,14 @@ const Profile = () => {
           <Text bold size="14px" >
             {profile_list?.userInfo?.nickname}
           </Text> 
-          <Text regular size="10.3px" width="225px"  margin="-12px 0 0 0">
+          <Text regular size="12px" width="225px"  margin="-12px 0 0 0">
             {profile_list?.userInfo?.bio}
           </Text> 
         </Grid>
 
         {profile_list?.userInfo?.userId === myId ?
-          <Text bold size="20px" margin="-60px 0 0 90%" _onClick={()=>{history.push("/edit")}}>
-            >
+          <Text bold size="20px" margin="-60px 0 0 92%" _onClick={()=>{history.push("/edit")}}>
+            <HiOutlineChevronRight/>
           </Text>
         :
           null
@@ -148,7 +149,7 @@ const Box = styled.div`
 const _Box = styled.div`
   width: 343px;
   height: 95px;
-  margin: 24px auto;
+  margin: 28px auto;
   border-radius: 3px;
   border: solid 1px #ddd;
   background-color: #fff;
@@ -195,8 +196,8 @@ const MyImage = styled.img`
 `;
 
 const _MyImage = styled.img`
-  height: 64px;
-  width: 64px;
+  height: 68px;
+  width: 68px;
   border-radius: 50%;
   margin: 80px 0 0 0px;
   border: solid 2px #ddd;
