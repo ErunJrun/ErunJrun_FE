@@ -143,8 +143,8 @@ const Img = styled.img`
 `;
 
 const ModalContent = styled.div`
-    position: absolute;
-    top: 25%;
+    position: fixed;
+    top: 24%;
     left: 20%;
     //transform: translate(-110%, 55%);
     line-height: 1.4;

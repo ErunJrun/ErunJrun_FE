@@ -22,7 +22,7 @@ const Mypage = () => {
   const userId = params.userId;
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
-
+console.log(userId);
   useEffect(() => {
     dispatch(getProfileDB(userId));
     dispatch(loginCheckDB());
