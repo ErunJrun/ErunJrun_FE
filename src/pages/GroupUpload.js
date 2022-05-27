@@ -75,6 +75,9 @@ const GroupUpload = () => {
     if (contents.title === "") {
       return swal("제목을 입력해주세요");
     }
+    if (contents.title.length < 3) {
+      return swal("제목은 최소 3글자입니다.");
+    }
     if (contents.standbyTime === "") {
       return swal("러닝 일시를 입력해주세요");
     }

@@ -237,6 +237,7 @@ const GroupContentMob = (props) => {
             <Grid width="343px" display="flex" justifyContent="space-between">
               <Grid width="171.5px">
                 <CalendarFilter
+                  setDate={setDate}
                   upload={true}
                   reset={resetState}
                   setStartDate={setStartDate}
