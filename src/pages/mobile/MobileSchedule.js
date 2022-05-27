@@ -32,12 +32,14 @@ const MobileSchedule = () => {
           display="flex"
           padding="10px 10px"
           margin="0 auto"
+          boxShadow=" 0px 0px 30px #eee"
         >
           <Grid
             display="flex"
             width="375px"
             justifyContent="left"
             alignItems="center"
+            
           >
             <img
               style={{ width: "10px", margin: "0 15px" }}

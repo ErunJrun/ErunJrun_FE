@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Text, Grid } from "../../elements";
 import { useMediaQuery } from "react-responsive";
-import { getProfileDB } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
 import backBtn from "../../assets/groupFeed/backBtn.svg";
 
@@ -32,6 +30,7 @@ const MobileEvaluation = () => {
           display="flex"
           padding="10px 10px"
           margin="0 auto"
+          boxShadow=" 0px 0px 30px #eee"
         >
           <Grid
             display="flex"

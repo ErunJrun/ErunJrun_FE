@@ -5,6 +5,7 @@ import { Text, Grid } from "../../elements";
 import { useMediaQuery } from "react-responsive";
 import { history } from "../../redux/configureStore";
 import { useParams } from "react-router-dom";
+import { HiOutlineChevronRight } from "react-icons/hi";
 
 const HostEvaluation = () => {
   const isMobile = useMediaQuery({
@@ -47,7 +48,7 @@ const HostEvaluation = () => {
             history.push("/m/evaluation");
           }}
         >
-          >
+          <HiOutlineChevronRight/>
         </Text>
         <Grid
           display="flex"

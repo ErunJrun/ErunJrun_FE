@@ -7,6 +7,7 @@ import { Text, Grid } from "../../elements";
 import LevelBox from "../groupDetail/LevelBox";
 import { useMediaQuery } from "react-responsive";
 import { history } from "../../redux/configureStore";
+import { HiOutlineChevronRight } from "react-icons/hi";
 
 const Profile = () => {
   const isMobile = useMediaQuery({
@@ -34,8 +35,8 @@ const Profile = () => {
         </Grid>
 
         {profile_list?.userInfo?.userId === myId ?
-          <Text bold size="20px" margin="-60px 0 0 90%" _onClick={()=>{history.push("/edit")}}>
-            >
+          <Text bold size="20px" margin="-60px 0 0 92%" _onClick={()=>{history.push("/edit")}}>
+            <HiOutlineChevronRight/>
           </Text>
         :
           null
