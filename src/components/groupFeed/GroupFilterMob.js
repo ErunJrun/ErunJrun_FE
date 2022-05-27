@@ -334,4 +334,5 @@ const SearchBtn = styled.button`
     box-shadow: 1px 1px 5px black;
   }
 `;
+
 export default GroupFilterMob;

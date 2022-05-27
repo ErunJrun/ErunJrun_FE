@@ -5,6 +5,8 @@ import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { addContents } from "../../redux/modules/uploadInfo";
 import swal from "sweetalert";
+import TimePickers from "./TimePickers";
+import CalendarFilter from "../groupFeed/CalendarFilter";
 
 const GroupContentMob = (props) => {
   const dispatch = useDispatch();
@@ -15,6 +17,10 @@ const GroupContentMob = (props) => {
   const [textLengthPark, setTextLengthPark] = useState(0);
   const [textLengthBag, setTextLengthBag] = useState(0);
   const [textLengthChat, setTextLengthChat] = useState(0);
+
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [resetState, setResetState] = useState(false);
 
   const [title, setTitle] = useState(contentsList.title);
   const [standbyTime, setStandbyTime] = useState(contentsList.standbyTime);
@@ -229,47 +235,22 @@ const GroupContentMob = (props) => {
               러닝 일시
             </Text>
             <Grid width="343px" display="flex" justifyContent="space-between">
-              <Grid
-                display="flex"
-                alignItems="center"
-                padding="10px 20px"
-                width="171.5px"
-                height="44px"
-                border="1px solid #CBCBCB"
-                borderRight="hidden"
-                borderRadius="3px 0 0 3px"
-                hover="border:1px solid #68F99E;"
-                margin="0"
-              >
-                <GroupInput
-                  type="date"
-                  onChange={(e) => {
-                    setDate(e.target.value);
-                    datePick(e);
-                  }}
-                  value={date}
-                ></GroupInput>
+              <Grid width="171.5px">
+                <CalendarFilter
+                  upload={true}
+                  reset={resetState}
+                  setStartDate={setStartDate}
+                  setEndDate={setEndDate}
+                />
               </Grid>
-
-              <Grid
-                display="flex"
-                alignItems="center"
-                padding="10px 20px"
-                width="171.5px"
-                height="44px"
-                border="1px solid #CBCBCB"
-                borderRadius="0 3px 3px 0"
-                hover="border:1px solid #68F99E;"
-                margin="0"
-              >
-                <GroupInput
-                  type="time"
-                  onChange={(e) => {
-                    setStandbyTime(e.target.value);
-                    // standbyTimePick(e);
-                  }}
-                  value={standbyTime}
-                ></GroupInput>
+              <Grid width="171.5px">
+                <TimePickers
+                  isMobile={true}
+                  standby={true}
+                  setStandbyTime={setStandbyTime}
+                  setStartTime={setStartTime}
+                  setFinishTime={setFinishTime}
+                />
               </Grid>
             </Grid>
 
@@ -295,56 +276,6 @@ const GroupContentMob = (props) => {
 
           <Grid display="flex" alignItems="center" margin="0 0 32px 0">
             <Text size="13px" display="inline" margin="0 73px 16px 0">
-              출발 시간
-            </Text>
-            <Grid
-              margin="0"
-              display="flex"
-              alignItems="center"
-              padding="5px 16px"
-              width="343px"
-              height="44px"
-              border="1px solid #B8B8B8"
-              borderRadius="3px"
-              hover="border:1px solid #68F99E;"
-            >
-              <GroupInput
-                type="time"
-                onChange={(e) => {
-                  setStartTime(e.target.value);
-                }}
-                value={startTime}
-              ></GroupInput>
-            </Grid>
-          </Grid>
-
-          <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text size="13px" display="inline" margin="0 73px 16px 0">
-              도착 시간
-            </Text>
-            <Grid
-              margin="0"
-              display="flex"
-              alignItems="center"
-              padding="5px 16px"
-              width="343px"
-              height="44px"
-              border="1px solid #B8B8B8"
-              borderRadius="3px"
-              hover="border:1px solid #68F99E;"
-            >
-              <GroupInput
-                type="time"
-                onChange={(e) => {
-                  setFinishTime(e.target.value);
-                }}
-                value={finishTime}
-              ></GroupInput>
-            </Grid>
-          </Grid>
-
-          <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text size="13px" display="inline" margin="0 73px 16px 0">
               모집 인원
             </Text>
             <Grid
@@ -355,6 +286,7 @@ const GroupContentMob = (props) => {
               width="343px"
               height="44px"
               border="1px solid #B8B8B8"
+              bg="white"
               borderRadius="3px"
               hover="border:1px solid #68F99E;"
             >

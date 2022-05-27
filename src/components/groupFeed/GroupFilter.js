@@ -373,7 +373,7 @@ const FilterClose = styled.div``;
 const RegionSelect = styled.select`
   width: 317px;
   height: 46px;
-  padding: 13px 16px;
+  padding: 10px 16px;
   border: solid 1px #000;
   outline: none;
   border-radius: 3px;

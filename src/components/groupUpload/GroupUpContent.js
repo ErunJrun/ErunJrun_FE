@@ -5,10 +5,15 @@ import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { addContents } from "../../redux/modules/uploadInfo";
 import swal from "sweetalert";
+import CalendarFilter from "../groupFeed/CalendarFilter";
+import TimePickers from "./TimePickers";
 
 const GroupContent = (props) => {
   const dispatch = useDispatch();
   const contentsList = useSelector((state) => state.uploadInfo.contents);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [resetState, setResetState] = useState(false);
 
   const [textLength, setTextLength] = useState(0);
   const [textLength600, setTextLength600] = useState(0);
@@ -155,6 +160,8 @@ const GroupContent = (props) => {
     setCheckedSpeed(e);
   };
 
+  console.log(startTime);
+
   const contents = {
     title: title,
     standbyTime: standbyTime,
@@ -240,46 +247,20 @@ const GroupContent = (props) => {
               display="flex"
               justifyContent="space-between"
             >
-              <Grid
-                display="flex"
-                alignItems="center"
-                padding="10px 20px"
-                maxWidth="347px"
-                height="75px"
-                border="1px solid #CBCBCB"
-                borderRadius="3px"
-                hover="border:1px solid #030C37;"
-                margin="0"
-              >
-                <GroupInput
-                  type="date"
-                  onChange={(e) => {
-                    setDate(e.target.value);
-                    datePick(e);
-                  }}
-                  value={date}
-                ></GroupInput>
+              <Grid width="auto">
+                <CalendarFilter
+                  upload={true}
+                  reset={resetState}
+                  setStartDate={setStartDate}
+                  setEndDate={setEndDate}
+                />
               </Grid>
-
-              <Grid
-                display="flex"
-                alignItems="center"
-                padding="10px 20px"
-                maxWidth="347px"
-                height="75px"
-                border="1px solid #CBCBCB"
-                borderRadius="3px"
-                hover="border:1px solid #030C37;"
-              >
-                <GroupInput
-                  type="time"
-                  onChange={(e) => {
-                    setStandbyTime(e.target.value);
-                    // standbyTimePick(e);
-                  }}
-                  value={standbyTime || ""}
-                ></GroupInput>
-              </Grid>
+              <TimePickers
+                standby={true}
+                setStandbyTime={setStandbyTime}
+                setStartTime={setStartTime}
+                setFinishTime={setFinishTime}
+              />
             </Grid>
 
             <Grid display="flex" alignItems="center" margin="12px 0 0 15%">
@@ -294,56 +275,6 @@ const GroupContent = (props) => {
               <Text width="auto" color="#FF2D55" bold margin="0">
                 스탠바이로 지정한 시간의 4시간 전, 그룹 러닝 모집이 마감됩니다.
               </Text>
-            </Grid>
-          </Grid>
-
-          <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold margin="0 85px 0 0">
-              출발 시간
-            </Text>
-            <Grid
-              display="flex"
-              alignItems="center"
-              padding="10px 20px"
-              maxWidth="347px"
-              height="75px"
-              border="1px solid #CBCBCB"
-              borderRadius="3px"
-              hover="border:1px solid #030C37;"
-              margin="0 11px 0 0"
-            >
-              <GroupInput
-                type="time"
-                onChange={(e) => {
-                  setStartTime(e.target.value);
-                }}
-                value={startTime || ""}
-              ></GroupInput>
-            </Grid>
-          </Grid>
-
-          <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-            <Text display="inline" bold margin="0 85px 0 0">
-              도착 시간
-            </Text>
-            <Grid
-              display="flex"
-              alignItems="center"
-              padding="10px 20px"
-              maxWidth="347px"
-              height="75px"
-              border="1px solid #CBCBCB"
-              borderRadius="3px"
-              hover="border:1px solid #030C37;"
-              margin="0 11px 0 0"
-            >
-              <GroupInput
-                type="time"
-                onChange={(e) => {
-                  setFinishTime(e.target.value);
-                }}
-                value={finishTime || ""}
-              ></GroupInput>
             </Grid>
           </Grid>
 
@@ -708,6 +639,28 @@ const Label = styled.label`
     border: 1px solid #68f99e;
     color: #000;
     font-weight: 700;
+  }
+`;
+
+const LabelTime = styled.label`
+  input {
+    display: none;
+  }
+  input + p {
+    margin: 20px 0 0 0;
+    width: 132px;
+    height: 44px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 60px;
+    border: 1px solid #000;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: 500;
   }
 `;
 
