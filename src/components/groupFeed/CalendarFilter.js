@@ -58,6 +58,12 @@ const CalendarFilter = (props) => {
   }
 
   useEffect(() => {
+    if (props.upload) {
+      props.setDate(_startDate);
+    }
+  }, [startDate]);
+
+  useEffect(() => {
     props.setStartDate(_startDate);
     props.setEndDate(_endDate);
   }, [startDate, endDate]);

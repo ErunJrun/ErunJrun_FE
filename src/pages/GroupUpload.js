@@ -39,6 +39,8 @@ const GroupUpload = () => {
 
   const [address, setAddress] = useState("");
 
+  console.log(contents);
+
   const lat = location[0]?.lat;
   const lng = location[0]?.lng;
 

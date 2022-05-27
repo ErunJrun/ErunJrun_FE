@@ -249,6 +249,7 @@ const GroupContent = (props) => {
             >
               <Grid width="auto">
                 <CalendarFilter
+                  setDate={setDate}
                   upload={true}
                   reset={resetState}
                   setStartDate={setStartDate}
