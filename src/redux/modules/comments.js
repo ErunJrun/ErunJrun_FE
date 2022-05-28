@@ -85,7 +85,9 @@ export const _addCommentFX = (category, categoryId, content) => {
       });
 
       dispatch(addComm(comment_list));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -95,7 +97,14 @@ export const _editCommentFX = (commentId, content) => {
       const { data } = await api.patch(`/comment/${commentId}`, {
         content: content,
       });
-      dispatch(editComm(data.data));
+
+      let comment_list = [];
+
+      data.data.map((data) => {
+        comment_list.push({ isRecomm: false, is_edit: false, ...data });
+      });
+
+      dispatch(editComm(comment_list));
       swal("댓글 수정 완료");
     } catch (error) {
       // console.log(error);

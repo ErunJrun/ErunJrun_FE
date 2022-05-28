@@ -127,6 +127,8 @@ function KakaoMap() {
 
   const DistanceInfo = ({ distance }) => {
     const runningTime = (distance / 100) | 0;
+    console.log(runningTime);
+    console.log(distance);
 
     return (
       <Final className="dotOverlay distanceInfo">
@@ -182,8 +184,12 @@ function KakaoMap() {
             id={`map`}
             center={{
               // 지도의 중심좌표
-              lat: 37.498004414546934,
-              lng: 127.02770621963765,
+              lat: mapInfoList?.paths[0]
+                ? mapInfoList?.paths[0]?.lat
+                : 37.498004414546934,
+              lng: mapInfoList?.paths[0]
+                ? mapInfoList?.paths[0]?.lng
+                : 127.02770621963765,
             }}
             style={{
               // 지도의 크기

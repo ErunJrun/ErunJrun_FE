@@ -52,6 +52,10 @@ const CourseUploadStep2 = (props) => {
   const [checkedType, setCheckedType] = useState(contentsList.theme);
   const [checkedSpeed, setCheckedSpeed] = useState(contentsList.speed);
 
+  const runHour = Math.floor(props.distance / 10);
+  const runMin = Math.floor(props.distance % 10) * 6;
+  const totalTime = `${runHour}h ${runMin}min`;
+
   const datePick = (e) => {
     if (
       dayjs(e.target.value).format("YYYYMMDD") <
@@ -163,36 +167,17 @@ const CourseUploadStep2 = (props) => {
 
   const contents = {
     title: title,
-    standbyTime: standbyTime,
-    startTime: startTime,
-    finishTime: finishTime,
-    maxPeople: maxPeople,
-    date: date,
-    speed: checkedSpeed,
+    totalTime: totalTime,
     parking: parking,
     baggage: baggage,
     content: content,
     theme: checkedType,
-    chattingRoom: chattingRoom,
   };
 
   useEffect(() => {
     // props.setContents(contents);
     dispatch(addContents(contents));
-  }, [
-    title,
-    standbyTime,
-    startTime,
-    finishTime,
-    maxPeople,
-    date,
-    checkedSpeed,
-    parking,
-    baggage,
-    content,
-    checkedType,
-    chattingRoom,
-  ]);
+  }, [title, parking, baggage, content, checkedType]);
 
   console.log(contentsList);
 
@@ -267,7 +252,7 @@ const CourseUploadStep2 = (props) => {
             >
               <GroupInput
                 type="text"
-                value={props.distance || ""}
+                value={`${runHour}h ${runMin}min` || ""}
                 placeholder="코스 거리에 따라 평균적(6’00’km/h 기준)으로 예상되는 시간"
                 readOnly
               ></GroupInput>
@@ -470,6 +455,7 @@ const RedPoint = styled.div`
 `;
 
 const GroupInput = styled.input`
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-size: 16px;
   font-weight: 500;
   box-sizing: border-box;
@@ -480,11 +466,13 @@ const GroupInput = styled.input`
   height: 35px;
   border: none;
   border-radius: 3px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #818181;
   :focus {
     outline: none;
   }
   ::placeholder {
-    font-family: "Spoqa Han Sans Neo", "sans-serif";
     font-size: 16px;
     font-weight: 500;
     color: #818181;

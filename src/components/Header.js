@@ -37,7 +37,10 @@ const Header = () => {
   const isGroupDetail = path.slice(1, 12) === "groupdetail" ? true : false;
   const isHome = path === "/";
   const isGroup = path === "/groupfeed";
-  const isCourse = path === "/coursefeed";
+  const isCourse =
+    path.slice(0, 11) === "/coursefeed" || path.slice(0, 11) === "/courseDeta"
+      ? true
+      : false;
   const isLoginInfo = path === "/loginInfo";
   const isLoginPage = path === "/login";
 

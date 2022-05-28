@@ -8,7 +8,7 @@ import CommentWrite from "./CommentWrite";
 import { useMediaQuery } from "react-responsive";
 import { resetReComm } from "../../redux/modules/recomments";
 
-const CommentList = () => {
+const CommentList = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
@@ -19,7 +19,8 @@ const CommentList = () => {
   const commentList = useSelector((state) => state.comments.list);
   const recommentList = useSelector((state) => state.recomments.list);
 
-  const groupId = params.groupId;
+  const groupId = params?.groupId;
+  const courseId = params?.courseId;
 
   // React.useEffect(() => {
   //   // dispatch(resetComm);
@@ -28,8 +29,48 @@ const CommentList = () => {
   // }, []);
 
   React.useEffect(() => {
-    dispatch(_getCommentFX("group", groupId));
+    if (groupId) {
+      return dispatch(_getCommentFX("group", groupId));
+    }
+    if (courseId) {
+      return dispatch(_getCommentFX("course", courseId));
+    }
   }, []);
+
+  if (props.course) {
+    return (
+      <>
+        <Grid display="flex" flexDirection="column" margin="0 0 320px 0">
+          <Grid margin="0 0 24px 0" display="flex" alignItems="center">
+            <Text margin="0 10px 0 0" size="18px" bold>
+              리뷰
+            </Text>
+            <Text margin="0" regular size="14px">
+              {commentList?.length}개
+            </Text>
+          </Grid>
+
+          <CommentWrite course={true} courseId={courseId}></CommentWrite>
+
+          {commentList.length > 0 ? (
+            <Grid
+              padding="24px"
+              display="flex"
+              border="1px solid #D3D3D3"
+              borderRadius="0 0 3px 3px"
+            >
+              {commentList?.map((comment, idx) => {
+                if (comment == null) {
+                  return;
+                }
+                return <CommentItem course={true} key={idx} {...comment} />;
+              })}
+            </Grid>
+          ) : null}
+        </Grid>
+      </>
+    );
+  }
 
   if (isMobile) {
     return (

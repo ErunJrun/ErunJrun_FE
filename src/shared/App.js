@@ -11,6 +11,7 @@ import "./GlobalStyles";
 import styled from "styled-components";
 import { Spinner, LogoSpinner } from "../elements";
 import CourseUpload from "../pages/CourseUpload";
+import CourseDetail from "../pages/CourseDetail";
 
 const Main = lazy(() => import("../pages/Main"));
 const Header = lazy(() => import("../components/Header"));
@@ -72,6 +73,11 @@ function App() {
             <Route path="/groupEdit/:groupId" exact component={GroupEdit} />
             <Route path="/edit" exact component={MypageEdit} />
             <Route path="/coursefeed/:region" exact component={CourseFeed} />
+            <Route
+              path="/courseDetail/:courseId"
+              exact
+              component={CourseDetail}
+            />
             <Route path="/courseUpload" exact component={CourseUpload} />
             <Route path="/contact" exact component={Contact} />
             <Route path="/serviceInfo" exact component={ServiceInfo} />

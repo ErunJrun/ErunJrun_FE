@@ -23,7 +23,7 @@ const CommentItem = (props) => {
   });
 
   const dispatch = useDispatch();
-  const [newComm, setNewComm] = useState("");
+  const [newComm, setNewComm] = useState(props.content);
   const [reCommBox, setReCommBox] = useState(false);
 
   const nickname = localStorage.getItem("nickname");
@@ -42,7 +42,10 @@ const CommentItem = (props) => {
   };
 
   React.useEffect(() => {
-    if (commentList.length > 0) {
+    if (commentList.length > 0 && !props.course) {
+      console.log(
+        "ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
+      );
       dispatch(_getReCommentFX(commentList[0].commentId));
     }
 
@@ -50,6 +53,124 @@ const CommentItem = (props) => {
       dispatch(resetReComm());
     };
   }, []);
+
+  if (props.course) {
+    return (
+      <>
+        <Grid display="flex" flexDirection="column" margin="0 0 15px 0">
+          <Grid display="flex" maxWidth="758px" width="100%">
+            <Grid
+              display="flex"
+              alignItems="center"
+              width="auto"
+              margin="0 0 4px 0"
+              cursor="pointer"
+            >
+              <Image
+                _onClick={() => {
+                  history.push(`/mypage/${props?.user.userId}`);
+                }}
+                imageType="circle"
+                size="40"
+                src={props?.user?.profileUrl}
+                margin="0 8px 0 0"
+              ></Image>
+
+              <Grid display="flex" flexDirection="column" width="auto">
+                {props?.is_edit ? (
+                  <>
+                    <EditInput
+                      onChange={(e) => setNewComm(e.target.value)}
+                      type="text"
+                      value={newComm ? newComm : ""}
+                    ></EditInput>
+                  </>
+                ) : (
+                  <>
+                    <Grid display="flex" alignItems="center">
+                      <Text width="auto" margin="0 5px 0 0" bold>
+                        {props?.user?.nickname}
+                      </Text>
+                      <Text color="#818181" margin="0 10px 0 0" size="12px">
+                        {props?.createdAt}
+                      </Text>
+                    </Grid>
+
+                    <Text width="auto" margin="0" size="16px">
+                      {props?.content}
+                    </Text>
+                  </>
+                )}
+              </Grid>
+            </Grid>
+          </Grid>
+
+          {props?.is_edit ? (
+            <>
+              <Grid margin="0 0 0 48px" display="flex" alignItems="center">
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    editComm(props?.commentId);
+                  }}
+                  margin="0 16px 0 0"
+                  size="12px"
+                  bold
+                >
+                  수정완료
+                </Text>
+                <IconButton
+                  cursor="pointer"
+                  color="gray"
+                  size="15"
+                  width="15px"
+                  height="18px"
+                  cancelRoundBlack
+                  _onClick={() => {
+                    editToggle(props?.commentId);
+                  }}
+                  margin="0 16px 0 0"
+                ></IconButton>
+              </Grid>
+            </>
+          ) : (
+            <Grid display="flex" margin="0 0 0 48px">
+              <Permit>
+                {props?.user?.nickname === nickname ? (
+                  <>
+                    <Text
+                      hover="color:#68F99E; font-weight:900;"
+                      cursor="pointer"
+                      _onClick={() => {
+                        editToggle(props?.commentId);
+                      }}
+                      margin="0 16px 0 0"
+                      size="12px"
+                      color="#818181"
+                    >
+                      수정하기
+                    </Text>
+                    <Text
+                      hover="color:#68F99E; font-weight:900;"
+                      cursor="pointer"
+                      _onClick={() => {
+                        dispatch(_deleteCommentFX(props?.commentId));
+                      }}
+                      margin="0 16px 0 0"
+                      size="12px"
+                      color="#818181"
+                    >
+                      삭제하기
+                    </Text>
+                  </>
+                ) : null}
+              </Permit>
+            </Grid>
+          )}
+        </Grid>
+      </>
+    );
+  }
 
   if (isMobile) {
     return (

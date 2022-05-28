@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { getGroupDetailDB } from "../redux/modules/feed";
 import shareMob from "../assets/groupDetail/shareMob.png";
 import { useMediaQuery } from "react-responsive";
+import { getCourseDetailDB } from "../redux/modules/course";
 
 const KakaoShareButton = (props) => {
   // const isMobile = useMediaQuery({
@@ -16,13 +17,21 @@ const KakaoShareButton = (props) => {
 
   const dispatch = useDispatch();
   const groupDetail = useSelector((state) => state.feed.detail);
+  const courseDetail = useSelector((state) => state.course.detail);
+
   const { pathname } = useLocation();
 
   const params = useParams();
-  const groupId = params.groupId;
+  const groupId = params?.groupId;
+  const courseId = params?.courseId;
 
   useEffect(() => {
-    dispatch(getGroupDetailDB(groupId));
+    if (groupId) {
+      return dispatch(getGroupDetailDB(groupId));
+    }
+    if (courseId) {
+      return dispatch(getCourseDetailDB(courseId));
+    }
   }, [groupId]);
 
   const shareKakao = () => {
@@ -41,9 +50,11 @@ const KakaoShareButton = (props) => {
         // container: ".kakao-link-btn",
         objectType: "feed",
         content: {
-          title: groupDetail?.title,
-          description: groupDetail?.content,
-          imageUrl: groupDetail?.thumbnailUrl1,
+          title: groupId ? groupDetail?.title : courseDetail?.title,
+          description: groupId ? groupDetail?.content : courseDetail?.content,
+          imageUrl: groupId
+            ? groupDetail?.thumbnailUrl1
+            : courseDetail?.courseImageUrl1,
           link: {
             mobileWebUrl: window.location.href,
             webUrl: window.location.href,

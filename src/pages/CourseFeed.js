@@ -31,6 +31,8 @@ const CourseFeed = () => {
 
   const courseList = useSelector((state) => state.course.list);
   const rankingFeed = useSelector((state) => state.course.rankingFeed);
+  const preferData = useSelector((state) => state.course.preferData);
+
   const paging = useSelector((state) => state.course.paging);
   console.log(courseList);
   console.log(paging);
@@ -40,28 +42,28 @@ const CourseFeed = () => {
 
   const newCourse = () => {
     dispatch(resetCourse());
-    dispatch(getCourseDB(region, "new", paging.page + 1, 6));
+    dispatch(getCourseDB(region, "new", 1, 6));
     setNewStarCheck(true);
     setcommBookCheck(false);
   };
 
   const starCourse = () => {
     dispatch(resetCourse());
-    dispatch(getCourseDB(region, "starPoint", paging.page + 1, 6));
+    dispatch(getCourseDB(region, "starPoint", 1, 6));
     setNewStarCheck(true);
     setcommBookCheck(false);
   };
 
   const commCourse = () => {
     dispatch(resetCourse());
-    dispatch(getCourseDB(region, "comment", paging.page + 1, 6));
+    dispatch(getCourseDB(region, "comment", 1, 6));
     setNewStarCheck(true);
     setcommBookCheck(false);
   };
 
   const bookCourse = () => {
     dispatch(resetCourse());
-    dispatch(getCourseDB(region, "bookmark", paging.page + 1, 6));
+    dispatch(getCourseDB(region, "bookmark", 1, 6));
     setNewStarCheck(true);
     setcommBookCheck(false);
   };
@@ -130,7 +132,7 @@ const CourseFeed = () => {
 
             <Grid margin="0 0 16px 0" display="flex" alignItems="baseline">
               <Text margin="0 4px 0 0" bold size="18px">
-                #고양시
+                #{preferData ? preferData : "전국"}
               </Text>
               <Text margin="0">코스맛집 BEST 4</Text>
             </Grid>

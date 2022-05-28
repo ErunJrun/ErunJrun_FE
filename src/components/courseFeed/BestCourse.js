@@ -3,17 +3,22 @@ import styled from "styled-components";
 import { Grid, Text } from "../../elements";
 import starIcon from "../../assets/courseFeed/star.svg";
 import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
+import { history } from "../../redux/configureStore";
 
 const BestCourse = (props) => {
   return (
     <>
       <Grid
+        cursor="pointer"
         margin="0 16px 0 0"
         width="288px"
         display="flex"
         flexDirection="column"
+        _onClick={() => {
+          history.push(`/courseDetail/${props.courseId}`);
+        }}
       >
-        <Grid position="relative">
+        <Grid cursor="pointer" position="relative">
           <img
             style={{
               width: "288px",
@@ -24,6 +29,7 @@ const BestCourse = (props) => {
             src={props.courseImageUrl1}
           />
           <Text
+            cursor="pointer"
             margin="0"
             size="40px"
             position="absolute"
@@ -36,6 +42,7 @@ const BestCourse = (props) => {
           <BookmarkWhite src={bookmarkWhite} />
 
           <Grid
+            cursor="pointer"
             width="258px"
             height="auto"
             bg="white"
@@ -45,16 +52,27 @@ const BestCourse = (props) => {
             bottom="-41px"
             left="15px"
           >
-            <Text margin="0 0 4px 0" size="14px" bold>
+            <Text cursor="pointer" margin="0 0 4px 0" size="14px" bold>
               {props.title}
             </Text>
 
-            <Grid display="flex" alignItems="center" margin="10px 0 8px 0">
+            <Grid
+              cursor="pointer"
+              display="flex"
+              alignItems="center"
+              margin="10px 0 8px 0"
+            >
               <img style={{ width: "13px", height: "17px" }} src={starIcon} />
               <Text margin="0 10px 0 4px" size="12px" bold>
                 {props.starPoint}
               </Text>
-              <Text margin="0" color="#909090" size="12px" regular>
+              <Text
+                cursor="pointer"
+                margin="0"
+                color="#909090"
+                size="12px"
+                regular
+              >
                 리뷰 {props.commentCnt}개
               </Text>
             </Grid>

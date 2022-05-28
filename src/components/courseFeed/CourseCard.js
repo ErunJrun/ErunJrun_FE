@@ -6,6 +6,7 @@ import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
 import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
 import { bookmarkDB } from "../../redux/modules/course";
 import { useDispatch } from "react-redux";
+import { history } from "../../redux/configureStore";
 
 const CourseCard = (props) => {
   const dispatch = useDispatch();
@@ -18,8 +19,11 @@ const CourseCard = (props) => {
           display="flex"
           flexDirection="column"
         >
-          <Grid position="relative">
+          <Grid cursor="pointer" position="relative">
             <img
+              onClick={() => {
+                history.push(`/courseDetail/${props.courseId}`);
+              }}
               style={{
                 width: "384px",
                 height: "288px",
@@ -45,6 +49,9 @@ const CourseCard = (props) => {
             )}
 
             <Grid
+              _onClick={() => {
+                history.push(`/courseDetail/${props.courseId}`);
+              }}
               width="354px"
               height="auto"
               bg="white"
@@ -53,17 +60,29 @@ const CourseCard = (props) => {
               position="absolute"
               left="15px"
               bottom="-45px"
+              cursor="pointer"
             >
-              <Text margin="0 0 4px 0" size="18px" bold>
+              <Text cursor="pointer" margin="0 0 4px 0" size="18px" bold>
                 {props.title}
               </Text>
 
-              <Grid display="flex" alignItems="center" margin="10px 0 8px 0">
+              <Grid
+                cursor="pointer"
+                display="flex"
+                alignItems="center"
+                margin="10px 0 8px 0"
+              >
                 <img style={{ width: "13px", height: "17px" }} src={starIcon} />
-                <Text margin="0 10px 0 4px" bold>
+                <Text cursor="pointer" margin="0 10px 0 4px" bold>
                   {props.starPoint}
                 </Text>
-                <Text margin="0" color="#909090" size="14px" regular>
+                <Text
+                  cursor="pointer"
+                  margin="0"
+                  color="#909090"
+                  size="14px"
+                  regular
+                >
                   리뷰 {props.commentCnt}개
                 </Text>
               </Grid>

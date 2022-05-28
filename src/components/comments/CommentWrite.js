@@ -20,6 +20,12 @@ const CommentWrite = (props) => {
       return swal("내용을 입력해주세요");
     }
 
+    if (props.course) {
+      console.log("코스 댓글 등록");
+      dispatch(_addCommentFX("course", props.courseId, comm));
+      setComm("");
+      return;
+    }
     dispatch(_addCommentFX("group", props.groupId, comm));
     setComm("");
   };
@@ -32,6 +38,36 @@ const CommentWrite = (props) => {
       return;
     }
   };
+
+  if (props.course) {
+    return (
+      <>
+        <Grid>
+          <Grid
+            height="60px"
+            bg="#efefef"
+            border="1px solid #D3D3D3"
+            borderRadius="3px 3px 0px 0px"
+          >
+            <Grid display="flex" alignItems="center">
+              <CommImg src={defaultProfile} />
+              <CommTextarea
+                type="text"
+                placeholder="코스에 대한 리뷰를 남겨주세요!"
+                value={comm}
+                onChange={(e) => {
+                  setComm(e.target.value);
+                  checkMaxLength(e);
+                }}
+              ></CommTextarea>
+            </Grid>
+          </Grid>
+
+          <CommBtn onClick={writeComm}>등록하기</CommBtn>
+        </Grid>
+      </>
+    );
+  }
 
   if (isMobile) {
     return (

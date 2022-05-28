@@ -21,6 +21,7 @@ import GroupUploadMob from "./GroupUploadMob";
 import { getCookie } from "../shared/Cookie";
 import inputArrowGray from "../assets/groupUpload/inputArrowGray.svg";
 import CourseUploadStep2 from "../components/courseUpload/CourseUploadStep2";
+import { addCourseDB } from "../redux/modules/course";
 
 const CourseUpload = () => {
   const isMobile = useMediaQuery({
@@ -100,8 +101,8 @@ const CourseUpload = () => {
     // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const addGroupPost = () => {
-    dispatch(addGroupDB(location, thumbnail, contents, address, distance));
+  const addCoursePost = () => {
+    dispatch(addCourseDB(location, thumbnail, contents, address, distance));
     dispatch(imgActions.resetFile());
   };
 
@@ -292,7 +293,7 @@ const CourseUpload = () => {
             justifyContent="space-between"
           >
             <Grid margin="80px auto 0 auto" width="865px">
-              <Grid display="flex" margin="0 0 18px 0" alignItems="center">
+              <Grid display="flex" margin="0 0 18px 0" alignItems="top">
                 <Text
                   margin="0"
                   height="auto"
@@ -300,9 +301,11 @@ const CourseUpload = () => {
                   bold
                   size="20px"
                 >
-                  추가 이미지
+                  코스 이미지
                 </Text>
+                <RedPoint></RedPoint>
               </Grid>
+
               <Hr />
 
               <Grid display="flex" maring="0">
@@ -330,7 +333,7 @@ const CourseUpload = () => {
                 </Link>
                 <StepBtn2
                   onClick={() => {
-                    addGroupPost();
+                    addCoursePost();
                   }}
                   style={{ color: "#68F99E" }}
                 >

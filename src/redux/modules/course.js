@@ -15,12 +15,15 @@ const EDIT_COURSE_CONTENT = "EDIT_COURSE_CONTENT";
 
 const LOADING = "LOADING";
 const BOOKMARK = "BOOKMARK";
+const STAR_POINT = "STAR_POINT";
+const PATCH_STAR_POINT = "PATCH_STAR_POINT";
 
 //initialState
 const initialState = {
   list: [],
+  starPoint: [],
   rankingFeed: [],
-  preferData: [],
+  preferData: "",
   detail: {
     mapLatLng: [
       { lat: 37.498004414546934, lng: 127.02770621963765 },
@@ -77,6 +80,16 @@ export const bookmark = (payload) => ({
   payload,
 });
 
+export const starPoint = (payload) => ({
+  type: STAR_POINT,
+  payload,
+});
+
+// export const patchStarPoint = (payload) => ({
+//   type: PATCH_STAR_POINT,
+//   payload,
+// });
+
 //미들웨어
 export const getCourseDB = (region = 0, sort = "new", page = 1, size = 6) => {
   return async function (dispatch, getState, { history }) {
@@ -96,7 +109,7 @@ export const getCourseDB = (region = 0, sort = "new", page = 1, size = 6) => {
         size: size,
       };
       console.log(paging);
-      dispatch(getCourse(data.data, paging));
+      dispatch(getCourse(data, paging));
     } catch (error) {
       // console.log(error);
     }
@@ -122,81 +135,108 @@ export const bookmarkDB = (courseId) => {
   };
 };
 
-// export const getGroupDetailDB = (groupId) => {
-//   return async function (dispatch, getState, { history }) {
-//     try {
-//       console.log(groupId);
-//       const { data } = await api.get(`/group/detail/${groupId}`);
-//       console.log(data.data);
-//       dispatch(getGroupDetail(data.data));
-//     } catch (error) {
-//       console.log(error);
-//       swal("해당 게시물이 존재하지 않습니다");
-//     }
-//   };
-// };
+export const getCourseDetailDB = (courseId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(courseId);
+      const { data } = await api.get(`/course/detail/${courseId}`);
+      console.log(data.data);
+      dispatch(getCourseDetail(data.data));
+    } catch (error) {
+      console.log(error);
+      swal("해당 게시물이 존재하지 않습니다");
+    }
+  };
+};
 
-// export const addGroupDB = (
-//   mapLatLng,
-//   thumbnail,
-//   contents,
-//   address,
-//   distance
-// ) => {
-//   return async function (dispatch, getState, { history }) {
-//     console.log(mapLatLng, thumbnail, contents, address, distance);
-//     const formData = new FormData();
-//     thumbnail?.map((e, idx) => {
-//       return formData.append("thumbnail", e);
-//     });
-//     formData.append("title", contents.title);
-//     formData.append("maxPeople", contents.maxPeople);
-//     formData.append("date", contents.date);
-//     formData.append("standbyTime", contents.standbyTime);
-//     formData.append("startTime", contents.startTime);
-//     formData.append("finishTime", contents.finishTime);
-//     formData.append("parking", contents.parking);
-//     formData.append("speed", contents.speed);
-//     formData.append("baggage", contents.baggage);
-//     formData.append("content", contents.content);
-//     formData.append("thema", contents.theme);
-//     formData.append("chattingRoom", contents.chattingRoom);
-//     formData.append("location", address);
-//     formData.append("distance", distance);
-//     formData.append("mapLatLng", JSON.stringify(mapLatLng));
-//     try {
-//       const { data } = await api.post("/group", formData, {
-//         headers: {
-//           "Content-Type": "multipart/form-data",
-//         },
-//       });
-//       console.log(data);
-//       swal("게시물 등록 완료", "", "success");
-//       console.log("1");
-//       history.replace("/groupfeed");
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
+export const getStarPointDB = (courseId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(courseId);
+      const { data } = await api.get(`/course/${courseId}/starPoint`);
+      console.log(data.data);
+      dispatch(starPoint(data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
-// export const deleteGroupDB = (groupId) => {
-//   return function (dispatch, getState, { history }) {
-//     console.log(groupId);
-//     api
-//       .delete(`/group/${groupId}`)
-//       .then((res) => {
-//         console.log(res);
-//         swal("삭제 완료");
+export const patchStarPointDB = (courseId, myStarPoint) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(courseId, myStarPoint);
+      const { data } = await api.patch(`/course/${courseId}/starPoint`, {
+        myStarPoint: myStarPoint,
+      });
 
-//         history.push("/groupfeed");
-//       })
+      const newData = {
+        myStarPoint: myStarPoint,
+        starPeople: data.data.starPeople,
+        starPoint: data.data.starPoint,
+      };
+      dispatch(starPoint(newData));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
-// };
+export const addCourseDB = (
+  mapLatLng,
+  courseImage,
+  contents,
+  address,
+  distance
+) => {
+  return async function (dispatch, getState, { history }) {
+    console.log(mapLatLng, courseImage, contents, address, distance);
+    const formData = new FormData();
+    courseImage?.map((e, idx) => {
+      return formData.append("courseImage", e);
+    });
+    formData.append("title", contents.title);
+    formData.append("totalTime", contents.totalTime);
+    formData.append("parking", contents.parking);
+    formData.append("baggage", contents.baggage);
+    formData.append("content", contents.content);
+    formData.append("thema", contents.theme);
+    formData.append("location", address);
+    formData.append("distance", distance);
+    formData.append("mapLatLng", JSON.stringify(mapLatLng));
+    try {
+      const { data } = await api.post("/course", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(data);
+      swal("게시물 등록 완료", "", "success");
+      console.log("1");
+      history.replace("/courseFeed/0");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteCourseDB = (courseId) => {
+  return function (dispatch, getState, { history }) {
+    console.log(courseId);
+    api
+      .delete(`/course/${courseId}`)
+      .then((res) => {
+        console.log(res);
+        swal("삭제 완료");
+
+        history.push("/courseFeed/0");
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
 
 // export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
 //   return async function (dispatch, getState, { history }) {
@@ -252,6 +292,7 @@ export default handleActions(
         draft.rankingFeed = [];
         draft.list = [];
         draft.main = [];
+        draft.starPoint = [];
         draft.preferData = [];
         draft.detail = {
           mapLatLng: [
@@ -270,12 +311,19 @@ export default handleActions(
     [GET_COURSE]: (state, action) =>
       produce(state, (draft) => {
         console.log(action);
-        draft.rankingFeed = action.courseList.rankingFeed;
-        draft.list.push(...action.courseList.feed);
+        draft.rankingFeed = action.courseList.data.rankingFeed;
+        draft.preferData = action.courseList.preferData;
+        draft.list.push(...action.courseList.data.feed);
         draft.isLoading = false;
         if (action.paging) {
           draft.paging = action.paging;
         }
+      }),
+
+    [STAR_POINT]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.starPoint = action.payload;
       }),
 
     [BOOKMARK]: (state, action) =>
@@ -303,11 +351,11 @@ export default handleActions(
     //     draft.main = action.feedList.data;
     //     draft.isLoading = false;
     //   }),
-    // [GET_GROUP_DETAIL]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     // console.log(action.payload);
-    //     draft.detail = action.payload;
-    //   }),
+    [GET_COURSE_DETAIL]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.detail = action.payload;
+      }),
 
     // [EDIT_GROUP_CONTENT]: (state, action) =>
     //   produce(state, (draft) => {
