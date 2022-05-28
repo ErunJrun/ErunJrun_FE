@@ -1,3 +1,9 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
 @media (max-width: 820px) {
   .timepicker-ui {
     font-family: "Spoqa Han Sans Neo";
