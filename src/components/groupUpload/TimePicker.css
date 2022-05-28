@@ -38,57 +38,6 @@
     font-family: "Spoqa Han Sans Neo";
     text-align: left;
   }
-
-  .timepicker-ui-circle-hand,
-  .timepicker-ui-dot,
-  .timepicker-ui-clock-hand {
-    background-color: #68f99e;
-  }
-
-  .timepicker-ui-wrapper-btn {
-    margin-bottom: 50px;
-  }
-
-  .timepicker-ui-wrapper-time,
-  .timepicker-ui-wrapper-time.mobile,
-  .timepicker-ui-hour.active {
-    color: #030c37;
-  }
-
-  /* .timepicker-ui-normalize > .active, */
-  .timepicker-ui-cancel-btn,
-  .timepicker-ui-ok-btn {
-    color: #030c37;
-  }
-  .timepicker-ui-wrapper-type-time:hover {
-    color: #030c37;
-  }
-
-  .timepicker-ui-pm,
-  .timepicker-ui-am,
-  .timepicker-ui-am:hover,
-  .timepicker-ui-pm:hover {
-    color: #030c37;
-  }
-
-  .timepicker-ui-normalize > .active {
-    color: #030c37;
-  }
-
-  .timepicker-ui-hour > .active {
-    color: #68f99e;
-  }
-
-  .timepicker-ui-hour,
-  .timepicker-ui-minutes {
-    width: 50px;
-    font-size: 40px;
-  }
-
-  .timepicker-ui-type-mode {
-    width: 40px;
-    height: 30px;
-  }
 }
 
 @media (min-width: 821px) {
@@ -125,59 +74,59 @@
     font-family: "Spoqa Han Sans Neo";
     text-align: left;
   }
-
-  .timepicker-ui-circle-hand,
-  .timepicker-ui-dot,
-  .timepicker-ui-clock-hand {
-    background-color: #68f99e;
-  }
-
-  .timepicker-ui-wrapper-btn {
-    margin-bottom: 50px;
-  }
-
-  .timepicker-ui-wrapper-time,
-  .timepicker-ui-wrapper-time.mobile,
-  .timepicker-ui-hour.active {
-    color: #030c37;
-  }
-
-  /* .timepicker-ui-normalize > .active, */
-  .timepicker-ui-cancel-btn,
-  .timepicker-ui-ok-btn {
-    color: #030c37;
-  }
-  .timepicker-ui-wrapper-type-time:hover {
-    color: #030c37;
-  }
-
-  .timepicker-ui-pm,
-  .timepicker-ui-am,
-  .timepicker-ui-am:hover,
-  .timepicker-ui-pm:hover {
-    color: #030c37;
-  }
-
-  .timepicker-ui-normalize > .active {
-    color: #030c37;
-  }
-
-  .timepicker-ui-hour > .active {
-    color: #68f99e;
-  }
-
-  .timepicker-ui-hour,
-  .timepicker-ui-minutes {
-    width: 60px;
-    font-size: 40px;
-  }
-
-  .timepicker-ui-type-mode {
-    width: 40px;
-    height: 30px;
-  }
 }
 
 .timepicker-ui-wrapper {
   width: 400;
+}
+
+.timepicker-ui-circle-hand,
+.timepicker-ui-dot,
+.timepicker-ui-clock-hand {
+  background-color: #68f99e;
+}
+
+.timepicker-ui-wrapper-btn {
+  margin-bottom: 50px;
+}
+
+.timepicker-ui-wrapper-time,
+.timepicker-ui-wrapper-time.mobile,
+.timepicker-ui-hour.active {
+  color: #030c37;
+}
+
+/* .timepicker-ui-normalize > .active, */
+.timepicker-ui-cancel-btn,
+.timepicker-ui-ok-btn {
+  color: #030c37;
+}
+.timepicker-ui-wrapper-type-time:hover {
+  color: #030c37;
+}
+
+.timepicker-ui-pm,
+.timepicker-ui-am,
+.timepicker-ui-am:hover,
+.timepicker-ui-pm:hover {
+  color: #030c37;
+}
+
+.timepicker-ui-normalize > .active {
+  color: #030c37;
+}
+
+.timepicker-ui-hour > .active {
+  color: #68f99e;
+}
+
+.timepicker-ui-hour,
+.timepicker-ui-minutes {
+  width: 70px;
+  font-size: 40px;
+}
+
+.timepicker-ui-type-mode {
+  width: 40px;
+  height: 30px;
 }
