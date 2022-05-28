@@ -15,6 +15,7 @@ const EDIT_COURSE_CONTENT = "EDIT_COURSE_CONTENT";
 
 const LOADING = "LOADING";
 const BOOKMARK = "BOOKMARK";
+const BOOKMARK_DETAIL = "BOOKMARK_DETAIL";
 const STAR_POINT = "STAR_POINT";
 const PATCH_STAR_POINT = "PATCH_STAR_POINT";
 
@@ -80,6 +81,11 @@ export const bookmark = (payload) => ({
   payload,
 });
 
+export const bookmarkDetail = (payload) => ({
+  type: BOOKMARK_DETAIL,
+  payload,
+});
+
 export const starPoint = (payload) => ({
   type: STAR_POINT,
   payload,
@@ -129,6 +135,20 @@ export const bookmarkDB = (courseId) => {
       };
 
       dispatch(bookmark(bookmarkState));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const bookmarkDetailDB = (courseId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(courseId);
+      const { data } = await api.patch(`/course/${courseId}/bookmark`);
+      console.log(data);
+
+      dispatch(bookmarkDetail(data.data.bookmark));
     } catch (error) {
       console.log(error);
     }
@@ -342,6 +362,11 @@ export default handleActions(
           }
         });
         draft.list = newList;
+      }),
+
+    [BOOKMARK_DETAIL]: (state, action) =>
+      produce(state, (draft) => {
+        draft.detail.bookmark = action.payload;
       }),
 
     // [GET_MAIN]: (state, action) =>

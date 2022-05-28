@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Image, Text, IconButton } from "../../elements";
 import styled from "styled-components";
@@ -14,8 +14,10 @@ import { useMediaQuery } from "react-responsive";
 import swal from "sweetalert";
 import {
   bookmarkDB,
+  bookmarkDetailDB,
   deleteCourseDB,
   getCourseDetailDB,
+  resetCourse,
 } from "../../redux/modules/course";
 import { getCookie } from "../../shared/Cookie";
 
@@ -42,10 +44,20 @@ const MainInfo = (props) => {
     return setEditMenu(false);
   };
 
-  const editGroup = () => {
-    closeEditMenu();
-    history.push(`/groupEdit/${groupId}`);
-  };
+  // const editGroup = () => {
+  //   closeEditMenu();
+  //   history.push(`/groupEdit/${groupId}`);
+  // };
+
+  // useEffect(() => {
+  //   console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+  //   dispatch(getCourseDetailDB(detailCourse?.courseId));
+
+  //   return () => {
+  //     console.log("코스 클린업");
+  //     dispatch(resetCourse());
+  //   };
+  // }, []);
 
   // if (isMobile) {
   //   return (
@@ -204,28 +216,6 @@ const MainInfo = (props) => {
           height="auto"
         >
           {detailCourse?.bookmark ? (
-            <BookMarkTrue
-              onClick={() => {
-                if (!token) {
-                  swal({
-                    text: "로그인 후 이용해 주세요",
-                    closeOnClickOutside: false,
-                  }).then(function (result) {
-                    if (result) {
-                      return history.push("/login");
-                    }
-                  });
-                }
-                dispatch(bookmarkDB(detailCourse?.courseId));
-                dispatch(getCourseDetailDB(detailCourse?.courseId));
-              }}
-              cursor="pointer"
-              margin="0"
-            >
-              <BookImg src={bookMarkGreen_detail} />
-              <Text color="#68F99E">북마크 저장</Text>
-            </BookMarkTrue>
-          ) : (
             <BookMarkFalse
               onClick={() => {
                 if (!token) {
@@ -238,8 +228,8 @@ const MainInfo = (props) => {
                     }
                   });
                 }
-                dispatch(bookmarkDB(detailCourse?.courseId));
-                dispatch(getCourseDetailDB(detailCourse?.courseId));
+                dispatch(bookmarkDetailDB(detailCourse?.courseId));
+                // dispatch(getCourseDetailDB(detailCourse?.courseId));
               }}
             >
               <BookImg src={bookMarkLine_detail} />
@@ -247,6 +237,28 @@ const MainInfo = (props) => {
                 북마크 취소
               </Text>
             </BookMarkFalse>
+          ) : (
+            <BookMarkTrue
+              onClick={() => {
+                if (!token) {
+                  swal({
+                    text: "로그인 후 이용해 주세요",
+                    closeOnClickOutside: false,
+                  }).then(function (result) {
+                    if (result) {
+                      return history.push("/login");
+                    }
+                  });
+                }
+                dispatch(bookmarkDetailDB(detailCourse?.courseId));
+                // dispatch(getCourseDetailDB(detailCourse?.courseId));
+              }}
+              cursor="pointer"
+              margin="0"
+            >
+              <BookImg src={bookMarkGreen_detail} />
+              <Text color="#68F99E">북마크 저장</Text>
+            </BookMarkTrue>
           )}
 
           <KakaoShareButton detailCourse={detailCourse} />
