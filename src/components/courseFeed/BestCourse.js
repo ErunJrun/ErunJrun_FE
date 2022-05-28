@@ -3,9 +3,15 @@ import styled from "styled-components";
 import { Grid, Text } from "../../elements";
 import starIcon from "../../assets/courseFeed/star.svg";
 import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
+import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
+
 import { history } from "../../redux/configureStore";
+import { bookmarkDB, bookmarkRankingDB } from "../../redux/modules/course";
+import { useDispatch } from "react-redux";
 
 const BestCourse = (props) => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Grid
@@ -14,12 +20,12 @@ const BestCourse = (props) => {
         width="288px"
         display="flex"
         flexDirection="column"
-        _onClick={() => {
-          history.push(`/courseDetail/${props.courseId}`);
-        }}
       >
         <Grid cursor="pointer" position="relative">
           <img
+            onClick={() => {
+              history.push(`/courseDetail/${props.courseId}`);
+            }}
             style={{
               width: "288px",
               height: "213px",
@@ -29,6 +35,9 @@ const BestCourse = (props) => {
             src={props.courseImageUrl1}
           />
           <Text
+            _onClick={() => {
+              history.push(`/courseDetail/${props.courseId}`);
+            }}
             cursor="pointer"
             margin="0"
             size="40px"
@@ -39,9 +48,26 @@ const BestCourse = (props) => {
           >
             {props.idx + 1}
           </Text>
-          <BookmarkWhite src={bookmarkWhite} />
+          {props.bookmark ? (
+            <BookmarkWhite
+              onClick={() => {
+                dispatch(bookmarkRankingDB(props.courseId));
+              }}
+              src={bookmarkGreen}
+            />
+          ) : (
+            <BookmarkWhite
+              onClick={() => {
+                dispatch(bookmarkRankingDB(props.courseId));
+              }}
+              src={bookmarkWhite}
+            />
+          )}
 
           <Grid
+            _onClick={() => {
+              history.push(`/courseDetail/${props.courseId}`);
+            }}
             cursor="pointer"
             width="258px"
             height="auto"

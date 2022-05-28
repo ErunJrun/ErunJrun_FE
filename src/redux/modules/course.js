@@ -16,6 +16,7 @@ const EDIT_COURSE_CONTENT = "EDIT_COURSE_CONTENT";
 const LOADING = "LOADING";
 const BOOKMARK = "BOOKMARK";
 const BOOKMARK_DETAIL = "BOOKMARK_DETAIL";
+const BOOKMARK_RANKING = "BOOKMARK_RANKING";
 const STAR_POINT = "STAR_POINT";
 const PATCH_STAR_POINT = "PATCH_STAR_POINT";
 
@@ -86,6 +87,11 @@ export const bookmarkDetail = (payload) => ({
   payload,
 });
 
+export const bookmarkRanking = (payload) => ({
+  type: BOOKMARK_RANKING,
+  payload,
+});
+
 export const starPoint = (payload) => ({
   type: STAR_POINT,
   payload,
@@ -149,6 +155,25 @@ export const bookmarkDetailDB = (courseId) => {
       console.log(data);
 
       dispatch(bookmarkDetail(data.data.bookmark));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const bookmarkRankingDB = (courseId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(courseId);
+      const { data } = await api.patch(`/course/${courseId}/bookmark`);
+      console.log(data);
+
+      let bookmarkState = {
+        bookmark: data.data.bookmark,
+        courseId: courseId,
+      };
+
+      dispatch(bookmarkRanking(bookmarkState));
     } catch (error) {
       console.log(error);
     }
@@ -324,10 +349,6 @@ export default handleActions(
         draft.isLoading = false;
       }),
 
-    // [ADD_GROUP]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.list.unshift(action.payload);
-    //   }),
     [GET_COURSE]: (state, action) =>
       produce(state, (draft) => {
         console.log(action);
@@ -369,13 +390,22 @@ export default handleActions(
         draft.detail.bookmark = action.payload;
       }),
 
-    // [GET_MAIN]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     console.log(action);
-    //     draft.preferData = action.feedList.preferData;
-    //     draft.main = action.feedList.data;
-    //     draft.isLoading = false;
-    //   }),
+    [BOOKMARK_RANKING]: (state, action) =>
+      produce(state, (draft) => {
+        const newList = state.rankingFeed.map((e) => {
+          if (action.payload.courseId === e.courseId) {
+            if (action.payload.bookmark === true) {
+              return { ...e, bookmark: true };
+            } else {
+              return { ...e, bookmark: false };
+            }
+          } else {
+            return e;
+          }
+        });
+        draft.rankingFeed = newList;
+      }),
+
     [GET_COURSE_DETAIL]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
@@ -396,24 +426,6 @@ export default handleActions(
     //     draft.detail.startTime = action.payload[0]?.startTime;
     //     draft.detail.thema = action.payload[0]?.theme;
     //     draft.detail.title = action.payload[0]?.title;
-    //   }),
-
-    // [APPLY_GROUP]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     console.log(state);
-    //     draft.list.map((e, i) => {
-    //       if (action.payload.groupId === e.groupId) {
-    //         e.applyState = action.payload.applyState;
-    //         e.applyPeople = action.payload.applyPeople;
-    //       }
-    //     });
-    //   }),
-
-    // [APPLY_DETAIL]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     console.log(state);
-    //     draft.detail.applyState = action.payload.applyState;
-    //     draft.detail.applyPeople = action.payload.applyPeople;
     //   }),
 
     [LOADING]: (state, action) =>
