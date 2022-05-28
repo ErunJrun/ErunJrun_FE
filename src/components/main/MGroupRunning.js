@@ -201,7 +201,7 @@ const MGroupRunning = () => {
 
           <Btn
             onClick={() => {
-              history.push("/coursefeed");
+              history.push("/coursefeed/0");
             }}
           >
             더보기

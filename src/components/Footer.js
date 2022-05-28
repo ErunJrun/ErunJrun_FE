@@ -121,12 +121,12 @@ const Footer = () => {
                       <FooterIcon
                         src={courseIcon}
                         onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                       />
                       <Text
                         _onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                         margin="0"
                         color="#B8B8B8"
@@ -228,12 +228,12 @@ const Footer = () => {
                       <FooterIcon
                         src={courseIcon}
                         onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                       />
                       <Text
                         _onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                         margin="0"
                         color="#B8B8B8"
@@ -334,12 +334,12 @@ const Footer = () => {
                       <FooterIcon
                         src={courseIconColor}
                         onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                       />
                       <Text
                         _onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                         margin="0"
                         color="#68F99E"
@@ -440,12 +440,12 @@ const Footer = () => {
                       <FooterIcon
                         src={courseIcon}
                         onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                       />
                       <Text
                         _onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                         margin="0"
                         color="#B8B8B8"
@@ -547,12 +547,12 @@ const Footer = () => {
                       <FooterIcon
                         src={courseIcon}
                         onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                       />
                       <Text
                         _onClick={() => {
-                          history.push("/coursefeed");
+                          history.push("/coursefeed/0");
                         }}
                         margin="0"
                         color="#B8B8B8"
@@ -629,9 +629,7 @@ const Footer = () => {
                   Frontend
                 </Text>
 
-
                 <Text regular color="#FAFAFA" size="13px">
-
                   유진열 &nbsp; 김다운
                 </Text>
               </Grid>

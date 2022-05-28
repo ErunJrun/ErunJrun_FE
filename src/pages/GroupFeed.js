@@ -58,20 +58,6 @@ const GroupFeed = () => {
 
   const [allCheck, setAllCheck] = useState(true);
 
-  const allGroup = () => {
-    dispatch(resetGroup());
-    dispatch(getAllDB(paging.page, 6));
-    setAllCheck(true);
-    setSearchState(false);
-  };
-
-  const preferGroup = () => {
-    dispatch(resetGroup());
-    dispatch(getPreferDB(paging.page, 6));
-    setAllCheck(false);
-    setSearchState(false);
-  };
-
   const [drawerState, setDrawerState] = useState(false);
 
   const [finish, setFinish] = useState("0");
@@ -90,6 +76,22 @@ const GroupFeed = () => {
   const preferData = useSelector((state) => state.feed.preferData);
   const isLoading = useSelector((state) => state.feed.isLoading);
   const paging = useSelector((state) => state.feed.paging);
+
+  console.log(paging);
+
+  const allGroup = () => {
+    dispatch(resetGroup());
+    dispatch(getAllDB(paging.page + 1, 6));
+    setAllCheck(true);
+    setSearchState(false);
+  };
+
+  const preferGroup = () => {
+    dispatch(resetGroup());
+    dispatch(getPreferDB(paging.page + 1, 6));
+    setAllCheck(false);
+    setSearchState(false);
+  };
 
   const category = {
     region: region,

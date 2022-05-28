@@ -201,7 +201,7 @@ const Header = () => {
                     <Btn
                       style={{ color: "#687096" }}
                       onClick={() => {
-                        history.push("/coursefeed");
+                        history.push("/coursefeed/0");
                       }}
                     >
                       추천 코스
@@ -227,7 +227,7 @@ const Header = () => {
                     <Btn
                       style={{ color: "#687096" }}
                       onClick={() => {
-                        history.push("/coursefeed");
+                        history.push("/coursefeed/0");
                       }}
                     >
                       추천 코스
@@ -253,7 +253,7 @@ const Header = () => {
                     </Btn>
                     <Btn
                       onClick={() => {
-                        history.push("/coursefeed");
+                        history.push("/coursefeed/0");
                       }}
                     >
                       추천 코스
@@ -280,7 +280,7 @@ const Header = () => {
                     <Btn
                       style={{ color: "#687096" }}
                       onClick={() => {
-                        history.push("/coursefeed");
+                        history.push("/coursefeed/0");
                       }}
                     >
                       추천 코스
@@ -376,7 +376,7 @@ const Header = () => {
                   <Btn
                     style={{ color: "#687096" }}
                     onClick={() => {
-                      history.push("/coursefeed");
+                      history.push("/coursefeed/0");
                     }}
                   >
                     추천 코스
@@ -402,7 +402,7 @@ const Header = () => {
                   <Btn
                     style={{ color: "#687096" }}
                     onClick={() => {
-                      history.push("/coursefeed");
+                      history.push("/coursefeed/0");
                     }}
                   >
                     추천 코스
@@ -428,7 +428,7 @@ const Header = () => {
                   </Btn>
                   <Btn
                     onClick={() => {
-                      history.push("/coursefeed");
+                      history.push("/coursefeed/0");
                     }}
                   >
                     추천 코스
@@ -455,7 +455,7 @@ const Header = () => {
                   <Btn
                     style={{ color: "#687096" }}
                     onClick={() => {
-                      history.push("/coursefeed");
+                      history.push("/coursefeed/0");
                     }}
                   >
                     추천 코스

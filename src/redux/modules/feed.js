@@ -363,7 +363,7 @@ export default handleActions(
             { lat: 37.6, lng: 127.4 },
           ],
         };
-        draft.paging = { page: 1, size: 3, is_next: false };
+        draft.paging = { page: 1, size: 3 };
         draft.isLoading = false;
       }),
 
