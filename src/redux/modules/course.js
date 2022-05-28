@@ -14,10 +14,12 @@ const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
 const EDIT_COURSE_CONTENT = "EDIT_COURSE_CONTENT";
 
 const LOADING = "LOADING";
+const BOOKMARK = "BOOKMARK";
 
 //initialState
 const initialState = {
   list: [],
+  rankingFeed: [],
   preferData: [],
   detail: {
     mapLatLng: [
@@ -25,7 +27,7 @@ const initialState = {
       { lat: 37.6, lng: 127.4 },
     ],
   },
-  paging: { page: 1, size: 3 },
+  paging: { page: 1, size: 6 },
   isLoading: false,
 };
 
@@ -39,9 +41,9 @@ export const addCourse = (payload) => ({
   payload,
 });
 
-export const getCourse = (feedList, paging) => ({
+export const getCourse = (courseList, paging) => ({
   type: GET_COURSE,
-  feedList,
+  courseList,
   paging,
 });
 
@@ -70,22 +72,52 @@ export const loading = (payload) => ({
   payload,
 });
 
+export const bookmark = (payload) => ({
+  type: BOOKMARK,
+  payload,
+});
+
 //미들웨어
-export const getCourseDB = (region = 0, sort = "new", page = 1, size = 3) => {
+export const getCourseDB = (region = 0, sort = "new", page = 1, size = 6) => {
   return async function (dispatch, getState, { history }) {
+    const _paging = getState().course.paging;
+    if (!_paging.page) {
+      return;
+    }
+    dispatch(loading(true));
+
     try {
       const { data } = await api.get(
         `/course/all?region=${region}&sort=${sort}&page=${page}&size=${size}`
       );
-      // console.log(data.data.length);
-      // let paging = {
-      //   page: data.data.length === size ? page + 1 : null,
-      //   size: size,
-      // };
-      // console.log(paging);
-      // dispatch(getGroup(data, paging));
+      console.log(data);
+      let paging = {
+        page: data.data.feed.length === size ? page + 1 : null,
+        size: size,
+      };
+      console.log(paging);
+      dispatch(getCourse(data.data, paging));
     } catch (error) {
       // console.log(error);
+    }
+  };
+};
+
+export const bookmarkDB = (courseId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(courseId);
+      const { data } = await api.patch(`/course/${courseId}/bookmark`);
+      console.log(data);
+
+      let bookmarkState = {
+        bookmark: data.data.bookmark,
+        courseId: courseId,
+      };
+
+      dispatch(bookmark(bookmarkState));
+    } catch (error) {
+      console.log(error);
     }
   };
 };
@@ -215,35 +247,55 @@ export const getCourseDB = (region = 0, sort = "new", page = 1, size = 3) => {
 //리듀서
 export default handleActions(
   {
-    // [RESET_GROUP]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.list = [];
-    //     draft.main = [];
-    //     draft.preferData = [];
-    //     draft.detail = {
-    //       mapLatLng: [
-    //         { lat: 37.498004414546934, lng: 127.02770621963765 },
-    //         { lat: 37.6, lng: 127.4 },
-    //       ],
-    //     };
-    //     draft.paging = { page: 1, size: 3, is_next: false };
-    //     draft.isLoading = false;
-    //   }),
+    [RESET_COURSE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.rankingFeed = [];
+        draft.list = [];
+        draft.main = [];
+        draft.preferData = [];
+        draft.detail = {
+          mapLatLng: [
+            { lat: 37.498004414546934, lng: 127.02770621963765 },
+            { lat: 37.6, lng: 127.4 },
+          ],
+        };
+        draft.paging = { page: 1, size: 6 };
+        draft.isLoading = false;
+      }),
 
     // [ADD_GROUP]: (state, action) =>
     //   produce(state, (draft) => {
     //     draft.list.unshift(action.payload);
     //   }),
-    // [GET_GROUP]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     console.log(action);
-    //     draft.preferData = action.feedList.preferData;
-    //     draft.list.push(...action.feedList.data);
-    //     draft.isLoading = false;
-    //     if (action.paging) {
-    //       draft.paging = action.paging;
-    //     }
-    //   }),
+    [GET_COURSE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action);
+        draft.rankingFeed = action.courseList.rankingFeed;
+        draft.list.push(...action.courseList.feed);
+        draft.isLoading = false;
+        if (action.paging) {
+          draft.paging = action.paging;
+        }
+      }),
+
+    [BOOKMARK]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        console.log(state);
+        const newList = state.list.map((e) => {
+          if (action.payload.courseId === e.courseId) {
+            if (action.payload.bookmark === true) {
+              return { ...e, bookmark: true };
+            } else {
+              return { ...e, bookmark: false };
+            }
+          } else {
+            return e;
+          }
+        });
+        draft.list = newList;
+      }),
+
     // [GET_MAIN]: (state, action) =>
     //   produce(state, (draft) => {
     //     console.log(action);

@@ -190,7 +190,7 @@ const Banner = () => {
                 <button
                   className="btn"
                   onClick={() => {
-                    history.push("/coursefeed");
+                    history.push("/coursefeed/0");
                   }}
                 >
                   추천 코스 보러가기
@@ -208,7 +208,7 @@ const Banner = () => {
               height="154px"
               bg="blue"
               _onClick={() => {
-                history.push("/coursefeed");
+                history.push("/coursefeed/0");
               }}
             >
               <Grid
@@ -331,7 +331,7 @@ const Banner = () => {
                 className="btn"
                 type="button"
                 onClick={() => {
-                  history.push("/coursefeed");
+                  history.push("/coursefeed/0");
                 }}
               >
                 추천 코스 보러가기
@@ -349,7 +349,7 @@ const Banner = () => {
             height="154px"
             bg="blue"
             _onClick={() => {
-              history.push("/coursefeed");
+              history.push("/coursefeed/0");
             }}
           >
             <Grid

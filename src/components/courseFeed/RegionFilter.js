@@ -1,8 +1,12 @@
 import React, { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements";
+import { history } from "../../redux/configureStore";
+import { getCourseDB } from "../../redux/modules/course";
 
 const RegionFilter = (props) => {
+  const dispatch = useDispatch();
   const [regionTag, setRegionTag] = useState([
     "전국",
     "서울특별시",
@@ -15,7 +19,7 @@ const RegionFilter = (props) => {
     "전라도 / 광주광역시",
     "제주특별자치시",
   ]);
-  const [checkedRegion, setCheckedRegion] = useState("");
+  const [checkedRegion, setCheckedRegion] = useState("전국");
 
   const choiceRegion = (e) => {
     setCheckedRegion(e);
@@ -38,7 +42,9 @@ const RegionFilter = (props) => {
               <Label>
                 <input
                   onChange={() => {
-                    choiceRegion(e);
+                    choiceRegion(e, idx);
+                    dispatch(getCourseDB(idx, "new", 1, 6));
+                    history.push(`/coursefeed/${idx}`);
                   }}
                   type="radio"
                   name="runType"
