@@ -148,12 +148,12 @@ const Box = styled.div`
 
 const _Box = styled.div`
   width: 343px;
-  height: 95px;
+  height: 101px;
   margin: 28px auto;
   border-radius: 3px;
   border: solid 1px #ddd;
   background-color: #fff;
-  padding: 7px 0px;
+  padding: 4px 0px;
 `;
 
 const MiddleBox = styled.div`

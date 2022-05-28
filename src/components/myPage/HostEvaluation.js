@@ -69,7 +69,7 @@ const HostEvaluation = () => {
           regular
             size="13px"
             width="208px"
-            height="26px"
+            height="32px"
             bg="#f0f0f0"
             padding="8px 0 0 0"
             textalign="center"
@@ -97,7 +97,7 @@ const HostEvaluation = () => {
             regular
             size="13px"
             width="262px"
-            height="26px"
+            height="32px"
             bg="#f0f0f0"
             padding="8px 0 0 0"
             textalign="center"
@@ -234,7 +234,7 @@ const Icon = styled.div`
 
 const EvaluationBox = styled.div`
   width: 417px;
-  height: 40px; 
+  height: 60px; 
   font-weight: normal;
   border-radius: 84px;
   background-color: #fff;
@@ -259,7 +259,7 @@ const LeftBox = styled.div`
 const EvaluationPoint = styled.div`
   width: 477px;
   height: 213px; 
-  margin: -145px 0 0 590px;
+  margin: -145px 0 0 540px;
   line-height: 4.25;
   font-size: 18px;
   font-weight: bold;
@@ -268,7 +268,7 @@ const EvaluationPoint = styled.div`
 const EvaluationPointL = styled.div`
   width: 1120px;
   height: 213px; 
-  margin: -212px 0 0 0px;
+  margin: -212px 0 0 -45px;
   line-height: 4.25;
   font-size: 18px;
   font-weight: bold;

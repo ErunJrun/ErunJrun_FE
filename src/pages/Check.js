@@ -118,7 +118,7 @@ const Check = () => {
           <_Leader>
             <Grid display="flex">
               <_MyImage src={check_list?.groupInfo?.user?.profileUrl} />
-              <Text bold size="15px" margin="30px 0 0 25px">
+              <Text bold size="12px" margin="25px 0 0 25px">
                 {check_list?.groupInfo?.user?.nickname}
               </Text>
               <_Img src="https://ifh.cc/g/06D7Gr.png" />
@@ -129,7 +129,7 @@ const Check = () => {
               bold
               size="12px"
               color="#030c37"
-              margin="48px 0 0 0"
+              margin="68px 0 0 0"
             >
               크루장
             </Text>
@@ -137,7 +137,7 @@ const Check = () => {
 
           {check_list?.applyUser?.map((applyUser, index) => (
             <_UserBox key={index}>
-              <Grid display="flex" margin="32px 0 0 0">
+              <Grid display="flex" margin="42px 0 0 0">
                 <_Image src={applyUser.user.profileUrl} />
                 <Text bold size="12px" margin="21px 0 0 25px">
                   {applyUser.user.nickname}
@@ -190,7 +190,7 @@ const Check = () => {
         </InfoBox>
 
         <Leader>
-          <Grid display="flex">
+          <Grid display="flex" margin="0 0 0 20px">
             <MyImage src={check_list?.groupInfo?.user?.profileUrl} />
             <Text bold size="16px" margin="30px 0 0 25px">
               {check_list?.groupInfo?.user?.nickname}
@@ -203,15 +203,15 @@ const Check = () => {
             bold
             size="16px"
             color="#030c37"
-            margin="20px -10px 0 0"
+            margin="55px -10px 0 0"
           >
             크루장
           </Text>
         </Leader>
 
         {check_list?.applyUser?.map((applyUser, index) => (
-          <UserBox key={index}>
-            <Grid display="flex" margin="32px 0 0 0">
+          <UserBox key={index} >
+            <Grid display="flex" margin="32px 0 0 20px">
               <Image src={applyUser.user.profileUrl} />
               <Text bold size="16px" margin="21px 0 0 25px">
                 {applyUser.user.nickname}
@@ -239,7 +239,7 @@ const Check = () => {
             dispatch(patchAttendDB(groupId, userId));
           }}
         >
-          출석체크 완료
+          출석체크 저장
         </Btn>
       </Box>
     );
@@ -281,6 +281,7 @@ const Leader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
 `;
 
 const _Leader = styled.div`
@@ -290,6 +291,7 @@ const _Leader = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 375px;
+  margin-bottom:24px;
 `;
 
 const MyImage = styled.img`
@@ -302,8 +304,8 @@ const MyImage = styled.img`
 `;
 
 const _MyImage = styled.img`
-  height: 55px;
-  width: 55px;
+  height: 60px;
+  width: 60px;
   border: 2px solid #68f99e;
   border-radius: 50%;
   margin-top: 7px;
@@ -331,9 +333,9 @@ const Img = styled.img`
 `;
 
 const _Img = styled.img`
-  height: 23px;
-  width: 18px;
-  margin: 29px 0 0 10px;
+  height: 19.7px;
+  width: 16px;
+  margin: 25px 0 0 10px;
 `;
 
 const UserBox = styled.div`
@@ -357,7 +359,7 @@ const _UserBox = styled.div`
 const Btn = styled.button`
   width: 186px;
   height: 56px;
-  margin: 50px 0 100px 180px;
+  margin: 96px 0 100px 180px;
   border-radius: 3px;
   border: none;
   background-color: #030c37;
@@ -404,7 +406,7 @@ const Label = styled.label`
     color: #68f99e;
     font-weight: 500;
   }
-  margin: 0px 8px 0 0;
+  margin: 34px 5px 0 0;
 `;
 
 const _Label = styled.label`
@@ -433,7 +435,7 @@ const _Label = styled.label`
     color: #68f99e;
     font-weight: 500;
   }
-  margin: 48px 8px 0 0;
+  margin: 83px 8px 0 0;
 `;
 
 export default Check;

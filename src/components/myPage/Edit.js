@@ -1075,7 +1075,7 @@ const Input = styled.input`
 `;
 
 const _Input = styled.input`
-  width: 300px;
+  width: 343px;
   height: 44px;
   flex-direction: row;
   justify-content: flex-start;
@@ -1206,6 +1206,7 @@ const LabelExpMob = styled.label`
     background-color: #68f99e;
     color: #030c37;
     font-weight: 500;
+    border: none;
   }
 `;
 

@@ -217,7 +217,7 @@ const ApplyBtnTrue = styled.div`
   width: 168px;
   background: #030c37;
   border-radius: 3px;
-  height: 19px;
+  height: 24px;
   color: white;
   border: none;
   cursor: pointer;
@@ -234,7 +234,7 @@ const ApplyBtnFalse = styled.div`
   width: 168px;
   background: #f0f0f0;
   border-radius: 3px;
-  height: 19 px;
+  height: 24 px;
   padding-top:5px;
   color: #7b7b7b;
   border: none;
