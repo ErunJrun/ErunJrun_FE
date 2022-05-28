@@ -171,3 +171,7 @@
     height: 30px;
   }
 }
+
+.timepicker-ui-wrapper {
+  width: 400;
+}
