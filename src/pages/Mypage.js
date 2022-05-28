@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getProfileDB, resetProfile } from "../redux/modules/mypage";
+import { 
+  getProfileDB, 
+  resetProfile, 
+  getMyRunningDB,
+  getRunningDB,
+  getMyBookmarkDB,
+  getMyCourseDB,
+ } from "../redux/modules/mypage";
 import Profile from "../components/myPage/Profile";
 import HostEvaluation from "../components/myPage/HostEvaluation";
 import styled from "styled-components";
@@ -26,6 +33,10 @@ console.log(userId);
   useEffect(() => {
     dispatch(getProfileDB(userId));
     dispatch(loginCheckDB());
+    dispatch(getMyRunningDB(userId));
+    dispatch(getRunningDB(userId));
+    dispatch(getMyBookmarkDB(userId));
+    dispatch(getMyCourseDB(userId));
 
     return () => {
       //dispatch(resetProfile());

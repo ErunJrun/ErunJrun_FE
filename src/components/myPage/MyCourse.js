@@ -7,7 +7,7 @@ import { history } from "../../redux/configureStore";
 const Bookmark = () => {
   return (
     <Grid>
-      <Box>북마크한 게시물이 없습니다</Box>
+      <Box>내가 만든 추천코스가 없습니다</Box>
     </Grid>
   );
 };

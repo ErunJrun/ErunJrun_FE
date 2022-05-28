@@ -8,6 +8,8 @@ import styled from "styled-components";
 import Schedule from "./Schedule";
 import Group from "../myPage/Group";
 import MyGroup from "../myPage/MyGroup";
+import Bookmark from "./Bookmark";
+import MyCourse from "./MyCourse";
 import Ready from "../../shared/Ready";
 import { styled as muiStyled } from "@mui/material/styles";
 
@@ -57,6 +59,8 @@ export default function BasicTabs() {
   const [expected, setExpected] = useState(true);
   const [complete, setComplete] = useState(false);
   const [myGroup, setMyGroup] = useState(false);
+  const [bookmark, setBookmark] = useState(true);
+  const [course, setCourse] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -161,7 +165,6 @@ export default function BasicTabs() {
                 setExpected(true);
                 setComplete(false);
                 setMyGroup(false);
-                dispatch(getProfileDB(userId));
               }}
             >
               참여 예정
@@ -171,7 +174,6 @@ export default function BasicTabs() {
                 setExpected(false);
                 setComplete(true);
                 setMyGroup(false);
-                dispatch(getRunningDB(userId));
               }}
             >
               참여 완료
@@ -181,7 +183,6 @@ export default function BasicTabs() {
                 setExpected(false);
                 setComplete(false);
                 setMyGroup(true);
-                dispatch(getMyRunningDB(userId));
               }}
             >
               My 모집
@@ -196,7 +197,6 @@ export default function BasicTabs() {
                     setExpected(true);
                     setComplete(false);
                     setMyGroup(false);
-                    dispatch(getProfileDB(userId));
                   }}
                 >
                   참여 예정
@@ -206,7 +206,6 @@ export default function BasicTabs() {
                     setExpected(false);
                     setComplete(true);
                     setMyGroup(false);
-                    dispatch(getRunningDB(userId));
                   }}
                 >
                   참여 완료
@@ -216,7 +215,6 @@ export default function BasicTabs() {
                     setExpected(false);
                     setComplete(false);
                     setMyGroup(true);
-                    dispatch(getMyRunningDB(userId));
                   }}
                 >
                   My 모집
@@ -231,7 +229,6 @@ export default function BasicTabs() {
                         setExpected(true);
                         setComplete(false);
                         setMyGroup(false);
-                        dispatch(getProfileDB(userId));
                       }}
                     >
                       참여 예정
@@ -240,8 +237,7 @@ export default function BasicTabs() {
                       onClick={() => {
                         setExpected(false);
                         setComplete(true);
-                        setMyGroup(false);
-                        dispatch(getRunningDB(userId));
+                        setMyGroup(false);                
                       }}
                     >
                       참여 완료
@@ -251,7 +247,6 @@ export default function BasicTabs() {
                         setExpected(false);
                         setComplete(false);
                         setMyGroup(true);
-                        dispatch(getMyRunningDB(userId));
                       }}
                     >
                       My 모집
@@ -267,7 +262,53 @@ export default function BasicTabs() {
         {myGroup === true ? <MyGroup /> : null}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Ready />
+        <CategoryBox>
+          {bookmark === true ? 
+            <>
+              <Btn
+                onClick={() => {
+                  setBookmark(true);
+                  setCourse(false);
+                  //dispatch(getProfileDB(userId));
+                }}
+              >
+                북마크
+              </Btn>
+              <Button
+                onClick={() => {
+                  setBookmark(false);
+                  setCourse(true);
+                  //dispatch(getRunningDB(userId));
+                }}
+              >
+                My 추천
+              </Button>
+            </>
+          : 
+            <>
+              <Button
+                onClick={() => {
+                  setBookmark(true);
+                  setCourse(false);
+                  //dispatch(getProfileDB(userId));
+                }}
+              >
+                북마크
+              </Button>
+              <Btn
+                onClick={() => {
+                  setBookmark(false);
+                  setCourse(true);
+                  //dispatch(getRunningDB(userId));
+                }}
+              >
+                My 추천
+              </Btn>
+            </>
+          }
+        </CategoryBox>
+        {bookmark === true ? <Bookmark /> : null}
+        {course === true ? <MyCourse /> : null}
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Ready />
