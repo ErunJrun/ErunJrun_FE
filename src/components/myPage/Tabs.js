@@ -324,7 +324,7 @@ const CategoryBox = styled.div`
 
 const Btn = styled.div`
   width: 143px;
-  height: 30px;
+  height: 40px;
   margin: 0px 20px 30px 0;
   padding-top: 10px;
   border-radius: 50px;
@@ -338,7 +338,7 @@ const Btn = styled.div`
 
 const Button = styled.div`
   width: 143px;
-  height: 30px;
+  height: 40px;
   margin: 0px 20px 30px 0;
   padding-top: 10px;
   border-radius: 50px;
