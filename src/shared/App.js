@@ -39,6 +39,8 @@ const MobileEvaluation = lazy(() => import("../pages/mobile/MobileEvaluation"));
 const MobileSchedule = lazy(() => import("../pages/mobile/MobileSchedule"));
 const MobileGroup = lazy(() => import("../pages/mobile/MobileGroup"));
 const MobileMyGroup = lazy(() => import("../pages/mobile/MobileMyGroup"));
+const MobileBookmark = lazy(() => import("../pages/mobile/MobileBookmark"));
+const MobileCourse = lazy(() => import("../pages/mobile/MobileCourse"));
 
 function App() {
   const dispatch = useDispatch();
@@ -92,6 +94,8 @@ function App() {
             />
             <Route path="/m/group/:userId" exact component={MobileGroup} />
             <Route path="/m/mygroup/:userId" exact component={MobileMyGroup} />
+            <Route path="/m/bookmark/:userId" exact component={MobileBookmark} />
+            <Route path="/m/course/:userId" exact component={MobileCourse} />
           </Wrapper>
           <Footer></Footer>
         </Suspense>

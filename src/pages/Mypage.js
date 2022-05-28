@@ -124,7 +124,7 @@ console.log(userId);
                 size="13px"
                 color="#222"
                 _onClick={() => {
-                  history.push("/serviceTerms");
+                  history.push(`/m/bookmark/${userId}`);
                 }}
               >
                 북마크
@@ -135,7 +135,7 @@ console.log(userId);
                 size="13px"
                 color="#222"
                 _onClick={() => {
-                  history.push("/serviceTerms");
+                  history.push(`/m/course/${userId}`);
                 }}
               >
                 My 추천

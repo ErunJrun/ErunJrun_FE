@@ -155,5 +155,6 @@ const ModalContent = styled.div`
     height: 300px;
     z-index: 2;
     justify-content: center;
+    height:400px;
 `;
 export default MyModal;

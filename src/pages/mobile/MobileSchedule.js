@@ -179,7 +179,7 @@ const ApplyBtnTrue = styled.div`
   width: 168px;
   background: #030c37;
   border-radius: 3px;
-  height: 19px;
+  height: 24px;
   color: white;
   border: none;
   cursor: pointer;

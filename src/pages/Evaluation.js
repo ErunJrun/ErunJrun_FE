@@ -427,7 +427,7 @@ const Evaluation = () => {
                     {host?.hostUser?.user?.nickname}
                   </Text>                   
                   <Text size="13px" color="#858585" margin=" -8px 0 0 0">
-                    {host?.hostUser?.date} &nbsp; {host?.hostUser?.standbyTime} 에
+                    {host?.hostUser?.date} &nbsp; {host?.hostUser?.standbyTime}에
                     &nbsp; {host?.hostUser?.title}를 &nbsp;함께함
                   </Text>
                   <Hr />
@@ -596,7 +596,7 @@ const Evaluation = () => {
                     width="168px" 
                     height="48px" 
                     border="1px solid #DDDDDD"
-                    margin="280px 0 0 150px"
+                    margin="280px 0 0 115px"
                     hover="border:2px solid #DDDDDD;"
                     _onClick={() => {
                       toggleModal();
@@ -667,12 +667,13 @@ const _Hr = styled.div`
 const Btn = styled.button`
   border: none;
   height: 80px;
-  width: 200px;
+  width: 150px;
   margin: 23px 0 0px 0px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #fff;
+  background-color: transparent;
+  z-index: 0;
 `;
 
 const _Btn = styled.div`
@@ -686,10 +687,10 @@ const _Btn = styled.div`
 
 const EvaluationButton = styled.div`
   border: none;
-  height: 38px;
+  height: 52px;
   width: 175px;
   font-weight: bold;
-  margin: 24px 0 10px 130px;
+  margin: 44px 0 40px 110px;
   padding-top: 14px;
   align-items: center;
   justify-content: center;
@@ -704,7 +705,7 @@ const EvaluationButton = styled.div`
 
 const _EvaluationButton = styled.div`
   border: none;
-  height: 32px;
+  height: 44px;
   width: 200px;
   margin: 30px 0 100px -10px;
   padding-top: 12px;
@@ -764,7 +765,7 @@ const LabelDistance = styled.label`
     display: none;
   }
   input + p {
-    width: 440px;
+    width: 390px;
     height: 50px;
     display: flex;
     justify-content: center;
