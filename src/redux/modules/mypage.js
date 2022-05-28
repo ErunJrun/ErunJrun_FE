@@ -19,6 +19,8 @@ const PATCH_EVALUATION = "PATCH_EVALUATION";
 const GET_ATTEND = "GET_ATTEND";
 const PATCH_ATTEND = "PATCH_ATTEND";
 const DELETE_USER = "DELETE_USER";
+const GET_MYBOOKMARK = "GET_MYBOOKMARK";
+const GET_MYCOURSE = "GET_MYCOURSE";
 
 //action creators
 export const resetProfile = (payload) => ({
@@ -86,6 +88,16 @@ export const deleteUser = (payload) => ({
   payload,
 });
 
+export const getMyBookmark = (payload) => ({
+  type: GET_MYBOOKMARK,
+  payload,
+});
+
+export const getMyCourse= (payload) => ({
+  type: GET_MYCOURSE,
+  payload,
+});
+
 //initialState
 const initialState = {
   list: [],
@@ -97,6 +109,8 @@ const initialState = {
   evaluation: [],
   attend: [],
   att: [],
+  mybook: [],
+  mycourse: [],
 };
 
 // middleware actions
@@ -327,6 +341,30 @@ export const deleteUserDB = () => {
   };
 };
 
+//북마크한 코스추천 게시물
+export const getMyBookmarkDB = (userId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.get(`/course/bookmark?userId=${userId}`);
+      dispatch(getMyBookmark(data));
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+};
+
+//내가만든 코스추천 게시물
+export const getMyCourseDB = (userId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.get(`/course/mypage?userId=${userId}`);
+      dispatch(getMyCourse(data));
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+};
+
 //reducer
 
 export default handleActions(
@@ -412,6 +450,16 @@ export default handleActions(
         draft.isLogin = false;
         draft.firstLogin = false;
       }),
+
+    [GET_MYBOOKMARK]: (state, action) =>
+    produce(state, (draft) => {
+      draft.mybook = action.payload;
+    }),
+
+    [GET_MYCOURSE]: (state, action) =>
+    produce(state, (draft) => {
+      draft.mycourse = action.payload;
+    }),
   },
   initialState
 );

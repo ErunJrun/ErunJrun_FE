@@ -6,6 +6,8 @@ import {
   resetProfile, 
   getMyRunningDB,
   getRunningDB,
+  getMyBookmarkDB,
+  getMyCourseDB,
  } from "../redux/modules/mypage";
 import Profile from "../components/myPage/Profile";
 import HostEvaluation from "../components/myPage/HostEvaluation";
@@ -33,6 +35,8 @@ console.log(userId);
     dispatch(loginCheckDB());
     dispatch(getMyRunningDB(userId));
     dispatch(getRunningDB(userId));
+    dispatch(getMyBookmarkDB(userId));
+    dispatch(getMyCourseDB(userId));
 
     return () => {
       //dispatch(resetProfile());
