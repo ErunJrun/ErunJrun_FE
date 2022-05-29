@@ -130,11 +130,10 @@
    
 ## 🚀 트러블 슈팅
 
-<!-- ### ✅ 사용자 편의 증진
 
-<details>
-  <summary>음성메세지 파일 변환</summary>
-   
+
+<!-- <details>
+  <summary><strong> ✅ Access&Refresh JWT 토큰 구현  </strong></summary>
   * 도입 이유
     - 음성메세지 녹음 시 IOS 기기에서 녹음 및 재생이 불가능한 문제발생
   * 문제 상황
