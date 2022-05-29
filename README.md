@@ -1,15 +1,7 @@
 ![banner](https://user-images.githubusercontent.com/100745412/170878912-8c879a79-a77b-49db-8ba5-72882d56bdea.png)
 
-  
+
 # [이RUN 저RUN](https://www.erunjrun.com/)
-
-<b>함께 뛰고 싶은 사람들을 위한 그룹 러닝 매칭 플랫폼</b>
-
-<br />
-
-## About 이RUN 저RUN ?
-
-### 사람들과 함께 뛰는 즐거움을 느끼고 러너들이 추천하는 러닝코스를 즐겨보아요! 👨‍💻
 
 <br>
 
@@ -29,64 +21,94 @@
 ## 👾 FRONTEND MEMBERS
 #### 유진열 🔰
 
-로그인 페이지 : `카카오 로그인` `네이버 로그인` 
-메인 페이지 : `배너&게시물 슬라이드` `알림 기능`
-그룹러닝 피드 페이지 : `중복 필터 검색 기능` `캘린더 기능` `게시글 관련 기능(조회,등록,수정)` `카카오 지도 연동(Polyline 드로잉)` `사진 다중 업로드`
-그룹러닝 상세 페이지 : `카카오 공유하기 기능` `댓글 & 대댓글 기능` `러닝 신청하기` `Scroll 이벤트 기능`
-추천 코스 피드 페이지 : ``
-</br>
+✅ 페이지
+<br>
+로그인 페이지, 메인 페이지, 그룹러닝 페이지, 추천코스 페이지
+<br></br>
+
+✅ 기능
+<br>
+`카카오 로그인` `네이버 로그인` `JWT토큰(Access, Refresh) 적용`
+<br>
+`배너&게시물 슬라이드` `알림 기능` `중복 필터 검색 기능` `캘린더 기능`
+<br>
+`게시글 관련 기능(조회,등록,수정)` `카카오 지도 연동(Polyline 드로잉)` `사진 다중 업로드`
+<br>
+`카카오 공유하기 기능` `댓글 & 대댓글 기능` `러닝 신청하기` `Scroll 이벤트 기능` `북마크 기능` `평점 기능` 
+<br>
 `CI/CD 세팅 및 배포환경 구축(AWS Route53, Amplify)`
-`스피너`
+<br>
+`반응형CSS 구현`
+<br>
 
 
 
 #### 김다운
 
-<!-- 
+✅ 페이지
+<br>
+마이 페이지
+<br></br>
+
+✅ 기능
+<br>
+`내용 기입`
+
 <br>
 
-## 🌈 도란도란 서비스 주요기능
-<p6> 🔔 도란도란은 반응형으로 웹과 모바일 모두 이용 가능한 서비스입니다.</p6>
-#### 1️⃣ 함께 달성하는 재미를 느낄 수 있는 🏆 가족 미션 🏆
-#### 2️⃣ 우리 가족의 일정을 한눈에 파악할 수 있는 📅 가족 캘린더 📅
-#### 3️⃣ 남는 건 사진인 거 아시죠? 우리 가족만의 📷 포토 갤러리 📷
-#### 4️⃣ 듣고 싶은 목소리를 언제든 꺼내들을 수 있는 💌 음성 메시지함 💌 
+## 📢 이RUN저RUN 서비스 주요기능
+### 🎵 함께 뛰고 싶은 사람들을 위한 그룹 러닝 매칭 플랫폼
+#### 1️⃣ 
+#### 2️⃣ 
+#### 3️⃣ 
+#### 4️⃣ 
 
-<img src="https://www.dorandorans.com/static/media/Web_01.29cbf948c7a423b343f6.png">
 
 <br>
 
 ## ✨ 아키텍쳐
 <br>
 
-![아키텍쳐 최최최최종](https://user-images.githubusercontent.com/100390926/170860219-34dbdce9-91c1-4c1a-8265-0b79f14a93b3.png)
-
 <br>
 
 ## 🔨 기술스택
 ### **Tech**
 <p>
-<img src='https://img.shields.io/badge/javascript-F7DF1E?logo=javascript'/>
-<img src='https://img.shields.io/badge/Node-version16.13.1-green?logo=Node.js'/>
-<img src='https://img.shields.io/badge/Express-v4.18.0-black?logo=Express'/>
-<img src='https://img.shields.io/badge/MongoDB-version111-green?logo=mongodb'/>
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+<img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=react&logoColor=black">
+<img src="https://img.shields.io/badge/axios-007CE2?style=for-the-badge&logo=axios&logoColor=white">
+<img src="https://img.shields.io/badge/reactrouterdom-CA4245?style=for-the-badge&logo=reactrouterdom&logoColor=white">
+</br>
+<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+<img src="https://img.shields.io/badge/amazonamplify-orange?style=for-the-badge&logo=amazonsamplify&logoColor=white"> 
+<img src="https://img.shields.io/badge/route53-F7A81B?style=for-the-badge&logo=route53&logoColor=white">
 <br>
-<img src='https://img.shields.io/badge/socket.io-v4.4.1-white?logo=Socket.io'/>
-<img src='https://img.shields.io/badge/prettier-v2.5.1-pink?logo=prettier'/>
-<img src="https://img.shields.io/badge/Passport-v0.5.2-34E27A?logo=Passport&logoColor=white" />
-<img src="https://img.shields.io/badge/JsonWebToken-v8.5.1-8a8a8a?logo=JSON Web Tokens&logoColor=white" />
-<img src="https://img.shields.io/badge/Git hub-000000?logo=Github&logoColor=white" />
-<img src="https://img.shields.io/badge/nginx-v1.14.0-green?logo=nginx&logoColor=white" />
-<img src="https://img.shields.io/badge/PM2-000000?logo=PM2&logoColor=white" />
+</p>
+
+### **Design**
+<p>
+<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white"/>
+  <img src="https://img.shields.io/badge/zeplin-FDBD39?style=for-the-badge&logo=zeplin&logoColor=FDBD39"/>
+</p>
+
+### **Tools**
+<p>
+<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white"/>
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white"/>
+<img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=github&logoColor=white">
 <br>
 </p>
 
 <br>
 
 ## 📚 라이브러리 
-| name                | Appliance               | version  |
+| Name                | Appliance               | Version  |
 | :-----------------: | :---------------------: | :------: |
-| bcrypt              | 비밀번호 암호화         |5.0.1|
+<!-- | bcrypt              | 비밀번호 암호화         |5.0.1|
 | cors                | CORS 핸들링             |2.8.5|
 | dotenv              | 환경변수 설정           |16.0.0|
 | helmet              | HTTP header 보안        |5.0.2|
@@ -103,13 +125,13 @@
 | winston             | 전체 서비스 로그 관리   |3.7.2|
 | jest                |  테스트코드             |28.1.0|
 | artillery	          |  퍼포먼스 테스팅 툴     |2.0.0-17|
-| express-rate-limit  | API 사용량 제한(보안)   |6.4.0|
+| express-rate-limit  | API 사용량 제한(보안)   |6.4.0| -->
 
 <br>
    
 ## 🚀 트러블 슈팅
 
-### ✅ 사용자 편의 증진
+<!-- ### ✅ 사용자 편의 증진
 
 <details>
   <summary>음성메세지 파일 변환</summary>
