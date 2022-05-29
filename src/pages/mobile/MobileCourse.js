@@ -127,16 +127,31 @@ const MobileCourse = () => {
                           {feed?.title}
                         </Text>
 
-                        <Grid display="flex" alignItems="center" margin="10px 0 8px 0">
+                        <Grid 
+                          display="flex" 
+                          alignItems="center" 
+                          margin="10px 0 8px 0"
+                        >
                           <img style={{ width: "7.4px", height: "7px" }} src={starIcon} />
-                          <Text margin="0 10px 0 4px"size="8px" bold>
+                          <Text 
+                            margin="0 10px 0 4px"
+                            size="8px" 
+                            bold
+                          >
                             {feed?.starPoint}
                           </Text>
-                          <Text margin="0" color="#909090" size="8px">
+                          <Text 
+                            margin="0" 
+                            color="#909090" 
+                            size="8px"
+                          >
                             리뷰{feed?.commentCnt}개
                           </Text>
                         </Grid>
-                        <Grid cursor="pointer" display="flex">
+                        <Grid 
+                          cursor="pointer" 
+                          display="flex"
+                        >
                           <Tag>{feed?.location}</Tag>
                           <Tag>{feed?.distance}km</Tag>
                         </Grid>
