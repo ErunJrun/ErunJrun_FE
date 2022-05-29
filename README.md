@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+![banner](https://user-images.githubusercontent.com/100745412/170878912-8c879a79-a77b-49db-8ba5-72882d56bdea.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  
+# [이RUN 저RUN](https://erunjrun.com/)
 
-## Available Scripts
+<b>함께 뛰고 싶은 사람들을 위한 그룹 러닝 매칭 플랫폼</b>
 
-In the project directory, you can run:
+<br />
 
-### `yarn start`
+## About 이RUN 저RUN ?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 사람들과 함께 뛰는 즐거움을 느끼고 러너들이 추천하는 러닝코스를 즐겨보아요! 👨‍💻
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br />
 
-### `yarn test`
+<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 📆 프로젝트 기간
 
-### `yarn build`
+- 2022.04.29 ~ 2022.06.03
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- <br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 😎 Members
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<br/>
+<br/>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 프로젝트 기능 소개
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### 🐰 카카오 로그인 / 네이버 로그인
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- 카카오를 통한 소셜로그인으로 간단하게 가입할 수 있어요. 이메일 회원가입에서는 유효한 이메일만 가입할 수 있도록 중복확인과 더불어 이메일 인증 링크 방식을 도입했어요.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br/>
+<br/>
 
-### Code Splitting
+## Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![WillBe-service_architecture](https://user-images.githubusercontent.com/88864019/170158157-eb5066ef-93dc-42a4-9407-4cfac15d4b76.jpg)
 
-### Analyzing the Bundle Size
+<br/>
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🛠 Tools
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+<br>
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🔥 Trouble Shooting
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br>
+<br>
+ -->
