@@ -55,15 +55,15 @@ const InfoCategory = (props) => {
     },
   });
 
-  React.useEffect(() => {
-    if (commentList.length > 0) {
-      dispatch(_getReCommentFX(commentList[0].commentId));
-    }
+  // React.useEffect(() => {
+  //   if (commentList.length > 0) {
+  //     dispatch(_getReCommentFX(commentList[0].commentId));
+  //   }
 
-    return () => {
-      dispatch(resetReComm());
-    };
-  }, [commentList]);
+  //   return () => {
+  //     dispatch(resetReComm());
+  //   };
+  // }, [commentList]);
 
   const AntTab = muiStyled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({

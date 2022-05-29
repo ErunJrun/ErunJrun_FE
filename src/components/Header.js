@@ -37,6 +37,7 @@ const Header = () => {
   const isGroupDetail = path.slice(1, 12) === "groupdetail" ? true : false;
   const isHome = path === "/";
   const isGroup = path === "/groupfeed";
+  const isCourse2 = path.slice(0, 11) === "/coursefeed" ? true : false;
   const isCourse =
     path.slice(0, 11) === "/coursefeed" || path.slice(0, 11) === "/courseDeta"
       ? true
@@ -95,7 +96,7 @@ const Header = () => {
       <HeaderBoxMob>
         <Grid display="flex">
           {agreeSMS === "false" ? (
-            isHome || isGroup || isCourse ? (
+            isHome || isGroup || isCourse2 ? (
               <AdHeader />
             ) : null
           ) : null}

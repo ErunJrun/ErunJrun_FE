@@ -55,12 +55,7 @@ const Group = () => {
                   ></Image>
 
                   <Grid>
-                    <Title
-                      cursor="pointer"
-                      size="16px"
-                      bold
-                      margin="8px 0 0 0"
-                    >
+                    <Title cursor="pointer" size="16px" bold margin="8px 0 0 0">
                       {data.title}
                     </Title>
                     <Text cursor="pointer" size="13px" margin="8px 0 0 0">
@@ -68,7 +63,7 @@ const Group = () => {
                     </Text>
                   </Grid>
 
-                  <Grid cursor="pointer" display="flex"  margin="-4px 0 0 0">
+                  <Grid cursor="pointer" display="flex" margin="-4px 0 0 0">
                     <Tagg>{data.location}</Tagg>
                     <Tag>{data.distance}km</Tag>
                     <Tag>{data.thema}</Tag>
@@ -212,7 +207,7 @@ const Box = styled.div`
   border: none;
 `;
 
-const Title = styled.text`
+const Title = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

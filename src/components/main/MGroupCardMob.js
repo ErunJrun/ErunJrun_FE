@@ -123,7 +123,7 @@ const Tag = styled.div`
   align-items: center;
   font-weight: 400;
   font-size: 8px;
-  height: 10px;
+  height: auto;
   background-color: #ddd;
   margin: 8px 12px 0 0;
   padding: 1px 10px;

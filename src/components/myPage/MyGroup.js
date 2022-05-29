@@ -212,7 +212,7 @@ const Box = styled.div`
   border: none;
 `;
 
-const Title = styled.text`
+const Title = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

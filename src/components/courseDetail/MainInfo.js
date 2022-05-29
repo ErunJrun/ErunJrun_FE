@@ -34,7 +34,6 @@ const MainInfo = (props) => {
 
   const nickname = localStorage.getItem("nickname");
   const token = getCookie("accessToken");
-  const isLogin = useSelector((state) => state.user.isLogin);
 
   const handleEditMenu = () => {
     return setEditMenu(!editMenu);
@@ -44,82 +43,69 @@ const MainInfo = (props) => {
     return setEditMenu(false);
   };
 
-  // const editGroup = () => {
-  //   closeEditMenu();
-  //   history.push(`/groupEdit/${groupId}`);
-  // };
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          width="375px"
+          margin="0"
+          padding="16px"
+          bg="#FFFFFF"
+          height="auto"
+        >
+          <Grid height="auto" display="flex">
+            <Text margin="0 0 12px 0" size="14px" bold>
+              {detailCourse?.title}
+            </Text>
+          </Grid>
 
-  // useEffect(() => {
-  //   console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-  //   dispatch(getCourseDetailDB(detailCourse?.courseId));
+          <Grid height="auto">
+            <Grid display="flex">
+              <Text
+                size="13px"
+                width="auto"
+                margin="0 16px 8px 0"
+                color="#7B7B7B"
+              >
+                장소
+              </Text>
+              <Text size="13px" width="auto" margin="0">
+                {detailCourse?.location}
+              </Text>
+            </Grid>
 
-  //   return () => {
-  //     console.log("코스 클린업");
-  //     dispatch(resetCourse());
-  //   };
-  // }, []);
+            <Grid display="flex">
+              <Text
+                size="13px"
+                width="auto"
+                margin="0 16px 8px 0"
+                color="#7B7B7B"
+              >
+                거리
+              </Text>
+              <Text size="13px" width="auto" margin="0">
+                {detailCourse?.distance} km
+              </Text>
+            </Grid>
 
-  // if (isMobile) {
-  //   return (
-  //     <>
-  //       <Grid
-  //         width="375px"
-  //         margin="0"
-  //         padding="24px 16px"
-  //         bg="#FFFFFF"
-  //         height="auto"
-  //       >
-  //         <Grid height="auto" display="flex">
-  //           <Text margin="0 0 12px 0" size="14px" bold>
-  //             {detailGroup?.title}
-  //           </Text>
-  //         </Grid>
-
-  //         <Grid height="auto">
-  //           <Grid display="flex">
-  //             <Text size="12px" width="auto" margin="0 16px 8px 0">
-  //               일시
-  //             </Text>
-  //             <Text size="12px" width="auto" margin="0" bold>
-  //               {detailGroup?.datetime}
-  //             </Text>
-  //           </Grid>
-
-  //           <Grid display="flex">
-  //             <Text size="12px" width="auto" margin="0 16px 8px 0">
-  //               장소
-  //             </Text>
-  //             <Text size="12px" width="auto" margin="0" bold>
-  //               {detailGroup?.location}
-  //             </Text>
-  //           </Grid>
-
-  //           <Grid display="flex">
-  //             <Text size="12px" width="auto" margin="0 16px 8px 0">
-  //               거리
-  //             </Text>
-  //             <Text size="12px" width="auto" margin="0" bold>
-  //               {detailGroup?.distance} km
-  //             </Text>
-  //           </Grid>
-
-  //           <Grid display="flex">
-  //             <Text size="12px" width="auto" margin="0 16px 8px 0">
-  //               인원
-  //             </Text>
-  //             <Text size="12px" width="auto" margin="0 5px 0 0" bold>
-  //               최대 {detailGroup?.maxPeople}명
-  //             </Text>
-  //             <Text size="12px" width="auto" margin="0" bold color="#FF2D55">
-  //               (잔여 {detailGroup?.maxPeople - detailGroup?.Appliers?.length}
-  //               자리)
-  //             </Text>
-  //           </Grid>
-  //         </Grid>
-  //       </Grid>
-  //     </>
-  //   );
-  // }
+            <Grid display="flex">
+              <Text
+                size="12px"
+                width="auto"
+                margin="0 16px 8px 0"
+                color="#7B7B7B"
+              >
+                타입
+              </Text>
+              <Text size="12px" width="auto" margin="0">
+                {detailCourse?.thema}
+              </Text>
+            </Grid>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>
@@ -149,16 +135,6 @@ const MainInfo = (props) => {
                 ></IconButton>
                 {editMenu ? (
                   <DropContent>
-                    <Text
-                      cursor="pointer"
-                      margin="0"
-                      // _onClick={() => {
-                      //   editGroup();
-                      // }}
-                    >
-                      수정하기
-                    </Text>
-                    <Line />
                     <Text
                       cursor="pointer"
                       margin="0"
@@ -229,7 +205,6 @@ const MainInfo = (props) => {
                   });
                 }
                 dispatch(bookmarkDetailDB(detailCourse?.courseId));
-                // dispatch(getCourseDetailDB(detailCourse?.courseId));
               }}
             >
               <BookImg src={bookMarkLine_detail} />
@@ -251,7 +226,6 @@ const MainInfo = (props) => {
                   });
                 }
                 dispatch(bookmarkDetailDB(detailCourse?.courseId));
-                // dispatch(getCourseDetailDB(detailCourse?.courseId));
               }}
               cursor="pointer"
               margin="0"
@@ -328,12 +302,12 @@ const DropContent = styled.div`
   align-items: center;
   position: absolute;
   box-sizing: border-box;
-  top: 180px;
-  left: 250px;
+  top: 155px;
+  left: 240px;
   background-color: #ffffff;
   border: 1px solid #dddddd;
   width: 107px;
-  height: 104px;
+  height: 40px;
   text-align: center;
   border-radius: 10px;
   box-shadow: 0px 0px 8px rgba(149, 149, 149, 0.35);

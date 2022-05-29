@@ -19,6 +19,8 @@ import ServeInfo from "./ServeInfo";
 import mapIcon from "../../assets/groupDetail/map.png";
 import { useDispatch, useSelector } from "react-redux";
 import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
+import StarPoint from "./StarPoint";
+import { useParams } from "react-router-dom";
 
 const InfoCategory = (props) => {
   const isMobile = useMediaQuery({
@@ -26,6 +28,10 @@ const InfoCategory = (props) => {
   });
 
   const commentList = useSelector((state) => state.comments.list);
+  const starPoint = useSelector((state) => state.course.starPoint);
+  const params = useParams();
+  const courseId = params.courseId;
+
   const dispatch = useDispatch();
 
   const [value, setValue] = React.useState("1");
@@ -40,28 +46,12 @@ const InfoCategory = (props) => {
     setCheckedInfo(e);
   };
 
-  const [infoCategory, setInfoCategory] = useState([
-    "코스정보",
-    "소개",
-    "리뷰",
-  ]);
-
   const AntTabs = muiStyled(Tabs)({
     borderBottom: "1px solid #e8e8e8",
     "& .MuiTabs-indicator": {
       backgroundColor: "#68F99E",
     },
   });
-
-  // React.useEffect(() => {
-  //   if (commentList.length > 0) {
-  //     dispatch(_getReCommentFX(commentList[0].commentId));
-  //   }
-
-  //   return () => {
-  //     dispatch(resetReComm());
-  //   };
-  // }, [commentList]);
 
   const AntTab = muiStyled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({
@@ -99,94 +89,133 @@ const InfoCategory = (props) => {
     })
   );
 
-  // if (isMobile) {
-  //   return (
-  //     <>
-  //       <Box sx={{ width: "100%" }}>
-  //         <TabContext value={value}>
-  //           <Box sx={{ bgcolor: "#fff" }}>
-  //             <AntTabs value={value} onChange={handleChange}>
-  //               <AntTab
-  //                 style={{
-  //                   fontSize: "13px",
-  //                   fontWeight: "700",
-  //                   fontFamily: "Spoqa Han Sans Neo",
-  //                 }}
-  //                 value="1"
-  //                 label="코스 정보"
-  //               />
-  //               <AntTab
-  //                 style={{
-  //                   fontSize: "13px",
-  //                   fontWeight: "700",
-  //                   fontFamily: "Spoqa Han Sans Neo",
-  //                 }}
-  //                 value="2"
-  //                 label="소개"
-  //               />
-  //               <AntTab
-  //                 style={{
-  //                   fontSize: "13px",
-  //                   fontWeight: "700",
-  //                   fontFamily: "Spoqa Han Sans Neo",
-  //                 }}
-  //                 value="3"
-  //                 label="크루원"
-  //               />
-  //               <AntTab
-  //                 style={{
-  //                   fontSize: "13px",
-  //                   fontWeight: "700",
-  //                   fontFamily: "Spoqa Han Sans Neo",
-  //                 }}
-  //                 value="4"
-  //                 label="Q&A"
-  //               />
-  //             </AntTabs>
-  //             <Box />
-  //           </Box>
-  //           <TabPanel
-  //             style={{ marginBottom: "100px", padding: "32px 16px" }}
-  //             value="1"
-  //           >
-  //             <Text bold size="13px" margin="0 0 10px 0">
-  //               상세 정보
-  //             </Text>
-  //             <ServeInfo />
-  //             <Grid display="flex" alignItems="center" margin="0 0 15px 0">
-  //               <MapIconImg src={mapIcon} />
-  //               <Text bold size="13px" margin="0 0 16px 0">
-  //                 지도로 보는 코스 정보
-  //               </Text>
-  //               <MapInfo />
-  //             </Grid>
-  //           </TabPanel>
-  //           <TabPanel
-  //             style={{ marginBottom: "100px", padding: "32px 16px" }}
-  //             value="2"
-  //           >
-  //             <Text bold size="13px" margin="0 0 20px 0">
-  //               상세 소개글
-  //             </Text>
-  //             <Text margin="0 0 137px 0" size="13px">
-  //               {props.content}
-  //             </Text>
-  //           </TabPanel>
-  //           <TabPanel
-  //             style={{ marginBottom: "100px", padding: "32px 16px" }}
-  //             value="3"
-  //           ></TabPanel>
-  //           <TabPanel
-  //             style={{ marginBottom: "100px", padding: "32px 16px" }}
-  //             value="4"
-  //           >
-  //             <CommentList />
-  //           </TabPanel>
-  //         </TabContext>
-  //       </Box>
-  //     </>
-  //   );
-  // }
+  if (isMobile) {
+    return (
+      <>
+        <Box sx={{ width: "100%" }}>
+          <TabContext value={value || "1"}>
+            <Box sx={{ bgcolor: "#fff" }}>
+              <AntTabs value={value || "1"} onChange={handleChange}>
+                <AntTab
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    fontFamily: "Spoqa Han Sans Neo",
+                  }}
+                  value="1"
+                  label="코스 정보"
+                />
+                <AntTab
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    fontFamily: "Spoqa Han Sans Neo",
+                  }}
+                  value="2"
+                  label="소개"
+                />
+
+                <AntTab
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    fontFamily: "Spoqa Han Sans Neo",
+                  }}
+                  value="3"
+                  label={`리뷰(${commentList ? commentList?.length : 0})`}
+                />
+              </AntTabs>
+              <Box />
+            </Box>
+
+            <TabPanel
+              style={{ marginBottom: "100px", padding: "32px 16px" }}
+              value="1"
+            >
+              <Text bold size="13px" margin="0 0 10px 0">
+                상세 정보
+              </Text>
+              <ServeInfo />
+              <Grid display="flex" alignItems="center" margin="0 0 15px 0">
+                <MapIconImg src={mapIcon} />
+                <Text bold size="13px" margin="0 0 16px 0">
+                  지도로 보는 코스 정보
+                </Text>
+                <MapInfo />
+              </Grid>
+            </TabPanel>
+
+            <TabPanel
+              style={{ marginBottom: "100px", padding: "32px 16px" }}
+              value="2"
+            >
+              <Text bold size="13px" margin="0 0 20px 0">
+                상세 소개글
+              </Text>
+              <Text margin="0 0 137px 0" size="13px">
+                {props.content}
+              </Text>
+            </TabPanel>
+
+            <TabPanel
+              style={{ marginBottom: "100px", padding: "32px 16px" }}
+              value="3"
+            >
+              <Grid
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                width="343px"
+                padding="16px 42px"
+                borderRadius="3px"
+                border="1px solid #ddd"
+                margin="0 auto 54px auto"
+              >
+                <Grid
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  margin="0"
+                  width="auto"
+                >
+                  <Text size="12px" width="auto" margin="0 0 8px 0" bold>
+                    코스 별점
+                  </Text>
+                  <StarPoint starPoint={starPoint} starOne={true} />
+                  <Text width="auto" margin="8px 0 0 0" size="13px" bold>
+                    {starPoint?.starPoint ? starPoint?.starPoint : "0.0"} /{" "}
+                    <span style={{ fontWeight: "500" }}>5.0</span>
+                    <span style={{ fontSize: "11px", color: "#7b7b7b" }}>
+                      {"  "}(
+                      {starPoint?.starPeople ? starPoint?.starPeople : "0"})
+                    </span>
+                  </Text>
+                </Grid>
+
+                <Grid
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  margin="0"
+                  width="auto"
+                >
+                  <Text size="12px" width="auto" margin="0 0 8px 0" bold>
+                    내가 준 별점
+                  </Text>
+                  <StarPoint courseId={courseId} />
+                  <Text width="auto" margin="8px 0 0 0" size="13px" bold>
+                    {starPoint?.myStarPoint} / 5.0
+                  </Text>
+                </Grid>
+              </Grid>
+              <CommentList course={true} />
+            </TabPanel>
+          </TabContext>
+        </Box>
+      </>
+    );
+  }
 
   return (
     <>

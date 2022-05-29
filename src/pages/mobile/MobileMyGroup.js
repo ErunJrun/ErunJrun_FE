@@ -60,11 +60,7 @@ const MobileMyGroup = () => {
                 history.go(-1);
               }}
             />
-            <Text 
-              margin="0 0 0 130px" 
-              bold 
-              size="16px"
-            >
+            <Text margin="0 0 0 130px" bold size="16px">
               My 모집
             </Text>
           </Grid>
@@ -77,17 +73,9 @@ const MobileMyGroup = () => {
           {my.data.length === 0 ? (
             <Box>진행한 그룹 러닝이 없습니다</Box>
           ) : (
-            <Grid 
-              display="flex" 
-              width="343px" 
-              justifyContent="space-between"
-            >
+            <Grid display="flex" width="343px" justifyContent="space-between">
               {my.data?.map((data, index) => (
-                <Grid 
-                  key={index} 
-                  width="166px" 
-                  margin="0 0px 32px 0px"
-                >
+                <Grid key={index} width="166px" margin="0 0px 32px 0px">
                   <Grid
                     _onClick={() => {
                       history.push(`/groupdetail/${data.groupId}`);
@@ -100,9 +88,7 @@ const MobileMyGroup = () => {
                     <Img src={data.thumbnailUrl} />
 
                     <Grid>
-                      <Title>
-                        {data.title}
-                      </Title>
+                      <Title>{data.title}</Title>
                       <Text
                         cursor="pointer"
                         size="11px"
@@ -113,17 +99,9 @@ const MobileMyGroup = () => {
                       </Text>
                     </Grid>
 
-                    <Grid 
-                      width="166px" 
-                      cursor="pointer" 
-                      display="flex"
-                    >
-                      <Tagg>
-                        {data.location}
-                      </Tagg>
-                      <Tag>
-                        {data.distance}km
-                      </Tag>
+                    <Grid width="166px" cursor="pointer" display="flex">
+                      <Tagg>{data.location}</Tagg>
+                      <Tag>{data.distance}km</Tag>
                     </Grid>
                     <Hr></Hr>
                   </Grid>
@@ -259,7 +237,7 @@ const Img = styled.img`
   object-fit: cover;
 `;
 
-const Title = styled.text`
+const Title = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

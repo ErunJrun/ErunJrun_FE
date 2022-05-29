@@ -94,7 +94,11 @@ function App() {
             />
             <Route path="/m/group/:userId" exact component={MobileGroup} />
             <Route path="/m/mygroup/:userId" exact component={MobileMyGroup} />
-            <Route path="/m/bookmark/:userId" exact component={MobileBookmark} />
+            <Route
+              path="/m/bookmark/:userId"
+              exact
+              component={MobileBookmark}
+            />
             <Route path="/m/course/:userId" exact component={MobileCourse} />
           </Wrapper>
           <Footer></Footer>

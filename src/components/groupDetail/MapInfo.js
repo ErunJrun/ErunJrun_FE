@@ -86,7 +86,7 @@ function MapInfo(props) {
               width: "758px",
               height: "406px",
             }}
-            level={4}
+            level={7}
             onCreate={setMap}
           >
             <Polyline

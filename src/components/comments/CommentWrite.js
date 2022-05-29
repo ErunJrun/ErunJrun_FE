@@ -39,7 +39,7 @@ const CommentWrite = (props) => {
     }
   };
 
-  if (props.course) {
+  if (props.course && !isMobile) {
     return (
       <>
         <Grid>
@@ -69,7 +69,36 @@ const CommentWrite = (props) => {
     );
   }
 
-  if (isMobile) {
+  if (props.course && isMobile) {
+    return (
+      <>
+        <Grid width="343px" height="96px" margin="0 0 32px 0">
+          <Grid
+            height="96px"
+            bg="white"
+            border="1px solid #C4C4C4"
+            borderRadius="3px"
+          >
+            <Grid display="flex" alignItems="center" padding="14px">
+              <CommTextareaMob
+                type="text"
+                placeholder="코스에 대한 리뷰를 남겨주세요!"
+                value={comm}
+                onChange={(e) => {
+                  setComm(e.target.value);
+                  checkMaxLength(e);
+                }}
+              ></CommTextareaMob>
+            </Grid>
+          </Grid>
+
+          <CommBtnMob onClick={writeComm}>등록</CommBtnMob>
+        </Grid>
+      </>
+    );
+  }
+
+  if (!props.course && isMobile) {
     return (
       <>
         <Grid width="343px" height="96px" margin="0 0 32px 0">
@@ -98,33 +127,35 @@ const CommentWrite = (props) => {
     );
   }
 
-  return (
-    <>
-      <Grid>
-        <Grid
-          height="60px"
-          bg="#efefef"
-          border="1px solid #D3D3D3"
-          borderRadius="3px 3px 0px 0px"
-        >
-          <Grid display="flex" alignItems="center">
-            <CommImg src={defaultProfile} />
-            <CommTextarea
-              type="text"
-              placeholder="궁금하신 점을 댓글로 남겨보세요! (40자이내)"
-              value={comm}
-              onChange={(e) => {
-                setComm(e.target.value);
-                checkMaxLength(e);
-              }}
-            ></CommTextarea>
+  if (!props.course && !isMobile) {
+    return (
+      <>
+        <Grid>
+          <Grid
+            height="60px"
+            bg="#efefef"
+            border="1px solid #D3D3D3"
+            borderRadius="3px 3px 0px 0px"
+          >
+            <Grid display="flex" alignItems="center">
+              <CommImg src={defaultProfile} />
+              <CommTextarea
+                type="text"
+                placeholder="궁금하신 점을 댓글로 남겨보세요! (40자이내)"
+                value={comm}
+                onChange={(e) => {
+                  setComm(e.target.value);
+                  checkMaxLength(e);
+                }}
+              ></CommTextarea>
+            </Grid>
           </Grid>
-        </Grid>
 
-        <CommBtn onClick={writeComm}>등록하기</CommBtn>
-      </Grid>
-    </>
-  );
+          <CommBtn onClick={writeComm}>등록하기</CommBtn>
+        </Grid>
+      </>
+    );
+  }
 };
 
 const CommImg = styled.img`

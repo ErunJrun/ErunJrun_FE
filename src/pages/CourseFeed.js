@@ -13,18 +13,38 @@ import BestCourse from "../components/courseFeed/BestCourse";
 import RegionFilter from "../components/courseFeed/RegionFilter";
 import CourseCard from "../components/courseFeed/CourseCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourseDB, resetCourse } from "../redux/modules/course";
+import {
+  getCourseDB,
+  getCourseRegionDB,
+  resetCourse,
+} from "../redux/modules/course";
 import { Link } from "react-scroll";
 import Permit from "../shared/Permit";
 import { history } from "../redux/configureStore";
 import swal from "sweetalert";
 import { useParams } from "react-router-dom";
+import SwiperCore, { Virtual, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "../components/main/MGroupSlide.css";
+import BestCourseMob from "../components/courseFeed/BestCourseMob";
+import "./CourseFeed.css";
+import RegionFilterMob from "../components/courseFeed/RegionFilterMob";
+import DrawerCategory from "../components/groupFeed/DrawerCategory";
+import DrawerCategoryCourse from "../components/courseFeed/DrawerCategoryCourse";
+import CourseCardMob from "../components/courseFeed/CourseCardMob";
+
+SwiperCore.use([Virtual, Navigation, Pagination]);
 
 const CourseFeed = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
 
+  const [swiperRef, setSwiperRef] = useState(null);
   const params = useParams();
   const region = params.region;
   console.log(region);
@@ -37,35 +57,45 @@ const CourseFeed = () => {
   console.log(courseList);
   console.log(paging);
 
-  const [newStarCheck, setNewStarCheck] = useState(true);
-  const [commBookCheck, setcommBookCheck] = useState(false);
+  const [newCheck, setNewCheck] = useState(true);
+  const [starCheck, setStarCheck] = useState(false);
+  const [commCheck, setCommCheck] = useState(false);
+  const [bookCheck, setBookCheck] = useState(false);
 
   const newCourse = () => {
     dispatch(resetCourse());
-    dispatch(getCourseDB(region, "new", 1, 6));
-    setNewStarCheck(true);
-    setcommBookCheck(false);
+    dispatch(getCourseRegionDB(region, "new", 1, 6));
+    setNewCheck(true);
+    setStarCheck(false);
+    setCommCheck(false);
+    setBookCheck(false);
   };
 
   const starCourse = () => {
     dispatch(resetCourse());
-    dispatch(getCourseDB(region, "starPoint", 1, 6));
-    setNewStarCheck(true);
-    setcommBookCheck(false);
+    dispatch(getCourseRegionDB(region, "starPoint", 1, 6));
+    setNewCheck(false);
+    setStarCheck(true);
+    setCommCheck(false);
+    setBookCheck(false);
   };
 
   const commCourse = () => {
     dispatch(resetCourse());
-    dispatch(getCourseDB(region, "comment", 1, 6));
-    setNewStarCheck(true);
-    setcommBookCheck(false);
+    dispatch(getCourseRegionDB(region, "comment", 1, 6));
+    setNewCheck(false);
+    setStarCheck(false);
+    setCommCheck(true);
+    setBookCheck(false);
   };
 
   const bookCourse = () => {
     dispatch(resetCourse());
-    dispatch(getCourseDB(region, "bookmark", 1, 6));
-    setNewStarCheck(true);
-    setcommBookCheck(false);
+    dispatch(getCourseRegionDB(region, "bookmark", 1, 6));
+    setNewCheck(false);
+    setStarCheck(false);
+    setCommCheck(false);
+    setBookCheck(true);
   };
 
   const dispatch = useDispatch();
@@ -74,6 +104,10 @@ const CourseFeed = () => {
   useEffect(() => {
     console.log("코스 실행");
     dispatch(getCourseDB(region, "new"));
+    setNewCheck(true);
+    setStarCheck(false);
+    setCommCheck(false);
+    setBookCheck(false);
 
     return () => {
       console.log("코스 클린업");
@@ -84,20 +118,176 @@ const CourseFeed = () => {
   if (isMobile) {
     return (
       <>
-        <AniWrap>
-          <Ready />
-        </AniWrap>
+        <Grid
+          display="flex"
+          justifyContent="center"
+          alignItem="center"
+          width="375px"
+          margin="84px auto 0 auto"
+        >
+          <Grid
+            position="relative"
+            width="375px"
+            margin="0"
+            justifyContent="space-between"
+            display="flex"
+          >
+            <Grid margin="0 auto" width="343px">
+              <Grid margin="0 0 16px 0" display="flex" alignItems="baseline">
+                <Text margin="0 4px 0 0" bold size="13px">
+                  #{preferData ? preferData : "전국"}
+                </Text>
+                <Text size="13px" margin="0">
+                  추천코스 BEST 4
+                </Text>
+              </Grid>
+
+              <Swiper
+                id="CourseRankCardSwiperMob"
+                onSwiper={setSwiperRef}
+                slidesPerView={2}
+                centeredSlides={true}
+                spaceBetween={0}
+                navigation={{ clickable: true }}
+                pagination={{ clickable: true }}
+                virtual
+              >
+                {rankingFeed?.map((item, idx) => {
+                  return (
+                    <SwiperSlide key={idx} id="CourseRankSlideMob">
+                      <BestCourseMob idx={idx} {...item} />{" "}
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+            </Grid>
+            <Grid width="375px" margin="0 auto">
+              <RegionFilterMob />
+            </Grid>
+
+            <Grid width="375px">
+              <Grid
+                width="343px"
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                margin="16px auto 0 auto"
+              >
+                <Grid
+                  display="flex"
+                  justifyContent="left"
+                  alignItems="center"
+                  margin="0"
+                  width="auto"
+                  height="auto"
+                >
+                  <Text height="auto" margin="0" width="auto" size="11px">
+                    총{" "}
+                    <span style={{ color: "#686EF9" }}>
+                      {courseList.length ? courseList.length : "0"}
+                    </span>{" "}
+                    개의 코스추천
+                  </Text>
+                </Grid>
+
+                <DrawerCategoryCourse />
+              </Grid>
+
+              <HrMob></HrMob>
+            </Grid>
+
+            <Grid
+              display="flex"
+              width="343px"
+              alignItem="center"
+              margin="0 auto"
+            >
+              {courseList.length !== 0 ? (
+                courseList?.map((item, idx) => {
+                  return <CourseCardMob key={idx} {...item}></CourseCardMob>;
+                })
+              ) : (
+                <img
+                  style={{ margin: "0 auto", width: "120px" }}
+                  src={noSearchData}
+                />
+              )}
+            </Grid>
+
+            <Grid
+              display="flex"
+              flexDirection="column"
+              position="sticky"
+              top="726px"
+              margin="0"
+              width="auto"
+            >
+              <Permit>
+                {uploadBtn === true ? (
+                  <UploadBtn
+                    onClick={() => {
+                      history.push("/courseUpload");
+                    }}
+                    src={uploadHover}
+                  />
+                ) : (
+                  <UploadBtn
+                    onClick={() => {
+                      history.push("/courseUpload");
+                    }}
+                    src={upload}
+                  />
+                )}
+              </Permit>
+
+              <Link
+                style={{ position: "relative" }}
+                to="1"
+                spy={true}
+                smooth={true}
+              >
+                <PageUpBtn src={pageUp} />
+              </Link>
+            </Grid>
+            {courseList.length === 0 || paging.page === null ? null : (
+              <Grid
+                width="1200px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                margin="0 auto 0 auto"
+              >
+                <Grid
+                  hover="box-shadow:1px 1px 8px gray;"
+                  cursor="pointer"
+                  margin="0 auto 100px auto"
+                  border="1px solid #030C37"
+                  width="104px"
+                  height="30px"
+                  borderRadius="2px"
+                  bg="#ffffff"
+                  display="flex"
+                  justifyContent="center"
+                  alignItem="center"
+                  padding="7px 36px"
+                  _onClick={() => {
+                    if (paging.page === null) {
+                      swal("게시물이 없습니다");
+                    }
+                    dispatch(getCourseDB(0, "new", paging.page, 6));
+                  }}
+                >
+                  <Text cursor="pointer" margin="0" size="11px" color="#030C37">
+                    더보기
+                  </Text>
+                </Grid>
+              </Grid>
+            )}
+          </Grid>
+        </Grid>
       </>
     );
   }
-
-  // return (
-  //   <>
-  //     <AniWrap>
-  //       <Ready />
-  //     </AniWrap>
-  //   </>
-  // );
 
   return (
     <>
@@ -221,56 +411,262 @@ const CourseFeed = () => {
             </Grid>
 
             <Hr></Hr>
-            <Grid
-              margin="0 0 40px 0"
-              width="auto"
-              display="flex"
-              alignItems="center"
-            >
-              <Text
-                cursor="pointer"
-                _onClick={() => {
-                  newCourse();
-                }}
-                bold
-                margin="0 16px 0 0"
+            {newCheck ? (
+              <Grid
+                margin="0 0 40px 0"
+                width="auto"
+                display="flex"
+                alignItems="center"
               >
-                최신순
-              </Text>
-              <Text
-                cursor="pointer"
-                _onClick={() => {
-                  starCourse();
-                }}
-                color="#B8B8B8"
-                bold
-                margin="0 16px 0 0"
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    newCourse();
+                  }}
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  최신순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    starCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  별점높은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    commCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  댓글많은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    bookCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0"
+                >
+                  북마크많은순
+                </Text>
+              </Grid>
+            ) : starCheck ? (
+              <Grid
+                margin="0 0 40px 0"
+                width="auto"
+                display="flex"
+                alignItems="center"
               >
-                별점높은순
-              </Text>
-              <Text
-                cursor="pointer"
-                _onClick={() => {
-                  commCourse();
-                }}
-                color="#B8B8B8"
-                bold
-                margin="0 16px 0 0"
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    newCourse();
+                  }}
+                  bold
+                  margin="0 16px 0 0"
+                  color="#B8B8B8"
+                >
+                  최신순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    starCourse();
+                  }}
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  별점높은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    commCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  댓글많은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    bookCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0"
+                >
+                  북마크많은순
+                </Text>
+              </Grid>
+            ) : commCheck ? (
+              <Grid
+                margin="0 0 40px 0"
+                width="auto"
+                display="flex"
+                alignItems="center"
               >
-                댓글많은순
-              </Text>
-              <Text
-                cursor="pointer"
-                _onClick={() => {
-                  bookCourse();
-                }}
-                color="#B8B8B8"
-                bold
-                margin="0"
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    newCourse();
+                  }}
+                  bold
+                  margin="0 16px 0 0"
+                  color="#B8B8B8"
+                >
+                  최신순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    starCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  별점높은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    commCourse();
+                  }}
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  댓글많은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    bookCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0"
+                >
+                  북마크많은순
+                </Text>
+              </Grid>
+            ) : bookCheck ? (
+              <Grid
+                margin="0 0 40px 0"
+                width="auto"
+                display="flex"
+                alignItems="center"
               >
-                북마크많은순
-              </Text>
-            </Grid>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    newCourse();
+                  }}
+                  bold
+                  margin="0 16px 0 0"
+                  color="#B8B8B8"
+                >
+                  최신순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    starCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  별점높은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    commCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  댓글많은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    bookCourse();
+                  }}
+                  bold
+                  margin="0"
+                >
+                  북마크많은순
+                </Text>
+              </Grid>
+            ) : (
+              <Grid
+                margin="0 0 40px 0"
+                width="auto"
+                display="flex"
+                alignItems="center"
+              >
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    newCourse();
+                  }}
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  최신순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    starCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  별점높은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    commCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0 16px 0 0"
+                >
+                  댓글많은순
+                </Text>
+                <Text
+                  cursor="pointer"
+                  _onClick={() => {
+                    bookCourse();
+                  }}
+                  color="#B8B8B8"
+                  bold
+                  margin="0"
+                >
+                  북마크많은순
+                </Text>
+              </Grid>
+            )}
           </Grid>
 
           <Grid display="flex" width="1200px" alignItem="center">
@@ -367,6 +763,12 @@ const CourseFeed = () => {
 const Hr = styled.hr`
   border-top: 1px solid #969696;
   width: 1200px;
+  margin: 16px auto;
+`;
+
+const HrMob = styled.hr`
+  border-top: 1px solid #f0f0f0;
+  width: 343px;
   margin: 16px auto;
 `;
 
