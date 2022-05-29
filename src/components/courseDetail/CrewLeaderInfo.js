@@ -8,12 +8,7 @@ import { useMediaQuery } from "react-responsive";
 
 import LevelBox from "./LevelBox";
 
-import chatIcon from "../../assets/groupDetail/chat.svg";
 import crewLeaderFlag from "../../assets/groupDetail/crewLeaderFlag.png";
-import crewLeaderName from "../../assets/groupDetail/crewLeaderName.png";
-import mapIcon from "../../assets/groupDetail/map.png";
-import shareIcon from "../../assets/groupDetail/share.svg";
-import shoesMintIcon from "../../assets/groupDetail/shoesMint.png";
 
 const CrewLeaderInfo = (props) => {
   const isMobile = useMediaQuery({
@@ -21,69 +16,69 @@ const CrewLeaderInfo = (props) => {
   });
 
   const detailCourse = useSelector((state) => state.course.detail);
+  console.log(detailCourse);
 
-  // if (isMobile) {
-  //   return (
-  //     <>
-  //       <Grid
-  //         cursor="pointer"
-  //         width="343px"
-  //         border="1px solid #F0F0F0"
-  //         borderRadius="3px"
-  //         margin="0 0 16px 0"
-  //         padding="12px"
-  //         bg="white"
-  //         height="88px"
-  //         display="flex"
-  //         alignItems="center"
-  //         boxShadow="0px 1px 5px rgba(0, 0, 0, 0.05);"
-  //         _onClick={() => {
-  //           history.push(`/mypage/${detailGroup?.userId}`);
-  //         }}
-  //         position="relative"
-  //       >
-  //         <CrewLeaderName src={crewLeaderName} />
-  //         <Grid justifyContent="center" display="flex" width="auto">
-  //           <CrewLeaderProfile
-  //             style={{ width: "56px", height: "56px" }}
-  //             src={detailGroup?.profileUrl}
-  //           ></CrewLeaderProfile>
-  //           <LevelWrap>
-  //             <LevelBox userLevel={detailGroup?.userLevel}></LevelBox>
-  //           </LevelWrap>
-  //         </Grid>
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          cursor="pointer"
+          width="343px"
+          border="1px solid #F0F0F0"
+          borderRadius="3px"
+          margin="0 0 16px 0"
+          padding="12px 24px"
+          bg="white"
+          height="88px"
+          display="flex"
+          alignItems="center"
+          boxShadow="0px 1px 5px rgba(0, 0, 0, 0.05);"
+          _onClick={() => {
+            history.push(`/mypage/${detailCourse?.user?.userId}`);
+          }}
+          position="relative"
+        >
+          <Grid justifyContent="center" display="flex" width="auto">
+            <CrewLeaderProfile
+              style={{ width: "56px", height: "56px" }}
+              src={detailCourse?.user?.profileUrl}
+            ></CrewLeaderProfile>
+            <LevelWrap>
+              <LevelBox userLevel={detailCourse?.user?.userLevel}></LevelBox>
+            </LevelWrap>
+          </Grid>
 
-  //         <Grid
-  //           margin="0 0 0 20px"
-  //           width="auto"
-  //           height="auto"
-  //           display="flex"
-  //           flexDirection="column"
-  //         >
-  //           <Text margin="0 5px 10px 0" size="12px" bold>
-  //             {detailGroup?.nickname}
-  //           </Text>
+          <Grid
+            margin="0 0 0 20px"
+            width="auto"
+            height="auto"
+            display="flex"
+            flexDirection="column"
+          >
+            <Text margin="0 5px 10px 0" size="12px" bold>
+              {detailCourse?.user?.nickname}
+            </Text>
 
-  //           <Grid
-  //             width="auto"
-  //             height="auto"
-  //             display="flex"
-  //             margin="0"
-  //             alignItems="center"
-  //           >
-  //             <CrewFlag style={{ width: "13px" }} src={crewLeaderFlag} />
-  //             <Text cursor="pointer" size="10px" margin="0 5px 0 0">
-  //               굿러너 레벨
-  //             </Text>
-  //             <Text cursor="pointer" size="10px" margin="0" bold>
-  //               {detailGroup?.mannerPoint}km
-  //             </Text>
-  //           </Grid>
-  //         </Grid>
-  //       </Grid>
-  //     </>
-  //   );
-  // }
+            <Grid
+              width="auto"
+              height="auto"
+              display="flex"
+              margin="0"
+              alignItems="center"
+            >
+              <CrewFlag style={{ width: "13px" }} src={crewLeaderFlag} />
+              <Text cursor="pointer" size="10px" margin="0 5px 0 0">
+                굿러너 레벨
+              </Text>
+              <Text cursor="pointer" size="10px" margin="0" bold>
+                {detailCourse?.user?.mannerPoint}km
+              </Text>
+            </Grid>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>

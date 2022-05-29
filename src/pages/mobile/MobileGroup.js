@@ -59,11 +59,7 @@ const MobileGroup = () => {
                 history.go(-1);
               }}
             />
-            <Text 
-              margin="0 0 0 130px" 
-              bold 
-              size="16px"
-            >
+            <Text margin="0 0 0 130px" bold size="16px">
               참여 완료
             </Text>
           </Grid>
@@ -76,18 +72,10 @@ const MobileGroup = () => {
           {running.data.length === 0 ? (
             <Box>참여완료한 그룹러닝이 없습니다</Box>
           ) : (
-            <Grid 
-              display="flex" 
-              width="343px" 
-              justifyContent="space-between"
-            >
+            <Grid display="flex" width="343px" justifyContent="space-between">
               {running.data.map((data, index) => {
                 return userId !== data.userId ? (
-                  <Grid 
-                    key={index} 
-                    width="166px" 
-                    margin="0 0px 32px 0px"
-                  >
+                  <Grid key={index} width="166px" margin="0 0px 32px 0px">
                     <Grid
                       _onClick={() => {
                         history.push(`/groupdetail/${data.groupId}`);
@@ -100,9 +88,7 @@ const MobileGroup = () => {
                       <Img src={data.thumbnailUrl} />
 
                       <Grid>
-                        <Title>
-                          {data.title}
-                        </Title>
+                        <Title>{data.title}</Title>
                         <Text
                           cursor="pointer"
                           size="11px"
@@ -113,17 +99,9 @@ const MobileGroup = () => {
                         </Text>
                       </Grid>
 
-                      <Grid 
-                        width="166px" 
-                        cursor="pointer" 
-                        display="flex"
-                      >
-                        <Tagg>
-                          {data.location}
-                        </Tagg>
-                        <Tag>
-                          {data.distance}km
-                        </Tag>
+                      <Grid width="166px" cursor="pointer" display="flex">
+                        <Tagg>{data.location}</Tagg>
+                        <Tag>{data.distance}km</Tag>
                       </Grid>
                       <Hr></Hr>
                     </Grid>
@@ -136,9 +114,7 @@ const MobileGroup = () => {
                           margin="0 0 10px 0"
                         ></Grid>
                         {data.evaluation ? (
-                          <ApplyBtnFalse>
-                            평가완료
-                          </ApplyBtnFalse>
+                          <ApplyBtnFalse>평가완료</ApplyBtnFalse>
                         ) : (
                           <ApplyBtnTrue
                             onClick={() => {
@@ -189,7 +165,7 @@ const Tag = styled.div`
   padding: 2px 6px;
 `;
 
-const Tagg = styled.div`
+const Tagg = styled.p`
   height: 15px;
   width: 57px;
   white-space: nowrap;
@@ -221,7 +197,7 @@ const ApplyBtnTrue = styled.div`
   color: white;
   border: none;
   cursor: pointer;
-  padding-top:5px;
+  padding-top: 5px;
   :hover {
     box-shadow: 0 0 3px black;
     font-weight: 900;
@@ -235,7 +211,7 @@ const ApplyBtnFalse = styled.div`
   background: #f0f0f0;
   border-radius: 3px;
   height: 24 px;
-  padding-top:5px;
+  padding-top: 5px;
   color: #7b7b7b;
   border: none;
 `;
@@ -258,7 +234,7 @@ const Img = styled.img`
   object-fit: cover;
 `;
 
-const Title = styled.text`
+const Title = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

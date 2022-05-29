@@ -12,7 +12,7 @@ const ServeInfo = () => {
     query: "(max-width:820px)",
   });
 
-  const detailGroup = useSelector((state) => state.feed.detail);
+  const detailCourse = useSelector((state) => state.course.detail);
 
   if (isMobile) {
     return (
@@ -31,7 +31,7 @@ const ServeInfo = () => {
                 주차시설
               </Text>
               <Text margin="0" size="12px">
-                {detailGroup?.parking}
+                {detailCourse?.parking}
               </Text>
             </Grid>
 
@@ -40,7 +40,7 @@ const ServeInfo = () => {
                 짐 보관{"    "}
               </Text>
               <Text margin="0" size="12px">
-                {detailGroup?.baggage}
+                {detailCourse?.baggage}
               </Text>
             </Grid>
           </Grid>
@@ -58,7 +58,7 @@ const ServeInfo = () => {
               주차 시설
             </Text>
             <Text bold color="" margin="0" size="16px">
-              {detailGroup?.parking}
+              {detailCourse?.parking}
             </Text>
           </Grid>
 
@@ -67,7 +67,7 @@ const ServeInfo = () => {
               짐 보관
             </Text>
             <Text bold margin="0" size="16px">
-              {detailGroup?.baggage}
+              {detailCourse?.baggage}
             </Text>
           </Grid>
         </Grid>

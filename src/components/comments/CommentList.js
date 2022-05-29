@@ -6,7 +6,7 @@ import { resetComm, _getCommentFX } from "../../redux/modules/comments";
 import CommentItem from "./CommentItem";
 import CommentWrite from "./CommentWrite";
 import { useMediaQuery } from "react-responsive";
-import { resetReComm } from "../../redux/modules/recomments";
+import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
 
 const CommentList = (props) => {
   const isMobile = useMediaQuery({
@@ -22,22 +22,20 @@ const CommentList = (props) => {
   const groupId = params?.groupId;
   const courseId = params?.courseId;
 
-  // React.useEffect(() => {
-  //   // dispatch(resetComm);
-  //   // dispatch(resetReComm);
-  //   dispatch(_getCommentFX("group", groupId));
-  // }, []);
+  console.log(commentList);
 
   React.useEffect(() => {
-    if (groupId) {
-      return dispatch(_getCommentFX("group", groupId));
-    }
-    if (courseId) {
+    if (props.course) {
+      console.log("코멘트 리스트 코스 코멘트");
+      dispatch(resetComm());
       return dispatch(_getCommentFX("course", courseId));
     }
+    console.log("코멘트 리스트 그룹 코멘트");
+    dispatch(resetComm());
+    dispatch(_getCommentFX("group", groupId));
   }, []);
 
-  if (props.course) {
+  if (props.course && !isMobile) {
     return (
       <>
         <Grid display="flex" flexDirection="column" margin="0 0 320px 0">
@@ -52,7 +50,7 @@ const CommentList = (props) => {
 
           <CommentWrite course={true} courseId={courseId}></CommentWrite>
 
-          {commentList.length > 0 ? (
+          {commentList?.length > 0 ? (
             <Grid
               padding="24px"
               display="flex"
@@ -72,7 +70,42 @@ const CommentList = (props) => {
     );
   }
 
-  if (isMobile) {
+  if (props.course && isMobile) {
+    return (
+      <>
+        <Grid
+          width="343px"
+          display="flex"
+          flexDirection="column"
+          margin="0 0 100px 0"
+        >
+          <Grid display="flex" alignItems="center" margin="0 auto 16px auto">
+            <Text height="auto" bold size="13px" margin="0 8px 0 0">
+              리뷰
+            </Text>
+            <Text height="auto" margin="0" regular size="10px">
+              {commentList?.length}개
+            </Text>
+          </Grid>
+
+          <CommentWrite course={true} courseId={courseId}></CommentWrite>
+
+          {commentList?.length > 0 ? (
+            <Grid width="343px" display="flex" margin="0">
+              {commentList?.map((comment, idx) => {
+                if (comment == null) {
+                  return;
+                }
+                return <CommentItem course={true} key={idx} {...comment} />;
+              })}
+            </Grid>
+          ) : null}
+        </Grid>
+      </>
+    );
+  }
+
+  if (!props.course && isMobile) {
     return (
       <>
         <Grid
@@ -104,35 +137,36 @@ const CommentList = (props) => {
       </>
     );
   }
-
-  return (
-    <>
-      <Grid display="flex" flexDirection="column" margin="0 0 320px 0">
-        <Text margin="0 0 24px 0" size="18px" bold>
-          Q&A
-        </Text>
-
-        <CommentWrite groupId={groupId}></CommentWrite>
-        <Grid
-          padding="24px"
-          display="flex"
-          border="1px solid #D3D3D3"
-          borderRadius="0 0 3px 3px"
-        >
-          <Text size="12px">
-            댓글 {commentList ? commentList?.length + recommentList?.length : 0}
-            개
+  if (!props.course && !isMobile) {
+    return (
+      <>
+        <Grid display="flex" flexDirection="column" margin="0 0 320px 0">
+          <Text margin="0 0 24px 0" size="18px" bold>
+            Q&A
           </Text>
-          {commentList?.map((comment, idx) => {
-            if (comment == null) {
-              return;
-            }
-            return <CommentItem key={idx} {...comment} />;
-          })}
+
+          <CommentWrite groupId={groupId}></CommentWrite>
+          <Grid
+            padding="24px"
+            display="flex"
+            border="1px solid #D3D3D3"
+            borderRadius="0 0 3px 3px"
+          >
+            <Text size="12px">
+              댓글{" "}
+              {commentList ? commentList?.length + recommentList?.length : 0}개
+            </Text>
+            {commentList?.map((comment, idx) => {
+              if (comment == null) {
+                return;
+              }
+              return <CommentItem key={idx} {...comment} />;
+            })}
+          </Grid>
         </Grid>
-      </Grid>
-    </>
-  );
+      </>
+    );
+  }
 };
 
 export default CommentList;

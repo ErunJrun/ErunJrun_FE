@@ -8,6 +8,8 @@ import swal from "sweetalert";
 const RESET_COURSE = "RESET_COURSE";
 const ADD_COURSE = "ADD_COURSE";
 const GET_COURSE = "GET_COURSE";
+const GET_COURSE_REGION = "GET_COURSE_REGION";
+
 const DELETE_COURSE = "DELETE_COURSE";
 const EDIT_COURSE = "EDIT_COURSE";
 const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
@@ -47,6 +49,12 @@ export const addCourse = (payload) => ({
 });
 
 export const getCourse = (courseList, paging) => ({
+  type: GET_COURSE,
+  courseList,
+  paging,
+});
+
+export const getCourseRegion = (courseList, paging) => ({
   type: GET_COURSE,
   courseList,
   paging,
@@ -122,6 +130,36 @@ export const getCourseDB = (region = 0, sort = "new", page = 1, size = 6) => {
       };
       console.log(paging);
       dispatch(getCourse(data, paging));
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+};
+
+export const getCourseRegionDB = (
+  region = 0,
+  sort = "new",
+  page = 1,
+  size = 6
+) => {
+  return async function (dispatch, getState, { history }) {
+    const _paging = getState().course.paging;
+    if (!_paging.page) {
+      return;
+    }
+    dispatch(loading(true));
+
+    try {
+      const { data } = await api.get(
+        `/course/all?region=${region}&sort=${sort}&page=${page}&size=${size}`
+      );
+      console.log(data);
+      let paging = {
+        page: data.data.feed.length === size ? page + 1 : null,
+        size: size,
+      };
+      console.log(paging);
+      dispatch(getCourseRegion(data, paging));
     } catch (error) {
       // console.log(error);
     }
@@ -334,7 +372,7 @@ export default handleActions(
   {
     [RESET_COURSE]: (state, action) =>
       produce(state, (draft) => {
-        draft.rankingFeed = [];
+        // draft.rankingFeed = [];
         draft.list = [];
         draft.main = [];
         draft.starPoint = [];
@@ -354,6 +392,16 @@ export default handleActions(
         console.log(action);
         draft.rankingFeed = action.courseList.data.rankingFeed;
         draft.preferData = action.courseList.preferData;
+        draft.list.push(...action.courseList.data.feed);
+        draft.isLoading = false;
+        if (action.paging) {
+          draft.paging = action.paging;
+        }
+      }),
+
+    [GET_COURSE_REGION]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action);
         draft.list.push(...action.courseList.data.feed);
         draft.isLoading = false;
         if (action.paging) {

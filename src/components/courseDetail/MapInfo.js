@@ -17,7 +17,7 @@ function MapInfo(props) {
     query: "(max-width:820px)",
   });
 
-  const detailGroup = useSelector((state) => state.feed.detail);
+  const courseGroup = useSelector((state) => state.course.detail);
 
   const [map, setMap] = useState();
 
@@ -31,7 +31,7 @@ function MapInfo(props) {
                 장소
               </Text>
               <Text margin="0" size="12px">
-                {detailGroup?.location}
+                {courseGroup?.location}
               </Text>
             </Grid>
 
@@ -40,7 +40,7 @@ function MapInfo(props) {
                 거리
               </Text>
               <Text margin="0" size="12px">
-                {detailGroup?.distance}km
+                {courseGroup?.distance}km
               </Text>
             </Grid>
           </Grid>
@@ -48,18 +48,18 @@ function MapInfo(props) {
             <Map
               id={`map`}
               center={{
-                lat: detailGroup?.mapLatLng[0]?.lat,
-                lng: detailGroup?.mapLatLng[0]?.lng,
+                lat: courseGroup?.mapLatLng[0]?.lat,
+                lng: courseGroup?.mapLatLng[0]?.lng,
               }}
               style={{
                 width: "343px",
                 height: "200px",
               }}
-              level={5}
+              level={7}
               onCreate={setMap}
             >
               <Polyline
-                path={detailGroup?.mapLatLng}
+                path={courseGroup?.mapLatLng}
                 strokeWeight={5}
                 strokeColor={"#686EF9"}
                 strokeOpacity={1}
@@ -79,8 +79,8 @@ function MapInfo(props) {
           <Map
             id={`map`}
             center={{
-              lat: detailGroup?.mapLatLng[0]?.lat,
-              lng: detailGroup?.mapLatLng[0]?.lng,
+              lat: courseGroup?.mapLatLng[0]?.lat,
+              lng: courseGroup?.mapLatLng[0]?.lng,
             }}
             style={{
               width: "758px",
@@ -90,7 +90,7 @@ function MapInfo(props) {
             onCreate={setMap}
           >
             <Polyline
-              path={detailGroup?.mapLatLng}
+              path={courseGroup?.mapLatLng}
               strokeWeight={5}
               strokeColor={"#686EF9"}
               strokeOpacity={1}

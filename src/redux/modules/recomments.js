@@ -51,6 +51,7 @@ const initialState = {
 // 미들웨어
 export const _getReCommentFX = (commentId) => {
   return async function (dispatch, getState, { history }) {
+    console.log("대댓글 미들웨어", commentId);
     try {
       const { data } = await api.get(`/recomment/${commentId}`);
 
@@ -62,7 +63,7 @@ export const _getReCommentFX = (commentId) => {
 
       dispatch(getReComm(recomment_list));
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 };
@@ -82,7 +83,7 @@ export const _addReCommentFX = (commentId, content, groupId) => {
       });
 
       dispatch(getReComm(recomment_list));
-      dispatch(_getCommentFX("group", groupId));
+      // dispatch(_getCommentFX("group", groupId));
     } catch (error) {
       // console.log(error);
     }

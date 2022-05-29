@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { patchStarPointDB } from "../../redux/modules/course";
+import swal from "sweetalert";
 
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import "./StarPoint.css";
+import { getCookie } from "../../shared/Cookie";
+import { history } from "../../redux/configureStore";
 
 const StarPoint = (props) => {
   const dispatch = useDispatch();
@@ -15,8 +18,19 @@ const StarPoint = (props) => {
   console.log(starPointList);
   console.log(myStarPoint);
 
+  const token = getCookie("accessToken");
+
   const myStar = (newValue) => {
-    console.log("22222222222222222222", newValue);
+    if (!token) {
+      return swal({
+        text: "로그인 후 이용해 주세요",
+        closeOnClickOutside: false,
+      }).then(function (result) {
+        if (result) {
+          history.push("/login");
+        }
+      });
+    }
     setMyStarPoint(newValue);
     dispatch(patchStarPointDB(props.courseId, newValue));
   };
@@ -25,7 +39,7 @@ const StarPoint = (props) => {
     setMyStarPoint(props?.starPoint?.myStarPoint);
   }, [starPointList.starPoint]);
 
-  if (props.starOne) {
+  if (props.starOne && !props.small) {
     return (
       <Stack spacing={1}>
         <Rating
@@ -38,10 +52,24 @@ const StarPoint = (props) => {
       </Stack>
     );
   }
+  if (props.small) {
+    return (
+      <Stack spacing={1}>
+        <Rating
+          readOnly
+          name="size-large"
+          defaultValue={1}
+          max={1}
+          size="middle"
+        />
+      </Stack>
+    );
+  }
+
   return (
     <Stack spacing={1}>
       <Rating
-        value={starPointList.myStarPoint ? starPointList.myStarPoint : 0}
+        value={starPointList.myStarPoint ? starPointList.myStarPoint : 1}
         onChange={(event, newValue) => {
           myStar(newValue);
         }}

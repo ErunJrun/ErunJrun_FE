@@ -31,8 +31,13 @@ const Footer = () => {
   const path = useLocation().pathname;
 
   const isHome = path === "/";
-  const isGroup = path === "/groupfeed";
-  const isCourse = path === "/coursefeed";
+  const isGroup =
+    path === "/groupfeed" || path.slice(1, 12) === "groupdetail" ? true : false;
+
+  const isCourse =
+    path.slice(0, 11) === "/coursefeed" || path.slice(0, 11) === "/courseDeta"
+      ? true
+      : false;
   const isMypage = path === `/mypage/${userId}`;
   const isLoginInfo = path === "/loginInfo";
   const isGroupUpload = path === "/groupupload";

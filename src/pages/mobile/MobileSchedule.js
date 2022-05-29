@@ -39,7 +39,6 @@ const MobileSchedule = () => {
             width="375px"
             justifyContent="left"
             alignItems="center"
-            
           >
             <img
               style={{ width: "10px", margin: "0 15px" }}
@@ -48,11 +47,7 @@ const MobileSchedule = () => {
                 history.go(-1);
               }}
             />
-            <Text 
-              margin="0 0 0 130px" 
-              bold 
-              size="16px"
-            >
+            <Text margin="0 0 0 130px" bold size="16px">
               참여 예정
             </Text>
           </Grid>
@@ -65,17 +60,9 @@ const MobileSchedule = () => {
           {profile_list.waiting.length === 0 ? (
             <Box>예정된 그룹 러닝이 없습니다</Box>
           ) : (
-            <Grid 
-              display="flex" 
-              width="343px" 
-              justifyContent="space-between"
-            >
-              {profile_list.waiting?.map((waiting, index) => 
-                <Grid 
-                  key={index} 
-                  width="166px" 
-                  margin="0 0px 32px 0px"
-                >
+            <Grid display="flex" width="343px" justifyContent="space-between">
+              {profile_list.waiting?.map((waiting, index) => (
+                <Grid key={index} width="166px" margin="0 0px 32px 0px">
                   <Grid
                     _onClick={() => {
                       history.push(`/groupdetail/${waiting.groupId}`);
@@ -88,9 +75,7 @@ const MobileSchedule = () => {
                     <Img src={waiting.thumbnailUrl} />
 
                     <Grid>
-                      <Title>
-                        {waiting.title}
-                      </Title>
+                      <Title>{waiting.title}</Title>
                       <Text
                         regular
                         cursor="pointer"
@@ -102,17 +87,9 @@ const MobileSchedule = () => {
                       </Text>
                     </Grid>
 
-                    <Grid 
-                      width="166px" 
-                      cursor="pointer" 
-                      display="flex"
-                    >
-                      <Tagg>
-                        {waiting.location}
-                      </Tagg>
-                      <Tag>
-                        {waiting.distance}
-                      </Tag>
+                    <Grid width="166px" cursor="pointer" display="flex">
+                      <Tagg>{waiting.location}</Tagg>
+                      <Tag>{waiting.distance}</Tag>
                     </Grid>
                     <Hr></Hr>
                     <Grid
@@ -131,7 +108,7 @@ const MobileSchedule = () => {
                     상세보기
                   </ApplyBtnTrue>
                 </Grid>
-              )}
+              ))}
             </Grid>
           )}
         </Grid>
@@ -208,8 +185,7 @@ const Img = styled.img`
   object-fit: cover;
 `;
 
-const Title = styled.text`
-  white-space: nowrap;
+const Title = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -23,6 +23,7 @@ import { history } from "../../redux/configureStore";
 import { Grid, Text } from "../../elements";
 
 import swal from "sweetalert";
+import { deleteCourseDB } from "../../redux/modules/course";
 
 const ImageSlide = () => {
   const isMobile = useMediaQuery({
@@ -31,7 +32,7 @@ const ImageSlide = () => {
 
   const dispatch = useDispatch();
   const params = useParams();
-  const groupId = params.groupId;
+  const courseId = params.courseId;
   const courseDetail = useSelector((state) => state.course.detail);
 
   const [editMenu, setEditMenu] = React.useState(false);
@@ -47,109 +48,95 @@ const ImageSlide = () => {
     return setEditMenu(!editMenu);
   };
 
-  const editGroup = () => {
-    closeEditMenu();
-    history.push(`/groupEdit/${groupId}`);
-  };
+  if (isMobile) {
+    return (
+      <Swiper
+        id="GroupDetailSlideMob"
+        modules={[Navigation, Pagination]}
+        spaceBetween={50}
+        slidesPerView={1}
+        navigation={{ clickable: true }}
+        pagination={{ clickable: true }}
+      >
+        <TitleWrap>
+          <img
+            style={{
+              width: "34px",
+              height: "34px",
+              cursor: "pointer",
+              margin: "0 0 0 10px",
+            }}
+            src={backIcon}
+            onClick={() => {
+              history.push("/coursefeed/0");
+            }}
+          />
 
-  // if (isMobile) {
-  //   return (
-  //     <Swiper
-  //       id="GroupDetailSlideMob"
-  //       modules={[Navigation, Pagination]}
-  //       spaceBetween={50}
-  //       slidesPerView={1}
-  //       navigation={{ clickable: true }}
-  //       pagination={{ clickable: true }}
-  //     >
-  //       <TitleWrap>
-  //         <img
-  //           style={{
-  //             width: "34px",
-  //             height: "34px",
-  //             cursor: "pointer",
-  //             margin: "0 0 0 10px",
-  //           }}
-  //           src={backIcon}
-  //           onClick={() => {
-  //             history.goBack();
-  //           }}
-  //         />
-
-  //         <Permit>
-  //           {nickname === detailGroup?.nickname ? (
-  //             <Grid margin="0" display="flex" width="auto" height="auto">
-  //               <img
-  //                 style={{
-  //                   width: "34px",
-  //                   height: "34px",
-  //                   cursor: "pointer",
-  //                   marginRight: "13px",
-  //                 }}
-  //                 src={editIcon}
-  //                 onClick={() => {
-  //                   handleEditMenu();
-  //                 }}
-  //               />
-  //               {editMenu ? (
-  //                 <DropContent>
-  //                   <Text
-  //                     margin="0"
-  //                     _onClick={() => {
-  //                       editGroup();
-  //                     }}
-  //                   >
-  //                     수정하기
-  //                   </Text>
-  //                   <Line />
-  //                   <Text
-  //                     margin="0"
-  //                     _onClick={() => {
-  //                       dispatch(deleteGroupDB(groupId));
-  //                       closeEditMenu();
-  //                     }}
-  //                   >
-  //                     삭제하기
-  //                   </Text>
-  //                 </DropContent>
-  //               ) : null}
-  //             </Grid>
-  //           ) : null}
-  //         </Permit>
-  //       </TitleWrap>
-  //       {detailGroup?.thumbnailUrl1 ? (
-  //         <SwiperSlide>
-  //           <img
-  //             style={{ width: "100%", height: "100%", objectFit: "cover" }}
-  //             src={detailGroup?.thumbnailUrl1}
-  //           ></img>
-  //         </SwiperSlide>
-  //       ) : (
-  //         ""
-  //       )}
-  //       {detailGroup?.thumbnailUrl2 ? (
-  //         <SwiperSlide>
-  //           <img
-  //             style={{ width: "100%", height: "100%", objectFit: "cover" }}
-  //             src={detailGroup?.thumbnailUrl2}
-  //           ></img>
-  //         </SwiperSlide>
-  //       ) : (
-  //         ""
-  //       )}
-  //       {detailGroup?.thumbnailUrl3 ? (
-  //         <SwiperSlide>
-  //           <img
-  //             style={{ width: "100%", height: "100%", objectFit: "cover" }}
-  //             src={detailGroup?.thumbnailUrl3}
-  //           ></img>
-  //         </SwiperSlide>
-  //       ) : (
-  //         ""
-  //       )}
-  //     </Swiper>
-  //   );
-  // }
+          <Permit>
+            {nickname === courseDetail?.user?.nickname ? (
+              <Grid margin="0" display="flex" width="auto" height="auto">
+                <img
+                  style={{
+                    width: "34px",
+                    height: "34px",
+                    cursor: "pointer",
+                    marginRight: "13px",
+                  }}
+                  src={editIcon}
+                  onClick={() => {
+                    handleEditMenu();
+                  }}
+                />
+                {editMenu ? (
+                  <DropContent>
+                    <Text
+                      margin="0"
+                      _onClick={() => {
+                        dispatch(deleteCourseDB(courseId));
+                        closeEditMenu();
+                      }}
+                    >
+                      삭제하기
+                    </Text>
+                  </DropContent>
+                ) : null}
+              </Grid>
+            ) : null}
+          </Permit>
+        </TitleWrap>
+        {courseDetail?.courseImageUrl1 ? (
+          <SwiperSlide>
+            <img
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              src={courseDetail?.courseImageUrl1}
+            ></img>
+          </SwiperSlide>
+        ) : (
+          ""
+        )}
+        {courseDetail?.courseImageUrl2 ? (
+          <SwiperSlide>
+            <img
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              src={courseDetail?.courseImageUrl2}
+            ></img>
+          </SwiperSlide>
+        ) : (
+          ""
+        )}
+        {courseDetail?.courseImageUrl3 ? (
+          <SwiperSlide>
+            <img
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              src={courseDetail?.courseImageUrl3}
+            ></img>
+          </SwiperSlide>
+        ) : (
+          ""
+        )}
+      </Swiper>
+    );
+  }
 
   return (
     <Swiper
@@ -213,12 +200,12 @@ const DropContent = styled.div`
   align-items: center;
   position: absolute;
   box-sizing: border-box;
-  top: 40px;
-  left: 250px;
+  top: 20px;
+  left: 220px;
   background-color: #ffffff;
   border: 1px solid #dddddd;
   width: 107px;
-  height: 104px;
+  height: 40px;
   text-align: center;
   border-radius: 10px;
   box-shadow: 0px 0px 8px rgba(149, 149, 149, 0.35);

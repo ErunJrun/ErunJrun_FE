@@ -43,12 +43,12 @@ const DrawerCategory = () => {
 
   const allGroup = () => {
     dispatch(resetGroup());
-    dispatch(getAllDB(paging.page, 6));
+    dispatch(getAllDB(paging.page + 1, 6));
   };
 
   const preferGroup = () => {
     dispatch(resetGroup());
-    dispatch(getPreferDB(paging.page, 6));
+    dispatch(getPreferDB(paging.page + 1, 6));
   };
 
   const list = (anchor) => (
@@ -76,53 +76,110 @@ const DrawerCategory = () => {
         </Grid>
 
         <List>
-          <Grid display="flex" flexDirection="column">
-            <Text
-              _onClick={() => {
-                setFilter("전체");
-                allGroup();
-              }}
-              size="13px"
-              margin="32px auto 16px auto"
-            >
-              전체
-            </Text>
-
-            <hr
-              style={{
-                width: "375px",
-                height: "0",
-                borderTop: "2px solid #f0f0f0",
-                marginBottom: "16px",
-              }}
-            ></hr>
-
-            <Text
-              _onClick={() => {
-                setFilter("추천 그룹 러닝");
-                preferGroup();
-              }}
-              size="13px"
-              margin="0 auto"
-            >
-              추천 그룹 러닝
-            </Text>
-          </Grid>
-        </List>
-
-        {/* <List>
-          {["전체", "추천 그룹 러닝"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemText
-                id="listItem"
-                primary={text}
-                onClick={() => {
-                  setFilter(text);
+          {filter === "전체" ? (
+            <Grid display="flex" flexDirection="column">
+              <Text
+                _onClick={() => {
+                  setFilter("전체");
+                  allGroup();
                 }}
-              />
-            </ListItem>
-          ))}
-        </List> */}
+                size="13px"
+                margin="32px auto 16px auto"
+              >
+                전체
+              </Text>
+
+              <hr
+                style={{
+                  width: "375px",
+                  height: "0",
+                  borderTop: "2px solid #f0f0f0",
+                  marginBottom: "16px",
+                }}
+              ></hr>
+
+              <Text
+                _onClick={() => {
+                  setFilter("추천 그룹 러닝");
+                  preferGroup();
+                }}
+                size="13px"
+                margin="0 auto"
+                color="#7B7B7B"
+              >
+                추천 그룹 러닝
+              </Text>
+            </Grid>
+          ) : filter === "추천 그룹 러닝" ? (
+            <Grid display="flex" flexDirection="column">
+              <Text
+                _onClick={() => {
+                  setFilter("전체");
+                  allGroup();
+                }}
+                size="13px"
+                margin="32px auto 16px auto"
+                color="#7B7B7B"
+              >
+                전체
+              </Text>
+
+              <hr
+                style={{
+                  width: "375px",
+                  height: "0",
+                  borderTop: "2px solid #f0f0f0",
+                  marginBottom: "16px",
+                }}
+              ></hr>
+
+              <Text
+                _onClick={() => {
+                  setFilter("추천 그룹 러닝");
+                  preferGroup();
+                }}
+                size="13px"
+                margin="0 auto"
+              >
+                추천 그룹 러닝
+              </Text>
+            </Grid>
+          ) : (
+            <Grid display="flex" flexDirection="column">
+              <Text
+                _onClick={() => {
+                  setFilter("전체");
+                  allGroup();
+                }}
+                size="13px"
+                margin="32px auto 16px auto"
+              >
+                전체
+              </Text>
+
+              <hr
+                style={{
+                  width: "375px",
+                  height: "0",
+                  borderTop: "2px solid #f0f0f0",
+                  marginBottom: "16px",
+                }}
+              ></hr>
+
+              <Text
+                _onClick={() => {
+                  setFilter("추천 그룹 러닝");
+                  preferGroup();
+                }}
+                size="13px"
+                margin="0 auto"
+                color="#7B7B7B"
+              >
+                추천 그룹 러닝
+              </Text>
+            </Grid>
+          )}
+        </List>
       </Grid>
     </Box>
   );
@@ -141,7 +198,7 @@ const DrawerCategory = () => {
               {filter}
             </Text>
             <img
-              _onClick={toggleDrawer(anchor, true)}
+              onClick={toggleDrawer(anchor, true)}
               style={{ width: "10px", marginTop: "2px" }}
               src={inputArrowGray}
             />

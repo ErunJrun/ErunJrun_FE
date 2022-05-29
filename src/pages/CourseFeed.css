@@ -1,0 +1,26 @@
+/* 모바일 */
+#CourseRankSlideMob {
+  width: 236px;
+  height: 220px;
+  display: flex;
+  transform: translate3d(-85px, 0px, 0px);
+  margin-right: 70px;
+  /* transform: translate3d(-120px, 0px, 0px); */
+}
+
+#CourseRankCardSwiperMob {
+  width: 343px;
+  height: 236px;
+}
+
+#CourseRankCardSwiperMob > .swiper-button-prev {
+  display: none;
+}
+
+#CourseRankCardSwiperMob > .swiper-button-next {
+  display: none;
+}
+
+#CourseRankCardSwiperMob > .swiper-pagination {
+  display: none;
+}
