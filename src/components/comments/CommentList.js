@@ -18,11 +18,12 @@ const CommentList = (props) => {
   const dispatch = useDispatch();
   const commentList = useSelector((state) => state.comments.list);
   const recommentList = useSelector((state) => state.recomments.list);
+  const detailGroup = useSelector((state) => state.feed.detail);
 
   const groupId = params?.groupId;
   const courseId = params?.courseId;
 
-  console.log(commentList);
+  console.log(groupId);
 
   React.useEffect(() => {
     if (props.course) {

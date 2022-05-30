@@ -65,7 +65,7 @@ export const _getCommentFX = (category, categoryId) => {
       });
 
       dispatch(getComm(comment_list));
-      if (category === "group") {
+      if (category === "group" && comment_list.length !== 0) {
         dispatch(_getReCommentFX(comment_list[0]?.commentId));
       }
     } catch (error) {
