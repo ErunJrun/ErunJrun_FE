@@ -6,6 +6,8 @@ import { TimepickerUI } from "timepicker-ui";
 
 import "./TimePicker.css";
 import { Grid } from "../../elements";
+import dayjs from "dayjs";
+import swal from "sweetalert";
 
 const TimePickers = (props) => {
   const tmRef = useRef(null);
@@ -15,21 +17,51 @@ const TimePickers = (props) => {
     console.log(hour, minutes, type);
 
     if (type === "PM") {
-      return setInputValue(Number(`${hour}`) + 12 + ":" + `${minutes}`);
+      standbyTimePick(Number(`${hour}`) + 12 + ":" + `${minutes}`);
+      setInputValue(Number(`${hour}`) + 12 + ":" + `${minutes}`);
     }
 
     if (type === "AM") {
-      return setInputValue(`${hour}:${minutes}`);
+      standbyTimePick(`${hour}:${minutes}`);
+      setInputValue(`${hour}:${minutes}`);
     }
   }, []);
 
+  console.log(inputValue);
+  console.log(props.date);
+
+  //스탠바이 시간 선택
+  const standbyTimePick = (time) => {
+    if (
+      dayjs(props.date).format("YYYYMMDD") ===
+      dayjs(new Date()).format("YYYYMMDD")
+    ) {
+      if (time < dayjs().format("HH:mm")) {
+        props.setStandbyTime("");
+        swal("현재 시간부터 6시간 이후 등록이 가능합니다.");
+      }
+
+      if (time < dayjs().add(6, "hour").format("HH:mm")) {
+        props.setStandbyTime("");
+        swal("현재 시간부터 6시간 이후 등록이 가능합니다.");
+      }
+      // } else {
+      //   if (time > dayjs().add(6, "hour").format("HH:mm")) {
+      //     if (time < dayjs().add(30, "hour").format("HH:mm")) {
+      //       props.setStandbyTime("");
+      //       swal("현재 시간부터 6시간 이후 등록이 가능합니다.");
+      //     }
+      //   }
+    }
+  };
+
   useEffect(() => {
+    // standbyTimePick(inputValue);
     props.setStandbyTime(inputValue);
-  }, [inputValue]);
+  }, [inputValue, props.date]);
 
   useEffect(() => {
     const tm = tmRef.current;
-
     const newPicker = new TimepickerUI(tm, {});
     newPicker.create();
 
