@@ -214,41 +214,18 @@ const CourseFeed = () => {
               )}
             </Grid>
 
-            <Grid
-              display="flex"
-              flexDirection="column"
-              position="sticky"
-              top="726px"
-              margin="0"
-              width="auto"
-            >
-              <Permit>
-                {uploadBtn === true ? (
-                  <UploadBtn
-                    onClick={() => {
-                      history.push("/courseUpload");
-                    }}
-                    src={uploadHover}
-                  />
-                ) : (
-                  <UploadBtn
-                    onClick={() => {
-                      history.push("/courseUpload");
-                    }}
-                    src={upload}
-                  />
-                )}
-              </Permit>
-
-              <Link
-                style={{ position: "relative" }}
-                to="1"
-                spy={true}
-                smooth={true}
+            <Permit>
+              <UploadBtnMob
+                onClick={() => {
+                  swal(
+                    "추천 코스 업로드는 데스크탑 또는 노트북을 이용해주세요."
+                  );
+                }}
               >
-                <PageUpBtn src={pageUp} />
-              </Link>
-            </Grid>
+                +
+              </UploadBtnMob>
+            </Permit>
+
             {courseList.length === 0 || paging.page === null ? null : (
               <Grid
                 width="1200px"
@@ -759,6 +736,29 @@ const CourseFeed = () => {
     </>
   );
 };
+
+const UploadBtnMob = styled.div`
+  box-sizing: border-box;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0px 1px 5px rgba(94, 94, 94, 0.45);
+  cursor: pointer;
+  margin: 0;
+  bottom: 95px;
+  right: 20px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  :hover {
+    box-shadow: 0px 1px 8px rgba(94, 94, 94, 0.45);
+    color: #68f99e;
+  }
+`;
 
 const Hr = styled.hr`
   border-top: 1px solid #969696;
