@@ -127,12 +127,8 @@ const GroupUpload = () => {
   };
 
   const addGroupPost = async () => {
-    console.log(thumbnail);
-
-    // let resizeImage = [];
-
     const options = {
-      maxSizeMB: 1,
+      maxSizeMB: 2,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
     };
