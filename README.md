@@ -75,8 +75,7 @@
 <br>
 
 ## ✨ 아키텍쳐
-![stack_diagram](https://user-images.githubusercontent.com/49478770/170918000-77b830ed-5988-4c8e-b5fa-57e778639c66.png)
-
+![stack_diagram](https://user-images.githubusercontent.com/100745412/170962123-420362bb-25d7-45fa-94a2-83b1352e1267.png)
 
 ## 🔨 기술스택
 ### **Tech**
@@ -103,7 +102,7 @@
   <img src="https://img.shields.io/badge/zeplin-FDBD39?style=for-the-badge&logo=zeplin&logoColor=FDBD39"/>
 </p>
 
-### **Dev Tools**
+### **Tools**
 <p>
 <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white"/>
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white"/>
