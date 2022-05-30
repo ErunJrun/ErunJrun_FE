@@ -63,7 +63,6 @@ const imgActions = {
   resetFile,
   setShow,
   deleteShow,
-  resetFile,
 };
 
 export { imgActions };
