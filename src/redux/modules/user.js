@@ -53,6 +53,7 @@ const initialState = {
 // 미들웨어
 export const kakaoLogin = (authorization_code) => {
   return async function (dispatch, getState, { history }) {
+    localStorage.clear();
     try {
       const { data } = await api.get(
         `user/kakao/callback?code=${authorization_code}`
@@ -94,6 +95,7 @@ export const kakaoLogin = (authorization_code) => {
 
 export const naverLoginDB = (code, state) => {
   return async function (dispatch, getState, { history }) {
+    localStorage.clear();
     try {
       const { data } = await api.get(
         `user/naver/callback?code=${code}&state=${state}`

@@ -1,93 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Grid } from '../../elements';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MobileStepper from '@mui/material/MobileStepper';
-import Button from '@mui/material/Button';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
+import { Grid } from "../../elements";
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import MobileStepper from "@mui/material/MobileStepper";
+import Button from "@mui/material/Button";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
 import { useMediaQuery } from "react-responsive";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
   {
-    label: 'Infor1',
-    imgPath:
-      'https://ifh.cc/g/HR3Yl0.png',
+    label: "Infor1",
+    imgPath: "https://ifh.cc/g/HR3Yl0.png",
   },
   {
-    label: 'Infor2',
-    imgPath:
-      'https://ifh.cc/g/w6pxCb.png',
+    label: "Infor2",
+    imgPath: "https://ifh.cc/g/w6pxCb.png",
   },
   {
-    label: 'Infor3',
-    imgPath:
-      'https://ifh.cc/g/fVY48m.png',
+    label: "Infor3",
+    imgPath: "https://ifh.cc/g/fVY48m.png",
   },
   {
-    label: 'Infor4',
-    imgPath:
-      'https://ifh.cc/g/HWnNzZ.png',
+    label: "Infor4",
+    imgPath: "https://ifh.cc/g/HWnNzZ.png",
   },
   {
-    label: 'Infor5',
-    imgPath:
-      'https://ifh.cc/g/xQxsp3.png',
+    label: "Infor5",
+    imgPath: "https://ifh.cc/g/xQxsp3.png",
   },
   {
-    label: 'Infor6',
-    imgPath:
-      'https://ifh.cc/g/XnXP1z.png',
+    label: "Infor6",
+    imgPath: "https://ifh.cc/g/XnXP1z.png",
   },
   {
-    label: 'Infor7',
-    imgPath:
-      'https://ifh.cc/g/oGVSwy.png',
+    label: "Infor7",
+    imgPath: "https://ifh.cc/g/oGVSwy.png",
   },
 ];
 
 const image = [
-    {
-      label: 'Infor1',
-      imgPath:
-        'https://ifh.cc/g/BpVFSp.jpg',
-    },
-    {
-      label: 'Infor2',
-      imgPath:
-        'https://ifh.cc/g/AdMHaL.png',
-    },
-    {
-      label: 'Infor3',
-      imgPath:
-        'https://ifh.cc/g/wpdXza.png',
-    },
-    {
-      label: 'Infor4',
-      imgPath:
-        'https://ifh.cc/g/YdP0rg.jpg',
-    },
-    {
-      label: 'Infor5',
-      imgPath:
-        'https://ifh.cc/g/tpjpGf.png',
-    },
-    {
-      label: 'Infor6',
-      imgPath:
-        'https://ifh.cc/g/pxfBVT.jpg',
-    },
-    {
-      label: 'Infor7',
-      imgPath:
-        'https://ifh.cc/g/Nhhtc4.png',
-    },
-  ];
+  {
+    label: "Infor1",
+    imgPath: "https://ifh.cc/g/BpVFSp.jpg",
+  },
+  {
+    label: "Infor2",
+    imgPath: "https://ifh.cc/g/AdMHaL.png",
+  },
+  {
+    label: "Infor3",
+    imgPath: "https://ifh.cc/g/wpdXza.png",
+  },
+  {
+    label: "Infor4",
+    imgPath: "https://ifh.cc/g/YdP0rg.jpg",
+  },
+  {
+    label: "Infor5",
+    imgPath: "https://ifh.cc/g/tpjpGf.png",
+  },
+  {
+    label: "Infor6",
+    imgPath: "https://ifh.cc/g/pxfBVT.jpg",
+  },
+  {
+    label: "Infor7",
+    imgPath: "https://ifh.cc/g/Nhhtc4.png",
+  },
+];
 
 function SwipeableTextMobileStepper() {
   const isMobile = useMediaQuery({
@@ -99,6 +85,7 @@ function SwipeableTextMobileStepper() {
   const [modal, setModal] = useState(true);
   const maxSteps = images.length;
   const firstLogin = localStorage.getItem("firstLogin");
+  const introModal = localStorage.getItem("introModal");
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -114,142 +101,175 @@ function SwipeableTextMobileStepper() {
 
   const toggleModal = () => {
     setModal(!modal);
+    localStorage.setItem("introModal", false);
   };
 
-  if(isMobile && firstLogin === "true") {
+  if (
+    (isMobile && introModal === "true") ||
+    (isMobile && introModal === null)
+  ) {
     return (
       <Grid margin="0 0 1000px 0">
         {modal && (
           <MOverlaye>
             <MWrap>
-                <Box sx={{ maxWidth: "100%",height: "100%", flexGrow: 1 , zIndex: "3",}}>
+              <Box
+                sx={{
+                  maxWidth: "100%",
+                  height: "100%",
+                  flexGrow: 1,
+                  zIndex: "3",
+                }}
+              >
                 <AutoPlaySwipeableViews
-                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                    index={activeStep}
-                    onChangeIndex={handleStepChange}
-                    enableMouseEvents
-                    sx={{ zIndex: "2"}}
+                  axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                  index={activeStep}
+                  onChangeIndex={handleStepChange}
+                  enableMouseEvents
+                  sx={{ zIndex: "2" }}
                 >
-                    {image.map((step, index) => (
+                  {image.map((step, index) => (
                     <div key={step.label}>
-                        {Math.abs(activeStep - index) <= 2 ? (
+                      {Math.abs(activeStep - index) <= 2 ? (
                         <Box
-                            component="img"
-                            sx={{
-                            height: '100%',
-                            display: 'block',
-                            overflow: 'hidden',
-                            width: '100%',
-                            }}
-                            src={step.imgPath}
-                            alt={step.label}
+                          component="img"
+                          sx={{
+                            height: "100%",
+                            display: "block",
+                            overflow: "hidden",
+                            width: "100%",
+                          }}
+                          src={step.imgPath}
+                          alt={step.label}
                         />
-                        ) : null}
+                      ) : null}
                     </div>
-                    ))}
+                  ))}
                 </AutoPlaySwipeableViews>
                 <StepperBox>
-                    <MobileStepper
+                  <MobileStepper
                     variant="dots"
                     steps={7}
                     position="static"
                     activeStep={activeStep}
-                    sx={{ width: 232, flexGrow: 1, position: "absolute", backgroundColor: "transparent"}}
+                    sx={{
+                      width: 232,
+                      flexGrow: 1,
+                      position: "absolute",
+                      backgroundColor: "transparent",
+                    }}
                     nextButton={
-                        <Button size="small" onClick={handleNext} disabled={activeStep === 6}>
-                        {theme.direction === 'rtl' ? (
-                            <KeyboardArrowLeft />
+                      <Button
+                        size="small"
+                        onClick={handleNext}
+                        disabled={activeStep === 6}
+                      >
+                        {theme.direction === "rtl" ? (
+                          <KeyboardArrowLeft />
                         ) : (
-                            <KeyboardArrowRight />
+                          <KeyboardArrowRight />
                         )}
-                        </Button>
+                      </Button>
                     }
                     backButton={
-                        <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                        {theme.direction === 'rtl' ? (
-                            <KeyboardArrowRight />
+                      <Button
+                        size="small"
+                        onClick={handleBack}
+                        disabled={activeStep === 0}
+                      >
+                        {theme.direction === "rtl" ? (
+                          <KeyboardArrowRight />
                         ) : (
-                            <KeyboardArrowLeft />
+                          <KeyboardArrowLeft />
                         )}
-                        </Button>
+                      </Button>
                     }
-                    />
+                  />
                 </StepperBox>
-                <MBtn onClick={toggleModal}>
-                    건너뛰기
-                </MBtn>
-                </Box>
+                <MBtn onClick={toggleModal}>건너뛰기</MBtn>
+              </Box>
             </MWrap>
           </MOverlaye>
         )}
       </Grid>
     );
   }
-  
+
   return (
-    <>  
+    <>
       {modal && (
         <Overlaye>
-        <Wrap>
-            <Box sx={{ maxWidth: 1000,height: 700, flexGrow: 1 , zIndex: "3",}}>
-            <AutoPlaySwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          <Wrap>
+            <Box sx={{ maxWidth: 1000, height: 700, flexGrow: 1, zIndex: "3" }}>
+              <AutoPlaySwipeableViews
+                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
                 index={activeStep}
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
-                sx={{ zIndex: "2"}}
-            >
+                sx={{ zIndex: "2" }}
+              >
                 {images.map((step, index) => (
-                <div key={step.label}>
+                  <div key={step.label}>
                     {Math.abs(activeStep - index) <= 2 ? (
-                    <Box
+                      <Box
                         component="img"
                         sx={{
-                        height: '700px',
-                        display: 'block',
-                        overflow: 'hidden',
-                        width: '1000px',
-                        borderRadius: '6px'
+                          height: "700px",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "1000px",
+                          borderRadius: "6px",
                         }}
                         src={step.imgPath}
                         alt={step.label}
-                    />
+                      />
                     ) : null}
-                </div>
+                  </div>
                 ))}
-            </AutoPlaySwipeableViews>
-            <MobileStepperBox>
+              </AutoPlaySwipeableViews>
+              <MobileStepperBox>
                 <MobileStepper
-                variant="dots"
-                steps={7}
-                position="static"
-                activeStep={activeStep}
-                sx={{ width: 232, flexGrow: 1, position: "absolute", backgroundColor: "transparent"}}
-                nextButton={
-                    <Button size="small" onClick={handleNext} disabled={activeStep === 6}>
-                    {theme.direction === 'rtl' ? (
+                  variant="dots"
+                  steps={7}
+                  position="static"
+                  activeStep={activeStep}
+                  sx={{
+                    width: 232,
+                    flexGrow: 1,
+                    position: "absolute",
+                    backgroundColor: "transparent",
+                  }}
+                  nextButton={
+                    <Button
+                      size="small"
+                      onClick={handleNext}
+                      disabled={activeStep === 6}
+                    >
+                      {theme.direction === "rtl" ? (
                         <KeyboardArrowLeft />
-                    ) : (
+                      ) : (
                         <KeyboardArrowRight />
-                    )}
+                      )}
                     </Button>
-                }
-                backButton={
-                    <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                    {theme.direction === 'rtl' ? (
+                  }
+                  backButton={
+                    <Button
+                      size="small"
+                      onClick={handleBack}
+                      disabled={activeStep === 0}
+                    >
+                      {theme.direction === "rtl" ? (
                         <KeyboardArrowRight />
-                    ) : (
+                      ) : (
                         <KeyboardArrowLeft />
-                    )}
+                      )}
                     </Button>
-                }
+                  }
                 />
-            </MobileStepperBox>
-            <Btn onClick={toggleModal}>
-                건너뛰기
-            </Btn>
+              </MobileStepperBox>
+              <Btn onClick={toggleModal}>건너뛰기</Btn>
             </Box>
-        </Wrap>
+          </Wrap>
         </Overlaye>
       )}
     </>
@@ -281,7 +301,7 @@ const Overlaye = styled.div`
   bottom: 0;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 2;
+  z-index: 3;
 `;
 
 const MOverlaye = styled.div`
@@ -293,12 +313,12 @@ const MOverlaye = styled.div`
   bottom: 0;
   position: fixed;
   background-color: #fff;
-  z-index: 2;
+  z-index: 3;
   margin: 0 0 200px 0;
 `;
 
 const Wrap = styled.div`
-  z-index: 0;
+  z-index: 3;
   position: absolute;
   left: 25%;
   top: 180px;
@@ -309,7 +329,7 @@ const Wrap = styled.div`
 `;
 
 const MWrap = styled.div`
-  z-index: 0;
+  z-index: 3;
   width: 100%;
   text-align: center;
 `;
@@ -331,7 +351,7 @@ const MBtn = styled.div`
   top: -1028px;
   left: 20px;
   width: 75px;
-  padding-top:3px;
+  padding-top: 3px;
   height: 21px;
   padding: 2px 17px 2px 16px;
   border-radius: 56px;
