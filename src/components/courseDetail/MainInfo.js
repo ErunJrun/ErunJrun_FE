@@ -120,12 +120,12 @@ const MainInfo = (props) => {
         boxShadow="0px 0px 6px rgba(141, 141, 141, 0.25)"
       >
         <Grid
-          width="300px"
+          width="auto"
           height="auto"
           display="flex"
           justifyContent="space-between"
         >
-          <Text width="300px" margin="0 0 12px 0" size="18px" bold>
+          <Text width="280px" margin="0 0 12px 0" size="18px" bold>
             {detailCourse?.title}
           </Text>
 
