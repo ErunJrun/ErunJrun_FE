@@ -8,6 +8,7 @@ import swal from "sweetalert";
 const RESET_COURSE = "RESET_COURSE";
 const ADD_COURSE = "ADD_COURSE";
 const GET_COURSE = "GET_COURSE";
+const GET_COURSE_MAIN = "GET_COURSE_MAIN";
 const GET_COURSE_REGION = "GET_COURSE_REGION";
 
 const DELETE_COURSE = "DELETE_COURSE";
@@ -17,14 +18,15 @@ const EDIT_COURSE_CONTENT = "EDIT_COURSE_CONTENT";
 
 const LOADING = "LOADING";
 const BOOKMARK = "BOOKMARK";
+const BOOKMARK_MAIN = "BOOKMARK_MAIN";
 const BOOKMARK_DETAIL = "BOOKMARK_DETAIL";
 const BOOKMARK_RANKING = "BOOKMARK_RANKING";
 const STAR_POINT = "STAR_POINT";
-const PATCH_STAR_POINT = "PATCH_STAR_POINT";
 
 //initialState
 const initialState = {
   list: [],
+  main: [],
   starPoint: [],
   rankingFeed: [],
   preferData: "",
@@ -54,8 +56,13 @@ export const getCourse = (courseList, paging) => ({
   paging,
 });
 
+export const getCourseMain = (payload) => ({
+  type: GET_COURSE_MAIN,
+  payload,
+});
+
 export const getCourseRegion = (courseList, paging) => ({
-  type: GET_COURSE,
+  type: GET_COURSE_REGION,
   courseList,
   paging,
 });
@@ -90,6 +97,11 @@ export const bookmark = (payload) => ({
   payload,
 });
 
+export const bookmarkMain = (payload) => ({
+  type: BOOKMARK_MAIN,
+  payload,
+});
+
 export const bookmarkDetail = (payload) => ({
   type: BOOKMARK_DETAIL,
   payload,
@@ -104,11 +116,6 @@ export const starPoint = (payload) => ({
   type: STAR_POINT,
   payload,
 });
-
-// export const patchStarPoint = (payload) => ({
-//   type: PATCH_STAR_POINT,
-//   payload,
-// });
 
 //미들웨어
 export const getCourseDB = (region = 0, sort = "new", page = 1, size = 6) => {
@@ -132,6 +139,19 @@ export const getCourseDB = (region = 0, sort = "new", page = 1, size = 6) => {
       dispatch(getCourse(data, paging));
     } catch (error) {
       // console.log(error);
+    }
+  };
+};
+
+export const getCourseMainDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await api.get(`/course/main`);
+      console.log(data);
+
+      dispatch(getCourseMain(data.data.feed));
+    } catch (error) {
+      console.log(error);
     }
   };
 };
@@ -179,6 +199,25 @@ export const bookmarkDB = (courseId) => {
       };
 
       dispatch(bookmark(bookmarkState));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const bookmarkMainDB = (courseId) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log(courseId);
+      const { data } = await api.patch(`/course/${courseId}/bookmark`);
+      console.log(data);
+
+      let bookmarkState = {
+        bookmark: data.data.bookmark,
+        courseId: courseId,
+      };
+
+      dispatch(bookmarkMain(bookmarkState));
     } catch (error) {
       console.log(error);
     }
@@ -321,52 +360,6 @@ export const deleteCourseDB = (courseId) => {
   };
 };
 
-// export const editGroupDB = (groupId, contents, thumbnailUrl, thumbnail) => {
-//   return async function (dispatch, getState, { history }) {
-//     try {
-//       console.log(
-//         groupId,
-//         contents,
-//         "url=>=>",
-//         thumbnailUrl,
-//         "새사진파일 =>=>",
-//         thumbnail
-//       );
-//       const formData = new FormData();
-
-//       thumbnail?.map((e, idx) => {
-//         return formData.append("thumbnail", e);
-//       });
-
-//       thumbnailUrl?.map((e, idx) => {
-//         return formData.append("thumbnailUrl", e);
-//       });
-
-//       formData.append("title", contents.title);
-//       formData.append("maxPeople", contents.maxPeople);
-//       formData.append("date", contents.date);
-//       formData.append("standbyTime", contents.standbyTime);
-//       formData.append("startTime", contents.startTime);
-//       formData.append("finishTime", contents.finishTime);
-//       formData.append("parking", contents.parking);
-//       formData.append("speed", contents.speed);
-//       formData.append("baggage", contents.baggage);
-//       formData.append("content", contents.content);
-//       formData.append("thema", contents.thema);
-
-//       const { data } = await api.patch(`/group/${groupId}`, formData, {
-//         headers: {
-//           "Content-Type": "multipart/form-data",
-//         },
-//       });
-//       console.log(data.data);
-//       history.push("/groupfeed");
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
 //리듀서
 export default handleActions(
   {
@@ -399,6 +392,12 @@ export default handleActions(
         }
       }),
 
+    [GET_COURSE_MAIN]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.main = action.payload;
+      }),
+
     [GET_COURSE_REGION]: (state, action) =>
       produce(state, (draft) => {
         console.log(action);
@@ -411,14 +410,11 @@ export default handleActions(
 
     [STAR_POINT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.starPoint = action.payload;
       }),
 
     [BOOKMARK]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
-        console.log(state);
         const newList = state.list.map((e) => {
           if (action.payload.courseId === e.courseId) {
             if (action.payload.bookmark === true) {
@@ -431,6 +427,23 @@ export default handleActions(
           }
         });
         draft.list = newList;
+      }),
+
+    [BOOKMARK_MAIN]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        const newList = state.main.map((e) => {
+          if (action.payload.courseId === e.courseId) {
+            if (action.payload.bookmark === true) {
+              return { ...e, bookmark: true };
+            } else {
+              return { ...e, bookmark: false };
+            }
+          } else {
+            return e;
+          }
+        });
+        draft.main = newList;
       }),
 
     [BOOKMARK_DETAIL]: (state, action) =>
@@ -459,22 +472,6 @@ export default handleActions(
         console.log(action.payload);
         draft.detail = action.payload;
       }),
-
-    // [EDIT_GROUP_CONTENT]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     console.log(action.payload);
-    //     draft.detail.baggage = action.payload[0]?.baggage;
-    //     draft.detail.content = action.payload[0]?.content;
-    //     draft.detail.date = action.payload[0]?.date;
-    //     draft.detail.finishTime = action.payload[0]?.finishTime;
-    //     draft.detail.maxPeople = action.payload[0]?.maxPeople;
-    //     draft.detail.parking = action.payload[0]?.parking;
-    //     draft.detail.speed = action.payload[0]?.speed;
-    //     draft.detail.standbyTime = action.payload[0]?.standbyTime;
-    //     draft.detail.startTime = action.payload[0]?.startTime;
-    //     draft.detail.thema = action.payload[0]?.theme;
-    //     draft.detail.title = action.payload[0]?.title;
-    //   }),
 
     [LOADING]: (state, action) =>
       produce(state, (draft) => {

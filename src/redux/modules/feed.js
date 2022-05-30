@@ -99,7 +99,9 @@ export const getGroupDB = (category, page = 1, size = 6) => {
 
     try {
       let region = "";
-      category.region ? (region = category.region) : (region = "");
+      category.region && category.region !== "none"
+        ? (region = category.region)
+        : (region = "");
 
       let time = "";
       category?.filterTime?.map((value) => {
