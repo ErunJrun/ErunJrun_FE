@@ -4,12 +4,104 @@ import { Grid, Text } from "../../elements";
 import starIcon from "../../assets/courseFeed/star.svg";
 import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
 import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
-import { bookmarkDB } from "../../redux/modules/course";
+import { bookmarkDB, bookmarkMainDB } from "../../redux/modules/course";
 import { useDispatch } from "react-redux";
 import { history } from "../../redux/configureStore";
 
 const CourseCardMob = (props) => {
   const dispatch = useDispatch();
+
+  if (props.main) {
+    return (
+      <>
+        <Grid
+          width="156px"
+          display="flex"
+          alignItems="center"
+          margin="53px 2px 52px 2px"
+        >
+          <Grid
+            margin="0 0 7px 0"
+            width="156px"
+            display="flex"
+            flexDirection="column"
+          >
+            <Grid cursor="pointer" position="relative" margin="0">
+              <img
+                onClick={() => {
+                  history.push(`/courseDetail/${props.courseId}`);
+                }}
+                style={{
+                  width: "156px",
+                  height: "117px",
+                  position: "relative",
+                  borderRadius: "3px 3px 0 0",
+                }}
+                src={props.courseImageUrl1}
+              />
+              {props.bookmark ? (
+                <BookmarkWhite
+                  onClick={() => {
+                    dispatch(bookmarkMainDB(props.courseId));
+                  }}
+                  src={bookmarkGreen}
+                />
+              ) : (
+                <BookmarkWhite
+                  onClick={() => {
+                    dispatch(bookmarkMainDB(props.courseId));
+                  }}
+                  src={bookmarkWhite}
+                />
+              )}
+
+              <Grid
+                _onClick={() => {
+                  history.push(`/courseDetail/${props.courseId}`);
+                }}
+                width="146px"
+                height="auto"
+                bg="white"
+                borderRadius="6px"
+                padding="8px"
+                position="absolute"
+                left="5px"
+                bottom="-35px"
+                cursor="pointer"
+              >
+                <Text cursor="pointer" margin="0 0 5px 0" size="9px" bold>
+                  {props.title}
+                </Text>
+
+                <Grid
+                  cursor="pointer"
+                  display="flex"
+                  alignItems="center"
+                  margin="0 0 7px 0"
+                >
+                  <img
+                    style={{ width: "7.4px", height: "7px" }}
+                    src={starIcon}
+                  />
+                  <Text size="8px" cursor="pointer" margin="0 4px 0 1.3px" bold>
+                    {props.starPoint}
+                  </Text>
+                  <Text cursor="pointer" margin="0" color="#909090" size="8px">
+                    리뷰 {props.commentCnt}개
+                  </Text>
+                </Grid>
+                <Grid cursor="pointer" display="flex">
+                  <Tag>{props.location}</Tag>
+                  <Tag>{props.distance}km</Tag>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
+
   return (
     <>
       <Grid

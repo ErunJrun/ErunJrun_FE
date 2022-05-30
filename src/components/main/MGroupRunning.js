@@ -9,6 +9,7 @@ import { getMainDB, resetGroup } from "../../redux/modules/feed";
 import MGroupCard from "./MGroupCard";
 import { useMediaQuery } from "react-responsive";
 import readyImage from "../../assets/errorPage.png";
+import CourseCardMob from "../courseFeed/CourseCardMob";
 
 import SwiperCore, { Virtual, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,6 +20,8 @@ import "swiper/css/pagination";
 import "./MGroupSlide.css";
 
 import MGroupCardMob from "./MGroupCardMob";
+import CourseCard from "../courseFeed/CourseCard";
+import { getCourseMainDB } from "../../redux/modules/course";
 
 SwiperCore.use([Virtual, Navigation, Pagination]);
 
@@ -29,6 +32,7 @@ const MGroupRunning = () => {
 
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.feed.main);
+  const courseList = useSelector((state) => state.course.main);
 
   const [swiperRef, setSwiperRef] = useState(null);
 
@@ -42,6 +46,7 @@ const MGroupRunning = () => {
 
   useEffect(() => {
     dispatch(getMainDB());
+    dispatch(getCourseMainDB());
 
     return () => {
       dispatch(resetGroup());
@@ -96,7 +101,7 @@ const MGroupRunning = () => {
             display="flex"
             justifyContent="space-between"
             alignItems="flex-end"
-            margin="0 auto 40px auto"
+            margin="0 auto 16px auto"
           >
             <Grid display="flex" justifyContent="center" margin="0">
               <Grid display="flex" alignItems="flex-end" width="375px">
@@ -106,19 +111,25 @@ const MGroupRunning = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid
-            display="flex"
-            flexDirection="column"
-            width="100%"
-            justifyContent="center"
-            alignItems="center"
-            margin="0 auto"
+
+          <Swiper
+            id="CourseCardSwiperMob"
+            onSwiper={setSwiperRef}
+            slidesPerView={3}
+            centeredSlides={true}
+            spaceBetween={130}
+            navigation={{ clickable: true }}
+            pagination={{ clickable: true }}
+            virtual
           >
-            <img style={{ width: "168px" }} src={readyImage} />
-            <Text margin="0 0 50px 0" size="10px">
-              해당 서비스는 오픈 전입니다. 조금만 기다려주세요!
-            </Text>
-          </Grid>
+            {courseList?.map((item, idx) => {
+              return (
+                <SwiperSlide key={idx} id="CourseCardSlideMob">
+                  <CourseCardMob main={true} {...item} />{" "}
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </Grid>
       </>
     );
@@ -209,7 +220,26 @@ const MGroupRunning = () => {
           </Btn>
         </Grid>
 
-        <CourseBanner src={courseFeedBanner}></CourseBanner>
+        <OpenAnimation>
+          <Swiper
+            id="CourseCardSwiper"
+            onSwiper={setSwiperRef}
+            slidesPerView={3}
+            centeredSlides={true}
+            spaceBetween={10}
+            pagination={true}
+            navigation={true}
+            virtual
+          >
+            {courseList?.map((item, idx) => {
+              return (
+                <SwiperSlide key={idx} id="CourseCardSlide">
+                  <CourseCard main={true} {...item} />{" "}
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </OpenAnimation>
       </Grid>
     </>
   );
