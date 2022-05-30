@@ -84,7 +84,7 @@ const CourseCardMob = (props) => {
                     src={starIcon}
                   />
                   <Text size="8px" cursor="pointer" margin="0 4px 0 1.3px" bold>
-                    {props.starPoint || props.starPoint !== "Nan"
+                    {props.starPoint && props.starPoint !== "Nan"
                       ? props.starPoint
                       : 0}
                   </Text>
@@ -173,7 +173,7 @@ const CourseCardMob = (props) => {
               >
                 <img style={{ width: "7.4px", height: "7px" }} src={starIcon} />
                 <Text size="8px" cursor="pointer" margin="0 4px 0 1.3px" bold>
-                  {props.starPoint || props.starPoint !== "Nan"
+                  {props.starPoint && props.starPoint !== "Nan"
                     ? props.starPoint
                     : 0}
                 </Text>

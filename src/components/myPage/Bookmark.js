@@ -87,7 +87,7 @@ const Bookmark = () => {
                           src={starIcon}
                         />
                         <Text margin="0 10px 0 4px" size="13px" bold>
-                          {feed?.starPoint || feed?.starPoint !== "Nan"
+                          {feed?.starPoint && feed?.starPoint !== "Nan"
                             ? feed?.starPoint
                             : 0}
                         </Text>

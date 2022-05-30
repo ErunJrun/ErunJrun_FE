@@ -90,7 +90,7 @@ const BestCourse = (props) => {
             >
               <img style={{ width: "13px", height: "17px" }} src={starIcon} />
               <Text margin="0 10px 0 4px" size="12px" bold>
-                {props.starPoint || props.starPoint !== "Nan"
+                {props.starPoint && props.starPoint !== "Nan"
                   ? props.starPoint
                   : 0}
               </Text>

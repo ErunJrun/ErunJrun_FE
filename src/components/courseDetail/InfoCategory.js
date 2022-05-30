@@ -184,7 +184,7 @@ const InfoCategory = (props) => {
                   </Text>
                   <StarPoint starPoint={starPoint} starOne={true} />
                   <Text width="auto" margin="8px 0 0 0" size="13px" bold>
-                    {starPoint?.starPoint || starPoint?.starPoint !== "NaN"
+                    {starPoint?.starPoint && starPoint?.starPoint !== "NaN"
                       ? starPoint?.starPoint
                       : "0.0"}{" "}
                     / <span style={{ fontWeight: "500" }}>5.0</span>

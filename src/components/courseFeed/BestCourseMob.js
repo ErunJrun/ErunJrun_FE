@@ -91,7 +91,7 @@ const BestCourseMob = (props) => {
             >
               <img style={{ width: "7.4px", height: "7px" }} src={starIcon} />
               <Text margin="0 2.3px 0 0" size="9px" bold>
-                {props.starPoint || props.starPoint !== "Nan"
+                {props.starPoint && props.starPoint !== "Nan"
                   ? props.starPoint
                   : 0}
               </Text>

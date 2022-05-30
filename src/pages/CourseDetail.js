@@ -260,8 +260,10 @@ const CourseDetail = () => {
                 </Text>
                 <StarPoint starPoint={starPoint} starOne={true} />
                 <Text width="auto" margin="16px 0 0 0" size="20px" bold>
-                  {starPoint?.starPoint ? starPoint?.starPoint : "0.0"} /{" "}
-                  <span style={{ fontWeight: "500" }}>5.0</span>
+                  {starPoint?.starPoint && starPoint?.starPoint !== "NaN"
+                    ? starPoint?.starPoint
+                    : "0.0"}{" "}
+                  / <span style={{ fontWeight: "500" }}>5.0</span>
                   <span style={{ fontSize: "16px", color: "#7b7b7b" }}>
                     {"  "}({starPoint?.starPeople ? starPoint?.starPeople : "0"}
                     )
@@ -345,9 +347,9 @@ const CourseDetail = () => {
                 >
                   <StarPoint starOne={true} />
                   <Text height="auto" width="auto" margin="0" size="20px" bold>
-                    {starPoint?.starPoint || starPoint?.starPoint !== "NaN"
+                    {starPoint?.starPoint && starPoint?.starPoint !== "NaN"
                       ? starPoint?.starPoint
-                      : 5.0}
+                      : 0.0}
                   </Text>
                 </Grid>
               </Grid>
