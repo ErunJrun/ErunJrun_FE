@@ -103,7 +103,7 @@
   <img src="https://img.shields.io/badge/zeplin-FDBD39?style=for-the-badge&logo=zeplin&logoColor=FDBD39"/>
 </p>
 
-### **Tools**
+### **Dev Tools**
 <p>
 <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white"/>
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white"/>
