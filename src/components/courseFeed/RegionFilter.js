@@ -17,7 +17,7 @@ const RegionFilter = (props) => {
     "경상북도 / 대구광역시",
     "경상남도 / 부산광역시 / 울산광역시",
     "전라도 / 광주광역시",
-    "제주특별자치시",
+    "제주특별자치도",
   ]);
   const [checkedRegion, setCheckedRegion] = useState("전국");
 

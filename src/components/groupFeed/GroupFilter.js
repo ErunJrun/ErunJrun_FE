@@ -38,7 +38,7 @@ const GroupFilter = (props) => {
     "경상북도 / 대구광역시",
     "경상남도 / 부산광역시 / 울산광역시",
     "전라도 / 광주광역시",
-    "제주특별자치시",
+    "제주특별자치도",
   ]);
 
   const [distanceTag, setDistanceTag] = useState([
@@ -133,7 +133,7 @@ const GroupFilter = (props) => {
                 <option value="6">경상북도 / 대구광역시</option>
                 <option value="7">경상남도 / 부산광역시 / 울산광역시</option>
                 <option value="8">전라도 / 광주광역시</option>
-                <option value="9">제주특별자치시</option>
+                <option value="9">제주특별자치도</option>
               </RegionSelect>
             </Grid>
           </Grid>

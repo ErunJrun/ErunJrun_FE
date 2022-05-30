@@ -129,7 +129,7 @@ const RegionFilterMob = () => {
           onClick={() => {
             history.push(`/coursefeed/9`);
           }}
-          label="제주특별자치시"
+          label="제주특별자치도"
         />
       </StyledTabs>
     </Box>
