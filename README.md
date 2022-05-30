@@ -137,12 +137,12 @@
 | React-share            | SNS 공유하기            |4.4.0|
 | Dayjs                  | 날짜, 시간 라이브러리   |1.11.0|
 | react-scroll           | 스크롤                  |1.8.7|
-| react-bootstrap           |                   |2.3.1|
-| react-date-range           |                   |1.4.0|
-| react-datepicker           |                |4.7.0|
-| react-intersection-observer           |                |9.1.0|
-| react-kakao-maps-sdk           |                |1.0.6|
-| react-photo-collage           |                |1.0.9|
+| react-date-range       | 달력 날짜 범위          |1.4.0|
+| react-datepicker       | 캘린더                  |4.7.0|
+| react-intersection-observer | 무한 스크롤        |9.1.0|
+| react-kakao-maps-sdk   | 카카오 지도             |1.0.6|
+| react-photo-collage    | 이미지 레이아웃 편집    |1.0.9|
+| lodash                 | 데이터 구조             |4.17.21|
  <br>
  
  ## 🖥 Core tech
