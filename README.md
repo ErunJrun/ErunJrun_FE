@@ -116,23 +116,6 @@
 ## 📚 라이브러리 
 | Name                | Appliance               | Version  |
 | :-----------------: | :---------------------: | :------: |
-| bcrypt              | 비밀번호 암호화         |5.0.1|
-| cors                   | CORS 핸들링             |2.8.5|
-| dotenv                 | 환경변수 설정           |16.0.0|
-| helmet                 | HTTP header 보안        |5.0.2|
-| joi                    | validator               |17.6.0|
-| mongoose               | MongoDB ODM             |6.3.2|
-| jsonwebtoken           | JWT토큰 발급            |8.5.1|
-| passport               | node.js authentication  |0.5.2|
-| passport-kakao         | 카카오 로그인 모듈      |1.0.1|
-| multer                 | 파일 업로드             |1.4.4|
-| multer-s3              | AWS S3 파일 업로드      |2.10.0|
-| ffmpeg                 | 파일 변환               |2.1.2|
-| socket.io              | 실시간 알림             |4.5.1|
-| morgan                 | HTTP 요청 로그 관리     |1.10.0|
-| winston                | 전체 서비스 로그 관리   |3.7.2|
-| jest                   | 테스트코드              |28.1.0|
-| artillery	             | 퍼포먼스 테스팅 툴      |2.0.0-17|
 | swiper	               | 슬라이드                |2.1.2|
 | sweetalert	           | 에러 메세지 핸들링      |2.1.2|
 | styled-components	     | 컴포넌트 스타일링       |5.3.5|
@@ -151,9 +134,14 @@
 | react-icons            | 아이콘                  |4.3.1|
 | react-responsive       | 반응형 웹               |9.0.0-beta.6|
 | React-share            | SNS 공유하기            |4.4.0|
-| React-copy-to-clipboard | URL 복사               |5.4.0|
-| socket.io-client       | 웹소켓 라이브러리       |4.4.1|
 | Dayjs                  | 날짜, 시간 라이브러리   |1.11.0|
+| react-scroll           | 스크롤                  |1.8.7|
+| react-bootstrap           |                   |2.3.1|
+| react-date-range           |                   |1.4.0|
+| react-datepicker           |                |4.7.0|
+| react-intersection-observer           |                |9.1.0|
+| react-kakao-maps-sdk           |                |1.0.6|
+| react-photo-collage           |                |1.0.9|
  <br>
  
  ## 🖥 Core tech
