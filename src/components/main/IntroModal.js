@@ -109,14 +109,18 @@ function SwipeableTextMobileStepper() {
     (isMobile && introModal === null)
   ) {
     return (
-      <Grid margin="0 0 1000px 0">
+      <Grid   
+        display="flex"
+        justifyContent="center"
+        width="355px"
+      >
         {modal && (
           <MOverlaye>
             <MWrap>
               <Box
                 sx={{
-                  maxWidth: "100%",
-                  height: "100%",
+                  width: "355px",
+                  height: "667px",
                   flexGrow: 1,
                   zIndex: "3",
                 }}
@@ -134,10 +138,10 @@ function SwipeableTextMobileStepper() {
                         <Box
                           component="img"
                           sx={{
-                            height: "100%",
+                            height: "788px",
                             display: "block",
                             overflow: "hidden",
-                            width: "100%",
+                            width: "355px",
                           }}
                           src={step.imgPath}
                           alt={step.label}
@@ -330,8 +334,11 @@ const Wrap = styled.div`
 
 const MWrap = styled.div`
   z-index: 3;
-  width: 100%;
+  width: 355px;
   text-align: center;
+  margin: 20px auto;
+  display:flex;
+  justify-content:center;
 `;
 
 const Btn = styled.div`
@@ -348,7 +355,7 @@ const MBtn = styled.div`
   position: relative;
   font-size: 11px;
   font-weight: 500;
-  top: -1028px;
+  top: -973px;
   left: 20px;
   width: 75px;
   padding-top: 3px;

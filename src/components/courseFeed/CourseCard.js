@@ -64,7 +64,13 @@ const CourseCard = (props) => {
                 bottom="-45px"
                 cursor="pointer"
               >
-                <Text cursor="pointer" margin="0 0 4px 0" size="18px" bold>
+                <Text
+                  hiddenText
+                  cursor="pointer"
+                  margin="0 0 4px 0"
+                  size="18px"
+                  bold
+                >
                   {props.title}
                 </Text>
 
@@ -157,7 +163,13 @@ const CourseCard = (props) => {
               bottom="-45px"
               cursor="pointer"
             >
-              <Text cursor="pointer" margin="0 0 4px 0" size="18px" bold>
+              <Text
+                hiddenText
+                cursor="pointer"
+                margin="0 0 4px 0"
+                size="18px"
+                bold
+              >
                 {props.title}
               </Text>
 

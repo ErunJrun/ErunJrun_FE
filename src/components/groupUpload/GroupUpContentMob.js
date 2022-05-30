@@ -296,7 +296,7 @@ const GroupContentMob = (props) => {
                 onChange={(e) => {
                   setMaxPeople(e.target.value);
                 }}
-                value={maxPeople}
+                value={maxPeople || "null"}
               >
                 <option style={{ color: "#818181" }} value="null">
                   모집 인원을 입력해주세요.(최대 20명)

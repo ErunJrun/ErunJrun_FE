@@ -78,7 +78,13 @@ const BestCourse = (props) => {
             bottom="-41px"
             left="15px"
           >
-            <Text cursor="pointer" margin="0 0 4px 0" size="14px" bold>
+            <Text
+              hiddenText
+              cursor="pointer"
+              margin="0 0 4px 0"
+              size="14px"
+              bold
+            >
               {props.title}
             </Text>
 

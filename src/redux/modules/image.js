@@ -52,6 +52,7 @@ export default handleActions(
     [RESET_FILE]: (state, action) =>
       produce(state, (draft) => {
         draft.files = [];
+        draft.show = [];
       }),
   },
   initialState
