@@ -91,6 +91,7 @@
 <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
 <img src="https://img.shields.io/badge/amazonamplify-orange?style=for-the-badge&logo=amazonsamplify&logoColor=white"> 
 <img src="https://img.shields.io/badge/route53-F7A81B?style=for-the-badge&logo=route53&logoColor=white">
+<img src="https://img.shields.io/badge/SweetAlert2-362D59?style=for-the-badge&logo=SweetAlert2&logoColor=black">
 <br>
 </p>
 
@@ -113,33 +114,36 @@
 ## 📚 라이브러리 
 | Name                | Appliance               | Version  |
 | :-----------------: | :---------------------: | :------: |
-<!-- | bcrypt              | 비밀번호 암호화         |5.0.1|
-| cors                | CORS 핸들링             |2.8.5|
-| dotenv              | 환경변수 설정           |16.0.0|
-| helmet              | HTTP header 보안        |5.0.2|
-| joi                 | validator               |17.6.0|
-| mongoose            | MongoDB ODM             |6.3.2|
-| jsonwebtoken        | JWT토큰 발급            |8.5.1|
-| passport            | node.js authentication  |0.5.2|
-| passport-kakao      | 카카오 로그인 모듈      |1.0.1|
-| multer              | 파일 업로드             |1.4.4|
-| multer-s3           | AWS S3 파일 업로드      |2.10.0|
-| ffmpeg              | 파일 변환               |2.1.2|
-| socket.io           | 실시간 알림             |4.5.1|
-| morgan              | HTTP 요청 로그 관리     |1.10.0|
-| winston             | 전체 서비스 로그 관리   |3.7.2|
-| jest                |  테스트코드             |28.1.0|
-| artillery	          |  퍼포먼스 테스팅 툴     |2.0.0-17|
-| swiper	            |  슬라이드               |2.1.2|
-| sweetalert	        |  에러 메세지 핸들링     |2.1.2|
-| styled-components	  |  컴포넌트 스타일링      |5.3.5|
-| Redux               |  상태 관리              |4.2.0|
-| axios               |  서버통신               |0.26.1|
-| React-router-dom	  |  라우터                 |5.3.0|
-| Redux-thunk	        |  리덕스 미들웨어        |2.4.1|
-| Redux-actions	      |  액션 관리              |2.6.5|
-| Immer	              |  불변성 유지            |9.0.12|
-| express-rate-limit  | API 사용량 제한(보안)   |6.4.0| -->
+| bcrypt              | 비밀번호 암호화         |5.0.1|
+| cors                   | CORS 핸들링             |2.8.5|
+| dotenv                 | 환경변수 설정           |16.0.0|
+| helmet                 | HTTP header 보안        |5.0.2|
+| joi                    | validator               |17.6.0|
+| mongoose               | MongoDB ODM             |6.3.2|
+| jsonwebtoken           | JWT토큰 발급            |8.5.1|
+| passport               | node.js authentication  |0.5.2|
+| passport-kakao         | 카카오 로그인 모듈      |1.0.1|
+| multer                 | 파일 업로드             |1.4.4|
+| multer-s3              | AWS S3 파일 업로드      |2.10.0|
+| ffmpeg                 | 파일 변환               |2.1.2|
+| socket.io              | 실시간 알림             |4.5.1|
+| morgan                 | HTTP 요청 로그 관리     |1.10.0|
+| winston                | 전체 서비스 로그 관리   |3.7.2|
+| jest                   |  테스트코드             |28.1.0|
+| artillery	             |  퍼포먼스 테스팅 툴     |2.0.0-17|
+| swiper	               |  슬라이드               |2.1.2|
+| sweetalert	           |  에러 메세지 핸들링     |2.1.2|
+| styled-components	     |  컴포넌트 스타일링      |5.3.5|
+| Redux                  |  상태 관리              |4.2.0|
+| axios                  |  서버통신               |0.26.1|
+| React-redux	           |  상태관리               |8.0.1|
+| React-router-dom	     |  라우터                 |5.3.0|
+| Redux-thunk	           |  리덕스 미들웨어        |2.4.1|
+| Redux-actions	         |  액션 관리              |2.6.5|
+| Connected-react-router |  히스토리 객체 관리     |6.9.2|
+| Immer	                 |  불변성 유지            |9.0.12|
+| History	               |  페이지 이동            |4.10.1|
+| express-rate-limit     | API 사용량 제한(보안)   |6.4.0|
 <br>
    
 ## 🚀 트러블 슈팅
@@ -162,4 +166,6 @@
       <p><img src="https://user-images.githubusercontent.com/100390926/170860580-a00d7ab8-5088-4a9e-991c-1d53fea939d1.png" /></p>
 </details>
 
-
+## 🌸 More Info
+[🌿 프로젝트 소개 문서]  
+[💾 와이어프레임](https://www.figma.com/file/KHfXRCNHENbZ7PBS1DYT7O/%EC%9D%B4RUN%EC%A0%80RUN?node-id=0%3A1)  
