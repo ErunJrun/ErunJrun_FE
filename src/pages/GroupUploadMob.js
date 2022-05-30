@@ -33,7 +33,6 @@ const GroupUploadMob = () => {
 
   const location = useSelector((state) => state.uploadInfo.paths);
   const distance = useSelector((state) => state.uploadInfo.distance);
-  console.log(distance);
   const finalDistance = (distance * repeatCnt).toFixed(2);
   const contents = useSelector((state) => state.uploadInfo.contents);
   const thumbnail = useSelector((state) => state.image.files);
@@ -289,7 +288,7 @@ const GroupUploadMob = () => {
                       style={{ width: "50%" }}
                       type="text"
                       placeholder="반복 횟수(1~99회)"
-                      value={repeatCnt || 1}
+                      value={repeatCnt || ""}
                       onChange={(e) => {
                         checkNumber(e);
                       }}

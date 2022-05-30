@@ -14,8 +14,6 @@ const TimePickers = (props) => {
   const [inputValue, setInputValue] = useState("");
 
   const testHandler = useCallback(({ detail: { hour, minutes, type } }) => {
-    console.log(hour, minutes, type);
-
     if (type === "PM") {
       standbyTimePick(Number(`${hour}`) + 12 + ":" + `${minutes}`);
       setInputValue(Number(`${hour}`) + 12 + ":" + `${minutes}`);
@@ -26,9 +24,6 @@ const TimePickers = (props) => {
       setInputValue(`${hour}:${minutes}`);
     }
   }, []);
-
-  console.log(inputValue);
-  console.log(props.date);
 
   //스탠바이 시간 선택
   const standbyTimePick = (time) => {

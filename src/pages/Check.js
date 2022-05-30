@@ -30,8 +30,6 @@ const Check = () => {
 
   const check_list = useSelector((state) => state.mypage.attend);
 
-  console.log(check_list);
-
   const [userId, setUserId] = useState([]);
 
   const choiceTime = (e, index) => {
@@ -161,7 +159,6 @@ const Check = () => {
 
           <_Btn
             onClick={() => {
-           
               dispatch(patchAttendDB(groupId, userId, id));
             }}
           >
@@ -210,7 +207,7 @@ const Check = () => {
         </Leader>
 
         {check_list?.applyUser?.map((applyUser, index) => (
-          <UserBox key={index} >
+          <UserBox key={index}>
             <Grid display="flex" margin="32px 0 0 20px">
               <Image src={applyUser.user.profileUrl} />
               <Text bold size="16px" margin="21px 0 0 25px">
@@ -235,7 +232,6 @@ const Check = () => {
 
         <Btn
           onClick={() => {
-     
             dispatch(patchAttendDB(groupId, userId));
           }}
         >
@@ -291,7 +287,7 @@ const _Leader = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 375px;
-  margin-bottom:24px;
+  margin-bottom: 24px;
 `;
 
 const MyImage = styled.img`

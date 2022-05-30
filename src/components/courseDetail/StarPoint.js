@@ -15,8 +15,6 @@ const StarPoint = (props) => {
     props?.starPoint?.myStarPoint
   );
   const starPointList = useSelector((state) => state.course.starPoint);
-  console.log(starPointList);
-  console.log(myStarPoint);
 
   const token = getCookie("accessToken");
 

@@ -23,16 +23,12 @@ const CommentList = (props) => {
   const groupId = params?.groupId;
   const courseId = params?.courseId;
 
-  console.log(groupId);
-
   React.useEffect(() => {
     if (props.course) {
-      console.log("코멘트 리스트 코스 코멘트");
       dispatch(resetComm());
       dispatch(_getCommentFX("course", courseId));
     }
     if (!props.course) {
-      console.log("코멘트 리스트 그룹 코멘트");
       dispatch(resetComm());
       dispatch(_getCommentFX("group", groupId));
     }

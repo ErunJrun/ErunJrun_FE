@@ -16,7 +16,6 @@ const CrewLeaderInfo = (props) => {
   });
 
   const detailCourse = useSelector((state) => state.course.detail);
-  console.log(detailCourse);
 
   if (isMobile) {
     return (

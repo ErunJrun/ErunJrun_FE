@@ -42,8 +42,6 @@ const CourseUpload = () => {
 
   const [address, setAddress] = useState("");
 
-  console.log(distance, location, contents, thumbnail);
-
   const lat = location[0]?.lat;
   const lng = location[0]?.lng;
 

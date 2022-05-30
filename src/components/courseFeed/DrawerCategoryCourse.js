@@ -31,7 +31,6 @@ const DrawerCategoryCourse = () => {
   });
 
   useEffect(() => {
-    console.log("정렬 초기화");
     dispatch(resetCourse());
     setFilter("최신순");
   }, [region]);

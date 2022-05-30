@@ -130,12 +130,10 @@ export const getCourseDB = (region = 0, sort = "new", page = 1, size = 6) => {
       const { data } = await api.get(
         `/course/all?region=${region}&sort=${sort}&page=${page}&size=${size}`
       );
-      console.log(data);
       let paging = {
         page: data.data.feed.length === size ? page + 1 : null,
         size: size,
       };
-      console.log(paging);
       dispatch(getCourse(data, paging));
     } catch (error) {
       // console.log(error);
@@ -147,11 +145,10 @@ export const getCourseMainDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await api.get(`/course/main`);
-      console.log(data);
 
       dispatch(getCourseMain(data.data.feed));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -173,12 +170,10 @@ export const getCourseRegionDB = (
       const { data } = await api.get(
         `/course/all?region=${region}&sort=${sort}&page=${page}&size=${size}`
       );
-      console.log(data);
       let paging = {
         page: data.data.feed.length === size ? page + 1 : null,
         size: size,
       };
-      console.log(paging);
       dispatch(getCourseRegion(data, paging));
     } catch (error) {
       // console.log(error);
@@ -189,9 +184,7 @@ export const getCourseRegionDB = (
 export const bookmarkDB = (courseId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(courseId);
       const { data } = await api.patch(`/course/${courseId}/bookmark`);
-      console.log(data);
 
       let bookmarkState = {
         bookmark: data.data.bookmark,
@@ -200,7 +193,7 @@ export const bookmarkDB = (courseId) => {
 
       dispatch(bookmark(bookmarkState));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -208,9 +201,7 @@ export const bookmarkDB = (courseId) => {
 export const bookmarkMainDB = (courseId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(courseId);
       const { data } = await api.patch(`/course/${courseId}/bookmark`);
-      console.log(data);
 
       let bookmarkState = {
         bookmark: data.data.bookmark,
@@ -219,7 +210,7 @@ export const bookmarkMainDB = (courseId) => {
 
       dispatch(bookmarkMain(bookmarkState));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -227,13 +218,11 @@ export const bookmarkMainDB = (courseId) => {
 export const bookmarkDetailDB = (courseId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(courseId);
       const { data } = await api.patch(`/course/${courseId}/bookmark`);
-      console.log(data);
 
       dispatch(bookmarkDetail(data.data.bookmark));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -241,9 +230,7 @@ export const bookmarkDetailDB = (courseId) => {
 export const bookmarkRankingDB = (courseId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(courseId);
       const { data } = await api.patch(`/course/${courseId}/bookmark`);
-      console.log(data);
 
       let bookmarkState = {
         bookmark: data.data.bookmark,
@@ -252,7 +239,7 @@ export const bookmarkRankingDB = (courseId) => {
 
       dispatch(bookmarkRanking(bookmarkState));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -260,13 +247,11 @@ export const bookmarkRankingDB = (courseId) => {
 export const getCourseDetailDB = (courseId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(courseId);
       const { data } = await api.get(`/course/detail/${courseId}`);
-      console.log(data.data);
       dispatch(getCourseDetail(data.data));
     } catch (error) {
-      console.log(error);
-      swal("해당 게시물이 존재하지 않습니다");
+      // console.log(error);
+      // swal("해당 게시물이 존재하지 않습니다");
     }
   };
 };
@@ -274,12 +259,10 @@ export const getCourseDetailDB = (courseId) => {
 export const getStarPointDB = (courseId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(courseId);
       const { data } = await api.get(`/course/${courseId}/starPoint`);
-      console.log(data.data);
       dispatch(starPoint(data.data));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -287,7 +270,6 @@ export const getStarPointDB = (courseId) => {
 export const patchStarPointDB = (courseId, myStarPoint) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(courseId, myStarPoint);
       const { data } = await api.patch(`/course/${courseId}/starPoint`, {
         myStarPoint: myStarPoint,
       });
@@ -299,7 +281,7 @@ export const patchStarPointDB = (courseId, myStarPoint) => {
       };
       dispatch(starPoint(newData));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -312,7 +294,6 @@ export const addCourseDB = (
   distance
 ) => {
   return async function (dispatch, getState, { history }) {
-    console.log(mapLatLng, courseImage, contents, address, distance);
     const formData = new FormData();
     courseImage?.map((e, idx) => {
       return formData.append("courseImage", e);
@@ -332,30 +313,26 @@ export const addCourseDB = (
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data);
       swal("게시물 등록 완료", "", "success");
-      console.log("1");
       history.replace("/courseFeed/0");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
 
 export const deleteCourseDB = (courseId) => {
   return function (dispatch, getState, { history }) {
-    console.log(courseId);
     api
       .delete(`/course/${courseId}`)
       .then((res) => {
-        console.log(res);
         swal("삭제 완료");
 
         history.push("/courseFeed/0");
       })
 
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 };
@@ -382,7 +359,6 @@ export default handleActions(
 
     [GET_COURSE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action);
         draft.rankingFeed = action.courseList.data.rankingFeed;
         draft.preferData = action.courseList.preferData;
         draft.list.push(...action.courseList.data.feed);
@@ -394,13 +370,11 @@ export default handleActions(
 
     [GET_COURSE_MAIN]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.main = action.payload;
       }),
 
     [GET_COURSE_REGION]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action);
         draft.list.push(...action.courseList.data.feed);
         draft.isLoading = false;
         if (action.paging) {
@@ -431,7 +405,6 @@ export default handleActions(
 
     [BOOKMARK_MAIN]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         const newList = state.main.map((e) => {
           if (action.payload.courseId === e.courseId) {
             if (action.payload.bookmark === true) {
@@ -469,7 +442,6 @@ export default handleActions(
 
     [GET_COURSE_DETAIL]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.detail = action.payload;
       }),
 

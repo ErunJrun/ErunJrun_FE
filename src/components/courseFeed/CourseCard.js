@@ -10,7 +10,6 @@ import { history } from "../../redux/configureStore";
 
 const CourseCard = (props) => {
   const dispatch = useDispatch();
-  console.log(props);
 
   if (props.main) {
     return (

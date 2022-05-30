@@ -77,8 +77,6 @@ const GroupFeed = () => {
   const isLoading = useSelector((state) => state.feed.isLoading);
   const paging = useSelector((state) => state.feed.paging);
 
-  console.log(paging);
-
   const allGroup = () => {
     dispatch(resetGroup());
     dispatch(getAllDB(paging.page + 1, 6));

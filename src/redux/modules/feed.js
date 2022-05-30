@@ -160,7 +160,6 @@ export const getAllDB = (page = 1, size = 6) => {
 
     try {
       const { data } = await api.get(`/group/all?page=${page}&size=${size}`);
-      console.log(data);
 
       let paging = {
         page: data.data.length === size ? page + 1 : null,
@@ -184,7 +183,6 @@ export const getPreferDB = (page = 1, size = 6) => {
 
     try {
       const { data } = await api.get(`/group/prefer?page=${page}&size=${size}`);
-      console.log(data);
 
       let paging = {
         page: data.data.length === size ? page + 1 : null,

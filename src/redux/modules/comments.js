@@ -89,7 +89,7 @@ export const _addCommentFX = (category, categoryId, content) => {
 
       dispatch(addComm(comment_list));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };

@@ -37,7 +37,9 @@ const Header = () => {
   const isGroupDetail = path.slice(1, 12) === "groupdetail" ? true : false;
   const isHome = path === "/";
   const isGroup = path === "/groupfeed";
+  const isGroupUpload = path === "/groupupload";
   const isCourse2 = path.slice(0, 11) === "/coursefeed" ? true : false;
+  const isCourseUpload = path === "/courseUpload";
   const isCourse =
     path.slice(0, 11) === "/coursefeed" || path.slice(0, 11) === "/courseDeta"
       ? true
@@ -211,7 +213,7 @@ const Header = () => {
                       추천 코스
                     </Btn>
                   </>
-                ) : isGroup || isGroupDetail ? (
+                ) : isGroup || isGroupDetail || isGroupUpload ? (
                   <>
                     <Btn
                       onClick={() => {
@@ -237,7 +239,7 @@ const Header = () => {
                       추천 코스
                     </Btn>
                   </>
-                ) : isCourse ? (
+                ) : isCourse || isCourseUpload ? (
                   <>
                     <Btn
                       onClick={() => {
@@ -386,7 +388,7 @@ const Header = () => {
                     추천 코스
                   </Btn>
                 </>
-              ) : isGroup ? (
+              ) : isGroup || isGroupUpload || isGroupDetail ? (
                 <>
                   <Btn
                     onClick={() => {
@@ -412,7 +414,7 @@ const Header = () => {
                     추천 코스
                   </Btn>
                 </>
-              ) : isCourse ? (
+              ) : isCourse || isCourseUpload ? (
                 <>
                   <Btn
                     onClick={() => {

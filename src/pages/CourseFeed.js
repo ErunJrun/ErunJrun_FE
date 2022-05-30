@@ -47,15 +47,12 @@ const CourseFeed = () => {
   const [swiperRef, setSwiperRef] = useState(null);
   const params = useParams();
   const region = params.region;
-  console.log(region);
 
   const courseList = useSelector((state) => state.course.list);
   const rankingFeed = useSelector((state) => state.course.rankingFeed);
   const preferData = useSelector((state) => state.course.preferData);
 
   const paging = useSelector((state) => state.course.paging);
-  console.log(courseList);
-  console.log(paging);
 
   const [newCheck, setNewCheck] = useState(true);
   const [starCheck, setStarCheck] = useState(false);
@@ -102,7 +99,6 @@ const CourseFeed = () => {
   const [uploadBtn, setUploadBtn] = useState(false);
 
   useEffect(() => {
-    console.log("코스 실행");
     dispatch(getCourseDB(region, "new"));
     setNewCheck(true);
     setStarCheck(false);
@@ -110,7 +106,6 @@ const CourseFeed = () => {
     setBookCheck(false);
 
     return () => {
-      console.log("코스 클린업");
       dispatch(resetCourse());
     };
   }, [region]);

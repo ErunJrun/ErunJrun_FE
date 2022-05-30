@@ -127,8 +127,6 @@ function KakaoMap() {
 
   const DistanceInfo = ({ distance }) => {
     const runningTime = (distance / 100) | 0;
-    console.log(runningTime);
-    console.log(distance);
 
     return (
       <Final className="dotOverlay distanceInfo">

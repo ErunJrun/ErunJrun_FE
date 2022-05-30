@@ -14,7 +14,7 @@ const CalendarFilter = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
-  console.log(props);
+
   // const [dateRange, setDateRange] = useState(["", ""]);
   // const [startDate, endDate] = dateRange;
 
@@ -25,7 +25,7 @@ const CalendarFilter = (props) => {
 
   const onChange = (dates) => {
     const [start, end] = dates;
-    console.log(start, end);
+
     setStartDate(start);
     setEndDate(end);
     if (end) {
@@ -34,7 +34,6 @@ const CalendarFilter = (props) => {
   };
 
   const onChange2 = (e) => {
-    console.log(e);
     setUploadDate(e);
     if (uploadDate) {
       setIsCalendarOpen(false);
@@ -44,8 +43,6 @@ const CalendarFilter = (props) => {
   const _startDate = formatDate(startDate);
   const _endDate = formatDate(endDate);
   const _uploadDate = formatDate(uploadDate);
-
-  console.log(uploadDate, _uploadDate);
 
   const koStartDate = dayjs(_startDate).format("YYYY년 M월 D일");
   const koEndDate = dayjs(_endDate).format("YYYY년 M월 D일");

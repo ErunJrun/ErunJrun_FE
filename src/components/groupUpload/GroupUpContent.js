@@ -69,7 +69,6 @@ const GroupContent = (props) => {
       if (dayjs().add(6, "hour").format("HH:mm") < dayjs().format("HH:mm")) {
         swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
         setStandbyTime("");
-        console.log(e);
       }
 
       if (e.target.value < dayjs().add(6, "hour").format("HH:mm")) {
@@ -192,8 +191,6 @@ const GroupContent = (props) => {
     checkedType,
     chattingRoom,
   ]);
-
-  console.log(contentsList);
 
   return (
     <>

@@ -11,12 +11,10 @@ const RegionFilterMob = () => {
 
   const params = useParams();
   const region = Number(params.region);
-  console.log(region);
 
   // const handleChange = (event, newValue) => {
   //   setValue(newValue);
   // };
-  console.log(value);
 
   const StyledTab = muiStyled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({

@@ -35,15 +35,12 @@ const GroupUpload = () => {
 
   const location = useSelector((state) => state.uploadInfo.paths);
   const distance = useSelector((state) => state.uploadInfo.distance);
-  console.log(distance);
   const finalDistance = (distance * repeatCnt).toFixed(2);
   const contents = useSelector((state) => state.uploadInfo.contents);
   const thumbnail = useSelector((state) => state.image.files);
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const [address, setAddress] = useState("");
-
-  console.log(contents);
 
   const lat = location[0]?.lat;
   const lng = location[0]?.lng;
@@ -77,7 +74,6 @@ const GroupUpload = () => {
 
   const a = "https://open.kakao.com/o/gbS50Dfe";
   const b = "open.kakao";
-  console.log(a.includes(b) ? true : false);
 
   // cosnt chattingRoomCheck = contents.chattingRoom.slice(6,)
   const goNext3 = () => {
@@ -222,7 +218,7 @@ const GroupUpload = () => {
                       <RepeatInput
                         type="text"
                         placeholder="반복 횟수(1~99회)"
-                        value={repeatCnt || 1}
+                        value={repeatCnt || ""}
                         onChange={(e) => {
                           checkNumber(e);
                         }}
