@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid, Image, IconButton } from "../../elements";
 import { bookmarkDB } from "../../redux/modules/course";
@@ -11,76 +11,72 @@ import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
 import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
 
 const MobileCourse = () => {
-    const isMobile = useMediaQuery({
-        query: "(max-width:820px)",
-      });
+  const isMobile = useMediaQuery({
+    query: "(max-width:820px)",
+  });
 
-    const dispatch = useDispatch();
-    const bookmark = useSelector((state) => state.mypage.mybook);
+  const dispatch = useDispatch();
+  const bookmark = useSelector((state) => state.mypage.mybook);
 
-    if(isMobile) {
-      return (
-        <>
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          zIndex="3"
+          bg="#ffffff"
+          justifyContent="center"
+          alignItems="center"
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="54px"
+          display="flex"
+          padding="10px 10px"
+          margin="0 auto"
+          boxShadow=" 0px 0px 30px #eee"
+        >
           <Grid
-            zIndex="3"
-            bg="#ffffff"
-            justifyContent="center"
+            display="flex"
+            width="375px"
+            justifyContent="left"
             alignItems="center"
-            position="fixed"
-            top="0"
-            left="0"
-            width="100%"
-            height="54px"
-            display="flex"
-            padding="10px 10px"
-            margin="0 auto"
-            boxShadow=" 0px 0px 30px #eee"
           >
-            <Grid
-                display="flex"
-                width="375px"
-                justifyContent="left"
-                alignItems="center"
-            >
-              <img
-                style={{ width: "10px", margin: "0 15px" }}
-                src={backBtn}
-                onClick={() => {
-                  history.go(-1);
-                }}
-              />
-              <Text 
-                margin="0 0 0 125px" 
-                bold 
-                size="16px"
-              >
-                북마크
-              </Text>
-            </Grid>
-          </Grid> 
+            <img
+              style={{ width: "10px", margin: "0 15px" }}
+              src={backBtn}
+              onClick={() => {
+                history.go(-1);
+              }}
+            />
+            <Text margin="0 0 0 125px" bold size="16px">
+              북마크
+            </Text>
+          </Grid>
+        </Grid>
 
-          <Grid
-            width="368px"
-            display="flex"
-            justifyContent="space-between"
-            padding="0 11px"
-            margin="88px auto 100px auto "
-          >
-            {bookmark.data.feed.length === 0 ? 
-              <Box>북마크한 게시물이 없습니다</Box>
-            :
-              <>
-                {bookmark?.data?.feed?.map((feed, index) => {
-                  return (
-                    <Grid 
-                      key={index}
-                      width="168px" 
-                      display="flex"
-                      alignItems="center" 
-                      _onClick={() => {
-                        history.push(`/courseDetail/${feed?.courseId}`);
+        <Grid
+          width="368px"
+          display="flex"
+          justifyContent="space-between"
+          padding="0 11px"
+          margin="88px auto 100px auto "
+        >
+          {bookmark.data.feed.length === 0 ? (
+            <Box>북마크한 게시물이 없습니다</Box>
+          ) : (
+            <>
+              {bookmark?.data?.feed?.map((feed, index) => {
+                return (
+                  <Grid
+                    key={index}
+                    width="168px"
+                    display="flex"
+                    alignItems="center"
+                    _onClick={() => {
+                      history.push(`/courseDetail/${feed?.courseId}`);
                     }}
-                    >
+                  >
                     <Grid
                       margin="0 0 75px 0"
                       width="100%"
@@ -90,28 +86,28 @@ const MobileCourse = () => {
                       <Grid position="relative">
                         <img
                           style={{
-                          width: "168px",
-                          height: "126px",
-                          position: "relative",
-                          borderRadius: "3px 3px 0 0",
-                        }}
+                            width: "168px",
+                            height: "126px",
+                            position: "relative",
+                            borderRadius: "3px 3px 0 0",
+                          }}
                           src={feed.courseImageUrl1}
                         />
-                        {feed?.bookmark ? ( 
+                        {feed?.bookmark ? (
                           <BookmarkWhite
                             onClick={() => {
-                            dispatch(bookmarkDB(feed?.courseId));
+                              dispatch(bookmarkDB(feed?.courseId));
                             }}
                             src={bookmarkGreen}
-                        />
-                        ) : ( 
+                          />
+                        ) : (
                           <BookmarkWhite
                             onClick={() => {
-                            dispatch(bookmarkDB(feed?.courseId));
+                              dispatch(bookmarkDB(feed?.courseId));
                             }}
                             src={bookmarkWhite}
                           />
-                        )} 
+                        )}
 
                         <Grid
                           width="156px"
@@ -123,35 +119,42 @@ const MobileCourse = () => {
                           left="6px"
                           bottom="-45px"
                         >
-                        <Text margin="0 0 4px 0" size="9px" bold>
-                          {feed.title}
-                        </Text>
+                          <Text margin="0 0 4px 0" size="9px" bold>
+                            {feed.title}
+                          </Text>
 
-                        <Grid display="flex" alignItems="center" margin="10px 0 8px 0">
-                          <img style={{ width: "7.4px", height: "7px" }} src={starIcon} />
-                          <Text margin="0 10px 0 4px"size="8px" bold>
-                            {feed?.starPoint}
-                          </Text>
-                          <Text margin="0" color="#909090" size="8px">
-                            리뷰{feed?.commentCnt}개
-                          </Text>
-                        </Grid>
-                        <Grid cursor="pointer" display="flex">
-                          <Tag>{feed?.location}</Tag>
-                          <Tag>{feed?.distance}km</Tag>
+                          <Grid
+                            display="flex"
+                            alignItems="center"
+                            margin="10px 0 8px 0"
+                          >
+                            <img
+                              style={{ width: "7.4px", height: "7px" }}
+                              src={starIcon}
+                            />
+                            <Text margin="0 10px 0 4px" size="8px" bold>
+                              {feed?.starPoint}
+                            </Text>
+                            <Text margin="0" color="#909090" size="8px">
+                              리뷰{feed?.commentCnt}개
+                            </Text>
+                          </Grid>
+                          <Grid cursor="pointer" display="flex">
+                            <Tag>{feed?.location}</Tag>
+                            <Tag>{feed?.distance}km</Tag>
+                          </Grid>
                         </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
-                )
+                );
               })}
             </>
-          }  
+          )}
         </Grid>
       </>
-    );  
-  }   
+    );
+  }
 };
 
 const Box = styled.div`

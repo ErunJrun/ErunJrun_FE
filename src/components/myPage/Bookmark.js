@@ -87,7 +87,9 @@ const Bookmark = () => {
                           src={starIcon}
                         />
                         <Text margin="0 10px 0 4px" size="13px" bold>
-                          {feed?.starPoint}
+                          {feed?.starPoint || feed?.starPoint !== "Nan"
+                            ? feed?.starPoint
+                            : 0}
                         </Text>
                         <Text margin="0" color="#909090" size="12px" regular>
                           리뷰{feed?.commentCnt}개

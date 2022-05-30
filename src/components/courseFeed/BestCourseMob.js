@@ -91,7 +91,9 @@ const BestCourseMob = (props) => {
             >
               <img style={{ width: "7.4px", height: "7px" }} src={starIcon} />
               <Text margin="0 2.3px 0 0" size="9px" bold>
-                {props.starPoint}
+                {props.starPoint || props.starPoint !== "Nan"
+                  ? props.starPoint
+                  : 0}
               </Text>
               <Text cursor="pointer" margin="0" color="#909090" size="9px">
                 리뷰 {props.commentCnt}개

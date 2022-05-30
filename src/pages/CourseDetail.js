@@ -345,7 +345,9 @@ const CourseDetail = () => {
                 >
                   <StarPoint starOne={true} />
                   <Text height="auto" width="auto" margin="0" size="20px" bold>
-                    {starPoint?.starPoint ? starPoint?.starPoint : 5.0}
+                    {starPoint?.starPoint || starPoint?.starPoint !== "NaN"
+                      ? starPoint?.starPoint
+                      : 5.0}
                   </Text>
                 </Grid>
               </Grid>

@@ -184,8 +184,10 @@ const InfoCategory = (props) => {
                   </Text>
                   <StarPoint starPoint={starPoint} starOne={true} />
                   <Text width="auto" margin="8px 0 0 0" size="13px" bold>
-                    {starPoint?.starPoint ? starPoint?.starPoint : "0.0"} /{" "}
-                    <span style={{ fontWeight: "500" }}>5.0</span>
+                    {starPoint?.starPoint || starPoint?.starPoint !== "NaN"
+                      ? starPoint?.starPoint
+                      : "0.0"}{" "}
+                    / <span style={{ fontWeight: "500" }}>5.0</span>
                     <span style={{ fontSize: "11px", color: "#7b7b7b" }}>
                       {"  "}(
                       {starPoint?.starPeople ? starPoint?.starPeople : "0"})
@@ -205,7 +207,10 @@ const InfoCategory = (props) => {
                   </Text>
                   <StarPoint courseId={courseId} />
                   <Text width="auto" margin="8px 0 0 0" size="13px" bold>
-                    {starPoint?.myStarPoint} / 5.0
+                    {starPoint?.myStarPoint === "NaN"
+                      ? 0
+                      : starPoint?.myStarPoint}{" "}
+                    / 5.0
                   </Text>
                 </Grid>
               </Grid>

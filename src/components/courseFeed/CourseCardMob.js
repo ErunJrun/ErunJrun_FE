@@ -84,7 +84,9 @@ const CourseCardMob = (props) => {
                     src={starIcon}
                   />
                   <Text size="8px" cursor="pointer" margin="0 4px 0 1.3px" bold>
-                    {props.starPoint}
+                    {props.starPoint || props.starPoint !== "Nan"
+                      ? props.starPoint
+                      : 0}
                   </Text>
                   <Text cursor="pointer" margin="0" color="#909090" size="8px">
                     리뷰 {props.commentCnt}개
@@ -171,7 +173,9 @@ const CourseCardMob = (props) => {
               >
                 <img style={{ width: "7.4px", height: "7px" }} src={starIcon} />
                 <Text size="8px" cursor="pointer" margin="0 4px 0 1.3px" bold>
-                  {props.starPoint}
+                  {props.starPoint || props.starPoint !== "Nan"
+                    ? props.starPoint
+                    : 0}
                 </Text>
                 <Text cursor="pointer" margin="0" color="#909090" size="8px">
                   리뷰 {props.commentCnt}개

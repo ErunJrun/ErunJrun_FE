@@ -79,7 +79,9 @@ const CourseCard = (props) => {
                     src={starIcon}
                   />
                   <Text cursor="pointer" margin="0 10px 0 4px" bold>
-                    {props.starPoint}
+                    {props.starPoint || props.starPoint !== "Nan"
+                      ? props.starPoint
+                      : 0}
                   </Text>
                   <Text
                     cursor="pointer"
@@ -167,7 +169,9 @@ const CourseCard = (props) => {
               >
                 <img style={{ width: "13px", height: "17px" }} src={starIcon} />
                 <Text cursor="pointer" margin="0 10px 0 4px" bold>
-                  {props.starPoint}
+                  {props.starPoint || props.starPoint !== "Nan"
+                    ? props.starPoint
+                    : 0}
                 </Text>
                 <Text
                   cursor="pointer"
