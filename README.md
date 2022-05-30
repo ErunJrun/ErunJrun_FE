@@ -8,6 +8,7 @@
 - 사이트 바로가기 : https://www.erunjrun.com/
 - 프론트엔드 GitHub Repository : https://github.com/ErunJrun/ErunJrun_FE
 - 백엔드 GitHub Respository : https://github.com/ErunJrun/ErunJrun_BE
+- Team Notion : https://www.notion.so/RUN-RUN-ea797e61794b442fadf987d40b0fad5e
 - 시연 영상 보러가기: xx
 
 <br>
@@ -72,9 +73,8 @@
 <br>
 
 ## ✨ 아키텍쳐
-<br>
+![stack_diagram](https://user-images.githubusercontent.com/49478770/170918000-77b830ed-5988-4c8e-b5fa-57e778639c66.png)
 
-<br>
 
 ## 🔨 기술스택
 ### **Tech**
@@ -106,6 +106,8 @@
 <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white"/>
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white"/>
 <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
+<img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white"/>
 <br>
 </p>
 
@@ -145,9 +147,12 @@
 | History	               |  페이지 이동            |4.10.1|
 | express-rate-limit     | API 사용량 제한(보안)   |6.4.0|
 <br>
+
+## 🌸 More Info
+[🌿 프로젝트 소개 문서]  
+[💾 와이어프레임](https://www.figma.com/file/KHfXRCNHENbZ7PBS1DYT7O/%EC%9D%B4RUN%EC%A0%80RUN?node-id=0%3A1)  
    
 ## 🚀 트러블 슈팅
-
 
 
 <!-- <details>
@@ -164,8 +169,6 @@
     - 사용자가 기기에 상관없이 모든 기능을 이용할 수 있게 ffmpeg 파일변환 라이브러리 도입
     - ffmpeg의 컨버팅 기능을 이용해 프론트엔드에서 받은 wepm파일을 mp3확장자로 컨버팅 후 저장하여 문제해결 
       <p><img src="https://user-images.githubusercontent.com/100390926/170860580-a00d7ab8-5088-4a9e-991c-1d53fea939d1.png" /></p>
-</details>
+</details> --!>
 
-## 🌸 More Info
-[🌿 프로젝트 소개 문서]  
-[💾 와이어프레임](https://www.figma.com/file/KHfXRCNHENbZ7PBS1DYT7O/%EC%9D%B4RUN%EC%A0%80RUN?node-id=0%3A1)  
+
