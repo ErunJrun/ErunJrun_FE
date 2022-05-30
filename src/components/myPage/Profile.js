@@ -8,6 +8,7 @@ import LevelBox from "../groupDetail/LevelBox";
 import { useMediaQuery } from "react-responsive";
 import { history } from "../../redux/configureStore";
 import { HiOutlineChevronRight } from "react-icons/hi";
+import edit from "../../assets/mypage/edit.svg";
 
 const Profile = () => {
   const isMobile = useMediaQuery({
@@ -76,64 +77,75 @@ const Profile = () => {
   }
   
   return (
-    <Box>
-      <MiddleBox> 
-          <MyImage src={profile_list?.userInfo?.profileUrl} />
-          <TextBox>
-            <Text 
-              margin="39px 0 0 0"
-              size="18px"
-              >
-                <span style={{fontWeight:"700"}}>
+    <>
+      <Box>
+        <MiddleBox> 
+            <MyImage src={profile_list?.userInfo?.profileUrl} />
+            <TextBox>
+              <Text 
+                margin="39px 0 0 0"
+                size="18px"
+                >
+                  <span style={{fontWeight:"700"}}>
+                  {" "}
+                  {profile_list?.userInfo?.nickname}{" "} 
+                  </span>
+                  님의 한 줄 소개
+              </Text> 
+            </TextBox>
+            
+          <Introduce>
+            <Triangle />    
+              <Text 
+                size="14px"
+                margin="-30px 0 0 0"
+                padding="20px">
+                {profile_list?.userInfo?.bio}
+              </Text>   
+          </Introduce>
+
+          <Information>
+            <Grid 
+              width="32px" 
+              height="32px"
+              _onClick={()=>{
+                history.push("/edit")
+              }}
+            >
+            <EditImg src={edit}/>
+            </Grid>
+            <SmallBox>
+              <Text bold size="16px">
                 {" "}
-                {profile_list?.userInfo?.nickname}{" "} 
-                </span>
-                님의 한 줄 소개
-            </Text> 
-          </TextBox>
-
-        <Introduce>
-          <Triangle />    
-            <Text 
-              size="14px"
-              margin="-30px 0 0 0"
-              padding="20px">
-              {profile_list?.userInfo?.bio}
-            </Text>   
-        </Introduce>
-
-        <Information>
-          <SmallBox>
-            <Text bold size="16px">
-              {" "}
-              러닝레벨{" "}
-            </Text>
-            <LevelBox userLevel={profile_list?.userInfo?.userLevel} />
-          </SmallBox>
-          <SmallBox>
-            <Text bold size="16px">
-              {" "}
-              선호거리{" "}
-            </Text>
-            <Text size="18px" color="#000">
-              {" "}
-              {profile_list?.userInfo?.likeDistance}
-            </Text>
-          </SmallBox>
-          <SmallBox>
-            <Text bold size="16px">
-              {" "}
-              선호지역{" "}
-            </Text>
-            <Text size="18px" color="#000">
-              {" "}
-              {profile_list?.userInfo?.likeLocation}
-            </Text>
-          </SmallBox>
-        </Information>
-      </MiddleBox>
-      <Level />
-    </Box>
+                러닝레벨{" "}
+              </Text>
+              <LevelBox userLevel={profile_list?.userInfo?.userLevel} />
+            </SmallBox>
+            <SmallBox>
+              <Text bold size="16px">
+                {" "}
+                선호거리{" "}
+              </Text>
+              <Text size="18px" color="#000">
+                {" "}
+                {profile_list?.userInfo?.likeDistance}
+              </Text>
+            </SmallBox>
+            <SmallBox>
+              <Text bold size="16px">
+                {" "}
+                선호지역{" "}
+              </Text>
+              <Text size="18px" color="#000">
+                {" "}
+                {profile_list?.userInfo?.likeLocation}
+              </Text>
+            </SmallBox>
+          </Information>
+        </MiddleBox>
+        <Level />
+      </Box>
+    </>
   );
 };
 
@@ -164,9 +176,9 @@ const SmallBox = styled.div`
   display: flex;
   align-items: center;
   width: 400px;
-  height: 23px;
+  height: 35px;
   gap: 20px;
-  margin-top: 16px;
+  margin-top: -4px;
 `;
 
 const _SmallBox = styled.div`
@@ -184,6 +196,11 @@ const TextBox = styled.div`
   height: 23px;
   text-align: left;
   margin: -3px 0 0 32px;
+`;
+const EditImg = styled.img`
+  margin: -0px 0 0 380px;
+  width: 32px;
+  height: 32px
 `;
 
 const MyImage = styled.img`

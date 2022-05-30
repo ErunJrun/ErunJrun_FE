@@ -3,6 +3,7 @@ import { Text, Grid } from "../../elements"
 import { AiOutlineClose } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
+import level from "../../assets/mypage/level.svg";
 
 import "./MyModal.css";
 
@@ -26,7 +27,7 @@ const MyModal = () => {
                  _onClick = {toggleModal}
                  margin="-19px 0 0 100px"
                  >
-                    <Img src='https://ifh.cc/g/8Sdtjg.png'/> 
+                    <Img src={level}/> 
                 </Grid>
                 {modal && (
                 <div>
@@ -83,7 +84,7 @@ const MyModal = () => {
             <button
             className="btn-modal_"
             onClick = {toggleModal}>
-                <img src='https://ifh.cc/g/8Sdtjg.png'/> 
+                <img src={level}/> 
             </button>
 
             {modal && (

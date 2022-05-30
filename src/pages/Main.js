@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Banner from "../components/main/Banner";
+import IntroModal from "../components/main/IntroModal";
 import MGroupRunning from "../components/main/MGroupRunning";
 import { loginCheckDB } from "../redux/modules/user";
 
@@ -10,6 +11,7 @@ const Main = () => {
 
   const from = localStorage.getItem("from");
   const userId = localStorage.getItem("userId");
+  const firstLogin = localStorage.getItem("firstLogin");
 
   useEffect(() => {
     if (userId) dispatch(loginCheckDB());
@@ -23,6 +25,11 @@ const Main = () => {
     <>
       <Banner />
       <MGroupRunning />
+      {firstLogin === true ? 
+       <IntroModal/>
+      : 
+        null 
+      }
     </>
   );
 };
