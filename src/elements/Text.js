@@ -130,7 +130,7 @@ Text.defaultProps = {
   alignItems: null,
   lineHeight: null,
   space: null,
-  textAlign:null,
+  textAlign: null,
 };
 const P = styled.p`
   line-height: ${(props) => props.lineHeight};
@@ -185,6 +185,7 @@ const P = styled.p`
     props.hiddenText
       ? "white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
       : ""};
+  word-break: break-all;
 `;
 
 export default Text;

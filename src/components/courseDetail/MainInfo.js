@@ -119,8 +119,13 @@ const MainInfo = (props) => {
         height="auto"
         boxShadow="0px 0px 6px rgba(141, 141, 141, 0.25)"
       >
-        <Grid height="auto" display="flex" justifyContent="space-between">
-          <Text margin="0 0 12px 0" size="18px" bold>
+        <Grid
+          width="300px"
+          height="auto"
+          display="flex"
+          justifyContent="space-between"
+        >
+          <Text width="300px" margin="0 0 12px 0" size="18px" bold>
             {detailCourse?.title}
           </Text>
 

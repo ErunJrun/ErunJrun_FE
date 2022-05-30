@@ -219,7 +219,7 @@ const CourseUploadStep2 = (props) => {
                   checkMaxLength(e);
                 }}
                 value={title || ""}
-                placeholder="그룹 러닝명을 입력해주세요."
+                placeholder="코스 이름을 입력해주세요."
               ></GroupInput>
               <Text margin="0" size="14px">
                 {textLength}/28
@@ -294,8 +294,7 @@ const CourseUploadStep2 = (props) => {
                   checkMaxLength600(e);
                 }}
                 value={content || ""}
-                placeholder=" 600자 이내로 그룹 러닝에 대한 소개를 작성해주세요.
-                ex) 호수공원 러닝 참 좋아하는데요~ 함께 뛰면 두배로 즐거울 것 같아 그룹 러닝을 모집합니다!"
+                placeholder="600자 이내로 코스에 대한 소개를 작성해주세요"
               ></GroupTextArea>
               <Grid
                 height="auto"
