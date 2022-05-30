@@ -69,7 +69,13 @@ const CourseCardMob = (props) => {
                 bottom="-35px"
                 cursor="pointer"
               >
-                <Text cursor="pointer" margin="0 0 5px 0" size="9px" bold>
+                <Text
+                  hiddenText
+                  cursor="pointer"
+                  margin="0 0 5px 0"
+                  size="9px"
+                  bold
+                >
                   {props.title}
                 </Text>
 
@@ -161,7 +167,13 @@ const CourseCardMob = (props) => {
               bottom="-35px"
               cursor="pointer"
             >
-              <Text cursor="pointer" margin="0 0 5px 0" size="9px" bold>
+              <Text
+                hiddenText
+                cursor="pointer"
+                margin="0 0 5px 0"
+                size="9px"
+                bold
+              >
                 {props.title}
               </Text>
 

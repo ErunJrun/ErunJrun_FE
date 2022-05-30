@@ -20,6 +20,7 @@ import { useMediaQuery } from "react-responsive";
 import GroupUploadMob from "./GroupUploadMob";
 import { getCookie } from "../shared/Cookie";
 import inputArrowGray from "../assets/groupUpload/inputArrowGray.svg";
+import imageCompression from "browser-image-compression";
 
 const GroupUpload = () => {
   const isMobile = useMediaQuery({
@@ -75,10 +76,6 @@ const GroupUpload = () => {
     setIsLoad2(false);
   };
 
-  const a = "https://open.kakao.com/o/gbS50Dfe";
-  const b = "open.kakao";
-
-  // cosnt chattingRoomCheck = contents.chattingRoom.slice(6,)
   const goNext3 = () => {
     if (contents.title === "") {
       return swal("제목을 입력해주세요");
@@ -129,9 +126,69 @@ const GroupUpload = () => {
     }
   };
 
-  const addGroupPost = () => {
-    dispatch(addGroupDB(location, thumbnail, contents, address, finalDistance));
-    dispatch(imgActions.resetFile());
+  const addGroupPost = async () => {
+    console.log(thumbnail);
+
+    // let resizeImage = [];
+
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+    if (thumbnail.length === 0) {
+      return;
+    }
+
+    if (thumbnail.length === 1) {
+      try {
+        const compressedFile1 = [await imageCompression(thumbnail[0], options)];
+
+        console.log(compressedFile1);
+        dispatch(
+          addGroupDB(location, compressedFile1, contents, address, distance)
+        );
+        dispatch(imgActions.resetFile());
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (thumbnail.length === 2) {
+      try {
+        const compressedFile1 = await imageCompression(thumbnail[0], options);
+        const compressedFile2 = await imageCompression(thumbnail[1], options);
+        console.log(compressedFile1, compressedFile2);
+        let resizeImage = [];
+
+        resizeImage.push(compressedFile1, compressedFile2);
+
+        dispatch(
+          addGroupDB(location, resizeImage, contents, address, distance)
+        );
+        dispatch(imgActions.resetFile());
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (thumbnail.length === 3) {
+      try {
+        const compressedFile1 = await imageCompression(thumbnail[0], options);
+        const compressedFile2 = await imageCompression(thumbnail[1], options);
+        const compressedFile3 = await imageCompression(thumbnail[2], options);
+        let resizeImage = [];
+
+        resizeImage.push(compressedFile1, compressedFile2, compressedFile3);
+
+        dispatch(
+          addGroupDB(location, resizeImage, contents, address, distance)
+        );
+        dispatch(imgActions.resetFile());
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   useEffect(() => {

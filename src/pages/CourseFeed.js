@@ -101,6 +101,7 @@ const CourseFeed = () => {
   const [uploadBtn, setUploadBtn] = useState(false);
 
   useEffect(() => {
+    dispatch(resetCourse());
     dispatch(getCourseDB(region, "new"));
     setNewCheck(true);
     setStarCheck(false);
@@ -204,16 +205,9 @@ const CourseFeed = () => {
               alignItem="center"
               margin="0 auto"
             >
-              {courseList.length !== 0 ? (
-                courseList?.map((item, idx) => {
-                  return <CourseCardMob key={idx} {...item}></CourseCardMob>;
-                })
-              ) : (
-                <img
-                  style={{ margin: "0 auto", width: "120px" }}
-                  src={noSearchData}
-                />
-              )}
+              {courseList?.map((item, idx) => {
+                return <CourseCardMob key={idx} {...item}></CourseCardMob>;
+              })}
             </Grid>
 
             <Permit>
@@ -649,13 +643,9 @@ const CourseFeed = () => {
           </Grid>
 
           <Grid display="flex" width="1200px" alignItem="center">
-            {courseList.length !== 0 ? (
-              courseList?.map((item, idx) => {
-                return <CourseCard key={idx} {...item}></CourseCard>;
-              })
-            ) : (
-              <img style={{ margin: "0 auto" }} src={noSearchData} />
-            )}
+            {courseList?.map((item, idx) => {
+              return <CourseCard key={idx} {...item}></CourseCard>;
+            })}
           </Grid>
 
           <Grid

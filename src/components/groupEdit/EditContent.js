@@ -100,8 +100,7 @@ const EditContent = (props) => {
 
   const [title, setTitle] = useState(props.title);
   const [standbyTime, setStandbyTime] = useState(props.standbyTime);
-  const [startTime, setStartTime] = useState(props.startTime);
-  const [finishTime, setFinishTime] = useState(props.finishTime);
+
   const [maxPeople, setMaxPeople] = useState(props.maxPeople);
   const [date, setDate] = useState(props.date);
   const [parking, setParking] = useState(props.parking);
@@ -115,8 +114,7 @@ const EditContent = (props) => {
     {
       title: title,
       standbyTime: standbyTime,
-      startTime: startTime,
-      finishTime: finishTime,
+
       maxPeople: maxPeople,
       date: date,
       speed: checkedSpeed,
@@ -139,8 +137,7 @@ const EditContent = (props) => {
   useEffect(() => {
     setTitle(props.title);
     setStandbyTime(props.standbyTime);
-    setStartTime(props.startTime);
-    setFinishTime(props.finishTime);
+
     setMaxPeople(props.maxPeople);
     setDate(props.date);
     setParking(props.parking);
@@ -275,56 +272,6 @@ const EditContent = (props) => {
 
             <Grid display="flex" alignItems="center" margin="0 0 32px 0">
               <Text display="inline" bold size="15px" margin="0 85px 0 0">
-                출발 시간
-              </Text>
-              <Grid
-                display="flex"
-                alignItems="center"
-                padding="10px 20px"
-                maxWidth="347px"
-                height="75px"
-                border="1px solid #CBCBCB"
-                borderRadius="3px"
-                hover="border:1px solid #030C37;"
-                margin="0 11px 0 0"
-              >
-                <GroupInput
-                  type="time"
-                  onChange={(e) => {
-                    setStartTime(e.target.value);
-                  }}
-                  value={startTime || ""}
-                ></GroupInput>
-              </Grid>
-            </Grid>
-
-            <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-              <Text display="inline" bold size="15px" margin="0 85px 0 0">
-                도착 시간
-              </Text>
-              <Grid
-                display="flex"
-                alignItems="center"
-                padding="10px 20px"
-                maxWidth="347px"
-                height="75px"
-                border="1px solid #CBCBCB"
-                borderRadius="3px"
-                hover="border:1px solid #030C37;"
-                margin="0 11px 0 0"
-              >
-                <GroupInput
-                  type="time"
-                  onChange={(e) => {
-                    setFinishTime(e.target.value);
-                  }}
-                  value={finishTime || ""}
-                ></GroupInput>
-              </Grid>
-            </Grid>
-
-            <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-              <Text display="inline" bold size="15px" margin="0 85px 0 0">
                 모집 인원
               </Text>
               <Grid
@@ -355,7 +302,7 @@ const EditContent = (props) => {
                   <option value="8">8명</option>
                   <option value="9">9명</option>
                   <option value="10">10명</option>
-                  <option value="10">20명</option>
+                  <option value="20">20명</option>
                 </GroupSelect>
               </Grid>
             </Grid>
