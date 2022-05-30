@@ -75,7 +75,7 @@
 <br>
 
 ## ✨ 아키텍쳐
-![stack_diagram](https://user-images.githubusercontent.com/100745412/170962123-420362bb-25d7-45fa-94a2-83b1352e1267.png)
+![stack_diagram](https://ifh.cc/g/7RDWVT.png)
 
 ## 🔨 기술스택
 ### **Tech**
