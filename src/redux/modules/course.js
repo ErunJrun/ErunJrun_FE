@@ -134,6 +134,7 @@ export const getCourseDB = (region = 0, sort = "new", page = 1, size = 6) => {
         page: data.data.feed.length === size ? page + 1 : null,
         size: size,
       };
+      dispatch(resetCourse());
       dispatch(getCourse(data, paging));
     } catch (error) {
       // console.log(error);
