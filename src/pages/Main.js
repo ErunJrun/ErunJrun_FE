@@ -12,10 +12,17 @@ const Main = () => {
   const from = localStorage.getItem("from");
   const userId = localStorage.getItem("userId");
   const firstLogin = localStorage.getItem("firstLogin");
+  const introModal = localStorage.getItem("introModal");
 
   useEffect(() => {
     if (userId) dispatch(loginCheckDB());
   }, [userId]);
+
+  useEffect(() => {
+    if (!introModal) {
+      localStorage.setItem("introModal", true);
+    }
+  }, []);
 
   if (from) {
     return <Redirect to={{ pathname: from }}></Redirect>;
@@ -25,11 +32,7 @@ const Main = () => {
     <>
       <Banner />
       <MGroupRunning />
-      {firstLogin === true ? 
-       <IntroModal/>
-      : 
-        null 
-      }
+      {introModal === "true" || introModal === null ? <IntroModal /> : null}
     </>
   );
 };
