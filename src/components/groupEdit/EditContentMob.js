@@ -101,8 +101,7 @@ const EditContentMob = (props) => {
 
   const [title, setTitle] = useState(props.title);
   const [standbyTime, setStandbyTime] = useState(props.standbyTime);
-  const [startTime, setStartTime] = useState(props.startTime);
-  const [finishTime, setFinishTime] = useState(props.finishTime);
+
   const [maxPeople, setMaxPeople] = useState(props.maxPeople);
   const [date, setDate] = useState(props.date);
   const [parking, setParking] = useState(props.parking);
@@ -116,8 +115,7 @@ const EditContentMob = (props) => {
     {
       title: title,
       standbyTime: standbyTime,
-      startTime: startTime,
-      finishTime: finishTime,
+
       maxPeople: maxPeople,
       date: date,
       speed: checkedSpeed,
@@ -140,8 +138,7 @@ const EditContentMob = (props) => {
   useEffect(() => {
     setTitle(props.title);
     setStandbyTime(props.standbyTime);
-    setStartTime(props.startTime);
-    setFinishTime(props.finishTime);
+
     setMaxPeople(props.maxPeople);
     setDate(props.date);
     setParking(props.parking);
@@ -319,56 +316,6 @@ const EditContentMob = (props) => {
                 <Text margin="0" size="11px" width="auto" color="#FF2D55" bold>
                   스탠바이로 지정한 시간의 4시간 전, 그룹러닝 모집이 마감됩니다.
                 </Text>
-              </Grid>
-            </Grid>
-
-            <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-              <Text size="13px" display="inline" margin="0 73px 16px 0">
-                출발 시간
-              </Text>
-              <Grid
-                margin="0"
-                display="flex"
-                alignItems="center"
-                padding="5px 16px"
-                width="343px"
-                height="44px"
-                border="1px solid #B8B8B8"
-                borderRadius="3px"
-                hover="border:1px solid #68F99E;"
-              >
-                <GroupInput
-                  type="time"
-                  onChange={(e) => {
-                    setStartTime(e.target.value);
-                  }}
-                  value={startTime}
-                ></GroupInput>
-              </Grid>
-            </Grid>
-
-            <Grid display="flex" alignItems="center" margin="0 0 32px 0">
-              <Text size="13px" display="inline" margin="0 73px 16px 0">
-                도착 시간
-              </Text>
-              <Grid
-                margin="0"
-                display="flex"
-                alignItems="center"
-                padding="5px 16px"
-                width="343px"
-                height="44px"
-                border="1px solid #B8B8B8"
-                borderRadius="3px"
-                hover="border:1px solid #68F99E;"
-              >
-                <GroupInput
-                  type="time"
-                  onChange={(e) => {
-                    setFinishTime(e.target.value);
-                  }}
-                  value={finishTime}
-                ></GroupInput>
               </Grid>
             </Grid>
 

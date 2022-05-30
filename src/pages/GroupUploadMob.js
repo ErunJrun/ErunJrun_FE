@@ -299,7 +299,7 @@ const GroupUploadMob = () => {
                   <DistanceInfo>
                     {distance !== "NaN" ? (
                       <>
-                        <Text textalign width="300px" margin="0" size="13px">
+                        <Text textalign width="100px" margin="0" size="13px">
                           {finalDistance}
                         </Text>
                         <Text margin="0" size="13px">

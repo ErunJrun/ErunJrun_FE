@@ -128,18 +128,6 @@ const GroupFeed = () => {
     "제주특별자치도",
   ]);
 
-  // useEffect(() => {
-  //   if (feedList.length === 0) {
-  //     console.log("GET 그룹 게시물");
-  //     dispatch(getGroupDB(category));
-  //   }
-
-  //   return () => {
-  //     console.log("그룹 게시물 클린업");
-  //     dispatch(resetGroup());
-  //   };
-  // }, []);
-
   //그룹러닝 등록 중 페이지 이탈 시 등록 데이터 리셋
   useEffect(() => {
     dispatch(resetMap());

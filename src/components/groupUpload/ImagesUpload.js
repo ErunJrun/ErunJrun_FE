@@ -5,6 +5,7 @@ import ImageIcon from "../../assets/groupUpload/imageCamera.png";
 import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
 import swal from "sweetalert";
+import imageCompression from "browser-image-compression";
 
 const ImagesUpload = (props) => {
   const dispatch = useDispatch();
