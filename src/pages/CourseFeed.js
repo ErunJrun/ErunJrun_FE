@@ -36,6 +36,8 @@ import RegionFilterMob from "../components/courseFeed/RegionFilterMob";
 import DrawerCategory from "../components/groupFeed/DrawerCategory";
 import DrawerCategoryCourse from "../components/courseFeed/DrawerCategoryCourse";
 import CourseCardMob from "../components/courseFeed/CourseCardMob";
+import { imgActions } from "../redux/modules/image";
+import { resetMap } from "../redux/modules/uploadInfo";
 
 SwiperCore.use([Virtual, Navigation, Pagination]);
 
@@ -109,6 +111,11 @@ const CourseFeed = () => {
       dispatch(resetCourse());
     };
   }, [region]);
+
+  useEffect(() => {
+    dispatch(resetMap());
+    dispatch(imgActions.resetFile());
+  }, []);
 
   if (isMobile) {
     return (
