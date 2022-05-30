@@ -246,6 +246,7 @@ const GroupContentMob = (props) => {
               </Grid>
               <Grid width="171.5px">
                 <TimePickers
+                  date={date}
                   isMobile={true}
                   standby={true}
                   setStandbyTime={setStandbyTime}
@@ -298,7 +299,7 @@ const GroupContentMob = (props) => {
                 value={maxPeople}
               >
                 <option style={{ color: "#818181" }} value="null">
-                  모집 인원을 입력해주세요.(최대 10명)
+                  모집 인원을 입력해주세요.(최대 20명)
                 </option>
                 <option value="2">2명</option>
                 <option value="3">3명</option>
@@ -309,6 +310,7 @@ const GroupContentMob = (props) => {
                 <option value="8">8명</option>
                 <option value="9">9명</option>
                 <option value="10">10명</option>
+                <option value="20">20명</option>
               </GroupSelect>
             </Grid>
           </Grid>

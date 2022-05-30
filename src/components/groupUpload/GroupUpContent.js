@@ -258,6 +258,7 @@ const GroupContent = (props) => {
                 />
               </Grid>
               <TimePickers
+                date={date}
                 standby={true}
                 setStandbyTime={setStandbyTime}
                 setStartTime={setStartTime}
@@ -301,7 +302,7 @@ const GroupContent = (props) => {
                 value={maxPeople || ""}
               >
                 <option value="null">
-                  모집 인원을 입력해주세요.(최대 10명)
+                  모집 인원을 입력해주세요.(최대 20명)
                 </option>
                 <option value="2">2명</option>
                 <option value="3">3명</option>
@@ -312,6 +313,7 @@ const GroupContent = (props) => {
                 <option value="8">8명</option>
                 <option value="9">9명</option>
                 <option value="10">10명</option>
+                <option value="20">20명</option>
               </GroupSelect>
             </Grid>
           </Grid>
