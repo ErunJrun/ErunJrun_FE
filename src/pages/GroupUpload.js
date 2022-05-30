@@ -60,7 +60,10 @@ const GroupUpload = () => {
 
   const goNext2 = () => {
     if (location.length == 0) {
-      swal("경로를 입력해주세요");
+      return swal("경로를 입력해주세요");
+    }
+    if (repeatCnt <= 0 || repeatCnt === "" || repeatCnt === null) {
+      return swal("횟수는 0이 될 수없습니다.");
     } else {
       setIsLoad1(true);
       setIsLoad2(true);

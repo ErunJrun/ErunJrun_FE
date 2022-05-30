@@ -57,7 +57,7 @@ const MyGroup = () => {
                     {data.title}
                   </Title>
                   <Text cursor="pointer" size="13px" margin="8px 0 0 0">
-                    {data.date} (소요 시간 : {data.totalTime})
+                    {data.date}
                   </Text>
                 </Grid>
 

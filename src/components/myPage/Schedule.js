@@ -43,7 +43,7 @@ const Schedule = () => {
                 <Grid>
                   <Title margin="8px 0 0 0">{waiting.title}</Title>
                   <Text cursor="pointer" size="13px" margin="8px 0 0 0">
-                    {waiting.date} (소요 시간 : {waiting.totalTime})
+                    {waiting.date}
                   </Text>
                 </Grid>
 

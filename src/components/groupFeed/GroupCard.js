@@ -97,7 +97,7 @@ const GroupCard = (props) => {
               size="16px"
               margin="10px 0 0 0"
             >
-              {props?.date} (소요 시간 : {props?.totalTime})
+              {props?.date}
             </Text>
           </Grid>
 
