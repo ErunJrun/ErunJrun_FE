@@ -12,7 +12,6 @@ import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
 const Bookmark = () => {
   const dispatch = useDispatch();
   const bookmark = useSelector((state) => state.mypage.mybook);
-  console.log(bookmark);
 
   return (
     <Grid width="1230px" display="flex" margin="0 0 0 -31px">
