@@ -170,7 +170,7 @@ const ImagesUpload = (props) => {
         >
           <Text margin="0" size="10px" regular>
             <li style={{ marginBottom: "10px" }}>
-              업로드 가능한 이미지 최대 용량은 30MB 입니다.
+              업로드 가능한 이미지 최대 용량은 1개당 5MB 입니다.
             </li>
             <li style={{ marginBottom: "10px" }}>
               504px*378px 사이즈의 이미지 크기를 권장합니다.
@@ -299,7 +299,7 @@ const ImagesUpload = (props) => {
       >
         <Text margin="0" size="14px">
           <li style={{ marginBottom: "10px" }}>
-            업로드 가능한 이미지 최대 용량은 30MB 입니다.
+            업로드 가능한 이미지 최대 용량은 1개당 5MB 입니다.
           </li>
           <li style={{ marginBottom: "10px" }}>
             504px*378px 사이즈의 이미지 크기를 권장합니다.
