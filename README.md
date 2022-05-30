@@ -114,7 +114,7 @@
 ## 📚 라이브러리 
 | Name                | Appliance               | Version  |
 | :-----------------: | :---------------------: | :------: |
-<!-- | bcrypt              | 비밀번호 암호화         |5.0.1|
+| bcrypt              | 비밀번호 암호화         |5.0.1|
 | cors                   | CORS 핸들링             |2.8.5|
 | dotenv                 | 환경변수 설정           |16.0.0|
 | helmet                 | HTTP header 보안        |5.0.2|
@@ -143,7 +143,7 @@
 | Connected-react-router |  히스토리 객체 관리     |6.9.2|
 | Immer	                 |  불변성 유지            |9.0.12|
 | History	               |  페이지 이동            |4.10.1|
-| express-rate-limit     | API 사용량 제한(보안)   |6.4.0| -->
+| express-rate-limit     | API 사용량 제한(보안)   |6.4.0|
 <br>
    
 ## 🚀 트러블 슈팅
@@ -166,4 +166,6 @@
       <p><img src="https://user-images.githubusercontent.com/100390926/170860580-a00d7ab8-5088-4a9e-991c-1d53fea939d1.png" /></p>
 </details>
 
-
+## 🌸 More Info
+[🌿 프로젝트 소개 문서]  
+[💾 와이어프레임](https://www.figma.com/file/KHfXRCNHENbZ7PBS1DYT7O/%EC%9D%B4RUN%EC%A0%80RUN?node-id=0%3A1)  
