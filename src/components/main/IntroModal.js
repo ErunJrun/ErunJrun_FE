@@ -16,31 +16,31 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const images = [
   {
     label: "Infor1",
-    imgPath: "https://ifh.cc/g/HR3Yl0.png",
+    imgPath: "https://ifh.cc/g/Xvo76C.png",
   },
   {
     label: "Infor2",
-    imgPath: "https://ifh.cc/g/w6pxCb.png",
+    imgPath: "https://ifh.cc/g/0M1GJg.png",
   },
   {
     label: "Infor3",
-    imgPath: "https://ifh.cc/g/fVY48m.png",
+    imgPath: "https://ifh.cc/g/XQMhMF.png",
   },
   {
     label: "Infor4",
-    imgPath: "https://ifh.cc/g/HWnNzZ.png",
+    imgPath: "https://ifh.cc/g/X2sP21.png",
   },
   {
     label: "Infor5",
-    imgPath: "https://ifh.cc/g/xQxsp3.png",
+    imgPath: "https://ifh.cc/g/CJdrXf.png",
   },
   {
     label: "Infor6",
-    imgPath: "https://ifh.cc/g/XnXP1z.png",
+    imgPath: "https://ifh.cc/g/dcfT6v.png",
   },
   {
     label: "Infor7",
-    imgPath: "https://ifh.cc/g/oGVSwy.png",
+    imgPath: "https://ifh.cc/g/hMmrLX.png",
   },
 ];
 

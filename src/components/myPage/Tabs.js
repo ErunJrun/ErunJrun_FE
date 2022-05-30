@@ -145,16 +145,6 @@ export default function BasicTabs() {
             label="추천 코스"
             {...a11yProps(1)}
           />
-          <AntTab
-            sx={{
-              color: "#909090",
-              fontSize: "18px",
-              fontWeight: "bold",
-              fontFamily: "Spoqa Han Sans Neo",
-            }}
-            label="뱃지"
-            {...a11yProps(2)}
-          />
         </AntTabs>
       </Box>
       <TabPanel value={value} index={0}>
