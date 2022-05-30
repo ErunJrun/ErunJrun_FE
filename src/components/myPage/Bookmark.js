@@ -16,11 +16,11 @@ const Bookmark = () => {
 
   return (
     <Grid width="1230px" display="flex" margin="0 0 0 -31px">
-      {bookmark.data.feed.length === 0 ? (
+      {bookmark?.data?.feed?.length === 0 ? (
         <Box>북마크한 게시물이 없습니다</Box>
       ) : (
         <>
-          {bookmark?.data?.feed.map((feed, index) => {
+          {bookmark?.data?.feed?.map((feed, index) => {
             return (
               <Grid
                 key={index}

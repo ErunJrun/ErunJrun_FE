@@ -18,7 +18,7 @@ const Bookmark = () => {
       display="flex"
       margin="0 0 0 -31px"
     >
-      {course.data.feed.length === 0 ? 
+      {course?.data?.feed?.length === 0 ? 
         <Box>내가 만든 코스추천 게시물이 없습니다</Box>
       :
         <>
