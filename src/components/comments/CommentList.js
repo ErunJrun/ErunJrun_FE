@@ -28,11 +28,13 @@ const CommentList = (props) => {
     if (props.course) {
       console.log("코멘트 리스트 코스 코멘트");
       dispatch(resetComm());
-      return dispatch(_getCommentFX("course", courseId));
+      dispatch(_getCommentFX("course", courseId));
     }
-    console.log("코멘트 리스트 그룹 코멘트");
-    dispatch(resetComm());
-    dispatch(_getCommentFX("group", groupId));
+    if (!props.course) {
+      console.log("코멘트 리스트 그룹 코멘트");
+      dispatch(resetComm());
+      dispatch(_getCommentFX("group", groupId));
+    }
   }, []);
 
   if (props.course && !isMobile) {
