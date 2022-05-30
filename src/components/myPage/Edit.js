@@ -50,7 +50,7 @@ const Edit = (props) => {
     "경상북도 / 대구광역시",
     "경상남도 / 부산광역시 / 울산광역시",
     "전라도 / 광주광역시",
-    "제주특별자치시",
+    "제주특별자치도",
   ]);
 
   const [runRegionMob, setRunRegionMob] = useState([
@@ -191,8 +191,8 @@ const Edit = (props) => {
     setCertPhone(props.profile.certPhone);
   }, [props]);
 
-  if (bio === null) {
-    setBio("");
+  if (bio === null || bio === "") {
+    setBio("한 줄 소개를 작성해보세요!");
   }
 
   if (isMobile) {
