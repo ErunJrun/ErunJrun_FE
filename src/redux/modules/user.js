@@ -53,7 +53,6 @@ const initialState = {
 // 미들웨어
 export const kakaoLogin = (authorization_code) => {
   return async function (dispatch, getState, { history }) {
-    localStorage.clear();
     try {
       const { data } = await api.get(
         `user/kakao/callback?code=${authorization_code}`
@@ -95,7 +94,6 @@ export const kakaoLogin = (authorization_code) => {
 
 export const naverLoginDB = (code, state) => {
   return async function (dispatch, getState, { history }) {
-    localStorage.clear();
     try {
       const { data } = await api.get(
         `user/naver/callback?code=${code}&state=${state}`
@@ -199,6 +197,7 @@ export const logoutDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await api.delete(`/user/logout`);
+      console.log(data);
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
       localStorage.clear();

@@ -1,18 +1,23 @@
 import React, { lazy, Suspense, useEffect } from "react";
+
+//Redux
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
-//페이지 변경시 마다 맨 위부터 보이게
-import ScrollToTop from "./ScrollToTop";
 import { useDispatch } from "react-redux";
-import { loginCheckDB, logoutDB } from "../redux/modules/user";
-import { getCookie } from "./Cookie";
-import "./GlobalStyles";
-import styled from "styled-components";
+
+//페이지 전환
+import ScrollToTop from "./ScrollToTop";
 import { Spinner, LogoSpinner } from "../elements";
+
+import { loginCheckDB } from "../redux/modules/user";
+import { getCookie } from "./Cookie";
+//css
+import styled from "styled-components";
+
+//page
 import CourseUpload from "../pages/CourseUpload";
 import CourseDetail from "../pages/CourseDetail";
-
 const Main = lazy(() => import("../pages/Main"));
 const Header = lazy(() => import("../components/Header"));
 const Footer = lazy(() => import("../components/Footer"));
