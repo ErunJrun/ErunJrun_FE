@@ -9,8 +9,8 @@
 - 사이트 바로가기 : https://www.erunjrun.com/
 - 프론트엔드 GitHub Repository : https://github.com/ErunJrun/ErunJrun_FE
 - 백엔드 GitHub Respository : https://github.com/ErunJrun/ErunJrun_BE
-- Team Notion : https://www.notion.so/RUN-RUN-ea797e61794b442fadf987d40b0fad5e
 - 시연 영상 보러가기: xx
+<!-- - Team Notion : https://www.notion.so/RUN-RUN-ea797e61794b442fadf987d40b0fad5e -->
 
 <br>
 
@@ -141,6 +141,8 @@
 <br>
 
 ## 📚 라이브러리
+<details>
+<summary><strong> 리스트 </strong></summary>
 
 |            Name             |       Appliance       |   Version    |
 | :-------------------------: | :-------------------: | :----------: |
@@ -170,7 +172,7 @@
 |    react-kakao-maps-sdk     |      카카오 지도      |    1.0.6     |
 |     react-photo-collage     | 이미지 레이아웃 편집  |    1.0.9     |
 |           lodash            |      데이터 구조      |   4.17.21    |
-
+</details>
  <br>
  
  ## 🖥 Core tech
