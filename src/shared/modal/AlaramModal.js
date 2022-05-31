@@ -75,19 +75,26 @@ const AlarmModal = ({ onClose }) => {
                           category={"start"}
                           role={"attendance"}
                           {...alarm}
+                          onClose={onClose}
                         />
                       );
                     }
 
                     if (alarm.category === "Dday") {
                       return (
-                        <AlarmStart key={idx} category={"dDay"} {...alarm} />
+                        <AlarmStart
+                          onClose={onClose}
+                          key={idx}
+                          category={"dDay"}
+                          {...alarm}
+                        />
                       );
                     }
 
                     if (alarm.category === "end" && alarm.role === "host") {
                       return (
                         <AlarmStart
+                          onClose={onClose}
                           key={idx}
                           category={"end"}
                           role={"host"}
@@ -102,6 +109,7 @@ const AlarmModal = ({ onClose }) => {
                     ) {
                       return (
                         <AlarmStart
+                          onClose={onClose}
                           key={idx}
                           category={"end"}
                           role={"attendance"}
@@ -113,6 +121,7 @@ const AlarmModal = ({ onClose }) => {
                     if (alarm.category === "comment") {
                       return (
                         <AlarmComment
+                          onClose={onClose}
                           key={idx}
                           category={"comment"}
                           {...alarm}
@@ -123,6 +132,7 @@ const AlarmModal = ({ onClose }) => {
                     if (alarm.category === "recomment") {
                       return (
                         <AlarmComment
+                          onClose={onClose}
                           key={idx}
                           category={"recomment"}
                           {...alarm}
@@ -132,13 +142,23 @@ const AlarmModal = ({ onClose }) => {
 
                     if (alarm.category === "update") {
                       return (
-                        <AlarmUpdate key={idx} category={"update"} {...alarm} />
+                        <AlarmUpdate
+                          onClose={onClose}
+                          key={idx}
+                          category={"update"}
+                          {...alarm}
+                        />
                       );
                     }
 
                     if (alarm.category === "delete") {
                       return (
-                        <AlarmUpdate key={idx} category={"delete"} {...alarm} />
+                        <AlarmUpdate
+                          onClose={onClose}
+                          key={idx}
+                          category={"delete"}
+                          {...alarm}
+                        />
                       );
                     }
                   })}
@@ -191,19 +211,26 @@ const AlarmModal = ({ onClose }) => {
                         category={"start"}
                         role={"attendance"}
                         {...alarm}
+                        onClose={onClose}
                       />
                     );
                   }
 
                   if (alarm.category === "Dday") {
                     return (
-                      <AlarmStart key={idx} category={"dDay"} {...alarm} />
+                      <AlarmStart
+                        onClose={onClose}
+                        key={idx}
+                        category={"dDay"}
+                        {...alarm}
+                      />
                     );
                   }
 
                   if (alarm.category === "end" && alarm.role === "host") {
                     return (
                       <AlarmStart
+                        onClose={onClose}
                         key={idx}
                         category={"end"}
                         role={"host"}
@@ -215,6 +242,7 @@ const AlarmModal = ({ onClose }) => {
                   if (alarm.category === "end" && alarm.role === "attendance") {
                     return (
                       <AlarmStart
+                        onClose={onClose}
                         key={idx}
                         category={"end"}
                         role={"attendance"}
@@ -225,13 +253,19 @@ const AlarmModal = ({ onClose }) => {
 
                   if (alarm.category === "comment") {
                     return (
-                      <AlarmComment key={idx} category={"comment"} {...alarm} />
+                      <AlarmComment
+                        onClose={onClose}
+                        key={idx}
+                        category={"comment"}
+                        {...alarm}
+                      />
                     );
                   }
 
                   if (alarm.category === "recomment") {
                     return (
                       <AlarmComment
+                        onClose={onClose}
                         key={idx}
                         category={"recomment"}
                         {...alarm}
@@ -241,13 +275,23 @@ const AlarmModal = ({ onClose }) => {
 
                   if (alarm.category === "update") {
                     return (
-                      <AlarmUpdate key={idx} category={"update"} {...alarm} />
+                      <AlarmUpdate
+                        onClose={onClose}
+                        key={idx}
+                        category={"update"}
+                        {...alarm}
+                      />
                     );
                   }
 
                   if (alarm.category === "delete") {
                     return (
-                      <AlarmUpdate key={idx} category={"delete"} {...alarm} />
+                      <AlarmUpdate
+                        onClose={onClose}
+                        key={idx}
+                        category={"delete"}
+                        {...alarm}
+                      />
                     );
                   }
                 })}

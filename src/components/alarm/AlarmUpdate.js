@@ -46,7 +46,8 @@ const AlarmUpdate = (props) => {
                   size="10px"
                   textLeft
                   _onClick={() => {
-                    props.setAlarmOpen(false);
+                    history.push(`/groupdetail/${props?.groupId}`);
+                    props.onClose();
                   }}
                   hover="font-weight:900;"
                   cursor="pointer"
@@ -63,7 +64,7 @@ const AlarmUpdate = (props) => {
                   size="10px"
                   textLeft
                   _onClick={() => {
-                    props.setAlarmOpen(false);
+                    props.onClose();
                   }}
                   hover="font-weight:900;"
                   cursor="pointer"
@@ -112,7 +113,8 @@ const AlarmUpdate = (props) => {
                 regular
                 textLeft
                 _onClick={() => {
-                  props.setAlarmOpen(false);
+                  history.push(`/groupdetail/${props?.groupId}`);
+                  props.onClose();
                 }}
                 hover="font-weight:900;"
                 cursor="pointer"
@@ -128,7 +130,7 @@ const AlarmUpdate = (props) => {
                 regular
                 textLeft
                 _onClick={() => {
-                  props.setAlarmOpen(false);
+                  props.onClose();
                 }}
                 hover="font-weight:900;"
                 cursor="pointer"

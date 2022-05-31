@@ -413,6 +413,7 @@ const AlarmStart = (props) => {
             <Grid
               _onClick={() => {
                 history.push(`/groupdetail/${props?.groupId}`);
+                props.onClose();
               }}
               height="auto"
               display="flex"

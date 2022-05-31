@@ -45,7 +45,7 @@ const AlarmComment = (props) => {
               cursor="pointer"
               _onClick={() => {
                 history.push(`/groupdetail/${props?.groupId}`);
-                props.setAlarmOpen(false);
+                props.onClose();
               }}
               height="auto"
               display="flex"
@@ -59,6 +59,10 @@ const AlarmComment = (props) => {
                   hover="font-weight:900;"
                   cursor="pointer"
                   margin="0"
+                  _onClick={() => {
+                    history.push(`/groupdetail/${props?.groupId}`);
+                    props.onClose();
+                  }}
                 >
                   <span style={{ color: "#000", fontWeight: "700" }}>
                     {props?.groupTitle}
@@ -68,6 +72,10 @@ const AlarmComment = (props) => {
                 </Text>
               ) : (
                 <Text
+                  _onClick={() => {
+                    history.push(`/groupdetail/${props?.groupId}`);
+                    props.onClose();
+                  }}
                   regular
                   textLeft
                   size="10px"
@@ -122,7 +130,7 @@ const AlarmComment = (props) => {
             cursor="pointer"
             _onClick={() => {
               history.push(`/groupdetail/${props?.groupId}`);
-              props.setAlarmOpen(false);
+              props.onClose();
             }}
             height="auto"
             display="flex"
