@@ -141,7 +141,7 @@ const GroupUploadMob = () => {
       useWebWorker: true,
     };
     if (thumbnail.length === 0) {
-      return;
+      dispatch(addGroupDB(location, thumbnail, contents, address, distance));
     }
 
     if (thumbnail.length === 1) {

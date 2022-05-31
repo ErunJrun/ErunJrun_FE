@@ -107,7 +107,7 @@ const CourseUpload = () => {
       useWebWorker: true,
     };
     if (thumbnail.length === 0) {
-      return;
+      dispatch(addCourseDB(location, thumbnail, contents, address, distance));
     }
 
     if (thumbnail.length === 1) {
