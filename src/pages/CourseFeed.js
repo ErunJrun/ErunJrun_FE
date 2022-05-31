@@ -1,44 +1,49 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Grid, Text } from "../elements";
-import Ready from "../shared/Ready";
+import { useParams } from "react-router-dom";
 
-import noSearchData from "../assets/groupFeed/noSearchData.svg";
-
-import { useMediaQuery } from "react-responsive";
-import upload from "../assets/groupFeed/groupUploadBtn1.png";
-import uploadHover from "../assets/groupFeed/groupUploadBtn2.png";
-import pageUp from "../assets/groupFeed/pageUpBtn.png";
-import BestCourse from "../components/courseFeed/BestCourse";
-import RegionFilter from "../components/courseFeed/RegionFilter";
-import CourseCard from "../components/courseFeed/CourseCard";
+//Redux
 import { useDispatch, useSelector } from "react-redux";
+import { history } from "../redux/configureStore";
+import { imgActions } from "../redux/modules/image";
+import { resetMap } from "../redux/modules/uploadInfo";
 import {
   getCourseDB,
   getCoursePlusDB,
   getCourseRegionDB,
   resetCourse,
 } from "../redux/modules/course";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
 import { Link } from "react-scroll";
-import Permit from "../shared/Permit";
-import { history } from "../redux/configureStore";
 import swal from "sweetalert";
-import { useParams } from "react-router-dom";
 import SwiperCore, { Virtual, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import styled from "styled-components";
 import "../components/main/MGroupSlide.css";
-import BestCourseMob from "../components/courseFeed/BestCourseMob";
 import "./CourseFeed.css";
+
+//Image
+import noSearchData from "../assets/groupFeed/noSearchData.svg";
+import upload from "../assets/groupFeed/groupUploadBtn1.png";
+import uploadHover from "../assets/groupFeed/groupUploadBtn2.png";
+import pageUp from "../assets/groupFeed/pageUpBtn.png";
+
+//elements
+import { Grid, Text } from "../elements";
+
+//components
+import BestCourse from "../components/courseFeed/BestCourse";
+import RegionFilter from "../components/courseFeed/RegionFilter";
+import CourseCard from "../components/courseFeed/CourseCard";
+import BestCourseMob from "../components/courseFeed/BestCourseMob";
 import RegionFilterMob from "../components/courseFeed/RegionFilterMob";
-import DrawerCategory from "../components/groupFeed/DrawerCategory";
 import DrawerCategoryCourse from "../components/courseFeed/DrawerCategoryCourse";
 import CourseCardMob from "../components/courseFeed/CourseCardMob";
-import { imgActions } from "../redux/modules/image";
-import { resetMap } from "../redux/modules/uploadInfo";
+import Permit from "../shared/Permit";
 
 SwiperCore.use([Virtual, Navigation, Pagination]);
 
@@ -46,21 +51,21 @@ const CourseFeed = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
-
-  const [swiperRef, setSwiperRef] = useState(null);
+  const dispatch = useDispatch();
   const params = useParams();
   const region = params.region;
 
-  const courseList = useSelector((state) => state.course.list);
-  const rankingFeed = useSelector((state) => state.course.rankingFeed);
-  const preferData = useSelector((state) => state.course.preferData);
-
-  const paging = useSelector((state) => state.course.paging);
-
+  const [uploadBtn, setUploadBtn] = useState(false);
+  const [swiperRef, setSwiperRef] = useState(null);
   const [newCheck, setNewCheck] = useState(true);
   const [starCheck, setStarCheck] = useState(false);
   const [commCheck, setCommCheck] = useState(false);
   const [bookCheck, setBookCheck] = useState(false);
+
+  const courseList = useSelector((state) => state.course.list);
+  const rankingFeed = useSelector((state) => state.course.rankingFeed);
+  const preferData = useSelector((state) => state.course.preferData);
+  const paging = useSelector((state) => state.course.paging);
 
   const newCourse = () => {
     dispatch(resetCourse());
@@ -97,9 +102,6 @@ const CourseFeed = () => {
     setCommCheck(false);
     setBookCheck(true);
   };
-
-  const dispatch = useDispatch();
-  const [uploadBtn, setUploadBtn] = useState(false);
 
   useEffect(() => {
     dispatch(resetCourse());
@@ -779,112 +781,4 @@ const PageUpBtn = styled.img`
   margin: 0;
 `;
 
-const AniWrap = styled.div`
-  -webkit-animation: bounce-in-top 1.1s both;
-  animation: bounce-in-top 1.1s both;
-  @-webkit-keyframes bounce-in-top {
-    0% {
-      -webkit-transform: translateY(-500px);
-      transform: translateY(-500px);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-      opacity: 0;
-    }
-    38% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-      opacity: 1;
-    }
-    55% {
-      -webkit-transform: translateY(-65px);
-      transform: translateY(-65px);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-    72% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-    81% {
-      -webkit-transform: translateY(-28px);
-      transform: translateY(-28px);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-    90% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-    95% {
-      -webkit-transform: translateY(-8px);
-      transform: translateY(-8px);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-    100% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-  }
-  @keyframes bounce-in-top {
-    0% {
-      -webkit-transform: translateY(-500px);
-      transform: translateY(-500px);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-      opacity: 0;
-    }
-    38% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-      opacity: 1;
-    }
-    55% {
-      -webkit-transform: translateY(-65px);
-      transform: translateY(-65px);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-    72% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-    81% {
-      -webkit-transform: translateY(-28px);
-      transform: translateY(-28px);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-    90% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-    95% {
-      -webkit-transform: translateY(-8px);
-      transform: translateY(-8px);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-    100% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-  }
-`;
 export default CourseFeed;

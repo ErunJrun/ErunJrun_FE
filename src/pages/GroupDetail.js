@@ -1,12 +1,30 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+
+//Redux
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { history } from "../redux/configureStore";
+
 import {
   applyDetailDB,
   deleteGroupDB,
   getGroupDetailDB,
 } from "../redux/modules/feed";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+import swal from "sweetalert";
+import { Link } from "react-scroll";
+import styled from "styled-components";
+
+//Image
+import pageUpIcon from "../assets/groupDetail/pageUpIcon.png";
+import mapIcon from "../assets/groupDetail/map.png";
+import chatMobColor from "../assets/groupDetail/chatMobColor.png";
+import chatMob from "../assets/groupDetail/chatMob.png";
+import shareMob from "../assets/groupDetail/shareMob.png";
+
+//components
 import ImageSlide from "../components/groupDetail/ImageSlide";
 import MainInfo from "../components/groupDetail/MainInfo";
 import { Grid, Text, IconButton } from "../elements";
@@ -16,22 +34,7 @@ import CrewLeaderInfo from "../components/groupDetail/CrewLeaderInfo";
 import Appliers from "../components/groupDetail/Appliers";
 import CommentList from "../components/comments/CommentList";
 import InfoCategory from "../components/groupDetail/InfoCategory";
-import mapIcon from "../assets/groupDetail/map.png";
-import { useMediaQuery } from "react-responsive";
-import backIcon from "../assets/groupDetail/backIcon.png";
-import editIcon from "../assets/groupDetail/editIcon.png";
-import pageUpIcon from "../assets/groupDetail/pageUpIcon.png";
-
-import Permit from "../shared/Permit";
-import { history } from "../redux/configureStore";
-import chatMobColor from "../assets/groupDetail/chatMobColor.png";
-import chatMob from "../assets/groupDetail/chatMob.png";
-import shareMob from "../assets/groupDetail/shareMob.png";
 import KakaoShareButton from "../components/KakaoShareButton";
-
-import swal from "sweetalert";
-
-import { Link } from "react-scroll";
 
 const GroupDetail = () => {
   const isMobile = useMediaQuery({
@@ -41,11 +44,13 @@ const GroupDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
-  const detailGroup = useSelector((state) => state.feed.detail);
-  const [editMenu, setEditMenu] = React.useState(false);
 
   const nickname = localStorage.getItem("nickname");
+
+  const detailGroup = useSelector((state) => state.feed.detail);
   const isLogin = useSelector((state) => state.user.isLogin);
+
+  const [editMenu, setEditMenu] = React.useState(false);
 
   const goApply = () => {
     if (isLogin || nickname) {
