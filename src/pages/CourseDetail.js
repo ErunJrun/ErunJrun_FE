@@ -1,41 +1,43 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+
+//Redux
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  applyDetailDB,
-  deleteGroupDB,
-  getGroupDetailDB,
-} from "../redux/modules/feed";
-import ImageSlide from "../components/courseDetail/ImageSlide";
-import MainInfo from "../components/courseDetail/MainInfo";
-import { Grid, Text, IconButton } from "../elements";
-import ServeInfo from "../components/courseDetail/ServeInfo";
-import MapInfo from "../components/courseDetail/MapInfo";
-import CrewLeaderInfo from "../components/courseDetail/CrewLeaderInfo";
+import { history } from "../redux/configureStore";
 
-import CommentList from "../components/comments/CommentList";
-import InfoCategory from "../components/courseDetail/InfoCategory";
-import mapIcon from "../assets/groupDetail/map.png";
+//css, library, package
+import swal from "sweetalert";
+import { Link } from "react-scroll";
 import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
 
+//Image
+import mapIcon from "../assets/groupDetail/map.png";
 import pageUpIcon from "../assets/groupDetail/pageUpIcon.png";
-
-import KakaoShareButton from "../components/KakaoShareButton";
-
 import bookMarkLine_detail_Mob from "../assets/courseFeed/bookMarkLine_detail_Mob.svg";
 import bookMarkGreen_detail from "../assets/courseFeed/bookMarkGreen_detail.svg";
-import swal from "sweetalert";
-
-import { Link } from "react-scroll";
 import {
   bookmarkDetailDB,
   getCourseDetailDB,
   getStarPointDB,
 } from "../redux/modules/course";
-import StarPoint from "../components/courseDetail/StarPoint";
-import { history } from "../redux/configureStore";
+
+//cookie
 import { getCookie } from "../shared/Cookie";
+
+//elements
+import { Grid, Text, IconButton } from "../elements";
+
+//components
+import ImageSlide from "../components/courseDetail/ImageSlide";
+import MainInfo from "../components/courseDetail/MainInfo";
+import ServeInfo from "../components/courseDetail/ServeInfo";
+import MapInfo from "../components/courseDetail/MapInfo";
+import CrewLeaderInfo from "../components/courseDetail/CrewLeaderInfo";
+import CommentList from "../components/comments/CommentList";
+import InfoCategory from "../components/courseDetail/InfoCategory";
+import KakaoShareButton from "../components/KakaoShareButton";
+import StarPoint from "../components/courseDetail/StarPoint";
 
 const CourseDetail = () => {
   const isMobile = useMediaQuery({
@@ -45,6 +47,7 @@ const CourseDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const courseId = params.courseId;
+
   const detailCourse = useSelector((state) => state.course.detail);
   const starPoint = useSelector((state) => state.course.starPoint);
   const comment = useSelector((state) => state.comments);

@@ -1,10 +1,18 @@
 import React from "react";
-import styled from "styled-components";
+
+//Redux
 import { useSelector } from "react-redux";
-import { Text, Grid } from "../../elements";
-import { useMediaQuery } from "react-responsive";
 import { history } from "../../redux/configureStore";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//Image
 import backBtn from "../../assets/groupFeed/backBtn.svg";
+
+//elements
+import { Text, Grid } from "../../elements";
 
 const MobileEvaluation = () => {
   const isMobile = useMediaQuery({
@@ -12,6 +20,7 @@ const MobileEvaluation = () => {
   });
 
   const myId = localStorage.getItem("userId");
+
   const profile_list = useSelector((state) => state.mypage.list);
 
   if (isMobile) {
@@ -91,23 +100,33 @@ const MobileEvaluation = () => {
               <>
                 <EvaluationBox>
                   <Text regular>“진행한 코스가 아쉬웠어요.”</Text>
-                  <Text bold>{profile_list?.evaluation?.evaluationCategory6}</Text>
+                  <Text bold>
+                    {profile_list?.evaluation?.evaluationCategory6}
+                  </Text>
                 </EvaluationBox>
                 <EvaluationBox>
                   <Text regular>“크루원에게 불친절했어요.“</Text>
-                  <Text bold>{profile_list?.evaluation?.evaluationCategory7}</Text>
+                  <Text bold>
+                    {profile_list?.evaluation?.evaluationCategory7}
+                  </Text>
                 </EvaluationBox>
                 <EvaluationBox>
                   <Text regular>“응답이 늦었어요.”</Text>
-                  <Text bold>{profile_list?.evaluation?.evaluationCategory8}</Text>
+                  <Text bold>
+                    {profile_list?.evaluation?.evaluationCategory8}
+                  </Text>
                 </EvaluationBox>
                 <EvaluationBox>
                   <Text regular>“변경사항을 안내해주지 않았어요.”</Text>
-                  <Text bold>{profile_list?.evaluation?.evaluationCategory9}</Text>
+                  <Text bold>
+                    {profile_list?.evaluation?.evaluationCategory9}
+                  </Text>
                 </EvaluationBox>
                 <EvaluationBox>
                   <Text regular>“시간 약속을 잘 안지켰어요.”</Text>
-                  <Text bold>{profile_list?.evaluation?.evaluationCategory10}</Text>
+                  <Text bold>
+                    {profile_list?.evaluation?.evaluationCategory10}
+                  </Text>
                 </EvaluationBox>
               </>
             ) : (

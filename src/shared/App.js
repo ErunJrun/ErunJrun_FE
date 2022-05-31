@@ -8,15 +8,15 @@ import { useDispatch } from "react-redux";
 import { loginCheckDB } from "../redux/modules/user";
 
 //css, library, package
-import styled from "styled-components";
+import ScrollToTop from "./ScrollToTop";
 import "./GlobalStyles";
+import styled from "styled-components";
 
 //cookie
 import { getCookie } from "./Cookie";
 
-//페이지 전환
-import ScrollToTop from "./ScrollToTop";
-import { Spinner, LogoSpinner } from "../elements";
+//elements
+import { Spinner } from "../elements";
 
 //page
 import CourseUpload from "../pages/CourseUpload";

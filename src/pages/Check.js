@@ -1,36 +1,42 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
-import { Text, Grid } from "../elements";
+import { Redirect, useParams, useLocation } from "react-router-dom";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import { getAttendDB, patchAttendDB } from "../redux/modules/mypage";
-import styled from "styled-components";
-import { Redirect, useParams } from "react-router-dom";
-import { getCookie } from "../shared/Cookie";
-import { useLocation } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
-import backBtn from "../assets/groupFeed/backBtn.svg";
+
+//css, library, package
 import swal from "sweetalert";
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//Image
+import backBtn from "../assets/groupFeed/backBtn.svg";
+
+//cookie
+import { getCookie } from "../shared/Cookie";
+
+//elements
+import { Text, Grid } from "../elements";
 
 const Check = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
+
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
-  const id = localStorage.getItem("userId");
-  const from = localStorage.getItem("from");
-  const isLogin = useSelector((state) => state.user.isLogin);
-  const token = getCookie("accessToken");
-
-  //페이지 정보
   const { pathname } = useLocation();
 
-  const check_list = useSelector((state) => state.mypage.attend);
+  const token = getCookie("accessToken");
+  const id = localStorage.getItem("userId");
+  const from = localStorage.getItem("from");
 
   const [userId, setUserId] = useState([]);
+
+  const check_list = useSelector((state) => state.mypage.attend);
 
   const choiceTime = (e, index) => {
     if (e.target.checked) {

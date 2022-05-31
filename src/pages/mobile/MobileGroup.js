@@ -1,12 +1,20 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
 import { getRunningDB, getEvaluationDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
-import { Text, Grid, Image, IconButton } from "../../elements";
-import styled from "styled-components";
 import { history } from "../../redux/configureStore";
-import { useParams } from "react-router-dom";
+
+//css, library, package
 import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//Image
 import backBtn from "../../assets/groupFeed/backBtn.svg";
+
+//elements
+import { Text, Grid } from "../../elements";
 
 const MobileGroup = () => {
   const isMobile = useMediaQuery({
@@ -16,6 +24,7 @@ const MobileGroup = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const userId = params.userId;
+
   const myId = localStorage.getItem("userId");
 
   const running = useSelector((state) => state.mypage.group);

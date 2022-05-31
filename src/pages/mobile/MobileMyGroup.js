@@ -1,13 +1,21 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import { Text, Grid } from "../../elements";
-import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { getAttendDB, getMyRunningDB } from "../../redux/modules/mypage";
-import { useParams } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
-import backBtn from "../../assets/groupFeed/backBtn.svg";
+
+//css, library, package
 import swal from "sweetalert";
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//Image
+import backBtn from "../../assets/groupFeed/backBtn.svg";
+
+//elements
+import { Text, Grid } from "../../elements";
 
 const MobileMyGroup = () => {
   const isMobile = useMediaQuery({
@@ -15,9 +23,10 @@ const MobileMyGroup = () => {
   });
 
   const dispatch = useDispatch();
-  const hostId = localStorage.getItem("userId");
   const params = useParams();
   const userId = params.userId;
+
+  const hostId = localStorage.getItem("userId");
 
   const my = useSelector((state) => state.mypage.mygroup);
 

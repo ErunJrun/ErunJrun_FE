@@ -1,10 +1,18 @@
 import React from "react";
+
+//Redux
 import { useSelector } from "react-redux";
-import { Text, Grid } from "../../elements";
-import styled from "styled-components";
 import { history } from "../../redux/configureStore";
+
+//css, library, package
 import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//Image
 import backBtn from "../../assets/groupFeed/backBtn.svg";
+
+//elements
+import { Text, Grid } from "../../elements";
 
 const MobileSchedule = () => {
   const isMobile = useMediaQuery({
@@ -12,6 +20,7 @@ const MobileSchedule = () => {
   });
 
   const profile_list = useSelector((state) => state.mypage.list);
+
   if (profile_list.length === 0) {
     return <></>;
   }

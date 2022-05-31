@@ -1,14 +1,22 @@
 import React from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import { Text, Grid, Image, IconButton } from "../../elements";
 import { bookmarkDB } from "../../redux/modules/course";
 import { history } from "../../redux/configureStore";
+
+//css, library, package
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
+
+//Image
 import backBtn from "../../assets/groupFeed/backBtn.svg";
 import starIcon from "../../assets/courseFeed/star.svg";
 import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
 import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
+
+//elements
+import { Text, Grid } from "../../elements";
 
 const MobileCourse = () => {
   const isMobile = useMediaQuery({

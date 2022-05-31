@@ -1,8 +1,7 @@
 import Image from "./Image";
 import Text from "./Text";
 import Grid from "./Grid";
-import Input from "./Input";
 import Spinner from "./Spinner";
 import IconButton from "./IconButton";
 
-export { Image, Text, Grid, Input, Spinner, IconButton };
+export { Image, Text, Grid, Spinner, IconButton };

@@ -348,20 +348,6 @@ const CourseUploadStep2 = (props) => {
               );
             })}
           </Grid>
-          {/* <Grid display="flex" alignItems="center" margin="16px 0 32px 0">
-            <IconButton
-              waring
-              color="#FF2D55"
-              size="19.21"
-              height="19.2px"
-              width="16px"
-              margin="0 8px 0 0"
-            />
-            <Text width="auto" color="#FF2D55" bold margin="0">
-              이미지를 추가하지 않는 경우, 러닝타입에 따른 기본 썸네일이
-              사용됩니다.
-            </Text>
-          </Grid> */}
 
           <MidHr />
 

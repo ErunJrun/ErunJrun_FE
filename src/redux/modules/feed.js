@@ -180,7 +180,7 @@ export const getPreferDB = (page = 1, size = 6) => {
     //   return;
     // }
     // dispatch(loading(true));
-
+    dispatch(resetGroup());
     try {
       const { data } = await api.get(`/group/prefer?page=${page}&size=${size}`);
 

@@ -22,22 +22,13 @@ import styled from "styled-components";
 //Image
 import filterIcon from "../assets/groupFeed/filterIcon.svg";
 import categoryLine from "../assets/groupFeed/categoryLine.svg";
-import inputArrowGray from "../assets/groupUpload/inputArrowGray.svg";
 import noSearchData from "../assets/groupFeed/noSearchData.svg";
 import upload from "../assets/groupFeed/groupUploadBtn1.png";
 import uploadHover from "../assets/groupFeed/groupUploadBtn2.png";
 import pageUp from "../assets/groupFeed/pageUpBtn.png";
-import shoesYellow from "../assets/groupFeed/shoesYellow.svg";
 
 //elements
-import {
-  Grid,
-  IconButton,
-  Text,
-  Input,
-  Spinner,
-  LogoSpinner,
-} from "../elements";
+import { Grid, Text } from "../elements";
 
 //components
 import GroupFilter from "../components/groupFeed/GroupFilter";
