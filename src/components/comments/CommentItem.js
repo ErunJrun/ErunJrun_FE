@@ -423,7 +423,7 @@ const CommentItem = (props) => {
                 size="12px"
                 cursor="pointer"
               >
-                답글 {recommentList?.length}개
+                답글 {props.recommentCount}개
               </Text>
               <Permit>
                 <Text
@@ -582,7 +582,7 @@ const CommentItem = (props) => {
                 size="12px"
                 cursor="pointer"
               >
-                답글 {recommentList?.length}개
+                답글 {props.recommentCount}개
               </Text>
 
               <Permit>

@@ -1,7 +1,7 @@
 import { api } from "../../shared/Api";
 import { produce } from "immer";
 import { handleActions } from "redux-actions";
-import { _getReCommentFX } from "./recomments";
+import { resetReComm, _getReCommentFX } from "./recomments";
 import swal from "sweetalert";
 
 // Action
@@ -56,6 +56,8 @@ const initialState = {
 // 미들웨어
 export const _getCommentFX = (category, categoryId) => {
   return async function (dispatch, getState, { history }) {
+    dispatch(resetComm());
+    dispatch(resetReComm());
     try {
       const { data } = await api.get(`/comment/${category}/${categoryId}`);
       let comment_list = [];
