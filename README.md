@@ -193,8 +193,8 @@
 <br/>
 
 ## 🔥 Trouble shooting
-
-### issue1: JWT 액세스,리프레쉬 토큰 관리
+<details>
+<summary><strong> issue1: JWT 액세스,리프레쉬 토큰 관리 </strong></summary>
 
 #### 🙁 situation
 
@@ -209,8 +209,10 @@
 
 - request 요청에 대한 인터셉터를 만들어 자동으로 모든 요청에 두가지의 토큰을 전달
 - response가 실패 시 액세스토큰이 만료되어 재발급 되는 경우면 새토큰을 쿠키에 저장하고 본래의 요청을 다시 요청하는 인터셉터 구성
+</details>
 
-### issue2: 게시물 등록 시 각 단계별 데이터 전역 관리
+<details>
+<summary><strong> issue2: 게시물 등록 시 각 단계별 데이터 전역 관리 </strong></summary>
 
 #### 🙁 situation
 
@@ -223,7 +225,26 @@
 #### 🚥 solution
 
 - 상속된 컴포넌트가 많고 부모,자식 컴포넌트의 원활한 데이터 전역 관리를 위한 리덕스 활용
+</details>
 
+<details>
+<summary><strong> issue3: 이미지 업로드 속도 </strong></summary>
+
+#### 🙁 situation
+
+- 서비스 특성상 게시물(그룹러닝/코스추천) 등록 시 다중 사진 업로드로 고화질 이미지 업로드의 가능성이 있음
+
+#### 🛑 cause
+
+- 유저 테스트 결과 2mb가 넘거나 스마트폰 후면카메라로 찍을 시 5mb가 넘는 사진들이 업로드 될 시 업로드가 오래 걸려 유저가 등록 후 오류로 인식하는 상황 발생
+
+#### 🚥 solution
+
+-  browser-image-compression 라이브러리로 1장,2장,3장 업로드 되는 각각의 상황을 고려하여 이미지를 압축한 후 서버로 전달
+  -> 데스크탑 테스트 결과 5Mb가 넘는 사진은 1Mb 이내로 용량을 압축하였고 업로드 속도를 50% 이상 줄여 업로드 속도 개선
+</details>
+
+<br></br>
 ## 🌸 More Info
 
 [🌿 프로젝트 소개 문서]  
