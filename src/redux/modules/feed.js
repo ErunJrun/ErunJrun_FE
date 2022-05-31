@@ -227,7 +227,6 @@ export const addGroupDB = (
   distance
 ) => {
   return async function (dispatch, getState, { history }) {
-    console.log(thumbnail);
     const formData = new FormData();
     thumbnail?.map((e, idx) => {
       return formData.append("thumbnail", e);
