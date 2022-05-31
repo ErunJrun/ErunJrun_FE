@@ -115,7 +115,7 @@ const CourseUpload = () => {
         const compressedFile1 = [await imageCompression(thumbnail[0], options)];
 
         dispatch(
-          addGroupDB(location, compressedFile1, contents, address, distance)
+          addCourseDB(location, compressedFile1, contents, address, distance)
         );
         dispatch(imgActions.resetFile());
       } catch (error) {
@@ -132,7 +132,7 @@ const CourseUpload = () => {
         resizeImage.push(compressedFile1, compressedFile2);
 
         dispatch(
-          addGroupDB(location, resizeImage, contents, address, distance)
+          addCourseDB(location, resizeImage, contents, address, distance)
         );
         dispatch(imgActions.resetFile());
       } catch (error) {
@@ -150,7 +150,7 @@ const CourseUpload = () => {
         resizeImage.push(compressedFile1, compressedFile2, compressedFile3);
 
         dispatch(
-          addGroupDB(location, resizeImage, contents, address, distance)
+          addCourseDB(location, resizeImage, contents, address, distance)
         );
         dispatch(imgActions.resetFile());
       } catch (error) {
