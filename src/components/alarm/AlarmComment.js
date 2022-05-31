@@ -26,12 +26,7 @@ const AlarmComment = (props) => {
               margin="0 0 5px 0"
               justifyContent="flex-start"
             >
-              <Text 
-                bold
-                margin="0 8px 0 0" 
-                size="9px" 
-                display="inline"
-              >
+              <Text bold margin="0 8px 0 0" size="9px" display="inline">
                 댓글등록
               </Text>
               <Text
@@ -114,24 +109,13 @@ const AlarmComment = (props) => {
             margin="0 0 10px 0"
             justifyContent="flex-start"
           >
-            <Text 
-              bold 
-              margin="0 8px 0 0" 
-              size="14px" 
-              display="inline"
-            >
+            <Text bold margin="0 8px 0 0" size="14px" display="inline">
               댓글등록
             </Text>
-            <Text 
-              bold
-              margin="0" 
-              size="12px" 
-              color="#828282" 
-              display="inline"
-            >
+            <Text bold margin="0" size="12px" color="#828282" display="inline">
               {props?.createdAt}
             </Text>
-            {!props?.check ? <NewDot /> : <NoneDot />}
+            {!props?.check ? <NewDot /> : null}
           </Grid>
 
           <Grid
@@ -153,7 +137,9 @@ const AlarmComment = (props) => {
                 cursor="pointer"
                 margin="0"
               >
-                <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span>
+                <span style={{ color: "#000", fontWeight: "700" }}>
+                  {props?.groupTitle}
+                </span>
                 {"   "}
                 게시물에 댓글이 달렸습니다.
               </Text>
@@ -165,8 +151,10 @@ const AlarmComment = (props) => {
                 cursor="pointer"
                 margin="0"
               >
-                <span style={{ color: "#000", fontWeight: "700" }}>{props?.groupTitle}</span> 의
-                {"   "}
+                <span style={{ color: "#000", fontWeight: "700" }}>
+                  {props?.groupTitle}
+                </span>{" "}
+                의{"   "}
                 <span style={{ color: "#000", fontWeight: "400" }}>
                   {props?.commentContent}
                 </span>

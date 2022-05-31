@@ -9,7 +9,6 @@ import { getGroupDetailDB } from "../redux/modules/feed";
 
 //css, library, package
 import styled from "styled-components";
-import { useMediaQuery } from "react-responsive";
 
 //Image
 import shareIcon from "../assets/groupDetail/share.svg";
