@@ -1,26 +1,38 @@
 import React, { useEffect, useState } from "react";
-import ImagesUpload from "../components/groupUpload/ImagesUpload";
-import KakaoMap from "../components/groupUpload/KakaoMap";
-import GroupUpContent from "../components/groupUpload/GroupUpContent";
-import styled from "styled-components";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { addGroupDB } from "../redux/modules/feed";
 import { history } from "../redux/configureStore";
-import { Grid, IconButton, Text } from "../elements";
 import { imgActions } from "../redux/modules/image";
+import { resetMap } from "../redux/modules/uploadInfo";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+import imageCompression from "browser-image-compression";
+import swal from "sweetalert";
+import { Link } from "react-scroll";
+import styled from "styled-components";
+
+//Image
 import step1 from "../assets/groupUpload/step1.png";
 import step2 from "../assets/groupUpload/step2.png";
 import step3 from "../assets/groupUpload/step3.png";
 import groupRightBtn from "../assets/groupUpload/groupRightBtn.png";
 import groupLeftBtn from "../assets/groupUpload/groupLeftBtn.png";
-import { Link } from "react-scroll";
-import { resetMap } from "../redux/modules/uploadInfo";
-import swal from "sweetalert";
-import { useMediaQuery } from "react-responsive";
-import GroupUploadMob from "./GroupUploadMob";
-import { getCookie } from "../shared/Cookie";
 import inputArrowGray from "../assets/groupUpload/inputArrowGray.svg";
-import imageCompression from "browser-image-compression";
+
+//cookie
+import { getCookie } from "../shared/Cookie";
+
+//elements
+import { Grid, IconButton, Text } from "../elements";
+
+//components
+import ImagesUpload from "../components/groupUpload/ImagesUpload";
+import KakaoMap from "../components/groupUpload/KakaoMap";
+import GroupUpContent from "../components/groupUpload/GroupUpContent";
+import GroupUploadMob from "./GroupUploadMob";
 
 const GroupUpload = () => {
   const isMobile = useMediaQuery({
@@ -133,7 +145,7 @@ const GroupUpload = () => {
       useWebWorker: true,
     };
     if (thumbnail.length === 0) {
-      return;
+      dispatch(addGroupDB(location, thumbnail, contents, address, distance));
     }
 
     if (thumbnail.length === 1) {

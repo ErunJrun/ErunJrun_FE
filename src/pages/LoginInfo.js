@@ -1,21 +1,29 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Text, Grid } from "../elements";
-import styled from "styled-components";
+
+//Redux
 import { useDispatch } from "react-redux";
-import { loginCheckDB, loginInfoDB } from "../redux/modules/user";
-import LevelBox from "../components/groupDetail/LevelBox";
-import LevelShoes from "../components/LevelShoes";
+import { loginInfoDB } from "../redux/modules/user";
+import { history } from "../redux/configureStore";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+import swal from "sweetalert";
+
+//Image
 import runStyleCharacterMob from "../assets/loginInfo/runStyleCharacterMob.png";
 import runStyleCharacter from "../assets/loginInfo/runStyleCharacter.png";
-import { history } from "../redux/configureStore";
-import Ready from "../shared/Ready";
 import headerLogo from "../assets/header/headerLogo.png";
 
+//cookie
 import { getCookie } from "../shared/Cookie";
 
-import { useMediaQuery } from "react-responsive";
+//elements
+import { Text, Grid } from "../elements";
 
-import swal from "sweetalert";
+//components
+import LevelBox from "../components/groupDetail/LevelBox";
+import LevelShoes from "../components/LevelShoes";
 
 const LoginInfo = () => {
   const isMobile = useMediaQuery({

@@ -1,27 +1,39 @@
 import React, { useEffect, useState } from "react";
-import ImagesUpload from "../components/groupUpload/ImagesUpload";
-import KakaoMap from "../components/groupUpload/KakaoMap";
-import GroupUpContentMob from "../components/groupUpload/GroupUpContentMob";
-import styled from "styled-components";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { addGroupDB } from "../redux/modules/feed";
 import { history } from "../redux/configureStore";
-import { Grid, IconButton, Text } from "../elements";
 import { imgActions } from "../redux/modules/image";
+import { resetMap } from "../redux/modules/uploadInfo";
+
+//css, library, package
+import { Link } from "react-scroll";
+import swal from "sweetalert";
+import styled from "styled-components";
+import imageCompression from "browser-image-compression";
+
+//Image
 import step1Mob from "../assets/groupUpload/step1Mob.svg";
 import step2Mob from "../assets/groupUpload/step2Mob.svg";
 import step3Mob from "../assets/groupUpload/step3Mob.svg";
 import backBtn from "../assets/groupFeed/backBtn.svg";
 import groupRightBtn from "../assets/groupUpload/groupRightBtn.png";
 import groupLeftBtn from "../assets/groupUpload/groupLeftBtn.png";
-import { Link } from "react-scroll";
-import { resetMap } from "../redux/modules/uploadInfo";
-import swal from "sweetalert";
-import KakaoMapMob from "../components/groupUpload/KakaoMapMob";
 import groupLeftBtnBlack from "../assets/groupUpload/groupLeftBtnBlack.svg";
 import groupRightBtnWhite from "../assets/groupUpload/groupRightBtnWhite.svg";
+
+//cookie
 import { getCookie } from "../shared/Cookie";
-import imageCompression from "browser-image-compression";
+
+//elements
+import { Grid, IconButton, Text } from "../elements";
+
+//components
+import ImagesUpload from "../components/groupUpload/ImagesUpload";
+import KakaoMap from "../components/groupUpload/KakaoMap";
+import GroupUpContentMob from "../components/groupUpload/GroupUpContentMob";
+import KakaoMapMob from "../components/groupUpload/KakaoMapMob";
 
 const GroupUploadMob = () => {
   const dispatch = useDispatch();

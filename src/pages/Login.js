@@ -1,23 +1,32 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+//Redux
+import { useSelector } from "react-redux";
+import { history } from "../redux/configureStore";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
-import { Grid, Text } from "../elements";
+
+//Image
 import KakaoLogin from "../assets/KakaoLogin.png";
 import NaverLogin from "../assets/NaverLogin.png";
 import kakaoLoginMob from "../assets/kakaoLoginMob.png";
 import naverLoginMob from "../assets/naverLoginMob.png";
-import { history } from "../redux/configureStore";
 import LoginLogo from "../assets/loginLogo.svg";
 import loginLogoMob from "../assets/loginLogoMob.png";
+
+//cookie
 import { getCookie, setCookie } from "../shared/Cookie";
-import { useMediaQuery } from "react-responsive";
+
+//elements
+import { Grid, Text } from "../elements";
 
 const Login = ({ location }) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
 
-  const dispatch = useDispatch();
   const naverClinetId = process.env.REACT_APP_NAVER_CLIENT_ID;
   const naverCallbackUrl = process.env.REACT_APP_NAVER_CALLBACK_URL;
   const kakaoClientId = process.env.REACT_APP_KAKAO_LOGIN_ID;

@@ -35,10 +35,6 @@ const Check = lazy(() => import("../pages/Check"));
 const LoginInfo = lazy(() => import("../pages/LoginInfo"));
 const MypageEdit = lazy(() => import("../pages/MypageEdit"));
 const GroupEdit = lazy(() => import("../pages/GroupEdit"));
-const ServiceInfo = lazy(() => import("../pages/ServiceInfo"));
-const Contact = lazy(() => import("../pages/Contact"));
-const ServiceTerms = lazy(() => import("../pages/ServiceTerms"));
-const PrivacyPolicy = lazy(() => import("../pages/PrivacyPolicy"));
 const CourseFeed = lazy(() => import("../pages/CourseFeed"));
 const Evaluation = lazy(() => import("../pages/Evaluation"));
 const MobileEvaluation = lazy(() => import("../pages/mobile/MobileEvaluation"));
@@ -86,10 +82,6 @@ function App() {
               component={CourseDetail}
             />
             <Route path="/courseUpload" exact component={CourseUpload} />
-            <Route path="/contact" exact component={Contact} />
-            <Route path="/serviceInfo" exact component={ServiceInfo} />
-            <Route path="/serviceTerms" exact component={ServiceTerms} />
-            <Route path="/privacyPolicy" exact component={PrivacyPolicy} />
             <Route path="/evaluation/:groupId" exact component={Evaluation} />
             <Route path="/m/evaluation" exact component={MobileEvaluation} />
             <Route

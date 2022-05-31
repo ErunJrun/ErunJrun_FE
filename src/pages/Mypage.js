@@ -1,32 +1,44 @@
 import React, { useState, useEffect } from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
+import { history } from "../redux/configureStore";
+import { loginCheckDB, logoutDB } from "../redux/modules/user";
 import { useParams } from "react-router-dom";
-import { 
-  getProfileDB, 
-  resetProfile, 
+import {
+  getProfileDB,
+  resetProfile,
   getMyRunningDB,
   getRunningDB,
   getMyBookmarkDB,
   getMyCourseDB,
- } from "../redux/modules/mypage";
+} from "../redux/modules/mypage";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+import swal from "sweetalert";
+
+//cookie
+import { getCookie } from "../shared/Cookie";
+
+//elements
+import { Text, Grid } from "../elements";
+
+//components
 import Profile from "../components/myPage/Profile";
 import HostEvaluation from "../components/myPage/HostEvaluation";
-import styled from "styled-components";
-import { Text, Grid } from "../elements";
 import Tabs from "../components/myPage/Tabs";
-import { getCookie } from "../shared/Cookie";
-import { useMediaQuery } from "react-responsive";
-import { history } from "../redux/configureStore";
-import { loginCheckDB, logoutDB } from "../redux/modules/user";
-import swal from "sweetalert";
 
 const Mypage = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
+
   const dispatch = useDispatch();
   const params = useParams();
   const userId = params.userId;
+
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
 
@@ -37,10 +49,6 @@ const Mypage = () => {
     dispatch(getRunningDB(userId));
     dispatch(getMyBookmarkDB(userId));
     dispatch(getMyCourseDB(userId));
-
-    return () => {
-      //dispatch(resetProfile());
-    };
   }, []);
 
   if (isMobile) {
@@ -57,16 +65,8 @@ const Mypage = () => {
             <_Hr />
             <HostEvaluation />
             <_Hr />
-            <Grid 
-              margin="0px auto 0 0px" 
-              lineHeight="24px" 
-              width="350px"
-            >
-              <Text 
-                bold 
-                size="14px" 
-                margin="24px 0 24px 0"
-              >
+            <Grid margin="0px auto 0 0px" lineHeight="24px" width="350px">
+              <Text bold size="14px" margin="24px 0 24px 0">
                 나의 그룹 러닝
               </Text>
               <Text
@@ -106,16 +106,8 @@ const Mypage = () => {
 
             <_Hr />
 
-            <Grid 
-              margin="0px auto 5px 0px" 
-              lineHeight="24px" 
-              width="350px"
-            >
-              <Text 
-                bold 
-                size="14px"
-                margin="24px 0 24px 0"
-              >
+            <Grid margin="0px auto 5px 0px" lineHeight="24px" width="350px">
+              <Text bold size="14px" margin="24px 0 24px 0">
                 나의 추천 코스
               </Text>
               <Text
@@ -182,10 +174,7 @@ const Mypage = () => {
             </Grid>
             <_Hr />
 
-            <Grid 
-              margin="-2px 0 0 20px" 
-              lineHeight="24px"
-            >
+            <Grid margin="-2px 0 0 20px" lineHeight="24px">
               <Text bold size="14px">
                 나의 그룹 러닝
               </Text>
@@ -244,10 +233,7 @@ const Mypage = () => {
 
             <Hr />
 
-            <Grid 
-              margin="0 0 0 20px" 
-              lineHeight="24px"
-            >
+            <Grid margin="0 0 0 20px" lineHeight="24px">
               <Text bold size="14px">
                 나의 추천 코스
               </Text>
