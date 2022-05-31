@@ -1,36 +1,43 @@
-/* eslint-disable react/jsx-pascal-case */
 import React from "react";
-import styled from "styled-components";
-import errorPage from "../assets/errorPage.png";
-import { Text, Grid } from "../elements";
+
+//Redux
 import { history } from "../redux/configureStore";
+
+//css, library, package
+import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
+
+//image
+import errorPage from "../assets/errorPage.png";
+
+//elements
+import { Text, Grid } from "../elements";
 
 const Ready = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
 
-  if(isMobile) {
+  if (isMobile) {
     return (
       <Grid
         display="flex"
         justifyContent="center"
         width="343px"
         margin="30px auto "
+      >
+        <_ErrImg src={errorPage}></_ErrImg>
+        <Text size="18px" bold margin="0">
+          <span style={{ color: "#68F99E" }}>이RUN 저RUN</span> 페이지
+          준비중입니다.
+        </Text>
+        <_Btn
+          onClick={() => {
+            history.push("/");
+          }}
         >
-          <_ErrImg src={errorPage}></_ErrImg>
-          <Text size="18px" bold margin="0">
-            <span style={{ color: "#68F99E" }}>이RUN 저RUN</span> 페이지
-            준비중입니다.
-          </Text>
-          <_Btn
-            onClick={() => {
-              history.push("/");
-            }}
-          >
-            홈으로 돌아가기
-          </_Btn>
+          홈으로 돌아가기
+        </_Btn>
       </Grid>
     );
   }
@@ -74,7 +81,6 @@ const _ErrImg = styled.img`
   height: 156px;
   margin: 130px auto 40px auto;
 `;
-
 
 const Btn = styled.button`
   cursor: pointer;

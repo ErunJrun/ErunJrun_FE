@@ -5,15 +5,17 @@ import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
+import { loginCheckDB } from "../redux/modules/user";
+
+//css, library, package
+import styled from "styled-components";
+
+//cookie
+import { getCookie } from "./Cookie";
 
 //페이지 전환
 import ScrollToTop from "./ScrollToTop";
 import { Spinner, LogoSpinner } from "../elements";
-
-import { loginCheckDB } from "../redux/modules/user";
-import { getCookie } from "./Cookie";
-//css
-import styled from "styled-components";
 
 //page
 import CourseUpload from "../pages/CourseUpload";
@@ -29,7 +31,6 @@ const GroupDetail = lazy(() => import("../pages/GroupDetail"));
 const KakaoLogin = lazy(() => import("../components/login/KakaoLogin"));
 const NaverLogin = lazy(() => import("../components/login/NaverLogin"));
 const Recommend = lazy(() => import("../pages/Recommend"));
-const Badge = lazy(() => import("../pages/Badge"));
 const Check = lazy(() => import("../pages/Check"));
 const LoginInfo = lazy(() => import("../pages/LoginInfo"));
 const MypageEdit = lazy(() => import("../pages/MypageEdit"));
@@ -74,7 +75,6 @@ function App() {
             <Route path="/naver" exact component={NaverLogin}></Route>
             <Route path="/groupdetail/:groupId" exact component={GroupDetail} />
             <Route path="/mypage/recommend" exact component={Recommend} />
-            <Route path="/mypage/badge" exact component={Badge} />
             <Route path="/check/:groupId" exact component={Check} />
             <Route path="/loginInfo" exact component={LoginInfo} />
             <Route path="/groupEdit/:groupId" exact component={GroupEdit} />

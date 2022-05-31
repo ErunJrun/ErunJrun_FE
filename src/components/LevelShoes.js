@@ -1,5 +1,9 @@
 import React from "react";
+
+//css, library, package
 import styled from "styled-components";
+
+//Image
 import shoesBlack from "../assets/loginInfo/shoesBlack.png";
 import levelBlue from "../assets/loginInfo/shoesBlue.png";
 import shoesOrange from "../assets/loginInfo/shoesOrange.png";

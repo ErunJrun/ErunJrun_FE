@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
 
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileDB } from "../redux/modules/mypage";
+
+//css, library, package
+import styled from "styled-components";
+
+//Modal
 import ModalPortal from "../shared/modal/ModalPortal";
 import ProfileModal from "../shared/modal/ProfileModal";
-import { getProfileDB } from "../redux/modules/mypage";
-import { Grid } from "../elements";
 
 const Modal = () => {
   const dispatch = useDispatch();
+
   const profile = localStorage.getItem("profileUrl");
   const userId = localStorage.getItem("userId");
-  const profile_list = useSelector((state) => state.mypage.list);
 
   const [modal, setModal] = useState(false);
 
