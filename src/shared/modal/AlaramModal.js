@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 
-// 라이브러리, 패키지
+//css, library, package
 import styled from "styled-components";
-import { Text } from "../../elements";
-import { history } from "../../redux/configureStore";
-import { logoutDB } from "../../redux/modules/user";
+import { useMediaQuery } from "react-responsive";
 
-// 모달
+//Modal
 import ModalPortal from "./ModalPortal";
 
+//elements
+import { Text } from "../../elements";
+
+//components
 import AlarmStart from "../../components/alarm/AlarmStart";
 import AlarmComment from "../../components/alarm/AlarmComment";
 import AlarmUpdate from "../../components/alarm/AlarmUpdate";
-
-import { useMediaQuery } from "react-responsive";
 
 const AlarmModal = ({ onClose }) => {
   const isMobile = useMediaQuery({

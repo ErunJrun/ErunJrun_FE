@@ -103,10 +103,7 @@ function SwipeableTextMobileStepper() {
     setCookie("introModal", false, 24);
   };
 
-  if (
-    (isMobile && introModal === "true") ||
-    (isMobile && introModal === null)
-  ) {
+  if (isMobile) {
     return (
       <Grid display="flex" justifyContent="center" width="355px">
         {modal && (
@@ -194,85 +191,89 @@ function SwipeableTextMobileStepper() {
     );
   }
 
-  return (
-    <>
-      {modal && (
-        <Overlaye>
-          <Wrap>
-            <Box sx={{ maxWidth: 1000, height: 700, flexGrow: 1, zIndex: "3" }}>
-              <AutoPlaySwipeableViews
-                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents
-                sx={{ zIndex: "2" }}
+  if (!isMobile) {
+    return (
+      <>
+        {modal && (
+          <Overlaye>
+            <Wrap>
+              <Box
+                sx={{ maxWidth: 1000, height: 700, flexGrow: 1, zIndex: "3" }}
               >
-                {images.map((step, index) => (
-                  <div key={step.label}>
-                    {Math.abs(activeStep - index) <= 2 ? (
-                      <Box
-                        component="img"
-                        sx={{
-                          height: "700px",
-                          display: "block",
-                          overflow: "hidden",
-                          width: "1000px",
-                          borderRadius: "6px",
-                        }}
-                        src={step.imgPath}
-                        alt={step.label}
-                      />
-                    ) : null}
-                  </div>
-                ))}
-              </AutoPlaySwipeableViews>
-              <MobileStepperBox>
-                <MobileStepper
-                  variant="dots"
-                  steps={7}
-                  position="static"
-                  activeStep={activeStep}
-                  sx={{
-                    width: 232,
-                    flexGrow: 1,
-                    position: "absolute",
-                    backgroundColor: "transparent",
-                  }}
-                  nextButton={
-                    <Button
-                      size="small"
-                      onClick={handleNext}
-                      disabled={activeStep === 6}
-                    >
-                      {theme.direction === "rtl" ? (
-                        <KeyboardArrowLeft />
-                      ) : (
-                        <KeyboardArrowRight />
-                      )}
-                    </Button>
-                  }
-                  backButton={
-                    <Button
-                      size="small"
-                      onClick={handleBack}
-                      disabled={activeStep === 0}
-                    >
-                      {theme.direction === "rtl" ? (
-                        <KeyboardArrowRight />
-                      ) : (
-                        <KeyboardArrowLeft />
-                      )}
-                    </Button>
-                  }
-                />
-              </MobileStepperBox>
-              <Btn onClick={toggleModal}>건너뛰기</Btn>
-            </Box>
-          </Wrap>
-        </Overlaye>
-      )}
-    </>
-  );
+                <AutoPlaySwipeableViews
+                  axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                  index={activeStep}
+                  onChangeIndex={handleStepChange}
+                  enableMouseEvents
+                  sx={{ zIndex: "2" }}
+                >
+                  {images.map((step, index) => (
+                    <div key={step.label}>
+                      {Math.abs(activeStep - index) <= 2 ? (
+                        <Box
+                          component="img"
+                          sx={{
+                            height: "700px",
+                            display: "block",
+                            overflow: "hidden",
+                            width: "1000px",
+                            borderRadius: "6px",
+                          }}
+                          src={step.imgPath}
+                          alt={step.label}
+                        />
+                      ) : null}
+                    </div>
+                  ))}
+                </AutoPlaySwipeableViews>
+                <MobileStepperBox>
+                  <MobileStepper
+                    variant="dots"
+                    steps={7}
+                    position="static"
+                    activeStep={activeStep}
+                    sx={{
+                      width: 232,
+                      flexGrow: 1,
+                      position: "absolute",
+                      backgroundColor: "transparent",
+                    }}
+                    nextButton={
+                      <Button
+                        size="small"
+                        onClick={handleNext}
+                        disabled={activeStep === 6}
+                      >
+                        {theme.direction === "rtl" ? (
+                          <KeyboardArrowLeft />
+                        ) : (
+                          <KeyboardArrowRight />
+                        )}
+                      </Button>
+                    }
+                    backButton={
+                      <Button
+                        size="small"
+                        onClick={handleBack}
+                        disabled={activeStep === 0}
+                      >
+                        {theme.direction === "rtl" ? (
+                          <KeyboardArrowRight />
+                        ) : (
+                          <KeyboardArrowLeft />
+                        )}
+                      </Button>
+                    }
+                  />
+                </MobileStepperBox>
+                <Btn onClick={toggleModal}>건너뛰기</Btn>
+              </Box>
+            </Wrap>
+          </Overlaye>
+        )}
+      </>
+    );
+  }
 }
 
 const MobileStepperBox = styled.div`

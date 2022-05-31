@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
-// 라이브러리, 패키지
-import styled from "styled-components";
-import { Text } from "../../elements";
+//Redux
+import { useDispatch } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { logoutDB } from "../../redux/modules/user";
 import {
@@ -12,8 +10,14 @@ import {
   getMyRunningDB,
 } from "../../redux/modules/mypage";
 
-// 모달
+//css, library, package
+import styled from "styled-components";
+
+//Modal
 import ModalPortal from "./ModalPortal";
+
+//elements
+import { Text } from "../../elements";
 
 const ProfileModal = ({ onClose }) => {
   const userId = localStorage.getItem("userId");
@@ -133,7 +137,7 @@ const Content = styled.div`
 `;
 
 const Hr = styled.div`
-  border-top: 1px solid #E4E4E4;
+  border-top: 1px solid #e4e4e4;
   width: 158px;
   margin: 0px 0px 12px 0px;
 `;
