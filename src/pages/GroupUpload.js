@@ -140,13 +140,12 @@ const GroupUpload = () => {
       try {
         const compressedFile1 = [await imageCompression(thumbnail[0], options)];
 
-        console.log(compressedFile1);
         dispatch(
           addGroupDB(location, compressedFile1, contents, address, distance)
         );
         dispatch(imgActions.resetFile());
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
 
@@ -154,7 +153,6 @@ const GroupUpload = () => {
       try {
         const compressedFile1 = await imageCompression(thumbnail[0], options);
         const compressedFile2 = await imageCompression(thumbnail[1], options);
-        console.log(compressedFile1, compressedFile2);
         let resizeImage = [];
 
         resizeImage.push(compressedFile1, compressedFile2);
@@ -164,7 +162,7 @@ const GroupUpload = () => {
         );
         dispatch(imgActions.resetFile());
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
 
@@ -182,7 +180,7 @@ const GroupUpload = () => {
         );
         dispatch(imgActions.resetFile());
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
   };

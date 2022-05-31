@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+
+//Redux
+
+//css, library, package
 import styled from "styled-components";
-import { Grid } from "../../elements";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -10,7 +13,12 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { useMediaQuery } from "react-responsive";
+
+//cookie
 import { getCookie, setCookie } from "../../shared/Cookie";
+
+//elements
+import { Grid } from "../../elements";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -82,9 +90,10 @@ function SwipeableTextMobileStepper() {
   });
 
   const theme = useTheme();
+  const introModal = getCookie("introModal");
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [modal, setModal] = useState(true);
-  const introModal = getCookie("introModal");
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

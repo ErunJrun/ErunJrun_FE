@@ -21,7 +21,6 @@ const CommentWrite = (props) => {
     }
 
     if (props.course) {
-      console.log("코스 댓글 등록");
       dispatch(_addCommentFX("course", props.courseId, comm));
       setComm("");
       return;
