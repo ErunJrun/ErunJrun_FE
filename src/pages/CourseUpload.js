@@ -1,28 +1,37 @@
 import React, { useEffect, useState } from "react";
-import ImagesUpload from "../components/groupUpload/ImagesUpload";
-import KakaoMap from "../components/groupUpload/KakaoMap";
-import GroupUpContent from "../components/groupUpload/GroupUpContent";
-import styled from "styled-components";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import { addGroupDB } from "../redux/modules/feed";
 import { history } from "../redux/configureStore";
-import { Grid, IconButton, Text } from "../elements";
 import { imgActions } from "../redux/modules/image";
+import { resetMap } from "../redux/modules/uploadInfo";
+import { addCourseDB } from "../redux/modules/course";
+
+//css, library, package
+import imageCompression from "browser-image-compression";
+import { Link } from "react-scroll";
+import swal from "sweetalert";
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//Image
 import step1 from "../assets/courseUpload/Step1.svg";
 import step2 from "../assets/courseUpload/Step2.svg";
 import step3 from "../assets/courseUpload/Step3.svg";
 import groupRightBtn from "../assets/groupUpload/groupRightBtn.png";
 import groupLeftBtn from "../assets/groupUpload/groupLeftBtn.png";
-import { Link } from "react-scroll";
-import { resetMap } from "../redux/modules/uploadInfo";
-import swal from "sweetalert";
-import { useMediaQuery } from "react-responsive";
-import GroupUploadMob from "./GroupUploadMob";
-import { getCookie } from "../shared/Cookie";
 import inputArrowGray from "../assets/groupUpload/inputArrowGray.svg";
+
+//cookie
+import { getCookie } from "../shared/Cookie";
+
+//elements
+import { Grid, IconButton, Text } from "../elements";
+
+//components
+import ImagesUpload from "../components/groupUpload/ImagesUpload";
+import KakaoMap from "../components/groupUpload/KakaoMap";
 import CourseUploadStep2 from "../components/courseUpload/CourseUploadStep2";
-import { addCourseDB } from "../redux/modules/course";
-import imageCompression from "browser-image-compression";
 
 const CourseUpload = () => {
   const isMobile = useMediaQuery({
@@ -31,33 +40,20 @@ const CourseUpload = () => {
 
   const dispatch = useDispatch();
 
+  const token = getCookie("accessToken");
+
   const [isLoaded1, setIsLoad1] = useState(false);
   const [isLoaded2, setIsLoad2] = useState(false);
   const [isLoaded3, setIsLoad3] = useState(false);
+  const [address, setAddress] = useState("");
 
   const location = useSelector((state) => state.uploadInfo.paths);
   const distance = useSelector((state) => state.uploadInfo.distance);
   const contents = useSelector((state) => state.uploadInfo.contents);
   const thumbnail = useSelector((state) => state.image.files);
-  const isLogin = useSelector((state) => state.user.isLogin);
-
-  const [address, setAddress] = useState("");
 
   const lat = location[0]?.lat;
   const lng = location[0]?.lng;
-
-  //위도 경도로 주소 추출
-  useEffect(() => {
-    let geocoder = new window.kakao.maps.services.Geocoder();
-
-    let coord = new window.kakao.maps.LatLng(lat, lng);
-    let callback = function (result, status) {
-      if (status === window.kakao.maps.services.Status.OK) {
-        setAddress(result[0].address.address_name);
-      }
-    };
-    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-  }, [lat]);
 
   const goNext2 = () => {
     if (location.length == 0) {
@@ -73,7 +69,6 @@ const CourseUpload = () => {
     setIsLoad2(false);
   };
 
-  // cosnt chattingRoomCheck = contents.chattingRoom.slice(6,)
   const goNext3 = () => {
     if (contents.title === "") {
       return swal("제목을 입력해주세요");
@@ -91,13 +86,11 @@ const CourseUpload = () => {
 
     setIsLoad2(false);
     setIsLoad3(true);
-    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const goBack2 = () => {
     setIsLoad2(true);
     setIsLoad3(false);
-    // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const addCoursePost = async () => {
@@ -159,11 +152,22 @@ const CourseUpload = () => {
     }
   };
 
+  //위도 경도 주소 추출
+  useEffect(() => {
+    let geocoder = new window.kakao.maps.services.Geocoder();
+
+    let coord = new window.kakao.maps.LatLng(lat, lng);
+    let callback = function (result, status) {
+      if (status === window.kakao.maps.services.Status.OK) {
+        setAddress(result[0].address.address_name);
+      }
+    };
+    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+  }, [lat]);
+
   useEffect(() => {
     dispatch(resetMap());
   }, []);
-
-  const token = getCookie("accessToken");
 
   useEffect(() => {
     if (!token) {
@@ -171,10 +175,6 @@ const CourseUpload = () => {
       history.push("/");
     }
   }, []);
-
-  // if (isMobile) {
-  //   return <GroupUploadMob />;
-  // }
 
   if (!isMobile) {
     if (!isLoaded1) {

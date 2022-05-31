@@ -9,6 +9,7 @@ import { loginCheckDB } from "../redux/modules/user";
 
 //css, library, package
 import styled from "styled-components";
+import "./GlobalStyles";
 
 //cookie
 import { getCookie } from "./Cookie";

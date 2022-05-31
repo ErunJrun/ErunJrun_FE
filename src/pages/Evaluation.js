@@ -1,24 +1,30 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { useLocation, Redirect, useParams } from "react-router-dom";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
+import { history } from "../redux/configureStore";
 import {
   getEvaluationDB,
   evaluationDB,
   getRunningDB,
 } from "../redux/modules/mypage";
-import styled from "styled-components";
-import { history } from "../redux/configureStore";
-import { Text, Grid } from "../elements";
+
+//css, library, package
+import swal from "sweetalert";
 import { AiOutlineClose } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
-import { getCookie } from "../shared/Cookie";
-import { useLocation } from "react-router-dom";
-import { Redirect } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import backBtn from "../assets/groupFeed/backBtn.svg";
-import swal from "sweetalert";
-
 import "../components/myPage/Evaluation.css";
-import { Button } from "react-scroll";
+import styled from "styled-components";
+
+//cookie
+import { getCookie } from "../shared/Cookie";
+
+//Image
+import backBtn from "../assets/groupFeed/backBtn.svg";
+
+//elements
+import { Text, Grid } from "../elements";
 
 const Evaluation = () => {
   const isMobile = useMediaQuery({
@@ -26,29 +32,20 @@ const Evaluation = () => {
   });
 
   const dispatch = useDispatch();
+  const params = useParams();
+  const groupId = params.groupId;
+  const { pathname } = useLocation();
+
+  const token = getCookie("accessToken");
+
+  const from = localStorage.getItem("from");
+  const userId = localStorage.getItem("userId");
+
   const [modal, setModal] = useState(true);
   const [checkModal, setCheckModal] = useState(false);
   const [emoji, setEmoji] = useState(true);
   const [evaluationCategory, setEvaluationCategory] = useState();
   const [point, setPoint] = useState(1);
-
-  const host = useSelector((state) => state.mypage.host);
-  const from = localStorage.getItem("from");
-  const userId = localStorage.getItem("userId");
-  const hostId = host?.hostUser?.user?.userId;
-  const token = getCookie("accessToken");
-  const { pathname } = useLocation();
-  const params = useParams();
-  const groupId = params.groupId;
-
-  const mpoint = () => {
-    if (emoji === true) {
-      setPoint(-1);
-    } else if (emoji === false) {
-      setPoint(1);
-    }
-  };
-
   const [likeCategory, setLikeCategory] = useState([
     "진행한 코스가 만족스러웠어요!",
     "사람들을 잘 이끌어줬어요!",
@@ -64,6 +61,17 @@ const Evaluation = () => {
     "변경사항을 안내해주지 않았어요.",
     "시간 약속을 잘 안지켰어요.",
   ]);
+
+  const host = useSelector((state) => state.mypage.host);
+  const hostId = host?.hostUser?.user?.userId;
+
+  const mpoint = () => {
+    if (emoji === true) {
+      setPoint(-1);
+    } else if (emoji === false) {
+      setPoint(1);
+    }
+  };
 
   const toggleModal = () => {
     setModal(!modal);
@@ -131,19 +139,15 @@ const Evaluation = () => {
                 history.go(-1);
               }}
             />
-            <Text 
-              margin="0 0 0 110px" 
-              bold 
-              size="16px"
-            >
+            <Text margin="0 0 0 110px" bold size="16px">
               크루장 평가
             </Text>
           </Grid>
         </Grid>
         <Grid width="100%" justifyContent="center">
-          {checkModal === false ? 
+          {checkModal === false ? (
             <_Wrap>
-              <_MyImage src={host?.hostUser?.user?.profileUrl}/>
+              <_MyImage src={host?.hostUser?.user?.profileUrl} />
               <Text bold size="15px" margin="16px 0 0 0">
                 {host?.hostUser?.user?.nickname}
               </Text>
@@ -153,250 +157,250 @@ const Evaluation = () => {
                 {host?.hostUser?.title} 를 &nbsp;함께함
               </Text>
 
-            {emoji ? (
-              <>
-                <Grid
-                  flexWrap="Wrap"
-                  width="100%"
-                  display="flex"
-                  justifyContent="center"
-                >
-                  <Grid 
-                    width="343px" 
-                    height="214px" 
-                    boxShadow=" 0px 0px 30px #ddd"
-                    borderRadius="16px"
-                    textAlign="center"
-                    margin="32px 0 0 0"
+              {emoji ? (
+                <>
+                  <Grid
+                    flexWrap="Wrap"
+                    width="100%"
+                    display="flex"
+                    justifyContent="center"
                   >
-                    <Text bold size="14px" margin="32px 0 0 0">
-                      {host?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
-                    </Text>
-                    <_Btn>
-                      <Icon>
-                        <Image
-                          style={{ margin: "5px 0 0 0" }}
-                          src="https://ifh.cc/g/DPpn4L.png"
-                        />
-                        <Text size="13px">
-                          좋았어요!
-                        </Text>
-                      </Icon>
-                      <Icon>
-                        <Image
-                          style={{ margin: "5px 0 0 0" }}
-                          src="https://ifh.cc/g/a8rsZ8.png"
-                          onClick={() => {
-                            change();
-                            mpoint();
-                          }}
-                        />
-                        <Text size="13px" color="#7b7b7b">
-                          아쉬웠어요.
-                        </Text>
-                      </Icon>
-                    </_Btn>
-                  </Grid>
-                </Grid>
-
-                <Grid
-                  flexWrap="Wrap"
-                  width="100%"
-                  display="flex"
-                  justifyContent="center"
-                >
-                  <Grid 
-                    width="343px" 
-                    height="382px" 
-                    boxShadow=" 0px 0px 30px #ddd"
-                    borderRadius="16px"
-                    textAlign="center"
-                    margin="32px 0 80px 0"
-                  >
-                    <Text bold size="14px" margin="32px 0 -32px 0">
-                    가장 좋았던 부분을 하나 선택해주세요.
-                    </Text>
                     <Grid
-                      flexWrap="Wrap"
-                      width="100%"
-                      display="flex"
-                      justifyContent="center"
-                      padding= "62px 0 60px 0"
+                      width="343px"
+                      height="214px"
+                      boxShadow=" 0px 0px 30px #ddd"
+                      borderRadius="16px"
+                      textAlign="center"
+                      margin="32px 0 0 0"
                     >
-                      {likeCategory.map((e, idx) => {
-                        return (
-                          <Fragment key={idx}>
-                            <_LabelDistance>
-                              <input
-                                onClick={() => {
-                                  choiceCategory(idx + 1);
-                                }}
-                                type="radio"
-                                name="likeCategory"
-                                value={e}
-                              ></input>
-                              <Text bold>{e}</Text>
-                            </_LabelDistance>
-                          </Fragment>
-                        );
-                      })}
+                      <Text bold size="14px" margin="32px 0 0 0">
+                        {host?.hostUser?.user?.nickname}님의 그룹 러닝은
+                        어땠나요?
+                      </Text>
+                      <_Btn>
+                        <Icon>
+                          <Image
+                            style={{ margin: "5px 0 0 0" }}
+                            src="https://ifh.cc/g/DPpn4L.png"
+                          />
+                          <Text size="13px">좋았어요!</Text>
+                        </Icon>
+                        <Icon>
+                          <Image
+                            style={{ margin: "5px 0 0 0" }}
+                            src="https://ifh.cc/g/a8rsZ8.png"
+                            onClick={() => {
+                              change();
+                              mpoint();
+                            }}
+                          />
+                          <Text size="13px" color="#7b7b7b">
+                            아쉬웠어요.
+                          </Text>
+                        </Icon>
+                      </_Btn>
                     </Grid>
                   </Grid>
-                
-                  <_EvaluationButton
-                    onClick={() => {
-                      CKModal();
-                    }}
-                  >
-                    평가완료
-                  </_EvaluationButton> 
-                </Grid>
-              </>
-            ) : (
-              <>
-                <Grid
-                  flexWrap="Wrap"
-                  width="100%"
-                  display="flex"
-                  justifyContent="center"
-                >
-                  <Grid 
-                    width="343px" 
-                    height="214px" 
-                    boxShadow=" 0px 0px 30px #ddd"
-                    borderRadius="16px"
-                    textAlign="center"
-                    margin="32px 0 0 0"
-                  >
-                    <Text bold size="14px" margin="32px 0 0 0">
-                      {host?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
-                    </Text>
-                    <_Btn>
-                      <Icon>
-                        <Image
-                          style={{ margin: "5px 0 0 0" }}
-                          src="https://ifh.cc/g/cmv5yP.png"
-                          onClick={() => {
-                            change();
-                            mpoint();
-                          }}
-                        />
-                        <Text size="13px"  color="#7b7b7b">
-                          좋았어요!
-                        </Text>
-                      </Icon>
-                      <Icon>
-                        <Image
-                          style={{ margin: "5px 0 0 0" }}
-                          src="https://ifh.cc/g/Nz1wV8.png"
-                        />
-                        <Text size="13px">
-                          아쉬웠어요.
-                        </Text>
-                      </Icon>
-                    </_Btn>
-                  </Grid>
-                </Grid>
 
-                <Grid
-                  flexWrap="Wrap"
-                  width="100%"
-                  display="flex"
-                  justifyContent="center"
-                >
-                  <Grid 
-                    width="343px" 
-                    height="382px" 
-                    boxShadow=" 0px 0px 30px #ddd"
-                    borderRadius="16px"
-                    textAlign="center"
-                    margin="32px 0 80px 0"
+                  <Grid
+                    flexWrap="Wrap"
+                    width="100%"
+                    display="flex"
+                    justifyContent="center"
                   >
-                    <Text bold size="14px" margin="32px 0 -32px 0">
-                      가장 아쉬웠던 부분을 하나 선택해주세요.
-                    </Text>
                     <Grid
-                      flexWrap="Wrap"
-                      width="100%"
-                      display="flex"
-                      justifyContent="center"
-                      padding= "62px 0 60px 0"
+                      width="343px"
+                      height="382px"
+                      boxShadow=" 0px 0px 30px #ddd"
+                      borderRadius="16px"
+                      textAlign="center"
+                      margin="32px 0 80px 0"
                     >
-                      {category.map((e, idx) => {
-                        return (
-                          <Fragment key={idx}>
-                            <_LabelDistance>
-                              <input
-                                onClick={() => {
-                                  choiceCategory(idx + 6);
-                                }}
-                                type="radio"
-                                name="category"
-                                value={e}
-                              ></input>
-                              <Text bold>{e}</Text>
-                            </_LabelDistance>
-                          </Fragment>
-                        );
-                      })}
+                      <Text bold size="14px" margin="32px 0 -32px 0">
+                        가장 좋았던 부분을 하나 선택해주세요.
+                      </Text>
+                      <Grid
+                        flexWrap="Wrap"
+                        width="100%"
+                        display="flex"
+                        justifyContent="center"
+                        padding="62px 0 60px 0"
+                      >
+                        {likeCategory.map((e, idx) => {
+                          return (
+                            <Fragment key={idx}>
+                              <_LabelDistance>
+                                <input
+                                  onClick={() => {
+                                    choiceCategory(idx + 1);
+                                  }}
+                                  type="radio"
+                                  name="likeCategory"
+                                  value={e}
+                                ></input>
+                                <Text bold>{e}</Text>
+                              </_LabelDistance>
+                            </Fragment>
+                          );
+                        })}
                       </Grid>
                     </Grid>
-                  <_EvaluationButton
-                    onClick={() => {
-                      CKModal();
-                    }}
+
+                    <_EvaluationButton
+                      onClick={() => {
+                        CKModal();
+                      }}
+                    >
+                      평가완료
+                    </_EvaluationButton>
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <Grid
+                    flexWrap="Wrap"
+                    width="100%"
+                    display="flex"
+                    justifyContent="center"
                   >
-                    평가완료
-                  </_EvaluationButton>   
-                </Grid>            
-              </>
-            )}
-          </_Wrap>
-          :
-          <_Wrap>
-            <MyImage style={{margin:"150px 0 0 0"}} src={host?.hostUser?.user?.profileUrl} />
-            <Text bold size="15px" margin="16px 0 0 0">
-              {host?.hostUser?.user?.nickname}
-            </Text>
-            <Text 
-              bold 
-              size="14px" 
-              margin="40px 0 0 0"
-            >
-              크루장 평가가 완료되었습니다.<br/>
-              평가해주셔서 감사합니다!
-            </Text>
-            <Grid
-              flexWrap="Wrap"
-              width="100%"
-              display="flex"
-              justifyContent="center"
-            >
-              <Grid 
-                width="200px" 
-                height="44px" 
-                margin="168px 0 100px 0px"
-                bg="#030c37"
-                padding="12px 0 0 0"
-                _onClick={() => {
-                  toggleModal();
-                  dispatch(
-                    evaluationDB(groupId, hostId, point, evaluationCategory, userId)
-                  );
-                  dispatch(getRunningDB(userId));                 
-                }}>
-                <Text
-                  size="14px"
-                  color="#fff"
-                  margin="0 0 100px 0px"
+                    <Grid
+                      width="343px"
+                      height="214px"
+                      boxShadow=" 0px 0px 30px #ddd"
+                      borderRadius="16px"
+                      textAlign="center"
+                      margin="32px 0 0 0"
+                    >
+                      <Text bold size="14px" margin="32px 0 0 0">
+                        {host?.hostUser?.user?.nickname}님의 그룹 러닝은
+                        어땠나요?
+                      </Text>
+                      <_Btn>
+                        <Icon>
+                          <Image
+                            style={{ margin: "5px 0 0 0" }}
+                            src="https://ifh.cc/g/cmv5yP.png"
+                            onClick={() => {
+                              change();
+                              mpoint();
+                            }}
+                          />
+                          <Text size="13px" color="#7b7b7b">
+                            좋았어요!
+                          </Text>
+                        </Icon>
+                        <Icon>
+                          <Image
+                            style={{ margin: "5px 0 0 0" }}
+                            src="https://ifh.cc/g/Nz1wV8.png"
+                          />
+                          <Text size="13px">아쉬웠어요.</Text>
+                        </Icon>
+                      </_Btn>
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    flexWrap="Wrap"
+                    width="100%"
+                    display="flex"
+                    justifyContent="center"
+                  >
+                    <Grid
+                      width="343px"
+                      height="382px"
+                      boxShadow=" 0px 0px 30px #ddd"
+                      borderRadius="16px"
+                      textAlign="center"
+                      margin="32px 0 80px 0"
+                    >
+                      <Text bold size="14px" margin="32px 0 -32px 0">
+                        가장 아쉬웠던 부분을 하나 선택해주세요.
+                      </Text>
+                      <Grid
+                        flexWrap="Wrap"
+                        width="100%"
+                        display="flex"
+                        justifyContent="center"
+                        padding="62px 0 60px 0"
+                      >
+                        {category.map((e, idx) => {
+                          return (
+                            <Fragment key={idx}>
+                              <_LabelDistance>
+                                <input
+                                  onClick={() => {
+                                    choiceCategory(idx + 6);
+                                  }}
+                                  type="radio"
+                                  name="category"
+                                  value={e}
+                                ></input>
+                                <Text bold>{e}</Text>
+                              </_LabelDistance>
+                            </Fragment>
+                          );
+                        })}
+                      </Grid>
+                    </Grid>
+                    <_EvaluationButton
+                      onClick={() => {
+                        CKModal();
+                      }}
+                    >
+                      평가완료
+                    </_EvaluationButton>
+                  </Grid>
+                </>
+              )}
+            </_Wrap>
+          ) : (
+            <_Wrap>
+              <MyImage
+                style={{ margin: "150px 0 0 0" }}
+                src={host?.hostUser?.user?.profileUrl}
+              />
+              <Text bold size="15px" margin="16px 0 0 0">
+                {host?.hostUser?.user?.nickname}
+              </Text>
+              <Text bold size="14px" margin="40px 0 0 0">
+                크루장 평가가 완료되었습니다.
+                <br />
+                평가해주셔서 감사합니다!
+              </Text>
+              <Grid
+                flexWrap="Wrap"
+                width="100%"
+                display="flex"
+                justifyContent="center"
+              >
+                <Grid
+                  width="200px"
+                  height="44px"
+                  margin="168px 0 100px 0px"
+                  bg="#030c37"
+                  padding="12px 0 0 0"
+                  _onClick={() => {
+                    toggleModal();
+                    dispatch(
+                      evaluationDB(
+                        groupId,
+                        hostId,
+                        point,
+                        evaluationCategory,
+                        userId
+                      )
+                    );
+                    dispatch(getRunningDB(userId));
+                  }}
                 >
-                  마이페이지로 이동하기
-                </Text>
+                  <Text size="14px" color="#fff" margin="0 0 100px 0px">
+                    마이페이지로 이동하기
+                  </Text>
+                </Grid>
               </Grid>
-            </Grid>
-          </_Wrap>
-          }
-          
+            </_Wrap>
+          )}
 
           <CBtn
             onClick={() => {
@@ -405,7 +409,6 @@ const Evaluation = () => {
           >
             <AiOutlineClose size="22" color="#030c37" />
           </CBtn>
-
         </Grid>
       </>
     );
@@ -417,7 +420,7 @@ const Evaluation = () => {
         {modal && (
           <div>
             <Overlaye>
-              {checkModal === false ? 
+              {checkModal === false ? (
                 <Wrap>
                   <Text bold size="16px">
                     크루장 평가
@@ -425,17 +428,17 @@ const Evaluation = () => {
                   <MyImage src={host?.hostUser?.user?.profileUrl} />
                   <Text bold size="14px">
                     {host?.hostUser?.user?.nickname}
-                  </Text>                   
+                  </Text>
                   <Text size="13px" color="#858585" margin=" -8px 0 0 0">
-                    {host?.hostUser?.date} &nbsp; {host?.hostUser?.standbyTime}에
-                    &nbsp; {host?.hostUser?.title}를 &nbsp;함께함
+                    {host?.hostUser?.date} &nbsp; {host?.hostUser?.standbyTime}
+                    에 &nbsp; {host?.hostUser?.title}를 &nbsp;함께함
                   </Text>
                   <Hr />
 
                   <Text bold size="18px">
                     {host?.hostUser?.user?.nickname}님의 그룹 러닝은 어땠나요?
                   </Text>
-                
+
                   {emoji ? (
                     <>
                       <Btn>
@@ -559,62 +562,58 @@ const Evaluation = () => {
                   )}
                   <EvaluationButton
                     onClick={() => {
-                      CKModal();                       
+                      CKModal();
                     }}
                   >
                     평가완료
                   </EvaluationButton>
-                    <button
-                      className="_close-modal"
-                      onClick={() => {
-                        history.push(`/mypage/${userId}`);
-                      }}
-                    >
-                      <AiOutlineClose size="22" color="#222" />
-                    </button>
-                </Wrap>
-                : 
-                <Wrap>
-                  <Text 
-                  bold 
-                  size="16px"
+                  <button
+                    className="_close-modal"
+                    onClick={() => {
+                      history.push(`/mypage/${userId}`);
+                    }}
                   >
+                    <AiOutlineClose size="22" color="#222" />
+                  </button>
+                </Wrap>
+              ) : (
+                <Wrap>
+                  <Text bold size="16px">
                     크루장 평가
                   </Text>
                   <MyImage src={host?.hostUser?.user?.profileUrl} />
                   <Text bold size="14px">
                     {host?.hostUser?.user?.nickname}
                   </Text>
-                  <Text 
-                    bold 
-                    size="20px" 
-                    margin="50px 0 0 0"
-                  >
+                  <Text bold size="20px" margin="50px 0 0 0">
                     평가해주셔서 감사합니다!
                   </Text>
-                  <Grid 
-                    width="168px" 
-                    height="48px" 
+                  <Grid
+                    width="168px"
+                    height="48px"
                     border="1px solid #DDDDDD"
                     margin="280px 0 0 115px"
                     hover="border:2px solid #DDDDDD;"
                     _onClick={() => {
                       toggleModal();
                       dispatch(
-                        evaluationDB(groupId, hostId, point, evaluationCategory, userId)
+                        evaluationDB(
+                          groupId,
+                          hostId,
+                          point,
+                          evaluationCategory,
+                          userId
+                        )
                       );
-                      dispatch(getRunningDB(userId));                 
-                    }}>
-                    <Text
-                      bold
-                      size="16px"
-                      margin="12px 0 0 0"
-                    >
+                      dispatch(getRunningDB(userId));
+                    }}
+                  >
+                    <Text bold size="16px" margin="12px 0 0 0">
                       닫기
                     </Text>
                   </Grid>
                 </Wrap>
-                }        
+              )}
             </Overlaye>
           </div>
         )}

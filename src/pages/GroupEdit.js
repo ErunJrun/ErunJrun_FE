@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import EditContent from "../components/groupEdit/EditContent";
-import EditImages from "../components/groupEdit/EditImages";
-import { Text } from "../elements";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import { getGroupDetailDB } from "../redux/modules/feed";
+
+//css, library, package
 import swal from "sweetalert";
 import { useMediaQuery } from "react-responsive";
-import EditContentMob from "../components/groupEdit/EditContentMob";
+
+//Cookie
 import { getCookie } from "../shared/Cookie";
+
+//elements
+
+//components
+import EditContent from "../components/groupEdit/EditContent";
+import EditImages from "../components/groupEdit/EditImages";
+import EditContentMob from "../components/groupEdit/EditContentMob";
 
 const GroupEdit = () => {
   const isMobile = useMediaQuery({

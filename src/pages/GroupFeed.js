@@ -1,4 +1,35 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
+import { history } from "../redux/configureStore";
+import { useDispatch, useSelector } from "react-redux";
+import { resetMap } from "../redux/modules/uploadInfo";
+import { imgActions } from "../redux/modules/image";
+import {
+  getAllDB,
+  getGroupDB,
+  getPreferDB,
+  resetGroup,
+} from "../redux/modules/feed";
+
+//css, library, package
+import swal from "sweetalert";
+import { useMediaQuery } from "react-responsive";
+import { Link } from "react-scroll";
+import styled from "styled-components";
+
+//Image
+import filterIcon from "../assets/groupFeed/filterIcon.svg";
+import categoryLine from "../assets/groupFeed/categoryLine.svg";
+import inputArrowGray from "../assets/groupUpload/inputArrowGray.svg";
+import noSearchData from "../assets/groupFeed/noSearchData.svg";
+import upload from "../assets/groupFeed/groupUploadBtn1.png";
+import uploadHover from "../assets/groupFeed/groupUploadBtn2.png";
+import pageUp from "../assets/groupFeed/pageUpBtn.png";
+import shoesYellow from "../assets/groupFeed/shoesYellow.svg";
+
+//elements
 import {
   Grid,
   IconButton,
@@ -7,44 +38,14 @@ import {
   Spinner,
   LogoSpinner,
 } from "../elements";
-import filterIcon from "../assets/groupFeed/filterIcon.svg";
-import categoryLine from "../assets/groupFeed/categoryLine.svg";
-import inputArrowGray from "../assets/groupUpload/inputArrowGray.svg";
 
-import { history } from "../redux/configureStore";
-import styled from "styled-components";
-import noSearchData from "../assets/groupFeed/noSearchData.svg";
+//components
 import GroupFilter from "../components/groupFeed/GroupFilter";
 import GroupFilterMob from "../components/groupFeed/GroupFilterMob";
 import GroupCard from "../components/groupFeed/GroupCard";
 import GroupCardMob from "../components/groupFeed/GroupCardMob";
-import upload from "../assets/groupFeed/groupUploadBtn1.png";
-import uploadHover from "../assets/groupFeed/groupUploadBtn2.png";
-import pageUp from "../assets/groupFeed/pageUpBtn.png";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-scroll";
-import shoesYellow from "../assets/groupFeed/shoesYellow.svg";
-
-import {
-  getAllDB,
-  getGroupDB,
-  getPreferDB,
-  resetGroup,
-} from "../redux/modules/feed";
-import Permit from "../shared/Permit";
-
-import InfinityScroll from "../components/InfinityScroll";
-
-import { useMediaQuery } from "react-responsive";
-
-import Ready from "../shared/Ready";
-import { resetMap } from "../redux/modules/uploadInfo";
-
-import { imgActions } from "../redux/modules/image";
-import { borderRadius } from "@mui/system";
-import { useParams } from "react-router-dom";
-import swal from "sweetalert";
 import DrawerCategory from "../components/groupFeed/DrawerCategory";
+import Permit from "../shared/Permit";
 
 const GroupFeed = () => {
   const isMobile = useMediaQuery({
@@ -57,9 +58,6 @@ const GroupFeed = () => {
   const nickname = localStorage.getItem("nickname");
 
   const [allCheck, setAllCheck] = useState(true);
-
-  const [drawerState, setDrawerState] = useState(false);
-
   const [finish, setFinish] = useState("0");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -67,10 +65,31 @@ const GroupFeed = () => {
   const [filterTime, setFilterTime] = useState([]);
   const [filterDistance, setFilterDistance] = useState([]);
   const [filterTheme, setFilterTheme] = useState([]);
-
   const [filterState, setFilterState] = useState(false);
   const [searchState, setSearchState] = useState(false);
   const [uploadBtn, setUploadBtn] = useState(false);
+  const [regionTag, setRegionTag] = useState([
+    "전국",
+    "서울특별시",
+    "경기도",
+    "인천광역시",
+    "강원도",
+    "충청도 / 세종특별자치시 / 대전광역시",
+    "경상북도 / 대구광역시",
+    "경상남도 / 부산광역시 / 울산광역시",
+    "전라도 / 광주광역시",
+    "제주특별자치도",
+  ]);
+
+  const category = {
+    region: region,
+    filterTime: filterTime,
+    filterDistance: filterDistance,
+    startDate: startDate,
+    endDate: endDate,
+    filterTheme: filterTheme,
+    finish: finish,
+  };
 
   const feedList = useSelector((state) => state.feed.list);
   const preferData = useSelector((state) => state.feed.preferData);
@@ -91,16 +110,6 @@ const GroupFeed = () => {
     setSearchState(false);
   };
 
-  const category = {
-    region: region,
-    filterTime: filterTime,
-    filterDistance: filterDistance,
-    startDate: startDate,
-    endDate: endDate,
-    filterTheme: filterTheme,
-    finish: finish,
-  };
-
   const finishCheck = () => {
     if (finish == 0) {
       setFinish(1);
@@ -111,24 +120,6 @@ const GroupFeed = () => {
     }
   };
 
-  const drawerToggle = () => {
-    setDrawerState(!drawerState);
-  };
-
-  const [regionTag, setRegionTag] = useState([
-    "전국",
-    "서울특별시",
-    "경기도",
-    "인천광역시",
-    "강원도",
-    "충청도 / 세종특별자치시 / 대전광역시",
-    "경상북도 / 대구광역시",
-    "경상남도 / 부산광역시 / 울산광역시",
-    "전라도 / 광주광역시",
-    "제주특별자치도",
-  ]);
-
-  //그룹러닝 등록 중 페이지 이탈 시 등록 데이터 리셋
   useEffect(() => {
     dispatch(resetMap());
     dispatch(imgActions.resetFile());
@@ -209,10 +200,6 @@ const GroupFeed = () => {
               ) : (
                 <>
                   <Grid display="flex" width="auto">
-                    {/* <img style={{ width: "18.91px" }} src={shoesYellow} />
-                    <Text width="auto" margin="0 0 0 4.55px" size="12px" bold>
-                      추천 그룹 러닝입니다!
-                    </Text> */}
                     <Text width="auto" margin="0" size="12px" bold>
                       총{" "}
                       <span style={{ color: "#686EF9" }}>
@@ -233,33 +220,6 @@ const GroupFeed = () => {
               >
                 <DrawerCategory />
               </Grid>
-
-              {/* <Grid
-                height="auto"
-                width="auto"
-                margin="0"
-                display="flex"
-                justifyContent="right"
-                alignItems="center"
-              >
-                <input
-                  style={{
-                    width: "13px",
-                    height: "13px",
-                    margin: "0 8px 0 0",
-                    cursor: "pointer",
-                    border: "0.8px solid  #000",
-                    borderRadius: "2.8px",
-                  }}
-                  type="checkbox"
-                  onChange={() => {
-                    finishCheck();
-                  }}
-                ></input>
-                <Text size="11px" margin="0">
-                  마감공고 포함하기
-                </Text>
-              </Grid> */}
             </Grid>
             <HrMob />
 
