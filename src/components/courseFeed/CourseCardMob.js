@@ -36,6 +36,7 @@ const CourseCardMob = (props) => {
                   height: "117px",
                   position: "relative",
                   borderRadius: "3px 3px 0 0",
+                  objectFit: "cover",
                 }}
                 src={props.courseImageUrl1}
               />
@@ -134,6 +135,7 @@ const CourseCardMob = (props) => {
                 height: "126px",
                 position: "relative",
                 borderRadius: "3px 3px 0 0",
+                objectFit: "cover",
               }}
               src={props.courseImageUrl1}
             />

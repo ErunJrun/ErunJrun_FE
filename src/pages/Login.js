@@ -26,6 +26,8 @@ const Login = ({ location }) => {
   const isLogin = useSelector((state) => state.user.isLogin);
   const token = getCookie("accessToken");
 
+  console.log(location);
+
   if (location?.state) {
     localStorage.setItem("from", location?.state?.from);
   }

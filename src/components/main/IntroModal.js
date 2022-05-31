@@ -10,6 +10,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { useMediaQuery } from "react-responsive";
+import { getCookie, setCookie } from "../../shared/Cookie";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -83,9 +84,7 @@ function SwipeableTextMobileStepper() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const [modal, setModal] = useState(true);
-  const maxSteps = images.length;
-  const firstLogin = localStorage.getItem("firstLogin");
-  const introModal = localStorage.getItem("introModal");
+  const introModal = getCookie("introModal");
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -101,7 +100,7 @@ function SwipeableTextMobileStepper() {
 
   const toggleModal = () => {
     setModal(!modal);
-    localStorage.setItem("introModal", false);
+    setCookie("introModal", false, 24);
   };
 
   if (
@@ -109,11 +108,7 @@ function SwipeableTextMobileStepper() {
     (isMobile && introModal === null)
   ) {
     return (
-      <Grid   
-        display="flex"
-        justifyContent="center"
-        width="355px"
-      >
+      <Grid display="flex" justifyContent="center" width="355px">
         {modal && (
           <MOverlaye>
             <MWrap>
@@ -337,8 +332,8 @@ const MWrap = styled.div`
   width: 355px;
   text-align: center;
   margin: 20px auto;
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
 `;
 
 const Btn = styled.div`
