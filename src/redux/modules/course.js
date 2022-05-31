@@ -142,6 +142,34 @@ export const getCourseDB = (region = 0, sort = "new", page = 1, size = 6) => {
   };
 };
 
+export const getCoursePlusDB = (
+  region = 0,
+  sort = "new",
+  page = 1,
+  size = 6
+) => {
+  return async function (dispatch, getState, { history }) {
+    const _paging = getState().course.paging;
+    if (!_paging.page) {
+      return;
+    }
+    dispatch(loading(true));
+
+    try {
+      const { data } = await api.get(
+        `/course/all?region=${region}&sort=${sort}&page=${page}&size=${size}`
+      );
+      let paging = {
+        page: data.data.feed.length === size ? page + 1 : null,
+        size: size,
+      };
+      dispatch(getCourse(data, paging));
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+};
+
 export const getCourseMainDB = () => {
   return async function (dispatch, getState, { history }) {
     try {

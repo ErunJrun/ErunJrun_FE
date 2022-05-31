@@ -31,6 +31,7 @@ const CourseCard = (props) => {
                   height: "288px",
                   position: "relative",
                   borderRadius: "3px 3px 0 0",
+                  objectFit: "cover",
                 }}
                 src={props.courseImageUrl1}
               />
@@ -130,6 +131,7 @@ const CourseCard = (props) => {
                 height: "288px",
                 position: "relative",
                 borderRadius: "3px 3px 0 0",
+                objectFit: "cover",
               }}
               src={props.courseImageUrl1}
             />

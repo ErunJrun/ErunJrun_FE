@@ -15,6 +15,7 @@ import CourseCard from "../components/courseFeed/CourseCard";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCourseDB,
+  getCoursePlusDB,
   getCourseRegionDB,
   resetCourse,
 } from "../redux/modules/course";
@@ -247,7 +248,7 @@ const CourseFeed = () => {
                     if (paging.page === null) {
                       swal("게시물이 없습니다");
                     }
-                    dispatch(getCourseDB(0, "new", paging.page, 6));
+                    dispatch(getCoursePlusDB(0, "new", paging.page, 6));
                   }}
                 >
                   <Text cursor="pointer" margin="0" size="11px" color="#030C37">
@@ -708,7 +709,7 @@ const CourseFeed = () => {
                   if (paging.page === null) {
                     swal("게시물이 없습니다");
                   }
-                  dispatch(getCourseDB(0, "new", paging.page, 6));
+                  dispatch(getCoursePlusDB(0, "new", paging.page, 6));
                 }}
               >
                 <Text
