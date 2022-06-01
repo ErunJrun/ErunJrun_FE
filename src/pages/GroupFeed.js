@@ -96,7 +96,7 @@ const GroupFeed = () => {
 
   const preferGroup = () => {
     dispatch(resetGroup());
-    dispatch(getPreferDB(paging.page + 1, 6));
+    dispatch(getPreferDB(1, 6));
     setAllCheck(false);
     setSearchState(false);
   };
