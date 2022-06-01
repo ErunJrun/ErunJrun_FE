@@ -114,7 +114,7 @@ const Check = () => {
                 {check_list?.groupInfo?.date}
               </Text>
             </Grid>
-            <Text size="12px" margin="0 20px 0 0">
+            <Text size="12px" margin="0 5px 0 0">
               {check_list?.groupInfo?.attendanceCount}
             </Text>
           </_InfoBox>
@@ -187,7 +187,7 @@ const Check = () => {
               {check_list?.groupInfo?.date}
             </Text>
           </Grid>
-          <Text size="15px" margin="0 30px 0 0">
+          <Text size="15px" margin="0 5px 0 0">
             {check_list?.groupInfo?.attendanceCount}
           </Text>
         </InfoBox>
