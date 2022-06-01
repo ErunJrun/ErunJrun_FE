@@ -1,10 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
+
+//Redux
 import { useSelector } from "react-redux";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//elements
+import { Text, Grid } from "../../elements";
+
+//components
 import MyModal from "./MyModal";
 import Progress from "./Progress";
-import styled from "styled-components";
-import { Text, Grid } from "../../elements";
-import { useMediaQuery } from "react-responsive";
 
 const Level = () => {
   const isMobile = useMediaQuery({
@@ -12,6 +20,7 @@ const Level = () => {
   });
 
   const profile_list = useSelector((state) => state.mypage.list);
+
   if (isMobile) {
     return (
       <Grid width="350px" margin="45px auto 0px auto">

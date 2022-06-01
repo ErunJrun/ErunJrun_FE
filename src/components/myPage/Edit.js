@@ -1,32 +1,41 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getInformation,
   editProfileDB,
   numberCheckMiddleware,
   getNumberCheckMiddleware,
   deleteUserDB,
 } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
-import { Text, Grid } from "../../elements";
+
+//css, library, package
+import swal from "sweetalert";
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
+
+//Image
+import backBtn from "../../assets/groupFeed/backBtn.svg";
+
+//elements
+import { Text, Grid } from "../../elements";
+
+//components
 import LevelBox from "../groupDetail/LevelBox";
 import LevelShoes from "../LevelShoes";
-import { useMediaQuery } from "react-responsive";
-import backBtn from "../../assets/groupFeed/backBtn.svg";
-import swal from "sweetalert";
-import { loginCheckDB } from "../../redux/modules/user";
+
+//page
 
 const Edit = (props) => {
-  //console.log(props);
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
 
   const dispatch = useDispatch();
   const fileInput = useRef();
+
   const userId = localStorage.getItem("userId");
-  const isLogin = useSelector((state) => state.user.isLogin);
 
   const [nickname, setNickname] = useState(props.profile.nickname);
   const [image, setImage] = useState(props.profile.profileUrl);
@@ -40,6 +49,8 @@ const Edit = (props) => {
   const [numberCK, setNumderCK] = useState("");
   const [certPhone, setCertPhone] = useState(props.profile.certPhone);
   const [ck, setCk] = useState(false);
+
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   const [runRegion, setRunRegion] = useState([
     "서울특별시",
@@ -540,29 +551,17 @@ const Edit = (props) => {
   }
   return (
     <>
-      <Grid 
-        maxWidth="800px" 
-        margin="68px auto" 
-        justify="center"
-      >
+      <Grid maxWidth="800px" margin="68px auto" justify="center">
         <Grid>
           <Text bold size="20px">
             회원정보 수정
           </Text>
           <Hrr />
 
-          <Text 
-            bold 
-            size="16px"
-            margin="48px 0 0 0"
-          >
+          <Text bold size="16px" margin="48px 0 0 0">
             프로필 사진
           </Text>
-          <Grid 
-            display="flex" 
-            alignItems="center" 
-            margin="24px 0 0 0"
-          >
+          <Grid display="flex" alignItems="center" margin="24px 0 0 0">
             <MyImage src={imgBase ? imgBase : "https://ifh.cc/g/1cYtTJ.png"} />
             <ProfileLabel htmlFor="input-file">사진 변경</ProfileLabel>
             <ProfileInput
@@ -578,11 +577,7 @@ const Edit = (props) => {
           </Grid>
         </Grid>
 
-        <Text 
-          bold 
-          size="16px" 
-          margin="32px 0 16px 0"
-        >
+        <Text bold size="16px" margin="32px 0 16px 0">
           닉네임
         </Text>
         <Input
@@ -592,11 +587,7 @@ const Edit = (props) => {
           placeholder="닉네임을 입력해주세요!"
           maxLength={8}
         />
-        <Text 
-          bold 
-          size="16px" 
-          margin="32px 0 16px 0"
-        >
+        <Text bold size="16px" margin="32px 0 16px 0">
           한 줄 소개
         </Text>
 
@@ -614,14 +605,9 @@ const Edit = (props) => {
         </Text>
         <Hrr />
 
-        <Text 
-          bold 
-          size="16px" 
-          margin="32px 0 16px 0"
-        >
+        <Text bold size="16px" margin="32px 0 16px 0">
           핸드폰 번호
         </Text>
-
 
         {certPhone === false ? (
           <>
@@ -651,20 +637,18 @@ const Edit = (props) => {
                 placeholder="인증번호 입력"
                 maxLength={20}
               />
-              {numberCK.length === 0 ? 
-                <Btn1>
-                  확인
-                </Btn1>
-              :
+              {numberCK.length === 0 ? (
+                <Btn1>확인</Btn1>
+              ) : (
                 <Btn0
                   onClick={() => {
                     dispatch(getNumberCheckMiddleware(phone, numberCK));
                     CK();
                   }}
-                  >
+                >
                   확인
                 </Btn0>
-              }
+              )}
             </Grid>
 
             {ck === false ? (
@@ -714,7 +698,7 @@ const Edit = (props) => {
           </>
         )}
 
-        <hr/>
+        <hr />
         <Text bold size="20px" margin="104px 0 18px 0">
           나의 러닝스타일
         </Text>
@@ -724,12 +708,12 @@ const Edit = (props) => {
             선호하는 러닝 지역
           </Text>
 
-          <Grid 
-            flexWrap="Wrap" 
-            maxWidth="800px" 
-            width="100%" 
-            display="flex" 
-            justifyContent= "space-between"
+          <Grid
+            flexWrap="Wrap"
+            maxWidth="800px"
+            width="100%"
+            display="flex"
+            justifyContent="space-between"
           >
             {runRegion.map((e, idx) => {
               return (
@@ -757,12 +741,12 @@ const Edit = (props) => {
             선호하는 러닝 거리
           </Text>
 
-          <Grid 
-            flexWrap="Wrap" 
-            maxWidth="800px" 
-            width="100%" 
-            display="flex" 
-            justifyContent= "space-between"
+          <Grid
+            flexWrap="Wrap"
+            maxWidth="800px"
+            width="100%"
+            display="flex"
+            justifyContent="space-between"
           >
             {runDistance.map((e, idx) => {
               return (
@@ -790,12 +774,12 @@ const Edit = (props) => {
             러닝 횟수(1달 기준)
           </Text>
 
-          <Grid 
+          <Grid
             flexWrap="Wrap"
-            maxWidth="800px" 
-            width="100%" 
-            display="flex" 
-            justifyContent= "space-between"
+            maxWidth="800px"
+            width="100%"
+            display="flex"
+            justifyContent="space-between"
           >
             {runExpComment.map((e, idx) => {
               return (
@@ -841,9 +825,9 @@ const Edit = (props) => {
           </Grid>
         </Grid>
         <hr style={{ margin: "104px 0 0 0" }} />
-        <Text 
-          size="16px" 
-          color="#7b7b7b" 
+        <Text
+          size="16px"
+          color="#7b7b7b"
           text_decoration="underline"
           _onClick={toggleModal}
         >
@@ -876,11 +860,7 @@ const Edit = (props) => {
           </Overlay>
         )}
 
-        <Grid
-          margin="104px 0 320px 0"
-          width="800px"
-          textAlign="right"
-        >
+        <Grid margin="104px 0 320px 0" width="800px" textAlign="right">
           <Button1
             onClick={() => {
               history.push(`/mypage/${userId}`);
@@ -987,16 +967,14 @@ const Btn1 = styled.button`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  border: solid 1px  #ddd;
-  background-color:  #ddd;
+  border: solid 1px #ddd;
+  background-color: #ddd;
   border-radius: 3px;
   font-size: 16px;
   font-weight: bold;
   color: #7b7b7b;
   margin-left: 17px;
 `;
-
-
 
 const Btn_ = styled.button`
   width: 88px;

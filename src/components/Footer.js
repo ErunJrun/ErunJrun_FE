@@ -1,23 +1,27 @@
 import React from "react";
-import { history } from "../redux/configureStore";
-import styled from "styled-components";
-import { Grid, Text } from "../elements";
-import { useMediaQuery } from "react-responsive";
+import { useLocation, useParams } from "react-router-dom";
 
+//Redux
+import { history } from "../redux/configureStore";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//Image
 import courseIcon from "../assets/footer/courseIcon.png";
 import courseIconColor from "../assets/footer/courseIconColor.png";
-
 import groupIcon from "../assets/footer/groupIcon.png";
 import groupIconColor from "../assets/footer/groupIconColor.png";
-
 import homeIcon from "../assets/footer/homeIcon.png";
 import homeIconColor from "../assets/footer/homeIconColor.png";
-
 import mypageIcon from "../assets/footer/mypageIcon.png";
-import mypageIconColor from "../assets/footer/mypageIconColor.png";
 
-import { useLocation, useParams } from "react-router-dom";
+//cookie
 import { getCookie } from "../shared/Cookie";
+
+//elements
+import { Grid, Text } from "../elements";
 
 const Footer = () => {
   const isMobile = useMediaQuery({
@@ -26,10 +30,9 @@ const Footer = () => {
 
   const userId = localStorage.getItem("userId");
   const profileUrl = localStorage.getItem("profileUrl");
-
   const token = getCookie("accessToken");
-  const path = useLocation().pathname;
 
+  const path = useLocation().pathname;
   const isHome = path === "/";
   const isGroup =
     path === "/groupfeed" || path.slice(1, 12) === "groupdetail" ? true : false;

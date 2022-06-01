@@ -1,18 +1,24 @@
-/* eslint-disable no-undef */
 import React from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import { Text, Grid, Image, Spinner } from "../../elements";
-import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 import { getAttendDB } from "../../redux/modules/mypage";
-import { useParams } from "react-router-dom";
+
+//css, library, package
 import swal from "sweetalert";
+
+//elements
+import { Text, Grid, Image, Spinner } from "../../elements";
+import styled from "styled-components";
 
 const MyGroup = () => {
   const dispatch = useDispatch();
-  const hostId = localStorage.getItem("userId");
   const params = useParams();
   const userId = params.userId;
+
+  const hostId = localStorage.getItem("userId");
 
   const my = useSelector((state) => state.mypage.mygroup);
 

@@ -1,14 +1,23 @@
-/* eslint-disable react/jsx-pascal-case */
 import React, { useEffect } from "react";
-import Level from "./Level";
+
+//Redux
 import { useSelector } from "react-redux";
-import styled from "styled-components";
-import { Text, Grid } from "../../elements";
-import LevelBox from "../groupDetail/LevelBox";
-import { useMediaQuery } from "react-responsive";
 import { history } from "../../redux/configureStore";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
 import { HiOutlineChevronRight } from "react-icons/hi";
+import styled from "styled-components";
+
+//Image
 import edit from "../../assets/mypage/edit.svg";
+
+//elements
+import { Text, Grid } from "../../elements";
+
+//components
+import Level from "./Level";
+import LevelBox from "../groupDetail/LevelBox";
 
 const Profile = () => {
   const isMobile = useMediaQuery({
@@ -18,41 +27,42 @@ const Profile = () => {
   const myId = localStorage.getItem("userId");
   const profile_list = useSelector((state) => state.mypage.list);
 
-  if(isMobile) {
+  if (isMobile) {
     return (
-      <Grid width="350px" >
+      <Grid width="350px">
         <_MyImage src={profile_list?.userInfo?.profileUrl} />
-        <Grid 
-          width="225px" 
-          height="65px" 
-          margin="-70px 0 0 85px"
-        >
-          <Text bold size="14px" >
+        <Grid width="225px" height="65px" margin="-70px 0 0 85px">
+          <Text bold size="14px">
             {profile_list?.userInfo?.nickname}
-          </Text> 
-          <Text regular size="12px" width="225px"  margin="-12px 0 0 0">
+          </Text>
+          <Text regular size="12px" width="225px" margin="-12px 0 0 0">
             {profile_list?.userInfo?.bio}
-          </Text> 
+          </Text>
         </Grid>
 
-        {profile_list?.userInfo?.userId === myId ?
-          <Text bold size="20px" margin="-60px 0 0 92%" _onClick={()=>{history.push("/edit")}}>
-            <HiOutlineChevronRight/>
+        {profile_list?.userInfo?.userId === myId ? (
+          <Text
+            bold
+            size="20px"
+            margin="-60px 0 0 92%"
+            _onClick={() => {
+              history.push("/edit");
+            }}
+          >
+            <HiOutlineChevronRight />
           </Text>
-        :
-          null
-        }
-        <Level/>
+        ) : null}
+        <Level />
         <_Box>
           <_SmallBox>
-            <Text  size="12px" color="#7b7b7b">
+            <Text size="12px" color="#7b7b7b">
               {" "}
               러닝레벨{" "}
             </Text>
             <LevelBox userLevel={profile_list?.userInfo?.userLevel} />
           </_SmallBox>
           <_SmallBox>
-            <Text  size="12px" color="#7b7b7b">
+            <Text size="12px" color="#7b7b7b">
               {" "}
               선호거리{" "}
             </Text>
@@ -62,7 +72,7 @@ const Profile = () => {
             </Text>
           </_SmallBox>
           <_SmallBox>
-            <Text  size="12px" color="#7b7b7b">
+            <Text size="12px" color="#7b7b7b">
               {" "}
               선호지역{" "}
             </Text>
@@ -75,44 +85,38 @@ const Profile = () => {
       </Grid>
     );
   }
-  
+
   return (
     <>
       <Box>
-        <MiddleBox> 
-            <MyImage src={profile_list?.userInfo?.profileUrl} />
-            <TextBox>
-              <Text 
-                margin="39px 0 0 0"
-                size="18px"
-                >
-                  <span style={{fontWeight:"700"}}>
-                  {" "}
-                  {profile_list?.userInfo?.nickname}{" "} 
-                  </span>
-                  님의 한 줄 소개
-              </Text> 
-            </TextBox>
-            
+        <MiddleBox>
+          <MyImage src={profile_list?.userInfo?.profileUrl} />
+          <TextBox>
+            <Text margin="39px 0 0 0" size="18px">
+              <span style={{ fontWeight: "700" }}>
+                {" "}
+                {profile_list?.userInfo?.nickname}{" "}
+              </span>
+              님의 한 줄 소개
+            </Text>
+          </TextBox>
+
           <Introduce>
-            <Triangle />    
-              <Text 
-                size="14px"
-                margin="-30px 0 0 0"
-                padding="20px">
-                {profile_list?.userInfo?.bio}
-              </Text>   
+            <Triangle />
+            <Text size="14px" margin="-30px 0 0 0" padding="20px">
+              {profile_list?.userInfo?.bio}
+            </Text>
           </Introduce>
 
           <Information>
-            <Grid 
-              width="32px" 
+            <Grid
+              width="32px"
               height="32px"
-              _onClick={()=>{
-                history.push("/edit")
+              _onClick={() => {
+                history.push("/edit");
               }}
             >
-            <EditImg src={edit}/>
+              <EditImg src={edit} />
             </Grid>
             <SmallBox>
               <Text bold size="16px">
@@ -188,7 +192,6 @@ const _SmallBox = styled.div`
   height: 16px;
   gap: 16px;
   margin: 12px 0 0 24px;
-
 `;
 
 const TextBox = styled.div`
@@ -200,7 +203,7 @@ const TextBox = styled.div`
 const EditImg = styled.img`
   margin: -0px 0 0 380px;
   width: 32px;
-  height: 32px
+  height: 32px;
 `;
 
 const MyImage = styled.img`
@@ -233,7 +236,7 @@ const Introduce = styled.div`
   width: 540px;
   height: 62px;
   border-radius: 6px;
-  background-color:  #f0f0f0;
+  background-color: #f0f0f0;
   font-size: 16.5px;
   font-weight: 550;
   color: #000;

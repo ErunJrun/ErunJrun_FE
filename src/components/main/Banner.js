@@ -1,34 +1,38 @@
-import React, { useEffect } from "react";
+import React from "react";
+
+//Redux
+import { history } from "../../redux/configureStore";
+import { useDispatch } from "react-redux";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-import { history } from "../../redux/configureStore";
-import styled from "styled-components";
-import { Grid, Text } from "../../elements";
-import { useSelector, useDispatch } from "react-redux";
-import { getCookie } from "../../shared/Cookie";
-
-import blueBanner from "../../assets/main/blueBanner.png";
-import yellowBanner from "../../assets/main/yellowBanner.png";
-import adBanner from "../../assets/main/adBanner.png";
-
-import yellowBannerMob from "../../assets/main/yellowBannerMob.svg";
-import adBannerMob from "../../assets/main/adBannerMov.png";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./Banner.css";
+import styled from "styled-components";
 
-import { useMediaQuery } from "react-responsive";
+//Image
+import yellowBanner from "../../assets/main/yellowBanner.png";
+import adBanner from "../../assets/main/adBanner.png";
+import yellowBannerMob from "../../assets/main/yellowBannerMob.svg";
+import adBannerMob from "../../assets/main/adBannerMov.png";
+
+//cookie
+import { getCookie } from "../../shared/Cookie";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const Banner = () => {
-  const dispatch = useDispatch();
-  const is_login = getCookie("accessToken");
-  const userName = localStorage.getItem("nickname");
-
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
+
+  const is_login = getCookie("accessToken");
+  const userName = localStorage.getItem("nickname");
 
   if (isMobile) {
     return (

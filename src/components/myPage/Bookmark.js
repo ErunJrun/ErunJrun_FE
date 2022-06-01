@@ -1,16 +1,25 @@
 import React from "react";
-import { Text, Grid } from "../../elements";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
 import { bookmarkDB } from "../../redux/modules/course";
-import styled from "styled-components";
 import { history } from "../../redux/configureStore";
+
+//css, library, package
+import styled from "styled-components";
+
+//Image
 import starIcon from "../../assets/courseFeed/star.svg";
 import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
 import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
 
+//elements
+import { Text, Grid } from "../../elements";
+
 const Bookmark = () => {
   const dispatch = useDispatch();
+
   const bookmark = useSelector((state) => state.mypage.mybook);
 
   return (

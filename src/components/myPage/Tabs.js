@@ -1,4 +1,15 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
+import {
+  getProfileDB,
+  getRunningDB,
+  getMyRunningDB,
+} from "../../redux/modules/mypage";
+import { useDispatch, useSelector } from "react-redux";
+
+//css, library, package
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -12,15 +23,6 @@ import Bookmark from "./Bookmark";
 import MyCourse from "./MyCourse";
 import Ready from "../../shared/Ready";
 import { styled as muiStyled } from "@mui/material/styles";
-
-import {
-  getProfileDB,
-  getRunningDB,
-  getMyRunningDB,
-} from "../../redux/modules/mypage";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { Grid } from "swiper";
 
 const TabPanel = (props) => {
   const { children, value, index } = props;
@@ -51,10 +53,6 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
-  const dispatch = useDispatch();
-  const params = useParams();
-  const userId = params.userId;
-
   const [value, setValue] = React.useState(0);
   const [expected, setExpected] = useState(true);
   const [complete, setComplete] = useState(false);
@@ -227,7 +225,7 @@ export default function BasicTabs() {
                       onClick={() => {
                         setExpected(false);
                         setComplete(true);
-                        setMyGroup(false);                
+                        setMyGroup(false);
                       }}
                     >
                       참여 완료
@@ -253,7 +251,7 @@ export default function BasicTabs() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CategoryBox>
-          {bookmark === true ? 
+          {bookmark === true ? (
             <>
               <Btn
                 onClick={() => {
@@ -274,7 +272,7 @@ export default function BasicTabs() {
                 My 추천
               </Button>
             </>
-          : 
+          ) : (
             <>
               <Button
                 onClick={() => {
@@ -295,7 +293,7 @@ export default function BasicTabs() {
                 My 추천
               </Btn>
             </>
-          }
+          )}
         </CategoryBox>
         {bookmark === true ? <Bookmark /> : null}
         {course === true ? <MyCourse /> : null}

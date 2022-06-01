@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { history } from "../../redux/configureStore";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { Text, Grid } from "../../elements";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import courseFeedBanner from "../../assets/courseFeedBanner.png";
-import { getMainDB, resetGroup } from "../../redux/modules/feed";
-import MGroupCard from "./MGroupCard";
-import { useMediaQuery } from "react-responsive";
-import readyImage from "../../assets/errorPage.png";
-import CourseCardMob from "../courseFeed/CourseCardMob";
 
+//Redux
+import { history } from "../../redux/configureStore";
+import { useDispatch, useSelector } from "react-redux";
+import { getMainDB, resetGroup } from "../../redux/modules/feed";
+import { getCourseMainDB } from "../../redux/modules/course";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import SwiperCore, { Virtual, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./MGroupSlide.css";
+import styled from "styled-components";
 
+//elements
+import { Text, Grid } from "../../elements";
+
+//components
+import MGroupCard from "./MGroupCard";
+import CourseCardMob from "../courseFeed/CourseCardMob";
 import MGroupCardMob from "./MGroupCardMob";
 import CourseCard from "../courseFeed/CourseCard";
-import { getCourseMainDB } from "../../redux/modules/course";
 
 SwiperCore.use([Virtual, Navigation, Pagination]);
 

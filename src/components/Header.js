@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { history } from "../redux/configureStore";
-import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
-import { Grid } from "../elements";
+//Redux
+import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { loginCheckDB, _getAlarmDB, _readAlarmDB } from "../redux/modules/user";
-import { getCookie } from "../shared/Cookie";
+
+//css, library, package
+import swal from "sweetalert";
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//Image
 import headerLogo from "../assets/header/headerLogo.png";
 import headerLogoMobile from "../assets/header/headerLogoMobile.png";
-
 import alarmIcon from "../assets/header/alarmIcon.png";
 import alarmIconMob from "../assets/header/alarmIconMob.png";
 
+//cookie
+import { getCookie } from "../shared/Cookie";
+
+//elements
+import { Grid } from "../elements";
+
+//components
 import AlarmModal from "../shared/modal/AlaramModal";
 import Modal from "./Modal";
-
-import { useLocation } from "react-router-dom";
-
-import { useMediaQuery } from "react-responsive";
 import AdHeader from "./AdHeader";
-
-import swal from "sweetalert";
 
 const Header = () => {
   const isMobile = useMediaQuery({
@@ -28,8 +34,7 @@ const Header = () => {
   });
 
   const dispatch = useDispatch();
-  const is_login = useSelector((state) => state.user.isLogin);
-  const alarmList = useSelector((state) => state.user.alarm);
+
   const agreeSMS = localStorage.getItem("agreeSMS");
   const firstLogin = localStorage.getItem("firstLogin");
 
@@ -48,6 +53,9 @@ const Header = () => {
   const isLoginPage = path === "/login";
 
   const [alarmOpen, setAlarmOpen] = useState(false);
+
+  const is_login = useSelector((state) => state.user.isLogin);
+  const alarmList = useSelector((state) => state.user.alarm);
 
   const alarmToggle = () => {
     setAlarmOpen(!alarmOpen);
@@ -80,12 +88,6 @@ const Header = () => {
       }
     }
   }, [firstLogin]);
-
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(_getAlarmDB());
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (token) {

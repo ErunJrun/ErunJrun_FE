@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import { Grid, Text } from "../elements";
 import { useMediaQuery } from "react-responsive";
+
+//Redux
 import { history } from "../redux/configureStore";
+
+//elements
+import { Grid, Text } from "../elements";
 
 const AdHeader = () => {
   const [header, setHeader] = useState(true);

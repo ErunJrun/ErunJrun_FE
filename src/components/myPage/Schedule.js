@@ -1,11 +1,18 @@
 import React from "react";
+
+//Redux
 import { useSelector } from "react-redux";
-import { Text, Grid, Image } from "../../elements";
-import styled from "styled-components";
 import { history } from "../../redux/configureStore";
+
+//css, library, package
+import styled from "styled-components";
+
+//elements
+import { Text, Grid, Image } from "../../elements";
 
 const Schedule = () => {
   const profile_list = useSelector((state) => state.mypage.list);
+
   if (profile_list.length === 0) {
     return <></>;
   }

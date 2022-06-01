@@ -1,13 +1,21 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import { Grid, Text } from "../../elements";
-import defaultProfile2 from "../../assets/defaultProfile2.png";
-import { resetReComm, _addReCommentFX } from "../../redux/modules/recomments";
-import { useMediaQuery } from "react-responsive";
-import { _getCommentFX, _isRecommBox } from "../../redux/modules/comments";
 import { useParams } from "react-router-dom";
+
+//Redux
+import { useDispatch } from "react-redux";
+import { resetReComm, _addReCommentFX } from "../../redux/modules/recomments";
+import { _getCommentFX, _isRecommBox } from "../../redux/modules/comments";
+
+//css, library, package
 import swal from "sweetalert";
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//Image
+import defaultProfile2 from "../../assets/defaultProfile2.png";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const RecommentWrite = (props) => {
   const isMobile = useMediaQuery({

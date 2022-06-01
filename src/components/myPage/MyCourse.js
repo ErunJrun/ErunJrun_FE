@@ -1,15 +1,24 @@
 import React from "react";
-import { Text, Grid } from "../../elements";
-import styled from "styled-components";
+
+//Redux
+
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { bookmarkDB } from "../../redux/modules/course";
+//css, library, package
+import styled from "styled-components";
+
+//Image
 import starIcon from "../../assets/courseFeed/star.svg";
 import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
 import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
 
+//elements
+import { Text, Grid } from "../../elements";
+
 const Bookmark = () => {
   const dispatch = useDispatch();
+
   const course = useSelector((state) => state.mypage.mycourse);
 
   return (

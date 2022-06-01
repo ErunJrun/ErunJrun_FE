@@ -1,17 +1,25 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
 import { getRunningDB, getEvaluationDB } from "../../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
-import { Text, Grid, Image, IconButton } from "../../elements";
-import styled from "styled-components";
 import { history } from "../../redux/configureStore";
-import { useParams } from "react-router-dom";
+
+//css, library, package
+import styled from "styled-components";
+
+//elements
+import { Text, Grid, Image, IconButton } from "../../elements";
 
 const Group = () => {
   const dispatch = useDispatch();
-  const myId = localStorage.getItem("userId");
+
   const params = useParams();
   const userId = params.userId;
   const groupId = params.groupId;
+
+  const myId = localStorage.getItem("userId");
 
   const running = useSelector((state) => state.mypage.group);
 

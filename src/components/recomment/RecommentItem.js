@@ -1,29 +1,37 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Grid, Text, Image, IconButton } from "../../elements";
-import Permit from "../../shared/Permit";
-import styled from "styled-components";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
 import {
   _deleteReCommentFX,
   _editReCommentFX,
   _getReCommentFX,
   _isReEdit,
 } from "../../redux/modules/recomments";
+
+//css, library, package
 import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+
+//elements
+import { Grid, Text, Image, IconButton } from "../../elements";
+
+//components
+import Permit from "../../shared/Permit";
 
 const RecommentItem = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
 
+  const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
 
-  const dispatch = useDispatch();
-  const [newComm, setNewComm] = useState("");
-
   const nickname = localStorage.getItem("nickname");
+
+  const [newComm, setNewComm] = useState("");
 
   const editToggle = (recommentId) => {
     dispatch(_isReEdit(recommentId));

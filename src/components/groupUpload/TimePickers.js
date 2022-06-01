@@ -1,13 +1,16 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
-import styled from "styled-components";
-import inputArrowGray from "../../assets/groupUpload/inputArrowGray.svg";
 
-import { TimepickerUI } from "timepicker-ui";
-
-import "./TimePicker.css";
-import { Grid } from "../../elements";
+//css, library, package
 import dayjs from "dayjs";
 import swal from "sweetalert";
+import { TimepickerUI } from "timepicker-ui";
+import "./TimePicker.css";
+
+//Image
+import inputArrowGray from "../../assets/groupUpload/inputArrowGray.svg";
+
+//elements
+import { Grid } from "../../elements";
 
 const TimePickers = (props) => {
   const tmRef = useRef(null);
@@ -40,18 +43,10 @@ const TimePickers = (props) => {
         props.setStandbyTime("");
         swal("현재 시간부터 6시간 이후 등록이 가능합니다.");
       }
-      // } else {
-      //   if (time > dayjs().add(6, "hour").format("HH:mm")) {
-      //     if (time < dayjs().add(30, "hour").format("HH:mm")) {
-      //       props.setStandbyTime("");
-      //       swal("현재 시간부터 6시간 이후 등록이 가능합니다.");
-      //     }
-      //   }
     }
   };
 
   useEffect(() => {
-    // standbyTimePick(inputValue);
     props.setStandbyTime(inputValue);
   }, [inputValue, props.date]);
 

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-//Redux
-
 //css, library, package
 import styled from "styled-components";
 import { useTheme } from "@mui/material/styles";

@@ -1,10 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+
+//elements
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
+import styled from "styled-components";
 
 const UploadStep = (props) => {
   const [activeStep, setActiveStep] = React.useState(0);

@@ -1,11 +1,18 @@
 import React, { Fragment, useEffect } from "react";
-import { Text, Grid, Image, IconButton } from "../../elements";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { applyGroupDB, getGroupDB } from "../../redux/modules/feed";
+
+//Redux
 import { history } from "../../redux/configureStore";
+
+//css, library, package
+import styled from "styled-components";
+
+//Image
 import shoesYellow from "../../assets/groupFeed/shoesYellow.png";
-import Permit from "../../shared/Permit";
+
+//elements
+import { Text, Grid } from "../../elements";
+
+//components
 
 const MGroupCard = (props) => {
   return (
