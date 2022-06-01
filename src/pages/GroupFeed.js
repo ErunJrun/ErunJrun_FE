@@ -89,7 +89,7 @@ const GroupFeed = () => {
 
   const allGroup = () => {
     dispatch(resetGroup());
-    dispatch(getAllDB(paging.page + 1, 6));
+    dispatch(getAllDB(1, 6));
     setAllCheck(true);
     setSearchState(false);
   };
