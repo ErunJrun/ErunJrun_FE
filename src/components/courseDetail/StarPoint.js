@@ -1,22 +1,28 @@
 import React, { useEffect } from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { patchStarPointDB } from "../../redux/modules/course";
-import swal from "sweetalert";
+import { history } from "../../redux/configureStore";
 
+//css, library, package
+import swal from "sweetalert";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import "./StarPoint.css";
+
+//cookie
 import { getCookie } from "../../shared/Cookie";
-import { history } from "../../redux/configureStore";
 
 const StarPoint = (props) => {
   const dispatch = useDispatch();
+
+  const starPointList = useSelector((state) => state.course.starPoint);
+  const token = getCookie("accessToken");
+
   const [myStarPoint, setMyStarPoint] = React.useState(
     props?.starPoint?.myStarPoint
   );
-  const starPointList = useSelector((state) => state.course.starPoint);
-
-  const token = getCookie("accessToken");
 
   const myStar = (newValue) => {
     if (!token) {

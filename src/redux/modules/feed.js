@@ -152,12 +152,6 @@ export const getGroupDB = (category, page = 1, size = 6) => {
 
 export const getAllDB = (page = 1, size = 6) => {
   return async function (dispatch, getState, { history }) {
-    // const _paging = getState().feed.paging;
-    // if (!_paging.page) {
-    //   return;
-    // }
-    // dispatch(loading(true));
-
     try {
       const { data } = await api.get(`/group/all?page=${page}&size=${size}`);
 
@@ -175,12 +169,6 @@ export const getAllDB = (page = 1, size = 6) => {
 
 export const getPreferDB = (page = 1, size = 6) => {
   return async function (dispatch, getState, { history }) {
-    // const _paging = getState().feed.paging;
-    // if (!_paging.page) {
-    //   return;
-    // }
-    // dispatch(loading(true));
-    // dispatch(resetGroup());
     try {
       const { data } = await api.get(`/group/prefer?page=${page}&size=${size}`);
 

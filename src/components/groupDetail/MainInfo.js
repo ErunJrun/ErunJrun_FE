@@ -1,17 +1,25 @@
 import React from "react";
+import { Link, useParams } from "react-router-dom";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, Image, Text, IconButton } from "../../elements";
-import styled from "styled-components";
-import Permit from "../../shared/Permit";
 import { applyDetailDB, deleteGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
-import { Link, useParams } from "react-router-dom";
-import groupChat from "../../assets/groupDetail/chat.svg";
-import shareIcon from "../../assets/groupDetail/share.svg";
-import shoesMint from "../../assets/groupDetail/shoesMint.png";
-import KakaoShareButton from "../KakaoShareButton";
+
+//css, library, package
+import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import swal from "sweetalert";
+
+//Image
+import groupChat from "../../assets/groupDetail/chat.svg";
+import shoesMint from "../../assets/groupDetail/shoesMint.png";
+//elements
+import { Grid, Text, IconButton } from "../../elements";
+
+//components
+import Permit from "../../shared/Permit";
+import KakaoShareButton from "../KakaoShareButton";
 
 const MainInfo = (props) => {
   const isMobile = useMediaQuery({
@@ -19,13 +27,16 @@ const MainInfo = (props) => {
   });
 
   const dispatch = useDispatch();
+
   const params = useParams();
   const groupId = params.groupId;
-  const detailGroup = useSelector((state) => state.feed.detail);
-  const [editMenu, setEditMenu] = React.useState(false);
 
   const nickname = localStorage.getItem("nickname");
+
+  const detailGroup = useSelector((state) => state.feed.detail);
   const isLogin = useSelector((state) => state.user.isLogin);
+
+  const [editMenu, setEditMenu] = React.useState(false);
 
   const goApply = () => {
     if (isLogin) {

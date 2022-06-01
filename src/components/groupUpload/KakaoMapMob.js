@@ -1,4 +1,15 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addDistance,
+  addPaths,
+  resetMap,
+} from "../../redux/modules/uploadInfo";
+
+//css, library, package
+import swal from "sweetalert";
 import styled from "styled-components";
 import {
   Map,
@@ -6,24 +17,18 @@ import {
   CustomOverlayMap,
   MapMarker,
 } from "react-kakao-maps-sdk";
-import { Grid, Input, Text } from "../../elements";
-import { history } from "../../redux/configureStore";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addDistance,
-  addPaths,
-  resetMap,
-} from "../../redux/modules/uploadInfo";
-import swal from "sweetalert";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const KakaoMapMob = () => {
   const { kakao } = window;
 
   const dispatch = useDispatch();
-  const [rightState, setRightState] = useState(false);
 
   const mapInfoList = useSelector((state) => state.uploadInfo);
 
+  const [rightState, setRightState] = useState(false);
   const [isdrawing, setIsdrawing] = useState(false);
   const [clickLine, setClickLine] = useState();
   const [paths, setPaths] = useState(mapInfoList?.paths);
@@ -33,17 +38,13 @@ const KakaoMapMob = () => {
     lng: 0,
   });
   const [moveLine, setMoveLine] = useState();
-
-  //서버에 보내줄 최종 거리(km)
-
-  const totalDistance = (distances[distances.length - 1] / 1000).toFixed(2);
-
-  // const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
-
   const [map, setMap] = useState();
   const [inputText, setInputText] = useState("");
   const [place, setPlace] = useState("");
+
+  //서버에 보내줄 최종 거리(km)
+  const totalDistance = (distances[distances.length - 1] / 1000).toFixed(2);
 
   const onChange = (e) => {
     setInputText(e.target.value);
@@ -126,7 +127,7 @@ const KakaoMapMob = () => {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
       } else {
-        // swal("검색된 장소가 없습니다", "", "warning");
+        swal("검색된 장소가 없습니다", "", "warning");
         setInputText("");
       }
     });

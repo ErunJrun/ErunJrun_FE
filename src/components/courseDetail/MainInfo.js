@@ -1,17 +1,10 @@
 import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, Image, Text, IconButton } from "../../elements";
-import styled from "styled-components";
-import Permit from "../../shared/Permit";
 import { applyDetailDB, deleteGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
-import { Link, useParams } from "react-router-dom";
-import groupChat from "../../assets/groupDetail/chat.svg";
-import bookMarkGreen_detail from "../../assets/courseFeed/bookMarkGreen_detail.svg";
-import bookMarkLine_detail from "../../assets/courseFeed/bookMarkLine_detail.svg";
-import KakaoShareButton from "../KakaoShareButton";
-import { useMediaQuery } from "react-responsive";
-import swal from "sweetalert";
 import {
   bookmarkDB,
   bookmarkDetailDB,
@@ -19,7 +12,26 @@ import {
   getCourseDetailDB,
   resetCourse,
 } from "../../redux/modules/course";
+
+//css, library, package
+import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
+import swal from "sweetalert";
+
+//Image
+import groupChat from "../../assets/groupDetail/chat.svg";
+import bookMarkGreen_detail from "../../assets/courseFeed/bookMarkGreen_detail.svg";
+import bookMarkLine_detail from "../../assets/courseFeed/bookMarkLine_detail.svg";
+
+//cookie
 import { getCookie } from "../../shared/Cookie";
+
+//elements
+import { Grid, Image, Text, IconButton } from "../../elements";
+
+//components
+import Permit from "../../shared/Permit";
+import KakaoShareButton from "../KakaoShareButton";
 
 const MainInfo = (props) => {
   const isMobile = useMediaQuery({
@@ -27,13 +39,13 @@ const MainInfo = (props) => {
   });
 
   const dispatch = useDispatch();
-  const params = useParams();
-  const groupId = params.groupId;
-  const detailCourse = useSelector((state) => state.course.detail);
-  const [editMenu, setEditMenu] = React.useState(false);
 
   const nickname = localStorage.getItem("nickname");
   const token = getCookie("accessToken");
+
+  const detailCourse = useSelector((state) => state.course.detail);
+
+  const [editMenu, setEditMenu] = React.useState(false);
 
   const handleEditMenu = () => {
     return setEditMenu(!editMenu);

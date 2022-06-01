@@ -1,4 +1,15 @@
 import React, { useRef, useEffect, useState } from "react";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addDistance,
+  addPaths,
+  resetMap,
+} from "../../redux/modules/uploadInfo";
+
+//css, library, package
+import swal from "sweetalert";
 import styled from "styled-components";
 import {
   Map,
@@ -6,15 +17,14 @@ import {
   CustomOverlayMap,
   MapMarker,
 } from "react-kakao-maps-sdk";
+//Image
+
+//elements
 import { Grid, Input, Text } from "../../elements";
-import { history } from "../../redux/configureStore";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addDistance,
-  addPaths,
-  resetMap,
-} from "../../redux/modules/uploadInfo";
-import swal from "sweetalert";
+
+//components
+
+//page
 
 function KakaoMap() {
   const { kakao } = window;

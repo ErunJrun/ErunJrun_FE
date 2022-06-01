@@ -4,8 +4,6 @@ import { produce } from "immer";
 import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
 import { handleActions } from "redux-actions";
 
-import swal from "sweetalert";
-
 // Action
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";

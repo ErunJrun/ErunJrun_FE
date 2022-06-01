@@ -1,21 +1,14 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { Grid, Text } from "../../elements";
+
+//css, library, package
 import styled from "styled-components";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const ThemeFilter = (props) => {
   const [checkedInputs, setCheckedInputs] = useState([]);
   const [allState, setAllState] = useState(false);
-
-  useEffect(() => {
-    props?.setFilterTheme(checkedInputs);
-  }, [checkedInputs]);
-
-  useEffect(() => {
-    if (props?.reset) {
-      setCheckedInputs([]);
-    }
-  }, [props.reset]);
-
   const [theme, setTheme] = useState([
     "도시",
     "공원",
@@ -34,6 +27,16 @@ const ThemeFilter = (props) => {
       setCheckedInputs(checkedInputs.filter((el) => el !== theme[idx]));
     }
   };
+
+  useEffect(() => {
+    props?.setFilterTheme(checkedInputs);
+  }, [checkedInputs]);
+
+  useEffect(() => {
+    if (props?.reset) {
+      setCheckedInputs([]);
+    }
+  }, [props.reset]);
 
   if (props.isMobile) {
     return (

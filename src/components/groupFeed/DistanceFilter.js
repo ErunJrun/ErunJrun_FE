@@ -1,23 +1,14 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { Grid, Text } from "../../elements";
+
+//css, library, package
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const DistanceFilter = (props) => {
   const [checkedInputs, setCheckedInputs] = useState([]);
   const [allState, setAllState] = useState(false);
-
-  useEffect(() => {
-    props?.setFilterDistance(checkedInputs);
-  }, [checkedInputs]);
-
-  useEffect(() => {
-    if (props?.reset) {
-      setCheckedInputs([]);
-      props.setResetState(false);
-    }
-  }, [props.reset]);
-
   const [distance, setDistance] = useState([
     "5km 미만",
     "5km 이상 10km 미만",
@@ -34,6 +25,17 @@ const DistanceFilter = (props) => {
       setCheckedInputs(checkedInputs.filter((el) => el !== idx));
     }
   };
+
+  useEffect(() => {
+    props?.setFilterDistance(checkedInputs);
+  }, [checkedInputs]);
+
+  useEffect(() => {
+    if (props?.reset) {
+      setCheckedInputs([]);
+      props.setResetState(false);
+    }
+  }, [props.reset]);
 
   if (props.isMobile) {
     return (

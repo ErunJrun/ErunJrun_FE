@@ -1,14 +1,22 @@
 import React, { useEffect, Fragment, useState } from "react";
-import styled from "styled-components";
-import { Image, Grid, Text } from "../../elements";
-import ImageIcon from "../../assets/groupUpload/imageCamera.png";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
+
+//css, library, package
+import styled from "styled-components";
 import swal from "sweetalert";
-import imageCompression from "browser-image-compression";
+
+//Image
+import ImageIcon from "../../assets/groupUpload/imageCamera.png";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const ImagesUpload = (props) => {
   const dispatch = useDispatch();
+
   const totalImage = useSelector((state) => state.image.files);
   const showImages = useSelector((state) => state.image.show);
 
@@ -46,14 +54,9 @@ const ImagesUpload = (props) => {
 
   //이미지 삭제
   const handleDeleteImage = (x, idx) => {
-    // 서버에서 준 URL 버킷 이름을 기준으로 찾아
-
-    // 리덕스에 files 삭제
     dispatch(imgActions.deletePre(idx));
 
-    // 프리뷰 삭제
     dispatch(imgActions.deleteShow(idx));
-    // setShowImages(showImages.filter((p, index) => index !== idx));
   };
 
   if (props.isMobile) {

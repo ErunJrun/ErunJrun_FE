@@ -1,20 +1,20 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
+import { history } from "../../redux/configureStore";
+
+//css, library, package
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { styled as muiStyled } from "@mui/material/styles";
-import { history } from "../../redux/configureStore";
-import { useParams } from "react-router-dom";
 
 const RegionFilterMob = () => {
   const [value, setValue] = React.useState(0);
 
   const params = useParams();
   const region = Number(params.region);
-
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
 
   const StyledTab = muiStyled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({

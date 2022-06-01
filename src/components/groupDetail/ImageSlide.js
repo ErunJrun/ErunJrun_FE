@@ -1,4 +1,10 @@
 import React from "react";
+
+//Redux
+import { deleteGroupDB } from "../../redux/modules/feed";
+import { useParams } from "react-router-dom";
+import { history } from "../../redux/configureStore";
+//css, library, package
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
@@ -8,21 +14,20 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-
-import backIcon from "../../assets/groupDetail/backIcon.png";
-import editIcon from "../../assets/groupDetail/editIcon.png";
-
-import Permit from "../../shared/Permit";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { deleteGroupDB } from "../../redux/modules/feed";
-import { useParams } from "react-router-dom";
-import { history } from "../../redux/configureStore";
+import swal from "sweetalert";
+
+//Image
+import backIcon from "../../assets/groupDetail/backIcon.png";
+import editIcon from "../../assets/groupDetail/editIcon.png";
+
+//elements
 import { Grid, Text } from "../../elements";
 
-import swal from "sweetalert";
+//components
+import Permit from "../../shared/Permit";
 
 const ImageSlide = () => {
   const isMobile = useMediaQuery({
@@ -32,12 +37,13 @@ const ImageSlide = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const groupId = params.groupId;
-  const detailGroup = useSelector((state) => state.feed.detail);
-
-  const [editMenu, setEditMenu] = React.useState(false);
 
   const nickname = localStorage.getItem("nickname");
+
+  const detailGroup = useSelector((state) => state.feed.detail);
   const isLogin = useSelector((state) => state.user.isLogin);
+
+  const [editMenu, setEditMenu] = React.useState(false);
 
   const closeEditMenu = () => {
     return setEditMenu(false);

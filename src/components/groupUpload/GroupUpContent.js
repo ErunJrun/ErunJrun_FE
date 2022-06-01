@@ -1,26 +1,34 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Grid, Text, Input, IconButton } from "../../elements";
-import styled from "styled-components";
-import dayjs from "dayjs";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { addContents } from "../../redux/modules/uploadInfo";
+
+//css, library, package
 import swal from "sweetalert";
+import styled from "styled-components";
+import dayjs from "dayjs";
+
+//elements
+import { Grid, Text, Input, IconButton } from "../../elements";
+
+//components
 import CalendarFilter from "../groupFeed/CalendarFilter";
 import TimePickers from "./TimePickers";
 
 const GroupContent = (props) => {
   const dispatch = useDispatch();
+
   const contentsList = useSelector((state) => state.uploadInfo.contents);
+
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [resetState, setResetState] = useState(false);
-
   const [textLength, setTextLength] = useState(0);
   const [textLength600, setTextLength600] = useState(0);
   const [textLengthPark, setTextLengthPark] = useState(0);
   const [textLengthBag, setTextLengthBag] = useState(0);
   const [textLengthChat, setTextLengthChat] = useState(0);
-
   const [title, setTitle] = useState(contentsList.title);
   const [standbyTime, setStandbyTime] = useState(contentsList.standbyTime);
   const [startTime, setStartTime] = useState(contentsList.startTime);
@@ -47,57 +55,21 @@ const GroupContent = (props) => {
     `6'00" km/h`,
     `6'30" km/h`,
   ]);
-
   const [checkedType, setCheckedType] = useState(contentsList.theme);
   const [checkedSpeed, setCheckedSpeed] = useState(contentsList.speed);
-
-  const datePick = (e) => {
-    if (
-      dayjs(e.target.value).format("YYYYMMDD") <
-      dayjs(new Date()).format("YYYYMMDD")
-    ) {
-      swal("지난 날짜는 선택이 불가능합니다.");
-      setDate("");
-    }
-  };
-
-  //스탠바이 시간 선택
-  const standbyTimePick = (e) => {
-    if (
-      dayjs(date).format("YYYYMMDD") === dayjs(new Date()).format("YYYYMMDD")
-    ) {
-      if (dayjs().add(6, "hour").format("HH:mm") < dayjs().format("HH:mm")) {
-        swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
-        setStandbyTime("");
-      }
-
-      if (e.target.value < dayjs().add(6, "hour").format("HH:mm")) {
-        swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
-        setStandbyTime("");
-      }
-    } else {
-      if (e.target.value > dayjs().add(6, "hour").format("HH:mm")) {
-        if (e.target.value < dayjs().add(30, "hour").format("HH:mm"))
-          swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
-        setStandbyTime("");
-      }
-    }
-  };
-
-  //출발 시간 선택
-  const startTimePick = (e) => {
-    if (e.target.value < standbyTime) {
-      swal("러닝 일시 시간보다 빠를 수 없습니다.");
-      setStartTime("");
-    }
-  };
-
-  //도착 시간 선택
-  const finishTimePick = (e) => {
-    if (e.target.value < startTime) {
-      swal("출발 시간보다 빠를 수 없습니다.");
-      setFinishTime("");
-    }
+  const contents = {
+    title: title,
+    standbyTime: standbyTime,
+    startTime: startTime,
+    finishTime: finishTime,
+    maxPeople: maxPeople,
+    date: date,
+    speed: checkedSpeed,
+    parking: parking,
+    baggage: baggage,
+    content: content,
+    theme: checkedType,
+    chattingRoom: chattingRoom,
   };
 
   //글자 수 제한
@@ -157,21 +129,6 @@ const GroupContent = (props) => {
 
   const choiceSpeed = (e) => {
     setCheckedSpeed(e);
-  };
-
-  const contents = {
-    title: title,
-    standbyTime: standbyTime,
-    startTime: startTime,
-    finishTime: finishTime,
-    maxPeople: maxPeople,
-    date: date,
-    speed: checkedSpeed,
-    parking: parking,
-    baggage: baggage,
-    content: content,
-    theme: checkedType,
-    chattingRoom: chattingRoom,
   };
 
   useEffect(() => {

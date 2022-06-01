@@ -1,27 +1,38 @@
 import React, { useEffect, useState } from "react";
+
+//css, library, package
 import styled from "styled-components";
-import { Grid, Text } from "../../elements";
 import DatePicker from "react-datepicker";
+import dayjs from "dayjs";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { useMediaQuery } from "react-responsive";
 import "./CalendarFilter.css";
+
+//Image
 import inputArrow from "../../assets/groupFeed/inputArrow.svg";
-import dayjs from "dayjs";
 import inputArrowGray from "../../assets/groupUpload/inputArrowGray.svg";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const CalendarFilter = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
 
-  // const [dateRange, setDateRange] = useState(["", ""]);
-  // const [startDate, endDate] = dateRange;
-
   const [startDate, setStartDate] = useState("");
   const [uploadDate, setUploadDate] = useState(props.date);
   const [endDate, setEndDate] = useState("");
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  const _startDate = formatDate(startDate);
+  const _endDate = formatDate(endDate);
+  const _uploadDate = formatDate(uploadDate);
+
+  const koStartDate = dayjs(_startDate).format("YYYY년 M월 D일");
+  const koEndDate = dayjs(_endDate).format("YYYY년 M월 D일");
+  const koUploadDate = dayjs(_uploadDate).format("YYYY년 M월 D일");
 
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -39,14 +50,6 @@ const CalendarFilter = (props) => {
       setIsCalendarOpen(false);
     }
   };
-
-  const _startDate = formatDate(startDate);
-  const _endDate = formatDate(endDate);
-  const _uploadDate = formatDate(uploadDate);
-
-  const koStartDate = dayjs(_startDate).format("YYYY년 M월 D일");
-  const koEndDate = dayjs(_endDate).format("YYYY년 M월 D일");
-  const koUploadDate = dayjs(_uploadDate).format("YYYY년 M월 D일");
 
   //날짜 포맷 변환
   function formatDate(date) {

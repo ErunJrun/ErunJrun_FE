@@ -1,17 +1,24 @@
-import { textAlign } from "@mui/system";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState } from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import { Text, Grid, IconButton } from "../../elements";
 import { getGroupDB, resetGroup } from "../../redux/modules/feed";
+
+//css, library, package
+import styled from "styled-components";
+
+//Image
+import backBtn from "../../assets/groupFeed/backBtn.svg";
+import ModalPortal from "../../shared/modal/ModalPortal";
+
+//elements
+import { Text, Grid } from "../../elements";
+
+//components
 import CalendarFilter from "./CalendarFilter";
 import DistanceFilter from "./DistanceFilter";
 import TimeFilter from "./TimeFilter";
 import ThemeFilter from "./ThemeFilter";
-import swal from "sweetalert";
-import backBtn from "../../assets/groupFeed/backBtn.svg";
-import { history } from "../../redux/configureStore";
-import ModalPortal from "../../shared/modal/ModalPortal";
 
 const GroupFilterMob = (props) => {
   const dispatch = useDispatch();
@@ -89,13 +96,6 @@ const GroupFilterMob = (props) => {
   };
 
   const getFilter = () => {
-    // if (
-    //   region.length === 0 ||
-    //   region === "none" ||
-    //   startDate === "NaN-NaN-NaN"
-    // ) {
-    //   return swal("지역과 모집 일정은 필수입니다.", "", "warning");
-    // }
     props.setSearchState(true);
     props.setFilterState(false);
     dispatch(resetGroup());

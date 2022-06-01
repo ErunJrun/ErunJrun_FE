@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
+
+//Redux
+import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
+
+//css, library, package
 import styled from "styled-components";
 import {
   Map,
@@ -6,13 +12,11 @@ import {
   CustomOverlayMap,
   MapMarker,
 } from "react-kakao-maps-sdk";
-import { Grid, Input, Text } from "../../elements";
-import { history } from "../../redux/configureStore";
-import { useSelector } from "react-redux";
 
-import { useMediaQuery } from "react-responsive";
+//elements
+import { Grid, Text } from "../../elements";
 
-function MapInfo(props) {
+function MapInfo() {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });

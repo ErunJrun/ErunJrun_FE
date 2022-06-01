@@ -1,27 +1,33 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
-import { Grid, Text } from "../../elements";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
 import { resetComm, _getCommentFX } from "../../redux/modules/comments";
+import { _getReCommentFX } from "../../redux/modules/recomments";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+
+//elements
+import { Grid, Text } from "../../elements";
+
+//components
 import CommentItem from "./CommentItem";
 import CommentWrite from "./CommentWrite";
-import { useMediaQuery } from "react-responsive";
-import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
 
 const CommentList = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
-  const path = useLocation().pathname;
 
-  const params = useParams();
   const dispatch = useDispatch();
-  const commentList = useSelector((state) => state.comments.list);
-  const recommentList = useSelector((state) => state.recomments.list);
-  const detailGroup = useSelector((state) => state.feed.detail);
-
+  const params = useParams();
   const groupId = params?.groupId;
   const courseId = params?.courseId;
+
+  const commentList = useSelector((state) => state.comments.list);
+  const recommentList = useSelector((state) => state.recomments.list);
 
   React.useEffect(() => {
     if (props.course) {

@@ -1,19 +1,27 @@
 import React, { useEffect, Fragment, useState } from "react";
-import styled from "styled-components";
-import { Image, Grid, Text } from "../../elements";
+import { useParams } from "react-router-dom";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { imgActions } from "../../redux/modules/image";
 import { editGroupDB } from "../../redux/modules/feed";
-import { useParams } from "react-router-dom";
+import { history } from "../../redux/configureStore";
+
+//css, library, package
+import styled from "styled-components";
+import swal from "sweetalert";
+
+//Image
 import ImageIcon from "../../assets/groupUpload/imageCamera.png";
 import editStep2 from "../../assets/groupUpload/editStep2.png";
 import editStep2Mob from "../../assets/groupUpload/editStep2Mob.svg";
 import backBtn from "../../assets/groupFeed/backBtn.svg";
 import step3Mob from "../../assets/groupUpload/step3Mob.svg";
 import groupLeftBtn from "../../assets/groupUpload/groupLeftBtn.png";
-import swal from "sweetalert";
-import { history } from "../../redux/configureStore";
 import groupLeftBtnBlack from "../../assets/groupUpload/groupLeftBtnBlack.svg";
+
+//elements
+import { Image, Grid, Text } from "../../elements";
 
 const EditImages = (props) => {
   const dispatch = useDispatch();
@@ -26,8 +34,8 @@ const EditImages = (props) => {
     props.thumbnailUrl2,
     props.thumbnailUrl3,
   ];
-
   const [showImages, setShowImages] = useState([]);
+
   const totalImage = useSelector((state) => state.image.files);
   const editContents = useSelector((state) => state.feed.detail);
 
@@ -35,13 +43,11 @@ const EditImages = (props) => {
     props.setIsLoad1(false);
     props.setIsLoad2(true);
     dispatch(imgActions.resetFile());
-    // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const editGroupPost = () => {
     dispatch(editGroupDB(groupId, editContents, editUrl, newFiles));
     dispatch(imgActions.resetFile());
-    // history.replace("/groupfeed");
   };
 
   //이미지 저장 및 미리보기
@@ -82,13 +88,11 @@ const EditImages = (props) => {
 
   //이미지 삭제
   const handleDeleteImage = (x, idx) => {
-    // 리덕스에 files 삭제
     dispatch(imgActions.deletePre(idx));
-    // 프리뷰 삭제
     setShowImages(showImages.filter((p, index) => index !== idx));
   };
 
-  //새로 올린 파일과 기존 사진 url을 분리
+  //새로 올린 파일과 기존 사진 url 분리
   let newFiles = [];
   let editUrl = [];
   totalImage.map((e, idx) => {
@@ -102,14 +106,12 @@ const EditImages = (props) => {
 
   useEffect(() => {
     let editPreview = [];
-    // 서버에서 받은 URL을 PreView에 넣어줌
     detailImageUrl.map((e, idx) => {
       if (e !== null) {
         return editPreview.push(detailImageUrl[idx]);
       }
     });
     setShowImages(editPreview);
-    // 리덕스에 files 인덱스를 맞추기 위해 URL도 같이 넣어줌
     dispatch(imgActions.setPre(editPreview));
   }, [props]);
 

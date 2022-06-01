@@ -1,8 +1,14 @@
 import React, { Fragment } from "react";
-import { Grid, Text } from "../../elements";
-import styled from "styled-components";
+
+//Redux
 import { history } from "../../redux/configureStore";
+
+//css, library, package
+import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const AlarmStart = (props) => {
   const isMobile = useMediaQuery({

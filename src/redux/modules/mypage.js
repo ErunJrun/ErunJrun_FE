@@ -93,7 +93,7 @@ export const getMyBookmark = (payload) => ({
   payload,
 });
 
-export const getMyCourse= (payload) => ({
+export const getMyCourse = (payload) => ({
   type: GET_MYCOURSE,
   payload,
 });
@@ -113,9 +113,7 @@ const initialState = {
   mycourse: [],
 };
 
-// middleware actions
-
-//프로필 가져오기
+// middleware
 export const getProfileDB = (userId) => {
   return async function (dispatch, getState, { history }) {
     try {
@@ -452,14 +450,14 @@ export default handleActions(
       }),
 
     [GET_MYBOOKMARK]: (state, action) =>
-    produce(state, (draft) => {
-      draft.mybook = action.payload;
-    }),
+      produce(state, (draft) => {
+        draft.mybook = action.payload;
+      }),
 
     [GET_MYCOURSE]: (state, action) =>
-    produce(state, (draft) => {
-      draft.mycourse = action.payload;
-    }),
+      produce(state, (draft) => {
+        draft.mycourse = action.payload;
+      }),
   },
   initialState
 );

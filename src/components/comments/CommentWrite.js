@@ -1,17 +1,26 @@
 import React, { useState } from "react";
+
+//Redux
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import { Grid } from "../../elements";
 import { _addCommentFX } from "../../redux/modules/comments";
-import defaultProfile from "../../assets/defaultProfile.png";
+
+//css, library, package
+import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import swal from "sweetalert";
+
+//Image
+import defaultProfile from "../../assets/defaultProfile.png";
+
+//elements
+import { Grid } from "../../elements";
 
 const CommentWrite = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
   const dispatch = useDispatch();
+
   const [comm, setComm] = useState("");
 
   const writeComm = (e) => {

@@ -1,7 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { Grid, Text, Image, IconButton } from "../../elements";
+import { _getReCommentFX } from "../../redux/modules/recomments";
+import { history } from "../../redux/configureStore";
+
 import {
   _deleteCommentFX,
   _editCommentFX,
@@ -9,13 +12,19 @@ import {
   _isEdit,
   _isRecommBox,
 } from "../../redux/modules/comments";
-import Permit from "../../shared/Permit";
 import styled from "styled-components";
+
+//css, library, package
+import { useMediaQuery } from "react-responsive";
+//Image
+
+//elements
+import { Grid, Text, Image, IconButton } from "../../elements";
+
+//components
+import Permit from "../../shared/Permit";
 import RecommentItem from "../recomment/RecommentItem";
 import RecommentWrite from "../recomment/RecommentWrite";
-import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
-import { history } from "../../redux/configureStore";
-import { useMediaQuery } from "react-responsive";
 
 const CommentItem = (props) => {
   const isMobile = useMediaQuery({
@@ -23,14 +32,13 @@ const CommentItem = (props) => {
   });
 
   const dispatch = useDispatch();
+
+  const nickname = localStorage.getItem("nickname");
+
   const [newComm, setNewComm] = useState(props.content);
   const [reCommBox, setReCommBox] = useState(false);
 
-  const nickname = localStorage.getItem("nickname");
-  const isLogin = useSelector((state) => state.user.isLogin);
-
   const recommentList = useSelector((state) => state.recomments.list);
-  const commentList = useSelector((state) => state.comments.list);
 
   const editToggle = (commentId) => {
     dispatch(_isEdit(commentId));
@@ -40,20 +48,6 @@ const CommentItem = (props) => {
     dispatch(_editCommentFX(commentId, newComm));
     editToggle(commentId);
   };
-
-  // React.useEffect(() => {
-  //   if (commentList.length > 0 && !props.course) {
-  //     console.log(
-  //       "ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
-  //     );
-
-  //     dispatch(_getReCommentFX(commentList[0].commentId));
-  //   }
-
-  //   return () => {
-  //     dispatch(resetReComm());
-  //   };
-  // }, []);
 
   if (props.course && !isMobile) {
     return (

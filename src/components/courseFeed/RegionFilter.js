@@ -1,16 +1,22 @@
 import React, { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import { Grid, Text } from "../../elements";
+
+//Redux
+import { useDispatch } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { getCourseDB, resetCourse } from "../../redux/modules/course";
+
+//css, library, package
+import styled from "styled-components";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const RegionFilter = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const regionId = params.region;
-  console.log(regionId);
+
   const [regionTag, setRegionTag] = useState([
     "전국",
     "서울특별시",

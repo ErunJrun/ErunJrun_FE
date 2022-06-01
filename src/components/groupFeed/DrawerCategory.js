@@ -1,4 +1,10 @@
 import React from "react";
+
+//Redux
+import { getAllDB, getPreferDB, resetGroup } from "../../redux/modules/feed";
+import { useDispatch, useSelector } from "react-redux";
+
+//css, library, package
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Button from "@mui/material/Button";
@@ -10,23 +16,26 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { Grid, Text } from "../../elements";
+import "./DrawerCategory.css";
+
+//Image
 import drawerArrow from "../../assets/groupFeed/drawerArrowLeft.svg";
 import inputArrowGray from "../../assets/groupUpload/inputArrowGray.svg";
-import "./DrawerCategory.css";
-import { getAllDB, getPreferDB, resetGroup } from "../../redux/modules/feed";
-import { useDispatch, useSelector } from "react-redux";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const DrawerCategory = () => {
   const dispatch = useDispatch();
+
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-
   const [filter, setFilter] = React.useState("전체");
+
   const paging = useSelector((state) => state.feed.paging);
 
   const toggleDrawer = (anchor, open) => (event) => {

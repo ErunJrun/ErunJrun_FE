@@ -1,6 +1,5 @@
 import { handleActions, createAction } from "redux-actions";
 import { produce } from "immer";
-import { api } from "../../shared/Api";
 
 //액션
 const ADD_PATHS = "ADD_PATHS";

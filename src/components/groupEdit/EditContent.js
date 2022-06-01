@@ -1,17 +1,67 @@
-import { useSelect } from "@mui/base";
 import React, { Fragment, useEffect, useState } from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import { Grid, Text, IconButton } from "../../elements";
 import { editGroupContent } from "../../redux/modules/feed";
+
+//css, library, package
+import styled from "styled-components";
+import dayjs from "dayjs";
+import swal from "sweetalert";
+
+//Image
 import editStep1 from "../../assets/groupUpload/editStep1.png";
 import groupRightBtn from "../../assets/groupUpload/groupRightBtn.png";
-import dayjs from "dayjs";
 
-import swal from "sweetalert";
+//elements
+import { Grid, Text, IconButton } from "../../elements";
 
 const EditContent = (props) => {
   const dispatch = useDispatch();
+
+  const [runTypeList, setRunTypeList] = useState([
+    "도시",
+    "공원",
+    "트랙",
+    "강변",
+    "산",
+    "해변",
+  ]);
+  const [runSpeedList, setRunSpeedList] = useState([
+    `4'00" km/h`,
+    `4'30" km/h`,
+    `5'00" km/h`,
+    `5'30" km/h`,
+    `6'00" km/h`,
+    `6'30" km/h`,
+  ]);
+  const [title, setTitle] = useState(props.title);
+  const [standbyTime, setStandbyTime] = useState(props.standbyTime);
+
+  const [maxPeople, setMaxPeople] = useState(props.maxPeople);
+  const [date, setDate] = useState(props.date);
+  const [parking, setParking] = useState(props.parking);
+  const [baggage, setBaggage] = useState(props.baggage);
+  const [content, setContent] = useState(props.content);
+  const [checkedType, setCheckedType] = useState(props.thema);
+  const [checkedSpeed, setCheckedSpeed] = useState(props.speed);
+  const [chattingRoom, setChattingRoom] = useState(props.chattingRoom);
+
+  const contents = [
+    {
+      title: title,
+      standbyTime: standbyTime,
+
+      maxPeople: maxPeople,
+      date: date,
+      speed: checkedSpeed,
+      parking: parking,
+      baggage: baggage,
+      content: content,
+      theme: checkedType,
+      chattingRoom: chattingRoom,
+    },
+  ];
 
   //글자 수 제한
   const [textLength, setTextLength] = useState(props?.title?.length);
@@ -71,23 +121,6 @@ const EditContent = (props) => {
     setTextLengthChat(wordLength);
   };
 
-  const [runTypeList, setRunTypeList] = useState([
-    "도시",
-    "공원",
-    "트랙",
-    "강변",
-    "산",
-    "해변",
-  ]);
-  const [runSpeedList, setRunSpeedList] = useState([
-    `4'00" km/h`,
-    `4'30" km/h`,
-    `5'00" km/h`,
-    `5'30" km/h`,
-    `6'00" km/h`,
-    `6'30" km/h`,
-  ]);
-
   const datePick = (e) => {
     if (
       dayjs(e.target.value).format("YYYYMMDD") <=
@@ -97,34 +130,6 @@ const EditContent = (props) => {
       setDate("");
     }
   };
-
-  const [title, setTitle] = useState(props.title);
-  const [standbyTime, setStandbyTime] = useState(props.standbyTime);
-
-  const [maxPeople, setMaxPeople] = useState(props.maxPeople);
-  const [date, setDate] = useState(props.date);
-  const [parking, setParking] = useState(props.parking);
-  const [baggage, setBaggage] = useState(props.baggage);
-  const [content, setContent] = useState(props.content);
-  const [checkedType, setCheckedType] = useState(props.thema);
-  const [checkedSpeed, setCheckedSpeed] = useState(props.speed);
-  const [chattingRoom, setChattingRoom] = useState(props.chattingRoom);
-
-  const contents = [
-    {
-      title: title,
-      standbyTime: standbyTime,
-
-      maxPeople: maxPeople,
-      date: date,
-      speed: checkedSpeed,
-      parking: parking,
-      baggage: baggage,
-      content: content,
-      theme: checkedType,
-      chattingRoom: chattingRoom,
-    },
-  ];
 
   const choiceRunType = (e) => {
     setCheckedType(e);
@@ -137,7 +142,6 @@ const EditContent = (props) => {
   useEffect(() => {
     setTitle(props.title);
     setStandbyTime(props.standbyTime);
-
     setMaxPeople(props.maxPeople);
     setDate(props.date);
     setParking(props.parking);

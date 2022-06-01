@@ -1,21 +1,14 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { Grid, Text } from "../../elements";
+
+//css, library, package
 import styled from "styled-components";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const TimeFilter = (props) => {
   const [checkedInputs, setCheckedInputs] = useState([]);
   const [allState, setAllState] = useState(false);
-
-  useEffect(() => {
-    props?.setFilterTime(checkedInputs);
-  }, [checkedInputs]);
-
-  useEffect(() => {
-    if (props?.reset) {
-      setCheckedInputs([]);
-    }
-  }, [props.reset]);
-
   const [time, setTime] = useState([
     "00:00 ~ 04:00",
     "04:00 ~ 08:00",
@@ -34,6 +27,16 @@ const TimeFilter = (props) => {
       setCheckedInputs(checkedInputs.filter((el) => el !== idx));
     }
   };
+
+  useEffect(() => {
+    props?.setFilterTime(checkedInputs);
+  }, [checkedInputs]);
+
+  useEffect(() => {
+    if (props?.reset) {
+      setCheckedInputs([]);
+    }
+  }, [props.reset]);
 
   if (props.isMobile) {
     return (

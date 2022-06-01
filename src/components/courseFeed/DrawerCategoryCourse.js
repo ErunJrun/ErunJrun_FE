@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
+import { getAllDB, getPreferDB, resetGroup } from "../../redux/modules/feed";
+import { useDispatch, useSelector } from "react-redux";
+import { getCourseDB, resetCourse } from "../../redux/modules/course";
+
+//css, library, package
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Button from "@mui/material/Button";
@@ -10,14 +18,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { Grid, Text } from "../../elements";
+import "./DrawerCategoryCourse.css";
+
+//Image
 import drawerArrow from "../../assets/groupFeed/drawerArrowLeft.svg";
 import inputArrowGray from "../../assets/groupUpload/inputArrowGray.svg";
-import "./DrawerCategoryCourse.css";
-import { getAllDB, getPreferDB, resetGroup } from "../../redux/modules/feed";
-import { useDispatch, useSelector } from "react-redux";
-import { getCourseDB, resetCourse } from "../../redux/modules/course";
-import { useParams } from "react-router-dom";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const DrawerCategoryCourse = () => {
   const dispatch = useDispatch();
@@ -29,12 +37,6 @@ const DrawerCategoryCourse = () => {
     bottom: false,
     right: false,
   });
-
-  useEffect(() => {
-    dispatch(resetCourse());
-    setFilter("최신순");
-  }, [region]);
-
   const [filter, setFilter] = React.useState("최신순");
   const paging = useSelector((state) => state.feed.paging);
 
@@ -69,6 +71,11 @@ const DrawerCategoryCourse = () => {
     dispatch(resetCourse());
     dispatch(getCourseDB(region, "bookmark", 1, 6));
   };
+
+  useEffect(() => {
+    dispatch(resetCourse());
+    setFilter("최신순");
+  }, [region]);
 
   const list = (anchor) => (
     <Box

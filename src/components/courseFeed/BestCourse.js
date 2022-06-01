@@ -1,13 +1,20 @@
 import React from "react";
+
+//Redux
+import { history } from "../../redux/configureStore";
+import { bookmarkRankingDB } from "../../redux/modules/course";
+import { useDispatch } from "react-redux";
+
+//css, library, package
 import styled from "styled-components";
-import { Grid, Text } from "../../elements";
+
+//Image
 import starIcon from "../../assets/courseFeed/star.svg";
 import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
 import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
 
-import { history } from "../../redux/configureStore";
-import { bookmarkDB, bookmarkRankingDB } from "../../redux/modules/course";
-import { useDispatch } from "react-redux";
+//elements
+import { Grid, Text } from "../../elements";
 
 const BestCourse = (props) => {
   const dispatch = useDispatch();

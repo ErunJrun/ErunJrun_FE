@@ -1,14 +1,20 @@
-import React, { Fragment, useEffect } from "react";
-import { Text, Grid, Image, IconButton } from "../../elements";
-import styled from "styled-components";
+import React from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import { applyGroupDB, getGroupDB } from "../../redux/modules/feed";
+import { applyGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
-import Permit from "../../shared/Permit";
+
+//css, library, package
+import styled from "styled-components";
 import swal from "sweetalert";
+
+//elements
+import { Text, Grid } from "../../elements";
 
 const GroupCardMob = (props) => {
   const dispatch = useDispatch();
+
   const peopleCnt = props?.maxPeople - props?.applyPeople;
   const isLogin = useSelector((state) => state.user.isLogin);
 

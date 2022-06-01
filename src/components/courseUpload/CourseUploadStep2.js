@@ -1,17 +1,22 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Grid, Text, Input, IconButton } from "../../elements";
-import styled from "styled-components";
-import dayjs from "dayjs";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { addContents } from "../../redux/modules/uploadInfo";
+
+//css, library, package
+import styled from "styled-components";
+import dayjs from "dayjs";
 import swal from "sweetalert";
-import CalendarFilter from "../groupFeed/CalendarFilter";
-import TimePickers from "../groupUpload/TimePickers";
+
+//elements
+import { Grid, Text, IconButton } from "../../elements";
 
 const CourseUploadStep2 = (props) => {
   const dispatch = useDispatch();
 
   const contentsList = useSelector((state) => state.uploadInfo.contents);
+
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [resetState, setResetState] = useState(false);
@@ -56,53 +61,13 @@ const CourseUploadStep2 = (props) => {
   const runMin = Math.floor(props.distance % 10) * 6;
   const totalTime = `${runHour}h ${runMin}min`;
 
-  const datePick = (e) => {
-    if (
-      dayjs(e.target.value).format("YYYYMMDD") <
-      dayjs(new Date()).format("YYYYMMDD")
-    ) {
-      swal("지난 날짜는 선택이 불가능합니다.");
-      setDate("");
-    }
-  };
-
-  //스탠바이 시간 선택
-  const standbyTimePick = (e) => {
-    if (
-      dayjs(date).format("YYYYMMDD") === dayjs(new Date()).format("YYYYMMDD")
-    ) {
-      if (dayjs().add(6, "hour").format("HH:mm") < dayjs().format("HH:mm")) {
-        swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
-        setStandbyTime("");
-      }
-
-      if (e.target.value < dayjs().add(6, "hour").format("HH:mm")) {
-        swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
-        setStandbyTime("");
-      }
-    } else {
-      if (e.target.value > dayjs().add(6, "hour").format("HH:mm")) {
-        if (e.target.value < dayjs().add(30, "hour").format("HH:mm"))
-          swal("현재 시간부터 6시간 이후부터 등록이 가능합니다.");
-        setStandbyTime("");
-      }
-    }
-  };
-
-  //출발 시간 선택
-  const startTimePick = (e) => {
-    if (e.target.value < standbyTime) {
-      swal("러닝 일시 시간보다 빠를 수 없습니다.");
-      setStartTime("");
-    }
-  };
-
-  //도착 시간 선택
-  const finishTimePick = (e) => {
-    if (e.target.value < startTime) {
-      swal("출발 시간보다 빠를 수 없습니다.");
-      setFinishTime("");
-    }
+  const contents = {
+    title: title,
+    totalTime: totalTime,
+    parking: parking,
+    baggage: baggage,
+    content: content,
+    theme: checkedType,
   };
 
   //글자 수 제한
@@ -164,17 +129,7 @@ const CourseUploadStep2 = (props) => {
     setCheckedSpeed(e);
   };
 
-  const contents = {
-    title: title,
-    totalTime: totalTime,
-    parking: parking,
-    baggage: baggage,
-    content: content,
-    theme: checkedType,
-  };
-
   useEffect(() => {
-    // props.setContents(contents);
     dispatch(addContents(contents));
   }, [title, parking, baggage, content, checkedType]);
 

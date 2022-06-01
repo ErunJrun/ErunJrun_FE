@@ -1,46 +1,51 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Grid, Text } from "../../elements";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
+
+//css, library, package
 import styled from "styled-components";
 import { Link } from "react-scroll";
 import { useMediaQuery } from "react-responsive";
-
 import { styled as muiStyled } from "@mui/material/styles";
 import Tabs from "@mui/material/Tabs";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
-
 import TabPanel from "@mui/lab/TabPanel";
 
+//Image
+import mapIcon from "../../assets/groupDetail/map.png";
+
+//elements
+import { Grid, Text } from "../../elements";
+
+//components
 import MapInfo from "./MapInfo";
 import CommentList from "../comments/CommentList";
 import ServeInfo from "./ServeInfo";
-
-import mapIcon from "../../assets/groupDetail/map.png";
-import { useDispatch, useSelector } from "react-redux";
-import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
 import StarPoint from "./StarPoint";
-import { useParams } from "react-router-dom";
 
 const InfoCategory = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
 
-  const commentList = useSelector((state) => state.comments.list);
-  const starPoint = useSelector((state) => state.course.starPoint);
+  const dispatch = useDispatch();
   const params = useParams();
   const courseId = params.courseId;
 
-  const dispatch = useDispatch();
+  const commentList = useSelector((state) => state.comments.list);
+  const starPoint = useSelector((state) => state.course.starPoint);
 
   const [value, setValue] = React.useState("1");
+  const [checkedInfo, setCheckedInfo] = useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const [checkedInfo, setCheckedInfo] = useState("");
 
   const goInfo = (e) => {
     setCheckedInfo(e);

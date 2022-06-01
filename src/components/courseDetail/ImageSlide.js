@@ -1,4 +1,12 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { history } from "../../redux/configureStore";
+import { deleteCourseDB } from "../../redux/modules/course";
+
+//css, library, package
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
@@ -6,24 +14,17 @@ import "./ImageSlide.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
+//Image
 import backIcon from "../../assets/groupDetail/backIcon.png";
 import editIcon from "../../assets/groupDetail/editIcon.png";
 
-import Permit from "../../shared/Permit";
-
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { deleteGroupDB } from "../../redux/modules/feed";
-import { useParams } from "react-router-dom";
-import { history } from "../../redux/configureStore";
+//elements
 import { Grid, Text } from "../../elements";
 
-import swal from "sweetalert";
-import { deleteCourseDB } from "../../redux/modules/course";
+//components
+import Permit from "../../shared/Permit";
 
 const ImageSlide = () => {
   const isMobile = useMediaQuery({
@@ -33,12 +34,11 @@ const ImageSlide = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const courseId = params.courseId;
+  const nickname = localStorage.getItem("nickname");
+
   const courseDetail = useSelector((state) => state.course.detail);
 
   const [editMenu, setEditMenu] = React.useState(false);
-
-  const nickname = localStorage.getItem("nickname");
-  const isLogin = useSelector((state) => state.user.isLogin);
 
   const closeEditMenu = () => {
     return setEditMenu(false);

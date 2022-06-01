@@ -1,12 +1,19 @@
 import React from "react";
-import styled from "styled-components";
-import { Grid, Text } from "../../elements";
-import starIcon from "../../assets/courseFeed/star.svg";
-import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
-import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
+
+//Redux
 import { bookmarkDB, bookmarkMainDB } from "../../redux/modules/course";
 import { useDispatch } from "react-redux";
 import { history } from "../../redux/configureStore";
+
+//css, library, package
+import styled from "styled-components";
+
+//Image
+import starIcon from "../../assets/courseFeed/star.svg";
+import bookmarkWhite from "../../assets/courseFeed/bookmarkWhite.svg";
+import bookmarkGreen from "../../assets/courseFeed/bookmarkGreen.svg";
+//elements
+import { Grid, Text } from "../../elements";
 
 const CourseCardMob = (props) => {
   const dispatch = useDispatch();

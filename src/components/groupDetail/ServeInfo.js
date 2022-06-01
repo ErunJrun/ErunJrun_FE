@@ -1,11 +1,13 @@
 import React from "react";
+
+//Redux
 import { useSelector } from "react-redux";
-import { Grid, Text } from "../../elements";
-import styled from "styled-components";
 
-import dayjs from "dayjs";
-
+//css, library, package
 import { useMediaQuery } from "react-responsive";
+
+//elements
+import { Grid, Text } from "../../elements";
 
 const ServeInfo = () => {
   const isMobile = useMediaQuery({

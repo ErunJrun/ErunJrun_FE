@@ -1,16 +1,19 @@
 import React, { useRef, useEffect, useState } from "react";
-import styled from "styled-components";
+
+//Redux
+import { useSelector } from "react-redux";
+
+//css, library, package
 import {
   Map,
   Polyline,
   CustomOverlayMap,
   MapMarker,
 } from "react-kakao-maps-sdk";
-import { Grid, Input, Text } from "../../elements";
-import { history } from "../../redux/configureStore";
-import { useSelector } from "react-redux";
-
 import { useMediaQuery } from "react-responsive";
+
+//elements
+import { Grid, Input, Text } from "../../elements";
 
 function MapInfo(props) {
   const isMobile = useMediaQuery({

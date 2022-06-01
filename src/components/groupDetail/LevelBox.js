@@ -1,12 +1,15 @@
 import React from "react";
+
+//css, library, package
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
+
+//Image
 import levelBlack from "../../assets/loginInfo/levelBlack.svg";
 import levelBlue from "../../assets/loginInfo/levelBlue.svg";
 import levelOrange from "../../assets/loginInfo/levelOrange.svg";
 import levelPurple from "../../assets/loginInfo/levelPurple.svg";
 import levelRed from "../../assets/loginInfo/levelRed.svg";
-
-import { useMediaQuery } from "react-responsive";
 
 const LevelBox = (props) => {
   const isMobile = useMediaQuery({

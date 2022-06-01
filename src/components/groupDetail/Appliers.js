@@ -1,9 +1,17 @@
 import React, { Fragment } from "react";
+
+//Redux
 import { useSelector } from "react-redux";
-import { Grid, Text, Image } from "../../elements";
-import defaultProfile from "../../assets/defaultProfile.png";
 import { history } from "../../redux/configureStore";
+
+//css, library, package
 import { useMediaQuery } from "react-responsive";
+
+//Image
+import defaultProfile from "../../assets/defaultProfile.png";
+
+//elements
+import { Grid, Text, Image } from "../../elements";
 
 const Appliers = () => {
   const isMobile = useMediaQuery({

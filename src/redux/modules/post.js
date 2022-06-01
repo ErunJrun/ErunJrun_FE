@@ -1,7 +1,6 @@
 import { handleActions, createAction } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/Api";
-import axios from "axios";
 
 //액션
 const GET_POST = "GET_POST";

@@ -1,19 +1,24 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Grid, Image, Text } from "../../elements";
-import styled from "styled-components";
 
+//Redux
+import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
+
+//css, library, package
+import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 
-import LevelBox from "./LevelBox";
-
-import chatIcon from "../../assets/groupDetail/chat.svg";
+//Image
 import crewLeaderFlag from "../../assets/groupDetail/crewLeaderFlag.png";
 import crewLeaderName from "../../assets/groupDetail/crewLeaderName.png";
-import mapIcon from "../../assets/groupDetail/map.png";
-import shareIcon from "../../assets/groupDetail/share.svg";
-import shoesMintIcon from "../../assets/groupDetail/shoesMint.png";
+
+//elements
+import { Grid, Text } from "../../elements";
+
+//components
+import LevelBox from "./LevelBox";
+
+//page
 
 const CrewLeaderInfo = (props) => {
   const isMobile = useMediaQuery({

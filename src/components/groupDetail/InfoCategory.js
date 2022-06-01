@@ -1,33 +1,36 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Grid, Text } from "../../elements";
+import React, { useState } from "react";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
+
+//css, library, package
 import styled from "styled-components";
 import { Link } from "react-scroll";
 import { useMediaQuery } from "react-responsive";
-
 import { styled as muiStyled } from "@mui/material/styles";
 import Tabs from "@mui/material/Tabs";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
-
 import TabPanel from "@mui/lab/TabPanel";
 
+//Image
+import mapIcon from "../../assets/groupDetail/map.png";
+
+//elements
+import { Grid, Text } from "../../elements";
+
+//components
 import MapInfo from "./MapInfo";
 import Appliers from "./Appliers";
 import CommentList from "../comments/CommentList";
 import ServeInfo from "./ServeInfo";
 
-import mapIcon from "../../assets/groupDetail/map.png";
-import { useDispatch, useSelector } from "react-redux";
-import { resetReComm, _getReCommentFX } from "../../redux/modules/recomments";
-
 const InfoCategory = (props) => {
   const isMobile = useMediaQuery({
     query: "(max-width:820px)",
   });
-
-  const commentList = useSelector((state) => state.comments.list);
-  const dispatch = useDispatch();
 
   const [value, setValue] = React.useState("1");
 
@@ -54,16 +57,6 @@ const InfoCategory = (props) => {
       backgroundColor: "#68F99E",
     },
   });
-
-  // React.useEffect(() => {
-  //   if (commentList.length > 0) {
-  //     dispatch(_getReCommentFX(commentList[0].commentId));
-  //   }
-
-  //   return () => {
-  //     dispatch(resetReComm());
-  //   };
-  // }, [commentList]);
 
   const AntTab = muiStyled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({

@@ -1,12 +1,19 @@
-import React, { Fragment, useEffect } from "react";
-import { Text, Grid, Image, IconButton } from "../../elements";
-import styled from "styled-components";
+import React from "react";
+
+//Redux
 import { useDispatch, useSelector } from "react-redux";
-import { applyGroupDB, getGroupDB } from "../../redux/modules/feed";
+import { applyGroupDB } from "../../redux/modules/feed";
 import { history } from "../../redux/configureStore";
-import shoesYellow from "../../assets/groupFeed/shoesYellow.png";
-import Permit from "../../shared/Permit";
+
+//css, library, package
+import styled from "styled-components";
 import swal from "sweetalert";
+
+//Image
+import shoesYellow from "../../assets/groupFeed/shoesYellow.png";
+
+//elements
+import { Text, Grid, Image } from "../../elements";
 
 const GroupCard = (props) => {
   const dispatch = useDispatch();
