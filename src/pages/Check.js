@@ -103,10 +103,10 @@ const Check = () => {
           display="flex"
           justifyContent="center"
           width="100%"
-          margin="50px auto "
+          margin="50px auto"
         >
           <_InfoBox>
-            <Grid display="block" textAlign="left">
+            <Grid display="block" textAlign="left" width="320px">
               <Text bold size="12px" margin="15px 0 0 10px">
                 {check_list?.groupInfo?.title}
               </Text>
@@ -114,7 +114,7 @@ const Check = () => {
                 {check_list?.groupInfo?.date}
               </Text>
             </Grid>
-            <Text size="12px" margin="0 5px 0 0">
+            <Text size="12px" width="auto" margin="0 15px 0 0">
               {check_list?.groupInfo?.attendanceCount}
             </Text>
           </_InfoBox>
@@ -179,7 +179,7 @@ const Check = () => {
     return (
       <Box>
         <InfoBox>
-          <Grid display="block" textAlign="left">
+          <Grid display="block" textAlign="left" width="460px">
             <Text bold size="15px" margin="12px 0 0 14px">
               {check_list?.groupInfo?.title}
             </Text>
@@ -187,7 +187,7 @@ const Check = () => {
               {check_list?.groupInfo?.date}
             </Text>
           </Grid>
-          <Text size="15px" margin="0 5px 0 0">
+          <Text size="15px" width="auto" margin="0 15px 0 0">
             {check_list?.groupInfo?.attendanceCount}
           </Text>
         </InfoBox>
@@ -293,7 +293,6 @@ const _Leader = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 375px;
-  margin-bottom: 24px;
 `;
 
 const MyImage = styled.img`
@@ -356,6 +355,7 @@ const _UserBox = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 375px;
+  margin: 16px 0;
 `;
 
 const Btn = styled.button`
