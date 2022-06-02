@@ -104,10 +104,8 @@ const GroupFeed = () => {
   const finishCheck = () => {
     if (finish == 0) {
       setFinish(1);
-      setSearchState(true);
     } else {
       setFinish(0);
-      setSearchState(false);
     }
   };
 
@@ -118,12 +116,12 @@ const GroupFeed = () => {
 
   useEffect(() => {
     dispatch(resetGroup());
-    dispatch(getGroupDB(category, 1, 100));
+    dispatch(getGroupDB(category));
 
     return () => {
       dispatch(resetGroup());
     };
-  }, [finish]);
+  }, []);
 
   if (isMobile) {
     return (
