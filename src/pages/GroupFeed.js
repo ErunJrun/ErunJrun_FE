@@ -240,36 +240,69 @@ const GroupFeed = () => {
                 alignItems="center"
                 margin="0 auto"
               >
-                <Grid
-                  hover="box-shadow:1px 1px 4px gray;"
-                  cursor="pointer"
-                  margin="0"
-                  border="1px solid #030C37"
-                  width="120px"
-                  height="20px"
-                  borderRadius="2px"
-                  bg="#ffffff"
-                  display="flex"
-                  justifyContent="center"
-                  alignItem="center"
-                  padding="2px"
-                  _onClick={() => {
-                    if (paging.page === null) {
-                      swal("게시물이 없습니다");
-                    }
-                    dispatch(getGroupDB(category, paging.page));
-                  }}
-                >
-                  <Text
+                {allCheck ? (
+                  <Grid
+                    hover="box-shadow:1px 1px 4px gray;"
                     cursor="pointer"
                     margin="0"
-                    bold
-                    size="10px"
-                    color="#030C37"
+                    border="1px solid #030C37"
+                    width="120px"
+                    height="20px"
+                    borderRadius="2px"
+                    bg="#ffffff"
+                    display="flex"
+                    justifyContent="center"
+                    alignItem="center"
+                    padding="2px"
+                    _onClick={() => {
+                      if (paging.page === null) {
+                        swal("게시물이 없습니다");
+                      }
+                      dispatch(getAllDB(paging.page));
+                    }}
                   >
-                    더보기
-                  </Text>
-                </Grid>
+                    <Text
+                      cursor="pointer"
+                      margin="0"
+                      bold
+                      size="10px"
+                      color="#030C37"
+                    >
+                      더보기
+                    </Text>
+                  </Grid>
+                ) : (
+                  <Grid
+                    hover="box-shadow:1px 1px 4px gray;"
+                    cursor="pointer"
+                    margin="0"
+                    border="1px solid #030C37"
+                    width="120px"
+                    height="20px"
+                    borderRadius="2px"
+                    bg="#ffffff"
+                    display="flex"
+                    justifyContent="center"
+                    alignItem="center"
+                    padding="2px"
+                    _onClick={() => {
+                      if (paging.page === null) {
+                        swal("게시물이 없습니다");
+                      }
+                      dispatch(getPreferDB(paging.page));
+                    }}
+                  >
+                    <Text
+                      cursor="pointer"
+                      margin="0"
+                      bold
+                      size="10px"
+                      color="#030C37"
+                    >
+                      더보기
+                    </Text>
+                  </Grid>
+                )}
               </Grid>
             )}
 
@@ -520,7 +553,7 @@ const GroupFeed = () => {
                       if (paging.page === null) {
                         swal("게시물이 없습니다");
                       }
-                      dispatch(getAllDB(category, paging.page));
+                      dispatch(getAllDB(paging.page));
                     }}
                   >
                     <Text
@@ -551,7 +584,7 @@ const GroupFeed = () => {
                       if (paging.page === null) {
                         swal("게시물이 없습니다");
                       }
-                      dispatch(getPreferDB(category, paging.page));
+                      dispatch(getPreferDB(paging.page));
                     }}
                   >
                     <Text
