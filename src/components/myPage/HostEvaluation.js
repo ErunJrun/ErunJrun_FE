@@ -93,6 +93,7 @@ const HostEvaluation = () => {
       </Grid>
     );
   }
+
   return (
     <div>
       {emoji ? (
@@ -220,7 +221,10 @@ const EvaluationBox = styled.div`
   background-color: #fff;
   font-size: 16px;
   text-align: left;
-  padding: 20px 30px 0 30px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 0 0 0 20px;
   margin-bottom: 16px;
 `;
 

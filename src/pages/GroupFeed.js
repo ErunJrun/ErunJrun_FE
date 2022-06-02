@@ -118,7 +118,7 @@ const GroupFeed = () => {
 
   useEffect(() => {
     dispatch(resetGroup());
-    dispatch(getGroupDB(category));
+    dispatch(getGroupDB(category, 1, 100));
 
     return () => {
       dispatch(resetGroup());

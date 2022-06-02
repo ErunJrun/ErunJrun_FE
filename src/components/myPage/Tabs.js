@@ -313,22 +313,27 @@ const CategoryBox = styled.div`
 const Btn = styled.div`
   width: 143px;
   height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0px 20px 30px 0;
-  padding-top: 10px;
   border-radius: 50px;
   border: none;
   background-color: #68f99e;
   color: #030c37;
   font-weight: bold;
   font-size: 16px;
-  text-align: center;
+  padding: 0;
 `;
 
 const Button = styled.div`
+  padding: 0;
   width: 143px;
   height: 40px;
   margin: 0px 20px 30px 0;
-  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50px;
   border: none;
   background-color: #f0f0f0;

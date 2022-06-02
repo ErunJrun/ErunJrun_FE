@@ -9,8 +9,8 @@ import { loginCheckDB } from "../redux/modules/user";
 
 //css, library, package
 import ScrollToTop from "./ScrollToTop";
-import "./GlobalStyles";
 import styled from "styled-components";
+import "./GlobalStyles";
 
 //cookie
 import { getCookie } from "./Cookie";
@@ -19,8 +19,8 @@ import { getCookie } from "./Cookie";
 import { Spinner } from "../elements";
 
 //page
-import CourseUpload from "../pages/CourseUpload";
-import CourseDetail from "../pages/CourseDetail";
+const CourseUpload = lazy(() => import("../pages/CourseUpload"));
+const CourseDetail = lazy(() => import("../pages/CourseDetail"));
 const Main = lazy(() => import("../pages/Main"));
 const Header = lazy(() => import("../components/Header"));
 const Footer = lazy(() => import("../components/Footer"));
