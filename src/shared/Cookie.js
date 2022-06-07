@@ -12,7 +12,7 @@ const setCookie = (name, value, exp = 1) => {
   let date = new Date();
   // 만료 날짜 만들기
   date.setTime(date.getTime() + exp * 60 * 60 * 1000);
-  document.cookie = `${name}=${value}; expires=${date.toUTCString()};`;
+  document.cookie = `${name}=${value}; expires=${date.toUTCString()}; SameSite=strict; Secure;`;
 };
 
 // 쿠키 삭제

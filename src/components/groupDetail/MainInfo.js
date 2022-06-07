@@ -314,7 +314,8 @@ const MainInfo = (props) => {
               {detailGroup?.chattingRoom ? (
                 <Text
                   _onClick={() => {
-                    window.open(detailGroup?.chattingRoom);
+                    // window.open(detailGroup?.chattingRoom);
+                    history.push(`/chat/${groupId}`);
                   }}
                   cursor="pointer"
                   margin="0"
@@ -324,7 +325,7 @@ const MainInfo = (props) => {
               ) : (
                 <Text
                   _onClick={() => {
-                    swal("입력된 채팅방 링크가 없습니다.");
+                    history.push(`/chat/${groupId}`);
                   }}
                   cursor="pointer"
                   margin="0"

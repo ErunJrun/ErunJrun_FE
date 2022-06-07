@@ -43,6 +43,8 @@
     "redux-actions": "^2.6.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
     "styled-components": "^5.3.5",
     "styled-reset": "^4.3.4",
     "sweetalert": "^2.1.2",
