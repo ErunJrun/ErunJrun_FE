@@ -67,7 +67,8 @@ api.interceptors.response.use(
       if (
         response.data.message === "유저 정보 불러오기에 실패하였습니다." ||
         response.data.message === "잘못된 유저입니다" ||
-        response.data.message === "코스 추천 게시물 불러오기 실패하였습니다"
+        response.data.message === "코스 추천 게시물 불러오기 실패하였습니다" ||
+        response.data.message === "refreshToken까지 만료되었습니다."
       ) {
         deleteCookie("accessToken");
         deleteCookie("refreshToken");

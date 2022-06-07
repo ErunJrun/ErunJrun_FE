@@ -15,12 +15,14 @@ import Post from "./modules/post";
 import Recomments from "./modules/recomments";
 import UploadInfo from "./modules/uploadInfo";
 import Course from "./modules/course";
+import Chat from "./modules/chat";
 
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
+  chat: Chat,
   user: User,
   comments: Comments,
   recomments: Recomments,

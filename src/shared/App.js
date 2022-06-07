@@ -19,6 +19,7 @@ import { getCookie } from "./Cookie";
 import { Spinner } from "../elements";
 
 //page
+import Chat from "../pages/Chat";
 const CourseUpload = lazy(() => import("../pages/CourseUpload"));
 const CourseDetail = lazy(() => import("../pages/CourseDetail"));
 const Main = lazy(() => import("../pages/Main"));
@@ -98,6 +99,7 @@ function App() {
               component={MobileBookmark}
             />
             <Route path="/m/course/:userId" exact component={MobileCourse} />
+            <Route path="/chat/:groupId" exact component={Chat} />
           </Wrapper>
           <Footer></Footer>
         </Suspense>
