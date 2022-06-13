@@ -27,17 +27,15 @@ const Chat = () => {
   const [chat, setChat] = useState({ userId: userId, message: "" });
 
   useEffect(() => {
-    if (socket?.connected === false || socket === null) {
-      console.log("소켓연결 컴포넌트");
-      const setNewSocket = (__socket) =>
-        dispatch(chatActions.connectSocket(__socket));
+    console.log("소켓연결 컴포넌트");
+    const setNewSocket = (__socket) =>
+      dispatch(chatActions.connectSocket(__socket));
 
-      initiateSocket(setNewSocket, groupId, userId);
-      getMessages((data) => {
-        dispatch(chatActions.loadMessages(data));
-      });
-    }
-  }, [dispatch, groupId, userId]);
+    initiateSocket(setNewSocket, groupId, userId);
+    getMessages((data) => {
+      dispatch(chatActions.loadMessages(data));
+    });
+  }, []);
 
   // close
   useEffect(() => {
