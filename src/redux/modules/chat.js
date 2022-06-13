@@ -31,6 +31,7 @@ export default handleActions(
     [DISCONNECT_SOCKET]: (state, action) =>
       produce(state, (draft) => {
         draft.socket = null;
+        draft.messages = [];
       }),
     [LOAD_MESSAGES]: (state, action) =>
       produce(state, (draft) => {

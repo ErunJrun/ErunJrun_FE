@@ -22,21 +22,24 @@ export const disconnectSocket = () => {
 export const getMessages = (newsocket) => {
   if (!socket) return;
   socket.on("chatList", (message) => {
-    console.log(message);
+    console.log("메시지 불러오기", message);
     return newsocket(message);
   });
 };
 
+//채팅 구독
 export const subscribeToChat = (newsocket) => {
   if (!socket) return;
   socket.on("chatMessage", (data) => {
-    console.log(data);
+    console.log("채팅 구독", data);
     return newsocket(data);
   });
 };
 
+//메시지 보내기
 export const sendMessage = (groupId, userId, message) => {
   if (socket) {
-    socket.emit("reqMessage", groupId, message, userId);
+    console.log("메시지 보내기", groupId, userId, message);
+    socket.emit("reqMessage", groupId, userId, message);
   }
 };

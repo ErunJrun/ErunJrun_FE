@@ -20,12 +20,14 @@ const Chat = () => {
   const dispatch = useDispatch();
   const chatScroll = useRef();
   const { groupId } = useParams();
-  const userId = parseInt(localStorage.getItem("userId"));
+  const userId = localStorage.getItem("userId");
   const useMsg = useSelector((state) => state.chat.messages);
-
+  const socket = useSelector((state) => state.chat.socket);
+  console.log(socket);
   const [chat, setChat] = useState({ userId: userId, message: "" });
 
   useEffect(() => {
+    console.log("소켓연결 컴포넌트");
     const setNewSocket = (__socket) =>
       dispatch(chatActions.connectSocket(__socket));
 
@@ -35,7 +37,7 @@ const Chat = () => {
     });
   }, []);
 
-  //close
+  // close
   useEffect(() => {
     return () => {
       disconnectSocket();
@@ -82,14 +84,14 @@ const Chat = () => {
           {useMsg?.map((item, idx) =>
             item.userId !== userId ? (
               <div className="Chat" key={idx}>
-                <img className="profile" src={item.profileImg} />
+                <img className="profile" src={item.profileUrl} />
                 <div className="nickname">{item.nickname}</div>
                 <div className="ChatLog">{item.message}</div>
               </div>
             ) : (
               <div className="__Chat" key={idx}>
                 <div className="__ChatLog">{item.message}</div>
-                <img className="__profile" src={item.profileImg} />
+                <img className="__profile" src={item.profileUrl} />
               </div>
             )
           )}
