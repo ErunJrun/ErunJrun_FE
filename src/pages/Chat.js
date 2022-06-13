@@ -20,8 +20,9 @@ const Chat = () => {
   const dispatch = useDispatch();
   const chatScroll = useRef();
   const { groupId } = useParams();
-  const userId = parseInt(localStorage.getItem("userId"));
+  const userId = localStorage.getItem("userId");
   const useMsg = useSelector((state) => state.chat.messages);
+  const socket = useSelector((state) => state.chat.socket);
 
   const [chat, setChat] = useState({ userId: userId, message: "" });
 
@@ -49,6 +50,7 @@ const Chat = () => {
 
   useEffect(() => {
     subscribeToChat((data) => {
+      console.log("구독 실행");
       dispatch(chatActions.addMessage(data));
     });
   }, [dispatch]);
@@ -82,14 +84,14 @@ const Chat = () => {
           {useMsg?.map((item, idx) =>
             item.userId !== userId ? (
               <div className="Chat" key={idx}>
-                <img className="profile" src={item.profileImg} />
+                <img className="profile" src={item.profileUrl} />
                 <div className="nickname">{item.nickname}</div>
                 <div className="ChatLog">{item.message}</div>
               </div>
             ) : (
               <div className="__Chat" key={idx}>
                 <div className="__ChatLog">{item.message}</div>
-                <img className="__profile" src={item.profileImg} />
+                <img className="__profile" src={item.profileUrl} />
               </div>
             )
           )}
