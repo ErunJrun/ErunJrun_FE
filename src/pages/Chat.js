@@ -103,7 +103,7 @@ const Chat = () => {
             className="MsgInput"
             placeholder="메세지를 입력하세요!"
             onKeyDown={handleEvent}
-            value={chat.message}
+            value={chat.message || ""}
             spellCheck={false}
             onChange={changeMessage}
           ></input>
