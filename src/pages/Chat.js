@@ -27,7 +27,8 @@ const Chat = () => {
   const [chat, setChat] = useState({ userId: userId, message: "" });
 
   useEffect(() => {
-    if (!socket) {
+    if (socket?.connected === false || socket === null) {
+      console.log("소켓연결 컴포넌트");
       const setNewSocket = (__socket) =>
         dispatch(chatActions.connectSocket(__socket));
 
@@ -36,7 +37,7 @@ const Chat = () => {
         dispatch(chatActions.loadMessages(data));
       });
     }
-  }, [dispatch, socket, groupId, userId]);
+  }, [dispatch, groupId, userId]);
 
   // close
   useEffect(() => {
