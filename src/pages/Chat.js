@@ -23,20 +23,22 @@ const Chat = () => {
   const userId = localStorage.getItem("userId");
   const useMsg = useSelector((state) => state.chat.messages);
   const socket = useSelector((state) => state.chat.socket);
-
+  console.log(socket);
   const [chat, setChat] = useState({ userId: userId, message: "" });
 
   useEffect(() => {
-    const setNewSocket = (__socket) =>
-      dispatch(chatActions.connectSocket(__socket));
+    if (!socket) {
+      const setNewSocket = (__socket) =>
+        dispatch(chatActions.connectSocket(__socket));
 
-    initiateSocket(setNewSocket, groupId, userId);
-    getMessages((data) => {
-      dispatch(chatActions.loadMessages(data));
-    });
-  }, []);
+      initiateSocket(setNewSocket, groupId, userId);
+      getMessages((data) => {
+        dispatch(chatActions.loadMessages(data));
+      });
+    }
+  }, [dispatch, socket, groupId, userId]);
 
-  //close
+  // close
   useEffect(() => {
     return () => {
       disconnectSocket();
@@ -50,7 +52,6 @@ const Chat = () => {
 
   useEffect(() => {
     subscribeToChat((data) => {
-      console.log("구독 실행");
       dispatch(chatActions.addMessage(data));
     });
   }, [dispatch]);
