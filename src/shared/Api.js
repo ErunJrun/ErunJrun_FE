@@ -68,23 +68,16 @@ api.interceptors.response.use(
         response.data.message === "유저 정보 불러오기에 실패하였습니다." ||
         response.data.message === "잘못된 유저입니다" ||
         response.data.message === "코스 추천 게시물 불러오기 실패하였습니다" ||
-        response.data.message === "refreshToken까지 만료되었습니다."
-      ) {
-        deleteCookie("accessToken");
-        deleteCookie("refreshToken");
-        localStorage.clear();
-        swal({
-          text: "로그인 후 이용해 주세요",
-          closeOnClickOutside: false,
-        }).then(function (result) {
-          if (result) {
-            history.push("/login");
-          }
-        });
-        return;
-      }
-      if (
-        response.data.message === "database에 저장된 refreshToken과 다릅니다."
+        response.data.message === "refreshToken까지 만료되었습니다." ||
+        response.data.message ===
+          "database에 저장된 refreshToken과 다릅니다." ||
+        response.data.message === "authorization 값이 존재하지 않습니다." ||
+        response.data.message === "토큰이 Bearer가 아닙니다." ||
+        response.data.message === "reAuthorization 값이 존재하지 않습니다." ||
+        response.data.message === "리프레쉬 토큰이 Bearer가 아닙니다." ||
+        response.data.message === "token에 문제가 있음(기한만료가 아닌 에러)" ||
+        response.data.message ===
+          "refreshToken에 문제가 있음(기한만료가 아닌 에러)"
       ) {
         deleteCookie("accessToken");
         deleteCookie("refreshToken");
@@ -111,18 +104,6 @@ api.interceptors.response.use(
         // });
       }
     }
-
-    // else {
-    //   console.log(response);
-    //   deleteCookie("accessToken");
-    //   deleteCookie("refreshToken");
-    //   localStorage.removeItem("userId");
-    //   localStorage.removeItem("nickname");
-    //   localStorage.removeItem("profileUrl");
-    //   swal("로그인 시간이 만료되었습니다.");
-    //   console.log("리프레쉬토큰 만료");
-    //   history.push("/login");
-    // }
 
     return Promise.reject(error);
   }

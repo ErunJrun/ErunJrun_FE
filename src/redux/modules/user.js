@@ -195,7 +195,6 @@ export const logoutDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await api.delete(`/user/logout`);
-      console.log(data);
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
       localStorage.clear();

@@ -22,12 +22,9 @@ const Chat = () => {
   const { groupId } = useParams();
   const userId = localStorage.getItem("userId");
   const useMsg = useSelector((state) => state.chat.messages);
-  const socket = useSelector((state) => state.chat.socket);
-  console.log(socket);
   const [chat, setChat] = useState({ userId: userId, message: "" });
 
   useEffect(() => {
-    console.log("소켓연결 컴포넌트");
     const setNewSocket = (__socket) =>
       dispatch(chatActions.connectSocket(__socket));
 
