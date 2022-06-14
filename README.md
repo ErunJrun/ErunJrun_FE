@@ -31,12 +31,14 @@
 
 ✅ 페이지
 <br>
-로그인 페이지, 메인 페이지, 그룹러닝 페이지, 추천코스 페이지
+로그인 페이지, 메인 페이지, 그룹러닝 페이지, 추천코스 페이지, 그룹채팅
 <br></br>
 
 ✅ 기능
 <br>
 `카카오 로그인` `네이버 로그인` `JWT토큰(Access, Refresh) 적용`
+<br>
+``
 <br>
 `배너&게시물 슬라이드` `알림 기능` `중복 필터 검색 기능` `캘린더 기능`
 <br>
@@ -76,9 +78,10 @@
 
 - 별도의 정보 입력 없이 간편하게 로그인할 수 있습니다.
 
-#### 🏃‍♀그룹러닝
+#### 🏃‍♀그룹러닝 모집 & 
 
 - 다른 사람과 뛰고 싶은 코스를 직접 그려서 함께 뛸 사람을 모집할 수 있습니다.
+- 채팅을 통해 질문과 답변에 대한 소통을 할 수 있습니다.
 
 #### ✔ 출석체크/크루장 평가
 
@@ -111,6 +114,7 @@
 <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=react&logoColor=black">
 <img src="https://img.shields.io/badge/axios-007CE2?style=for-the-badge&logo=axios&logoColor=white">
 <img src="https://img.shields.io/badge/reactrouterdom-CA4245?style=for-the-badge&logo=reactrouterdom&logoColor=white">
+<img src="https://img.shields.io/badge/socket.io-010101?style=for-the-badge&logo=reactrouterdom&logoColor=white">
 </br>
 <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
 <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
@@ -175,6 +179,7 @@
 |    react-kakao-maps-sdk     |      카카오 지도      |    1.0.6     |
 |     react-photo-collage     | 이미지 레이아웃 편집  |    1.0.9     |
 |           lodash            |      데이터 구조      |   4.17.21    |
+|           socket.io-client            |      데이터 구조      |   4.5.1    |
 </details>
  <br>
  
