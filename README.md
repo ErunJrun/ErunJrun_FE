@@ -6,7 +6,6 @@
 
 ## 📌 바로가기
 
-- 사이트 바로가기 : https://www.erunjrun.com/
 - 프론트엔드 GitHub Repository : https://github.com/ErunJrun/ErunJrun_FE
 - 백엔드 GitHub Respository : https://github.com/ErunJrun/ErunJrun_BE
 - 시연 영상 보러가기: https://www.youtube.com/watch?v=j64DAMz1pDw
